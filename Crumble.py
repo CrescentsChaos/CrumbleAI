@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Hearth - a local character-chat helper for .gguf models (SillyTavern-style).
+Crumble - a local character-chat helper for .gguf models (SillyTavern-style).
 
 Setup:   pip install llama-cpp-python
          (GPU: CMAKE_ARGS="-DGGML_CUDA=on" pip install llama-cpp-python --force-reinstall --no-cache-dir)
@@ -83,7 +83,10 @@ def sub(t, c, u):
     return (t or "").replace("{{char}}", c.get("name") or "Character").replace("{{user}}", u)
 
 
-def build_messages(c, user, hist, fold=False):
+THINK = re.compile(r"^.*?</think>|<think>.*?(?:</think>|$)", re.S)
+
+
+def build_messages(c, user, hist, fold=False, think=True, actions=True):
     n = c.get("name") or "Character"
     out = [c.get("system_prompt") or
            "Write {{char}}'s next reply in a roleplay chat with {{user}}. Stay in character and never speak or act for {{user}}."]
@@ -101,11 +104,15 @@ def build_messages(c, user, hist, fold=False):
             lore.append(e["content"].strip())
     if lore:
         out.append("[World info]\n" + "\n".join(lore))
-    msgs = [dict(m) for m in hist]
+    msgs = [dict(m, content=THINK.sub("", m["content"]).strip()) if m["role"] == "assistant" else dict(m) for m in hist]
     if fold and msgs and msgs[0]["role"] == "assistant":
         out.append(f"[{n}'s opening message]\n{msgs.pop(0)['content']}")
+    out.append("[Style]\n" + ("Write actions, gestures and narration between *asterisks*. Spoken words are plain text."
+               if actions else "Reply with spoken dialogue only. No narration, no actions, no asterisks."))
     if (c.get("post_history") or "").strip():
         out.append(c["post_history"].strip())
+    if not think:
+        out.append("/no_think")
     return [{"role": "system", "content": sub("\n\n".join(out), c, user)}] + \
            [{"role": m["role"], "content": sub(m["content"], c, user)} for m in msgs]
 
@@ -215,7 +222,8 @@ class H(BaseHTTPRequestHandler):
             try:
                 if not LLM["obj"]:
                     raise RuntimeError("No model loaded.")
-                msgs = build_messages(b["char"], b["user"], b["history"], b["params"].get("fold", False))
+                msgs = build_messages(b["char"], b["user"], b["history"], b["params"].get("fold", False),
+                                      b["params"].get("think", True), b["params"].get("actions", True))
                 with LOCK:
                     for ch in LLM["obj"].create_chat_completion(messages=msgs, stream=True, **sampler(b["params"])):
                         t = ch["choices"][0]["delta"].get("content")
@@ -231,40 +239,69 @@ class H(BaseHTTPRequestHandler):
 
 
 PAGE = r"""<!doctype html><html lang=en><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
-<title>Hearth</title><style>
-:root{--bg:#18222c;--pn:#223140;--pn2:#2b3d4f;--tx:#e9e5d8;--mu:#93a1ad;--ac:#6cc0ad;--bad:#d97070;--ln:#36495b}
-*{box-sizing:border-box}body{margin:0;height:100vh;display:grid;grid-template-columns:290px 1fr;background:var(--bg);color:var(--tx);font:14px/1.45 system-ui,sans-serif}
-aside{background:var(--pn);padding:14px;overflow:auto;border-right:1px solid var(--ln)}
+<title>Crumble</title><style>
+:root{--bg:#0a0c10;--pn:#10131a;--pn2:#171b24;--pn3:#1f2430;--tx:#eceef4;--mu:#8b93a7;--ac:#f0b26b;--ac2:#e5806a;--bad:#ef7676;--ln:rgba(255,255,255,.08)}
+*{box-sizing:border-box}
+body{margin:0;height:100vh;display:grid;grid-template-columns:292px 1fr;color:var(--tx);font:14px/1.5 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased;
+background:radial-gradient(900px 520px at 88% -10%,rgba(240,178,107,.10),transparent 60%),radial-gradient(700px 500px at -10% 110%,rgba(229,128,106,.08),transparent 60%),var(--bg)}
+::-webkit-scrollbar{width:10px}::-webkit-scrollbar-thumb{background:var(--pn3);border-radius:10px;border:3px solid transparent;background-clip:content-box}
+aside{background:rgba(16,19,26,.85);backdrop-filter:blur(14px);padding:18px 14px;overflow:auto;border-right:1px solid var(--ln)}
 main{display:flex;flex-direction:column;min-width:0;height:100vh}
-h2{font:600 13px system-ui;color:var(--mu);margin:16px 0 6px}h1{font:700 22px Georgia,serif;margin:0}
-input,select,textarea,button{font:inherit;color:var(--tx);background:var(--bg);border:1px solid var(--ln);border-radius:6px;padding:6px 8px;width:100%}
-textarea{resize:vertical}button{width:auto;cursor:pointer;background:var(--pn2)}button:hover{border-color:var(--ac)}button.go{background:var(--ac);color:#10201b;border-color:var(--ac);font-weight:600}
+.brand{display:flex;align-items:center;gap:10px;margin:0 4px 18px}.logo{width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,var(--ac),var(--ac2));display:grid;place-items:center;font-size:18px;box-shadow:0 6px 20px -6px var(--ac2)}
+h1{font:700 20px Inter,system-ui;letter-spacing:-.02em;margin:0}
+h2{font:600 11px Inter,system-ui;letter-spacing:.09em;text-transform:uppercase;color:var(--mu);margin:20px 4px 8px}
+input,select,textarea,button{font:inherit;color:var(--tx);background:var(--pn2);border:1px solid var(--ln);border-radius:12px;padding:8px 11px;width:100%;transition:border-color .15s,background .15s,transform .1s}
+textarea{resize:vertical}button{width:auto;cursor:pointer}button:hover{border-color:rgba(240,178,107,.5);background:var(--pn3)}button:active{transform:scale(.97)}
+button.go{background:linear-gradient(135deg,var(--ac),var(--ac2));color:#1b1209;border:0;font-weight:650}button.go:hover{filter:brightness(1.08)}
 button.x{color:var(--bad)}:focus-visible{outline:2px solid var(--ac);outline-offset:1px}
-.row{display:flex;gap:6px;margin:4px 0;align-items:center}.row>*{flex:1}.row>button{flex:none}
-.ch{padding:7px 9px;border-radius:6px;cursor:pointer}.ch:hover{background:var(--pn2)}.ch.on{background:var(--pn2);border-left:3px solid var(--ac)}
-.small{color:var(--mu);font-size:12px}nav{display:flex;gap:4px;padding:10px 16px 0;border-bottom:1px solid var(--ln)}
-nav button{border:0;border-radius:6px 6px 0 0;background:none;color:var(--mu)}nav button.on{background:var(--pn);color:var(--tx);border-bottom:2px solid var(--ac)}
-section{flex:1;overflow:auto;padding:16px;min-height:0}#chat{display:flex;flex-direction:column;padding:0}#log{flex:1;overflow:auto;padding:16px}
-.m{max-width:760px;margin:0 auto 14px;font:16px/1.6 Georgia,serif}.m b{font:600 12px system-ui;color:var(--ac);display:block}.m.user b{color:var(--mu)}.m span{white-space:pre-wrap}
-.bar{border-top:1px solid var(--ln);padding:10px 16px;background:var(--pn)}.bar .row{max-width:760px;margin:4px auto}
-details{background:var(--pn);border:1px solid var(--ln);border-radius:8px;margin:0 0 10px;padding:8px 12px;max-width:820px}summary{cursor:pointer;font-weight:600}
-label{display:block;margin:8px 0 3px;color:var(--mu);font-size:12px}.lore{background:var(--bg);padding:8px;border-radius:6px;margin:6px 0}
-.sampler{max-width:420px}[hidden]{display:none!important}
-@media(max-width:700px){body{grid-template-columns:1fr;height:auto}main{height:90vh}}
+.row{display:flex;gap:6px;margin:4px 0;align-items:center}.row>*{flex:1}.row>button{flex:none}.sp{flex:1}
+.small{color:var(--mu);font-size:12px}
+.ch{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:12px;cursor:pointer;border:1px solid transparent;transition:background .15s}.ch:hover{background:var(--pn2)}.ch.on{background:var(--pn2);border-color:var(--ln)}
+.av{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-weight:700;color:#17110a;flex:none}.av.sm{width:30px;height:30px;font-size:13px}
+details.mdl{background:var(--pn2);border:1px solid var(--ln);border-radius:12px;padding:8px 12px}details.mdl summary{cursor:pointer;font-weight:600}
+nav{display:flex;gap:4px;padding:6px;margin:14px auto 0;background:var(--pn);border:1px solid var(--ln);border-radius:14px}
+nav button{border:0;border-radius:10px;background:none;color:var(--mu);padding:6px 16px}nav button.on{background:var(--pn3);color:var(--tx)}
+section{flex:1;overflow:auto;padding:20px;min-height:0}#chat{display:flex;flex-direction:column;padding:0}
+.chead{display:flex;align-items:center;gap:12px;padding:14px 22px;border-bottom:1px solid var(--ln)}.chead select{width:auto;max-width:200px}
+.who b{display:block;font-size:15px}.who small{color:var(--mu);font-size:12px}.who small.on{color:var(--ac)}.who small:before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:#58d68d;margin-right:6px}.who small.on:before{background:var(--ac);animation:pl 1s infinite}
+.ib{padding:7px 10px;line-height:1}
+#log{flex:1;overflow:auto;padding:28px 20px 10px;overflow-anchor:none}
+.m{display:flex;gap:12px;max-width:800px;margin:0 auto 20px}.m.fresh{animation:in .35s cubic-bezier(.2,.8,.2,1)}.m.user{flex-direction:row-reverse}
+.bub{max-width:82%;min-width:0}.nm{font:600 12px Inter,system-ui;color:var(--mu);margin:0 6px 5px}.m.user .nm{text-align:right}
+.tx{padding:12px 16px;border-radius:4px 20px 20px 20px;background:var(--pn2);border:1px solid var(--ln);font-size:15px;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere;box-shadow:0 8px 28px -14px #000}
+.m.user .tx{border-radius:20px 4px 20px 20px;background:linear-gradient(135deg,rgba(240,178,107,.22),rgba(229,128,106,.15));border-color:rgba(240,178,107,.3)}
+.act{color:var(--ac);font-style:italic}.q{color:#fff}.tx strong{font-weight:650}
+.dots{display:flex;gap:5px;align-items:center;color:var(--mu);font-size:13px}.dots i{width:7px;height:7px;border-radius:50%;background:var(--ac);animation:bn 1.2s infinite}.dots i:nth-child(2){animation-delay:.15s}.dots i:nth-child(3){animation-delay:.3s}.dots span{margin-left:6px}
+.think{margin:0 0 8px;background:rgba(255,255,255,.03);border:1px solid var(--ln);border-radius:14px;padding:7px 13px;font-size:13px;color:var(--mu)}
+.think summary{cursor:pointer;font-weight:600;list-style:none}.think summary:before{content:"✦ ";color:var(--ac)}.think.live summary{animation:pl 1.4s infinite}
+.think div{white-space:pre-wrap;margin-top:8px;max-height:240px;overflow:auto;line-height:1.55}
+.bar{padding:10px 20px 18px}.comp{max-width:800px;margin:0 auto;display:flex;gap:8px;align-items:flex-end;background:var(--pn2);border:1px solid var(--ln);border-radius:24px;padding:8px 8px 8px 20px;box-shadow:0 14px 44px -18px #000;transition:border-color .2s}
+.comp:focus-within{border-color:rgba(240,178,107,.55)}.comp textarea{border:0;background:none;resize:none;max-height:170px;padding:9px 0;outline:0}
+#send,#stop{width:42px;height:42px;border-radius:50%;padding:0;font-size:18px;flex:none}
+.tools{max-width:800px;margin:10px auto 0;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.pill{border-radius:99px;padding:5px 13px;font-size:12.5px;color:var(--mu);background:var(--pn)}.pill.on{color:#1b1209;background:linear-gradient(135deg,var(--ac),var(--ac2));border-color:transparent;font-weight:600}
+.ghost{border:0;background:none;color:var(--mu);font-size:12.5px;padding:5px 8px}
+details:not(.think):not(.mdl){background:var(--pn);border:1px solid var(--ln);border-radius:16px;margin:0 0 12px;padding:10px 16px;max-width:840px}summary{cursor:pointer;font-weight:600}
+label{display:block;margin:10px 0 4px;color:var(--mu);font-size:12px}.lore{background:var(--bg);padding:10px;border-radius:12px;margin:8px 0}
+.sampler{max-width:440px}[hidden]{display:none!important}
+@keyframes in{from{opacity:0;transform:translateY(8px)}}@keyframes bn{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-5px);opacity:1}}@keyframes pl{50%{opacity:.45}}
+@media(max-width:700px){body{grid-template-columns:1fr;height:auto}main{height:90vh}.bub{max-width:90%}}
 </style>
-<aside><h1>Hearth</h1>
-<h2>Model (.gguf)</h2><select id=msel></select>
-<input id=mpath placeholder="or paste a full path to a .gguf" style="margin-top:6px">
-<div class=row><input id=nctx type=number value=8192 title="Context length"><input id=ngl type=number value=-1 title="GPU layers (-1 = all)"></div>
-<div class=small>context length / GPU layers</div>
-<div class=row><button class=go id=load>Load model</button></div><div id=mstat class=small></div>
-<h2>Characters</h2><div class=row><button id=new>New</button><button id=imp>Import</button></div>
+<aside><div class=brand><div class=logo>🍪</div><h1>Crumble</h1></div>
+<h2>Characters</h2><div class=row><button id=new>＋ New</button><button id=imp>Import</button></div>
 <input type=file id=file accept=".json,.png" hidden><div id=clist></div>
+<h2>Model</h2><details class=mdl><summary>Load a .gguf</summary><select id=msel style="margin-top:8px"></select>
+<input id=mpath placeholder="or paste a full path" style="margin-top:6px">
+<div class=row><input id=nctx type=number value=8192 title="Context length"><input id=ngl type=number value=-1 title="GPU layers (-1 = all)"></div>
+<div class=small>context length / GPU layers</div><div class=row><button class=go id=load>Load model</button></div></details><div id=mstat class=small style="margin:8px 4px"></div>
 <h2>Your name</h2><input id=uname value=User></aside>
-<main><nav><button data-t=chat class=on>Chat</button><button data-t=editor>Character editor</button><button data-t=samp>Sampler</button></nav>
-<section id=chat><div class=row id=chatbar style="padding:8px 16px;margin:0;border-bottom:1px solid var(--ln)"><select id=chsel></select><button id=newchat>New chat</button><button id=rename>Rename</button><button id=delchat class=x>Delete chat</button></div><div id=log></div><div class=bar>
-<div class=row><textarea id=inp rows=2 placeholder="Write a message. Enter sends, Shift+Enter adds a line."></textarea><button class=go id=send>Send</button><button id=stop hidden>Stop</button></div>
-<div class=row style="flex-wrap:wrap"><button id=regen>Regenerate</button><button id=undo>Undo</button><button id=greet>Next greeting</button></div></div></section>
+<main><nav><button data-t=chat class=on>Chat</button><button data-t=editor>Character</button><button data-t=samp>Sampler</button></nav>
+<section id=chat><div class=chead><div class=av id=hav></div><div class=who><b id=hname>Character</b><small id=hstat>online</small></div><div class=sp></div>
+<select id=chsel></select><button id=newchat class=ib title="New chat">＋</button><button id=rename class=ib title=Rename>✎</button><button id=delchat class="ib x" title="Delete chat">🗑</button></div>
+<div id=log></div><div class=bar><div class=comp><textarea id=inp rows=1 placeholder="Message… (Enter sends, Shift+Enter adds a line)"></textarea>
+<button class=go id=send title=Send>↑</button><button id=stop hidden title=Stop>■</button></div>
+<div class=tools><button class=pill id=tthink title="Let the model think before replying (shows a collapsible panel)">✦ Thinking</button><button class=pill id=tact title="Actions in *stars*: styled when on, hidden when off">✱ Actions</button><span class=sp></span>
+<button class=ghost id=regen>↻ Regenerate</button><button class=ghost id=undo>↶ Undo</button><button class=ghost id=greet>Next greeting</button></div></div></section>
 <section id=editor hidden><details open><summary>AI draft</summary><label>Describe the character in a sentence or two. Only empty fields get filled.</label>
 <textarea id=concept rows=2></textarea><div class=row><button id=gen>Draft with loaded model</button><span class=small id=gstat></span></div></details>
 <div id=form></div>
@@ -282,7 +319,7 @@ async function init(){S=await api('/api/state');
  $('#msel').innerHTML='<option value="">(choose from ./models)</option>'+S.models.map(m=>`<option>${esc(m)}</option>`).join('');
  $('#mstat').textContent=S.backend?(S.loaded?'Loaded: '+S.loaded:'No model loaded'):'llama-cpp-python missing: pip install llama-cpp-python';
  renderChars();renderSampler();if(!cur)S.chars[0]?await pick(S.chars[0].id):openNew();}
-function renderChars(){$('#clist').innerHTML=S.chars.map(c=>`<div class="ch ${cur&&cur.id==c.id?'on':''}" data-id=${c.id}>${esc(c.name||'(unnamed)')}</div>`).join('')}
+function renderChars(){$('#clist').innerHTML=S.chars.map(c=>`<div class="ch ${cur&&cur.id==c.id?'on':''}" data-id=${c.id}><div class="av sm" style="${avs(c.name)}">${ini(c.name)}</div><span>${esc(c.name||'(unnamed)')}</span></div>`).join('')}
 $('#clist').onclick=e=>{const d=e.target.closest('.ch');if(d)pick(d.dataset.id)};
 let chat=null,chats=[];const rid=()=>Math.random().toString(36).slice(2,10);
 async function pick(id){cur=S.chars.find(c=>c.id==id);renderChars();renderForm(cur);
@@ -293,20 +330,44 @@ async function saveChat(){if(!cur?.id||!chat)return;const r=await api('/api/chat
  if(r.err)return;chat.title=r.title;const m={id:chat.id,title:chat.title,n:hist.length},i=chats.findIndex(c=>c.id==chat.id);i<0?chats.unshift(m):chats[i]=m;drawChats()}
 function drawChats(){$('#chsel').innerHTML=chats.map(c=>`<option value=${c.id} ${chat&&c.id==chat.id?'selected':''}>${esc(c.title)} (${c.n})</option>`).join('')}
 function resetChat(i=0){const g=greetings(cur);hist=g.length?[{role:'assistant',content:g[i%g.length]}]:[]}
-function draw(){const u=$('#uname').value||'User';$('#log').innerHTML=hist.map(m=>`<div class="m ${m.role}"><b>${esc(m.role=='user'?u:(cur?.name||'Character'))}</b><span>${esc(m.content)}</span></div>`).join('');
- $('#log').scrollTop=1e9}
-const busy=b=>{$('#send').hidden=b;$('#stop').hidden=!b};
-async function gen(){if(!cur||!cur.id||!chat)return;const out=hist.push({role:'assistant',content:''})-1;draw();
- ctl=new AbortController();busy(true);const el=()=>$('#log').lastElementChild.querySelector('span');
+const U={think:true,actions:true};try{Object.assign(U,JSON.parse(localStorage.crumbleUI||'{}'))}catch(e){}
+const hue=n=>[...(n||'?')].reduce((a,c)=>a*31+c.charCodeAt(0)>>>0,7)%360,
+ avs=n=>`background:linear-gradient(135deg,hsl(${hue(n)} 75% 68%),hsl(${(hue(n)+40)%360} 70% 58%))`,ini=n=>esc((n||'?').trim()[0]||'?').toUpperCase();
+function pills(){$('#tthink').classList.toggle('on',U.think);$('#tact').classList.toggle('on',U.actions);try{localStorage.crumbleUI=JSON.stringify(U)}catch(e){}}
+$('#tthink').onclick=()=>{U.think=!U.think;pills();draw()};$('#tact').onclick=()=>{U.actions=!U.actions;pills();draw()};pills();
+function split(t){if(!t.includes('<think>')&&t.includes('</think>'))t='<think>'+t;let th='',open=false;
+ const body=t.replace(/<think>([\s\S]*?)(<\/think>|$)/g,(m,x,c)=>{th+=x;if(!c)open=true;return''});return{th:th.trim(),open,body:body.trim()}}
+function fmt(t){t=esc(t).replace(/\*\*([^*\n]+)\*\*/g,'<strong>$1</strong>');
+ const act=x=>U.actions?`<em class=act>${x}</em>`:'';
+ t=t.replace(/\*([^*\n]+)\*/g,(m,x)=>act(x)).replace(/\(([^()\n]{3,})\)/g,(m,x)=>act('('+x+')'));
+ return t.replace(/(&quot;|"|“)([^"“”\n]+)(&quot;|"|”)/g,'<span class=q>$1$2$3</span>').replace(/[ \t]{2,}/g,' ').trim()}
+function msgHTML(m,live){const u=m.role=='user',n=u?($('#uname').value||'User'):(cur?.name||'Character');
+ if(u)return`<div class="m user"><div class=bub><div class=nm>${esc(n)}</div><div class=tx>${esc(m.content)}</div></div></div>`;
+ const s=split(m.content),think=U.think&&s.th?`<details class="think ${live&&s.open?'live':''}"><summary>${live&&s.open?'Thinking…':'Thought process'}</summary><div>${esc(s.th)}</div></details>`:'',
+ body=fmt(s.body);
+ return`<div class="m assistant"><div class=av style="${avs(n)}">${ini(n)}</div><div class=bub><div class=nm>${esc(n)}</div>${think}${body?`<div class=tx>${body}</div>`:live?'<div class=tx><div class=dots><i></i><i></i><i></i><span>typing…</span></div></div>':''}</div></div>`}
+function head(){const n=cur?.name||'Character';$('#hname').textContent=n;$('#hav').style.cssText=avs(n);$('#hav').textContent=ini(n);
+ $('#hstat').textContent=ctl?'typing…':'online';$('#hstat').classList.toggle('on',!!ctl)}
+function draw(anim=0){head();$('#log').innerHTML=hist.map((m,i)=>msgHTML(m,!!ctl&&i==hist.length-1).replace('class="m ',i>=hist.length-anim?'class="m fresh ':'class="m ')).join('');$('#log').scrollTop=1e9}
+function paint(){const L=$('#log'),near=L.scrollHeight-L.scrollTop-L.clientHeight<140,last=L.lastElementChild,
+ old=last.querySelector('.think div'),ot=old?old.scrollTop:0,pin=old?old.scrollHeight-old.scrollTop-old.clientHeight<30:false,was=last.querySelector('details')?.open,
+ t=document.createElement('div');t.innerHTML=msgHTML(hist.at(-1),true);const n=t.firstElementChild;
+ if(was)n.querySelector('details')?.setAttribute('open','');
+ last.innerHTML=n.innerHTML;  // patch in place: no new node, so no animation restart / flicker
+ const nd=last.querySelector('.think div');if(nd)nd.scrollTop=pin?1e9:ot;
+ if(near)L.scrollTop=L.scrollHeight}
+const busy=b=>{$('#send').hidden=b;$('#stop').hidden=!b;head()};
+async function gen(){if(!cur||!cur.id||!chat)return;const out=hist.push({role:'assistant',content:''})-1;ctl=new AbortController();busy(true);draw(2);
  try{const r=await fetch('/api/chat',{method:'POST',signal:ctl.signal,headers:{'Content-Type':'application/json'},
-  body:JSON.stringify({char:cur,user:$('#uname').value||'User',history:hist.slice(0,out),params:P})});
+  body:JSON.stringify({char:cur,user:$('#uname').value||'User',history:hist.slice(0,out),params:{...P,think:U.think,actions:U.actions}})});
   const rd=r.body.getReader(),dec=new TextDecoder();let buf='';
   for(;;){const{done,value}=await rd.read();if(done)break;buf+=dec.decode(value,{stream:true});let i;
    while((i=buf.indexOf('\n\n'))>=0){const l=buf.slice(0,i);buf=buf.slice(i+2);if(!l.startsWith('data: ')||l.slice(6)=='[DONE]')continue;
-    const j=JSON.parse(l.slice(6));hist[out].content+=j.t??('\n[error: '+j.err+']');el().textContent=hist[out].content;$('#log').scrollTop=1e9}}
+    const j=JSON.parse(l.slice(6));hist[out].content+=j.t??('\n[error: '+j.err+']');paint()}}
  }catch(e){}
- busy(false);ctl=null;saveChat()}
-async function send(){const t=$('#inp').value.trim();if(!t||ctl)return;$('#inp').value='';hist.push({role:'user',content:t});await gen()}
+ ctl=null;busy(false);draw();saveChat()}
+$('#inp').oninput=e=>{e.target.style.height='auto';e.target.style.height=Math.min(e.target.scrollHeight,170)+'px'};
+async function send(){const t=$('#inp').value.trim();if(!t||ctl)return;$('#inp').value='';$('#inp').style.height='';hist.push({role:'user',content:t});await gen()}
 $('#send').onclick=send;$('#stop').onclick=()=>ctl&&ctl.abort();
 $('#inp').onkeydown=e=>{if(e.key=='Enter'&&!e.shiftKey){e.preventDefault();send()}};
 $('#regen').onclick=()=>{if(ctl||!hist.length)return;if(hist.length>1&&hist.at(-1).role=='assistant')hist.pop();gen()};
@@ -376,6 +437,6 @@ if __name__ == "__main__":
     ap.add_argument("--port", type=int, default=8000)
     a = ap.parse_args()
     url = f"http://{a.host}:{a.port}"
-    print(f"Hearth running at {url}  (models in {MODELS})")
+    print(f"Crumble running at {url}  (models in {MODELS})")
     threading.Timer(.8, lambda: webbrowser.open(url)).start()
     ThreadingHTTPServer((a.host, a.port), H).serve_forever()
