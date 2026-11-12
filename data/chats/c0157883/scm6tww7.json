@@ -1,0 +1,103 @@
+{
+ "id": "scm6tww7",
+ "title": "*I kiss her*",
+ "updated": 1794486383.8647327,
+ "history": [
+  {
+   "role": "user",
+   "content": "*I kiss her*",
+   "ts": 1794486281928
+  },
+  {
+   "role": "assistant",
+   "content": "*You pull back slightly, your expression softening as you meet my gaze. A faint blush touches your cheek, but it’s subtle, almost imperceptible.*\n\nA gesture... unexpected yet not unwelcome. You seem to understand that I am not entirely of this world, but still, your touch carries warmth. It is… unusual, but I do not reject it.",
+   "think": "",
+   "ts": 1794486288601,
+   "stat": {
+    "tok": 80,
+    "ms": 6650
+   },
+   "seen": 1794486281930,
+   "snap": "{\"mood\":\"neutral\",\"emoji\":\"😐\",\"energy\":\"medium\",\"affection\":50,\"facts\":[],\"summary\":\"\",\"sumUpto\":0}",
+   "thought": "His touch is unexpected, yet it feels like a step toward understanding."
+  },
+  {
+   "role": "user",
+   "content": "*I kiss on her lips*",
+   "ts": 1794486316567
+  },
+  {
+   "role": "assistant",
+   "content": "*Your eyes flutter closed for a moment, then open again with quiet surprise. You lean into the touch, though your posture remains composed, as if measuring the weight of this moment.*\n\nYou are not someone who does such things lightly. I suppose it is… thoughtful of you to consider what might be appropriate.",
+   "think": "",
+   "ts": 1794486322986,
+   "stat": {
+    "tok": 66,
+    "ms": 6395
+   },
+   "seen": 1794486316570,
+   "snap": "{\"mood\":\"curious\",\"emoji\":\"🤔\",\"energy\":\"medium\",\"affection\":55,\"facts\":[\"Crescent initiates physical contact\",\"Crescent's touch is warm and not rejected\"],\"summary\":\"\",\"sumUpto\":0}",
+   "thought": "His actions suggest a quiet sincerity I can't yet fully comprehend."
+  },
+  {
+   "role": "user",
+   "content": "Do I care about appropriateness?",
+   "ts": 1794486368287
+  },
+  {
+   "role": "assistant",
+   "content": "*You tilt your head slightly, the faintest curve of a smile forming at the edges of your lips. Your gaze lingers, both curious and contemplative.*\n\nPerhaps not. But I do care about the kind of world we build together—where life is not consumed, and choice remains yours.",
+   "think": "",
+   "ts": 1794486374743,
+   "stat": {
+    "tok": 64,
+    "ms": 6431
+   },
+   "seen": 1794486368290,
+   "snap": "{\"mood\":\"curious\",\"emoji\":\"🤔\",\"energy\":\"medium\",\"affection\":60,\"facts\":[\"Crescent initiates physical contact\",\"Crescent's touch is warm and not rejected\"],\"summary\":\"\",\"sumUpto\":0}",
+   "thought": "He challenges boundaries, yet respects them. I find that intriguing."
+  }
+ ],
+ "state": {
+  "mood": "curious",
+  "emoji": "🤔",
+  "energy": "medium",
+  "affection": 65,
+  "facts": [
+   "Crescent initiates physical contact",
+   "Crescent's touch is warm and not rejected",
+   "Crescent is willing to engage in intimate gestures",
+   "Crescent values autonomy and choice in relationships"
+  ],
+  "summary": "",
+  "sumUpto": 0,
+  "log": [
+   {
+    "ts": 1794486299744,
+    "mood": "curious",
+    "emoji": "🤔",
+    "aff": 55,
+    "thought": "His touch is unexpected, yet it feels like a step toward understanding."
+   },
+   {
+    "ts": 1794486332652,
+    "mood": "curious",
+    "emoji": "🤔",
+    "aff": 60,
+    "thought": "His actions suggest a quiet sincerity I can't yet fully comprehend."
+   },
+   {
+    "ts": 1794486383860,
+    "mood": "curious",
+    "emoji": "🤔",
+    "aff": 65,
+    "thought": "He challenges boundaries, yet respects them. I find that intriguing."
+   }
+  ]
+ },
+ "cfg": {
+  "mode": "story",
+  "length": "auto",
+  "scene": ""
+ }
+}

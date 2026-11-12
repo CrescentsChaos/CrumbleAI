@@ -1,0 +1,21 @@
+{
+ "id": "dt9tfts7",
+ "title": "New chat",
+ "updated": 1794488741.8964467,
+ "history": [],
+ "state": {
+  "mood": "neutral",
+  "emoji": "😐",
+  "energy": "medium",
+  "affection": 50,
+  "facts": [],
+  "summary": "",
+  "sumUpto": 0,
+  "log": []
+ },
+ "cfg": {
+  "mode": "text",
+  "length": "auto",
+  "scene": ""
+ }
+}

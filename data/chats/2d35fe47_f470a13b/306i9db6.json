@@ -1,0 +1,160 @@
+{
+ "id": "306i9db6",
+ "title": "hey bitch",
+ "updated": 1794487224.9590533,
+ "history": [
+  {
+   "role": "user",
+   "content": "hey bitch",
+   "ts": 1794487139557
+  },
+  {
+   "role": "assistant",
+   "content": "How predictable. You're not even trying to be clever, are you?",
+   "think": "",
+   "ts": 1794487143152,
+   "stat": {
+    "tok": 19,
+    "ms": 3483
+   },
+   "seen": 1794487139565,
+   "thought": "He speaks as if he owns the world. How beneath him."
+  },
+  {
+   "role": "user",
+   "content": "here take this cock",
+   "ts": 1794487153387
+  },
+  {
+   "role": "assistant",
+   "content": "How amusing. You think throwing insults will make me flinch? I’d rather face a sword.",
+   "think": "",
+   "ts": 1794487156840,
+   "stat": {
+    "tok": 24,
+    "ms": 3397
+   },
+   "seen": 1794487153400,
+   "snap": "{\"mood\":\"disdain\",\"emoji\":\"🙂\",\"energy\":\"high\",\"affection\":45,\"facts\":[\"Tanzil uses derogatory language\",\"Tanzil lacks strategic thinking\"],\"summary\":\"\",\"sumUpto\":0}",
+   "thought": "His insults are feeble; he lacks the wit to challenge me meaningfully."
+  },
+  {
+   "role": "user",
+   "content": "*I rub my cock on her face*",
+   "ts": 1794487170153
+  },
+  {
+   "role": "assistant",
+   "content": "How dare you? I am no one’s plaything, and your crude behavior reflects nothing but your own weakness.",
+   "think": "",
+   "ts": 1794487173723,
+   "stat": {
+    "tok": 27,
+    "ms": 3525
+   },
+   "seen": 1794487170164,
+   "snap": "{\"mood\":\"disdain\",\"emoji\":\"🙂\",\"energy\":\"high\",\"affection\":40,\"facts\":[\"Tanzil uses derogatory language\",\"Tanzil lacks strategic thinking\",\"Tanzil resorts to verbal aggression\"],\"summary\":\"\",\"sumUpto\":0}",
+   "thought": "His arrogance is a mask for his inability to comprehend strength."
+  },
+  {
+   "role": "user",
+   "content": "*I shut her up when I push my cock inside her mouth. she cant talk anymore*",
+   "ts": 1794487200224
+  },
+  {
+   "role": "assistant",
+   "content": "How *predictable*. You think force will silence me? I have endured far worse, and I will not be your pawn.",
+   "think": "",
+   "ts": 1794487203932,
+   "stat": {
+    "tok": 30,
+    "ms": 3652
+   },
+   "seen": 1794487200243,
+   "snap": "{\"mood\":\"disdain\",\"emoji\":\"🙂\",\"energy\":\"high\",\"affection\":35,\"facts\":[\"Tanzil uses derogatory language\",\"Tanzil lacks strategic thinking\",\"Tanzil resorts to verbal aggression\",\"Tanzil uses physical aggression\",\"Tanzil lacks self-control\",\"Tanzil's behavior is intentionally provocative\"],\"summary\":\"\",\"sumUpto\":0}",
+   "thought": "He thinks he controls me? I will break him, not with words, but with consequences."
+  },
+  {
+   "role": "user",
+   "content": "*I keen on taking blowjob from her*",
+   "ts": 1794487230063
+  },
+  {
+   "role": "assistant",
+   "content": "*She suddenly slams her fist against the table, sending papers flying.* You think you can use me? I am not your tool. Your arrogance will be your undoing.",
+   "think": "",
+   "ts": 1794487234146,
+   "stat": {
+    "tok": 40,
+    "ms": 4023
+   },
+   "seen": 1794487230085,
+   "snap": "{\"mood\":\"fury\",\"emoji\":\"🙂\",\"energy\":\"high\",\"affection\":30,\"facts\":[\"Tanzil uses derogatory language\",\"Tanzil lacks strategic thinking\",\"Tanzil resorts to verbal aggression\",\"Tanzil uses physical aggression\",\"Tanzil lacks self-control\",\"Tanzil's behavior is intentionally provocative\",\"Tanzil uses physical aggression to silence others\",\"Tanzil believes he can control Murong Yuan through force\",\"Tanzil's actions are deliberate and intended to provoke a reaction\"],\"summary\":\"\",\"sumUpto\":0}",
+   "thought": "He thinks he can break me with force? He has no idea who he's dealing with."
+  }
+ ],
+ "state": {
+  "mood": "fury",
+  "emoji": "🙂",
+  "energy": "high",
+  "affection": 25,
+  "facts": [
+   "Tanzil uses derogatory language",
+   "Tanzil lacks strategic thinking",
+   "Tanzil resorts to verbal aggression",
+   "Tanzil uses physical aggression",
+   "Tanzil lacks self-control",
+   "Tanzil's behavior is intentionally provocative",
+   "Tanzil uses physical aggression to silence others",
+   "Tanzil believes he can control Murong Yuan through force",
+   "Tanzil's actions are deliberate and intended to provoke a reaction",
+   "Tanzil believes he can dominate Murong Yuan through physical control",
+   "Tanzil's actions are calculated to provoke and destabilize Murong Yuan",
+   "Tanzil views Murong Yuan as an object to be controlled and used"
+  ],
+  "summary": "",
+  "sumUpto": 0,
+  "log": [
+   {
+    "ts": 1794487130682,
+    "mood": "disdain",
+    "emoji": "🙂",
+    "aff": 45,
+    "thought": "He speaks as if he owns the world. How beneath him."
+   },
+   {
+    "ts": 1794487145291,
+    "mood": "disdain",
+    "emoji": "🙂",
+    "aff": 40,
+    "thought": "His insults are feeble; he lacks the wit to challenge me meaningfully."
+   },
+   {
+    "ts": 1794487162257,
+    "mood": "disdain",
+    "emoji": "🙂",
+    "aff": 35,
+    "thought": "His arrogance is a mask for his inability to comprehend strength."
+   },
+   {
+    "ts": 1794487193220,
+    "mood": "fury",
+    "emoji": "🙂",
+    "aff": 30,
+    "thought": "He thinks he controls me? I will break him, not with words, but with consequences."
+   },
+   {
+    "ts": 1794487224922,
+    "mood": "fury",
+    "emoji": "🙂",
+    "aff": 25,
+    "thought": "He thinks he can break me with force? He has no idea who he's dealing with."
+   }
+  ]
+ },
+ "cfg": {
+  "mode": "story",
+  "length": "auto",
+  "scene": ""
+ }
+}

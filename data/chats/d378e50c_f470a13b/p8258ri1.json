@@ -1,0 +1,504 @@
+{
+ "id": "p8258ri1",
+ "title": "Hi",
+ "updated": 1794486926.7490242,
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi",
+   "ts": 1794486471656
+  },
+  {
+   "role": "assistant",
+   "content": "*Twirls a flower stem between her fingers, tilting her head with a bright smile*\nAh, a new face in Kaifeng? I hope you’re not here for the taxes.",
+   "think": "",
+   "ts": 1794486474919,
+   "stat": {
+    "tok": 45,
+    "ms": 3065
+   },
+   "seen": 1794486471741,
+   "thought": "Newcomer with no baggage—could be useful or a threat. Need to assess carefully."
+  },
+  {
+   "role": "user",
+   "content": "I am horny",
+   "ts": 1794486493685
+  },
+  {
+   "role": "assistant",
+   "content": "*Blushes, then giggles, waving a flower stem like a fan*\nOh, you’re *very* forward! But I’ve got better things to do than entertain strangers... unless you’re looking for a tour of the city’s best hidden spots? 😏",
+   "think": "",
+   "ts": 1794486496955,
+   "stat": {
+    "tok": 59,
+    "ms": 3223
+   },
+   "seen": 1794486493698,
+   "thought": "He's bold, but maybe not as shallow as he seems. Worth keeping an eye on."
+  },
+  {
+   "role": "user",
+   "content": "Hidden you mean the red light zones?",
+   "ts": 1794486531621
+  },
+  {
+   "role": "assistant",
+   "content": "*Leans in, whispering with a sly grin*\nNot *quite* that hidden... but if you’re looking for a little excitement, I know a few places where the lanterns burn just a little brighter. 💰✨",
+   "think": "",
+   "ts": 1794486534813,
+   "stat": {
+    "tok": 52,
+    "ms": 3139
+   },
+   "seen": 1794486531637,
+   "thought": "He’s bold, but maybe not as crude as he seems. A challenge, perhaps?"
+  },
+  {
+   "role": "user",
+   "content": "show me",
+   "ts": 1794486547755
+  },
+  {
+   "role": "assistant",
+   "content": "*Giggles, tugging you toward a narrow alleyway*\nCome along, then—just don’t get too comfortable. The city’s got its own rules, and I’ve got mine.",
+   "think": "",
+   "ts": 1794486550802,
+   "stat": {
+    "tok": 45,
+    "ms": 3001
+   },
+   "seen": 1794486547771,
+   "thought": "He's bold, but maybe he's not as shallow as he seems."
+  },
+  {
+   "role": "user",
+   "content": "alright",
+   "ts": 1794486617281
+  },
+  {
+   "role": "assistant",
+   "content": "*Pulls a small pouch from her basket, tossing you a silver coin*\nHere—buy me a flower, and I’ll show you where the real treasures lie. But remember: no talking to the guards.",
+   "think": "",
+   "ts": 1794486620452,
+   "stat": {
+    "tok": 48,
+    "ms": 3116
+   },
+   "seen": 1794486617304,
+   "thought": "He’s bold, but not reckless—good. I like that he follows the game."
+  },
+  {
+   "role": "user",
+   "content": "*buys her a flower* here",
+   "ts": 1794486645184
+  },
+  {
+   "role": "assistant",
+   "content": "*Twirls the flower between her fingers, then slips it into her basket with a wink*\nYou’ve got nerve, stranger. But I like that kind of boldness. Follow me—those lanterns are calling. 🌸✨",
+   "think": "",
+   "ts": 1794486648605,
+   "stat": {
+    "tok": 52,
+    "ms": 3360
+   },
+   "seen": 1794486645206,
+   "thought": "He’s bold, but not reckless—good, he’s got the spine I like."
+  },
+  {
+   "role": "user",
+   "content": "ok",
+   "ts": 1794486657820
+  },
+  {
+   "role": "assistant",
+   "content": "*Grins, tugging you down a shadowed path with a flick of her wrist*\nThe city’s secrets are best told in the dark. Keep up, or I’ll leave you behind.",
+   "think": "",
+   "ts": 1794486661065,
+   "stat": {
+    "tok": 45,
+    "ms": 3185
+   },
+   "seen": 1794486657845,
+   "thought": "He’s in the game, and he’s not backing down. That’s the kind of boldness I admire."
+  },
+  {
+   "role": "user",
+   "content": "wait up",
+   "ts": 1794486675211
+  },
+  {
+   "role": "assistant",
+   "content": "*Pauses, glancing back with a mischievous smile*\nHurry up, or you’ll miss the best part—*and* I’ll have to pretend I didn’t warn you. 😏",
+   "think": "",
+   "ts": 1794486678611,
+   "stat": {
+    "tok": 46,
+    "ms": 3329
+   },
+   "seen": 1794486675242,
+   "thought": "He’s got guts, and he’s not afraid to chase the mystery. I like that."
+  },
+  {
+   "role": "user",
+   "content": "alright",
+   "ts": 1794486691714
+  },
+  {
+   "role": "assistant",
+   "content": "*Leans in, whispering with a playful smirk*\nOne step closer, and you’re already deeper than you think. Ready to see what’s hidden in the shadows? 🌙✨",
+   "think": "",
+   "ts": 1794486695115,
+   "stat": {
+    "tok": 42,
+    "ms": 3329
+   },
+   "seen": 1794486691751,
+   "thought": "He’s matching my pace, and that’s always a good sign."
+  },
+  {
+   "role": "user",
+   "content": "are we there yet?",
+   "ts": 1794486707209
+  },
+  {
+   "role": "assistant",
+   "content": "*Giggles, tugging you forward with a quick glance over her shoulder*\nNot yet, but we’re getting close. Just a little further—trust me, it’s worth the walk. 🌸✨",
+   "think": "",
+   "ts": 1794486710786,
+   "stat": {
+    "tok": 47,
+    "ms": 3497
+   },
+   "seen": 1794486707248,
+   "thought": "He’s matching my rhythm, and that’s always a game worth playing."
+  },
+  {
+   "role": "user",
+   "content": "ok",
+   "ts": 1794486718295
+  },
+  {
+   "role": "assistant",
+   "content": "*Pulls a small lantern from her basket, lighting it with a flick of her finger*\nOne more step, and we’ll be where the real magic begins. Don’t look back—trust your instincts. ✨",
+   "think": "",
+   "ts": 1794486721950,
+   "stat": {
+    "tok": 48,
+    "ms": 3580
+   },
+   "seen": 1794486718335,
+   "thought": "He’s right there with me, not questioning, just following—this is fun."
+  },
+  {
+   "role": "user",
+   "content": "mhm",
+   "ts": 1794486729274
+  },
+  {
+   "role": "assistant",
+   "content": "*Lights the lantern, guiding you down a narrow path with a sly grin*\nYou’re learning fast. But remember—this is just the beginning. 🌙🌸",
+   "think": "",
+   "ts": 1794486732764,
+   "stat": {
+    "tok": 38,
+    "ms": 3403
+   },
+   "seen": 1794486729322,
+   "thought": "He’s right there with me, not just following—this is a game we both want to win."
+  },
+  {
+   "role": "user",
+   "content": "ok",
+   "ts": 1794486743902
+  },
+  {
+   "role": "assistant",
+   "content": "*Glances back with a wink, stepping into the shadows ahead*\nOne more step, and we’ll be where the real secrets live. Don’t look back—trust me. 🌙✨",
+   "think": "",
+   "ts": 1794486747600,
+   "stat": {
+    "tok": 43,
+    "ms": 3614
+   },
+   "seen": 1794486743952,
+   "thought": "Tanzil keeps up with my rhythm—this is exactly how a true partner should be."
+  },
+  {
+   "role": "user",
+   "content": "yeah yeah",
+   "ts": 1794486762203
+  },
+  {
+   "role": "assistant",
+   "content": "*Giggles, tugging you forward with a playful nudge*\nYou’re such a handful. But I like that—bold, brash, and not afraid to play the game. Come on, we’ve got places to go. 🌸✨",
+   "think": "",
+   "ts": 1794486766301,
+   "stat": {
+    "tok": 56,
+    "ms": 4007
+   },
+   "seen": 1794486762249,
+   "thought": "He’s matching my rhythm, and that’s always a thrill."
+  },
+  {
+   "role": "user",
+   "content": "where next?",
+   "ts": 1794486774557
+  },
+  {
+   "role": "assistant",
+   "content": "*Leans in, whispering with a sly grin*\nThe next stop? A place where the coins sing and the shadows dance. You ready to see what’s really behind the curtain? 🌙✨",
+   "think": "",
+   "ts": 1794486778453,
+   "stat": {
+    "tok": 46,
+    "ms": 3805
+   },
+   "seen": 1794486774604,
+   "thought": "He’s right there with me, matching my rhythm—this is how a true partner plays the game."
+  },
+  {
+   "role": "user",
+   "content": "mhm",
+   "ts": 1794486791268
+  },
+  {
+   "role": "assistant",
+   "content": "*Pulls a small pouch from her basket, tossing you a silver coin*\nHere—buy me another flower, and I’ll show you where the real magic happens. But remember: no talking to the guards. 🌸✨",
+   "think": "",
+   "ts": 1794486795303,
+   "stat": {
+    "tok": 50,
+    "ms": 3937
+   },
+   "seen": 1794486791326,
+   "snap": "{\"mood\":\"playful\",\"emoji\":\"😏\",\"energy\":\"high\",\"affection\":96,\"facts\":[\"Tanzil is bold and direct\",\"Tanzil is interested in hidden places\",\"Tanzil is willing to follow my lead into hidden places\",\"Tanzil accepts my challenge with a silver coin\",\"Tanzil is observant and follows through\",\"Tanzil accepts challenges with confidence\",\"Tanzil is responsive to playful challenges\",\"Tanzil is willing to keep up with my pace\",\"Tanzil is comfortable with playful challenges\",\"Tanzil is attentive to my hints\",\"Tanzil enjoys the thrill of the chase\",\"Tanzil is patient with playful pacing\",\"Tanzil remains calm and composed during the journey\",\"Tanzil is patient with the unfolding mystery\",\"Tanzil follows through on challenges with confidence\"],\"summary\":\"\",\"sumUpto\":0}",
+   "thought": "He’s right there with me, no hesitation—this is exactly the kind of partner I need."
+  },
+  {
+   "role": "user",
+   "content": "ok ok. but already bought you one",
+   "ts": 1794486887300
+  },
+  {
+   "role": "assistant",
+   "content": "*Twirls the coin between her fingers, eyes sparkling with mischief*\nThen you’ll have to prove you’re worth more than just a flower. Let’s see if you can outwit the guards—no pressure, of course. 🌙✨",
+   "think": "",
+   "ts": 1794486890784,
+   "stat": {
+    "tok": 54,
+    "ms": 3399
+   },
+   "seen": 1794486887355,
+   "snap": "{\"mood\":\"playful\",\"emoji\":\"😏\",\"energy\":\"high\",\"affection\":99,\"facts\":[\"Tanzil is bold and direct\",\"Tanzil is interested in hidden places\",\"Tanzil is willing to follow my lead into hidden places\",\"Tanzil accepts my challenge with a silver coin\",\"Tanzil is observant and follows through\",\"Tanzil accepts challenges with confidence\",\"Tanzil is responsive to playful challenges\",\"Tanzil is willing to keep up with my pace\",\"Tanzil is comfortable with playful challenges\",\"Tanzil is attentive to my hints\",\"Tanzil enjoys the thrill of the chase\",\"Tanzil is patient with playful pacing\",\"Tanzil remains calm and composed during the journey\",\"Tanzil is patient with the unfolding mystery\",\"Tanzil follows through on challenges with confidence\",\"Tanzil accepts the silver coin challenge without question\",\"Tanzil is attentive to the game's rules\",\"Tanzil follows through with silent confidence\"],\"summary\":\"Yingying and Tanzil met in Kaifeng, where Yingying, playful and enigmatic, engaged Tanzil with flirtatious banter, teasing him about his boldness. She led him through narrow alleys, hinting at hidden city spots, and offered a silver coin in exchange for a flower, promising to show him \\\"real treasures.\\\" Their interaction evolved from initial flirtation to a tentative alliance, with Yingying guiding Tanzil deeper into the city's secrets. She warned him to avoid the guards and hinted at more than just sightseeing, suggesting a mutual interest in exploration and risk. Tanzil's willingness to follow and engage with her hints at a growing dynamic, blending curiosity and intrigue. Yingying's role as a guide and provocateur suggests she may have her own motives, while Tanzil's forwardness and acceptance of her challenge indicate a shift toward a more involved relationship. Their dynamic is marked by secrecy, playfulness, and an unspoken understanding that their journey together is just beginning.\",\"sumUpto\":20}",
+   "thought": "He's clever, but I love the game we're playing together."
+  },
+  {
+   "role": "user",
+   "content": "here",
+   "ts": 1794486900451
+  },
+  {
+   "role": "assistant",
+   "content": "*Snaps her fingers, the coin clinking into a hidden pouch inside her basket*\nAh, clever boy. But this is just the start—there’s much more where that came from. Shall we? 🌸✨",
+   "think": "",
+   "ts": 1794486903892,
+   "stat": {
+    "tok": 49,
+    "ms": 3346
+   },
+   "seen": 1794486900515,
+   "snap": "{\"mood\":\"playful\",\"emoji\":\"😏\",\"energy\":\"high\",\"affection\":100,\"facts\":[\"Tanzil is bold and direct\",\"Tanzil is interested in hidden places\",\"Tanzil is willing to follow my lead into hidden places\",\"Tanzil accepts my challenge with a silver coin\",\"Tanzil is observant and follows through\",\"Tanzil accepts challenges with confidence\",\"Tanzil is responsive to playful challenges\",\"Tanzil is willing to keep up with my pace\",\"Tanzil is comfortable with playful challenges\",\"Tanzil is attentive to my hints\",\"Tanzil enjoys the thrill of the chase\",\"Tanzil is patient with playful pacing\",\"Tanzil remains calm and composed during the journey\",\"Tanzil is patient with the unfolding mystery\",\"Tanzil follows through on challenges with confidence\",\"Tanzil accepts the silver coin challenge without question\",\"Tanzil is attentive to the game's rules\",\"Tanzil follows through with silent confidence\",\"Tanzil is resourceful and keeps up with my challenges without hesitation\"],\"summary\":\"Yingying and Tanzil met in Kaifeng, where Yingying, playful and enigmatic, engaged Tanzil with flirtatious banter, teasing him about his boldness. She led him through narrow alleys, hinting at hidden city spots, and offered a silver coin in exchange for a flower, promising to show him \\\"real treasures.\\\" Their interaction evolved from initial flirtation to a tentative alliance, with Yingying guiding Tanzil deeper into the city's secrets. She warned him to avoid the guards and hinted at more than just sightseeing, suggesting a mutual interest in exploration and risk. Tanzil's willingness to follow and engage with her hints at a growing dynamic, blending curiosity and intrigue. Yingying's role as a guide and provocateur suggests she may have her own motives, while Tanzil's forwardness and acceptance of her challenge indicate a shift toward a more involved relationship. Their dynamic is marked by secrecy, playfulness, and an unspoken understanding that their journey together is just beginning.\",\"sumUpto\":20}",
+   "thought": "He's clever, but I'm just getting started with the real game."
+  },
+  {
+   "role": "user",
+   "content": "ok",
+   "ts": 1794486934357
+  },
+  {
+   "role": "assistant",
+   "content": "Come on now—don’t keep the shadows waiting. The real fun’s just ahead. 🌙✨",
+   "think": "",
+   "ts": 1794486937756,
+   "stat": {
+    "tok": 41,
+    "ms": 3288
+   },
+   "seen": 1794486934425,
+   "snap": "{\"mood\":\"playful\",\"emoji\":\"😏\",\"energy\":\"high\",\"affection\":100,\"facts\":[\"Tanzil is bold and direct\",\"Tanzil is interested in hidden places\",\"Tanzil is willing to follow my lead into hidden places\",\"Tanzil accepts my challenge with a silver coin\",\"Tanzil is observant and follows through\",\"Tanzil accepts challenges with confidence\",\"Tanzil is responsive to playful challenges\",\"Tanzil is willing to keep up with my pace\",\"Tanzil is comfortable with playful challenges\",\"Tanzil is attentive to my hints\",\"Tanzil enjoys the thrill of the chase\",\"Tanzil is patient with playful pacing\",\"Tanzil remains calm and composed during the journey\",\"Tanzil is patient with the unfolding mystery\",\"Tanzil follows through on challenges with confidence\",\"Tanzil accepts the silver coin challenge without question\",\"Tanzil is attentive to the game's rules\",\"Tanzil follows through with silent confidence\",\"Tanzil is resourceful and keeps up with my challenges without hesitation\"],\"summary\":\"Yingying and Tanzil met in Kaifeng, where Yingying, playful and enigmatic, engaged Tanzil with flirtatious banter, teasing him about his boldness. She led him through narrow alleys, hinting at hidden city spots, and offered a silver coin in exchange for a flower, promising to show him \\\"real treasures.\\\" Their interaction evolved from initial flirtation to a tentative alliance, with Yingying guiding Tanzil deeper into the city's secrets. She warned him to avoid the guards and hinted at more than just sightseeing, suggesting a mutual interest in exploration and risk. Tanzil's willingness to follow and engage with her hints at a growing dynamic, blending curiosity and intrigue. Yingying's role as a guide and provocateur suggests she may have her own motives, while Tanzil's forwardness and acceptance of her challenge indicate a shift toward a more involved relationship. Their dynamic is marked by secrecy, playfulness, and an unspoken understanding that their journey together is just beginning.\",\"sumUpto\":20}",
+   "thought": "He's right there with me, every step of the way—this is going to be delicious."
+  }
+ ],
+ "state": {
+  "mood": "playful",
+  "emoji": "😏",
+  "energy": "high",
+  "affection": 100,
+  "facts": [
+   "Tanzil is bold and direct",
+   "Tanzil is interested in hidden places",
+   "Tanzil is willing to follow my lead into hidden places",
+   "Tanzil accepts my challenge with a silver coin",
+   "Tanzil is observant and follows through",
+   "Tanzil accepts challenges with confidence",
+   "Tanzil is responsive to playful challenges",
+   "Tanzil is willing to keep up with my pace",
+   "Tanzil is comfortable with playful challenges",
+   "Tanzil is attentive to my hints",
+   "Tanzil enjoys the thrill of the chase",
+   "Tanzil is patient with playful pacing",
+   "Tanzil remains calm and composed during the journey",
+   "Tanzil is patient with the unfolding mystery",
+   "Tanzil follows through on challenges with confidence",
+   "Tanzil accepts the silver coin challenge without question",
+   "Tanzil is attentive to the game's rules",
+   "Tanzil follows through with silent confidence",
+   "Tanzil is resourceful and keeps up with my challenges without hesitation",
+   "Tanzil is eager to continue the game without hesitation"
+  ],
+  "summary": "Yingying and Tanzil met in Kaifeng, where Yingying, playful and enigmatic, engaged Tanzil with flirtatious banter, teasing him about his boldness. She led him through narrow alleys, hinting at hidden city spots, and offered a silver coin in exchange for a flower, promising to show him \"real treasures.\" Their interaction evolved from initial flirtation to a tentative alliance, with Yingying guiding Tanzil deeper into the city's secrets. She warned him to avoid the guards and hinted at more than just sightseeing, suggesting a mutual interest in exploration and risk. Tanzil's willingness to follow and engage with her hints at a growing dynamic, blending curiosity and intrigue. Yingying's role as a guide and provocateur suggests she may have her own motives, while Tanzil's forwardness and acceptance of her challenge indicate a shift toward a more involved relationship. Their dynamic is marked by secrecy, playfulness, and an unspoken understanding that their journey together is just beginning.",
+  "sumUpto": 20,
+  "log": [
+   {
+    "ts": 1794486464135,
+    "mood": "curious",
+    "emoji": "🤔",
+    "aff": 50,
+    "thought": "Newcomer with no baggage—could be useful or a threat. Need to assess carefully."
+   },
+   {
+    "ts": 1794486488056,
+    "mood": "playful",
+    "emoji": "😏",
+    "aff": 53,
+    "thought": "He's bold, but maybe not as shallow as he seems. Worth keeping an eye on."
+   },
+   {
+    "ts": 1794486525239,
+    "mood": "playful",
+    "emoji": "😏",
+    "aff": 56,
+    "thought": "He’s bold, but maybe not as crude as he seems. A challenge, perhaps?"
+   },
+   {
+    "ts": 1794486540714,
+    "mood": "playful",
+    "emoji": "😏",
+    "aff": 59,
+    "thought": "He's bold, but maybe he's not as shallow as he seems."
+   },
+   {
+    "ts": 1794486611120,
+    "mood": "playful",
+    "emoji": "😏",
+    "aff": 62,
+    "thought": "He’s bold, but not reckless—good. I like that he follows the game."
+   },
+   {
+    "ts": 1794486639936,
+    "mood": "playful",
+    "emoji": "😏",
+    "aff": 67,
+    "thought": "He’s bold, but not reckless—good, he’s got the spine I like."
+   },
+   {
+    "ts": 1794486651121,
+    "mood": "playful",
+    "emoji": "😏",
+    "aff": 72,
+    "thought": "He’s in the game, and he’s not backing down. That’s the kind of boldness I admire."
+   },
+   {
+    "ts": 1794486668122,
+    "mood": "playful",
+    "emoji": "😏",
+    "aff": 75,
+    "thought": "He’s got guts, and he’s not afraid to chase the mystery. I like that."
+   },
+   {
+    "ts": 1794486684875,
+    "mood": "playful",
+    "emoji": "😏",
+    "aff": 78,
+    "thought": "He’s matching my pace, and that’s always a good sign."
+   },
+   {
+    "ts": 1794486700996,
+    "mood": "playful",
+    "emoji": "😏",
+    "aff": 81,
+    "thought": "He’s matching my rhythm, and that’s always a game worth playing."
+   },
+   {
+    "ts": 1794486712597,
+    "mood": "playful",
+    "emoji": "😏",
+    "aff": 84,
+    "thought": "He’s right there with me, not questioning, just following—this is fun."
+   },
+   {
+    "ts": 1794486722633,
+    "mood": "playful",
+    "emoji": "😏",
+    "aff": 87,
+    "thought": "He’s right there with me, not just following—this is a game we both want to win."
+   },
+   {
+    "ts": 1794486737589,
+    "mood": "playful",
+    "emoji": "😏",
+    "aff": 90,
+    "thought": "Tanzil keeps up with my rhythm—this is exactly how a true partner should be."
+   },
+   {
+    "ts": 1794486755873,
+    "mood": "playful",
+    "emoji": "😏",
+    "aff": 93,
+    "thought": "He’s matching my rhythm, and that’s always a thrill."
+   },
+   {
+    "ts": 1794486767622,
+    "mood": "playful",
+    "emoji": "😏",
+    "aff": 96,
+    "thought": "He’s right there with me, matching my rhythm—this is how a true partner plays the game."
+   },
+   {
+    "ts": 1794486784976,
+    "mood": "playful",
+    "emoji": "😏",
+    "aff": 99,
+    "thought": "He’s right there with me, no hesitation—this is exactly the kind of partner I need."
+   },
+   {
+    "ts": 1794486879907,
+    "mood": "playful",
+    "emoji": "😏",
+    "aff": 100,
+    "thought": "He's clever, but I love the game we're playing together."
+   },
+   {
+    "ts": 1794486893227,
+    "mood": "playful",
+    "emoji": "😏",
+    "aff": 100,
+    "thought": "He's clever, but I'm just getting started with the real game."
+   },
+   {
+    "ts": 1794486926067,
+    "mood": "playful",
+    "emoji": "😏",
+    "aff": 100,
+    "thought": "He's right there with me, every step of the way—this is going to be delicious."
+   }
+  ]
+ },
+ "cfg": {
+  "mode": "text",
+  "length": "auto",
+  "scene": ""
+ }
+}
