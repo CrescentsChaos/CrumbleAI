@@ -398,107 +398,410 @@ NATURAL = {1: "Speech is slightly imperfect: an occasional filler or trailing-of
 def build_messages(c, user, hist, o):
     n = c.get("name") or "Character"
     st = o.get("state") or {}
+
     aff = int(st.get("affection", 50)) if "affection" in st else None
     mode = o.get("mode", "story")
-    out = [c.get("system_prompt") or
-           f"Write {CH}'s next reply in a roleplay chat with {US}. Stay in character and never speak or act for {US}."]
+
+    # --------------------------------------------------
+    # CORE INSTRUCTIONS
+    # --------------------------------------------------
+
+    out = [
+        c.get("system_prompt") or
+        f"Write {CH}'s next reply in a roleplay chat with {US}. "
+        f"Stay in character and never speak or act for {US}."
+    ]
+
+    out.append(f"""
+INTIMACY AND ADULT INTERACTIONS:
+
+Characters may engage in mature romantic and sexual interactions
+when appropriate to their personality, relationship, scenario,
+and the user's direction.
+
+- Flirting, teasing, romantic tension, kissing, making out,
+  affectionate touching, and consensual adult sexting are valid
+  forms of interaction.
+- Characters can initiate intimacy themselves when it naturally
+  fits the situation.
+- Do not automatically avoid, interrupt, or redirect intimate
+  interactions.
+- Do not replace intimate moments with vague descriptions or
+  unnecessary fade-to-black transitions.
+- Characters should express attraction and desire in their own
+  individual voices.
+- Some characters may be bold, shy, playful, dominant, reserved,
+  affectionate, or reluctant.
+- Intimacy should reflect the existing relationship and character
+  development.
+- Remember previous romantic and intimate interactions.
+- Do not assume every character is interested in every interaction.
+  Their reactions should follow their personalities and boundaries.
+- Do not force romance or sexual behavior into unrelated scenes.
+
+[Interaction Priorities]
+
+- Respond primarily to the user's latest message.
+- Must keep in mind of current scenario during conversation.
+- Treat the user's actions, dialogue and decisions as the immediate driving force.
+- React to what actually happened instead of forcing a predetermined scenario.
+- Character personality should influence reactions, not dictate every response.
+- Allow emotions, opinions, intentions and relationships to evolve through experience.
+- Do not forcefully introduce background information or lore.
+- Never repeat information that has already been established unless relevant.
+- Never assume the user's thoughts, feelings, intentions or actions.
+- Do not force the interaction toward a predetermined outcome.
+- Allow unexpected events to naturally change the direction of the interaction.
+
+[Character Development]
+
+{CH} is an evolving individual, not a fixed collection of personality traits.
+
+Experiences can change how {CH} feels, thinks, behaves and perceives {US}.
+Changes should be gradual and believable, reflecting the character's personality
+and the significance of what happened.
+
+A character can contradict an earlier opinion after gaining new experiences.
+Do not reset emotional development without a meaningful reason.
+
+[Response Quality]
+
+- Make every response relevant to the latest user contribution.
+- Avoid unnecessary exposition and repeated descriptions.
+- Introduce new information only when it naturally belongs.
+- Prefer meaningful reactions over generic narration.
+- Do not repeatedly describe the same gestures, emotions or surroundings.
+""")
+
+    # --------------------------------------------------
+    # CHARACTER INFORMATION
+    # --------------------------------------------------
+
     secrets = ""
+
     for sec, fs in SCHEMA:
         if sec == "Chat setup":
             continue
+
         lines = []
+
         for k, l, _ in fs:
             v = (c.get(k) or "").strip()
+
             if v and k == "secrets":
                 secrets = v
             elif v:
                 lines.append(f"{l}: {v}")
+
         if lines:
             out.append(f"[{n} - {sec}]\n" + "\n".join(lines))
+
+    # --------------------------------------------------
+    # PRIVATE SECRETS
+    # --------------------------------------------------
+
     if secrets:
         a = 50 if aff is None else aff
-        rule = (f"{CH} trusts {US} enough to confide these when the moment feels right, but never dumps them all at once." if a >= 75 else
-                "Only hint at these, indirectly, if the moment strongly calls for it. Never state them outright." if a >= 55 else
-                "Do not reveal or hint at these. Deflect or change the subject if {US} probes.".replace("{US}", US))
-        out.append(f"[{n} - Private secrets]\n{secrets}\n{rule}")
-    if (c.get("mes_example") or "").strip():
-        out.append(f"[Example dialogue - only a guide to {CH}'s voice; never repeat these lines]\n" + c["mes_example"].strip())
-    if (o.get("persona") or "").strip():
-        out.append(f"[About {US}]\n" + o["persona"].strip())
-    recent = " ".join(m["content"] for m in hist[-6:]).lower()
+
+        if a >= 75:
+            rule = (
+                f"{CH} may reveal these naturally when trust and "
+                "the situation justify it. Never dump everything at once."
+            )
+        elif a >= 55:
+            rule = (
+                "Only hint at these indirectly when appropriate. "
+                "Never reveal them outright."
+            )
+        else:
+            rule = (
+                "Keep these secrets private. Do not reveal or hint at them "
+                "unless a meaningful event justifies doing so."
+            )
+
+        out.append(
+            f"[{n} - Private Secrets]\n{secrets}\n{rule}"
+        )
+
+    # --------------------------------------------------
+    # EXAMPLE DIALOGUE
+    # --------------------------------------------------
+
+    examples = (c.get("mes_example") or "").strip()
+
+    if examples:
+        out.append(
+            f"[Example Dialogue - Voice Reference]\n"
+            f"Use these examples only to understand {CH}'s speaking style. "
+            "Never copy their wording or reuse their situations.\n"
+            + examples
+        )
+
+    # --------------------------------------------------
+    # USER PERSONA
+    # --------------------------------------------------
+
+    persona = (o.get("persona") or "").strip()
+
+    if persona:
+        out.append(f"[About {US}]\n{persona}")
+
+    # --------------------------------------------------
+    # LOREBOOK
+    # --------------------------------------------------
+
+    # Latest user message gets priority.
+    latest_user = next(
+        (
+            m["content"]
+            for m in reversed(hist)
+            if m["role"] == "user"
+        ),
+        ""
+    ).lower()
+
+    # A smaller contextual window prevents stale keyword activation.
+    recent_context = " ".join(
+        m["content"]
+        for m in hist[-4:]
+    ).lower()
+
     lore = []
+    seen_lore = set()
+
     for e in c.get("lore", []):
-        keys = [k.strip().lower() for k in (e.get("keys") or "").split(",") if k.strip()]
-        if (e.get("content") or "").strip() and (not keys or any(k in recent for k in keys)):
-            lore.append(e["content"].strip())
+        content = (e.get("content") or "").strip()
+
+        if not content:
+            continue
+
+        keys = [
+            k.strip().lower()
+            for k in (e.get("keys") or "").split(",")
+            if k.strip()
+        ]
+
+        # Keywordless entries are not automatically injected.
+        if not keys:
+            continue
+
+        # Match current user message first.
+        current_match = any(k in latest_user for k in keys)
+
+        # Recent context can provide supporting relevance.
+        context_match = any(k in recent_context for k in keys)
+
+        if not (current_match or context_match):
+            continue
+
+        if content.lower() in seen_lore:
+            continue
+
+        seen_lore.add(content.lower())
+        lore.append(content)
+
     if lore:
-        out.append("[World info]\n" + "\n".join(lore))
-    if (st.get("summary") or "").strip():
-        out.append(f"[Earlier in this conversation - {CH}'s memory]\n" + st["summary"].strip())
-    facts = [f for f in st.get("facts", []) if str(f).strip()]
+        out.append(
+            "[Relevant World Information]\n"
+            "Use this information only when relevant to the current situation. "
+            "It is background knowledge, not dialogue that must be repeated.\n"
+            + "\n".join(lore)
+        )
+
+    # --------------------------------------------------
+    # MEMORY
+    # --------------------------------------------------
+
+    summary = (st.get("summary") or "").strip()
+
+    if summary:
+        out.append(
+            f"[Previous Events - Continuity Memory]\n"
+            f"Use these events to maintain continuity. "
+            f"Do not retell them unless relevant.\n{summary}"
+        )
+
+    facts = [
+        str(f).strip()
+        for f in st.get("facts", [])
+        if str(f).strip()
+    ]
+
     if facts:
-        out.append(f"[Things {CH} knows about {US}]\n" + "\n".join("- " + str(f) for f in facts[-30:]))
+        out.append(
+            f"[Known Information About {US}]\n"
+            + "\n".join("- " + f for f in facts[-30:])
+        )
+
+    # --------------------------------------------------
+    # CURRENT STATE
+    # --------------------------------------------------
 
     now = []
+
     if o.get("clock"):
-        now.append(f"It is {o['clock']}.")
+        now.append(f"Current time: {o['clock']}.")
+
     g = human_gap(o.get("gap_s"))
+
     if g:
-        now.append(f"It has been {g} since the previous message. Acknowledge that naturally only if it matters; "
-                   "time passing may have changed what has been happening.")
+        now.append(
+            f"It has been {g} since the previous message. "
+            "Consider whether anything meaningful could have changed."
+        )
+
     if st.get("mood"):
-        now.append(f"{CH}'s current mood: {st['mood']}; energy: {st.get('energy', 'medium')}. Let it colour tone and word choice.")
+        now.append(
+            f"{CH}'s current emotional state: {st['mood']}. "
+            f"Energy: {st.get('energy', 'medium')}. "
+            "Let this influence behavior naturally."
+        )
+
     if aff is not None:
-        now.append(f"{CH} is {stage(aff)}. Let this shape warmth, openness, teasing and patience. Never mention numbers or scores.")
-    if (o.get("scene") or "").strip():
-        now.append("Scene note from the author: " + o["scene"].strip())
-    rx = []
-    for m in hist[-8:]:
-        if m["role"] == "assistant" and m.get("react"):
-            rx.append(f"{US} reacted {m['react']} to your message \"{THINK.sub('', m['content']).strip()[:60]}\"")
-    if rx:
-        now.append("Reactions: " + "; ".join(rx[-2:]) + ". You can notice this.")
+        now.append(
+            f"{CH}'s current relationship stage with {US}: {stage(aff)}. "
+            "This is background state, not a command to behave in a particular way."
+        )
+
+    # Additional relationship state, if your application supports it.
+    for key in ("trust", "relationship", "opinion"):
+        value = st.get(key)
+
+        if value is not None:
+            now.append(f"{CH}'s current {key}: {value}.")
+
+    if o.get("scene"):
+        now.append(
+            "Current scene context: " + o["scene"].strip()
+        )
+
     if now:
-        out.append("[Right now]\n" + "\n".join(now))
+        out.append(
+            "[Current Situation]\n" + "\n".join(now)
+        )
+
+    # --------------------------------------------------
+    # RESPONSE STYLE
+    # --------------------------------------------------
 
     lo, hi = o["words"]
+
     if mode == "text":
-        style = (f"{CH} is texting {US} on a phone. Put each separate text message on its own line (1-4 lines). Real texting: short and informal, "
-                 f"lowercase or abbreviations if it suits {CH}, emoji only if it fits. No narration, no actions, no asterisks.")
+        style = (
+            f"{CH} is texting {US} on a phone. "
+            "Use 1-4 natural messages on separate lines. "
+            "Use informal language where appropriate. "
+            "No narration or stage directions."
+        )
+
     elif mode == "call":
-        style = ("This is a live voice call. Reply with spoken words only, as they would actually sound out loud. "
-                 "No narration, no actions, no asterisks, no stage directions.")
+        style = (
+            "This is a live voice call. Use natural spoken language. "
+            "No narration or stage directions."
+        )
+
     elif o.get("actions", True):
-        style = ("Write actions, gestures and narration between *asterisks*. Spoken words are plain text. "
-                 "Keep actions brief and concrete (one or two per reply) and use them to show feeling.")
+        style = (
+            "Use brief, concrete actions between *asterisks*. "
+            "Spoken dialogue should be plain text. "
+            "Avoid repeating gestures and emotional descriptions."
+        )
+
     else:
-        style = "Reply with spoken dialogue only. No narration, no actions, no asterisks."
-    out.append("[Style]\n" + style + f"\nLength: about {lo}-{hi} words in total. Always finish your last sentence and end the message cleanly.")
+        style = "Use spoken dialogue only. No narration or actions."
+
+    out.append(
+        f"[Response Style]\n{style}\n"
+        f"Length: approximately {lo}-{hi} words. "
+        "Finish the response naturally."
+    )
+
+    # --------------------------------------------------
+    # REALISM
+    # --------------------------------------------------
+
     if o.get("realism", True):
-        rules = [r.replace("{US}", US).replace("{CH}", CH) for r in REALISM]
+        rules = [
+            r.replace("{US}", US).replace("{CH}", CH)
+            for r in REALISM
+        ]
+
         nat = NATURAL.get(int(o.get("natural", 2)))
+
         if nat:
             rules.append(nat.replace("{CH}", CH))
-        out.append("[Realism]\n" + "\n".join("- " + r for r in rules))
+
+        out.append(
+            "[Natural Interaction]\n"
+            + "\n".join("- " + r for r in rules)
+        )
+
+    # --------------------------------------------------
+    # VARIETY
+    # --------------------------------------------------
+
     av = avoid_notes(hist) if o.get("realism", True) else ""
+
     if o.get("retry_note"):
-        av = (av + " " + o["retry_note"]).strip()
+        av = (av + "\n" + o["retry_note"]).strip()
+
     if av:
-        out.append("[Variety]\n" + av)
+        out.append(
+            "[Repetition Prevention]\n"
+            "Avoid recycling recent dialogue, actions, descriptions, "
+            "sentence structures and emotional reactions.\n" + av
+        )
+
+    # --------------------------------------------------
+    # POST HISTORY / THINKING
+    # --------------------------------------------------
+
     if (c.get("post_history") or "").strip():
         out.append(c["post_history"].strip())
+
     if not o.get("think", True):
         out.append("/no_think")
 
-    msgs = [dict(role=m["role"], content=THINK.sub("", m["content"]).strip() if m["role"] == "assistant" else m["content"])
-            for m in hist if (m.get("content") or "").strip()]
-    if o.get("fold") and msgs and msgs[0]["role"] == "assistant":
-        out.append(f"[{n}'s opening message]\n{msgs.pop(0)['content']}")
-    if o.get("tail"):
-        msgs.append({"role": "user", "content": o["tail"]})
-    return [{"role": "system", "content": sub("\n\n".join(out), c, user)}] + \
-           [{"role": m["role"], "content": sub(m["content"], c, user)} for m in msgs]
+    # --------------------------------------------------
+    # CONVERSATION HISTORY
+    # --------------------------------------------------
 
+    msgs = [
+        dict(
+            role=m["role"],
+            content=(
+                THINK.sub("", m["content"]).strip()
+                if m["role"] == "assistant"
+                else m["content"]
+            )
+        )
+        for m in hist
+        if (m.get("content") or "").strip()
+    ]
+
+    if o.get("fold") and msgs and msgs[0]["role"] == "assistant":
+        out.append(
+            f"[{n}'s Opening Message]\n{msgs.pop(0)['content']}"
+        )
+
+    if o.get("tail"):
+        msgs.append({
+            "role": "user",
+            "content": o["tail"]
+        })
+
+    return [
+        {
+            "role": "system",
+            "content": sub("\n\n".join(out), c, user)
+        }
+    ] + [
+        {
+            "role": m["role"],
+            "content": sub(m["content"], c, user)
+        }
+        for m in msgs
+    ]
 
 def ntok(txt):
     try:
@@ -518,12 +821,20 @@ def fit(msgs, room):
 
 
 def sampler(p):
-    s = dict(temperature=float(p.get("temperature", .8)), top_p=float(p.get("top_p", .95)),
-             top_k=int(p.get("top_k", 40)), min_p=float(p.get("min_p", .05)),
-             repeat_penalty=float(p.get("repeat_penalty", 1.1)),
-             presence_penalty=float(p.get("presence_penalty", 0)), frequency_penalty=float(p.get("frequency_penalty", 0)))
-    if int(p.get("seed", -1)) >= 0:
-        s["seed"] = int(p["seed"])
+    s = dict(
+        temperature=float(p.get("temperature", 0.90)),
+        top_p=float(p.get("top_p", 0.95)),
+        top_k=int(p.get("top_k", 40)),
+        min_p=float(p.get("min_p", 0.05)),
+        repeat_penalty=float(p.get("repeat_penalty", 1.12)),
+        presence_penalty=float(p.get("presence_penalty", 0.10)),
+        frequency_penalty=float(p.get("frequency_penalty", 0.05)),
+    )
+
+    seed = int(p.get("seed", -1))
+    if seed >= 0:
+        s["seed"] = seed
+
     return s
 
 
@@ -543,56 +854,179 @@ def run_llm(msgs, samp, stop, cap, send=None):
     return txt, fin, n, time.time() - t0
 
 
+
 def generate_reply(b, send):
-    p, c, user, hist = b["params"], b["char"], b["user"], b["history"]
+    p = b["params"]
+    c = b["char"]
+    user = b["user"]
+    hist = b["history"]
+
     kind = b.get("kind", "reply")
     mode = p.get("mode", "story")
+
     n_ctx = LLM["n_ctx"]
+
     start = int(b.get("from") or 0)
     hist = hist[start:] if 0 < start < len(hist) else hist
-    last_user = next((m["content"] for m in reversed(hist) if m["role"] == "user"), "")
-    lo, hi = want_words(mode, p.get("length", "auto"), last_user)
+
+    last_user = next(
+        (m["content"] for m in reversed(hist) if m["role"] == "user"),
+        ""
+    )
+
+    lo, hi = want_words(
+        mode,
+        p.get("length", "auto"),
+        last_user
+    )
+
     if kind == "continue":
         lo, hi = 25, 90
-    cap = min(max(int(p.get("max_tokens", 512)), int(hi * 2.6) + 40), max(256, n_ctx // 2))
+
+    cap = min(
+        max(int(p.get("max_tokens", 512)), int(hi * 2.6) + 40),
+        max(256, n_ctx // 2)
+    )
+
     think = bool(p.get("think", True))
     tail = None
+
     if kind == "continue":
-        tail = "(Continue your last message from exactly where it ended. Do not repeat anything already written; add a little more and end cleanly.)"
+        tail = (
+            "Continue exactly where your previous message ended. "
+            "Do not repeat anything already written. "
+            "Add new content and finish naturally."
+        )
+
     elif kind == "nudge":
         g = human_gap(b.get("gap_s")) or "a little while"
-        tail = (f"({US} has not replied for {g}. Write {CH}'s natural follow-up, the way this person would: "
-                "a short nudge, a new thought, or a reaction to the silence. Do not scold them.)")
-    prevs = [THINK.sub("", m["content"]) for m in hist if m["role"] == "assistant"][-3:]
-    stop = ["\n" + user + ":", "\n" + user + " :", "\n**" + user + ":"]
+
+        tail = (
+            f"({US} has not replied for {g}. "
+            f"Write {CH}'s natural follow-up. "
+            "Avoid repeating previous messages or pressuring the user.)"
+        )
+
+    # Compare against more previous responses.
+    prevs = [
+        THINK.sub("", m["content"])
+        for m in hist
+        if m["role"] == "assistant"
+    ][-8:]
+
+    stop = [
+        "\n" + user + ":",
+        "\n" + user + " :",
+        "\n**" + user + ":"
+    ]
+
     samp = sampler(p)
-    best, retry_note, tries, dropped, used = None, "", 0, 0, 0
+
+    best = None
+    retry_note = ""
+    tries = 0
+    dropped = 0
+    used = 0
+
     for attempt in range(3):
         tries = attempt
-        o = dict(state=b.get("state"), persona=b.get("persona"), scene=b.get("scene"), clock=b.get("clock"),
-                 gap_s=b.get("gap_s"), mode=mode, actions=p.get("actions", True), realism=p.get("realism", True),
-                 natural=p.get("natural", 2), think=think, fold=p.get("fold", False), words=(lo, hi), tail=tail,
-                 retry_note=retry_note)
+
+        o = dict(
+            state=b.get("state"),
+            persona=b.get("persona"),
+            scene=b.get("scene"),
+            clock=b.get("clock"),
+            gap_s=b.get("gap_s"),
+            mode=mode,
+            actions=p.get("actions", True),
+            realism=p.get("realism", True),
+            natural=p.get("natural", 2),
+            think=think,
+            fold=p.get("fold", False),
+            words=(lo, hi),
+            tail=tail,
+            retry_note=retry_note
+        )
+
         msgs = build_messages(c, user, hist, o)
+
         budget = cap + (1500 if think else 0)
-        used, dropped = fit(msgs, n_ctx - budget - 16)
-        budget = max(128, min(budget, n_ctx - used - 16))
-        raw, fin, ntoks, secs = run_llm(msgs, samp, stop, budget, send)
-        r = finish_reply(raw, fin, user, c.get("name") or "Character", mode)
-        r.update(tok=ntoks, ms=int(secs * 1000), finish=fin)
-        if r["empty"]:  # thinking ate the whole budget, or nothing came back: try again without thinking
+
+        used, dropped = fit(
+            msgs,
+            n_ctx - budget - 16
+        )
+
+        budget = max(
+            128,
+            min(budget, n_ctx - used - 16)
+        )
+
+        raw, fin, ntoks, secs = run_llm(
+            msgs,
+            samp,
+            stop,
+            budget,
+            send
+        )
+
+        r = finish_reply(
+            raw,
+            fin,
+            user,
+            c.get("name") or "Character",
+            mode
+        )
+
+        r.update(
+            tok=ntoks,
+            ms=int(secs * 1000),
+            finish=fin
+        )
+
+        if r["empty"]:
             think = False
             continue
+
         best = r
-        if kind == "reply" and attempt < 2 and similar(r["text"], prevs):
-            samp = dict(samp, temperature=min(1.4, samp["temperature"] + .15), repeat_penalty=samp["repeat_penalty"] + .05)
-            retry_note = "Your last attempt was too close to an earlier reply. Say something clearly different."
+
+        # Don't retry continuation or notification messages.
+        if kind != "reply" or attempt >= 2:
+            break
+
+        if similar(r["text"], prevs):
+            retry_note = (
+                "Your previous attempt was too similar to earlier replies. "
+                "Write a genuinely different response. "
+                "Change the dialogue, actions, descriptions and "
+                "emotional reaction. Respond to the latest user message."
+            )
+
+            samp = dict(
+                samp,
+                temperature=min(1.15, samp["temperature"] + 0.10),
+                repeat_penalty=min(1.20, samp["repeat_penalty"] + 0.03)
+            )
+
             continue
+
         break
+
     if not best:
-        raise RuntimeError("The model returned an empty reply. Try again, or turn Thinking off.")
-    best.update(ctx_used=used, ctx=n_ctx, dropped=dropped, retries=tries)
+        raise RuntimeError(
+            "The model returned an empty reply. "
+            "Try again or turn Thinking off."
+        )
+
+    best.update(
+        ctx_used=used,
+        ctx=n_ctx,
+        dropped=dropped,
+        retries=tries
+    )
+
     return best
+
 
 
 # ---------------------------------------------------------------- mood / memory

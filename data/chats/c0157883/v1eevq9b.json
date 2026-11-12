@@ -1,7 +1,7 @@
 {
- "id": "dt9tfts7",
+ "id": "v1eevq9b",
  "title": "New chat",
- "updated": 1794488741.8964467,
+ "updated": 1794501982.8596368,
  "history": [],
  "state": {
   "mood": "neutral",
@@ -14,7 +14,7 @@
   "log": []
  },
  "cfg": {
-  "mode": "text",
+  "mode": "story",
   "length": "auto",
   "scene": ""
  }

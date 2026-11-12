@@ -1,8 +1,27 @@
 {
  "id": "69ltmnnf",
- "title": "New chat",
- "updated": 1794485059.5300825,
- "history": [],
+ "title": "sup!",
+ "updated": 1794502642.1189592,
+ "history": [
+  {
+   "role": "user",
+   "content": "sup!",
+   "ts": 1794502633655
+  },
+  {
+   "role": "assistant",
+   "content": "*raises an eyebrow, tilting her head slightly*\nYou have a curious way of addressing someone. Care to explain?",
+   "think": "",
+   "ts": 1794502637687,
+   "stat": {
+    "tok": 29,
+    "ms": 4010
+   },
+   "seen": 1794502633657,
+   "snap": "{\"mood\":\"neutral\",\"emoji\":\"😐\",\"energy\":\"medium\",\"affection\":50,\"facts\":[],\"summary\":\"\",\"sumUpto\":0}",
+   "thought": "This user's tone is careless. I should assess their intent before engaging further."
+  }
+ ],
  "state": {
   "mood": "neutral",
   "emoji": "😐",
@@ -11,7 +30,15 @@
   "facts": [],
   "summary": "",
   "sumUpto": 0,
-  "log": []
+  "log": [
+   {
+    "ts": 1794502642114,
+    "mood": "neutral",
+    "emoji": "😐",
+    "aff": 50,
+    "thought": "This user's tone is careless. I should assess their intent before engaging further."
+   }
+  ]
  },
  "cfg": {
   "mode": "story",

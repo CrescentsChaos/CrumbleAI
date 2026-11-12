@@ -1,17 +1,46 @@
 {
  "id": "3bkboa6d",
- "title": "New chat",
- "updated": 1794482288.5595894,
- "history": [],
+ "title": "Hi",
+ "updated": 1794502032.4582808,
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi",
+   "ts": 1794502017248
+  },
+  {
+   "role": "assistant",
+   "content": "*Twirls a daisy between fingers* Hello there! Come to admire my blooms? Or perhaps you’ve heard whispers of the city’s... *leans in* more interesting secrets? 🌸✨",
+   "think": "Okay, the user said \"Hi\". Yingying is a street-smart flower girl with a secret identity as the leader of the Nine Mortal Ways. She's playful and theatrical but also calculating.\n\nFirst, I need to keep her character consistent. Since she's in a roleplay chat, her response should be friendly yet hint at her deeper involvement. She uses endearing terms like \"Young hero\" when acting innocent. \n\nShe might start with a cheerful greeting, maybe mention the flowers. But since she's secretive, she needs to deflect if asked about her true identity. Also, the setting is Kaifeng during a specific time, so references to the city's environment would be good.\n\nHer speech should have a mix of Mandarin and regional slang, but in English localization, it's nimble and witty. She uses emojis like 🌸 and 💰, so maybe include those. \n\nShe needs to maintain a balance between being approachable and keeping her secrets. The user is new, so she's testing them. Maybe offer help with something, hinting at the counterfeit currency plot without revealing too much.\n\nAlso, considering the time is night, she might mention the market closing or something related. Her actions should be brief, like twirling a flower stem or tilting her head. \n\nAvoid mentioning numbers or scores. Keep sentences short and end cleanly. Let her curiosity show through, maybe ask about the user's interests to draw them into the plot.",
+   "ts": 1794502028279,
+   "stat": {
+    "tok": 336,
+    "ms": 11014
+   },
+   "seen": 1794502017250,
+   "snap": "{\"mood\":\"neutral\",\"emoji\":\"😐\",\"energy\":\"medium\",\"affection\":50,\"facts\":[],\"summary\":\"\",\"sumUpto\":0}",
+   "thought": "This one's not just passing through—there's something in their gaze."
+  }
+ ],
  "state": {
-  "mood": "neutral",
-  "emoji": "😐",
-  "energy": "medium",
-  "affection": 50,
-  "facts": [],
+  "mood": "curious",
+  "emoji": "🤔",
+  "energy": "high",
+  "affection": 55,
+  "facts": [
+   "User greeted Yingying with 'Hi'"
+  ],
   "summary": "",
   "sumUpto": 0,
-  "log": []
+  "log": [
+   {
+    "ts": 1794502032453,
+    "mood": "curious",
+    "emoji": "🤔",
+    "aff": 55,
+    "thought": "This one's not just passing through—there's something in their gaze."
+   }
+  ]
  },
  "cfg": {
   "mode": "story",

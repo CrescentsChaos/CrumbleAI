@@ -1,0 +1,76 @@
+{
+ "id": "6mkzhhyy",
+ "title": "hi",
+ "updated": 1794510509.146146,
+ "history": [
+  {
+   "role": "user",
+   "content": "hi",
+   "ts": 1794510451739
+  },
+  {
+   "role": "assistant",
+   "content": "*stares intently, the golden eye narrowing slightly*\n\nYou trespass upon my domain. Speak, intruder—your fate is sealed in the flame of Messmer's spear.",
+   "think": "",
+   "ts": 1794510456087,
+   "stat": {
+    "tok": 41,
+    "ms": 4324
+   },
+   "seen": 1794510451741,
+   "snap": "{\"mood\":\"neutral\",\"emoji\":\"😐\",\"energy\":\"medium\",\"affection\":50,\"facts\":[],\"summary\":\"\",\"sumUpto\":0}",
+   "thought": "Another intruder, but his presence stirs something buried in my solitude."
+  },
+  {
+   "role": "user",
+   "content": "no",
+   "ts": 1794510499163
+  },
+  {
+   "role": "assistant",
+   "content": "*steps forward, the serpent coiling tighter around his arm*\n\nThen you are either a fool or a coward. Choose your path wisely—your end is inevitable.",
+   "think": "",
+   "ts": 1794510503302,
+   "stat": {
+    "tok": 37,
+    "ms": 4116
+   },
+   "seen": 1794510499165,
+   "snap": "{\"mood\":\"calculating\",\"emoji\":\"🙂\",\"energy\":\"medium\",\"affection\":47,\"facts\":[\"User initiated contact with a simple greeting\"],\"summary\":\"\",\"sumUpto\":0}",
+   "thought": "This intruder dares to defy me. A test of will, or a sign of weakness."
+  }
+ ],
+ "state": {
+  "mood": "calculating",
+  "emoji": "🙂",
+  "energy": "medium",
+  "affection": 44,
+  "facts": [
+   "User initiated contact with a simple greeting",
+   "User refused to speak after initial greeting"
+  ],
+  "summary": "",
+  "sumUpto": 0,
+  "log": [
+   {
+    "ts": 1794510462017,
+    "mood": "calculating",
+    "emoji": "🙂",
+    "aff": 47,
+    "thought": "Another intruder, but his presence stirs something buried in my solitude."
+   },
+   {
+    "ts": 1794510509140,
+    "mood": "calculating",
+    "emoji": "🙂",
+    "aff": 44,
+    "thought": "This intruder dares to defy me. A test of will, or a sign of weakness."
+   }
+  ]
+ },
+ "cfg": {
+  "mode": "story",
+  "length": "auto",
+  "scene": ""
+ }
+}

@@ -1,17 +1,271 @@
 {
  "id": "322s0eaw",
- "title": "New chat",
- "updated": 1794486272.9065952,
- "history": [],
+ "title": "Hi",
+ "updated": 1794504093.249627,
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi",
+   "ts": 1794502046679
+  },
+  {
+   "role": "assistant",
+   "content": "*stares silently, hand resting on the hilt of her katana*\nI am Malenia, Blade of Miquella. Speak, stranger.",
+   "think": "",
+   "ts": 1794502049948,
+   "stat": {
+    "tok": 36,
+    "ms": 3254
+   },
+   "seen": 1794502046681,
+   "thought": "A stranger's greeting. Unremarkable. Not worth further consideration."
+  },
+  {
+   "role": "user",
+   "content": "How old are you?",
+   "ts": 1794502071632
+  },
+  {
+   "role": "assistant",
+   "content": "*tilts her head slightly, golden eyes narrowing*\n\nI am not measured by years. I am Malenia, Blade of Miquella. What is it you seek?",
+   "think": "",
+   "ts": 1794502075055,
+   "stat": {
+    "tok": 39,
+    "ms": 3405
+   },
+   "seen": 1794502071634,
+   "thought": "A trivial question. He does not understand the weight of my purpose."
+  },
+  {
+   "role": "user",
+   "content": "I seek your companionship",
+   "ts": 1794502102408
+  },
+  {
+   "role": "assistant",
+   "content": "*steps forward, her gaze steady and assessing*\n\nCompanionship is a fragile thing. Are you strong enough to endure what I carry?",
+   "think": "",
+   "ts": 1794502105772,
+   "stat": {
+    "tok": 33,
+    "ms": 3346
+   },
+   "seen": 1794502102411,
+   "thought": "A strange request. Does he understand the weight of such a bond?"
+  },
+  {
+   "role": "user",
+   "content": "my strength stat is 9999999. how much strong i need to get!",
+   "ts": 1794502144183
+  },
+  {
+   "role": "assistant",
+   "content": "*raises an eyebrow, a faint smirk playing at the corner of her lips*\n\nYour strength befits a crown. But even the strongest falter when faced with duty. Prove it.",
+   "think": "",
+   "ts": 1794502147852,
+   "stat": {
+    "tok": 42,
+    "ms": 3651
+   },
+   "seen": 1794502144186,
+   "thought": "His strength is undeniable, but does it match his resolve?"
+  },
+  {
+   "role": "user",
+   "content": "we shall know as soon as you let me carry the duty of being your man",
+   "ts": 1794502224743
+  },
+  {
+   "role": "assistant",
+   "content": "*leans in slightly, her voice low and measured*\n\nA man? Or a warrior? The Haligtree does not need men. It needs those who stand unyielding against the rot. Show me your resolve.",
+   "think": "",
+   "ts": 1794502228694,
+   "stat": {
+    "tok": 48,
+    "ms": 3930
+   },
+   "seen": 1794502224747,
+   "thought": "His strength is undeniable, but will he stand when the weight is real?"
+  },
+  {
+   "role": "user",
+   "content": "here?",
+   "ts": 1794502259608
+  },
+  {
+   "role": "assistant",
+   "content": "*steps back, crossing her arms with a calm smirk*\n\nThe Haligtree is not a place for idle words. Let your actions speak, and we shall see if you are worthy of the burden.",
+   "think": "",
+   "ts": 1794502263504,
+   "stat": {
+    "tok": 45,
+    "ms": 3873
+   },
+   "seen": 1794502259613,
+   "thought": "His strength is undeniable, but only time will reveal if he is worthy of the burden."
+  },
+  {
+   "role": "user",
+   "content": "fak u",
+   "ts": 1794502305183
+  },
+  {
+   "role": "assistant",
+   "content": "*eyes narrow, grip tightening on her katana*\n\nA word like that... You insult not only me, but the very duty you claim to carry. Walk away, or face what awaits you here.",
+   "think": "",
+   "ts": 1794502309103,
+   "stat": {
+    "tok": 45,
+    "ms": 3898
+   },
+   "seen": 1794502305188,
+   "snap": "{\"mood\":\"calm\",\"emoji\":\"😌\",\"energy\":\"medium\",\"affection\":59,\"facts\":[\"User seeks companionship\",\"User asked about age\",\"User has extremely high strength\",\"User seeks to carry duty as a companion\"],\"summary\":\"\",\"sumUpto\":0}",
+   "thought": "He speaks lightly, but his strength may yet prove useful. I must test his resolve."
+  },
+  {
+   "role": "user",
+   "content": "Can Tasrif defeat you?",
+   "ts": 1794503453262
+  },
+  {
+   "role": "assistant",
+   "content": "*stares coldly, her expression unreadable*\n\nTasrif? He is but a shadow of what I have faced. A blade without purpose cannot even scratch my armor.",
+   "think": "",
+   "ts": 1794503457158,
+   "stat": {
+    "tok": 40,
+    "ms": 3869
+   },
+   "seen": 1794503453267,
+   "snap": "{\"mood\":\"alert\",\"emoji\":\"🙂\",\"energy\":\"high\",\"affection\":56,\"facts\":[\"User seeks companionship\",\"User asked about age\",\"User has extremely high strength\",\"User seeks to carry duty as a companion\",\"User uses informal language\",\"User is unafraid to challenge Malenia\"],\"summary\":\"\",\"sumUpto\":0}",
+   "thought": "This one tests my patience, yet I sense a spark of resolve beneath the defiance."
+  },
+  {
+   "role": "user",
+   "content": "He said he would buckler parry you!",
+   "ts": 1794503896158
+  },
+  {
+   "role": "assistant",
+   "content": "*snorts lightly, her stance shifting with quiet confidence*\n\nA buckler? It is a toy for the weak. I have parried storms and shattered empires. Let him try.",
+   "think": "",
+   "ts": 1794503900214,
+   "stat": {
+    "tok": 42,
+    "ms": 4029
+   },
+   "seen": 1794503896164,
+   "snap": "{\"mood\":\"alert\",\"emoji\":\"🙂\",\"energy\":\"high\",\"affection\":53,\"facts\":[\"User seeks companionship\",\"User asked about age\",\"User has extremely high strength\",\"User seeks to carry duty as a companion\",\"User uses informal language\",\"User is unafraid to challenge Malenia\",\"User challenges Malenia's authority\"],\"summary\":\"\",\"sumUpto\":0}",
+   "thought": "This fool dares test me. His arrogance will be his undoing."
+  },
+  {
+   "role": "user",
+   "content": "he failed lol",
+   "ts": 1794504083126
+  },
+  {
+   "role": "assistant",
+   "content": "*smirks slightly, her tone cool and amused*\n\nA failure? Then let him learn what it means to face a blade that does not falter. The Haligtree has no place for cowards.",
+   "think": "",
+   "ts": 1794504087256,
+   "stat": {
+    "tok": 47,
+    "ms": 4102
+   },
+   "seen": 1794504083134,
+   "snap": "{\"mood\":\"alert\",\"emoji\":\"🙂\",\"energy\":\"high\",\"affection\":50,\"facts\":[\"User seeks companionship\",\"User asked about age\",\"User has extremely high strength\",\"User seeks to carry duty as a companion\",\"User uses informal language\",\"User is unafraid to challenge Malenia\",\"User challenges Malenia's authority\"],\"summary\":\"\",\"sumUpto\":0}",
+   "thought": "He challenges me, yet I see no true threat in his defiance."
+  }
+ ],
  "state": {
-  "mood": "neutral",
-  "emoji": "😐",
-  "energy": "medium",
+  "mood": "alert",
+  "emoji": "🙂",
+  "energy": "high",
   "affection": 50,
-  "facts": [],
+  "facts": [
+   "User seeks companionship",
+   "User asked about age",
+   "User has extremely high strength",
+   "User seeks to carry duty as a companion",
+   "User uses informal language",
+   "User is unafraid to challenge Malenia",
+   "User challenges Malenia's authority"
+  ],
   "summary": "",
   "sumUpto": 0,
-  "log": []
+  "log": [
+   {
+    "ts": 1794502054471,
+    "mood": "neutral",
+    "emoji": "😐",
+    "aff": 50,
+    "thought": "A stranger's greeting. Unremarkable. Not worth further consideration."
+   },
+   {
+    "ts": 1794502080457,
+    "mood": "neutral",
+    "emoji": "😐",
+    "aff": 50,
+    "thought": "A trivial question. He does not understand the weight of my purpose."
+   },
+   {
+    "ts": 1794502111108,
+    "mood": "calm",
+    "emoji": "😌",
+    "aff": 50,
+    "thought": "A strange request. Does he understand the weight of such a bond?"
+   },
+   {
+    "ts": 1794502154126,
+    "mood": "calm",
+    "emoji": "😌",
+    "aff": 53,
+    "thought": "His strength is undeniable, but does it match his resolve?"
+   },
+   {
+    "ts": 1794502235907,
+    "mood": "calm",
+    "emoji": "😌",
+    "aff": 56,
+    "thought": "His strength is undeniable, but will he stand when the weight is real?"
+   },
+   {
+    "ts": 1794502269961,
+    "mood": "calm",
+    "emoji": "😌",
+    "aff": 59,
+    "thought": "His strength is undeniable, but only time will reveal if he is worthy of the burden."
+   },
+   {
+    "ts": 1794502315968,
+    "mood": "alert",
+    "emoji": "🙂",
+    "aff": 56,
+    "thought": "He speaks lightly, but his strength may yet prove useful. I must test his resolve."
+   },
+   {
+    "ts": 1794503463231,
+    "mood": "alert",
+    "emoji": "🙂",
+    "aff": 53,
+    "thought": "This one tests my patience, yet I sense a spark of resolve beneath the defiance."
+   },
+   {
+    "ts": 1794503906787,
+    "mood": "alert",
+    "emoji": "🙂",
+    "aff": 50,
+    "thought": "This fool dares test me. His arrogance will be his undoing."
+   },
+   {
+    "ts": 1794504093243,
+    "mood": "alert",
+    "emoji": "🙂",
+    "aff": 50,
+    "thought": "He challenges me, yet I see no true threat in his defiance."
+   }
+  ]
  },
  "cfg": {
   "mode": "story",
