@@ -1,0 +1,66 @@
+{
+ "id": "q64ghs9d",
+ "title": "Hi!",
+ "updated": 1794470075.3781326,
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi!",
+   "ts": 1794469902908
+  },
+  {
+   "role": "assistant",
+   "content": "*Twirls a bloom between her fingers, eyes bright with curiosity*\nSo, you're the one they've been talking about? I do love meeting new faces. What brings you to Kaifeng?",
+   "think": "",
+   "ts": 1794469972862,
+   "stat": {
+    "tok": 47,
+    "ms": 69933
+   },
+   "seen": 1794469902910,
+   "snap": "{\"mood\":\"neutral\",\"emoji\":\"😐\",\"energy\":\"medium\",\"affection\":50,\"facts\":[],\"summary\":\"\",\"sumUpto\":0}",
+   "thought": "This one's got potential. Let's see what they're made of."
+  },
+  {
+   "role": "user",
+   "content": "Well I was just wandering around..",
+   "ts": 1794470002044
+  },
+  {
+   "role": "assistant",
+   "content": "*Leans in, voice dropping to a conspiratorial whisper*\nWandering? Hmm. That’s a dangerous habit here. But I like it. You’ve got the look of someone who doesn’t follow rules—or at least, not the ones that hurt people.",
+   "think": "",
+   "ts": 1794470075375,
+   "stat": {
+    "tok": 58,
+    "ms": 73315
+   },
+   "seen": 1794470002047
+  }
+ ],
+ "state": {
+  "mood": "curious",
+  "emoji": "🤔",
+  "energy": "high",
+  "affection": 55,
+  "facts": [
+   "Tanzz initiated contact"
+  ],
+  "summary": "",
+  "sumUpto": 0,
+  "log": [
+   {
+    "ts": 1794469994908,
+    "mood": "curious",
+    "emoji": "🤔",
+    "aff": 55,
+    "thought": "This one's got potential. Let's see what they're made of."
+   }
+  ]
+ },
+ "cfg": {
+  "mode": "story",
+  "length": "auto",
+  "scene": ""
+ }
+}
