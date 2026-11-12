@@ -40,6 +40,7 @@ Run it with `--share` and others can chat with your characters from their own br
 ```bash
 git clone https://github.com/CrescentsChaos/CrumbleAI.git
 cd CrumbleAI
+.\venv\Scripts\Activate.ps1
 $env:CMAKE_ARGS = "-DGGML_CUDA=on -DCMAKE_CUDA_ARCHITECTURES=86"
 $env:CMAKE_BUILD_PARALLEL_LEVEL = "6"
 pip install llama-cpp-python --force-reinstall --no-cache-dir
