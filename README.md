@@ -38,9 +38,11 @@ Run it with `--share` and others can chat with your characters from their own br
 **Requirements:** Python 3.9+ and a `.gguf` model (for example from [Hugging Face](https://huggingface.co/models?library=gguf)).
 
 ```bash
-git clone https://github.com/<your-username>/CrumbleAI.git
+git clone https://github.com/CrescentsChaos/CrumbleAI.git
 cd CrumbleAI
-pip install llama-cpp-python
+$env:CMAKE_ARGS = "-DGGML_CUDA=on -DCMAKE_CUDA_ARCHITECTURES=86"
+$env:CMAKE_BUILD_PARALLEL_LEVEL = "6"
+pip install llama-cpp-python --force-reinstall --no-cache-dir
 python Crumble.py
 ```
 
