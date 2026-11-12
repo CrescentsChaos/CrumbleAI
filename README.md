@@ -50,11 +50,18 @@ Your browser opens at `http://127.0.0.1:8000`.
 2. In the sidebar open **Load a .gguf**, choose it and press **Load model**.
 3. Pick a character and start talking. Crumble remembers your last model and loads it automatically next time.
 
-**GPU acceleration (NVIDIA):**
-```bash
-CMAKE_ARGS="-DGGML_CUDA=on" pip install llama-cpp-python --force-reinstall --no-cache-dir
+**GPU acceleration (NVIDIA):** a plain `pip install llama-cpp-python` gives a **CPU-only** build (the GPU stays idle).
+Crumble prints `GPU offload AVAILABLE / NOT available` at startup and shows `(GPU)` or `CPU ONLY build` in the sidebar.
+To get the GPU build on Windows (needs the CUDA Toolkit and Visual Studio Build Tools with the C++ workload), in PowerShell:
+```powershell
+pip uninstall -y llama-cpp-python
+$env:CMAKE_ARGS = "-DGGML_CUDA=on"
+pip install llama-cpp-python --force-reinstall --no-cache-dir
 ```
-Then leave *GPU layers* at `-1` to offload everything.
+(cmd.exe: `set CMAKE_ARGS=-DGGML_CUDA=on`. Linux/Mac: `CMAKE_ARGS="-DGGML_CUDA=on" pip install ...`.)
+Leave *GPU layers* at `-1` to offload everything. Set `CRUMBLE_LLM_LOG=1` to see llama.cpp's own log
+(look for "offloaded N/N layers to GPU"). In Task Manager the GPU graph defaults to *3D*; switch one of the
+graphs to **Cuda** (or run `nvidia-smi`) to see the model working.
 
 ### Command-line options
 

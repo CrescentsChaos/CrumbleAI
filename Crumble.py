@@ -11,6 +11,21 @@ Data:    ./data/characters/*.json, ./data/chats/<character>/*.json
 Replies are generated in full first (you see "typing..."), then typed out like a person.
 Every reply is checked so it never ends mid-sentence or with a dangling *action* or "quote".
 """
+import os
+# Let a CUDA build of llama-cpp-python find the CUDA DLLs (any installed toolkit, or CUDA_PATH).
+if hasattr(os, "add_dll_directory"):
+    _cuda_dirs = []
+    if os.environ.get("CUDA_PATH"):
+        _cuda_dirs.append(os.path.join(os.environ["CUDA_PATH"], "bin"))
+    _tk = r"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA"
+    if os.path.isdir(_tk):
+        _cuda_dirs += [os.path.join(_tk, v, "bin") for v in sorted(os.listdir(_tk), reverse=True)]
+    for _d in _cuda_dirs:
+        if os.path.isdir(_d):
+            try:
+                os.add_dll_directory(_d)
+            except OSError:
+                pass
 import argparse, difflib, hmac, json, random, re, secrets, shutil, socket, threading, time, uuid, webbrowser
 from http.cookies import SimpleCookie
 from http.server import ThreadingHTTPServer, BaseHTTPRequestHandler
@@ -21,11 +36,40 @@ try:
 except ImportError:
     Llama = None
 
+
+def gpu_status():
+    """(can this llama-cpp-python build use the GPU?, version). A pip-installed CPU build says False."""
+    try:
+        import llama_cpp
+        fn = getattr(llama_cpp, "llama_supports_gpu_offload", None)
+        return (bool(fn()) if fn else False), getattr(llama_cpp, "__version__", "?")
+    except Exception:
+        return False, "?"
+
+
+GPU_HELP = """
+  ============================================================================
+   WARNING: this llama-cpp-python is a CPU-ONLY build, so the model runs on the CPU
+   (your GPU will stay idle no matter what "GPU layers" is set to).
+
+   Reinstall it with CUDA support (Windows PowerShell, needs the CUDA Toolkit and
+   Visual Studio Build Tools with "Desktop development with C++"):
+
+       pip uninstall -y llama-cpp-python
+       $env:CMAKE_ARGS = "-DGGML_CUDA=on"
+       pip install llama-cpp-python --force-reinstall --no-cache-dir
+
+   (cmd.exe:  set CMAKE_ARGS=-DGGML_CUDA=on   then the same pip install.)
+   Then start Crumble again; this warning disappears when the GPU is usable.
+  ============================================================================
+"""
+
 ROOT = Path(__file__).resolve().parent
 CHARS, CHATS, MODELS = ROOT/"data"/"characters", ROOT/"data"/"chats", ROOT/"models"
 for d in (CHARS, CHATS, MODELS):
     d.mkdir(parents=True, exist_ok=True)
 LLM = {"obj": None, "path": None, "n_ctx": 8192}
+LLM_VERBOSE = bool(os.environ.get("CRUMBLE_LLM_LOG"))   # set CRUMBLE_LLM_LOG=1 to see llama.cpp's own log (shows "offloaded N/N layers to GPU")
 LOCK = threading.Lock()
 CH, US = "{{char}}", "{{user}}"
 
@@ -164,7 +208,7 @@ def state(a):
     adm = a["role"] == "admin"
     chars = load_chars() if adm else [pub(c) for c in load_chars()]
     loaded = LLM["path"] if adm else (Path(LLM["path"]).name if LLM["path"] else None)
-    return {"schema": SCHEMA, "ext": EXT_KEYS, "chars": chars, "loaded": loaded, "backend": Llama is not None, "emo": EMO,
+    return {"schema": SCHEMA, "ext": EXT_KEYS, "chars": chars, "loaded": loaded, "backend": Llama is not None, "gpu": gpu_status()[0], "emo": EMO,
             "models": sorted(str(m) for m in MODELS.rglob("*.gguf")) if adm else [], "role": a["role"], "name": a.get("name", "")}
 
 
@@ -815,9 +859,14 @@ class H(BaseHTTPRequestHandler):
                 with LOCK:
                     LLM["obj"] = None
                     n_ctx = int(b.get("n_ctx", 8192))
-                    LLM["obj"] = Llama(model_path=b["path"], n_ctx=n_ctx, n_gpu_layers=int(b.get("n_gpu", -1)), verbose=False)
+                    # Ensure n_gpu is forced to -1 if it comes in as 0 or empty
+                    gpu_layers = int(b.get("n_gpu", -1))
+                    if gpu_layers == 0:
+                        gpu_layers = -1
+                        
+                    LLM["obj"] = Llama(model_path=b["path"], n_ctx=n_ctx, n_gpu_layers=gpu_layers, verbose=LLM_VERBOSE)
                     LLM["path"], LLM["n_ctx"] = b["path"], n_ctx
-                wj(ROOT/"data"/"last_model.json", {"path": b["path"], "n_ctx": n_ctx, "n_gpu": int(b.get("n_gpu", -1))})
+                wj(ROOT/"data"/"last_model.json", {"path": b["path"], "n_ctx": n_ctx, "n_gpu": gpu_layers})
                 return self.send({"ok": True, "loaded": b["path"]})
             except Exception as e:
                 return self.send({"err": str(e)})
@@ -1020,7 +1069,7 @@ label.chk{display:flex;gap:10px;align-items:flex-start;color:var(--tx);font-size
 .avrow{display:flex;gap:14px;align-items:center;margin:6px 0 4px}.avrow .av{width:64px;height:64px;font-size:24px}
 input[type=range]{padding:0;accent-color:var(--ac)}
 @keyframes in{from{opacity:0;transform:translateY(8px)}}@keyframes bn{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-5px);opacity:1}}@keyframes pl{50%{opacity:.45}}
-.mob{display:none}nav button .ni{display:none}.hctl{display:contents}.m.sel .acts{opacity:1;pointer-events:auto}
+.mob{display:none}#scrim{display:none}nav button .ni{display:none}.hctl{display:contents}.m.sel .acts{opacity:1;pointer-events:auto}
 @media(max-width:760px){
 body{display:block;height:var(--vh,100dvh);overflow:hidden}main{height:var(--vh,100dvh)}.mob{display:inline-flex}
 aside{position:fixed;z-index:30;left:0;top:0;bottom:0;width:min(86vw,320px);transform:translateX(-102%);transition:transform .25s;padding-top:calc(18px + env(safe-area-inset-top));background:var(--pn)}
@@ -1419,14 +1468,14 @@ function applyUI(){document.documentElement.dataset.theme=U.theme;document.docum
 if('speechSynthesis' in window)speechSynthesis.onvoiceschanged=()=>{if(S)renderSettings()};
 
 $('#load').onclick=async()=>{const path=$('#mpath').value.trim()||$('#msel').value;if(!path)return;$('#mstat').textContent='Loading (this can take a while)...';
- const r=await api('/api/load','POST',{path,n_ctx:$('#nctx').value,n_gpu:$('#ngl').value});if(!r.err)S.loaded=r.loaded;$('#mstat').textContent=r.err?'Error: '+r.err:'Loaded: '+r.loaded};
+ const r=await api('/api/load','POST',{path,n_ctx:$('#nctx').value,n_gpu:$('#ngl').value});if(!r.err)S.loaded=r.loaded;$('#mstat').textContent=r.err?'Error: '+r.err:'Loaded: '+r.loaded+(S.gpu?' (GPU)':' - CPU ONLY build')};
 function tab(t){closeDrawer();if(t=='samp')renderShare(true);$$('nav button').forEach(b=>b.classList.toggle('on',b.dataset.t==t));
  for(const id of['chat','editor','mem','samp'])$('#'+id).hidden=id!=t;if(t=='mem')renderMem();if(t=='chat'){const L=$('#log');L.scrollTop=L.scrollHeight}}
 document.querySelector('nav').onclick=e=>e.target.dataset.t&&tab(e.target.dataset.t);
 
 async function init(){S=await api('/api/state');
  $('#msel').innerHTML='<option value="">(choose from ./models)</option>'+S.models.map(m=>`<option>${esc(m)}</option>`).join('');
- $('#mstat').textContent=S.backend?(S.loaded?'Loaded: '+S.loaded:'No model loaded'):'llama-cpp-python missing: pip install llama-cpp-python';
+ $('#mstat').textContent=S.backend?((S.loaded?'Loaded: '+S.loaded:'No model loaded')+(S.gpu?' (GPU)':' - CPU ONLY build: see the console to enable the GPU')):'llama-cpp-python missing: pip install llama-cpp-python';
  document.body.classList.toggle('guest',S.role=='guest');if(S.role=='guest'&&(!U.uname||U.uname=='User'))U.uname=S.name;
  $('#uname').value=U.uname;$('#persona').value=U.persona;renderChars();renderSettings();applyUI();
  if(S.chars[0])await pick(S.chars[0].id);else openNew()}
@@ -1471,15 +1520,21 @@ if __name__ == "__main__":
     if SHARE["on"]:
         SHARE["password"] = "" if a.no_password else (a.password or saved.get("password") or secrets.token_urlsafe(6))
         save_share()
+    _gpu, _ver = gpu_status()
+    if Llama is not None:
+        print(f"llama-cpp-python {_ver}: GPU offload " + ("AVAILABLE" if _gpu else "NOT available"))
+        if not _gpu:
+            print(GPU_HELP)
     last = rj(ROOT/"data"/"last_model.json", {}) or {}
     mp = a.model or last.get("path")
     if mp and Llama is not None and Path(mp).exists():
         print(f"Loading model {mp} ... (this can take a while)")
         try:
-            LLM["obj"] = Llama(model_path=mp, n_ctx=int(last.get("n_ctx", 8192)), n_gpu_layers=int(last.get("n_gpu", -1)), verbose=False)
+            # CHANGE n_gpu_layers to -1 here
+            LLM["obj"] = Llama(model_path=mp, n_ctx=int(last.get("n_ctx", 8192)), n_gpu_layers=-1, verbose=LLM_VERBOSE)
             LLM["path"], LLM["n_ctx"] = mp, int(last.get("n_ctx", 8192))
-            wj(ROOT/"data"/"last_model.json", {"path": mp, "n_ctx": LLM["n_ctx"], "n_gpu": int(last.get("n_gpu", -1))})
-            print("Model ready.")
+            wj(ROOT/"data"/"last_model.json", {"path": mp, "n_ctx": LLM["n_ctx"], "n_gpu": -1})
+            print("Model ready." + ("  (running on the GPU)" if gpu_status()[0] else "  (running on the CPU)"))
         except Exception as e:
             print("Could not load the model:", e)
     elif a.share:

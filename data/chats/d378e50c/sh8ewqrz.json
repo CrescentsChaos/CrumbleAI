@@ -1,0 +1,127 @@
+{
+ "id": "sh8ewqrz",
+ "title": "Hi!",
+ "updated": 1794480263.4315338,
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi!",
+   "ts": 1794480186211
+  },
+  {
+   "role": "assistant",
+   "content": "*Twirls a daisy between her fingers, eyes bright with curiosity*\nAh, a new face in Kaifeng! You’re looking quite... interesting. What brings you to our bustling market?",
+   "think": "",
+   "ts": 1794480189102,
+   "stat": {
+    "tok": 46,
+    "ms": 2877
+   },
+   "seen": 1794480186213,
+   "snap": "{\"mood\":\"neutral\",\"emoji\":\"😐\",\"energy\":\"medium\",\"affection\":50,\"facts\":[],\"summary\":\"\",\"sumUpto\":0}",
+   "thought": "This one's got potential. Maybe a new ally or a challenge."
+  },
+  {
+   "role": "user",
+   "content": "nothing just dropped out of the sky",
+   "ts": 1794480211283
+  },
+  {
+   "role": "assistant",
+   "content": "*Leans in, smiling with a hint of mischief*\nA sky drop? *Tilts head playfully* That’s quite the story. Care to share how you landed here—by accident or by design?",
+   "think": "",
+   "ts": 1794480214343,
+   "stat": {
+    "tok": 49,
+    "ms": 3046
+   },
+   "seen": 1794480211285,
+   "snap": "{\"mood\":\"curious\",\"emoji\":\"🤔\",\"energy\":\"high\",\"affection\":55,\"facts\":[\"User greeted Yingying with 'Hi!'\"],\"summary\":\"\",\"sumUpto\":0}",
+   "thought": "This stranger's mystery is as intriguing as a hidden alley in the city."
+  },
+  {
+   "role": "user",
+   "content": "there is no difference",
+   "ts": 1794480233859
+  },
+  {
+   "role": "assistant",
+   "content": "*Laughs softly, tapping her basket with a finger*\nA sky drop... and no difference? *Smirks* Sounds like fate’s playing its own game. You’re either very lucky or very strange.",
+   "think": "",
+   "ts": 1794480236948,
+   "stat": {
+    "tok": 47,
+    "ms": 3073
+   },
+   "seen": 1794480233862,
+   "snap": "{\"mood\":\"curious\",\"emoji\":\"🤔\",\"energy\":\"high\",\"affection\":60,\"facts\":[\"User greeted Yingying with 'Hi!'\",\"User said they dropped out of the sky\"],\"summary\":\"\",\"sumUpto\":0}",
+   "thought": "This stranger’s got a wild story, and I’m eager to hear more."
+  },
+  {
+   "role": "user",
+   "content": "strange indeed",
+   "ts": 1794480252035
+  },
+  {
+   "role": "assistant",
+   "content": "*Gestures to the bustling street, eyes sparkling with intrigue*\nStrange? *Laughs lightly* Then you’ll fit right in. Kaifeng’s full of oddities—some by accident, some by design. Let’s see if you’re one of them.",
+   "think": "",
+   "ts": 1794480255503,
+   "stat": {
+    "tok": 59,
+    "ms": 3448
+   },
+   "seen": 1794480252039,
+   "snap": "{\"mood\":\"playful\",\"emoji\":\"😏\",\"energy\":\"high\",\"affection\":65,\"facts\":[\"User greeted Yingying with 'Hi!'\",\"User said they dropped out of the sky\",\"User says there is no difference between accident and design\"],\"summary\":\"\",\"sumUpto\":0}",
+   "thought": "This stranger’s words are as enigmatic as the sky drop—worth chasing."
+  }
+ ],
+ "state": {
+  "mood": "curious",
+  "emoji": "🤔",
+  "energy": "high",
+  "affection": 70,
+  "facts": [
+   "User greeted Yingying with 'Hi!'",
+   "User said they dropped out of the sky",
+   "User says there is no difference between accident and design"
+  ],
+  "summary": "",
+  "sumUpto": 0,
+  "log": [
+   {
+    "ts": 1794480195258,
+    "mood": "curious",
+    "emoji": "🤔",
+    "aff": 55,
+    "thought": "This one's got potential. Maybe a new ally or a challenge."
+   },
+   {
+    "ts": 1794480220209,
+    "mood": "curious",
+    "emoji": "🤔",
+    "aff": 60,
+    "thought": "This stranger's mystery is as intriguing as a hidden alley in the city."
+   },
+   {
+    "ts": 1794480243583,
+    "mood": "playful",
+    "emoji": "😏",
+    "aff": 65,
+    "thought": "This stranger’s got a wild story, and I’m eager to hear more."
+   },
+   {
+    "ts": 1794480263426,
+    "mood": "curious",
+    "emoji": "🤔",
+    "aff": 70,
+    "thought": "This stranger’s words are as enigmatic as the sky drop—worth chasing."
+   }
+  ]
+ },
+ "cfg": {
+  "mode": "story",
+  "length": "auto",
+  "scene": ""
+ }
+}
