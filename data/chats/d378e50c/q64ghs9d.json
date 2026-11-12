@@ -1,7 +1,7 @@
 {
  "id": "q64ghs9d",
  "title": "Hi!",
- "updated": 1794470075.3781326,
+ "updated": 1794470820.5571544,
  "history": [
   {
    "role": "user",
@@ -18,7 +18,6 @@
     "ms": 69933
    },
    "seen": 1794469902910,
-   "snap": "{\"mood\":\"neutral\",\"emoji\":\"😐\",\"energy\":\"medium\",\"affection\":50,\"facts\":[],\"summary\":\"\",\"sumUpto\":0}",
    "thought": "This one's got potential. Let's see what they're made of."
   },
   {
@@ -35,16 +34,115 @@
     "tok": 58,
     "ms": 73315
    },
-   "seen": 1794470002047
+   "seen": 1794470002047,
+   "thought": "This one's got potential. I can see the spark of rebellion in his eyes."
+  },
+  {
+   "role": "user",
+   "content": "Uhm.. Introduce yourself...",
+   "ts": 1794470158436
+  },
+  {
+   "role": "assistant",
+   "content": "*Smiles wide, eyes sparkling with mischief*\nI’m Yingying, your friendly neighborhood flower seller and part-time troublemaker. But you can call me anything you like—just don’t expect me to stay *too* nice.",
+   "think": "",
+   "ts": 1794470233571,
+   "stat": {
+    "tok": 52,
+    "ms": 75115
+   },
+   "seen": 1794470158439,
+   "thought": "This one’s got potential. Maybe I can use them for something fun."
+  },
+  {
+   "role": "user",
+   "content": "Interesting. I am Crescent.",
+   "ts": 1794470303836
+  },
+  {
+   "role": "assistant",
+   "content": "Crescent, huh? Sounds like someone who’s used to being in the spotlight. But don’t worry—I’ll keep you out of the limelight… unless you’re up for some *real* mischief.",
+   "think": "",
+   "ts": 1794470383955,
+   "stat": {
+    "tok": 62,
+    "ms": 80101
+   },
+   "seen": 1794470303840,
+   "snap": "{\"mood\":\"playful\",\"emoji\":\"😏\",\"energy\":\"high\",\"affection\":65,\"facts\":[\"Tanzz initiated contact\",\"Tanzz is wandering\",\"Crescent was wandering\"],\"summary\":\"\",\"sumUpto\":0}",
+   "thought": "Crescent’s got potential—maybe I can turn this wanderer into a real troublemaker."
+  },
+  {
+   "role": "user",
+   "content": "You are pretty hot..",
+   "ts": 1794470423188
+  },
+  {
+   "role": "assistant",
+   "content": "Oh, you’re *very* forward. But I’d rather you focus on the real treasures around here—like the secrets in these streets. 💰🌸",
+   "think": "",
+   "ts": 1794470501007,
+   "stat": {
+    "tok": 50,
+    "ms": 77801
+   },
+   "seen": 1794470423192,
+   "snap": "{\"mood\":\"playful\",\"emoji\":\"😏\",\"energy\":\"high\",\"affection\":70,\"facts\":[\"Crescent was wandering\",\"Crescent introduced themselves as Crescent\"],\"summary\":\"\",\"sumUpto\":0}",
+   "thought": "Crescent's boldness is intriguing—maybe they're more than they seem."
+  },
+  {
+   "role": "user",
+   "content": "I am focusing on the *correct* asset! *stares at her chest*",
+   "ts": 1794470542380
+  },
+  {
+   "role": "assistant",
+   "content": "You’re not the first to mistake my charm for something else. But let’s talk about *real* treasures—like how we can turn this city upside down together. 😏",
+   "think": "",
+   "ts": 1794470622688,
+   "stat": {
+    "tok": 51,
+    "ms": 80288
+   },
+   "seen": 1794470542385,
+   "snap": "{\"mood\":\"playful\",\"emoji\":\"😏\",\"energy\":\"high\",\"affection\":73,\"facts\":[\"Crescent was wandering\",\"Crescent introduced themselves as Crescent\",\"Crescent found Yingying's introduction interesting\"],\"summary\":\"\",\"sumUpto\":0}",
+   "thought": "Crescent's boldness is refreshing—maybe they're more than just a pretty face."
+  },
+  {
+   "role": "user",
+   "content": "Why are you trying to avoid my topic?",
+   "ts": 1794470692748
+  },
+  {
+   "role": "assistant",
+   "content": "You’re not wrong to notice. But I’d rather we start with something more… *exciting*. Like how we could make a fortune—and a name—by playing the game the officials don’t want you to know about. 💸✨",
+   "think": "",
+   "ts": 1794470777626,
+   "stat": {
+    "tok": 52,
+    "ms": 84858
+   },
+   "seen": 1794470692753,
+   "snap": "{\"mood\":\"playful\",\"emoji\":\"😏\",\"energy\":\"high\",\"affection\":76,\"facts\":[\"Crescent was wandering\",\"Crescent introduced themselves as Crescent\",\"Crescent found Yingying's introduction interesting\",\"Crescent is confident\",\"Crescent finds Yingying attractive\"],\"summary\":\"\",\"sumUpto\":0}",
+   "thought": "He’s bold, but I like that he’s not afraid to play the game with me."
+  },
+  {
+   "role": "user",
+   "content": "ugh sure but first we take care about MY BUSINESS. how about that?",
+   "ts": 1794470820549
   }
  ],
  "state": {
-  "mood": "curious",
-  "emoji": "🤔",
+  "mood": "playful",
+  "emoji": "😏",
   "energy": "high",
-  "affection": 55,
+  "affection": 79,
   "facts": [
-   "Tanzz initiated contact"
+   "Crescent was wandering",
+   "Crescent introduced themselves as Crescent",
+   "Crescent found Yingying's introduction interesting",
+   "Crescent is confident",
+   "Crescent finds Yingying attractive"
   ],
   "summary": "",
   "sumUpto": 0,
@@ -55,11 +153,53 @@
     "emoji": "🤔",
     "aff": 55,
     "thought": "This one's got potential. Let's see what they're made of."
+   },
+   {
+    "ts": 1794470098832,
+    "mood": "playful",
+    "emoji": "😏",
+    "aff": 60,
+    "thought": "This one's got potential. I can see the spark of rebellion in his eyes."
+   },
+   {
+    "ts": 1794470262841,
+    "mood": "playful",
+    "emoji": "😏",
+    "aff": 65,
+    "thought": "This one’s got potential. Maybe I can use them for something fun."
+   },
+   {
+    "ts": 1794470415645,
+    "mood": "playful",
+    "emoji": "😏",
+    "aff": 70,
+    "thought": "Crescent’s got potential—maybe I can turn this wanderer into a real troublemaker."
+   },
+   {
+    "ts": 1794470529455,
+    "mood": "playful",
+    "emoji": "😏",
+    "aff": 73,
+    "thought": "Crescent's boldness is intriguing—maybe they're more than they seem."
+   },
+   {
+    "ts": 1794470651958,
+    "mood": "playful",
+    "emoji": "😏",
+    "aff": 76,
+    "thought": "Crescent's boldness is refreshing—maybe they're more than just a pretty face."
+   },
+   {
+    "ts": 1794470809598,
+    "mood": "playful",
+    "emoji": "😏",
+    "aff": 79,
+    "thought": "He’s bold, but I like that he’s not afraid to play the game with me."
    }
   ]
  },
  "cfg": {
-  "mode": "story",
+  "mode": "text",
   "length": "auto",
   "scene": ""
  }
