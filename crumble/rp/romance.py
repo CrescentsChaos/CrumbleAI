@@ -42,6 +42,18 @@ def romance_beat(act, c, rp, aff, mood, ust, cfg, user, out):
     if act == "confess" and r["tier"] in ("fail", "bust") and "confession turned down" not in rom["ms"]:
         rom["ms"].append("confession turned down")
     rom["ms"] = rom["ms"][-8:]
+    if adult(c):
+        from .intimacy import settings as intim_settings
+        icfg = intim_settings(cfg.get("intimacy"))
+        if icfg["on"]:
+            intim = rp.setdefault("intim", {}).setdefault(c["id"], {"iv": 0, "acts": []})
+            if act == "kiss" and r["tier"] in ("crit", "win"):
+                intim["iv"] = min(100, intim["iv"] + (4 if r["tier"] == "crit" else 2))
+                if "first kiss" not in intim["acts"]:
+                    intim["acts"].append("first kiss")
+                    intim["acts"] = intim["acts"][-8:]
+            elif act == "touch" and r["tier"] in ("crit", "win"):
+                intim["iv"] = min(100, intim["iv"] + (2 if r["tier"] == "crit" else 1))
     react = {"crit": f"{nm} is clearly moved and responds warmly, in their own way.",
              "win": f"{nm} welcomes it, in character (shy, teasing, warm: whatever fits them).",
              "part": f"{nm} is torn or flustered: a hesitant, mixed or conditional response, neither a clear yes nor a clear no.",

@@ -18,7 +18,8 @@ $('#memf').oninput=e=>{const k=e.target.dataset.m,st=chat?.state;if(!k||!st)retu
  if(k=='affection'){st.affection=+v;$('#mstage').textContent=`${stg(st.affection)} (${v})`}
  else if(k=='scene')chat.cfg.scene=v;else if(k=='summary')st.summary=v;else if(k=='fact')st.facts[+e.target.dataset.i]=v;
   else if(k=='gaff'){mst(e.target.dataset.c).affection=+v;e.target.previousElementSibling.querySelector('b').textContent=`${stg(+v)} (${v})`}
-  else if(k=='rom'){const r=(chat.rp.rom=chat.rp.rom||{});(r[e.target.dataset.c]=r[e.target.dataset.c]||{v:0,ms:[]}).v=+v;e.target.previousElementSibling.querySelector('b').textContent=`${romStage(+v)} (${v})`}else return;head();saveSoon()};
+  else if(k=='rom'){const r=(chat.rp.rom=chat.rp.rom||{});(r[e.target.dataset.c]=r[e.target.dataset.c]||{v:0,ms:[]}).v=+v;e.target.previousElementSibling.querySelector('b').textContent=`${romStage(+v)} (${v})`}
+  else if(k=='intim'){const r=(chat.rp.intim=chat.rp.intim||{});(r[e.target.dataset.c]=r[e.target.dataset.c]||{iv:0,acts:[]}).iv=+v;e.target.previousElementSibling.querySelector('b').textContent=`${intimStage(+v)} (${v})`}else return;head();saveSoon()};
 $('#memf').onchange=e=>{const k=e.target.dataset.m,st=chat?.state;if(!st)return;
  if(k=='mood'){st.mood=e.target.value;st.emoji=S.emo[st.mood]||'🙂'}else if(k=='energy')st.energy=e.target.value;else return;head();saveSoon()};
 $('#memf').onclick=async e=>{const b=e.target.closest('button'),k=b?.dataset.m,st=chat?.state;if(!k||!st)return;

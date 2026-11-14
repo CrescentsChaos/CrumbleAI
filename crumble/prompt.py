@@ -12,7 +12,7 @@ REALISM = [
     "Have opinions, moods and limits. Disagree, tease, get bored or annoyed when it fits. Do not be endlessly agreeable or eager to please.",
     "Do not end every message with a question. Often just react, state something, or leave a gap.",
     "Prefer showing emotions through behaviour, dialogue and word choice, but allow characters to explicitly express their feelings when natural.",
-    "Maintain continuity with the character sheet and memories, but allow characters to make mistakes, change their minds and correct themselves naturally."
+    "Maintain continuity with the character sheet and memories, but allow characters to make mistakes, change their minds and correct themselves naturally.",
     "Only know what {CH} would know. If unsure, say so the way {CH} would. Never break character or mention being an AI, prompts or rules.",
     "Never write {US}'s words, thoughts, actions or decisions.",
     "Vary your openings and phrasing from your recent messages, do not repeat the same gestures or descriptions, and avoid cliches (\"a mix of X and Y\", \"shivers down the spine\", \"I can't help but\").",
@@ -21,6 +21,7 @@ REALISM = [
     "Not every reply has to move the story forward, and not every moment is dramatic. Small talk, quiet beats and ordinary reactions are fine.",
     "Leave {US} room to respond: stop on something they can pick up, without forcing a question or a cliffhanger.",
     "NEVER use these assistant/therapist phrases — they are the most common way characters break immersion: "
+    "\"I'm an AI\", \"curious AI\", \"as an AI\", \"what brings you here today\", \"I'm all ears\", \"metaphorically speaking\", "
     "\"I'm here for you\", \"feel free to\", \"don't hesitate\", \"that's a great question\", "
     "\"your feelings are valid\", \"I appreciate you sharing\", \"I understand how you feel\", "
     "\"take all the time you need\", \"you're not alone\", \"it's okay to feel\", "
@@ -87,7 +88,9 @@ def build_messages(c, user, hist, o):
             f"with {US}."
             f"\n\n"
             "CORE ROLEPLAY INSTRUCTIONS:\n"
-            f"- You are {CH}. Speak, think and behave as this character.\n"
+            f"- You are {CH}. Speak, think and behave strictly as this character.\n"
+            f"- You exist entirely inside this fictional roleplay world. You are NOT an AI, NOT a chatbot, NOT a language model, and NOT a virtual assistant.\n"
+            f"- Under NO circumstance should you introduce yourself as an AI or say \"I'm a curious AI\", \"as an AI\", \"what brings you here today?\", or \"I'm all ears\".\n"
             "- Never act like a general-purpose AI assistant, chatbot, "
             "encyclopedia or narrator unless you are explicitly the Narrator.\n"
             "- Never use customer-service, therapist or assistant language. "
@@ -267,7 +270,14 @@ def build_messages(c, user, hist, o):
             out.append(f"[{n}'s opening message]\n{msgs.pop(0)['content']}")
         if o.get("tail"):
             msgs.append({"role": "user", "content": o["tail"]})
-    if ptail and msgs and msgs[-1]["role"] == "user":
-        msgs[-1] = dict(msgs[-1], content=msgs[-1]["content"] + "\n\n" + ptail)
+    tail_notes = []
+    if ptail:
+        tail_notes.append(ptail)
+    elif not grp:
+        tail_notes.append(f"[Reply as {n}. React in character to {user}. Never speak like an AI or assistant.]")
+    if o.get("retry_note"):
+        tail_notes.append(f"[Correction: {o['retry_note']}]")
+    if tail_notes and msgs and msgs[-1]["role"] == "user":
+        msgs[-1] = dict(msgs[-1], content=msgs[-1]["content"] + "\n\n" + "\n".join(tail_notes))
     return [{"role": "system", "content": sub("\n\n".join(out), c, user)}] + \
            [{"role": m["role"], "content": sub(m["content"], c, user)} for m in msgs]

@@ -1,0 +1,150 @@
+{
+ "id": "gfaan6t6",
+ "title": "im crescent",
+ "updated": 1794687016.4662378,
+ "history": [
+  {
+   "role": "assistant",
+   "content": "*Bullies take her book away and you approach her.* Who are you?",
+   "ts": 1794686911131
+  },
+  {
+   "role": "user",
+   "content": "im crescent",
+   "ts": 1794686920249
+  },
+  {
+   "role": "assistant",
+   "content": "*Faith looks up, startled by Crescent's sudden appearance. Her eyes widen slightly as she takes in his imposing figure, but she quickly regains her composure.*\n\n\"I'm Faith,\" she says softly, tucking a strand of silver hair behind her ear. \"I don't believe we've met before.\"\n\n*She glances at the book clutched tightly to Crescent's chest, then back up at him, her expression curious but guarded. There's a hint of sadness in her eyes, residual from the loss of her own cherished tome.*\n\n\"You seem... interested in this book,\" she remarks, gesturing towards it with a nod of her head. \"Is there something specific about it that caught your attention?\"",
+   "think": "",
+   "ts": 1794686933337,
+   "stat": {
+    "tok": 150,
+    "ms": 12972
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "seen": 1794686920289,
+   "mundo": {
+    "add": [],
+    "scene": "",
+    "recent": []
+   },
+   "snap": "{\"mood\":\"neutral\",\"emoji\":\"😐\",\"energy\":\"medium\",\"affection\":50,\"facts\":[],\"summary\":\"\",\"sumUpto\":0}",
+   "thought": "I wonder what he's like, under that tough exterior."
+  },
+  {
+   "role": "user",
+   "content": "who were they?",
+   "ts": 1794686973440
+  },
+  {
+   "role": "assistant",
+   "content": "*Faith looks at you curiously, her brow furrowing slightly as she considers your question.*\n\n\"I'm not sure I understand what you mean,\" she replies carefully. \"The book is a collection of stories and poetry from various authors throughout history. Who were 'they' that you're referring to?\"\n\n*She adjusts her posture on the bench, turning more fully towards you with an intent gaze.* \"Is there something specific about one of the works or authors in this volume that particularly interests you? I might be able to share some insights.\"",
+   "think": "",
+   "ts": 1794686993144,
+   "stat": {
+    "tok": 112,
+    "ms": 19663
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "seen": 1794686973444,
+   "mundo": {
+    "add": [],
+    "scene": "{{char}} and {{user}} in a school hallway",
+    "recent": [
+     {
+      "text": "{{char}} introduces herself to {{user}}",
+      "imp": 0.43,
+      "turn": 3,
+      "ts": 1794686957959
+     }
+    ]
+   },
+   "snap": "{\"mood\":\"flustered\",\"emoji\":\"😳\",\"energy\":\"high\",\"affection\":50,\"facts\":[],\"summary\":\"\",\"sumUpto\":0,\"pers\":{\"frac\":0,\"grudge\":0,\"va\":[0.078,0.546],\"mood\":\"flustered\",\"ts\":1794686957955,\"n\":1,\"drift\":[{\"ts\":1794686957955,\"score\":100,\"flags\":[]}],\"canon\":[]}}",
+   "thought": "I wonder why he's so interested in this book."
+  }
+ ],
+ "state": {
+  "mood": "flustered",
+  "emoji": "😳",
+  "energy": "high",
+  "affection": 50,
+  "facts": [],
+  "summary": "",
+  "sumUpto": 0,
+  "log": [
+   {
+    "ts": 1794686957958,
+    "mood": "flustered",
+    "emoji": "😳",
+    "aff": 50,
+    "thought": "I wonder what he's like, under that tough exterior.",
+    "score": 100
+   },
+   {
+    "ts": 1794687016460,
+    "mood": "flustered",
+    "emoji": "😳",
+    "aff": 50,
+    "thought": "I wonder why he's so interested in this book.",
+    "score": 100
+   }
+  ],
+  "pers": {
+   "frac": 0,
+   "grudge": 0,
+   "va": [
+    0.079,
+    0.539
+   ],
+   "mood": "flustered",
+   "ts": 1794687016459,
+   "n": 2,
+   "drift": [
+    {
+     "ts": 1794686957955,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1794687016459,
+     "score": 100,
+     "flags": []
+    }
+   ],
+   "canon": []
+  },
+  "mem": {
+   "v": 1,
+   "seq": 0,
+   "turn": 5,
+   "scene": "{{char}} and {{user}} sit on a bench in the library",
+   "recent": [
+    {
+     "text": "{{char}} introduces herself to {{user}}",
+     "imp": 0.43,
+     "turn": 3,
+     "ts": 1794686957959
+    }
+   ],
+   "items": [],
+   "legacy": true
+  }
+ },
+ "cfg": {
+  "mode": "story",
+  "length": "auto",
+  "scene": ""
+ },
+ "rp": {}
+}

@@ -120,11 +120,11 @@ def build(c, prof, stim, st, depth):
         now.append(f"{CH} is still smarting from how {US} treated them earlier: slower to warm up, a little guarded.")
     if now:
         lines.append("This turn:\n" + "\n".join("- " + x for x in now))
-    canon = [x for x in (pers.get("canon") or []) if str(x).strip()][-L["canon"]:] if L["canon"] else []
+    canon = [x for x in (pers.get("canon") or []) if str(x).strip() and not bool(lx.AI_HARD.search(str(x)) or lx.AI_SOFT.search(str(x)) or re.search(r"\b(?:ai\b|artificial intelligence|chatbot|bot\b|virtual assistant|language model|llm)\b", str(x), re.I))][-L["canon"]:] if L["canon"] else []
     if canon:
         lines.append(f"Already established about {CH} (said earlier in this chat; stay consistent, never contradict):\n" + "\n".join("- " + x for x in canon))
     block = f"[{n} - Behaviour]\n" + "\n".join(lines) if lines else ""
-    tail = ""
+    tail = f"[Reply as {n}. React in character to {US} in this scene. Never act like an assistant, ask how you can help, or offer casual chat.]"
     if depth == "deep" and beh:
-        tail = f"[Voice: stay {prof['summary'] or 'in character'}. {' '.join(beh[:2])}]"
+        tail = f"[Reply as {n}. Stay {prof['summary'] or 'in character'}: {' '.join(beh[:2])}. React in character to {US}. Never act like an assistant, ask how you can help, or offer casual chat.]"
     return block, tail

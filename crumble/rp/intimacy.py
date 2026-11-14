@@ -97,10 +97,18 @@ def intim_stage(iv):
 
 def settings(cfg):
     """Normalise the intimacy config dict that comes from the front-end."""
-    cfg = cfg or {}
-    level = cfg.get("level") if cfg.get("level") in LEVELS else DEFAULT_LEVEL
-    pacing = cfg.get("pacing") if cfg.get("pacing") in PACING else DEFAULT_PACING
-    return {"on": bool(cfg.get("on", False)), "level": level, "pacing": pacing}
+    if isinstance(cfg, bool):
+        cfg = {"on": cfg}
+    elif not isinstance(cfg, dict):
+        cfg = {}
+    on = bool(cfg.get("on", cfg.get("intimacy", False)))
+    level = cfg.get("level", cfg.get("intimLevel"))
+    if level not in LEVELS:
+        level = DEFAULT_LEVEL
+    pacing = cfg.get("pacing", cfg.get("intimPacing"))
+    if pacing not in PACING:
+        pacing = DEFAULT_PACING
+    return {"on": on, "level": level, "pacing": pacing}
 
 
 def _rom_val(rp_state, cid):

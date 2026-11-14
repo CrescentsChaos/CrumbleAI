@@ -5,8 +5,9 @@ const mst=id=>{const m=chat.state.members||(chat.state.members={});return m[id]|
 const gmem=()=>G?G.members.map(memberById).filter(Boolean):[];
 const first=c=>c.name.split(/\s+/)[0];
 const uniqueTag=c=>gmem().filter(x=>first(x).toLowerCase()==first(c).toLowerCase()).length>1?c.name:first(c);
-const rpCfg=()=>({mode:U.rp,diff:U.diff,romance:U.romance,tone:U.tone});
+const rpCfg=()=>({mode:U.rp,diff:U.diff,romance:U.romance,tone:U.tone,intimacy:{on:!!U.intimacy,level:U.intimLevel||'fade',pacing:U.intimPacing||'natural'}});
 const ROMST=[[10,'No spark'],[25,'Curious'],[45,'Flirty'],[65,'Smitten'],[85,'In love'],[101,'Devoted']],romStage=v=>ROMST.find(s=>v<s[0])[1];
+const INTIMST=[[10,'No closeness'],[25,'Tentative'],[45,'Casual'],[60,'Affectionate'],[80,'Very close'],[101,'Deeply intimate']],intimStage=v=>INTIMST.find(s=>v<s[0])[1];
 const TIERC={crit:'#58d68d',win:'#7fd48a',part:'#f0b26b',fail:'#ef7676',bust:'#e0484f'};
 const addAff=(id,d)=>{const s=G?mst(id):chat.state;s.affection=Math.max(0,Math.min(100,(s.affection??50)+d))};
 

@@ -118,11 +118,15 @@ def generate_reply(b, send):
         if pg:
             r["pers"] = {"score": pg["score"], "flags": pg["flags"], "retries": attempt}
             pool.append(r)
+        ai_hard = bool(personality.lexicon.AI_HARD.search(r["text"]))
+        ai_soft = bool(personality.lexicon.AI_SOFT.search(r["text"]))
         notes = []
-        if kind == "reply" and attempt < 2 and similar(r["text"], prevs):
+        if (ai_hard or ai_soft) and attempt < 2:
+            notes.append(f"CRITICAL: Do NOT talk like an AI assistant or chatbot (no 'How are you doing today?', 'casual conversation', 'I'm here if you'd like to chat', 'What brings you here?'). You are {c.get('name') or 'Character'}, a living person in this scene. Speak and act strictly from their perspective.")
+        elif kind == "reply" and attempt < 2 and similar(r["text"], prevs):
             samp = dict(samp, temperature=min(1.4, samp["temperature"] + .15), repeat_penalty=samp["repeat_penalty"] + .05)
             notes.append("Your last attempt was too close to an earlier reply. Say something clearly different.")
-        if pg and pg["retry"] and attempt < 2 and pg["note"]:
+        elif pg and pg["retry"] and attempt < 2 and pg["note"]:
             notes.append(pg["note"])
         if notes:
             retry_note = " ".join(notes)
@@ -131,6 +135,14 @@ def generate_reply(b, send):
     if len(pool) > 1:    # out of attempts: keep the reply that stayed most in character
         best = max(pool, key=lambda x: x["pers"]["score"])
         best["pers"]["retries"] = tries
+    if best and (personality.lexicon.AI_HARD.search(best["text"]) or personality.lexicon.AI_SOFT.search(best["text"])):
+        # Clean out any AI confession / assistant sentences if they persisted across retries
+        cleaned_sents = [s for s in re.split(r"(?<=[.!?…])\s+", best["text"])
+                         if not (personality.lexicon.AI_HARD.search(s) or personality.lexicon.AI_SOFT.search(s))]
+        best["text"] = " ".join(cleaned_sents).strip()
+        if not best["text"]:
+            cname = c.get("name") or "Character"
+            best["text"] = f"*{cname} looks at {user}, unsure of what to say.*"
     if not best:
         raise RuntimeError("The model returned an empty reply. Try again, or turn Thinking off.")
     best.update(ctx_used=used, ctx=n_ctx, dropped=dropped, retries=tries)

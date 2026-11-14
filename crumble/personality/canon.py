@@ -23,19 +23,23 @@ def _clean(text):
     return t.replace("’", "'").replace("“", '"').replace("”", '"')
 
 
+def is_ai_statement(s):
+    return bool(lx.AI_HARD.search(s) or lx.AI_SOFT.search(s) or re.search(r"\b(?:ai\b|artificial intelligence|chatbot|bot\b|virtual assistant|language model|llm|computer program)\b", s, re.I))
+
+
 def extract(text):
     """First-person statements about the self, worth remembering."""
     out = []
     for sent in re.split(r"(?<=[.!?…])\s+|\n+", _clean(text)):
         s = sent.strip(" \"'")
-        if len(s) < 6 or _transient(s):
+        if len(s) < 6 or _transient(s) or is_ai_statement(s):
             continue
         for rx in lx.CANON_PATTERNS:
             m = rx.search(s)
             if m:
                 frag = m.group(0).strip(" ,;:-\"'")
                 frag = re.sub(r"\s+", " ", frag)
-                if 6 <= len(frag) <= 100:
+                if 6 <= len(frag) <= 100 and not is_ai_statement(frag):
                     out.append(frag)
                 break
     return out
@@ -47,8 +51,10 @@ def _transient(s):
 
 def merge(canon, new):
     """Add new lines, skipping near-duplicates; newest kept when over the cap."""
-    canon = [str(x) for x in (canon or []) if str(x).strip()]
+    canon = [str(x) for x in (canon or []) if str(x).strip() and not is_ai_statement(str(x))]
     for n in new:
+        if is_ai_statement(n):
+            continue
         low = n.lower()
         if any(difflib.SequenceMatcher(None, low, o.lower()).ratio() > .8 or low in o.lower() or o.lower() in low for o in canon):
             continue

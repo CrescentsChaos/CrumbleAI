@@ -57,8 +57,10 @@ $('#keep').onclick=()=>{if(!ctl&&!rounding&&chat)round({keep:true})};
 /* roleplay memory section */
 function rpMem(){const rp=chat.rp||{},ids=G?G.members:[cur.id];
  return`<details open><summary>Roleplay</summary><label>Romance with each character (your choices and the dice move this; you can adjust it)</label>${ids.map(i=>{const c=memberById(i)||cur,r=rp.rom?.[i]?.v||0;
-  return`<label>${esc(c.name)}: <b>${romStage(r)} (${r})</b></label><input type=range min=0 max=100 value=${r} data-m=rom data-c=${i}>`+(rp.rom?.[i]?.ms?.length?`<div class=small>${esc(rp.rom[i].ms.join(' · '))}</div>`:'')}).join('')}
- <div class=row><button data-m=rest>🛏 Rest (heal everyone)</button>${rp.combat?.on?'<button class=x data-m=endfight>End the fight</button>':''}</div><div class=small>Set your stats and gear under “About you” in the sidebar. Dice, combat and romance can be changed in Settings.</div></details>`}
+  return`<label>${esc(c.name)}: <b>${romStage(r)} (${r})</b></label><input type=range min=0 max=100 value=${r} data-m=rom data-c=${i}>`+(rp.rom?.[i]?.ms?.length?`<div class=small>${esc(rp.rom[i].ms.join(' · '))}</div>`:'')}).join('')}`
+ +(U.intimacy?`<label style="margin-top:8px">Physical intimacy with each character (adult characters only; you can adjust it)</label>${ids.map(i=>{const c=memberById(i)||cur,iv=rp.intim?.[i]?.iv||0;
+  return`<label>${esc(c.name)}: <b>${intimStage(iv)} (${iv})</b></label><input type=range min=0 max=100 value=${iv} data-m=intim data-c=${i}>`+(rp.intim?.[i]?.acts?.length?`<div class=small>${esc(rp.intim[i].acts.join(' · '))}</div>`:'')}).join('')}`:'')
+ +`<div class=row><button data-m=rest>🛏 Rest (heal everyone)</button>${rp.combat?.on?'<button class=x data-m=endfight>End the fight</button>':''}</div><div class=small>Set your stats and gear under “About you” in the sidebar. Dice, combat, romance and intimacy can be changed in Settings.</div></details>`}
 function renderMemG(){const f=$('#memf'),st=chat.state;
  f.innerHTML=`<details open><summary>Characters in this group</summary>${gmem().map(c=>{const s=mst(c.id);return`<label>${esc(c.name)}: <b>${s.emoji||'😐'} ${esc(s.mood||'neutral')}</b> · feels about you: <b>${stg(s.affection)} (${s.affection})</b></label><input type=range min=0 max=100 value=${s.affection} data-m=gaff data-c=${c.id}>`}).join('')}</details>
  <details open><summary>Scene note</summary><label>Steer the situation. It stays in every prompt for this chat.</label><textarea data-m=scene rows=3>${esc(chat.cfg.scene||'')}</textarea></details>

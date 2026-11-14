@@ -178,19 +178,47 @@ STIM = {
 STIM_RX = {k: [(w, re.compile(p, re.I)) for w, p in v] for k, v in STIM.items()}
 
 # ---------------------------------------------------------------- reply checks
-AI_HARD = re.compile(r"\b(?:as an ai|i(?:'m| am) an ai|language model|i(?:'m| am) (?:just )?a (?:program|chatbot|bot|virtual assistant)|i don'?t have (?:personal )?(?:feelings|emotions|a body)|my (?:training|programming) (?:data|prevents|doesn'?t))\b", re.I)
+AI_HARD = re.compile(
+    r"\b(?:"
+    # I am / As an / Being an ... AI, assistant, bot, program, etc.
+    r"(?:i(?:'m| am)|as|being) (?:a |an |just (?:a |an )?|merely (?:a |an )?|only (?:a |an )?|simply (?:a |an )?|part of (?:a |an )?)?(?:[\w-]+\s+){0,3}(?:ai\b|artificial intelligence|language model|llm|chatbot|bot\b|virtual assistant|digital assistant|program\b|computer program|neural network|machine learning model|software|system\b|algorithm)"
+    r"|i(?:'m| am) (?:here )?(?:to act as|designed to|programmed to|trained to|an automated)"
+    # Disclaimers of humanity, bodies, feelings
+    r"|i (?:don'?t|do not|cannot) have (?:a |an )?(?:personal )?(?:physical |real )?(?:feelings|emotions|a body|consciousness|ears|eyes|senses)"
+    r"|my (?:training|programming|knowledge cutoff|system prompt|developer|creators|algorithm|model weights)"
+    r"|(?:metaphorically|figuratively) speaking\b"
+    r"|as (?:a |an )?(?:language model|ai|machine|computer program|assistant)"
+    r")\b",
+    re.I
+)
 AI_SOFT = re.compile(
     r"\b(?:"
     # direct assistant offers
     r"i'?d be (?:happy|glad|delighted) to (?:help|assist)"
     r"|how (?:can|may) i (?:help|assist)"
     r"|i(?:'m| am) here (?:for you|to (?:help|assist|listen|support))"
+    r"|i(?:'m| am) (?:always )?(?:eager|happy|ready) to (?:learn|engage|chat|talk|help|assist)\b"
     r"|i hope (?:this|that) helps"
     r"|feel free to (?:ask|reach out|share|let me know)"
     r"|(?:don'?t|do not) hesitate to"
     r"|let me know if (?:you|there)"
     r"|is there anything else"
     r"|i cannot (?:assist|help) with"
+    # generic chatbot openings & prompts
+    r"|(?:it'?s|it is) (?:nice|great|good|a pleasure) to meet you"
+    r"|(?:hello|hi|hey)\s+[\w'-]+[!,.]?\s*(?:it'?s|it is) (?:nice|great|good|a pleasure) to meet you"
+    r"|what brings you (?:here |in |by )?today\??"
+    r"|how are you (?:doing |feeling )?today\??"
+    r"|how is your day (?:going|so far)\??"
+    r"|is there (?:something|anything) (?:specific )?(?:on your mind|you(?:'d| would) like to (?:discuss|talk about|ask|know))\??"
+    r"|what (?:can|would) you like to (?:talk|chat|discuss|explore|ask) (?:about )?today\??"
+    r"|what do you (?:usually |normally )?(?:enjoy|like) (?:talking|chatting) about\??"
+    r"|i(?:'m| am) here if you(?:'d| would| want to| need to| ever| wish to) (?:like to )?(?:chat|talk|reach out)\b"
+    r"|(?:chat|talk) about (?:anything|whatever) (?:on your mind|you(?:'d| would)? (?:like|want))\b"
+    r"|(?:have a |just a |for a )?casual conversation\b"
+    r"|i(?:'m| am) all ears\b"
+    r"|how can i (?:best )?(?:help|assist|serve) you today\??"
+    r"|anything on your mind\??"
     # therapist / customer-service tone
     r"|(?:that'?s|that is|this is) (?:a |completely |totally |perfectly )?(?:valid|understandable|normal) (?:feeling|concern|question|response|reaction|point|worry)"
     r"|i (?:completely |totally |fully )?understand (?:that |how you |your |where you)"

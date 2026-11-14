@@ -56,12 +56,12 @@ def check(c, prof, text, own, mode="story", canon=None, fp=None, threshold=65):
     found = []      # (penalty, flag, instruction for a retry)
 
     if lx.AI_HARD.search(text):
-        found.append((60, "breaks character (talks like an AI)", "Never mention being an AI or a program; speak only as the character."))
+        found.append((100, "breaks character (talks like an AI)", f"CRITICAL: Never mention being an AI, bot, chatbot, or assistant. You are {c.get('name') or 'Character'}, a living person in the scene. Speak strictly as this character."))
     elif lx.AI_SOFT.search(text):
         # count how many distinct AI-assistant patterns appear
         ai_hits = len(lx.AI_SOFT.findall(text))
-        penalty = min(50, 30 + 8 * (ai_hits - 1))
-        found.append((penalty, "assistant-style phrasing", "Do not talk like a helpful assistant or therapist. No 'happy to help', 'feel free to', 'that's a great question', 'I'm here for you', 'your feelings are valid', 'don't hesitate to ask'. Talk the way this character actually would."))
+        penalty = min(80, 50 + 15 * (ai_hits - 1))
+        found.append((penalty, "assistant-style phrasing", f"Do not talk like a helpful assistant or chatbot. Never say 'How are you doing today?', 'casual conversation', 'I'm here if you'd like to chat', 'What brings you here today?'. You are {c.get('name') or 'Character'}. Stay completely in character in the scene."))
     if lx.LIST_LINE.search(text):
         found.append((15, "uses list or heading formatting", "Write in natural speech, not lists or headings."))
 
