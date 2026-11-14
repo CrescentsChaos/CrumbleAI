@@ -1,0 +1,21 @@
+@media(max-width:760px){
+body{display:block;height:var(--vh,100dvh);overflow:hidden}main{height:var(--vh,100dvh)}.mob{display:inline-flex}
+aside{position:fixed;z-index:30;left:0;top:0;bottom:0;width:min(86vw,320px);transform:translateX(-102%);transition:transform .25s;padding-top:calc(18px + env(safe-area-inset-top));background:var(--pn)}
+body.drawer aside{transform:none;box-shadow:0 0 60px #000}#scrim{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:25}body.drawer #scrim{display:block}
+nav{order:9;align-self:stretch;margin:0;border-radius:0;border-width:1px 0 0;justify-content:space-around;padding:3px 4px calc(3px + env(safe-area-inset-bottom));gap:0}
+nav button{flex:1;display:flex;flex-direction:column;align-items:center;gap:0;padding:3px 2px;font-size:10.5px;border-radius:10px}nav button .ni{display:block;font-size:18px;line-height:1.1}
+body.kb nav{display:none}body.kb .bar{padding-bottom:calc(6px + env(safe-area-inset-bottom))}
+section{padding:12px}#chat{padding:0}
+.chead{padding:calc(6px + env(safe-area-inset-top)) 10px 6px;gap:8px;flex-wrap:wrap}.chead .av{width:34px;height:34px}
+.who{min-width:0}.who b{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:46vw}.who small{font-size:11px}
+.chip{padding:3px 8px}.chip #hmood,.chip #hstage,.chip .meter{display:none}
+.hctl{display:none;width:100%;gap:6px;flex-wrap:wrap}.chead.open .hctl{display:flex}.hctl select{flex:1 1 42%;max-width:none}.hctl .sp{display:none}
+#log{padding:12px 10px 4px;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}.sep{margin:2px auto 12px}
+.m{gap:8px;margin-bottom:14px}.m .av{width:28px;height:28px;font-size:12px}.bub{max-width:calc(100% - 36px)}.m.user .bub{max-width:88%}
+.tx{padding:9px 13px;border-radius:4px 18px 18px 18px}.m.user .tx{border-radius:18px 4px 18px 18px}.nm{margin:0 4px 3px}
+.bar{padding:6px 8px 6px}.comp{padding:4px 4px 4px 14px;border-radius:22px}#send,#stop,#mic{width:38px;height:38px;font-size:16px}
+input,select,textarea{font-size:16px}
+.tools{margin-top:6px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;gap:6px}.tools::-webkit-scrollbar{display:none}.tools>*{flex:none}.tools .sp,#ctxm{display:none}
+.pill{padding:4px 11px}.ghost{padding:4px 8px}
+.acts{top:-30px}details:not(.think):not(.mdl){padding:8px 12px}label.chk{margin:10px 0}
+}

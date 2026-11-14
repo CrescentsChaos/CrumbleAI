@@ -2,7 +2,7 @@
 
 **A local character-chat app for `.gguf` models.** Crumble runs entirely on your own computer. Pick a character, load a model, and chat in your browser. Characters have moods, memory, a sense of time and their own way of talking. You can also share it with friends so they use the AI running on *your* PC.
 
-No cloud, no accounts, no API keys. One Python file.
+No cloud, no accounts, no API keys. A small Python package whose only dependency is `llama-cpp-python`.
 
 ---
 
@@ -11,12 +11,25 @@ No cloud, no accounts, no API keys. One Python file.
 ### Characters that feel real
 - **Mood and relationship** - after every reply the character updates how it feels (shown as an emoji chip) and how much it likes you. That changes its tone, warmth and patience over time.
 - **Long-term memory** - it remembers facts about you and automatically summarises long chats, so it doesn't forget what happened earlier. Everything is viewable and editable in the **Memory** tab.
+- **Hierarchical memory** - four layers instead of one blob. **Short-term** (the scene right now and what just happened), **episodic** (important events between you, e.g. "{{user}} gave her a necklace on her birthday"), **semantic** (lasting facts about you, them and your relationship, e.g. "{{user}} dislikes being interrupted") and **emotional** (how the character remembers feeling, e.g. "she felt embarrassed when you found her secret", linked to the event). Nothing is pasted wholesale: each reply, Crumble reads your latest message (people, topics, kind of event, feeling), searches the memories, ranks them by relevance, recency and importance, and injects only the best few (**Settings -> Memory**: light / standard / deep). Memories are written after replies and, for important moments (gifts, promises, fights, confessions, \"remember this\"), with one extra small model call; a plain note is kept if the model gives nothing usable. The **Memory** tab shows and edits every layer, pins memories, explains *why* something is recalled (**Try a message**), and can **Build memories from this chat** for existing chats. Rewinding or swiping a reply undoes what it taught.
 - **Time awareness** - it knows the date, the time of day, and how long it's been since you last spoke.
 - **Secrets that stay secret** - private character info is only hinted at or revealed once trust is high enough.
 - **Inner thoughts** - optionally see a private thought under each message.
 - **Natural speech** - prompts push the model away from "AI assistant" talk: contractions, opinions, moods, fillers, no repeating the same openings. Reply length mirrors yours. Repetitive replies are detected and regenerated.
 - **Deep character sheets** - on top of the usual fields: catchphrases, slang, dialect, texting habits, how their speech changes when happy/angry/nervous, body language, humour, values, flaws, triggers, boundaries and more.
 - **Initiative (optional)** - the character can text you first if you go quiet.
+
+### A personality that stays consistent
+Small local models drift: a shy character turns chatty, a blunt one turns polite, and anyone can slip into "happy to help!" assistant talk. The **personality engine** (on by default, tune it in **Settings → Personality engine**) works around that without extra model calls for the common case.
+
+- **Traits read from the sheet.** Crumble turns the Personality, Flaws, Quirks, Humour, Speech and Texting fields into 14 stable dials: the five broad traits (openness, conscientiousness, extraversion, agreeableness, emotional volatility) plus assertiveness, warmth, humour, formality, talkativeness, impulsiveness, openness to trust, pride and expressiveness. Negations ("not shy") and intensifiers ("very guarded") are understood. Open the **Personality profile** panel in the character editor to see what it found and why.
+- **You stay in charge.** Fill the new **Traits** field to override the guesses (`O 70 C 40 E 85 A 30 N 60`, or `warmth: high, pride: very low`, or plain adjectives like `sarcastic, guarded`). **How they react** and **Consistency** (hard rules such as `Never swears` or `Always speaks in lowercase`) are read by the engine and enforced.
+- **Reactions that depend on who they are.** The prompt describes how this character behaves in every scene, and reacts to what you just did: an insult, kindness, a compliment, a challenge, an apology, you opening up. A proud, blunt character fires back; a timid one withdraws. Anything matching their **Triggers**, **Boundaries**, **Fears** or **Comforts** is noticed even when you word it differently ("laughing at you" matches *being laughed at*).
+- **Mood that moves like they would.** Mood and affection changes proposed by the model are bounded and shaped by temperament: a stoic does not jump to fury in one message, a thin-skinned character is hurt more by an insult, warmth is earned back slowly after a grudge, and time heals (come back tomorrow and the anger has cooled). Setting the mood by hand in the Memory tab is respected.
+- **They remember what they said about themselves.** Durable statements ("I'm a nurse", "I hate cilantro", promises) are collected per chat, fed back into the prompt, and checked so the character does not contradict them later. Edit the list in **Memory → Personality**.
+- **Consistency guard.** Each reply is scored 0-100 for assistant-speak, list formatting, wrong register (too formal or too casual for them), emoji against their habits, breaking a rule you wrote, contradicting an earlier statement, and wildly different length. A reply that scores too low is re-rolled with a targeted correction, up to twice, and the best attempt is kept. Turn on **Show consistency score** for a badge on each message; the Memory tab charts the trend.
+
+Depth **Light**, **Standard** and **Deep** control how much is added to the prompt (Deep also adds a one-line reminder at the end, where models listen most). Characters without personality text are left alone. The Narrator never gets a personality. Guests cannot see profiles, because they are derived from the private sheet.
 
 ### Chat that feels like chatting
 - **Replies are generated in full first**, then typed out like a person (variable speed, pauses at punctuation). Click or press `Esc` to skip.
@@ -27,6 +40,16 @@ No cloud, no accounts, no API keys. One Python file.
 - Read-aloud (browser voices) and voice dictation, avatars, light/dark theme, multiple chats per character, chat export.
 - Tavern **Character Card V2** import/export (JSON and PNG), lorebook, AI-drafted characters.
 - **Mobile-friendly** - drawer menu, bottom tabs, compact header, keyboard-aware layout.
+
+### Group chats and real roleplay
+- **Group chats** - put two or more characters in one chat (**＋ New group** in the sidebar). Each one keeps their own mood, memory and personality, and only knows what they would know. Add an optional **Narrator** (a game-master voice) and a shared setting.
+- **Realistic turn-taking** - not everyone answers everything. A "director" decides who speaks next from how chatty each character is (the new *Talkativeness* field, or guessed from their sheet), who was spoken to, what interests them and how fond they are of you. Quiet characters stay out of it, chatty ones jump in, the conversation winds down by itself, and a character can simply choose not to reply. Pick the **pace** per group: Quiet, Natural or Lively.
+- **@mentions** - type `@` for an autocomplete menu (or click a face in the header). A mentioned character always answers; the others mostly stay out. `@everyone` gets the whole group. Characters can `@` each other too, and pull each other into the conversation. **💬 Let them talk** lets the group chat among themselves.
+- **Action engine** - what you *do* now has consequences. Write actions naturally (`*punches Marcus*`, `I try to convince her`, `*kisses her cheek*`) or use the **🎲 Actions** buttons. Crumble rolls a d20 against your stats and the situation, shows the roll, and the characters must play out the result: a failed persuasion fails, a lucky stealth works. Turn it off or switch to buttons-only in **Settings → Roleplay engine**.
+- **Real combat** - start a fight and you get HP bars, initiative, hit and miss rolls, damage, armor, defending, fleeing, using powers, healing, intimidating and talking people down. Enemies can lose their nerve and yield or flee; friends who like you jump in; bystanders react. The characters narrate what the dice decided (never the numbers). Fights never kill anyone: at 0 HP you are knocked out, and the story decides what happens next. Characters stay wounded until you rest.
+- **Romance that takes time** - each character has a romance level with you that moves with your choices: flirt, tender touch, ask out, kiss, confess, get closer. Rushing gets a gentle (or firm) deflection, and personality matters (*slow burn* is harder than *flirty*). Milestones like the first kiss are remembered. Intimate scenes are always tasteful and fade to black, and romance is never used with a character whose age is under 18.
+- **Stats** - set yours under **About you** and theirs in the **Roleplay** section of the character sheet: `STR 12 DEX 14 CON 10 INT 9 WIS 11 CHA 13` plus fighting style, gear and powers.
+- **Slash commands** - `/roll 2d6+3`, `/fight Name`, `/peace`, `/rest`. Every roll has ↻ re-roll and ✕ ignore buttons.
 
 ### Share it with friends
 Run it with `--share` and others can chat with your characters from their own browser, using the model on your PC. See [Sharing](#sharing-your-ai-with-others).
@@ -121,7 +144,9 @@ Everything stays on your machine, in the `data/` folder:
 ```
 data/
   characters/        character sheets (.json)
-  chats/<character>/ your chats, including mood, memory and settings per chat
+  groups/            group chat setups (.json)
+  chats/<character>/ your chats, including mood, memory, fights and romance per chat
+  chats/<group id>/  group chats
   chats/<character>_<guest id>/   guests' private chats (share mode)
   last_model.json    the model to auto-load next time
   share.json         guest password and limit
@@ -135,24 +160,42 @@ Back up or delete that folder to keep or wipe everything. Settings such as theme
 ## Tips
 
 - **Replies feel flat?** Raise `temperature` a little in **Settings → Generation**, and turn **Realism rules** and **Emotions and memory** on.
-- **Slow on a weak PC?** Turn off **Emotions and memory** (it makes one small extra model call after each reply) and **Thinking**.
+- **Slow on a weak PC?** Turn off **Emotions and memory** (it makes one small extra model call after each reply) and **Thinking**. Turn off **Consistency guard** too if replies are being re-rolled often, or set the personality depth to Light.
+- **Character keeps acting off-type?** Describe them in plain adjectives in **Personality**, or put numbers in **Traits**, add a couple of lines under **Consistency**, and check the **Personality profile** panel to see whether Crumble understood.
 - **Model template errors about the first message?** Enable *Fold the greeting into the system prompt* in Settings.
 - **Context too small for long chats?** Load the model with a bigger context length. Old messages are summarised and trimmed automatically either way.
 
 ## Project layout
 
 ```
-Crumble.py     the whole app: server, prompt building and web UI
-Share.bat      Windows launcher for share mode
-share.sh       Mac/Linux launcher for share mode
-SHARING.md     hosting guide
-data/          characters, chats and settings
-models/        put your .gguf files here
+Crumble.py         starts the app (python -m crumble does the same)
+crumble/
+  config.py        paths, shared state, the character-sheet schema
+  storage.py       characters, groups and chats on disk
+  textutil.py      reply clean-up, repetition checks, JSON recovery
+  rp/              roleplay engine: dice, actions, combat, romance, group turn-taking
+  personality/     personality engine: profile, stimulus, dynamics, canon, voice guard, prompt directives
+  prompt.py        builds the messages the model sees
+  llm.py           runs the model and the reply pipeline
+  memory.py        mood, affection and long-term memory
+  recall/          hierarchical memory: store, query analysis, ranked retrieval, learning (short-term / episodic / semantic / emotional)
+  sharing.py       guest sessions, password, queue
+  server.py        HTTP server and JSON API
+  web.py, web/     the browser UI: index.html, css/NN-*.css, js/NN-*.js (joined in filename order)
+  app.py           command-line options and startup
+tests/             python -m unittest discover -s tests -t .
+Share.bat          Windows launcher for share mode
+share.sh           Mac/Linux launcher for share mode
+SHARING.md         hosting guide
+data/              characters, chats and settings
+models/            put your .gguf files here
 ```
+
+Environment variables: `CRUMBLE_HOME` moves `data/` and `models/` to another folder, `CRUMBLE_DEV=1` re-reads the UI files on every page load while you edit them, and `CRUMBLE_LLM_LOG=1` shows llama.cpp's own log.
 
 ## Contributing
 
-Issues and pull requests are welcome. The app is intentionally a single dependency-light file (`llama-cpp-python` is the only requirement), so please keep it that way.
+Issues and pull requests are welcome. The app is intentionally dependency-light (`llama-cpp-python` is the only requirement; the tests use only the standard library), so please keep it that way. Run `python -m unittest discover -s tests -t .` before sending a change.
 
 ## License
 

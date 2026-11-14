@@ -1,0 +1,21 @@
+{
+ "id": "obodva4o",
+ "title": "New chat",
+ "updated": 1794513598.30245,
+ "history": [],
+ "state": {
+  "mood": "neutral",
+  "emoji": "😐",
+  "energy": "medium",
+  "affection": 50,
+  "facts": [],
+  "summary": "",
+  "sumUpto": 0,
+  "log": []
+ },
+ "cfg": {
+  "mode": "story",
+  "length": "auto",
+  "scene": ""
+ }
+}

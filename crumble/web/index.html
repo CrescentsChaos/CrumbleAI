@@ -1,0 +1,44 @@
+<!doctype html><html lang=en data-theme=dark><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Crumble</title><style>
+<!--STYLES-->
+</style>
+<div id=scrim></div><aside><div class=brand><div class=logo>🍪</div><h1>Crumble</h1></div>
+<h2>Characters</h2><div class="row adm"><button id=new>＋ New</button><button id=imp>Import</button></div>
+<input id=csearch placeholder="Search characters…" style="margin:6px 0">
+<input type=file id=file accept=".json,.png" hidden><div id=clist></div>
+<h2>Group chats</h2><div class="row adm"><button id=newg>＋ New group</button></div><div id=glist></div>
+<h2 class=adm>Model</h2><details class="mdl adm"><summary>Load a .gguf</summary><select id=msel style="margin-top:8px"></select>
+<input id=mpath placeholder="or paste a full path" style="margin-top:6px">
+<div class=row><input id=nctx type=number value=8192 title="Context length"><input id=ngl type=number value=-1 title="GPU layers (-1 = all)"></div>
+<div class=small>context length / GPU layers</div><div class=row><button class=go id=load>Load model</button></div></details><div id=mstat class=small style="margin:8px 4px"></div>
+<h2>You</h2><input id=uname value=User placeholder="Your name">
+<details class=mdl style="margin-top:8px"><summary>About you</summary><textarea id=persona rows=4 placeholder="Who you are, in a few lines. The character will know this." style="margin-top:8px"></textarea>
+<label>Your stats (for dice and fights)</label><input id=ustats placeholder="STR 10 DEX 12 CON 10 INT 14 WIS 10 CHA 13">
+<label>Your weapon, gear or powers</label><input id=ugear placeholder="e.g. rusty shortsword, leather jacket"></details></aside>
+<main><nav><button id=menu class=mob><span class=ni>☰</span>Menu</button><button data-t=chat class=on><span class=ni>💬</span>Chat</button><button data-t=editor class=adm><span class=ni>🎭</span>Character</button><button data-t=mem><span class=ni>🧠</span>Memory</button><button data-t=samp><span class=ni>⚙️</span>Settings</button></nav>
+<section id=chat><div class=chead><div class=av id=hav></div><div class=who><b id=hname>Character</b><small id=hstat>online</small></div>
+<div class=chip id=hchip title="Open mood and memory"><span id=hemo>😐</span><b id=hmood>neutral</b><span class=meter><i id=hmeter></i></span><span id=hstage class=small></span></div><div class=chip id=hrom hidden title="Romance (open Memory)"><span>💞</span><b></b></div><div class=gstrip id=gstrip hidden></div><div class=sp></div><button id=hmore class="ib mob" title="Chat options">⋯</button><div class=hctl>
+<select id=mode title="How the conversation happens"><option value=story>🎭 Roleplay</option><option value=text>💬 Texting</option><option value=call>📞 Voice call</option></select>
+<select id=len title="Reply length"><option value=auto>Length: auto</option><option value=short>Short</option><option value=medium>Medium</option><option value=long>Long</option></select>
+<select id=chsel></select><button id=newchat class=ib title="New chat">＋</button><button id=rename class=ib title=Rename>✎</button><button id=expchat class=ib title="Export chat">⇩</button><button id=delchat class="ib x" title="Delete chat">🗑</button></div></div>
+<div id=log></div><div class=bar><div id=cbt hidden></div><div id=rpbar hidden></div><div id=mnu hidden></div><div class=comp><textarea id=inp rows=1 placeholder="Message… (Enter sends, Shift+Enter adds a line)"></textarea>
+<button id=mic title="Dictate" hidden>🎤</button><button class=go id=send title=Send>↑</button><button id=stop hidden title="Stop (Esc)">■</button></div>
+<div class=tools><button class=pill id=tthink title="Let the model think before replying (shown in a collapsible panel once the reply is ready)">✦ Thinking</button><button class=pill id=tact title="Actions in *stars*: styled when on, hidden when off">✱ Actions</button><button class=pill id=tthoughts title="Show the character's private inner thoughts under their messages">💭 Thoughts</button><button class=pill id=tvoice title="Read replies aloud">🔊 Voice</button><button class=pill id=tact2 title="Action buttons: fights, persuasion, sneaking, romance">🎲 Actions</button><span class=sp></span><span class=small id=ctxm></span>
+<button class=ghost id=skip hidden>⏭ Skip typing</button><button class=ghost id=keep hidden title="Let the group talk among themselves for a moment">💬 Let them talk</button><button class=ghost id=cont title="Let the character keep going">… Continue</button><button class=ghost id=regen>↻ Regenerate</button><button class=ghost id=undo>↶ Undo</button><button class=ghost id=greet>Next greeting</button></div></div></section>
+<section id=editor hidden><details open><summary>AI draft</summary><label>Describe the character in a sentence or two. Only empty fields get filled.</label>
+<textarea id=concept rows=2></textarea><div class=row><button id=gen>Draft with loaded model</button><span class=small id=gstat></span></div></details>
+<details open><summary>Avatar</summary><div class=avrow><div class=av id=eav></div><button id=avup>Upload image</button><button id=avrm class=x>Remove</button><input type=file id=avfile accept="image/*" hidden></div></details>
+<div id=form></div>
+<div class=row style="max-width:840px"><button class=go id=save>Save character</button><button id=dup>Duplicate</button><button id=exp>Export card (JSON)</button><button class=x id=del>Delete</button></div></section>
+<section id=gedit hidden><details open><summary>Group chat</summary>
+<label>Name</label><input id=gname placeholder="e.g. Friday night crew">
+<label>Members (pick at least two)</label><div id=gmem></div>
+<label>Pace of conversation</label><select id=gpace><option value=quiet>Quiet: few replies, mostly when addressed</option><option value=natural selected>Natural: like a real group chat</option><option value=lively>Lively: everyone chimes in</option></select>
+<label class=chk><input type=checkbox id=gnar><span>Add a Narrator<small>A game-master voice that describes the world and what dice rolls and fights lead to.</small></span></label>
+<label>Setting (shared by everyone)</label><textarea id=gscen rows=4 placeholder="Where are they, what is going on, how do they all know each other?"></textarea>
+<div class=row><button class=go id=gsave>Save group</button><button class=x id=gdel>Delete group</button></div></details></section>
+<section id=mem hidden><div class=sampler id=memf></div></section>
+<section id=samp hidden><div class=sampler id=sharebox></div><div class=sampler id=sform></div></section></main>
+<script>
+<!--SCRIPTS-->
+</script></html>

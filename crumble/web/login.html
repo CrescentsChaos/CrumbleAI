@@ -1,0 +1,10 @@
+<!doctype html><html><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Crumble</title><style>
+body{margin:0;min-height:100vh;display:grid;place-items:center;background:#0a0c10;color:#eceef4;font:15px system-ui,sans-serif}
+form{width:min(340px,90vw);background:#10131a;border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:26px}
+h1{margin:0 0 4px;font-size:22px}p{margin:0 0 18px;color:#8b93a7;font-size:13px}
+input,button{width:100%;box-sizing:border-box;font:inherit;padding:10px 12px;margin:6px 0;border-radius:12px;border:1px solid rgba(255,255,255,.1);background:#171b24;color:inherit}
+button{background:linear-gradient(135deg,#f0b26b,#e5806a);color:#1b1209;border:0;font-weight:650;cursor:pointer;margin-top:12px}#e{color:#ef7676;font-size:13px;min-height:18px}
+</style><form id=f><h1>🍪 Crumble</h1><p>You were invited to chat with AI characters running on the host's computer.</p>
+<input id=n placeholder="Your name" maxlength=24 required><input id=p type=password placeholder="Password" autocomplete=current-password><div id=e></div><button>Join</button></form>
+<script>f.onsubmit=async e=>{e.preventDefault();const r=await fetch('/api/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:n.value,password:p.value})});
+const j=await r.json();if(j.ok)location.reload();else e.target.querySelector('#e').textContent=j.err||'Could not join'}</script></html>

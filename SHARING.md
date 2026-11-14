@@ -19,3 +19,5 @@ Everyone shares your one model, so replies queue up (guests see "waiting in line
 Options: `--password X`, `--no-password`, `--max-guests N`, `--port N`.
 
 Note: opening the share link on your own PC still counts as you (the host), so you keep full control there.
+
+Group chats you create are visible to guests too. Each guest gets their own private copy of the chat, and they can @mention, fight and roleplay like you, but they cannot edit groups or see private character fields.
