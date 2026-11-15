@@ -1,19 +1,23 @@
 /* ---------- generation: the whole reply is made first, then typed out ---------- */
 const apiChar=(c=cur)=>{const{avatar,...x}=c;return x};
-const apiHist=a=>a.filter(m=>m.content&&m.content.trim()).map(m=>({role:m.role,content:m.content,ts:m.ts,react:m.react,name:m.name,cid:m.cid}));
+/* out-of-character messages are left out unless asked for: the characters, the memory and the summaries only know the story */
+const apiHist=(a,withOoc=false)=>a.filter(m=>m.content&&m.content.trim()&&(withOoc||!m.ooc)).map(m=>({role:m.role,content:m.content,ts:m.ts,react:m.react,name:m.name,cid:m.cid,ooc:m.ooc}));
 async function gen(kind='reply',spk,cue){
  if(!cur?.id||!chat||ctl)return null;skipTyping();
- const last=hist.at(-1),sp=G?memberById(spk||last?.cid):cur;if(!sp)return null;
- const base=kind=='swipe'?hist.slice(0,-1):hist,lastU=[...base].reverse().find(m=>m.role=='user'),started=Date.now();
- pendWho=G?sp:null;ctl=new AbortController();busy(true);phase('reading…');
+ const ooc=kind=='ooc',swp=kind=='swipe'||kind=='continue',li=swp?icLast():hist.length-1,last=hist[li];if(swp&&!last)return null;
+ const sp=ooc?OOCSP:G?memberById(spk||last?.cid):cur;if(!sp)return null;
+ const all=kind=='swipe'?hist.slice(0,li):hist,ic=all.filter(m=>!m.ooc),base=ooc?all:ic,lastU=[...ic].reverse().find(m=>m.role=='user'),started=Date.now(),
+  lastO=ooc?[...hist].reverse().find(m=>m.role=='user'&&m.ooc):null;
+ pendWho=ooc?OOCSP:G?sp:null;ctl=new AbortController();busy(true);phase('reading…');
  const rt=setTimeout(()=>{if(pendLabel=='reading…')phase(S.role=='guest'?'waiting for the AI…':'typing…')},Math.min(1000,350+(lastU?lastU.content.split(' ').length*45:0)));
- const a=base.at(-1)?.ts,b=base.at(-2)?.ts;
- const gap=!U.timeaware?0:kind=='nudge'||kind=='continue'?(Date.now()-(a||Date.now()))/1000:(a&&b?(a-b)/1000:0);
- const s=chat.state,ms=G?{...mst(sp.id),summary:s.summary,log:undefined}:{...s,log:undefined},
-  body={user:uname(),persona:U.persona,history:apiHist(base),turn:base.length,kind:kind=='swipe'?'reply':kind,
-  from:U.track&&s.summary?Math.max(0,Math.min(s.sumUpto,base.length-2)):0,state:U.track?ms:{},scene:chat.cfg.scene,
+ const a=ic.at(-1)?.ts,b=ic.at(-2)?.ts;
+ const gap=ooc||!U.timeaware?0:kind=='nudge'||kind=='continue'?(Date.now()-(a||Date.now()))/1000:(a&&b?(a-b)/1000:0);
+ const s=chat.state,ms=ooc?{summary:s.summary}:G?{...mst(sp.id),summary:s.summary,log:undefined}:{...s,log:undefined},
+  body={user:uname(),persona:U.persona,history:apiHist(base,ooc),turn:all.length,kind:kind=='swipe'?'reply':kind,
+  from:ooc?0:U.track&&s.summary?Math.max(0,Math.min(all.slice(0,s.sumUpto).filter(m=>!m.ooc).length,ic.length-2)):0,state:U.track?ms:{},scene:chat.cfg.scene,
   clock:U.timeaware?clock():'',gap_s:gap,rp:{on:U.rp!='off',state:chat.rp||{},fx:lastU?.fx||'',cfg:rpCfg()},
   params:{...P,think:U.think,actions:U.actions,mode:chat.cfg.mode,length:chat.cfg.length,realism:U.realism,natural:U.natural,pers:persCfg(),mem:memCfg()}};
+ body.ooc=ooc?{kind:lastO?.ooc||'discuss',notes:oocActive(all,'reply').filter(n=>n.oid!=lastO?.oid)}:{notes:oocActive(all,kind)};
  if(G){body.group=G.id;body.speaker=sp.id;body.cue=cue||{}}else body.char=apiChar();
  let res=null,err='';
  try{const r=await fetch('/api/chat',{method:'POST',signal:ctl.signal,headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
@@ -26,21 +30,24 @@ async function gen(kind='reply',spk,cue){
  clearTimeout(rt);const ab=ctl.signal.aborted;ctl=null;hidePending();pendWho=null;if(!rounding)busy(false);setStatus('online');
  if(ab){draw();return null}
  if(res&&res.pass)return 'pass';
- if(!res||!res.text){draw();errBox(err||'The model returned nothing.',G?'round':kind);return null}
+ if(!res||!res.text){draw();errBox(err||'The model returned nothing.',G&&!ooc?'round':kind);return null}
  let idx;const v={content:res.text,think:res.think,ts:Date.now(),stat:{tok:res.tok,ms:res.ms},pers:res.pers,recalled:res.recalled};
- if(kind=='swipe'){restore(last);if(!last.sw)last.sw=[{content:last.content,think:last.think,ts:last.ts,stat:last.stat,thought:last.thought,pers:last.pers}];
-  last.sw.push(v);last.si=last.sw.length-1;Object.assign(last,v,{thought:'',react:''});idx=hist.length-1}
- else if(kind=='continue'){last.content=last.content.trimEnd()+(chat.cfg.mode=='text'?'\n':'\n\n')+res.text;if(last.sw)last.sw[last.si].content=last.content;idx=hist.length-1}
+ if(ooc){hist.push({role:'assistant',content:res.text,think:res.think,ts:Date.now(),stat:v.stat,ooc:lastO?.ooc||'discuss'});idx=hist.length-1}
+ else if(kind=='swipe'){restore(last);if(!last.sw)last.sw=[{content:last.content,think:last.think,ts:last.ts,stat:last.stat,thought:last.thought,pers:last.pers}];
+  last.sw.push(v);last.si=last.sw.length-1;Object.assign(last,v,{thought:'',react:''});idx=li}
+ else if(kind=='continue'){last.content=last.content.trimEnd()+(chat.cfg.mode=='text'?'\n':'\n\n')+res.text;if(last.sw)last.sw[last.si].content=last.content;idx=li}
  else{hist.push({role:'assistant',...v,seen:started,nudge:kind=='nudge'?1:undefined,...(G?{cid:sp.id,name:sp.name}:{})});idx=hist.length-1}
  $('#ctxm').textContent=(res.cut?'Reply hit the length cap and was trimmed to a full sentence. Use Continue for more. · ':'')+`prompt ${res.ctx_used.toLocaleString()} / ${res.ctx.toLocaleString()} tokens`+(res.recalled?.length?` · recalled ${res.recalled.length} ${res.recalled.length==1?'memory':'memories'}`:'')+(res.dropped?` · ${res.dropped} oldest messages left out`:'');
  saveChat();draw();beep();lastAct=Date.now();
- if(U.tts)speak(hist[idx].content);
+ if(U.tts&&!ooc)speak(hist[idx].content);
  await typeMsg(idx);lastAct=Date.now();
- trackState(idx);return true}
+ if(!ooc)trackState(idx);return true}
 async function post(t,forced,nofx){const m={role:'user',content:t,ts:Date.now()};hist.push(m);beep(520,.05);nudges=0;lastAct=Date.now();draw();
  if(U.rp!='off'&&!nofx){await resolveFx(m,forced);draw()}saveChat();G?await round():await gen('reply')}
-async function send(){const t=$('#inp').value.trim();if(!t||ctl||rounding||!cur?.id||!chat)return;skipTyping();window.speechSynthesis?.cancel();
+async function send(){let t=$('#inp').value.trim();if(!t||ctl||rounding||!cur?.id||!chat)return;skipTyping();window.speechSynthesis?.cancel();
  $('#inp').value='';$('#inp').style.height='';hideMnu();
+ const o=oocRoute(t);   // out of character? (OOC button, ((text)), //text, ooc: text, /ooc /correct /setting /direct) or back in with /ic
+ if(o){if('mode' in o)return oocSet(o.mode,o.kind);if('ooc' in o)return postOoc(o.ooc,o.kind);t=o.ic}
  if(t[0]=='/'){const r=slash(t);if(r)return post(r.text,r.forced,r.nofx)}
  const f=armed;armed=null;armUI();return post(t,f)}
 

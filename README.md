@@ -51,6 +51,20 @@ Depth **Light**, **Standard** and **Deep** control how much is added to the prom
 - **Stats** - set yours under **About you** and theirs in the **Roleplay** section of the character sheet: `STR 12 DEX 14 CON 10 INT 9 WIS 11 CHA 13` plus fighting style, gear and powers.
 - **Slash commands** - `/roll 2d6+3`, `/fight Name`, `/peace`, `/rest`. Every roll has ↻ re-roll and ✕ ignore buttons.
 
+### In character and out of character (IC / OOC)
+You are both the player and the author. **IC** is what your character says and does, and the characters answer it. **OOC** is you talking to the **storyteller** (a co-author voice, not any character). The characters never hear OOC messages, and they never reach the memory or the summaries.
+
+Switch with the **IC / OOC** button next to the message box (or `Alt+O`), or send a single OOC message with `((text))`, `//text` or `ooc: text`. `/ic` goes back in character; `/ooc`, `/discuss`, `/correct`, `/setting` and `/direct` switch mode (or send one message when followed by text).
+
+| Kind | Use it to | What happens |
+| --- | --- | --- |
+| 💬 **Discuss** | Talk about the story: motives, pacing, what could happen next | The storyteller answers. Nothing in the scene changes. |
+| 🛠 **Correct** | "Mira wouldn't say that, she's shy" | A standing rule for that character (name them in a group). It overrides contradicting habits. **↻ Redo the last reply** rewrites the reply with the rule. |
+| 🌍 **Setting** | "Move the scene to the pier at sunset", "time skip to morning" | Becomes true for everyone from now on. |
+| 🎬 **Direct** | "Have a stranger knock on the window" | Steers events without touching anyone's dialogue. Used once (in the next round of replies), or always if you say "from now on". |
+
+**Auto** (default) reads which kind you meant; click the tag under a message to change it. Corrections, settings and directions are kept as **author's notes**: see, edit, make standing, or remove them in **Memory → Author's notes**. Deleting or rewinding the OOC message removes its note. Characters follow the notes silently and never mention them. **▶ Continue the scene** goes back in character with your notes applied. In **Settings → Out of character** you can make the storyteller stay silent for corrections, settings and directions.
+
 ### Share it with friends
 Run it with `--share` and others can chat with your characters from their own browser, using the model on your PC. See [Sharing](#sharing-your-ai-with-others).
 

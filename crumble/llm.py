@@ -6,6 +6,7 @@ from . import personality, recall
 from .config import CH, LLM, US
 from .prompt import build_messages, cue_text
 from .rp.narrator import NARR_ID
+from .rp.ooc import KINDS as OOC_KINDS, clean_notes, finish_ooc, ooc_messages, ooc_words
 from .textutil import THINK, finish_reply, human_gap, similar, want_words
 
 
@@ -52,15 +53,53 @@ def run_llm(msgs, samp, stop, cap, send=None):
     return txt, fin, n, time.time() - t0
 
 
+def ooc_reply(b, send):
+    """The storyteller answers out of character: discussion, or the acknowledgement of a correction, setting change or direction.
+    One short generation: no personality guard, no repetition checks, and 'assistant' talk is fine here."""
+    p, c, user, hist = b["params"], b["char"], b["user"], b["history"]
+    oo = b.get("ooc") or {}
+    kind = oo.get("kind") if oo.get("kind") in OOC_KINDS else "discuss"
+    n_ctx = LLM["n_ctx"]
+    last_user = next((m["content"] for m in reversed(hist) if m["role"] == "user" and m.get("ooc")), "")
+    lo, hi = ooc_words(last_user, p.get("length", "auto"))
+    cap = min(max(int(hi * 2.6) + 60, 160), max(256, n_ctx // 2), max(int(p.get("max_tokens", 512)), 160))
+    think = bool(p.get("think", True))
+    stop = ["\n" + user + ":", "\n" + user + " :", "\n**" + user + ":"]
+    samp = sampler(p)
+    best, used, dropped = None, 0, 0
+    for _ in range(2):
+        o = dict(group=b.get("grp"), kind=kind, notes=clean_notes(oo.get("notes")), scene=b.get("scene"), persona=b.get("persona"),
+                 summary=(b.get("state") or {}).get("summary"), words=(lo, hi), think=think)
+        msgs = ooc_messages(c, user, hist, o)
+        budget = cap + (1500 if think else 0)
+        used, dropped = fit(msgs, n_ctx - budget - 16)
+        budget = max(128, min(budget, n_ctx - used - 16))
+        raw, fin, ntoks, secs = run_llm(msgs, samp, stop, budget, send)
+        r = finish_ooc(raw, fin, user)
+        r.update(tok=ntoks, ms=int(secs * 1000), finish=fin)
+        if r["empty"]:   # thinking ate the whole budget, or nothing came back: try again without thinking
+            think = False
+            continue
+        best = r
+        break
+    if not best:
+        raise RuntimeError("The model returned an empty reply. Try again, or turn Thinking off.")
+    best.update(ctx_used=used, ctx=n_ctx, dropped=dropped, kind=kind)
+    return best
+
+
 def generate_reply(b, send):
     p, c, user, hist = b["params"], b["char"], b["user"], b["history"]
     grp = b.get("grp")
     cid = c.get("id")
     kind = b.get("kind", "reply")
+    if kind == "ooc":
+        return ooc_reply(b, send)
+    hist = [m for m in hist if not m.get("ooc")]   # out-of-character talk is never heard by the characters (the author's notes carry what matters)
     mode = p.get("mode", "story")
     n_ctx = LLM["n_ctx"]
     start = int(b.get("from") or 0)
-    turns = len(hist)
+    turns = int(b.get("turn") or len(hist))   # position in the whole chat, which out-of-character messages also count toward
     hist = hist[start:] if 0 < start < len(hist) else hist
     last_user = next((m["content"] for m in reversed(hist) if m["role"] == "user"), "")
     lo, hi = want_words(mode, p.get("length", "auto"), last_user)
@@ -75,6 +114,9 @@ def generate_reply(b, send):
     tail = None
     if kind == "continue":
         tail = "(Continue your last message from exactly where it ended. Do not repeat anything already written; add a little more and end cleanly.)"
+    elif kind == "resume":
+        tail = (f"(The author has just stepped out of the story to set things up. Carry the scene on from the latest moment, "
+                f"working in the author's notes. Write only {CH}'s next message.)")
     elif kind == "nudge":
         g = human_gap(b.get("gap_s")) or "a little while"
         tail = (f"({US} has not replied for {g}. Write {CH}'s natural follow-up, the way this person would: "
@@ -100,7 +142,8 @@ def generate_reply(b, send):
         o = dict(state=b.get("state"), persona=b.get("persona"), scene=b.get("scene"), clock=b.get("clock"),
                  gap_s=b.get("gap_s"), mode=mode, actions=p.get("actions", True), realism=p.get("realism", True),
                  natural=p.get("natural", 2), think=think, fold=p.get("fold", False), words=(lo, hi), tail=tail,
-                 retry_note=retry_note, group=grp, rp=b.get("rp"), own=own, pers=p.get("pers"), mem=p.get("mem"), recall=rc, turn=turns)
+                 retry_note=retry_note, group=grp, rp=b.get("rp"), own=own, pers=p.get("pers"), mem=p.get("mem"), recall=rc, turn=turns,
+                 ooc=clean_notes((b.get("ooc") or {}).get("notes")))
         msgs = build_messages(c, user, hist, o)
         budget = cap + (1500 if think else 0)
         used, dropped = fit(msgs, n_ctx - budget - 16)

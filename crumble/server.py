@@ -16,6 +16,7 @@ from .llm import generate_reply
 from .memory import memorize, summarize, track
 from .rp.director import PACE, plan_next
 from .rp.narrator import NARRATOR, NARR_ID
+from .rp.ooc import OOC_CHAR, clean_notes
 from .rp.resolve import rp_resolve
 from .sharing import FAILS, FWD, LOCAL, MAX_BODY, MAX_QUEUE, MYIPS, QL, QUEUE, SESS, SHARE, lan_urls, save_share
 from .storage import chat_list, cdir, get_char, get_group, group_members, load_chars, load_groups, pub, rj, wj
@@ -170,6 +171,8 @@ class H(BaseHTTPRequestHandler):
             return self.login(a, b)
         if not a["role"]:
             return self.deny(a)
+        if self.path not in ("/api/chat", "/api/chat_save") and isinstance(b.get("history"), list):   # out-of-character talk is not part of the story the memory systems read
+            b["history"] = [m for m in b["history"] if not (isinstance(m, dict) and m.get("ooc"))]
         adm, guest = a["role"] == "admin", a["role"] == "guest"
         if self.path in ("/api/load", "/api/chars", "/api/gen_char", "/api/share", "/api/groups", "/api/personality") and not adm:
             return self.deny(a)
@@ -205,7 +208,7 @@ class H(BaseHTTPRequestHandler):
                 return self.send({"err": "bad id"}, 400)
             title = b.get("title") or "New chat"
             if title == "New chat":
-                first = next((m["content"] for m in b["history"] if m["role"] == "user"), "").strip()
+                first = next((m["content"] for m in b["history"] if m["role"] == "user" and not m.get("ooc")), "").strip()
                 if first:
                     title = first.replace("\n", " ")[:40]
             cdir(cid)
@@ -293,6 +296,8 @@ class H(BaseHTTPRequestHandler):
                         if not c:
                             raise RuntimeError("Unknown character.")
                         b["char"] = c
+                    if isinstance(b.get("ooc"), dict):
+                        b["ooc"] = {"kind": b["ooc"].get("kind"), "notes": clean_notes(b["ooc"].get("notes"))}
                     if isinstance(b.get("rp"), dict):
                         b["rp"] = dict(b["rp"], fx=str(b["rp"].get("fx", ""))[:3500])
                     b["history"] = [dict(m, content=str(m.get("content", ""))[:8000]) for m in b.get("history", [])[-300:]]
@@ -304,7 +309,7 @@ class H(BaseHTTPRequestHandler):
                         raise RuntimeError("Unknown group.")
                     mem = group_members(g)
                     spk = str(b.get("speaker"))
-                    c = NARRATOR if spk == NARR_ID else next((m for m in mem if m["id"] == spk), None)
+                    c = OOC_CHAR if b.get("kind") == "ooc" else NARRATOR if spk == NARR_ID else next((m for m in mem if m["id"] == spk), None)
                     if not c:
                         raise RuntimeError("That character is not in this group.")
                     b["char"], b["grp"] = c, dict(name=g["name"], scenario=g.get("scenario", ""), members=mem, narrator=bool(g.get("narrator")))

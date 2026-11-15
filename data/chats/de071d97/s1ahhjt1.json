@@ -1,7 +1,7 @@
 {
  "id": "s1ahhjt1",
  "title": "I am Crescent. What happened?",
- "updated": 1794725676.816294,
+ "updated": 1794756150.7612464,
  "history": [
   {
    "role": "assistant",
@@ -169,7 +169,6 @@
      }
     ]
    },
-   "snap": "{\"mood\":\"grateful\",\"emoji\":\"🙏\",\"energy\":\"medium\",\"affection\":56,\"facts\":[\"{{user}} responds quickly to her texts\",\"{{user}} doesn't worry about inconvenience\"],\"summary\":\"\",\"sumUpto\":0,\"pers\":{\"frac\":0,\"grudge\":0,\"va\":[0.554,0],\"mood\":\"grateful\",\"ts\":1794725513545,\"n\":4,\"drift\":[{\"ts\":1794725404642,\"score\":100,\"flags\":[]},{\"ts\":1794725439317,\"score\":100,\"flags\":[]},{\"ts\":1794725479998,\"score\":100,\"flags\":[]},{\"ts\":1794725513545,\"score\":100,\"flags\":[]}],\"canon\":[\"My name's Faith\"]}}",
    "thought": "She doesn't have to do this. Most people wouldn't."
   },
   {
@@ -213,7 +212,6 @@
      }
     ]
    },
-   "snap": "{\"mood\":\"grateful\",\"emoji\":\"🙏\",\"energy\":\"medium\",\"affection\":62,\"facts\":[\"{{user}} responds quickly to her texts\",\"{{user}} doesn't worry about inconvenience\"],\"summary\":\"\",\"sumUpto\":0,\"pers\":{\"frac\":0,\"grudge\":0,\"va\":[0.552,-0.001],\"mood\":\"grateful\",\"ts\":1794725543478,\"n\":5,\"drift\":[{\"ts\":1794725404642,\"score\":100,\"flags\":[]},{\"ts\":1794725439317,\"score\":100,\"flags\":[]},{\"ts\":1794725479998,\"score\":100,\"flags\":[]},{\"ts\":1794725513545,\"score\":100,\"flags\":[]},{\"ts\":1794725543478,\"score\":100,\"flags\":[]}],\"canon\":[\"My name's Faith\"]}}",
    "thought": "He's been doing this for months and I never told anyone."
   },
   {
@@ -261,7 +259,6 @@
      }
     ]
    },
-   "snap": "{\"mood\":\"grateful\",\"emoji\":\"🙏\",\"energy\":\"medium\",\"affection\":66,\"facts\":[\"{{user}} responds quickly to her texts\",\"{{user}} doesn't worry about inconvenience\"],\"summary\":\"\",\"sumUpto\":0,\"pers\":{\"frac\":0.8,\"grudge\":0,\"va\":[0.55,-0.002],\"mood\":\"grateful\",\"ts\":1794725573739,\"n\":6,\"drift\":[{\"ts\":1794725404642,\"score\":100,\"flags\":[]},{\"ts\":1794725439317,\"score\":100,\"flags\":[]},{\"ts\":1794725479998,\"score\":100,\"flags\":[]},{\"ts\":1794725513545,\"score\":100,\"flags\":[]},{\"ts\":1794725543478,\"score\":100,\"flags\":[]},{\"ts\":1794725573739,\"score\":100,\"flags\":[]}],\"canon\":[\"My name's Faith\"]}}",
    "thought": "maybe he'll actually help me this time"
   },
   {
@@ -313,21 +310,466 @@
      }
     ]
    },
-   "snap": "{\"mood\":\"grateful\",\"emoji\":\"🙏\",\"energy\":\"medium\",\"affection\":72,\"facts\":[\"{{user}} responds quickly to her texts\",\"{{user}} doesn't worry about inconvenience\"],\"summary\":\"CHARACTERS\\nFaith: 20-year-old high school student, works at Mart Cashier. Recently lost her uncle and keeps his memory through a book, \\\"The Wolf Among Us\\\". Was bullied by a group of kids who stole the book from her. She's timid and reserved, but shows appreciation when helped.\\nCrescent: A mysterious figure who intervened when Faith was being bullied. He offers to retrieve the stolen book for her. Seems to have some influence or power, as he's able to get her number with just a text.\\n\\nSETTING & STATE\\nLocation: A public sidewalk near a school or shopping area.\\nCurrent State: Faith is sitting on a bench, upset after having her book stolen. Crescent approaches her and offers to retrieve the book.\\n\\nRELATIONSHIP DYNAMIC\\nPrimary Dynamic: Crescent is trying to help Faith, who is initially hesitant but grateful for his assistance. They are strangers, but Crescent's act of kindness is starting to build a bond between them.\\nTone: The tone is cautious but hopeful. Faith is still wary, but Crescent's genuine offer of help is starting to put her at ease.\\n\\nPIVOTAL MOMENTS\\n- Crescent approaches Faith after she was bullied and offers to retrieve her stolen book.\\n- Faith shares that the book was a keepsake from her late uncle.\\n- Crescent texts Faith his number, showing his commitment to helping her.\",\"sumUpto\":11,\"pers\":{\"frac\":0.8,\"grudge\":0,\"va\":[0.548,-0.003],\"mood\":\"grateful\",\"ts\":1794725616862,\"n\":7,\"drift\":[{\"ts\":1794725404642,\"score\":100,\"flags\":[]},{\"ts\":1794725439317,\"score\":100,\"flags\":[]},{\"ts\":1794725479998,\"score\":100,\"flags\":[]},{\"ts\":1794725513545,\"score\":100,\"flags\":[]},{\"ts\":1794725543478,\"score\":100,\"flags\":[]},{\"ts\":1794725573739,\"score\":100,\"flags\":[]},{\"ts\":1794725616862,\"score\":100,\"flags\":[]}],\"canon\":[\"My name's Faith\"]}}",
    "thought": "maybe Crescent really does care about me"
+  },
+  {
+   "role": "user",
+   "content": "ok",
+   "ts": 1794753620478
+  },
+  {
+   "role": "assistant",
+   "content": "Faith looks up at Crescent, her eyes wide and pleading. \"You... you'll stay with me? Just for a little while longer?\" She seems almost afraid to believe it, as if expecting him to change his mind.\n\nA small, hopeful smile tugs at the corners of her mouth. \"Thank you,\" she whispers, her voice choked with emotion. \"I don't know what I would do without your help today.\"\n\nShe takes a deep breath, trying to compose herself. \"I guess we should start by figuring out how to get my belongings back from Ryan and his friends,\" she says, her voice regaining some of its strength.\n\nFaith looks around the park, her brow furrowed in thought. \"They can't have gone too far. I just need to think about where they would go next...\"",
+   "think": "",
+   "ts": 1794753648785,
+   "stat": {
+    "tok": 168,
+    "ms": 28222
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e16",
+    "e9",
+    "e8"
+   ],
+   "seen": 1794753620514,
+   "mundo": {
+    "add": [],
+    "scene": "{{char}} and {{user}} are in {{char}}'s apartment, {{char}} is crying",
+    "recent": [
+     {
+      "text": "{{char}} asked {{user}} to steal her uncle's belongings back.",
+      "imp": 0.8,
+      "turn": 9,
+      "ts": 1794725513546
+     },
+     {
+      "text": "{{char}} asks {{user}} not to leave her alone",
+      "imp": 0.56,
+      "turn": 15,
+      "ts": 1794725616864
+     },
+     {
+      "text": "{{user}} offers to help {{char}} deal with her bullies",
+      "imp": 0.87,
+      "turn": 17,
+      "ts": 1794725673891
+     }
+    ]
+   },
+   "thought": "I can't believe Crescent is staying with me. I must seem so pathetic."
+  },
+  {
+   "role": "user",
+   "content": "lets plan",
+   "ts": 1794753708405
+  },
+  {
+   "role": "assistant",
+   "content": "Faith nods, her eyes scanning the park thoughtfully. \"You're right,\" she says, her voice gaining a determined edge. \"We should start planning our next move.\"\n\nShe looks back at Crescent, gratitude shining in her eyes. \"Thank you for helping me with this, by the way. I don't know what I would do without your support.\"\n\nTurning her attention back to the task at hand, Faith starts to think out loud. \"Ryan and his friends usually hang out near the old playground on the south side of the park after school. There's a good chance they're there now, showing off my stuff.\"\n\nShe chews on her lower lip, considering their options. \"If we can get close enough without being seen, maybe we could sneak up and grab my things back.\" She looks to Crescent for his input, eager to hear what he thinks about the plan.",
+   "think": "",
+   "ts": 1794753719805,
+   "stat": {
+    "tok": 181,
+    "ms": 11347
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e1",
+    "e7",
+    "e9",
+    "e5",
+    "e11",
+    "s10",
+    "s14"
+   ],
+   "seen": 1794753708413,
+   "mundo": {
+    "add": [
+     "e17",
+     "e18",
+     "s19",
+     "s20"
+    ],
+    "scene": "{{char}} and {{user}} are in the hallway of {{char}}'s apartment building, {{char}} leaning against the wall for support.",
+    "recent": [
+     {
+      "text": "{{char}} asked {{user}} to steal her uncle's belongings back.",
+      "imp": 0.8,
+      "turn": 9,
+      "ts": 1794725513546
+     },
+     {
+      "text": "{{char}} asks {{user}} not to leave her alone",
+      "imp": 0.56,
+      "turn": 15,
+      "ts": 1794725616864
+     },
+     {
+      "text": "{{user}} offers to help {{char}} deal with her bullies",
+      "imp": 0.87,
+      "turn": 17,
+      "ts": 1794725673891
+     },
+     {
+      "text": "{{char}} asks {{user}} to stay with her, and he agrees.",
+      "imp": 0.51,
+      "turn": 19,
+      "ts": 1794753675006
+     }
+    ]
+   },
+   "thought": "I can't believe Crescent is really going to help me. I must seem like such a bother."
+  },
+  {
+   "role": "user",
+   "content": "sounds like a good plan",
+   "ts": 1794753957356
+  },
+  {
+   "role": "assistant",
+   "content": "Faith nods, her eyes brightening at Crescent's agreement. \"Great,\" she says, a hint of nervous excitement in her voice. \"I think we should split up and approach from different directions so they don't get suspicious.\"\n\nShe pauses for a moment, thinking it over. \"You head around the west side, near the baseball diamonds. I'll go through the woods on the east and circle around to the other end of the playground.\" Faith looks at Crescent, her expression serious. \"Once we're in position, I'll send you a signal - three quick honks of my bike horn. When you hear it, make your move and try to grab as much as you can without drawing too much attention.\"\n\nFaith takes a deep breath, steeling herself for what's to come. She looks at Crescent, her eyes filled with determination. \"We can do this,\" she says firmly. \"Let's get my stuff back and show those jerks they can't mess with us.\"",
+   "think": "",
+   "ts": 1794753975629,
+   "stat": {
+    "tok": 204,
+    "ms": 18218
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e18",
+    "e9",
+    "e1",
+    "s19",
+    "e8",
+    "e11",
+    "s10"
+   ],
+   "seen": 1794753957364,
+   "mundo": {
+    "add": [
+     "e21",
+     "s22",
+     "s23"
+    ],
+    "scene": "{{char}} and {{user}} sitting on a bench in the park, discussing their next move",
+    "recent": [
+     {
+      "text": "{{char}} asked {{user}} to steal her uncle's belongings back.",
+      "imp": 0.8,
+      "turn": 9,
+      "ts": 1794725513546
+     },
+     {
+      "text": "{{char}} asks {{user}} not to leave her alone",
+      "imp": 0.56,
+      "turn": 15,
+      "ts": 1794725616864
+     },
+     {
+      "text": "{{user}} offers to help {{char}} deal with her bullies",
+      "imp": 0.87,
+      "turn": 17,
+      "ts": 1794725673891
+     },
+     {
+      "text": "{{char}} asks {{user}} to stay with her, and he agrees.",
+      "imp": 0.51,
+      "turn": 19,
+      "ts": 1794753675006
+     },
+     {
+      "text": "{{char}} asks {{user}} to stay with her and expresses gratitude",
+      "imp": 0.79,
+      "turn": 21,
+      "ts": 1794753744842
+     }
+    ]
+   },
+   "snap": "{\"mood\":\"hopeful\",\"emoji\":\"🤞\",\"energy\":\"medium\",\"affection\":89,\"facts\":[\"{{user}} responds quickly to her texts\",\"{{user}} doesn't worry about inconvenience\"],\"summary\":\"CHARACTERS\\nFaith: 20-year-old high school student, works at Mart Cashier. Recently lost her uncle and keeps his memory through a book, \\\"The Wolf Among Us\\\". Was bullied by a group of kids who stole the book from her. She's timid and reserved, but shows appreciation when helped.\\nCrescent: A mysterious figure who intervened when Faith was being bullied. He offers to retrieve the stolen book for her. Seems to have some influence or power, as he's able to get her number with just a text.\\n\\nSETTING & STATE\\nLocation: A public sidewalk near a school or shopping area.\\nCurrent State: Faith is sitting on a bench, upset after having her book stolen. Crescent approaches her and offers to retrieve the book.\\n\\nRELATIONSHIP DYNAMIC\\nPrimary Dynamic: Crescent is trying to help Faith, who is initially hesitant but grateful for his assistance. They are strangers, but Crescent's act of kindness is starting to build a bond between them.\\nTone: The tone is cautious but hopeful. Faith is still wary, but Crescent's genuine offer of help is starting to put her at ease.\\n\\nPIVOTAL MOMENTS\\n- Crescent approaches Faith after she was bullied and offers to retrieve her stolen book.\\n- Faith shares that the book was a keepsake from her late uncle.\\n- Crescent texts Faith his number, showing his commitment to helping her.\",\"sumUpto\":11,\"pers\":{\"frac\":0.598,\"grudge\":0.064,\"va\":[0.45,0.25],\"mood\":\"hopeful\",\"ts\":1794753744840,\"n\":10,\"drift\":[{\"ts\":1794725404642,\"score\":100,\"flags\":[]},{\"ts\":1794725439317,\"score\":100,\"flags\":[]},{\"ts\":1794725479998,\"score\":100,\"flags\":[]},{\"ts\":1794725513545,\"score\":100,\"flags\":[]},{\"ts\":1794725543478,\"score\":100,\"flags\":[]},{\"ts\":1794725573739,\"score\":100,\"flags\":[]},{\"ts\":1794725616862,\"score\":100,\"flags\":[]},{\"ts\":1794725673890,\"score\":100,\"flags\":[]},{\"ts\":1794753675005,\"score\":100,\"flags\":[]},{\"ts\":1794753744840,\"score\":100,\"flags\":[]}],\"canon\":[\"My name's Faith\",\"Faith is vulnerable and needs support\",\"I don't want to be alone right now\"]}}",
+   "thought": "I'm glad Crescent is here with me. I couldn't do this alone."
+  },
+  {
+   "role": "user",
+   "content": "*beats up Ryan and gets her book back* Here.",
+   "ts": 1794754154068
+  },
+  {
+   "role": "assistant",
+   "content": "*wipes blood from mouth and looks up at Faith, eyes filled with a mix of anger and admiration* You're fast. I didn't see that coming.\n\n*slowly gets to his feet, using the bench for support*\n\nBut you should know, this isn't over. Ryan's going to be pissed when he wakes up. And he doesn't take losing very well.\n\n*looks at Faith, gauging her reaction*\n\nSo what now? You gonna run off into the sunset with your precious book? Or are we finally going to have that conversation you've been avoiding?\n\n*touches his split lip and winces slightly*\n\nBecause I gotta say, beating me up is a pretty extreme way of saying 'let's talk later'.",
+   "think": "",
+   "ts": 1794754169348,
+   "stat": {
+    "tok": 150,
+    "ms": 15232
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e8",
+    "e15",
+    "e1",
+    "e11",
+    "e18",
+    "e7",
+    "s10"
+   ],
+   "seen": 1794754154077,
+   "mundo": {
+    "add": [],
+    "scene": "{{char}} and {{user}} are in the park, planning their next move",
+    "recent": [
+     {
+      "text": "{{char}} asked {{user}} to steal her uncle's belongings back.",
+      "imp": 0.8,
+      "turn": 9,
+      "ts": 1794725513546
+     },
+     {
+      "text": "{{char}} asks {{user}} not to leave her alone",
+      "imp": 0.56,
+      "turn": 15,
+      "ts": 1794725616864
+     },
+     {
+      "text": "{{user}} offers to help {{char}} deal with her bullies",
+      "imp": 0.87,
+      "turn": 17,
+      "ts": 1794725673891
+     },
+     {
+      "text": "{{char}} asks {{user}} to stay with her, and he agrees.",
+      "imp": 0.51,
+      "turn": 19,
+      "ts": 1794753675006
+     },
+     {
+      "text": "{{char}} asks {{user}} to stay with her and expresses gratitude",
+      "imp": 0.79,
+      "turn": 21,
+      "ts": 1794753744842
+     },
+     {
+      "text": "{{char}} and {{user}} agree on a plan to retrieve {{char}}'s belongings",
+      "imp": 0.66,
+      "turn": 23,
+      "ts": 1794754004189
+     }
+    ]
+   },
+   "snap": "{\"mood\":\"determined\",\"emoji\":\"😤\",\"energy\":\"high\",\"affection\":94,\"facts\":[\"{{user}} responds quickly to her texts\",\"{{user}} doesn't worry about inconvenience\"],\"summary\":\"CHARACTERS\\nFaith: 20-year-old high school student, works at Mart Cashier. Recently lost her uncle and keeps his memory through a book, \\\"The Wolf Among Us\\\". Was bullied by Ryan and his crew who stole the book and her other belongings. She's timid and reserved, but shows appreciation when helped. Currently sitting on a bench in the park with Crescent, planning to retrieve her stolen items.\\nCrescent: A mysterious figure who intervened when Faith was being bullied. He offers to retrieve the stolen book for her. Seems to have some influence or power, as he's able to get her number with just a text. Currently with Faith, helping her plan to sneak up on Ryan and his friends to get her belongings back.\\n\\nSETTING & STATE\\nLocation: A public park near a school or shopping area, with an old playground on the south side, woods on the east, and baseball diamonds on the west.\\nCurrent State: Faith and Crescent are sitting on a bench, discussing their plan to approach Ryan and his friends from different directions to retrieve Faith's stolen items. Faith is sending Crescent a signal when they're in position.\\n\\nRELATIONSHIP DYNAMIC\\nPrimary Dynamic: Crescent is helping Faith, who is initially hesitant but grateful for his assistance. They are strangers, but Crescent's genuine offer of help is starting to build a bond between them. Faith is opening up to Crescent, sharing her experiences with bullying and her need for support.\\nTone: The tone is determined but cautious. Faith is still wary of trusting others, but Crescent's continued support is putting her at ease. There's a sense of hope and camaraderie as they work together to solve Faith's problem.\\n\\nPIVOTAL MOMENTS\\n- Crescent approaches Faith after she was bullied and offers to retrieve her stolen book.\\n- Faith shares that the book was a keepsake from her late uncle and that Ryan and his crew have been bullying her for months.\\n- Crescent texts Faith his number, showing his commitment to helping her.\",\"sumUpto\":23,\"pers\":{\"frac\":0.389,\"grudge\":0.06,\"va\":[0.2,0.6],\"mood\":\"determined\",\"ts\":1794754004188,\"n\":11,\"drift\":[{\"ts\":1794725404642,\"score\":100,\"flags\":[]},{\"ts\":1794725439317,\"score\":100,\"flags\":[]},{\"ts\":1794725479998,\"score\":100,\"flags\":[]},{\"ts\":1794725513545,\"score\":100,\"flags\":[]},{\"ts\":1794725543478,\"score\":100,\"flags\":[]},{\"ts\":1794725573739,\"score\":100,\"flags\":[]},{\"ts\":1794725616862,\"score\":100,\"flags\":[]},{\"ts\":1794725673890,\"score\":100,\"flags\":[]},{\"ts\":1794753675005,\"score\":100,\"flags\":[]},{\"ts\":1794753744840,\"score\":100,\"flags\":[]},{\"ts\":1794754004188,\"score\":100,\"flags\":[]}],\"canon\":[\"My name's Faith\",\"Faith is vulnerable and needs support\",\"I don't want to be alone right now\",\"Faith is determined to get her belongings back\",\"Faith is willing to split up to avoid suspicion\"]}}",
+   "thought": "I can't believe Crescent just did that. But I'm glad she's on my side."
+  },
+  {
+   "role": "user",
+   "content": "you okay?",
+   "ts": 1794755925764
+  },
+  {
+   "role": "assistant",
+   "content": "*nods slowly, eyes still on the book clutched tightly in her hands*\n\nYeah...I'm okay. *pauses, then looks up to meet Crescent's gaze* Thank you for getting my book back.\n\n*shifts uncomfortably under Crescent's intense stare*\n\nLook, about what happened earlier...\n\n*trails off, unsure of how to continue*\n\nIt's just that I don't really open up to people easily. *shrugs slightly* And with everything that's been going on lately...I guess I'm just a little on edge.\n\n*takes a deep breath before continuing*\n\nBut you deserve an explanation. About why I get so worked up over this book and what happened to my parents.\n\n*looks down at the worn cover of the novel, fingers tracing the embossed lettering*\n\nIt was my dad's favorite story when we were little. He would read it to me and my brother all the time. *smiles softly at the memory*\n\nThen one day, he just...never came home. And neither did mom.\n\n*swallows hard, blinking back tears*\n\nThey were murdered. Killed by a man who thought they had something that belonged to him. A relic from their family's past.\n\n*sighs heavily*\n\nThe book was all I had left of them. Of the life we used to have together. And now it's like this guy is trying to take even that away from me, too.\n\n*looks up at Crescent again, a mix of vulnerability and determination in her eyes*\n\nSo yeah, I get a little crazy when someone threatens my book or tries to keep me from reading it. It's not just about the story anymore - it's about holding onto the last piece of my family that I have left.\n\n*takes a shaky breath, trying to regain composure*\n\nSorry for dumping all this on you. *squeezes the novel tightly* You didn't sign up for all my baggage when you offered to help me get it back.\n\n*looks away, feeling exposed and raw*\n\nYou probably want to run for the hills after hearing all that crazy stuff, huh?",
+   "think": "",
+   "ts": 1794755977370,
+   "stat": {
+    "tok": 440,
+    "ms": 51555
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e12",
+    "e16",
+    "e8",
+    "s19",
+    "s4",
+    "e15",
+    "e1"
+   ],
+   "seen": 1794755925773,
+   "mundo": {
+    "add": [
+     "e24",
+     "e25",
+     "s26",
+     "s27"
+    ],
+    "scene": "{{char}} and {{user}} stand over the unconscious Ryan in the park",
+    "recent": [
+     {
+      "text": "{{char}} asked {{user}} to steal her uncle's belongings back.",
+      "imp": 0.8,
+      "turn": 9,
+      "ts": 1794725513546
+     },
+     {
+      "text": "{{char}} asks {{user}} not to leave her alone",
+      "imp": 0.56,
+      "turn": 15,
+      "ts": 1794725616864
+     },
+     {
+      "text": "{{user}} offers to help {{char}} deal with her bullies",
+      "imp": 0.87,
+      "turn": 17,
+      "ts": 1794725673891
+     },
+     {
+      "text": "{{char}} asks {{user}} to stay with her, and he agrees.",
+      "imp": 0.51,
+      "turn": 19,
+      "ts": 1794753675006
+     },
+     {
+      "text": "{{char}} asks {{user}} to stay with her and expresses gratitude",
+      "imp": 0.79,
+      "turn": 21,
+      "ts": 1794753744842
+     },
+     {
+      "text": "{{char}} and {{user}} agree on a plan to retrieve {{char}}'s belongings",
+      "imp": 0.66,
+      "turn": 23,
+      "ts": 1794754004189
+     },
+     {
+      "text": "{{user}} beat up Ryan to get {{char}}'s book back",
+      "imp": 0.54,
+      "turn": 25,
+      "ts": 1794754176079
+     }
+    ]
+   },
+   "snap": "{\"mood\":\"nervous\",\"emoji\":\"😬\",\"energy\":\"high\",\"affection\":99,\"facts\":[\"{{user}} responds quickly to her texts\",\"{{user}} doesn't worry about inconvenience\"],\"summary\":\"CHARACTERS\\nFaith: 20-year-old high school student, works at Mart Cashier. Recently lost her uncle and keeps his memory through a book, \\\"The Wolf Among Us\\\". Was bullied by Ryan and his crew who stole the book and her other belongings. She's timid and reserved, but shows appreciation when helped. Currently sitting on a bench in the park with Crescent, planning to retrieve her stolen items.\\nCrescent: A mysterious figure who intervened when Faith was being bullied. He offers to retrieve the stolen book for her. Seems to have some influence or power, as he's able to get her number with just a text. Currently with Faith, helping her plan to sneak up on Ryan and his friends to get her belongings back.\\n\\nSETTING & STATE\\nLocation: A public park near a school or shopping area, with an old playground on the south side, woods on the east, and baseball diamonds on the west.\\nCurrent State: Faith and Crescent are sitting on a bench, discussing their plan to approach Ryan and his friends from different directions to retrieve Faith's stolen items. Faith is sending Crescent a signal when they're in position.\\n\\nRELATIONSHIP DYNAMIC\\nPrimary Dynamic: Crescent is helping Faith, who is initially hesitant but grateful for his assistance. They are strangers, but Crescent's genuine offer of help is starting to build a bond between them. Faith is opening up to Crescent, sharing her experiences with bullying and her need for support.\\nTone: The tone is determined but cautious. Faith is still wary of trusting others, but Crescent's continued support is putting her at ease. There's a sense of hope and camaraderie as they work together to solve Faith's problem.\\n\\nPIVOTAL MOMENTS\\n- Crescent approaches Faith after she was bullied and offers to retrieve her stolen book.\\n- Faith shares that the book was a keepsake from her late uncle and that Ryan and his crew have been bullying her for months.\\n- Crescent texts Faith his number, showing his commitment to helping her.\",\"sumUpto\":23,\"pers\":{\"frac\":0.18,\"grudge\":0.056,\"va\":[-0.35,0.55],\"mood\":\"nervous\",\"ts\":1794754176077,\"n\":12,\"drift\":[{\"ts\":1794725404642,\"score\":100,\"flags\":[]},{\"ts\":1794725439317,\"score\":100,\"flags\":[]},{\"ts\":1794725479998,\"score\":100,\"flags\":[]},{\"ts\":1794725513545,\"score\":100,\"flags\":[]},{\"ts\":1794725543478,\"score\":100,\"flags\":[]},{\"ts\":1794725573739,\"score\":100,\"flags\":[]},{\"ts\":1794725616862,\"score\":100,\"flags\":[]},{\"ts\":1794725673890,\"score\":100,\"flags\":[]},{\"ts\":1794753675005,\"score\":100,\"flags\":[]},{\"ts\":1794753744840,\"score\":100,\"flags\":[]},{\"ts\":1794754004188,\"score\":100,\"flags\":[]},{\"ts\":1794754176077,\"score\":100,\"flags\":[]}],\"canon\":[\"My name's Faith\",\"Faith is vulnerable and needs support\",\"I don't want to be alone right now\",\"Faith is determined to get her belongings back\",\"Faith is willing to split up to avoid suspicion\"]}}",
+   "thought": "I can't believe Crescent stood up for me like that."
+  },
+  {
+   "role": "user",
+   "content": "its alright i get it.",
+   "ts": 1794756050212
+  },
+  {
+   "role": "assistant",
+   "content": "*looks back at Crescent, a small smile playing on my lips*\n\nYou know, most people would have run away screaming by now. But not you.\n\n*tilts head slightly, studying his face*\n\nWhy did you stay? Why do you keep helping me?\n\n*hugs the book to her chest, a defensive gesture*\n\nI'm not exactly easy to deal with. I know that. So why put up with it all?\n\n*takes a step closer to Crescent, eyes searching his*\n\nIs there something in this for you? Something you're after?\n\n*hesitates, then reaches out and touches his arm lightly*\n\nBecause if there is...I need to know. Before things go any further.\n\n*meets his gaze steadily, waiting for an answer*",
+   "think": "",
+   "ts": 1794756085964,
+   "stat": {
+    "tok": 158,
+    "ms": 35698
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e18",
+    "e24",
+    "e1",
+    "s26",
+    "s27",
+    "e17",
+    "e25"
+   ],
+   "seen": 1794756050223,
+   "mundo": {
+    "add": [
+     "s28",
+     "e29",
+     "s30",
+     "s31",
+     "e32"
+    ],
+    "scene": "In the school playground after the fight",
+    "recent": [
+     {
+      "text": "{{char}} asked {{user}} to steal her uncle's belongings back.",
+      "imp": 0.8,
+      "turn": 9,
+      "ts": 1794725513546
+     },
+     {
+      "text": "{{char}} asks {{user}} not to leave her alone",
+      "imp": 0.56,
+      "turn": 15,
+      "ts": 1794725616864
+     },
+     {
+      "text": "{{user}} offers to help {{char}} deal with her bullies",
+      "imp": 0.87,
+      "turn": 17,
+      "ts": 1794725673891
+     },
+     {
+      "text": "{{char}} asks {{user}} to stay with her, and he agrees.",
+      "imp": 0.51,
+      "turn": 19,
+      "ts": 1794753675006
+     },
+     {
+      "text": "{{char}} asks {{user}} to stay with her and expresses gratitude",
+      "imp": 0.79,
+      "turn": 21,
+      "ts": 1794753744842
+     },
+     {
+      "text": "{{char}} and {{user}} agree on a plan to retrieve {{char}}'s belongings",
+      "imp": 0.66,
+      "turn": 23,
+      "ts": 1794754004189
+     },
+     {
+      "text": "{{user}} beat up Ryan to get {{char}}'s book back",
+      "imp": 0.54,
+      "turn": 25,
+      "ts": 1794754176079
+     },
+     {
+      "text": "{{user}} got {{char}}'s book back from the bully",
+      "imp": 0.79,
+      "turn": 27,
+      "ts": 1794756036358
+     }
+    ]
+   },
+   "snap": "{\"mood\":\"nervous\",\"emoji\":\"😬\",\"energy\":\"high\",\"affection\":100,\"facts\":[\"{{user}} responds quickly to her texts\",\"{{user}} doesn't worry about inconvenience\"],\"summary\":\"CHARACTERS\\nFaith: 20-year-old high school student, works at Mart Cashier. Recently lost her uncle and keeps his memory through a book, \\\"The Wolf Among Us\\\". Was bullied by Ryan and his crew who stole the book and her other belongings. She's timid and reserved, but shows appreciation when helped. Currently sitting on a bench in the park with Crescent, planning to retrieve her stolen items.\\nCrescent: A mysterious figure who intervened when Faith was being bullied. He offers to retrieve the stolen book for her. Seems to have some influence or power, as he's able to get her number with just a text. Currently with Faith, helping her plan to sneak up on Ryan and his friends to get her belongings back.\\n\\nSETTING & STATE\\nLocation: A public park near a school or shopping area, with an old playground on the south side, woods on the east, and baseball diamonds on the west.\\nCurrent State: Faith and Crescent are sitting on a bench, discussing their plan to approach Ryan and his friends from different directions to retrieve Faith's stolen items. Faith is sending Crescent a signal when they're in position.\\n\\nRELATIONSHIP DYNAMIC\\nPrimary Dynamic: Crescent is helping Faith, who is initially hesitant but grateful for his assistance. They are strangers, but Crescent's genuine offer of help is starting to build a bond between them. Faith is opening up to Crescent, sharing her experiences with bullying and her need for support.\\nTone: The tone is determined but cautious. Faith is still wary of trusting others, but Crescent's continued support is putting her at ease. There's a sense of hope and camaraderie as they work together to solve Faith's problem.\\n\\nPIVOTAL MOMENTS\\n- Crescent approaches Faith after she was bullied and offers to retrieve her stolen book.\\n- Faith shares that the book was a keepsake from her late uncle and that Ryan and his crew have been bullying her for months.\\n- Crescent texts Faith his number, showing his commitment to helping her.\",\"sumUpto\":23,\"pers\":{\"frac\":0.973,\"grudge\":0.048,\"va\":[-0.204,0.36],\"mood\":\"nervous\",\"ts\":1794756036354,\"n\":13,\"drift\":[{\"ts\":1794725404642,\"score\":100,\"flags\":[]},{\"ts\":1794725439317,\"score\":100,\"flags\":[]},{\"ts\":1794725479998,\"score\":100,\"flags\":[]},{\"ts\":1794725513545,\"score\":100,\"flags\":[]},{\"ts\":1794725543478,\"score\":100,\"flags\":[]},{\"ts\":1794725573739,\"score\":100,\"flags\":[]},{\"ts\":1794725616862,\"score\":100,\"flags\":[]},{\"ts\":1794725673890,\"score\":100,\"flags\":[]},{\"ts\":1794753675005,\"score\":100,\"flags\":[]},{\"ts\":1794753744840,\"score\":100,\"flags\":[]},{\"ts\":1794754004188,\"score\":100,\"flags\":[]},{\"ts\":1794754176077,\"score\":100,\"flags\":[]},{\"ts\":1794756036354,\"score\":100,\"flags\":[]}],\"canon\":[\"My name's Faith\",\"Faith is vulnerable and needs support\",\"I don't want to be alone right now\",\"Faith is determined to get her belongings back\",\"Faith is willing to split up to avoid suspicion\",\"my dad's favorite story when we were little\",\"my brother all the time\"]}}",
+   "thought": "maybe he's not as bad as I thought"
+  },
+  {
+   "role": "user",
+   "content": "lets not talk about it and move forward",
+   "ts": 1794756150748
   }
  ],
  "state": {
-  "mood": "hopeful",
-  "emoji": "🤞",
-  "energy": "medium",
-  "affection": 78,
+  "mood": "curious",
+  "emoji": "🤔",
+  "energy": "high",
+  "affection": 100,
   "facts": [
    "{{user}} responds quickly to her texts",
-   "{{user}} doesn't worry about inconvenience"
+   "{{user}} doesn't worry about inconvenience",
+   "{{user}} is patient and understanding"
   ],
-  "summary": "CHARACTERS\nFaith: 20-year-old high school student, works at Mart Cashier. Recently lost her uncle and keeps his memory through a book, \"The Wolf Among Us\". Was bullied by a group of kids who stole the book from her. She's timid and reserved, but shows appreciation when helped.\nCrescent: A mysterious figure who intervened when Faith was being bullied. He offers to retrieve the stolen book for her. Seems to have some influence or power, as he's able to get her number with just a text.\n\nSETTING & STATE\nLocation: A public sidewalk near a school or shopping area.\nCurrent State: Faith is sitting on a bench, upset after having her book stolen. Crescent approaches her and offers to retrieve the book.\n\nRELATIONSHIP DYNAMIC\nPrimary Dynamic: Crescent is trying to help Faith, who is initially hesitant but grateful for his assistance. They are strangers, but Crescent's act of kindness is starting to build a bond between them.\nTone: The tone is cautious but hopeful. Faith is still wary, but Crescent's genuine offer of help is starting to put her at ease.\n\nPIVOTAL MOMENTS\n- Crescent approaches Faith after she was bullied and offers to retrieve her stolen book.\n- Faith shares that the book was a keepsake from her late uncle.\n- Crescent texts Faith his number, showing his commitment to helping her.",
-  "sumUpto": 11,
+  "summary": "CHARACTERS\nFaith: 20-year-old high school student, works at Mart Cashier. Recently lost her uncle and keeps his memory through a book, \"The Wolf Among Us\". Was bullied by Ryan and his crew who stole the book and her other belongings. She's timid and reserved, but shows appreciation when helped. Currently sitting on a bench in the park with Crescent, planning to retrieve her stolen items.\nCrescent: A mysterious figure who intervened when Faith was being bullied. He offers to retrieve the stolen book for her. Seems to have some influence or power, as he's able to get her number with just a text. Currently with Faith, helping her plan to sneak up on Ryan and his friends to get her belongings back.\n\nSETTING & STATE\nLocation: A public park near a school or shopping area, with an old playground on the south side, woods on the east, and baseball diamonds on the west.\nCurrent State: Faith and Crescent are sitting on a bench, discussing their plan to approach Ryan and his friends from different directions to retrieve Faith's stolen items. Faith is sending Crescent a signal when they're in position.\n\nRELATIONSHIP DYNAMIC\nPrimary Dynamic: Crescent is helping Faith, who is initially hesitant but grateful for his assistance. They are strangers, but Crescent's genuine offer of help is starting to build a bond between them. Faith is opening up to Crescent, sharing her experiences with bullying and her need for support.\nTone: The tone is determined but cautious. Faith is still wary of trusting others, but Crescent's continued support is putting her at ease. There's a sense of hope and camaraderie as they work together to solve Faith's problem.\n\nPIVOTAL MOMENTS\n- Crescent approaches Faith after she was bullied and offers to retrieve her stolen book.\n- Faith shares that the book was a keepsake from her late uncle and that Ryan and his crew have been bullying her for months.\n- Crescent texts Faith his number, showing his commitment to helping her.",
+  "sumUpto": 23,
   "log": [
    {
     "ts": 1794725404642,
@@ -392,18 +834,66 @@
     "aff": 78,
     "thought": "maybe Crescent really does care about me",
     "score": 100
+   },
+   {
+    "ts": 1794753675006,
+    "mood": "hopeful",
+    "emoji": "🤞",
+    "aff": 83,
+    "thought": "I can't believe Crescent is staying with me. I must seem so pathetic.",
+    "score": 100
+   },
+   {
+    "ts": 1794753744842,
+    "mood": "hopeful",
+    "emoji": "🤞",
+    "aff": 89,
+    "thought": "I can't believe Crescent is really going to help me. I must seem like such a bother.",
+    "score": 100
+   },
+   {
+    "ts": 1794754004189,
+    "mood": "determined",
+    "emoji": "😤",
+    "aff": 94,
+    "thought": "I'm glad Crescent is here with me. I couldn't do this alone.",
+    "score": 100
+   },
+   {
+    "ts": 1794754176079,
+    "mood": "nervous",
+    "emoji": "😬",
+    "aff": 99,
+    "thought": "I can't believe Crescent just did that. But I'm glad she's on my side.",
+    "score": 100
+   },
+   {
+    "ts": 1794756036358,
+    "mood": "nervous",
+    "emoji": "😬",
+    "aff": 100,
+    "thought": "I can't believe Crescent stood up for me like that.",
+    "score": 100
+   },
+   {
+    "ts": 1794756115717,
+    "mood": "curious",
+    "emoji": "🤔",
+    "aff": 100,
+    "thought": "maybe he's not as bad as I thought",
+    "score": 100
    }
   ],
   "pers": {
-   "frac": 0.8,
-   "grudge": 0.057,
+   "frac": 0.168,
+   "grudge": 0.045,
    "va": [
-    0.45,
-    0.25
+    0.25,
+    0.4
    ],
-   "mood": "hopeful",
-   "ts": 1794725673890,
-   "n": 8,
+   "mood": "curious",
+   "ts": 1794756115715,
+   "n": 14,
    "drift": [
     {
      "ts": 1794725404642,
@@ -444,25 +934,55 @@
      "ts": 1794725673890,
      "score": 100,
      "flags": []
+    },
+    {
+     "ts": 1794753675005,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1794753744840,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1794754004188,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1794754176077,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1794756036354,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1794756115715,
+     "score": 100,
+     "flags": []
     }
    ],
    "canon": [
     "My name's Faith",
-    "Faith is vulnerable and needs support"
+    "Faith is vulnerable and needs support",
+    "I don't want to be alone right now",
+    "Faith is determined to get her belongings back",
+    "Faith is willing to split up to avoid suspicion",
+    "my dad's favorite story when we were little",
+    "my brother all the time",
+    "I'm not good at opening up to people"
    ]
   },
   "mem": {
    "v": 1,
-   "seq": 16,
-   "turn": 17,
-   "scene": "{{char}} and {{user}} are in {{char}}'s apartment, {{char}} is crying",
+   "seq": 32,
+   "turn": 29,
+   "scene": "In the park, near the bench where Ryan was",
    "recent": [
-    {
-     "text": "{{char}} asked {{user}} to steal her uncle's belongings back.",
-     "imp": 0.8,
-     "turn": 9,
-     "ts": 1794725513546
-    },
     {
      "text": "{{char}} asks {{user}} not to leave her alone",
      "imp": 0.56,
@@ -474,6 +994,42 @@
      "imp": 0.87,
      "turn": 17,
      "ts": 1794725673891
+    },
+    {
+     "text": "{{char}} asks {{user}} to stay with her, and he agrees.",
+     "imp": 0.51,
+     "turn": 19,
+     "ts": 1794753675006
+    },
+    {
+     "text": "{{char}} asks {{user}} to stay with her and expresses gratitude",
+     "imp": 0.79,
+     "turn": 21,
+     "ts": 1794753744842
+    },
+    {
+     "text": "{{char}} and {{user}} agree on a plan to retrieve {{char}}'s belongings",
+     "imp": 0.66,
+     "turn": 23,
+     "ts": 1794754004189
+    },
+    {
+     "text": "{{user}} beat up Ryan to get {{char}}'s book back",
+     "imp": 0.54,
+     "turn": 25,
+     "ts": 1794754176079
+    },
+    {
+     "text": "{{user}} got {{char}}'s book back from the bully",
+     "imp": 0.79,
+     "turn": 27,
+     "ts": 1794756036358
+    },
+    {
+     "text": "{{char}} asks {{user}} why he keeps helping her",
+     "imp": 0.66,
+     "turn": 29,
+     "ts": 1794756115717
     }
    ],
    "items": [
@@ -484,8 +1040,8 @@
      "imp": 0.825,
      "ts": 1794725421630,
      "turn": 5,
-     "n": 5,
-     "last": 17,
+     "n": 10,
+     "last": 29,
      "pin": false,
      "src": "auto",
      "people": []
@@ -525,8 +1081,8 @@
      "imp": 0.5,
      "ts": 1794725494675,
      "turn": 9,
-     "n": 0,
-     "last": 0,
+     "n": 1,
+     "last": 27,
      "pin": false,
      "src": "auto",
      "subj": "user",
@@ -539,8 +1095,8 @@
      "imp": 0.8,
      "ts": 1794725494675,
      "turn": 9,
-     "n": 3,
-     "last": 17,
+     "n": 4,
+     "last": 21,
      "pin": false,
      "src": "auto",
      "people": []
@@ -565,8 +1121,8 @@
      "imp": 0.85,
      "ts": 1794725527769,
      "turn": 11,
-     "n": 2,
-     "last": 17,
+     "n": 4,
+     "last": 25,
      "pin": false,
      "src": "auto-lite",
      "emo": "grateful",
@@ -581,8 +1137,8 @@
      "imp": 0.875,
      "ts": 1794725557743,
      "turn": 13,
-     "n": 1,
-     "last": 15,
+     "n": 5,
+     "last": 27,
      "pin": false,
      "src": "auto",
      "people": [
@@ -596,8 +1152,8 @@
      "imp": 0.875,
      "ts": 1794725557743,
      "turn": 13,
-     "n": 2,
-     "last": 17,
+     "n": 5,
+     "last": 23,
      "pin": false,
      "src": "auto",
      "emo": "grateful",
@@ -612,8 +1168,8 @@
      "imp": 0.5,
      "ts": 1794725557743,
      "turn": 13,
-     "n": 1,
-     "last": 17,
+     "n": 4,
+     "last": 25,
      "pin": false,
      "src": "auto",
      "subj": "bond",
@@ -626,8 +1182,8 @@
      "imp": 0.63,
      "ts": 1794725599514,
      "turn": 15,
-     "n": 0,
-     "last": 0,
+     "n": 3,
+     "last": 25,
      "pin": false,
      "src": "auto",
      "people": [
@@ -641,8 +1197,8 @@
      "imp": 0.63,
      "ts": 1794725599514,
      "turn": 15,
-     "n": 0,
-     "last": 0,
+     "n": 1,
+     "last": 27,
      "pin": false,
      "src": "auto",
      "emo": "surprised",
@@ -671,11 +1227,12 @@
      "imp": 0.5,
      "ts": 1794725654421,
      "turn": 17,
-     "n": 0,
-     "last": 0,
+     "n": 1,
+     "last": 21,
      "pin": false,
      "src": "auto",
-     "subj": "bond"
+     "subj": "bond",
+     "people": []
     },
     {
      "id": "e15",
@@ -684,8 +1241,8 @@
      "imp": 0.835,
      "ts": 1794725654421,
      "turn": 17,
-     "n": 0,
-     "last": 0,
+     "n": 2,
+     "last": 27,
      "pin": false,
      "src": "auto",
      "people": [
@@ -699,13 +1256,240 @@
      "imp": 0.835,
      "ts": 1794725654421,
      "turn": 17,
-     "n": 0,
-     "last": 0,
+     "n": 2,
+     "last": 27,
      "pin": false,
      "src": "auto",
      "emo": "relieved",
      "val": 0.8,
-     "link": "e15"
+     "link": "e15",
+     "people": []
+    },
+    {
+     "id": "e17",
+     "t": "episodic",
+     "text": "{{user}} agreed to stay with {{char}} for a while longer",
+     "imp": 0.835,
+     "ts": 1794753719805,
+     "turn": 21,
+     "n": 1,
+     "last": 29,
+     "pin": false,
+     "src": "auto",
+     "people": []
+    },
+    {
+     "id": "e18",
+     "t": "emotional",
+     "text": "{{char}} felt a wave of relief and gratitude wash over her when {{user}} agreed to stay, realizing how much his presence meant to her in that moment.",
+     "imp": 0.795,
+     "ts": 1794753719805,
+     "turn": 21,
+     "n": 3,
+     "last": 29,
+     "pin": false,
+     "src": "auto",
+     "emo": "relieved",
+     "val": 0.8,
+     "link": "e17",
+     "people": []
+    },
+    {
+     "id": "s19",
+     "t": "semantic",
+     "text": "{{user}} is reliable and trustworthy, willing to support {{char}} even when it's inconvenient",
+     "imp": 0.5,
+     "ts": 1794753719805,
+     "turn": 21,
+     "n": 2,
+     "last": 27,
+     "pin": false,
+     "src": "auto",
+     "subj": "bond",
+     "people": []
+    },
+    {
+     "id": "s20",
+     "t": "semantic",
+     "text": "{{char}} can count on {{user}} to be there for her in times of need",
+     "imp": 0.5,
+     "ts": 1794753719805,
+     "turn": 21,
+     "n": 0,
+     "last": 0,
+     "pin": false,
+     "src": "auto",
+     "subj": "bond",
+     "people": []
+    },
+    {
+     "id": "e21",
+     "t": "emotional",
+     "text": "{{char}} felt immense gratitude and relief when {{user}} agreed to stay with her",
+     "imp": 0.73,
+     "ts": 1794753975629,
+     "turn": 23,
+     "n": 0,
+     "last": 0,
+     "pin": false,
+     "src": "auto",
+     "emo": "relief",
+     "val": 0,
+     "link": "e17",
+     "people": []
+    },
+    {
+     "id": "s22",
+     "t": "semantic",
+     "text": "{{user}} is willing to make time for {{char}} even when it's inconvenient",
+     "imp": 0.5,
+     "ts": 1794753975629,
+     "turn": 23,
+     "n": 0,
+     "last": 0,
+     "pin": false,
+     "src": "auto",
+     "subj": "bond",
+     "people": []
+    },
+    {
+     "id": "s23",
+     "t": "semantic",
+     "text": "{{char}} can count on {{user}} to be there for her emotionally",
+     "imp": 0.5,
+     "ts": 1794753975629,
+     "turn": 23,
+     "n": 0,
+     "last": 0,
+     "pin": false,
+     "src": "auto",
+     "subj": "bond",
+     "people": []
+    },
+    {
+     "id": "e24",
+     "t": "episodic",
+     "text": "{{user}} beat up Ryan and got {{char}}'s book back",
+     "imp": 0.835,
+     "ts": 1794755977370,
+     "turn": 27,
+     "n": 1,
+     "last": 29,
+     "pin": false,
+     "src": "auto",
+     "people": [
+      "Ryan"
+     ]
+    },
+    {
+     "id": "e25",
+     "t": "emotional",
+     "text": "{{char}} felt deeply grateful and somewhat guilty for putting {{user}} in that situation",
+     "imp": 0.795,
+     "ts": 1794755977370,
+     "turn": 27,
+     "n": 1,
+     "last": 29,
+     "pin": false,
+     "src": "auto",
+     "emo": "grateful",
+     "val": 0.8,
+     "link": "e24",
+     "people": []
+    },
+    {
+     "id": "s26",
+     "t": "semantic",
+     "text": "{{user}} is willing to fight for {{char}}",
+     "imp": 0.5,
+     "ts": 1794755977370,
+     "turn": 27,
+     "n": 1,
+     "last": 29,
+     "pin": false,
+     "src": "auto",
+     "subj": "bond",
+     "people": []
+    },
+    {
+     "id": "s27",
+     "t": "semantic",
+     "text": "{{char}}'s book is very important to her",
+     "imp": 0.5,
+     "ts": 1794755977370,
+     "turn": 27,
+     "n": 1,
+     "last": 29,
+     "pin": false,
+     "src": "auto",
+     "subj": "self",
+     "people": []
+    },
+    {
+     "id": "s28",
+     "t": "semantic",
+     "text": "{{user}} is patient and understanding",
+     "imp": 0.5,
+     "ts": 1794756085964,
+     "turn": 29,
+     "n": 0,
+     "last": 0,
+     "pin": false,
+     "src": "auto",
+     "subj": "user"
+    },
+    {
+     "id": "e29",
+     "t": "emotional",
+     "text": "{{char}} felt deeply grateful and impressed by {{user}}'s actions",
+     "imp": 0.73,
+     "ts": 1794756085964,
+     "turn": 29,
+     "n": 0,
+     "last": 0,
+     "pin": false,
+     "src": "auto",
+     "emo": "grateful",
+     "val": 0.8,
+     "link": "e24"
+    },
+    {
+     "id": "s30",
+     "t": "semantic",
+     "text": "{{user}} is willing to physically confront those who wrong {{char}}",
+     "imp": 0.5,
+     "ts": 1794756085964,
+     "turn": 29,
+     "n": 0,
+     "last": 0,
+     "pin": false,
+     "src": "auto",
+     "subj": "bond"
+    },
+    {
+     "id": "s31",
+     "t": "semantic",
+     "text": "{{char}} can count on {{user}} to protect her",
+     "imp": 0.5,
+     "ts": 1794756085964,
+     "turn": 29,
+     "n": 0,
+     "last": 0,
+     "pin": false,
+     "src": "auto",
+     "subj": "bond"
+    },
+    {
+     "id": "e32",
+     "t": "episodic",
+     "text": "{{char}} asked {{user}} to steal her uncle's belongings back.",
+     "imp": 0.72,
+     "ts": 1794725513546,
+     "turn": 9,
+     "n": 0,
+     "last": 0,
+     "pin": false,
+     "src": "promoted"
     }
    ],
    "legacy": true
@@ -713,8 +1497,9 @@
  },
  "cfg": {
   "mode": "story",
-  "length": "auto",
-  "scene": ""
+  "length": "short",
+  "scene": "",
+  "notes": []
  },
  "rp": {}
 }

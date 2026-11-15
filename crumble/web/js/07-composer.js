@@ -10,7 +10,8 @@ $('#log').onclick=e=>{const b=e.target.closest('button');
  if(a=='copy')navigator.clipboard?.writeText(plain(m));
  else if(a=='edit')editMsg(i);
  else if(a=='ecancel')draw();
- else if(a=='esave'){const t=mEl.querySelector('textarea').value.trim();if(t){m.content=t;if(m.sw)m.sw[m.si].content=t}saveChat();draw()}
+ else if(a=='esave'){const t=mEl.querySelector('textarea').value.trim();if(t){m.content=t;if(m.sw)m.sw[m.si].content=t;if(m.oid)noteSync(m)}saveChat();draw()}
+ else if(a=='okind')oocCycle(i);else if(a=='oredo')oocRedo();else if(a=='ogo')oocGo();
  else if(a=='react')b.closest('.acts').classList.toggle('open');
  else if(a=='rx'){m.react=m.react==b.dataset.e?'':b.dataset.e;saveChat();draw()}
  else if(a=='speak')speak(m.content);
@@ -27,8 +28,10 @@ $('#inp').onkeydown=e=>{if(!$('#mnu').hidden){if(e.key=='ArrowDown'||e.key=='Arr
  if(e.key=='Enter'&&!e.shiftKey){e.preventDefault();send()}
  else if(e.key=='ArrowUp'&&!$('#inp').value){const i=hist.map(m=>m.role).lastIndexOf('user');if(i>=0){e.preventDefault();editMsg(i)}}};
 document.addEventListener('keydown',e=>{if(e.key=='Escape'){if(ctl){roundAbort=true;ctl.abort()}else if(typingNow)skipTyping();else if(rounding)roundAbort=true}});
-$('#regen').onclick=()=>{if(ctl||rounding||hist.length<2)return;const l=hist.at(-1);if(G)l.role=='assistant'?gen('swipe',l.cid):round();else gen(l.role=='assistant'?'swipe':'reply')};
-$('#cont').onclick=()=>{if(ctl||rounding||!hist.length||hist.at(-1).role!='assistant')return;gen('continue',hist.at(-1).cid)};
+$('#regen').onclick=()=>{if(ctl||rounding||hist.length<2)return;const l=hist.at(-1);
+ if(l.ooc){if(l.role=='assistant'){restore(l);hist.pop();saveChat();draw()}return void gen('ooc')}   // the storyteller's reply is written again
+ if(G)l.role=='assistant'?gen('swipe',l.cid):round();else gen(l.role=='assistant'?'swipe':'reply')};
+$('#cont').onclick=()=>{if(ctl||rounding||!hist.length)return;const l=hist.at(-1);if(l.ooc)return void oocGo();if(l.role!='assistant')return;gen('continue',l.cid)};
 $('#undo').onclick=()=>{if(ctl||rounding)return;skipTyping();restore(hist.pop());draw();saveChat()};
 $('#greet').onclick=()=>{if(ctl||hist.length>1)return;resetChat(++gi);draw();saveChat()};
 $('#chsel').onchange=e=>{if(!ctl)openChat(e.target.value)};
@@ -36,7 +39,7 @@ $('#newchat').onclick=()=>{if(!ctl&&cur?.id)newChat()};
 $('#rename').onclick=()=>{if(!chat)return;const t=prompt('Chat name',chat.title);if(t&&t.trim()){chat.title=t.trim();saveChat()}};
 $('#delchat').onclick=async()=>{if(ctl||!chat||!confirm('Delete this chat?'))return;await api(`/api/chat/${cur.id}/${chat.id}`,'DELETE');
  chats=chats.filter(c=>c.id!=chat.id);chats.length?await openChat(chats[0].id):await newChat()};
-$('#expchat').onclick=()=>{if(!chat)return;dl(hist.map(m=>`${m.role=='user'?uname():(m.name||cur.name)}: ${plain(m)}`).join('\n\n'),`${cur.name||'chat'} - ${chat.title}.txt`,'text/plain')};
+$('#expchat').onclick=()=>{if(!chat)return;dl(hist.map(m=>`${m.ooc?'(OOC) ':''}${m.role=='user'?uname():m.ooc?'Storyteller':(m.name||cur.name)}: ${plain(m)}`).join('\n\n'),`${cur.name||'chat'} - ${chat.title}.txt`,'text/plain')};
 $('#mode').onchange=e=>{if(!chat)return;chat.cfg.mode=U.mode=e.target.value;persist();saveChat();draw()};
 $('#len').onchange=e=>{if(!chat)return;chat.cfg.length=U.length=e.target.value;persist();saveChat()};
 $('#hchip').onclick=()=>tab('mem');
@@ -54,5 +57,5 @@ if(SR){$('#mic').hidden=false;$('#mic').onclick=()=>{if(rec){rec.stop();return}r
  rec.onresult=e=>{const i=$('#inp');i.value+=(i.value?' ':'')+e.results[0][0].transcript;i.dispatchEvent(new Event('input'))};rec.onend=()=>{rec=null;$('#mic').classList.remove('on')};$('#mic').classList.add('on');rec.start()}}
 /* the character may follow up on its own if you go quiet (Settings > Initiative) */
 setInterval(()=>{if(!U.nudge||G||rounding||ctl||typingNow||!chat||!cur?.id||!S.loaded||document.hidden||$('#chat').hidden||nudges>=2)return;
- const l=hist.at(-1);if(!l||l.role!='assistant'||hist.length<2)return;
+ const l=hist.at(-1);if(!l||l.role!='assistant'||l.ooc||hist.length<2)return;
  if(Date.now()-Math.max(l.ts||0,lastAct)>U.nudge*6e4*(nudges+1)){nudges++;gen('nudge')}},10000);

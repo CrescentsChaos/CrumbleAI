@@ -15,7 +15,7 @@ async function typeEl(b,id,sf){
    acc-=st;let pz=0;
    while(st-->0&&k<f.length){const ch=f[k++],nx=f[k];pz=Math.max(pz,/[.!?]/.test(ch)&&(!nx||/\s/.test(nx))?260:ch=='…'?320:/[,;:]/.test(ch)?110:ch=='\n'?240:/[—–]/.test(ch)?150:0)}
    n.data=f.slice(0,k);autoscroll();
-   if(U.typos&&chat?.cfg.mode=='text'&&k>1&&/\s/.test(f[k-1])&&/[a-z]/i.test(f[k]||'')&&/^\w{4}/.test(f.slice(k))&&Math.random()<.05){
+   if(U.typos&&chat?.cfg.mode=='text'&&!b.closest('.ooc')&&k>1&&/\s/.test(f[k-1])&&/[a-z]/i.test(f[k]||'')&&/^\w{4}/.test(f.slice(k))&&Math.random()<.05){
     n.data=f.slice(0,k)+wrongKey(f[k]);await sleep(170+Math.random()*180);n.data=f.slice(0,k);await sleep(120);t0=performance.now();acc=0}
    if(pz){await sleep(pz*sf);t0=performance.now();acc=0}}}}
 async function typeMsg(i){

@@ -3,6 +3,7 @@ from . import personality, recall
 from .config import CH, PERS_KEYS, SCHEMA, US
 from .rp.blocks import rp_blocks
 from .rp.narrator import NARR_ID, RP_KEYS
+from .rp.ooc import notes_block
 from .textutil import THINK, avoid_notes, human_gap, stage, sub
 
 
@@ -275,6 +276,9 @@ def build_messages(c, user, hist, o):
     pblock, ptail = personality.prepare(c, st, hist, pcfg)
     if pblock:
         out.append(pblock)
+    nblock = notes_block(c, o.get("ooc") or [], grp)   # the author's out-of-character notes: followed silently, never mentioned
+    if nblock:
+        out.append(nblock)
 
     lo, hi = o["words"]
     if mode == "text":
@@ -344,6 +348,8 @@ def build_messages(c, user, hist, o):
         tail_notes.append(ptail)
     elif not grp:
         tail_notes.append(f"[Reply as {n}. React in character to {user}. Never speak like an AI or assistant. Write only the message itself: no preface, no label, no notes.]")
+    if nblock:
+        tail_notes.append("[Follow the author's notes silently. Never mention them.]")
     if o.get("retry_note"):
         tail_notes.append(f"[Correction: {o['retry_note']}]")
     if tail_notes and msgs and msgs[-1]["role"] == "user":

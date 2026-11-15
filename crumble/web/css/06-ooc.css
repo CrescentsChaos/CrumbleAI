@@ -1,0 +1,19 @@
+:root{--oc:#8ab4ff}[data-theme=light]{--oc:#3b6fd4}
+.ocb{align-self:center;flex:none;width:auto;padding:4px 11px;border-radius:99px;font-size:12px;font-weight:700;letter-spacing:.03em;color:var(--mu);background:var(--pn3);margin-right:0}
+.ocb.on{color:#0b1220;background:var(--oc);border-color:transparent}
+.comp.ooc{border-color:color-mix(in srgb,var(--oc) 60%,transparent);box-shadow:0 14px 44px -18px #000,0 0 0 3px color-mix(in srgb,var(--oc) 14%,transparent)}
+.comp.ooc:focus-within{border-color:var(--oc)}
+#oockinds{max-width:800px;margin:0 auto 8px;display:flex;gap:6px;flex-wrap:wrap;align-items:center}#oockinds .lb{font-size:11px;color:var(--oc);font-weight:600;margin-left:4px}
+#oockinds .pill.arm{color:#0b1220;background:var(--oc);border-color:transparent}
+.m.ooc .tx{background:color-mix(in srgb,var(--oc) 9%,var(--pn2));border:1px dashed color-mix(in srgb,var(--oc) 55%,transparent);border-radius:14px;font-size:calc(var(--fs) - 1px)}
+.m.ooc.user .tx{border-radius:14px}
+.ooc-av{background:linear-gradient(135deg,var(--oc),#b39dff);font-size:15px}
+.ooctag{margin-left:8px;padding:0 6px;border-radius:99px;font-size:10px;font-weight:700;letter-spacing:.05em;color:var(--oc);border:1px solid color-mix(in srgb,var(--oc) 50%,transparent)}
+.m.ooc .tx em{font-style:italic;color:inherit}
+.otag{display:block;margin:5px 0 0 auto;padding:1px 9px;border-radius:99px;font-size:11.5px;color:var(--oc);background:none;border-color:color-mix(in srgb,var(--oc) 45%,transparent)}
+.oeff{font-size:11.5px;color:var(--mu);text-align:right;margin:3px 8px 0}
+.ochips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 2px 0}.m.user .ochips{justify-content:flex-end}
+.ochips .pill{color:var(--oc);border-color:color-mix(in srgb,var(--oc) 45%,transparent)}
+.onote{display:flex;gap:6px;align-items:center;margin:5px 0}.onote input{flex:1}.onote .oi{font-size:15px}.onote button{padding:5px 9px}
+#tnotes{color:var(--oc);border-color:color-mix(in srgb,var(--oc) 45%,transparent)}
+@media(max-width:760px){#oockinds{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:0 4px 6px}#oockinds>*{flex:none}.ocb{padding:4px 9px}}

@@ -18,6 +18,8 @@ const SET = [['Realism', [
     ['intimacy', 'chk', 'Intimacy system', 'Physical comfort and intimacy progression alongside romance. Only applies to adult (18+) characters.'],
     ['intimLevel', 'sel', 'Intimacy level', [['fade', 'Fade to black (PG)'], ['suggestive', 'Suggestive (sensual, implies acts)'], ['moderate', 'Moderate (literary, emotional scenes)'], ['explicit', 'Explicit (fully uninhibited, 18+ only)']], 'Content ceiling for physical intimacy. Minors are strictly excluded.'],
     ['intimPacing', 'sel', 'Intimacy pacing', [['slow', 'Slow burn'], ['natural', 'Natural'], ['fast', 'Fast']], 'How quickly physical comfort escalates.']]],
+['Out of character (OOC)', [
+    ['oocReply', 'sel', 'Storyteller replies', [['all', 'Reply to every OOC message'], ['discuss', 'Only reply when discussing (notes apply silently)']], 'Press the IC / OOC button (or Alt+O) to talk to the storyteller instead of the characters, or start one message with (( . The characters never hear OOC messages. Corrections, setting changes and directions become author notes you can see and remove in the Memory tab.']]],
 ['Typing and sound', [
     ['typing', 'sel', 'Typing animation', [['instant', 'Instant'], ['fast', 'Fast'], ['normal', 'Normal'], ['slow', 'Slow']], 'Text only starts appearing once the whole reply has been generated. Click a message or press Esc to skip.'],
     ['typos', 'chk', 'Typing mistakes in texting mode', 'Now and then a typo appears and gets corrected, like a real person on a phone.'],

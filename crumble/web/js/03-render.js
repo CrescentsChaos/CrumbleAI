@@ -1,5 +1,6 @@
 /* ---------- rendering ---------- */
 function msgHTML(m,i){
+ if(m.ooc)return oocHTML(m,i);
  const u=m.role=='user',sp=u?null:(G?(memberById(m.cid)||{name:m.name||'?'}):cur),n=u?uname():(sp?.name||'Character'),mode=chat.cfg.mode,last=i==hist.length-1;
  let tx;
  if(u)tx=`<div class=tx>${fmt(m.content,mode!='text',true)}</div>`;
@@ -23,7 +24,7 @@ function head(){const c=cur||{name:'Character'},st=G?null:chat?.state;$('#hname'
  $('#gstrip').hidden=!G;if(G)$('#gstrip').innerHTML=gmem().concat(G.narrator?[NARR]:[]).map(m=>`<div class=av data-mid=${m.id} title="@${at(first(m))}" style="${avs(m)}">${avin(m)}</div>`).join('')+(S.role!='guest'?'<button class=ib id=gedit2 title="Edit group">⚙</button>':'');
  $('#greet').hidden=!!G;cbtDraw();
  $('#hchip').hidden=!(U.track&&st);if(st){$('#hemo').textContent=st.emoji;$('#hmood').textContent=st.mood;$('#hmeter').style.width=st.affection+'%';$('#hstage').textContent=stg(st.affection)}
- $('#mode').value=chat?.cfg.mode||U.mode;$('#len').value=chat?.cfg.length||U.length}
+ $('#mode').value=chat?.cfg.mode||U.mode;$('#len').value=chat?.cfg.length||U.length;oocUI()}
 function setStatus(t){status=t;$('#hstat').textContent=t;$('#hstat').classList.toggle('on',t!='online')}
 function showPending(l){pendLabel=l;let e=$('#pend');if(!e){e=document.createElement('div');e.id='pend';e.className='m assistant';$('#log').append(e)}
  const w=pendWho||cur;e.innerHTML=avatar(w)+`<div class=bub><div class=nm>${esc(w?.name||'Character')}</div><div class="tx dt"><div class=dots><i></i><i></i><i></i><span>${l}</span></div></div></div>`;
