@@ -125,6 +125,31 @@ def finish_reply(raw, finish, user, name, mode, others=()):
     return {"think": th, "text": balance(body), "empty": not body.strip(), "cut": cut, "think_open": think_open}
 
 
+TEXT_LINES = {"short": 2, "medium": 3, "long": 5, "auto": 4}   # most separate text messages (lines) in texting mode
+
+
+def cap_reply(text, mode, length, hi):
+    """Enforce the Length setting after the fact: models often ignore the limit in the prompt.
+    Texting: at most N lines. Other modes with a fixed length: cut back to a whole sentence near the word limit."""
+    if not text:
+        return text
+    if mode == "text":
+        lines = [l for l in text.split("\n") if l.strip()]
+        n = TEXT_LINES.get(length, 4)
+        if len(lines) > n:
+            text = "\n".join(lines[:n])
+    if length in ("short", "medium") and len(text.split()) > hi * 1.5:
+        words, out = 0, []
+        for sent in re.split(r"(?<=[.!?…])\s+", text):
+            w = len(sent.split())
+            if out and words + w > hi * 1.3:
+                break
+            out.append(sent)
+            words += w
+        text = " ".join(out)
+    return balance(text)
+
+
 def similar(t, prevs):
     a = re.sub(r"\W+", " ", t.lower()).strip()
     for p in prevs:

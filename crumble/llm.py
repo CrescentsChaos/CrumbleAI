@@ -7,7 +7,7 @@ from .config import CH, LLM, US
 from .prompt import build_messages, cue_text
 from .rp.narrator import NARR_ID
 from .rp.ooc import KINDS as OOC_KINDS, clean_notes, finish_ooc, ooc_messages, ooc_words
-from .textutil import THINK, finish_reply, human_gap, similar, want_words
+from .textutil import THINK, cap_reply, finish_reply, human_gap, similar, want_words
 
 
 def ntok(txt):
@@ -141,7 +141,7 @@ def generate_reply(b, send):
         tries = attempt
         o = dict(state=b.get("state"), persona=b.get("persona"), scene=b.get("scene"), clock=b.get("clock"),
                  gap_s=b.get("gap_s"), mode=mode, actions=p.get("actions", True), realism=p.get("realism", True),
-                 natural=p.get("natural", 2), think=think, fold=p.get("fold", False), words=(lo, hi), tail=tail,
+                 natural=p.get("natural", 2), think=think, fold=p.get("fold", False), words=(lo, hi), length=p.get("length", "auto"), tail=tail,
                  retry_note=retry_note, group=grp, rp=b.get("rp"), own=own, pers=p.get("pers"), mem=p.get("mem"), recall=rc, turn=turns,
                  ooc=clean_notes((b.get("ooc") or {}).get("notes")))
         msgs = build_messages(c, user, hist, o)
@@ -150,6 +150,8 @@ def generate_reply(b, send):
         budget = max(128, min(budget, n_ctx - used - 16))
         raw, fin, ntoks, secs = run_llm(msgs, samp, stop, budget, send)
         r = finish_reply(raw, fin, user, c.get("name") or "Character", mode, others)
+        if kind in ("reply", "resume", "nudge") and not r["empty"]:
+            r["text"] = cap_reply(r["text"], mode, p.get("length", "auto"), hi)
         r.update(tok=ntoks, ms=int(secs * 1000), finish=fin)
         if grp and (b.get("cue") or {}).get("pass") and re.fullmatch(r"\W*(?:pass|silent|stays? silent)\W*", r["text"].lower()):
             return {"pass": True, "text": "", "think": "", "tok": ntoks, "ms": r["ms"], "ctx_used": used, "ctx": n_ctx, "dropped": dropped}

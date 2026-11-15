@@ -4,7 +4,7 @@ from .config import CH, PERS_KEYS, SCHEMA, US
 from .rp.blocks import rp_blocks
 from .rp.narrator import NARR_ID, RP_KEYS
 from .rp.ooc import notes_block
-from .textutil import THINK, avoid_notes, human_gap, stage, sub
+from .textutil import TEXT_LINES, THINK, avoid_notes, human_gap, stage, sub
 
 
 REALISM = [
@@ -281,8 +281,10 @@ def build_messages(c, user, hist, o):
         out.append(nblock)
 
     lo, hi = o["words"]
+    nl = TEXT_LINES.get(o.get("length", "auto"), 4)
+    pl = "" if nl == 1 else "s"
     if mode == "text":
-        style = (f"{CH} is texting {US} on a phone. Put each separate text message on its own line (1-4 lines). Real texting: short and informal, "
+        style = (f"{CH} is texting {US} on a phone. Put each separate text message on its own line (at most {nl} line{pl}). Real texting: short and informal, "
                  f"lowercase or abbreviations if it suits {CH}, emoji only if it fits. No narration, no actions, no asterisks.")
     elif mode == "call":
         style = ("This is a live voice call. Reply with spoken words only, as they would actually sound out loud. "
