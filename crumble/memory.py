@@ -90,11 +90,18 @@ def track(b):
     return out
 
 
+def identity_line(c, n):
+    """Fixed facts from the sheet, so the summary copies them instead of guessing (small models love to invent ages)."""
+    bits = [f"{l}: {str(c.get(k)).strip()}" for k, l in (("age", "age"), ("gender", "gender"), ("species", "species"), ("occupation", "occupation"))
+            if str(c.get(k) or "").strip()]
+    return (f"Fixed facts about {n} from the character sheet (copy them exactly, never change them): " + "; ".join(bits) + ".\n") if bits else ""
+
+
 def summarize(b):
     c, user = b["char"], b["user"]
     n = c.get("name") or "Character"
     convo = "\n".join(f"{(m.get('name') or n) if m['role'] == 'assistant' else user}: {THINK.sub('', m['content'])[:700]}" for m in b["history"])
-    ask = (f"Previous memory notes: {b.get('summary') or 'none'}\n\nNew events to fold in:\n{convo}\n\n"
+    ask = (identity_line(c, n) + f"Previous memory notes: {b.get('summary') or 'none'}\n\nNew events to fold in:\n{convo}\n\n"
            f"Update the memory using the conversation above. Return only these sections and fields, in this order:\n"
            f"CHARACTERS\n{n}: [important traits, facts, and current situation]\n{user}: [important traits, facts, and current situation]\n"
            "SETTING & STATE\nLocation: [where they are]\nCurrent State: [what is happening now]\n"
@@ -102,6 +109,7 @@ def summarize(b):
            "Tone: [the emotional tone between them]\n"
            "PIVOTAL MOMENTS\n- [important events, statements, or promises; include prior pivotal moments that still matter]\n"
            "Keep every heading and field, use concise specific details, and write \"Not established\" when the chat does not provide an answer. "
+           "Never guess or estimate anyone's age: only write an age if it is in the fixed facts, the previous notes or the chat itself. "
            "Fold the new events into the previous notes without losing still-relevant facts. No preamble. /no_think")
     with LOCK:
         r = LLM["obj"].create_chat_completion(messages=[{"role": "user", "content": ask}], temperature=.3, max_tokens=450)

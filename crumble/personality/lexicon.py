@@ -242,6 +242,22 @@ AI_SOFT = re.compile(
     r"|^\W*(?:certainly|absolutely|of course)[!,.]",
     re.I | re.M
 )
+
+# polite "assistant curiosity" register that the list above does not catch ("Is there something specific about X that caught your attention?")
+_AI_OFFER = (
+    r"\bis there (?:something|anything) (?:specific |particular |else )?(?:about|in|that|you|i can)\b[^.?!\n]{0,80}"
+    r"(?:interest|caught|catch|attention|help|know|share|discuss|talk|ask|curious|wonder)"
+    r"|\bi (?:might|may|could|can) (?:be able to )?(?:share|offer|provide|give) (?:you )?(?:some |a few )?(?:insights?|thoughts|advice|information|guidance|help)\b"
+    r"|\bwhat (?:specifically |exactly |in particular )?(?:about [^.?!\n]{1,40} )?(?:caught|interests?|draws?|brings?) you\b"
+    r"|\bwhat would you like (?:me )?to (?:know|talk|tell|share|discuss|do|say|explain)\b"
+    r"|\bwould you like (?:me )?to (?:talk|chat|tell|share|explain|discuss|elaborate)\b"
+    r"|\bif you(?:'d| would) like,? i (?:can|could|'d be happy)\b"
+    r"|\bi(?:'m| am) (?:happy|glad|here) to (?:listen|talk|chat|share|discuss)\b"
+    r"|\bhow (?:can|may|could) i (?:be of )?(?:help|assist|serve|support)\b"
+    r"|\bfeel free to\b"
+    r"|\bi'?m (?:curious|interested|eager) (?:to (?:know|hear|learn)|about)\b[^.?!\n]{0,40}\byou(?:r)?\b"
+)
+AI_SOFT = re.compile("(?:" + AI_SOFT.pattern + ")|(?:" + _AI_OFFER + ")", AI_SOFT.flags)
 GUSH = re.compile(r"\b(?:so sweet of you|thank you so much|you(?:'re| are) (?:so )?(?:amazing|wonderful|incredible)|i(?:'m| am) so (?:sorry|grateful|honou?red)|that means (?:so much|the world))\b", re.I)
 HARSH = re.compile(r"\b(?:idiot|stupid|pathetic|moron|shut up|worthless|loser|disgusting)\b", re.I)
 SLANG = re.compile(r"\b(?:gonna|wanna|gotta|yeah|yep|nah|dunno|kinda|sorta|lol|omg|ya|y'all|ain't|lemme|gimme)\b", re.I)

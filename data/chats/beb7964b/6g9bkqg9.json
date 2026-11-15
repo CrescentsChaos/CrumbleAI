@@ -1,8 +1,14 @@
 {
- "id": "obodva4o",
+ "id": "6g9bkqg9",
  "title": "New chat",
- "updated": 1794513598.30245,
- "history": [],
+ "updated": 1794720919.4464893,
+ "history": [
+  {
+   "role": "assistant",
+   "content": "Siuuuu! Ready to dominate the pitch? You think you can beat me? I've trained for this!",
+   "ts": 1794720919444
+  }
+ ],
  "state": {
   "mood": "neutral",
   "emoji": "😐",
@@ -17,5 +23,6 @@
   "mode": "story",
   "length": "auto",
   "scene": ""
- }
+ },
+ "rp": {}
 }

@@ -14,3 +14,10 @@ Layout
     web.py + web/ the browser UI
     app.py        command line entry point
 """
+import shutil
+import sys
+from pathlib import Path
+
+sys.dont_write_bytecode = True   # no new __pycache__ folders are written
+for _d in Path(__file__).resolve().parent.rglob("__pycache__"):   # and any old ones are removed at startup
+    shutil.rmtree(_d, ignore_errors=True)

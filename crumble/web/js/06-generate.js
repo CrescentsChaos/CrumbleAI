@@ -55,8 +55,11 @@ async function trackState(i){
   m.snap=snap;if(G)m.snapc=sp.id;m.thought=r.thought||'';hist.forEach((x,k)=>{if(k<i-6){delete x.snap;delete x.snapc}});
   if(G)ch.state.members[sp.id]={...stt,...r.state};else ch.state={...ch.state,...r.state};
   head();redrawMsg(i);saveChat();if(!$('#mem').hidden)renderMem();maybeSummarize()}catch(e){}}
+const SUM_EVERY=10,SUM_KEEP=4;   // auto-summarize every 10 new messages; the newest 4 stay word-for-word in the prompt
+let sumBusy=false;
 async function maybeSummarize(force){
- if((!force&&!U.track)||!S.loaded||!chat)return;const ch=chat,s=ch.state,upto=force?hist.length:hist.length-12;
- if((!force&&hist.length-s.sumUpto<=30)||upto<=s.sumUpto)return;
+ if((!force&&!U.track)||!S.loaded||!chat||sumBusy)return;const ch=chat,s=ch.state,upto=force?hist.length:hist.length-SUM_KEEP;
+ if((!force&&upto-s.sumUpto<SUM_EVERY)||upto<=s.sumUpto)return;
+ sumBusy=true;try{
  const r=await api('/api/summarize','POST',{char:apiChar(),user:uname(),group:G?G.id:undefined,history:apiHist(hist.slice(s.sumUpto,upto)),summary:s.summary});
- if(r.summary&&chat===ch){s.summary=r.summary;s.sumUpto=upto;saveChat();if(!$('#mem').hidden)renderMem()}return r}
+ if(r.summary&&chat===ch){s.summary=r.summary;s.sumUpto=upto;saveChat();if(!$('#mem').hidden)renderMem()}return r}finally{sumBusy=false}}

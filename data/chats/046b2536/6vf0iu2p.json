@@ -1,7 +1,7 @@
 {
- "id": "r561ww53",
+ "id": "6vf0iu2p",
  "title": "New chat",
- "updated": 1794514219.5395162,
+ "updated": 1794720921.8272376,
  "history": [],
  "state": {
   "mood": "neutral",
@@ -17,5 +17,6 @@
   "mode": "story",
   "length": "auto",
   "scene": ""
- }
+ },
+ "rp": {}
 }

@@ -1,4 +1,5 @@
 """Turns a profile, the current exchange and the character's state into the prompt text that keeps a model in character."""
+import re
 from ..config import CH, US
 from . import lexicon as lx
 

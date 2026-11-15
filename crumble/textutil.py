@@ -20,7 +20,25 @@ def split_think(t):
         t = "<think>" + t
     th = "\n".join(x.strip() for x in re.findall(r"<think>(.*?)(?:</think>|$)", t, re.S))
     is_open = t.rfind("<think>") > t.rfind("</think>")
-    return th.strip(), re.sub(r"<think>.*?(?:</think>|$)", "", t, flags=re.S).strip(), is_open
+    body = re.sub(r"<think>.*?(?:</think>|$)", "", t, flags=re.S).strip()
+    leak, body = split_plan(body)
+    return "\n".join(x for x in (th.strip(), leak) if x), body, is_open
+
+
+_PLAN_HEAD = re.compile(r"(?is)^\s*[#>\s]*[\*_]*(?:(?:thinking|thought)\s+process|thinking|reasoning|analysis|planning)[\*_]*\s*:|^\s*1[.)]\s*\**\s*(?:analy[sz]e|understand|identify|review)\b[^\n]{0,40}:")
+_REPLY_MARK = re.compile(r"(?im)^[ \t]*[\[\*#_>(]*[ \t]*(?:final[ \t]+|actual[ \t]+)?(?:in[- ]character[ \t]+)?(?:reply|response|answer|output|draft)[ \t]*[\]\*_)]*[ \t]*:?[ \t]*[\]\*_)]*[ \t]*")
+
+
+def split_plan(body):
+    """The model wrote its reasoning in the visible text ('Thinking Process: 1. Analyze the Request ... [Reply] ...').
+    Return (leaked reasoning, the real reply). The reply is empty when no marker shows where it starts."""
+    if not _PLAN_HEAD.match(body or ""):
+        return "", body
+    marks = list(_REPLY_MARK.finditer(body))
+    if not marks:
+        return body.strip(), ""
+    m = marks[-1]
+    return body[:m.start()].strip(), body[m.end():].strip()
 
 
 def trim_sentence(t):
@@ -53,9 +71,31 @@ def balance(t):
     return t.strip()
 
 
+_META_LEAD = [
+    # "Here is a reply that stays in character as Faith:" (must be a line of its own that ends in a colon)
+    re.compile(r"^\s*[\*\(\[_>]*\s*(?:here(?:'s| is| are)|below is|this is)\b[^\n:]{0,90}?\b(?:repl(?:y|ies)|response|answer|continuation)\b[^\n:]{0,90}:[\*\)\]_]*[ \t]*(?:\n|$)", re.I),
+    re.compile(r"^\s*[\*\(\[_>]*\s*(?:here(?:'s| is)|below is)\s+(?:a|the|my)\s+(?:in[- ]character\s+)?(?:reply|response)\b[^\n:]{0,60}?(?:in[- ]character|as [A-Z][\w' -]{0,30})[^\n:]{0,30}:[\*\)\]_]*[ \t]*", re.I),
+    re.compile(r"^\s*[\*\(\[_>]*\s*(?:(?:my |the |a )?(?:in[- ]character )?(?:reply|response|answer|output)|in[- ]character)(?: as [A-Z][^\n:]{0,40})?[\*\)\]_]*:[ \t]*(?:\n|$)", re.I),
+]
+_META_TAIL = re.compile(r"(?is)(?:\n+|\s{2,})[\*\(\[_>-]*\s*(?:note|ooc|disclaimer|this (?:reply|response|message)|the (?:above|reply|response)|i (?:stayed|kept|have kept|made sure|tried to)|(?:and )?many thoughts)\b.*$")
+
+
+def strip_meta(b):
+    """Remove 'Here is a reply that stays in character as X:' style prefaces and trailing notes the model sometimes adds."""
+    for _ in range(3):
+        n = b
+        for rx in _META_LEAD:
+            b = rx.sub("", b, count=1)
+        if b == n:
+            break
+    return _META_TAIL.sub("", b).strip()
+
+
 def clean_body(body, user, name, mode, others=()):
     b = body.replace("\r", "")
+    b = strip_meta(b)
     b = re.sub(r"^\s*\**" + re.escape(name) + r"\**\s*:\s*", "", b)
+    b = strip_meta(b)
     m = re.search(r"(?im)^\s*\**" + re.escape(user) + r"\**\s*:", b)  # the model started writing the user's turn
     if m:
         b = b[:m.start()]
