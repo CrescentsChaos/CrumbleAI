@@ -38,13 +38,18 @@ class H(BaseHTTPRequestHandler):
 
     def send(self, obj, code=200, ctype="application/json", headers=()):
         b = obj if isinstance(obj, bytes) else json.dumps(obj).encode()
-        self.send_response(code)
-        self.send_header("Content-Type", ctype)
-        self.send_header("Content-Length", str(len(b)))
-        for k, v in headers:
-            self.send_header(k, v)
-        self.end_headers()
-        self.wfile.write(b)
+        try:
+            self.send_response(code)
+            self.send_header("Content-Type", ctype)
+            self.send_header("Content-Length", str(len(b)))
+            for k, v in headers:
+                self.send_header(k, v)
+            self.end_headers()
+            self.wfile.write(b)
+        except (BrokenPipeError, ConnectionResetError, ConnectionAbortedError):
+            # The client may navigate away or time out while the request is being
+            # processed. There is no useful error response to send on that socket.
+            return
 
     def body(self):
         n = int(self.headers.get("Content-Length", 0))
@@ -317,7 +322,7 @@ class H(BaseHTTPRequestHandler):
                 got = True
                 res = generate_reply(b, self.sse)
                 self.sse({"done": res})  # the whole reply is ready: only now does the page show any text
-            except (BrokenPipeError, ConnectionResetError):
+            except (BrokenPipeError, ConnectionResetError, ConnectionAbortedError):
                 return
             except Exception as e:
                 try:

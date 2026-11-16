@@ -1,7 +1,7 @@
 {
- "id": "occ6hxch",
+ "id": "lm0o5jgf",
  "title": "New chat",
- "updated": 1794720918.4617047,
+ "updated": 1794853064.771536,
  "history": [],
  "state": {
   "mood": "neutral",
@@ -16,7 +16,8 @@
  "cfg": {
   "mode": "story",
   "length": "auto",
-  "scene": ""
+  "scene": "",
+  "notes": []
  },
  "rp": {}
 }
