@@ -63,7 +63,7 @@ def _parse(txt, user, char):
             "people": [str(p).strip() for p in (j.get("people") if isinstance(j.get("people"), list) else []) if str(p).strip().lower() not in skip][:4]}
 
 
-def _write_moment(m, mem, mom, user_text, mood, *, turn, ts, src="auto"):
+def _write_moment(m, mem, mom, user_text, mood, *, turn, ts, src="auto", guard=None):
     """Store the episode (+ the feeling that goes with it) from the model's JSON, or from plain heuristics."""
     if mem and len(mem["episode"]) >= 8:
         ep_text, people, imp = mem["episode"], mem["people"], max(.5, .5 * (mem["imp"] if mem["imp"] is not None else mom["score"]) + .5 * mom["score"])
@@ -71,21 +71,29 @@ def _write_moment(m, mem, mom, user_text, mood, *, turn, ts, src="auto"):
         ep_text, people, imp, mem, src = analyze.fallback_episode(user_text, mom["cats"]), [], max(.5, mom["score"]), mem or {}, "auto-lite"
     if not ep_text:
         return []
+    gd = guard or (lambda t, k: t)
+    ep_text = gd(ep_text, "episode")
+    if not ep_text:
+        return []
     ep, _ = store.add(m, "episodic", ep_text, imp=min(1.0, imp), people=people, turn=turn, ts=ts, src=src)
     out = [ep]
     emo = mem.get("emo") or (mood if lx.is_strong(mood) else "")
     feeling = mem.get("feeling") or (f"{{{{char}}}} felt {emo} about it." if emo and src == "auto-lite" else "")
-    if len(feeling) >= 8 and ep:
+    feeling = gd(feeling, "feeling") if feeling else feeling
+    if feeling and len(feeling) >= 8 and ep:
         g, v = lx.emotion_group(emo)
         fe, _ = store.add(m, "emotional", feeling, imp=min(1.0, imp), emo=emo, val=v, link=ep["id"], turn=turn, ts=ts, src=src)
         out.append(fe)
     for f in mem.get("facts", []):
+        f = gd(f, "fact")
+        if not f:
+            continue
         fi, subj = analyze.classify_fact(f)
         out.append(store.add(m, "semantic", f, subj=subj, imp=fi, turn=turn, ts=ts, src=src)[0])
     return out
 
 
-def update(st, j, hist, *, user, char, persona="", cfg, turn, delta=0, mood_before="", mood_after="", ask=None, used=()):
+def update(st, j, hist, *, user, char, persona="", cfg, turn, delta=0, mood_before="", mood_after="", ask=None, used=(), guard=None):
     """Everything memory does after a reply. Mutates st["mem"] (and st["facts"], kept in step for the old flat list).
     -> {"added": [ids], "moment": {...}}"""
     m = store.ensure(st, user, char)
@@ -98,14 +106,16 @@ def update(st, j, hist, *, user, char, persona="", cfg, turn, delta=0, mood_befo
     ts = (la or {}).get("ts") or store.now_ms()
     ph = lambda t, n=160: store.placeholders(_one_line(t, n), user, char)
     mom = analyze.moment(user_text, reply_text, delta, mood_before, mood_after, j.get("importance"))
+    gd = guard or (lambda t, k: t)
     # short-term
-    if ph(j.get("scene")):
-        m["scene"] = ph(j.get("scene"))
-    promoted = store.push_recent(m, ph(j.get("event")), mom["score"], turn) if ph(j.get("event")) else []
+    scene, event = gd(ph(j.get("scene")), "scene") if ph(j.get("scene")) else "", gd(ph(j.get("event")), "event") if ph(j.get("event")) else ""
+    if scene:
+        m["scene"] = scene
+    promoted = store.push_recent(m, event, mom["score"], turn) if event else []
     # semantic: what the tracker found + what the user plainly said
     for f in (j.get("facts") if isinstance(j.get("facts"), list) else [])[:3]:
-        f = ph(f, 140)
-        if len(f) >= 6:
+        f = gd(ph(f, 140), "fact")
+        if f and len(f) >= 6:
             fi, subj = analyze.classify_fact(f)
             store.add(m, "semantic", f, subj=subj, imp=fi, turn=turn, ts=ts)
     for f, fi, subj in analyze.user_facts(user_text):
@@ -119,16 +129,16 @@ def update(st, j, hist, *, user, char, persona="", cfg, turn, delta=0, mood_befo
                                                                                        sorted((x for x in m["items"] if x["t"] == "semantic"), key=lambda x: -x.get("imp", 0))[:8]]), 380), user, char)
             except Exception:
                 mem = None
-        _write_moment(m, mem, mom, user_text, mood_after, turn=turn, ts=ts)
+        _write_moment(m, mem, mom, user_text, mood_after, turn=turn, ts=ts, guard=guard)
     for r in promoted:    # fell out of the short-term buffer and was worth keeping
-        if r["imp"] >= .45:
+        if r["imp"] >= .45 and gd(r["text"], "episode"):
             store.add(m, "episodic", r["text"], imp=r["imp"] * .9, turn=r["turn"], ts=r["ts"], src="promoted")
     store.compact(m, turn)
     st["facts"] = store.user_facts_mirror(m)
     return {"added": [i["id"] for i in m["items"] if i["id"] not in before], "moment": mom}
 
 
-def backfill(st, hist, *, user, char, persona="", cfg, ask, max_calls=8):
+def backfill(st, hist, *, user, char, persona="", cfg, ask, max_calls=8, guard=None):
     """Build memories from a chat that already exists: scan it in windows, ask the model only about the moments
     that look important. -> {"added": [ids], "calls": n, "scanned": n}"""
     m = store.ensure(st, user, char)
@@ -149,7 +159,7 @@ def backfill(st, hist, *, user, char, persona="", cfg, ask, max_calls=8):
                 mem = _parse(ask(prompt(char, user, persona, _convo(win, char, user), []), 380), user, char)
             except Exception:
                 mem = None
-            _write_moment(m, mem, dict(mom, score=max(mom["score"], .55)), _plain(lu), "", turn=end, ts=(win[-1].get("ts") or store.now_ms()))
+            _write_moment(m, mem, dict(mom, score=max(mom["score"], .55)), _plain(lu), "", turn=end, ts=(win[-1].get("ts") or store.now_ms()), guard=guard)
             calls += 1
             covered = end
             k = end

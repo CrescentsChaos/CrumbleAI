@@ -2,11 +2,13 @@
 import re
 import time
 
-from . import personality, recall
+from . import ambience, identity, personality, recall, simtime
 from .config import CH, LLM, US
 from .prompt import build_messages, cue_text
 from .rp.narrator import NARR_ID
 from .rp.ooc import KINDS as OOC_KINDS, clean_notes, finish_ooc, ooc_messages, ooc_words
+from .recall import lexicon as lx
+from .recall import store as rstore
 from .textutil import THINK, cap_reply, finish_reply, human_gap, similar, want_words
 
 
@@ -100,7 +102,13 @@ def generate_reply(b, send):
     n_ctx = LLM["n_ctx"]
     start = int(b.get("from") or 0)
     turns = int(b.get("turn") or len(hist))   # position in the whole chat, which out-of-character messages also count toward
+    full = hist                                # the whole in-character chat: identity, names and what the user said are read from all of it
     hist = hist[start:] if 0 < start < len(hist) else hist
+    trimmed = len(full) > len(hist)
+    led, id_tail = None, []
+    if cid != NARR_ID:
+        led = identity.build(c, user, full, persona=b.get("persona"), grp=grp)   # derived from the whole chat: edits and rewinds can never leave it stale
+        user = led["user"]["name"]             # the name the user asked for in the chat (or the one set in the UI)
     last_user = next((m["content"] for m in reversed(hist) if m["role"] == "user"), "")
     lo, hi = want_words(mode, p.get("length", "auto"), last_user)
     if grp:
@@ -126,30 +134,54 @@ def generate_reply(b, send):
     own = [m for m in hist if m["role"] == "assistant" and (not grp or m.get("cid") == cid)]
     prevs = [THINK.sub("", m["content"]) for m in own][-3:]
     others = [m.get("name") or "" for m in (grp or {}).get("members", []) if m.get("id") != cid and m.get("name")] + ([] if not grp or cid == NARR_ID else ["Narrator"])
+    if led:    # a line that starts 'Nadia:' or '<other name for the user>:' is the model writing someone else's turn
+        others += [o["name"] for o in led["others"].values()] + [n for n in identity.user_labels(led) if n != user]
     stop = ["\n" + user + ":", "\n" + user + " :", "\n**" + user + ":"] + [s for o_ in others for s in ("\n" + o_ + ":", "\n**" + o_ + ":")]
+    stop += ["<<PRIVATE", "[Reply as", "[As ", "(Write only"]      # the model starts echoing an instruction: cut it off right there
+    # story time: derived from the whole chat (scenario, messages, author's settings), so the character lives by the story's clock, not the PC's
+    notes_ = clean_notes((b.get("ooc") or {}).get("notes"))
+    sim = simtime.derive(full, (grp or {}).get("scenario") or c.get("scenario") or "", notes_ + ([{"kind": "setting", "text": b["scene"]}] if b.get("scene") else []))
+    gap_s = sim["elapsed"] if sim else b.get("gap_s")
+    amb = ambience.derive(full, (grp or {}).get("scenario") or c.get("scenario") or "", notes_ + ([{"kind": "setting", "text": b["scene"]}] if b.get("scene") else []), sim)
+    if p.get("length", "auto") == "auto" and kind in ("reply", "nudge"):   # room for atmosphere in a horror or intimate beat
+        k = ambience.boost(amb)
+        lo, hi = int(lo * (1 + (k - 1) / 2)), int(hi * k)
     samp = sampler(p)
     pcfg = personality.settings(p.get("pers"))
     guard_on = personality.active(c, pcfg) and pcfg["guard"] and kind in ("reply", "nudge")
     rcfg = recall.settings(p.get("mem"))
+    veto, known = None, [(b.get("state") or {}).get("summary") or "", b.get("persona") or ""]
+    if led:
+        identity.analyze(led, full, known, kind)      # relevant claims, topic change (first pass: before the memory search)
+        cts = [(set(lx.terms(x["quote"])), x["quote"]) for x in led["claims"]]
+
+        def veto(text):   # a stored memory that disagrees with the user's own words is not shown
+            t = rstore.resolve(text, user, c.get("name") or "Character")
+            tt = set(lx.terms(t))
+            return any(ct & tt and identity.claims.conflict(q, t) for ct, q in cts)
     rc = None   # search the memory once per reply (the retries below reuse it)
     if rcfg["on"] and cid != NARR_ID:
         rc = recall.select(b.get("state"), hist, user=user, char=c.get("name") or "Character", cfg=rcfg, turn=turns,
-                           known_extra=[m_.get("name") for m_ in (grp or {}).get("members", [])])
-    pool = []
+                           known_extra=[m_.get("name") for m_ in (grp or {}).get("members", [])], fresh=bool(led and led["fresh"]), veto=veto)
+    if led:   # now that the memory search is done, "does anyone know this?" can include what it found
+        identity.analyze(led, full, known + [t_["text"] for t_ in (rc or {}).get("trace", [])] + list((rc or {}).get("short", [])), kind)
+        id_tail = identity.tail_notes(led)
+    pool, id_pool = [], []
     best, retry_note, tries, dropped, used = None, "", 0, 0, 0
     for attempt in range(3):
         tries = attempt
-        o = dict(state=b.get("state"), persona=b.get("persona"), scene=b.get("scene"), clock=b.get("clock"),
-                 gap_s=b.get("gap_s"), mode=mode, actions=p.get("actions", True), realism=p.get("realism", True),
+        o = dict(state=b.get("state"), persona=b.get("persona"), scene=b.get("scene"), clock=b.get("clock"), sim=sim, amb=amb,
+                 gap_s=gap_s, mode=mode, actions=p.get("actions", True), realism=p.get("realism", True),
                  natural=p.get("natural", 2), think=think, fold=p.get("fold", False), words=(lo, hi), length=p.get("length", "auto"), tail=tail,
                  retry_note=retry_note, group=grp, rp=b.get("rp"), own=own, pers=p.get("pers"), mem=p.get("mem"), recall=rc, turn=turns,
+                 ledger=led, id_tail=id_tail, full=full, trimmed=trimmed,
                  ooc=clean_notes((b.get("ooc") or {}).get("notes")))
         msgs = build_messages(c, user, hist, o)
         budget = cap + (1500 if think else 0)
         used, dropped = fit(msgs, n_ctx - budget - 16)
         budget = max(128, min(budget, n_ctx - used - 16))
         raw, fin, ntoks, secs = run_llm(msgs, samp, stop, budget, send)
-        r = finish_reply(raw, fin, user, c.get("name") or "Character", mode, others)
+        r = finish_reply(raw, fin, user, c.get("name") or "Character", mode, others, narrate=p.get("actions", True))
         if kind in ("reply", "resume", "nudge") and not r["empty"]:
             r["text"] = cap_reply(r["text"], mode, p.get("length", "auto"), hi)
         r.update(tok=ntoks, ms=int(secs * 1000), finish=fin)
@@ -157,8 +189,17 @@ def generate_reply(b, send):
             return {"pass": True, "text": "", "think": "", "tok": ntoks, "ms": r["ms"], "ctx_used": used, "ctx": n_ctx, "dropped": dropped}
         if r["empty"]:  # thinking ate the whole budget, or nothing came back: try again without thinking
             think = False
+            if r.get("leak"):
+                retry_note = "Your last attempt was only instruction text. Write what the character says and does, nothing else."
             continue
         best = r
+        ig = identity.check(r["text"], led, mode) if led and kind in ("reply", "resume", "nudge") else None
+        if ig:
+            r["text"] = ig["text"]                     # repairable slips (the model wrote the user's lines) are cut out right away
+            r["_ni"] = len(ig["issues"])
+            id_pool.append(r)
+            if ig["issues"]:
+                r["identity"] = ig["issues"]
         pg = personality.check_reply(c, b.get("state"), r["text"], [THINK.sub("", m["content"]) for m in own][-6:], mode, pcfg) if guard_on else None
         if pg:
             r["pers"] = {"score": pg["score"], "flags": pg["flags"], "retries": attempt}
@@ -166,6 +207,21 @@ def generate_reply(b, send):
         ai_hard = bool(personality.lexicon.AI_HARD.search(r["text"]))
         ai_soft = bool(personality.lexicon.AI_SOFT.search(r["text"]))
         notes = []
+        cn = c.get("name") or "Character"
+        if r.get("flip") and attempt < 2:    # the reply was headed 'Reply as <the user>': the model took the user's seat
+            notes.append(f"You are {cn}, not {user}. {user} is the other person; never write as {user}.")
+        elif r.get("leak") and attempt < 2:
+            notes.append("Do not write brackets, labels or instructions. Output only what the character says and does.")
+        tn = simtime.time_note(r["text"], sim) if kind in ("reply", "nudge") else ""
+        if tn and attempt < 2:
+            notes.append(tn)
+        en = ambience.env_note(r["text"], amb, sim) if kind in ("reply", "nudge") else ""
+        if en and attempt < 2:
+            notes.append(en)
+        if kind == "reply" and attempt < 2 and last_user and similar(r["text"], [last_user]) and len(last_user.split()) > 3:
+            notes.append(f"You repeated {user}'s own message. Respond as {cn} with your own words, thoughts and decision.")
+        if ig and ig["issues"] and attempt < 2:
+            notes.append(ig["note"])
         if (ai_hard or ai_soft) and attempt < 2:
             notes.append(f"CRITICAL: Do NOT talk like an AI assistant or chatbot (no 'How are you doing today?', 'casual conversation', 'I'm here if you'd like to chat', 'What brings you here?'). You are {c.get('name') or 'Character'}, a living person in this scene. Speak and act strictly from their perspective.")
         elif kind == "reply" and attempt < 2 and similar(r["text"], prevs):
@@ -177,6 +233,11 @@ def generate_reply(b, send):
             retry_note = " ".join(notes)
             continue
         break
+    if id_pool:          # out of attempts: prefer the attempts with the fewest identity mistakes
+        fewest = min(x["_ni"] for x in id_pool)
+        if best and best.get("_ni", 0) > fewest:
+            best = [x for x in id_pool if x["_ni"] == fewest][-1]
+        pool = [x for x in pool if x.get("_ni", 0) == fewest]
     if len(pool) > 1:    # out of attempts: keep the reply that stayed most in character
         best = max(pool, key=lambda x: x["pers"]["score"])
         best["pers"]["retries"] = tries
@@ -190,6 +251,7 @@ def generate_reply(b, send):
             best["text"] = f"*{cname} looks at {user}, unsure of what to say.*"
     if not best:
         raise RuntimeError("The model returned an empty reply. Try again, or turn Thinking off.")
+    best.pop("_ni", None)
     best.update(ctx_used=used, ctx=n_ctx, dropped=dropped, retries=tries)
     if rc is not None:
         best.update(recalled=rc["ids"], recall=[{"id": t["id"], "t": t["t"], "why": t["why"]} for t in rc["trace"]])

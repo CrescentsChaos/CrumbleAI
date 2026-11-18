@@ -4,6 +4,7 @@ import json
 import random
 import re
 
+from . import sanitize
 from .config import CH, STAGES, STOPW, US
 
 
@@ -91,8 +92,11 @@ def strip_meta(b):
     return _META_TAIL.sub("", b).strip()
 
 
-def clean_body(body, user, name, mode, others=()):
+def clean_body(body, user, name, mode, others=(), info=None):
     b = body.replace("\r", "")
+    b, leak = sanitize.strip_directives(b, name, user, others)   # leaked prompt text ('[Reply as ...]', '<<note>>') never reaches the chat
+    if info is not None:
+        info.update(leak)
     b = strip_meta(b)
     b = re.sub(r"^\s*\**" + re.escape(name) + r"\**\s*:\s*", "", b)
     b = strip_meta(b)
@@ -114,15 +118,19 @@ def clean_body(body, user, name, mode, others=()):
     return b.strip()
 
 
-def finish_reply(raw, finish, user, name, mode, others=()):
+def finish_reply(raw, finish, user, name, mode, others=(), narrate=True):
     th, body, think_open = split_think(raw)
-    body = clean_body(body, user, name, mode, others)
+    leak = {}
+    body = clean_body(body, user, name, mode, others, leak)
+    if mode == "story" and narrate:   # whatever is not dialogue is narration, and narration lives between *asterisks*
+        body = sanitize.enclose_narration(body, name, user)
     cut = False
     if finish == "length" and body:  # ran out of tokens: never leave half a sentence on screen
         cut = True
         lines = body.split("\n")
         body = "\n".join(lines[:-1]) if mode == "text" and len(lines) > 1 else trim_sentence(body)
-    return {"think": th, "text": balance(body), "empty": not body.strip(), "cut": cut, "think_open": think_open}
+    return {"think": th, "text": balance(body), "empty": not body.strip(), "cut": cut, "think_open": think_open,
+            "leak": bool(leak.get("leaked")), "flip": bool(leak.get("flipped"))}
 
 
 TEXT_LINES = {"short": 2, "medium": 3, "long": 5, "auto": 4}   # most separate text messages (lines) in texting mode

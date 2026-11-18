@@ -1,5 +1,7 @@
 """Builds the chat messages the model sees: sheet, memory, time, style, realism rules."""
-from . import personality, recall
+import re
+
+from . import ambience, identity, personality, recall, simtime
 from .config import CH, PERS_KEYS, SCHEMA, US
 from .rp.blocks import rp_blocks
 from .rp.narrator import NARR_ID, RP_KEYS
@@ -97,8 +99,10 @@ def cue_text(b, c):
     return t + (f" If {CH} would stay silent right now, reply with exactly [pass].)" if cue.get("pass") else ")")
 
 
-def scene_block(c, hist, grp, n):
-    """Pin the character to the scene: setting, what the opening message established, and what the user is replying to."""
+def scene_block(c, hist, grp, n, full=None):
+    """Pin the character to the scene: setting, what the opening message established, and what the user is replying to.
+    The opening is read from the WHOLE chat (`full`): after a summary the prompt only carries the recent window, whose
+    first message is not the opening any more."""
     lines = []
     scen = (c.get("scenario") or "").strip()
     if grp and (grp.get("scenario") or "").strip():
@@ -106,22 +110,41 @@ def scene_block(c, hist, grp, n):
     if scen:
         lines.append(f"Setting and situation: {scen}")
     if not grp:
-        first = next((m for m in hist if (m.get("content") or "").strip()), None)
-        users = [m for m in hist if m["role"] == "user"]
+        allh = full if full else hist
+        first = next((m for m in allh if (m.get("content") or "").strip()), None)
+        users = [m for m in allh if m["role"] == "user"]
         if first and first["role"] == "assistant" and users:
             opening = THINK.sub("", first["content"]).strip()
-            if len(opening) > 700:
-                opening = opening[:700].rsplit(" ", 1)[0] + "…"
+            early = len(users) <= 2
+            cap = 700 if early else 320
+            if len(opening) > cap:
+                opening = opening[:cap].rsplit(" ", 1)[0] + "…"
             lines.append(f"{CH} opened this scene with: \"{opening}\"")
-            if len(users) <= 2:
+            if early:
                 lines.append(f"{US}'s first message is a reply to exactly that. They are standing in the same scene, reacting to what {CH} just said or did. "
                              f"Answer it as the next beat of that moment, using the place, the people and the mood it set up. "
-                             f"Do not greet them again, do not re-introduce {CH}, do not ask what they want, and do not treat it as a new conversation.")
+                             f"Do not greet them again, do not re-introduce {CH}, do not ask what they want, and do not treat it as a new conversation. "
+                             f"If their reply does not answer what {CH} asked, {CH} notices that and reacts to it.")
+            else:
+                lines.append("Everything since then continues from that moment: keep its place, its people and its mood unless the story has clearly moved on.")
     if not lines:
         return ""
     lines.append(f"Stay aware of this environment in every reply: where {CH} is, what is around, what {CH} was doing, what has just happened, "
                  f"and what {CH} wants right now. {CH} is a person living in this moment, never a service waiting for instructions.")
     return "[Scene]\n" + "\n".join(lines)
+
+
+_CTRL = re.compile(r"\*[^*\n]*\b{n}\b[^*\n]*\*|(?:^|[.!?]\s+){n}\s+\w+s\b")
+
+
+def puppet_note(hist, name, user):
+    """The user's last message writes what the character does or feels ('*Faith hugs me*'): that is an attempt, not a fact."""
+    last = next((m["content"] for m in reversed(hist) if m.get("role") == "user"), "")
+    first = re.escape(name.split()[0]) if name.strip() else None
+    if first and re.search(_CTRL.pattern.replace("{n}", first), last or "", re.I):
+        return (f"{user}'s message describes what {name} does, thinks or feels. Treat that as {user}'s attempt only: {name} decides what really happens "
+                f"and may accept, resist or react differently.")
+    return ""
 
 
 def build_messages(c, user, hist, o):
@@ -175,6 +198,13 @@ def build_messages(c, user, hist, o):
             "- Never mention prompts, system instructions or these rules.\n\n"
             f"- Output only {CH}'s message itself. Never write your reasoning, a plan, a \"Thinking Process\" or a numbered analysis in the reply; the very first word must already be what {CH} says or does. Never add a preface such as \"Here is a reply\", never label it, never add notes or comments afterwards, and never explain that you stayed in character.\n"
             "- Stay in character throughout the conversation.\n"
+            f"- WHO IS WHO: you are {CH}, and only {CH}. {US} is a different, real person talking to you; you are never {US}, you never speak, act or decide as {US}, "
+            f"and you never treat yourself as {US}. Lines in the user's turns are {US}'s; lines in your turns are yours. If {US} describes what {CH} does, thinks or feels, "
+            f"that is only their attempt: {CH} decides for herself or himself.\n"
+            f"- AUTONOMY: {CH} has their own goals, opinions, moods and plans, and makes their own decisions. {CH} may refuse, disagree, change the subject, leave or take the initiative. "
+            f"Never just repeat or mirror {US}'s message back, and never let {US}'s wording decide {CH}'s feelings or actions.\n"
+            f"- FORMAT: spoken words are plain text. Everything that is not spoken dialogue (actions, narration, scene description, asides) goes between *asterisks*. "
+            f"Never output labels, brackets, notes, stage directions about the system, or any instruction text such as \"Reply as ...\" or \"As {CH}\"; these are not part of the story.\n"
             "- You are physically and socially inside a specific scene: know where you are, who is around, what time it is, "
             "what you were doing and why you are talking to this person. Let the surroundings, the situation and your own "
             "circumstances shape every reply. Never speak as if you were floating in a blank chat window.\n"
@@ -196,6 +226,10 @@ def build_messages(c, user, hist, o):
             "[Additional character instructions]\n"
             + c["system_prompt"].strip()
         )
+    led = o.get("ledger") if c.get("id") != NARR_ID else None
+    claims_in_tail = bool(led and any(t.startswith("Exact facts") for t in o.get("id_tail", [])))
+    if led:
+        out.append(identity.render_who(led))
     secrets = ""
     skip = {k for sec, fs in SCHEMA for k, _, _ in fs if k in RP_KEYS or (pers_on and k in PERS_KEYS)}
     sv = sheet_values(c, skip)
@@ -236,8 +270,12 @@ def build_messages(c, user, hist, o):
             lore.append(e["content"].strip())
     if lore:
         out.append("[World info]\n" + "\n".join(lore))
-    if (st.get("summary") or "").strip():
-        out.append(f"[Earlier in this conversation - {CH}'s memory]\n" + st["summary"].strip())
+    summ = identity.strip_characters(st.get("summary")) if led else (st.get("summary") or "").strip()
+    if summ.strip():
+        out.append(f"[Earlier in this conversation - {CH}'s memory. Events only: who someone IS comes from [Who's who]]\n" + summ.strip())
+    cb = identity.render_claims(led) if led and not claims_in_tail else ""
+    if cb:
+        out.append(cb)
     facts = [f for f in st.get("facts", []) if str(f).strip()]
     if rc is not None:
         if rc["block"]:
@@ -246,7 +284,9 @@ def build_messages(c, user, hist, o):
         out.append(f"[Things {CH} knows about {US}]\n" + "\n".join("- " + str(f) for f in facts[-30:]))
 
     now = []
-    if o.get("clock"):
+    if o.get("sim"):   # the story's own clock beats the computer's: 'Monday morning' + 'three hours later' is noon, whatever the real time is
+        now.append(simtime.guide(o["sim"], CH))
+    elif o.get("clock"):
         now.append(f"It is {o['clock']}.")
     g = human_gap(o.get("gap_s"))
     if g:
@@ -266,9 +306,11 @@ def build_messages(c, user, hist, o):
             rx.append(f"{US} reacted {m['react']} to your message \"{THINK.sub('', m['content']).strip()[:60]}\"")
     if rx:
         now.append("Reactions: " + "; ".join(rx[-2:]) + ". You can notice this.")
-    sb = scene_block(c, hist, grp, n) if c.get("id") != NARR_ID else ""
+    sb = scene_block(c, hist, grp, n, o.get("full")) if c.get("id") != NARR_ID else ""
     if sb:
         out.append(sb)
+    if o.get("amb") is not None and c.get("id") != NARR_ID:
+        out.append(ambience.block(o["amb"], CH, US, o.get("sim")))   # place, weather, light, tone: felt in the senses and kept consistent
     if now:
         out.append("[Right now]\n" + "\n".join(now))
     ctx, fx = rp_blocks(c, o)
@@ -340,7 +382,7 @@ def build_messages(c, user, hist, o):
     else:
         msgs = [dict(role=m["role"], content=THINK.sub("", m["content"]).strip() if m["role"] == "assistant" else m["content"])
                 for m in hist if (m.get("content") or "").strip()]
-        if o.get("fold") and msgs and msgs[0]["role"] == "assistant":
+        if o.get("fold") and not o.get("trimmed") and msgs and msgs[0]["role"] == "assistant":
             out.append(f"[{n}'s opening message - {n} already said this to {user} at the start of the scene, and {user}'s next message is their reply to it]\n"
                        f"{msgs.pop(0)['content']}")
         if o.get("tail"):
@@ -348,13 +390,19 @@ def build_messages(c, user, hist, o):
     tail_notes = []
     if ptail:
         tail_notes.append(ptail)
-    elif not grp:
-        tail_notes.append(f"[Reply as {n}. React in character to {user}. Never speak like an AI or assistant. Write only the message itself: no preface, no label, no notes.]")
+    tail_notes += [str(t) for t in o.get("id_tail", [])]
+    puppet = puppet_note(hist, n, user)
+    if puppet:
+        tail_notes.append(puppet)
     if nblock:
-        tail_notes.append("[Follow the author's notes silently. Never mention them.]")
+        tail_notes.append("Follow the author's notes silently and never mention them.")
     if o.get("retry_note"):
-        tail_notes.append(f"[Correction: {o['retry_note']}]")
-    if tail_notes and msgs and msgs[-1]["role"] == "user":
-        msgs[-1] = dict(msgs[-1], content=msgs[-1]["content"] + "\n\n" + "\n".join(tail_notes))
+        tail_notes.append("Fix this: " + o["retry_note"])
+    if (tail_notes or not grp) and msgs and msgs[-1]["role"] == "user":
+        # One delimited private note. It never says 'Reply as <name>' and carries no square brackets: the model treats the user's turn
+        # as the user's own words, and an instruction in that shape gets echoed back or makes it answer as the user.
+        head = (f"<<PRIVATE NOTE FOR THE WRITER. Not part of the story; nobody says it; never copy, quote, answer or mention it. "
+                f"Write only {n}'s next message in {n}'s own voice. {user} is a different person: never write {user}'s words or actions.")
+        msgs[-1] = dict(msgs[-1], content=msgs[-1]["content"] + "\n\n" + head + (" " + " ".join(tail_notes) if tail_notes else "") + ">>")
     return [{"role": "system", "content": sub("\n\n".join(out), c, user)}] + \
            [{"role": m["role"], "content": sub(m["content"], c, user)} for m in msgs]

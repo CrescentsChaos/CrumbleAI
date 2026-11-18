@@ -119,18 +119,18 @@ def short_term(m, turn):
     return lines
 
 
-def _query_for(hist, m, st, user, char, known_extra):
+def _query_for(hist, m, st, user, char, known_extra, fresh=False):
     msgs = [x for x in (hist or []) if (x.get("content") or "").strip()]
     last_user = next((x for x in reversed(msgs) if x.get("role") == "user"), None)
     text = (last_user or {}).get("content", "")
-    ctx = [(THINK.sub("", x["content"])[:400], w) for x, w in zip(reversed([x for x in msgs if x is not last_user][-2:]), (.35, .2))]
-    if (m.get("scene") or "").strip():
+    ctx = [] if fresh else [(THINK.sub("", x["content"])[:400], w) for x, w in zip(reversed([x for x in msgs if x is not last_user][-2:]), (.35, .2))]
+    if (m.get("scene") or "").strip() and not fresh:     # the subject just changed: the old scene and old lines must not pull old memories in
         ctx.append((m["scene"], .3))
     known = analyze.known_people(m["items"], skip=(user, char)) + [n for n in known_extra if n]
     return analyze.query(text, ctx, (st or {}).get("mood", ""), known, skip=(user, char))
 
 
-def select(st, hist, *, user="", char="", cfg=None, turn=None, now=None, known_extra=()):
+def select(st, hist, *, user="", char="", cfg=None, turn=None, now=None, known_extra=(), fresh=False, veto=None):
     """What goes into the prompt this turn.
     -> {block, short, ids, trace, q}   block = the memory text ("" if nothing earned a place), short = lines for the scene
     section, ids = what was used (so recalling it can strengthen it), trace = why each one was picked."""
@@ -139,7 +139,7 @@ def select(st, hist, *, user="", char="", cfg=None, turn=None, now=None, known_e
     turn = (m.get("turn", 0) + 1) if turn is None else int(turn)
     now = now or store.now_ms()
     d = DEPTH[cfg["depth"]]
-    q = _query_for(hist, m, st, user, char, known_extra)
+    q = _query_for(hist, m, st, user, char, known_extra, fresh)
     ranked = rank(m, q, turn, now)
     items_cap, chars = d["items"] + (2 if q["reach"] else 0), int(d["chars"] * (1.3 if q["reach"] else 1))
     caps = {"episodic": max(2, round(items_cap * .5)), "semantic": max(2, round(items_cap * .55)), "emotional": max(1, round(items_cap * .3))}
@@ -153,6 +153,8 @@ def select(st, hist, *, user="", char="", cfg=None, turn=None, now=None, known_e
         if not force and (used[i["t"]] >= caps[i["t"]] or spent + cost > chars):
             return False
         if any(store.similar(i["text"], c[0]["item"]["text"]) >= .6 for c in chosen):
+            return False
+        if veto and veto(i["text"]):      # contradicts something the user actually said: what they said wins
             return False
         chosen.append((r, reason))
         used[i["t"]] += 1
@@ -169,7 +171,7 @@ def select(st, hist, *, user="", char="", cfg=None, turn=None, now=None, known_e
             break
         if r["rel"] >= MIN_REL:
             take(r, "+".join(r["why"]) or "relevant")
-        elif (r["item"]["t"] != "semantic" and r["imp"] >= .7 and turn - r["item"].get("turn", 0) <= AMBIENT_TURNS
+        elif (not fresh and r["item"]["t"] != "semantic" and r["imp"] >= .7 and turn - r["item"].get("turn", 0) <= AMBIENT_TURNS
               and ambient < (2 if cfg["depth"] == "deep" else 1)):
             ambient += take(r, "just happened")    # still colours the mood even if nobody mentioned it
     by_id = {r["item"]["id"]: r for r in ranked}
@@ -179,13 +181,16 @@ def select(st, hist, *, user="", char="", cfg=None, turn=None, now=None, known_e
                 if e["t"] == "emotional" and e.get("link") == r["item"]["id"] and e["id"] in by_id:
                     take(by_id[e["id"]], "linked feeling", force=len(chosen) < items_cap)
     short = short_term(m, turn)
+    if fresh:
+        short = [x for x in short if x.startswith("Scene:")]     # 'just happened' belongs to the topic that was dropped
     if not chosen:
         return {"block": "", "short": short, "ids": [], "trace": [], "q": _public_q(q)}
     groups = {"episodic": [], "semantic": [], "emotional": []}
     for r, _ in sorted(chosen, key=lambda c: c[0]["item"].get("turn", 0)):
         i = r["item"]
         groups[i["t"]].append(f"- {i['text']}" + (_ago(i, now) if i["t"] == "episodic" else ""))
-    parts = [f"[What {CH} remembers - let it shape the reply only where it fits the moment; never recite it]"]
+    parts = [f"[What {CH} remembers. These are real. When {US} asks about any of it, answer from it exactly; otherwise let it colour the reply without reciting it. "
+             f"If a memory disagrees with what {US} actually said, what {US} said wins]"]
     for t, head in (("episodic", f"What happened between {CH} and {US}:"), ("semantic", f"What {CH} knows:"), ("emotional", f"How {CH} remembers feeling:")):
         if groups[t]:
             parts += [head] + groups[t]

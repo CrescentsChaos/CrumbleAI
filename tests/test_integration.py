@@ -102,10 +102,10 @@ class SummarizeTests(unittest.TestCase):
                             "summary": "They met yesterday."})
         ask = fake.calls[-1][0]["content"]
         self.assertEqual(result, "A short summary.")
-        for field in ("CHARACTERS", "Eva:", "Crescent:", "SETTING & STATE", "Location:",
-                      "Current State:", "RELATIONSHIP DYNAMIC", "Primary Dynamic:", "Tone:",
-                      "PIVOTAL MOMENTS"):
+        for field in ("SETTING & STATE", "Location:", "Current State:", "RELATIONSHIP DYNAMIC", "Primary Dynamic:", "Tone:",
+                      "PIVOTAL MOMENTS", "Who's who:", "Eva (the character)", "Crescent (the user)"):
             self.assertIn(field, ask)
+        self.assertNotIn("CHARACTERS\n", ask)      # per-person facts come from the cast ledger now, not from the summary
         self.assertIn("They met yesterday.", ask)
         self.assertIn("We are at the station.", ask)
         self.assertIn("I promised to stay.", ask)

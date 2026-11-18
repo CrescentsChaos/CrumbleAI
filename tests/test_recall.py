@@ -426,7 +426,7 @@ class PipelineTests(unittest.TestCase):
         self.assertNotIn('"scene"', fake.calls[-1][-1]["content"])
 
     def test_track_end_to_end(self):
-        h.install(MemLLM(mem=TestMem, track={"mood": "touched", "affection_delta": 4, "thought": "aw", "facts": ["Sam is generous"],
+        h.install(MemLLM(mem=TestMem, track={"mood": "touched", "affection_delta": 4, "thought": "aw", "facts": ["Sam got a necklace for a birthday"],
                                              "scene": "Mira's birthday evening at the cafe", "event": "Sam handed Mira a necklace", "importance": 9}))
         hist = [{"role": "user", "content": "Here, I got you a necklace for your birthday!"}, {"role": "assistant", "content": "*gasps* Sam..."}]
         r = track({"char": h.BOLD, "user": "Sam", "history": hist, "state": {"affection": 50}, "mem": ON, "turn": 2})
@@ -434,7 +434,7 @@ class PipelineTests(unittest.TestCase):
         self.assertEqual({i["t"] for i in items}, {"episodic", "emotional", "semantic"})
         self.assertTrue(r["mem_added"])
         self.assertEqual(r["state"]["mem"]["turn"], 2)
-        self.assertIn("{{user}} is generous", r["state"]["facts"])
+        self.assertIn("{{user}} got a necklace for a birthday", r["state"]["facts"])   # facts must be grounded in what the user said
         self.assertIn("Sam handed", json.dumps(r["state"]["mem"]["recent"]).replace("{{user}}", "Sam"))
 
     def test_track_does_not_touch_the_callers_state(self):

@@ -214,3 +214,16 @@ Issues and pull requests are welcome. The app is intentionally dependency-light 
 ## License
 
 Add a license for your repo (for example MIT) as `LICENSE`.
+
+---
+
+## Roleplay reliability (identity, leaks, narration, story time)
+
+- **Identity separation.** The prompt states plainly who is who (the character, the user, everyone else), tells the character it never writes or decides for the user, and notes when the user's message dictates what the character does or feels (an *attempt*, not a fact). A reply that narrates the user (`*Crescent walks away*`) or echoes the user's message is retried.
+- **No instruction leaks.** The end-of-prompt reminder is one delimited private note without brackets or "Reply as <name>" wording. Anything that still leaks (`[Reply as ...]`, `[As Faith]`, `<<note>>`, `(Write only ...)`) is stripped from the reply (`crumble/sanitize.py`), cut off at generation time by stop sequences, and retried when the model wrote as the user.
+- **Narration format.** Everything that is not spoken dialogue is shown between `*asterisks*`; stray `(asides)` and `[asides]` become narration.
+- **Story time.** `crumble/simtime.py` derives the clock from the story ("Monday morning", "three hours later", "the next morning", "at 3pm", author setting notes) every turn. The character gets the story clock instead of the PC's clock, the "time since last message" is story time, and replies that contradict it (night talk at noon) are retried. Without any time in the story, the real clock is used as before.
+
+## Environmental awareness (`crumble/ambience.py`)
+
+Derived from the whole chat every turn, like the identity ledger and the story clock: place (indoors/outdoors, with sensory palette), weather (with physics, indoors vs outdoors, persistence until the story changes it), light (follows the story clock) and tone (horror 0-2, tenderness/intimacy 0-2, weighted to the most recent messages). It adds an `[Environment]` block to the prompt, gives horror and intimate beats up to 30% more room, and retries replies that clearly break the scene (sunshine in a storm, rain soaking people indoors, rain from nowhere in clear weather, giggling in a horror beat). Intimacy only adds grounding and realism; the explicitness ceiling from the intimacy settings always wins.

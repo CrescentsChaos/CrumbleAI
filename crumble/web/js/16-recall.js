@@ -52,7 +52,7 @@ $('#memf').addEventListener('click',async e=>{const b=e.target.closest('button')
   box.innerHTML=r.err?esc(r.err):r.short.map(x=>`<div class=small>⏱ ${esc(x)}</div>`).join('')+(r.trace.map(t=>`<div class=mt><b>${esc(t.t)}</b> ${esc(t.text)}<small>${esc(t.why)} · relevance ${Math.round(t.rel*100)} · recency ${Math.round(t.rec*100)} · importance ${Math.round(t.imp*100)}</small></div>`).join('')||'<p class=small>Nothing would be added to the prompt for that message.</p>');return}
  else if(k=='build'){if(!S.loaded){stat().textContent='Load a model first.';return}
   b.disabled=true;stat().textContent='Reading the chat… (one model call per important moment)';let added=0,calls=0,err='';
-  for(const c of(G?gmem().filter(c=>c.id!='__narrator__'):[cur])){const s=memS(G?c.id:''),r=await api('/api/memorize','POST',{char:apiChar(c),user:uname(),history:apiHist(hist),state:s,mem:memCfg()});
+  for(const c of(G?gmem().filter(c=>c.id!='__narrator__'):[cur])){const s=memS(G?c.id:''),r=await api('/api/memorize','POST',{char:apiChar(c),user:uname(),persona:U.persona,history:apiHist(hist),state:s,mem:memCfg()});
    if(r.err){err=r.err;break}Object.assign(s,r.state);added+=r.added;calls+=r.calls}
   saveSoon();renderMem();const el=$('#memf').querySelector(`[data-mstat="${cid}"]`);if(el)el.textContent=err||`Done: ${added} new ${added==1?'memory':'memories'} (${calls} model calls).`;return}
  else if(k=='wipe'){if(!confirm('Forget every memory in this chat?'))return;memS(cid).mem=blankMem();memS(cid).facts=[]}

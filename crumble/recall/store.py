@@ -67,12 +67,18 @@ def ensure(st, user="", char=""):
     return m
 
 
+_COMMON = set("will mark grace hope joy rose may june april august art bill rob pat sky dawn faith summer autumn winter amber ivy rain river "
+              "wind lily daisy violet hunter fox wolf bird page rick dean ray jack case chase frank sue sunny honey angel star".split())
+
+
 def placeholders(text, user, char):
-    """Real names -> {{user}} / {{char}} so the memory survives a rename."""
+    """Real names -> {{user}} / {{char}} so the memory survives a rename. Matches any capitalisation ('crescent's'), except
+    that a name which is also an ordinary word (Will, Hope, Rose) is only matched when written with a capital."""
     t = str(text or "").strip()
     for name, ph in ((user, "{{user}}"), (char, "{{char}}")):
         for n in sorted({x for x in (name or "", (name or "").split(" ")[0]) if len(x) >= 2}, key=len, reverse=True):
-            t = re.sub(r"(?<![\w{])" + re.escape(n) + r"(?![\w}])", ph, t)
+            loose = n.lower() not in _COMMON and n.lower() not in lx.EXTRA_STOP and len(n) >= 3
+            t = re.sub(r"(?<![\w{])" + re.escape(n) + r"(?![\w}])", ph, t, flags=re.I if loose else 0)
     return re.sub(r"\s+", " ", t).strip()
 
 

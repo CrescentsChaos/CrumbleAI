@@ -322,7 +322,7 @@ class H(BaseHTTPRequestHandler):
                 got = True
                 res = generate_reply(b, self.sse)
                 self.sse({"done": res})  # the whole reply is ready: only now does the page show any text
-            except (BrokenPipeError, ConnectionResetError, ConnectionAbortedError):
+            except (BrokenPipeError, ConnectionResetError):
                 return
             except Exception as e:
                 try:

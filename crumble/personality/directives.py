@@ -125,7 +125,7 @@ def build(c, prof, stim, st, depth):
     if canon:
         lines.append(f"Already established about {CH} (said earlier in this chat; stay consistent, never contradict):\n" + "\n".join("- " + x for x in canon))
     block = f"[{n} - Behaviour]\n" + "\n".join(lines) if lines else ""
-    tail = f"[Reply as {n}. React in character to {US} in this scene. Never act like an assistant, ask how you can help, or offer casual chat.]"
+    tail = ""   # only Deep adds a closing reminder; it is plain text (no brackets or 'Reply as'), so it can never be mistaken for a chat line
     if depth == "deep" and beh:
-        tail = f"[Reply as {n}. Stay {prof['summary'] or 'in character'}: {' '.join(beh[:2])}. React in character to {US}. Never act like an assistant, ask how you can help, or offer casual chat.]"
+        tail = f"Voice: {n} stays {prof['summary'] or 'in character'}: {' '.join(beh[:2])}."
     return block, tail

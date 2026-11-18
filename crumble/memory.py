@@ -4,8 +4,9 @@ import difflib
 import re
 import time
 
-from . import personality, recall
+from . import identity, personality, recall
 from .config import EMO, LLM, LOCK
+from .recall import store as rstore
 from .textutil import THINK, loose_json, trim_sentence
 
 
@@ -26,15 +27,22 @@ def track(b):
     if rcfg["on"] and isinstance(st.get("mem"), dict):
         st["mem"] = copy.deepcopy(st["mem"])
     n = c.get("name") or "Character"
+    led = identity.build(c, user, b["history"], persona=b.get("persona"), state=st)   # who is who, read from this window + what was seen before
+    ui = user
+    user = led["user"]["name"]
+    guard = identity.make_guard(led, [THINK.sub("", m["content"]) for m in b["history"] if m["role"] == "user"])
+    st["cast"] = led["seed"]
     aff, facts = int(st.get("affection", 50)), [str(f) for f in st.get("facts", [])]
-    convo = "\n".join(f"{(m.get('name') or n) if m['role'] == 'assistant' else user}: {THINK.sub('', m['content'])[:500]}" for m in hist)
+    convo = "\n".join(f"{(m.get('name') or n) + ' (the character)' if m['role'] == 'assistant' else user + ' (the user)'}: {THINK.sub('', m['content'])[:500]}" for m in hist)
     ask = (f"You track the inner state of a roleplay character named {n}. Personality: {(c.get('personality') or c.get('description') or '')[:400]}\n"
+           f"{identity.roster(led)}\n"
            f"Previous mood: {st.get('mood', 'neutral')}. Affection toward {user} (0-100): {aff}.\n"
            f"Facts already known about {user}: {'; '.join(facts[-15:]) or 'none'}\n\nLatest messages:\n{convo}\n\n"
            f"Reply with ONLY a JSON object: {{\"mood\": one lowercase word for how {n} feels now, \"energy\": \"low\" or \"medium\" or \"high\", "
            f"\"affection_delta\": integer from -5 to 5 (how this exchange changed {n}'s feelings toward {user}; 0 if nothing changed), "
            f"\"thought\": \"one short private first-person thought of {n}, max 20 words\", "
-           f"\"facts\": [new durable facts {n} learned about {user} in these messages; empty list if none]}}. /no_think")
+           f"\"facts\": [new lasting facts that {user} said about THEMSELF in the lines marked (the user). Never include anything that appears only in {n}'s lines, "
+           f"never something said about {n}, and never a gender or age that {user} did not state; empty list if none]}}. /no_think")
     pcfg = personality.settings(b.get("pers"))
     pers_on = personality.active(c, pcfg)
     if pers_on:
@@ -73,6 +81,9 @@ def track(b):
     new = j.get("facts") if isinstance(j.get("facts"), list) else []
     for f in new[:3]:
         f = str(f).strip().rstrip(".")
+        t = rstore.placeholders(rstore.placeholders(f, user, n), ui, n)
+        t = guard(t, "fact") if t else None          # grounded in the user's own words, not the character's invention; no assumed pronouns
+        f = rstore.resolve(t, user, n) if t else ""
         if 3 < len(f) < 160 and not any(difflib.SequenceMatcher(None, f.lower(), o.lower()).ratio() > .8 for o in facts):
             facts.append(f)
     st["facts"] = facts[-40:]
@@ -85,7 +96,7 @@ def track(b):
     if rcfg["on"]:   # hierarchical memory: short-term, semantic facts, and (for important moments) an episode + its feeling
         turn = int(b.get("turn") or ((st.get("mem") or {}).get("turn", 0) + 2))
         rec = recall.update(st, j, b["history"], user=user, char=n, persona=(c.get("personality") or c.get("description") or ""), cfg=rcfg,
-                            turn=turn, delta=delta, mood_before=mood_before, mood_after=mood, ask=_ask, used=b.get("used") or [])
+                            turn=turn, delta=delta, mood_before=mood_before, mood_after=mood, ask=_ask, used=b.get("used") or [], guard=guard)
         out.update(mem_added=rec["added"], moment=rec["moment"]["score"])
     return out
 
@@ -100,28 +111,36 @@ def identity_line(c, n):
 def summarize(b):
     c, user = b["char"], b["user"]
     n = c.get("name") or "Character"
-    convo = "\n".join(f"{(m.get('name') or n) if m['role'] == 'assistant' else user}: {THINK.sub('', m['content'])[:700]}" for m in b["history"])
-    ask = (identity_line(c, n) + f"Previous memory notes: {b.get('summary') or 'none'}\n\nNew events to fold in:\n{convo}\n\n"
+    led = identity.build(c, user, b["history"], persona=b.get("persona"))
+    user = led["user"]["name"]
+    convo = "\n".join(f"{(m.get('name') or n) + ' (the character)' if m['role'] == 'assistant' else user + ' (the user)'}: {THINK.sub('', m['content'])[:700]}" for m in b["history"])
+    prev = identity.strip_characters(b.get("summary") or "") or "none"     # who someone is comes from the cast ledger, not from the summary
+    ask = (identity_line(c, n) + identity.roster(led) + f"\nPrevious memory notes: {prev}\n\nNew events to fold in:\n{convo}\n\n"
            f"Update the memory using the conversation above. Return only these sections and fields, in this order:\n"
-           f"CHARACTERS\n{n}: [important traits, facts, and current situation]\n{user}: [important traits, facts, and current situation]\n"
            "SETTING & STATE\nLocation: [where they are]\nCurrent State: [what is happening now]\n"
            "RELATIONSHIP DYNAMIC\nPrimary Dynamic: [how their relationship currently works and how it has changed]\n"
            "Tone: [the emotional tone between them]\n"
-           "PIVOTAL MOMENTS\n- [important events, statements, or promises; include prior pivotal moments that still matter]\n"
+           "PIVOTAL MOMENTS\n- [important events, statements, or promises, each with the real name of who did or said it; include prior pivotal moments that still matter]\n"
+           f"Rules: write only what the conversation shows. Something a person says about themself belongs to that person and to nobody else. "
+           f"People who are only talked about are never present and never take part. Never describe a shared past or a shared experience that was not actually shown. "
+           f"Keep exact names, numbers and dates as written. Never guess anyone's age or gender (for {user} use 'they' unless the gender is stated). "
            "Keep every heading and field, use concise specific details, and write \"Not established\" when the chat does not provide an answer. "
-           "Never guess or estimate anyone's age: only write an age if it is in the fixed facts, the previous notes or the chat itself. "
            "Fold the new events into the previous notes without losing still-relevant facts. No preamble. /no_think")
     with LOCK:
         r = LLM["obj"].create_chat_completion(messages=[{"role": "user", "content": ask}], temperature=.3, max_tokens=450)
     ch = r["choices"][0]
     txt = THINK.sub("", ch["message"]["content"]).strip()
-    return trim_sentence(txt) if ch.get("finish_reason") == "length" else txt
+    txt = trim_sentence(txt) if ch.get("finish_reason") == "length" else txt
+    return identity.sanitize_summary(txt, led, [m["content"] for m in b["history"] if m["role"] == "user"], b.get("persona") or "")
 
 
 def memorize(b):
     """Build memories from a chat that already exists (the Memory tab's "Build memories from this chat")."""
     c, user, st = b["char"], b["user"], copy.deepcopy(dict(b.get("state") or {}))
     rcfg = recall.settings(dict(b.get("mem") or {}, on=True))
-    res = recall.backfill(st, b.get("history") or [], user=user, char=c.get("name") or "Character",
-                          persona=(c.get("personality") or c.get("description") or ""), cfg=rcfg, ask=_ask, max_calls=int(b.get("max_calls") or 8))
+    hist_ = b.get("history") or []
+    led = identity.build(c, user, hist_, persona=b.get("persona"), state=st)
+    guard = identity.make_guard(led, [THINK.sub("", x.get("content") or "") for x in hist_ if x.get("role") == "user"])
+    res = recall.backfill(st, hist_, user=led["user"]["name"], char=c.get("name") or "Character",
+                          persona=(c.get("personality") or c.get("description") or ""), cfg=rcfg, ask=_ask, max_calls=int(b.get("max_calls") or 8), guard=guard)
     return {"state": st, "added": len(res["added"]), "calls": res["calls"], "scanned": res["scanned"]}

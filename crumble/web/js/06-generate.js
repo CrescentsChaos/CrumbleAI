@@ -56,7 +56,7 @@ async function trackState(i){
  if(!U.track||!S.loaded||!chat)return;const ch=chat,m=hist[i];if(!m)return;
  const sp=G?memberById(m.cid):cur;if(!sp||sp.id=='__narrator__')return;
  const stt=G?mst(sp.id):ch.state,{log,mem:memPrev,...rest}=stt,snap=JSON.stringify(rest);
- try{const r=await api('/api/track','POST',{char:apiChar(sp),user:uname(),history:apiHist(hist.slice(Math.max(0,i-5),i+1)),state:stt,group:G?G.id:undefined,pers:persCfg(),mem:memCfg(),turn:i+1,used:m.recalled||[]});
+ try{const r=await api('/api/track','POST',{char:apiChar(sp),user:uname(),persona:U.persona,history:apiHist(hist.slice(Math.max(0,i-5),i+1)),state:stt,group:G?G.id:undefined,pers:persCfg(),mem:memCfg(),turn:i+1,used:m.recalled||[]});
   if(r.err||!r.state||chat!==ch||hist[i]!==m)return;
   if(U.mem)m.mundo={add:r.mem_added||[],scene:memPrev?.scene||'',recent:memPrev?.recent||[]};
   m.snap=snap;if(G)m.snapc=sp.id;m.thought=r.thought||'';hist.forEach((x,k)=>{if(k<i-6){delete x.snap;delete x.snapc}});
@@ -68,5 +68,5 @@ async function maybeSummarize(force){
  if((!force&&!U.track)||!S.loaded||!chat||sumBusy)return;const ch=chat,s=ch.state,upto=force?hist.length:hist.length-SUM_KEEP;
  if((!force&&upto-s.sumUpto<SUM_EVERY)||upto<=s.sumUpto)return;
  sumBusy=true;try{
- const r=await api('/api/summarize','POST',{char:apiChar(),user:uname(),group:G?G.id:undefined,history:apiHist(hist.slice(s.sumUpto,upto)),summary:s.summary});
+ const r=await api('/api/summarize','POST',{char:apiChar(),user:uname(),persona:U.persona,group:G?G.id:undefined,history:apiHist(hist.slice(s.sumUpto,upto)),summary:s.summary});
  if(r.summary&&chat===ch){s.summary=r.summary;s.sumUpto=upto;saveChat();if(!$('#mem').hidden)renderMem()}return r}finally{sumBusy=false}}

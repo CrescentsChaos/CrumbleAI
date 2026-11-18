@@ -11,9 +11,19 @@ EXTRA_STOP = set(("when someone people being anything about very really feel fee
                   "remember remembered remembers remembering forget forgot forgotten").split())
 
 
+IRREGULAR = {"broke": "break", "broken": "break", "took": "take", "taken": "take", "gave": "give", "given": "give", "bought": "buy",
+             "met": "meet", "wrote": "write", "written": "write", "ate": "eat", "eaten": "eat", "drank": "drink", "drunk": "drink",
+             "fell": "fall", "fallen": "fall", "lost": "lose", "found": "find", "ran": "run", "went": "go", "gone": "go", "saw": "see",
+             "seen": "see", "knew": "know", "known": "know", "felt": "feel", "kept": "keep", "sold": "sell",
+             "stole": "steal", "stolen": "steal", "swore": "swear", "sworn": "swear", "began": "begin", "begun": "begin", "drove": "drive",
+             "children": "child", "mice": "mouse", "men": "man", "women": "woman"}
+
+
 def stem(w):
     """Crude but consistent: kissed/kisses/kiss, hugging/hugged/hug, gifts/gift, promises/promised/promise all agree."""
     w = w.lower().strip("'")
+    if w in IRREGULAR:
+        w = IRREGULAR[w]
     if w.endswith("'s"):
         w = w[:-2]
     if len(w) <= 3:
@@ -35,12 +45,13 @@ def stem(w):
     return w[:-1] if len(w) > 3 and w.endswith("e") else w
 
 
-WORD = re.compile(r"[a-z][a-z']{2,}")
+WORD = re.compile(r"[a-z][a-z']{2,}|\d{1,4}(?:st|nd|rd|th)?\b")
 
 
 def terms(text):
     """A text -> list of content stems (stop words dropped, order kept, duplicates kept for weighting)."""
-    return [stem(w) for w in WORD.findall((text or "").lower().replace("’", "'"))
+    return [re.sub(r"(?<=\d)(?:st|nd|rd|th)$", "", w) if w[0].isdigit() else stem(w)
+            for w in WORD.findall((text or "").lower().replace("’", "'"))
             if w not in STOPW and w not in EXTRA_STOP and w not in ("{{user}}", "{{char}}", "user", "char")]
 
 
