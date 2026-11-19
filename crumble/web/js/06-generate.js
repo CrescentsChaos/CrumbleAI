@@ -8,6 +8,7 @@ const liveFix=t=>{ // close a dangling *action*, "quote" or (aside) so the previ
  if(((t.match(/"/g)||[]).length)%2)t+='"';
  const o=(t.match(/\(/g)||[]).length-(t.match(/\)/g)||[]).length;return o>0?t+')'.repeat(o):t};
 function liveAdd(d){const L=live;if(!L||!U.stream)return;L.raw+=d;if(!L.raf)L.raf=requestAnimationFrame(liveTick)}
+function liveSet(t){const L=live;if(!L||!U.stream)return;L.raw=t;if(L.shown>t.length)L.shown=t.length;if(!L.raf)L.raf=requestAnimationFrame(liveTick)}   // the server sends the whole preview (already cleaned and length-capped), so what you watch is what stays
 function liveStop(){if(live){cancelAnimationFrame(live.raf)}const t=live;live=null;return t}
 function liveTick(){const L=live;if(!L)return;L.raf=0;
  const te=L.raw.lastIndexOf('</think>'),floor=te>=0?te+8:(L.raw.includes('<think>')?L.raw.length:0);   // thinking text is never shown: skip over it at once
@@ -31,7 +32,7 @@ async function gen(kind='reply',spk,cue){
  const all=kind=='swipe'?hist.slice(0,li):hist,ic=all.filter(m=>!m.ooc),base=ooc?all:ic,lastU=[...ic].reverse().find(m=>m.role=='user'),started=Date.now(),
   lastO=ooc?[...hist].reverse().find(m=>m.role=='user'&&m.ooc):null;
  pendWho=ooc?OOCSP:G?sp:null;ctl=new AbortController();busy(true);phase('reading…');live={raw:'',shown:0,on:false,raf:0,sp:pendWho||cur,ooc};
- const rt=setTimeout(()=>{if(pendLabel=='reading…')phase(S.role=='guest'?'waiting for the AI…':'typing…')},Math.min(350,200+(lastU?lastU.content.split(' ').length*10:0)));
+ const rt=setTimeout(()=>{if(pendLabel=='reading…')phase('typing…')},Math.min(350,200+(lastU?lastU.content.split(' ').length*10:0)));
  const a=ic.at(-1)?.ts,b=ic.at(-2)?.ts;
  const gap=ooc||!U.timeaware?0:kind=='nudge'||kind=='continue'?(Date.now()-(a||Date.now()))/1000:(a&&b?(a-b)/1000:0);
  const s=chat.state,ms=ooc?{summary:s.summary}:G?{...mst(sp.id),summary:s.summary,log:undefined}:{...s,log:undefined},
@@ -47,7 +48,7 @@ async function gen(kind='reply',spk,cue){
   const rd=r.body.getReader(),dec=new TextDecoder();let buf='';
   for(;;){const{done,value}=await rd.read();if(done)break;buf+=dec.decode(value,{stream:true});let i;
    while((i=buf.indexOf('\n\n'))>=0){const l=buf.slice(0,i);buf=buf.slice(i+2);if(!l.startsWith('data: ')||l.slice(6)=='[DONE]')continue;
-    const j=JSON.parse(l.slice(6));if(j.q!=null)phase(j.q?`waiting in line (${j.q} ahead)…`:'waiting for the AI…');else if(j.d!=null)liveAdd(j.d);else if(j.rs){if(live){cancelAnimationFrame(live.raf);Object.assign(live,{raw:'',shown:0,on:false,raf:0});if(j.rs>1)phase('refining…')}}else if(j.p)phase(j.p=='think'?'thinking…':'typing…');else if(j.done)res=j.done;else if(j.err)err=j.err}}
+    const j=JSON.parse(l.slice(6));if(j.q!=null)phase('typing…');else if(j.t!=null)liveSet(j.t);else if(j.d!=null)liveAdd(j.d);else if(j.rs){if(live){cancelAnimationFrame(live.raf);Object.assign(live,{raw:'',shown:0,on:false,raf:0});if(j.rs>1)phase('refining…')}}else if(j.p)phase(j.p=='think'?'thinking…':'typing…');else if(j.done)res=j.done;else if(j.err)err=j.err}}
  }catch(e){err=e.name=='AbortError'?'aborted':(e.message||'Connection lost')}
  clearTimeout(rt);const ab=ctl.signal.aborted,L=liveStop();ctl=null;hidePending();pendWho=null;if(!rounding)busy(false);setStatus('online');
  if(ab){   // Stop keeps whatever was already written, like a person who trails off
@@ -67,7 +68,7 @@ async function gen(kind='reply',spk,cue){
  if(U.tts&&!ooc)speak(hist[idx].content);
  if(!U.stream)await typeMsg(idx);lastAct=Date.now();
  if(!ooc)trackSoon(idx);return true}
-async function post(t,forced,nofx){const m={role:'user',content:t,ts:Date.now()};hist.push(m);beep(520,.05);nudges=0;lastAct=Date.now();draw();
+async function post(t,forced,nofx){const m={role:'user',content:t,ts:Date.now()};hist.push(m);beep(520,.05);nudges=0;lastAct=Date.now();draw();feelPeek(t);
  if(U.rp!='off'&&!nofx){await resolveFx(m,forced);draw()}saveChat();G?await round():await gen('reply')}
 async function send(){let t=$('#inp').value.trim();if(!t||ctl||rounding||!cur?.id||!chat)return;skipTyping();window.speechSynthesis?.cancel();
  $('#inp').value='';$('#inp').style.height='';hideMnu();
@@ -85,7 +86,7 @@ async function trackState(i){
   if(r.err||!r.state||chat!==ch||hist[i]!==m)return;
   if(U.mem)m.mundo={add:r.mem_added||[],scene:memPrev?.scene||'',recent:memPrev?.recent||[]};
   m.snap=snap;if(G)m.snapc=sp.id;m.thought=r.thought||'';hist.forEach((x,k)=>{if(k<i-6){delete x.snap;delete x.snapc}});
-  if(G)ch.state.members[sp.id]={...stt,...r.state};else ch.state={...ch.state,...r.state};
+  if(G)ch.state.members[sp.id]={...stt,...r.state};else ch.state={...ch.state,...r.state};bondAfterTrack(m,G?sp.id:cur.id,r);
   head();redrawMsg(i);saveChat();if(!$('#mem').hidden)renderMem();maybeSummarize()}catch(e){}}
 const SUM_EVERY=10,SUM_KEEP=4;   // auto-summarize every 10 new messages; the newest 4 stay word-for-word in the prompt
 let sumBusy=false;

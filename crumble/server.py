@@ -12,11 +12,13 @@ from pathlib import Path
 
 from .config import CHARS, CHATS, EMO, EXT_KEYS, GROUPS, KEYS, LLM, LLM_VERBOSE, LOCK, MODELS, ROOT, SCHEMA, Llama, gpu_status
 from . import personality, recall
+from .feel import peek as feel_peek
 from .llm import generate_reply
 from .memory import memorize, summarize, track
 from .rp.director import PACE, plan_next
 from .rp.narrator import NARRATOR, NARR_ID
 from .rp.ooc import OOC_CHAR, clean_notes
+from .rp.relations import public as rel_paths
 from .rp.resolve import rp_resolve
 from .sharing import FAILS, FWD, LOCAL, MAX_BODY, MAX_QUEUE, MYIPS, QL, QUEUE, SESS, SHARE, lan_urls, save_share
 from .storage import chat_list, cdir, get_char, get_group, group_members, load_chars, load_groups, pub, rj, wj
@@ -28,7 +30,7 @@ def state(a):
     adm = a["role"] == "admin"
     chars = load_chars() if adm else [pub(c) for c in load_chars()]
     loaded = LLM["path"] if adm else (Path(LLM["path"]).name if LLM["path"] else None)
-    return {"schema": SCHEMA, "ext": EXT_KEYS, "chars": chars, "loaded": loaded, "backend": Llama is not None, "gpu": gpu_status()[0], "emo": EMO, "groups": load_groups(),
+    return {"schema": SCHEMA, "ext": EXT_KEYS, "chars": chars, "loaded": loaded, "backend": Llama is not None, "gpu": gpu_status()[0], "emo": EMO, "rels": rel_paths(), "groups": load_groups(),
             "models": sorted(str(m) for m in MODELS.rglob("*.gguf")) if adm else [], "role": a["role"], "name": a.get("name", "")}
 
 
@@ -93,6 +95,13 @@ class H(BaseHTTPRequestHandler):
             f = web.WEB / "fonts" / m.group(1)
             if f.is_file():
                 return self.send(f.read_bytes(), ctype="font/woff2", headers=[("Cache-Control", "public, max-age=31536000, immutable")])
+            return self.send({"err": "not found"}, 404)
+        m = re.fullmatch(r"/(logo|favicon-32|icon-192|icon-512|apple-touch-icon)\.png|/(favicon)\.ico", self.path.split("?")[0])
+        if m:   # the web icon: public static files from <project>/assets, also needed by the sign-in page
+            name = m.group(1) + ".png" if m.group(1) else "favicon.ico"
+            f = ROOT / "assets" / name
+            if f.is_file():
+                return self.send(f.read_bytes(), ctype="image/x-icon" if name.endswith(".ico") else "image/png", headers=[("Cache-Control", "public, max-age=86400")])
             return self.send({"err": "not found"}, 404)
         a = self.auth()
         if self.path == "/":
@@ -248,6 +257,13 @@ class H(BaseHTTPRequestHandler):
                                            str(b.get("user") or "User"), b))
             except Exception as e:
                 return self.send({"err": str(e)})
+        if self.path == "/api/feel":   # instant, provisional reaction to the message just sent (no model call, nothing saved)
+            out = {}
+            for cid in [str(x) for x in (b.get("cids") or [])][:8]:
+                c = get_char(cid)
+                if c:
+                    out[cid] = feel_peek(c, (b.get("states") or {}).get(cid) or {}, str(b.get("text") or "")[:2000])
+            return self.send({"feel": out})
         if self.path == "/api/personality":   # host only: it is derived from the private sheet
             c = get_char(str(b.get("cid"))) if b.get("cid") else {k: str(v) for k, v in (b.get("char") or {}).items() if k in KEYS}
             if not c:

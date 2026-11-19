@@ -9,7 +9,7 @@ from .rp.narrator import NARR_ID
 from .rp.ooc import KINDS as OOC_KINDS, clean_notes, finish_ooc, ooc_messages, ooc_words
 from .recall import lexicon as lx
 from .recall import store as rstore
-from .textutil import THINK, cap_reply, finish_reply, human_gap, similar, want_words
+from .textutil import THINK, cap_reply, finish_reply, human_gap, preview_reply, similar, want_words
 
 
 def ntok(txt):
@@ -42,10 +42,27 @@ def sampler(p):
 HOLD = 14   # characters kept back from the live preview: a stop phrase ("\nUser:") is cut off by the model, but its first letters may already have been generated
 
 
-def run_llm(msgs, samp, stop, cap, send=None, live=False):
-    """Run the model. With live=True the text is also streamed to the page as it is written ({"d": new text}); the finished text
-    (after clean-up, repairs and any retries) always follows in the final message, so the preview can never leave a wrong reply behind."""
-    t0, txt, fin, n, out, last = time.time(), "", None, 0, 0, 0.0
+def run_llm(msgs, samp, stop, cap, send=None, live=False, view=None):
+    """Run the model. With live=True the text is also streamed to the page as it is written; the finished text
+    (after clean-up, repairs and any retries) always follows in the final message, so the preview can never leave a wrong reply behind.
+    With view=<function>, the preview is that function applied to the text so far ({"t": whole preview}): the page then shows the same
+    clean-up and length cap as the finished reply, so a short reply is never written long on screen and then cut back."""
+    t0, txt, fin, n, out, last, sent = time.time(), "", None, 0, 0, 0.0, ""
+
+    def push(upto):
+        nonlocal out, sent
+        if view:
+            try:
+                t = view(txt[:upto])
+            except Exception:
+                return
+            if t != sent:
+                send({"t": t})
+                sent = t
+        else:
+            send({"d": txt[out:upto]})
+        out = upto
+
     for ch in LLM["obj"].create_chat_completion(messages=msgs, stream=True, max_tokens=cap, stop=stop, **samp):
         c = ch["choices"][0]
         d = c["delta"].get("content")
@@ -59,10 +76,12 @@ def run_llm(msgs, samp, stop, cap, send=None, live=False):
                 if n <= 2 or now - last > .045:     # a few tokens per message: smooth on the page, light on the socket
                     upto = len(txt) - HOLD
                     if upto > out:
-                        send({"d": txt[out:upto]})
-                        out, last = upto, now
+                        push(upto)
+                        last = now
         if c.get("finish_reason"):
             fin = c["finish_reason"]
+    if send and live and view:
+        push(len(txt))     # the held-back tail, so the preview is complete before the finished reply arrives
     return txt, fin, n, time.time() - t0
 
 
@@ -160,6 +179,9 @@ def generate_reply(b, send):
         k = ambience.boost(amb)
         lo, hi = int(lo * (1 + (k - 1) / 2)), int(hi * k)
     samp = sampler(p)
+    reg = personality.register.detect(c, mode) if cid != NARR_ID else None
+    if reg and reg["kind"] == "archaic":     # repeat_penalty taxes the repeated "thou / thy / thee" the register depends on
+        samp["repeat_penalty"] = min(samp["repeat_penalty"], 1.05)
     pcfg = personality.settings(p.get("pers"))
     guard_on = personality.active(c, pcfg) and pcfg["guard"] and kind in ("reply", "nudge")
     rcfg = recall.settings(p.get("mem"))
@@ -197,7 +219,10 @@ def generate_reply(b, send):
         budget = max(128, min(budget, n_ctx - used - 16))
         if send and p.get("stream"):
             send({"rs": attempt + 1})    # a new attempt starts: the page clears its live preview
-        raw, fin, ntoks, secs = run_llm(msgs, samp, stop, budget, send, bool(p.get("stream")))
+        def view(t):   # what the page may show while the reply is still being written
+            return preview_reply(t, user, c.get("name") or "Character", mode, others, p.get("actions", True), p.get("length", "auto"), hi,
+                                 kind in ("reply", "resume", "nudge"))
+        raw, fin, ntoks, secs = run_llm(msgs, samp, stop, budget, send, bool(p.get("stream")), view)
         r = finish_reply(raw, fin, user, c.get("name") or "Character", mode, others, narrate=p.get("actions", True))
         if kind in ("reply", "resume", "nudge") and not r["empty"]:
             r["text"] = cap_reply(r["text"], mode, p.get("length", "auto"), hi)
@@ -244,7 +269,7 @@ def generate_reply(b, send):
         elif kind == "reply" and not quick and attempt < tries_max - 1 and similar(r["text"], prevs):
             samp = dict(samp, temperature=min(1.4, samp["temperature"] + .15), repeat_penalty=samp["repeat_penalty"] + .05)
             notes.append("Your last attempt was too close to an earlier reply. Say something clearly different.")
-        elif pg and pg["retry"] and not quick and attempt < tries_max - 1 and pg["note"]:
+        elif pg and pg["retry"] and (not quick or pg.get("hard")) and attempt < tries_max - 1 and pg["note"]:
             notes.append(pg["note"])
         if notes:
             retry_note = " ".join(notes)
@@ -268,6 +293,8 @@ def generate_reply(b, send):
             best["text"] = f"*{cname} looks at {user}, unsure of what to say.*"
     if not best:
         raise RuntimeError("The model returned an empty reply. Try again, or turn Thinking off.")
+    if reg and kind in ("reply", "resume", "nudge", "continue"):
+        best["text"] = personality.register.repair(best["text"], reg)   # whatever else slipped, a formal or archaic voice never keeps contractions
     best.pop("_ni", None)
     best.update(ctx_used=used, ctx=n_ctx, dropped=dropped, retries=tries)
     if rc is not None:

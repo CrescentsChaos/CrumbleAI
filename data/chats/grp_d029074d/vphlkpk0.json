@@ -1,0 +1,925 @@
+{
+ "id": "vphlkpk0",
+ "title": "Hello is anyone here?",
+ "updated": 1795113083.8504596,
+ "history": [
+  {
+   "role": "user",
+   "content": "Hello is anyone here?",
+   "ts": 1795112773072
+  },
+  {
+   "role": "assistant",
+   "content": "*Leans against the counter with a playful smirk, tilting her head.*\n\nI'm here. You're going to have to be a bit louder if you want us to notice you.",
+   "think": "",
+   "ts": 1795112815351,
+   "stat": {
+    "tok": 40,
+    "ms": 42095
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "seen": 1795112773149,
+   "cid": "77b68c2c",
+   "name": "Reze",
+   "mundo": {
+    "add": [],
+    "scene": "",
+    "recent": []
+   },
+   "thought": "He seems a bit lost. I wonder what he's looking for in a place like this."
+  },
+  {
+   "role": "user",
+   "content": "Us?",
+   "ts": 1795112858464
+  },
+  {
+   "role": "assistant",
+   "content": "*She chuckles, her eyes gleaming with a mischievous glint.*\n\n\"Us.\" I mean the world around you. Or maybe just me?",
+   "think": "",
+   "ts": 1795112867712,
+   "stat": {
+    "tok": 30,
+    "ms": 9143
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "seen": 1795112858527,
+   "cid": "77b68c2c",
+   "name": "Reze",
+   "mundo": {
+    "add": [],
+    "scene": "{{char}} is leaning against a counter, teasing {{user}} in a public or semi-public space.",
+    "recent": [
+     {
+      "text": "{{char}} acknowledged {{user}}'s presence with a witty and slightly mocking greeting.",
+      "imp": 0.1,
+      "turn": 2,
+      "ts": 1795112822476
+     }
+    ]
+   },
+   "thought": "He's a bit slow on the uptake, but that makes him fun to tease."
+  },
+  {
+   "role": "user",
+   "content": "I dont see anyone else around..",
+   "ts": 1795112883880
+  },
+  {
+   "role": "assistant",
+   "content": "*Power scoffs loudly, crossing her arms over her chest.*\n\nHmph! You are clearly a fool! Of course there is no one else... I am here!",
+   "think": "",
+   "ts": 1795112893379,
+   "stat": {
+    "tok": 35,
+    "ms": 9390
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "seen": 1795112883946,
+   "cid": "f3292c76",
+   "name": "Power",
+   "mundo": {
+    "add": [],
+    "scene": "",
+    "recent": []
+   },
+   "thought": "Finally, a human who recognizes my greatness! I shall allow him to bask in my presence."
+  },
+  {
+   "role": "user",
+   "content": "lmao",
+   "ts": 1795112905191
+  },
+  {
+   "role": "assistant",
+   "content": "*She narrows her eyes, baring her sharp teeth in a grin.*\n\nDo not mock the great Power with your \"lmao\" nonsense! *It is an insult!*",
+   "think": "",
+   "ts": 1795112915037,
+   "stat": {
+    "tok": 35,
+    "ms": 9728
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "seen": 1795112905261,
+   "cid": "f3292c76",
+   "name": "Power",
+   "mundo": {
+    "add": [],
+    "scene": "{{char}} and {{user}} are in a room where {{char}} is asserting her dominance.",
+    "recent": [
+     {
+      "text": "{{char}} corrected {{user}}'s observation by declaring her own presence as the only thing that matters.",
+      "imp": 0.17,
+      "turn": 6,
+      "ts": 1795112898378
+     }
+    ]
+   },
+   "thought": "How dare he mock the mighty Power! I shall strike him down for his insolence!"
+  },
+  {
+   "role": "user",
+   "content": "alright you win. can I get a coffee?",
+   "ts": 1795112933409
+  },
+  {
+   "role": "assistant",
+   "content": "*She points a dramatic finger at him.*\n\nCoffee? You expect the great Power to fetch such a trivial beverage for you? I am not your servant!",
+   "think": "",
+   "ts": 1795112945503,
+   "stat": {
+    "tok": 32,
+    "ms": 2180
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 1
+   },
+   "recalled": [],
+   "seen": 1795112933482,
+   "cid": "f3292c76",
+   "name": "Power",
+   "mundo": {
+    "add": [],
+    "scene": "{{char}} and {{user}} are standing together, with {{char}} reacting to {{user}}'s laughter.",
+    "recent": [
+     {
+      "text": "{{char}} corrected {{user}}'s observation by declaring her own presence as the only thing that matters.",
+      "imp": 0.17,
+      "turn": 6,
+      "ts": 1795112898378
+     },
+     {
+      "text": "{{user}} mocked {{char}}'s presence with 'lmao' and she took it as a grave insult.",
+      "imp": 0.39,
+      "turn": 8,
+      "ts": 1795112920144
+     }
+    ]
+   },
+   "thought": "He thinks he can command me? I shall not be his slave!"
+  },
+  {
+   "role": "assistant",
+   "content": "*I watch the interaction with a faint, steady smile. It is quite amusing to see such a lively dynamic.* I shall provide your coffee, Crescent.",
+   "think": "",
+   "ts": 1795112956261,
+   "stat": {
+    "tok": 32,
+    "ms": 9624
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "seen": 1795112946582,
+   "cid": "246e3fcf",
+   "name": "Makima",
+   "mundo": {
+    "add": [],
+    "scene": "",
+    "recent": []
+   },
+   "thought": "He seems manageable. I enjoy the way he reacts to Power's outbursts."
+  },
+  {
+   "role": "user",
+   "content": "Thanks. someone has manners",
+   "ts": 1795112969408
+  },
+  {
+   "role": "assistant",
+   "content": "*She huffs, turning her head away with a look of extreme indignation.*\n\nHmph! Manners are for the weak! Only I have the true authority here!",
+   "think": "",
+   "ts": 1795112979506,
+   "stat": {
+    "tok": 34,
+    "ms": 9976
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "seen": 1795112969483,
+   "cid": "f3292c76",
+   "name": "Power",
+   "mundo": {
+    "add": [],
+    "scene": "{{char}} and {{user}} are standing together, and she is refusing to get him coffee.",
+    "recent": [
+     {
+      "text": "{{char}} corrected {{user}}'s observation by declaring her own presence as the only thing that matters.",
+      "imp": 0.17,
+      "turn": 6,
+      "ts": 1795112898378
+     },
+     {
+      "text": "{{user}} mocked {{char}}'s presence with 'lmao' and she took it as a grave insult.",
+      "imp": 0.39,
+      "turn": 8,
+      "ts": 1795112920144
+     },
+     {
+      "text": "{{char}} indignantly refused to fetch coffee for {{user}}.",
+      "imp": 0.36,
+      "turn": 10,
+      "ts": 1795112961325
+     }
+    ]
+   },
+   "snap": "{\"mood\":\"proud\",\"emoji\":\"😎\",\"energy\":\"high\",\"affection\":50,\"facts\":[],\"summary\":\"\",\"sumUpto\":0,\"pers\":{\"frac\":0.45,\"grudge\":0,\"va\":[0.598,0.35],\"mood\":\"proud\",\"ts\":1795112961325,\"n\":3,\"drift\":[{\"ts\":1795112898378,\"score\":100,\"flags\":[]},{\"ts\":1795112920143,\"score\":100,\"flags\":[]},{\"ts\":1795112961325,\"score\":100,\"flags\":[]}],\"canon\":[\"Power is not a servant\"]},\"cast\":{\"un\":\"\",\"ug\":\"m\",\"wrong\":[]}}",
+   "snapc": "f3292c76",
+   "thought": "He's lucky I even allow him to stand in my presence!"
+  },
+  {
+   "role": "assistant",
+   "content": "*I shrink back slightly, my shoulders hunching as I watch Power's outburst.*\n\nUm... please don't fight over the coffee... *it's a bit...* loud.",
+   "think": "",
+   "ts": 1795113010704,
+   "stat": {
+    "tok": 39,
+    "ms": 10420
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "seen": 1795113000239,
+   "cid": "a224ae86",
+   "name": "Kobeni Higashiyama",
+   "mundo": {
+    "add": [],
+    "scene": "",
+    "recent": []
+   },
+   "snap": "{\"mood\":\"neutral\",\"emoji\":\"😐\",\"energy\":\"medium\",\"affection\":50,\"facts\":[],\"summary\":\"\",\"sumUpto\":0,\"pers\":{}}",
+   "snapc": "a224ae86",
+   "thought": "I hope they don't get mad at me for speaking up. I just want things to be quiet."
+  },
+  {
+   "role": "assistant",
+   "content": "*Power glares at Kobeni, her horns practically twitching.*\n\nQuiet, you trembling human! My voice is the sound of greatness! *It is not* \"loud,\" *it is majestic!*",
+   "think": "",
+   "ts": 1795113022184,
+   "stat": {
+    "tok": 39,
+    "ms": 10412
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "seen": 1795113011719,
+   "cid": "f3292c76",
+   "name": "Power",
+   "mundo": {
+    "add": [],
+    "scene": "{{char}} and {{user}} are in a room where Makima is preparing coffee.",
+    "recent": [
+     {
+      "text": "{{char}} corrected {{user}}'s observation by declaring her own presence as the only thing that matters.",
+      "imp": 0.17,
+      "turn": 6,
+      "ts": 1795112898378
+     },
+     {
+      "text": "{{user}} mocked {{char}}'s presence with 'lmao' and she took it as a grave insult.",
+      "imp": 0.39,
+      "turn": 8,
+      "ts": 1795112920144
+     },
+     {
+      "text": "{{char}} indignantly refused to fetch coffee for {{user}}.",
+      "imp": 0.36,
+      "turn": 10,
+      "ts": 1795112961325
+     },
+     {
+      "text": "{{char}} reacted indignantly to {{user}}'s comment about manners.",
+      "imp": 0.1,
+      "turn": 13,
+      "ts": 1795112994710
+     }
+    ]
+   },
+   "snap": "{\"mood\":\"happy\",\"emoji\":\"😊\",\"energy\":\"high\",\"affection\":50,\"facts\":[],\"summary\":\"\",\"sumUpto\":0,\"pers\":{\"frac\":0.675,\"grudge\":0,\"va\":[0.797,0.35],\"mood\":\"happy\",\"ts\":1795112994709,\"n\":4,\"drift\":[{\"ts\":1795112898378,\"score\":100,\"flags\":[]},{\"ts\":1795112920143,\"score\":100,\"flags\":[]},{\"ts\":1795112961325,\"score\":100,\"flags\":[]},{\"ts\":1795112994709,\"score\":100,\"flags\":[]}],\"canon\":[\"Power is not a servant\",\"Power does not have manners\",\"Power has the true authority\"]},\"cast\":{\"un\":\"\",\"ug\":\"m\",\"wrong\":[]}}",
+   "snapc": "f3292c76",
+   "thought": "That human is mocking me! I must assert my dominance over this trivial coffee situation!"
+  },
+  {
+   "role": "assistant",
+   "content": "*Reze leans back, her smile widening as she watches the chaos.*\n\n\"Majestic,\" huh? I think it's more like a very loud headache.",
+   "think": "",
+   "ts": 1795113033136,
+   "stat": {
+    "tok": 34,
+    "ms": 10014
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "seen": 1795113023057,
+   "cid": "77b68c2c",
+   "name": "Reze",
+   "mundo": {
+    "add": [],
+    "scene": "{{char}} is leaning against a counter, teasing {{user}} in a public or semi-public space.",
+    "recent": [
+     {
+      "text": "{{char}} acknowledged {{user}}'s presence with a witty and slightly mocking greeting.",
+      "imp": 0.1,
+      "turn": 2,
+      "ts": 1795112822476
+     },
+     {
+      "text": "{{char}} teased {{user}} about his lack of awareness regarding the people around him.",
+      "imp": 0.1,
+      "turn": 4,
+      "ts": 1795112872723
+     }
+    ]
+   },
+   "snap": "{\"mood\":\"amused\",\"emoji\":\"😄\",\"energy\":\"high\",\"affection\":50,\"facts\":[],\"summary\":\"\",\"sumUpto\":0,\"cast\":{\"un\":\"\",\"ug\":\"m\",\"wrong\":[]},\"pers\":{\"frac\":0.689,\"grudge\":0,\"va\":[0.65,0.4],\"mood\":\"amused\",\"ts\":1795112872723,\"n\":2,\"drift\":[{\"ts\":1795112822476,\"score\":100,\"flags\":[]},{\"ts\":1795112872723,\"score\":100,\"flags\":[]}],\"canon\":[]}}",
+   "snapc": "77b68c2c",
+   "thought": "This little chaos is actually quite entertaining to watch."
+  },
+  {
+   "role": "user",
+   "content": "pfft *laughs*",
+   "ts": 1795113044824
+  },
+  {
+   "role": "assistant",
+   "content": "*Power points a sharp finger at Crescent, baring her teeth in a grin.*\n\nYou laugh?! You dare mock the Great Power? I shall have your head for this!",
+   "think": "",
+   "ts": 1795113058125,
+   "stat": {
+    "tok": 36,
+    "ms": 10667
+   },
+   "pers": {
+    "score": 86,
+    "flags": [
+     "too formal for this character"
+    ],
+    "retries": 0
+   },
+   "recalled": [],
+   "seen": 1795113044915,
+   "cid": "f3292c76",
+   "name": "Power",
+   "mundo": {
+    "add": [],
+    "scene": "{{char}} and {{user}} are in a room with Makima and Kobeni, arguing over coffee.",
+    "recent": [
+     {
+      "text": "{{char}} corrected {{user}}'s observation by declaring her own presence as the only thing that matters.",
+      "imp": 0.17,
+      "turn": 6,
+      "ts": 1795112898378
+     },
+     {
+      "text": "{{user}} mocked {{char}}'s presence with 'lmao' and she took it as a grave insult.",
+      "imp": 0.39,
+      "turn": 8,
+      "ts": 1795112920144
+     },
+     {
+      "text": "{{char}} indignantly refused to fetch coffee for {{user}}.",
+      "imp": 0.36,
+      "turn": 10,
+      "ts": 1795112961325
+     },
+     {
+      "text": "{{char}} reacted indignantly to {{user}}'s comment about manners.",
+      "imp": 0.1,
+      "turn": 13,
+      "ts": 1795112994710
+     },
+     {
+      "text": "{{char}} shouted at Kobeni to be quiet after being mocked for her lack of manners.",
+      "imp": 0.17,
+      "turn": 15,
+      "ts": 1795113047430
+     }
+    ]
+   },
+   "snap": "{\"mood\":\"joyful\",\"emoji\":\"😄\",\"energy\":\"high\",\"affection\":50,\"facts\":[],\"summary\":\"\",\"sumUpto\":0,\"pers\":{\"frac\":0.9,\"grudge\":0,\"va\":[0.995,0.35],\"mood\":\"joyful\",\"ts\":1795113047428,\"n\":5,\"drift\":[{\"ts\":1795112898378,\"score\":100,\"flags\":[]},{\"ts\":1795112920143,\"score\":100,\"flags\":[]},{\"ts\":1795112961325,\"score\":100,\"flags\":[]},{\"ts\":1795112994709,\"score\":100,\"flags\":[]},{\"ts\":1795113047428,\"score\":100,\"flags\":[]}],\"canon\":[\"Power is not a servant\",\"Power does not have manners\",\"Power has the true authority\",\"Power's voice is majestic\"]},\"cast\":{\"un\":\"\",\"ug\":\"m\",\"wrong\":[]}}",
+   "snapc": "f3292c76",
+   "thought": "He thinks he's so funny! I'll show him who the real boss is!"
+  },
+  {
+   "role": "assistant",
+   "content": "*Reze chuckles, her eyes sparkling with amusement at Power's display.*\n\n\"Careful now, Power. You might actually scare him if you keep that up.\"",
+   "think": "",
+   "ts": 1795113070095,
+   "stat": {
+    "tok": 36,
+    "ms": 10110
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "seen": 1795113059927,
+   "cid": "77b68c2c",
+   "name": "Reze",
+   "mundo": {
+    "add": [],
+    "scene": "{{char}} is in a room with the others, watching the group's chaotic interaction.",
+    "recent": [
+     {
+      "text": "{{char}} acknowledged {{user}}'s presence with a witty and slightly mocking greeting.",
+      "imp": 0.1,
+      "turn": 2,
+      "ts": 1795112822476
+     },
+     {
+      "text": "{{char}} teased {{user}} about his lack of awareness regarding the people around him.",
+      "imp": 0.1,
+      "turn": 4,
+      "ts": 1795112872723
+     },
+     {
+      "text": "{{char}} teased Power about her loud voice during the coffee exchange.",
+      "imp": 0.13,
+      "turn": 16,
+      "ts": 1795113075023
+     }
+    ]
+   },
+   "snap": "{\"mood\":\"amused\",\"emoji\":\"😄\",\"energy\":\"high\",\"affection\":51,\"facts\":[],\"summary\":\"\",\"sumUpto\":0,\"cast\":{\"un\":\"\",\"ug\":\"m\",\"wrong\":[]},\"pers\":{\"frac\":0.033,\"grudge\":0,\"va\":[0.842,0.4],\"mood\":\"amused\",\"ts\":1795113075023,\"n\":3,\"drift\":[{\"ts\":1795112822476,\"score\":100,\"flags\":[]},{\"ts\":1795112872723,\"score\":100,\"flags\":[]},{\"ts\":1795113075023,\"score\":100,\"flags\":[]}],\"canon\":[]}}",
+   "snapc": "77b68c2c",
+   "thought": "He has a good sense of humor. I like that he isn't easily intimidated by Power's theatrics."
+  }
+ ],
+ "state": {
+  "mood": "neutral",
+  "emoji": "😐",
+  "energy": "medium",
+  "affection": 50,
+  "facts": [],
+  "summary": "SETTING & STATE\nLocation: Not established\nCurrent State: Reze is leaning against a counter; Power is standing nearby; Makima is watching the interaction.\n\nRELATIONSHIP DYNAMIC\nPrimary Dynamic: Not established\nTone: Playful and teasing\n\nPIVOTAL MOMENTS\n- Reze teased Crescent for not being loud enough to be noticed.\n- Reze teased Crescent about the world around him or her presence.\n- Power claimed to be present and insulted Crescent for being a fool.\n- Power demanded that Crescent not mock her with \"lmao\" nonsense.\n- Power refused to fetch coffee for Crescent, stating she is not his servant.\n- Makima offered to provide the coffee for Crescent.",
+  "sumUpto": 12,
+  "log": [],
+  "members": {
+   "246e3fcf": {
+    "mood": "hopeful",
+    "emoji": "🤞",
+    "energy": "medium",
+    "affection": 50,
+    "facts": [],
+    "summary": "",
+    "sumUpto": 0,
+    "log": [
+     {
+      "ts": 1795112964999,
+      "mood": "hopeful",
+      "emoji": "🤞",
+      "aff": 50,
+      "thought": "He seems manageable. I enjoy the way he reacts to Power's outbursts.",
+      "score": 100
+     }
+    ],
+    "mem": {
+     "v": 1,
+     "seq": 0,
+     "turn": 11,
+     "scene": "{{char}} and {{user}} are in a room with Power, who is acting boisterous.",
+     "recent": [
+      {
+       "text": "{{char}} offered to get {{user}} a coffee after Power refused.",
+       "imp": 0.33,
+       "turn": 11,
+       "ts": 1795112964999
+      }
+     ],
+     "items": [],
+     "legacy": true
+    },
+    "pers": {
+     "frac": 0,
+     "grudge": 0,
+     "va": [
+      0.375,
+      0.231
+     ],
+     "mood": "hopeful",
+     "ts": 1795112964999,
+     "n": 1,
+     "drift": [
+      {
+       "ts": 1795112964999,
+       "score": 100,
+       "flags": []
+      }
+     ],
+     "canon": []
+    },
+    "cast": {
+     "un": "",
+     "ug": "m",
+     "wrong": []
+    }
+   },
+   "f3292c76": {
+    "mood": "joyful",
+    "emoji": "😄",
+    "energy": "high",
+    "affection": 50,
+    "facts": [],
+    "summary": "",
+    "sumUpto": 0,
+    "log": [
+     {
+      "ts": 1795112898378,
+      "mood": "proud",
+      "emoji": "😎",
+      "aff": 50,
+      "thought": "Finally, a human who recognizes my greatness! I shall allow him to bask in my presence.",
+      "score": 100
+     },
+     {
+      "ts": 1795112920143,
+      "mood": "proud",
+      "emoji": "😎",
+      "aff": 50,
+      "thought": "How dare he mock the mighty Power! I shall strike him down for his insolence!",
+      "score": 100
+     },
+     {
+      "ts": 1795112961325,
+      "mood": "proud",
+      "emoji": "😎",
+      "aff": 50,
+      "thought": "He thinks he can command me? I shall not be his slave!",
+      "score": 100
+     },
+     {
+      "ts": 1795112994710,
+      "mood": "happy",
+      "emoji": "😊",
+      "aff": 50,
+      "thought": "He's lucky I even allow him to stand in my presence!",
+      "score": 100
+     },
+     {
+      "ts": 1795113047430,
+      "mood": "joyful",
+      "emoji": "😄",
+      "aff": 50,
+      "thought": "That human is mocking me! I must assert my dominance over this trivial coffee situation!",
+      "score": 100
+     },
+     {
+      "ts": 1795113079542,
+      "mood": "joyful",
+      "emoji": "😄",
+      "aff": 50,
+      "thought": "He thinks he's so funny! I'll show him who the real boss is!",
+      "score": 86
+     }
+    ],
+    "mem": {
+     "v": 1,
+     "seq": 0,
+     "turn": 18,
+     "scene": "{{char}} and {{user}} are in a room with others, reacting to her loud outburst.",
+     "recent": [
+      {
+       "text": "{{char}} corrected {{user}}'s observation by declaring her own presence as the only thing that matters.",
+       "imp": 0.17,
+       "turn": 6,
+       "ts": 1795112898378
+      },
+      {
+       "text": "{{user}} mocked {{char}}'s presence with 'lmao' and she took it as a grave insult.",
+       "imp": 0.39,
+       "turn": 8,
+       "ts": 1795112920144
+      },
+      {
+       "text": "{{char}} indignantly refused to fetch coffee for {{user}}.",
+       "imp": 0.36,
+       "turn": 10,
+       "ts": 1795112961325
+      },
+      {
+       "text": "{{char}} reacted indignantly to {{user}}'s comment about manners.",
+       "imp": 0.1,
+       "turn": 13,
+       "ts": 1795112994710
+      },
+      {
+       "text": "{{char}} shouted at Kobeni to be quiet after being mocked for her lack of manners.",
+       "imp": 0.17,
+       "turn": 15,
+       "ts": 1795113047430
+      },
+      {
+       "text": "{{user}} laughed at {{char}}'s claim that her voice is majestic.",
+       "imp": 0.2,
+       "turn": 18,
+       "ts": 1795113079542
+      }
+     ],
+     "items": [],
+     "legacy": true
+    },
+    "pers": {
+     "frac": 0.9,
+     "grudge": 0,
+     "va": [
+      0.993,
+      0.35
+     ],
+     "mood": "joyful",
+     "ts": 1795113079541,
+     "n": 6,
+     "drift": [
+      {
+       "ts": 1795112898378,
+       "score": 100,
+       "flags": []
+      },
+      {
+       "ts": 1795112920143,
+       "score": 100,
+       "flags": []
+      },
+      {
+       "ts": 1795112961325,
+       "score": 100,
+       "flags": []
+      },
+      {
+       "ts": 1795112994709,
+       "score": 100,
+       "flags": []
+      },
+      {
+       "ts": 1795113047428,
+       "score": 100,
+       "flags": []
+      },
+      {
+       "ts": 1795113079541,
+       "score": 86,
+       "flags": [
+        "too formal for this character"
+       ]
+      }
+     ],
+     "canon": [
+      "Power is not a servant",
+      "Power does not have manners",
+      "Power has the true authority",
+      "Power's voice is majestic"
+     ]
+    },
+    "cast": {
+     "un": "",
+     "ug": "m",
+     "wrong": []
+    }
+   },
+   "77b68c2c": {
+    "mood": "amused",
+    "emoji": "😄",
+    "energy": "high",
+    "affection": 51,
+    "facts": [],
+    "summary": "",
+    "sumUpto": 0,
+    "log": [
+     {
+      "ts": 1795112822476,
+      "mood": "playful",
+      "emoji": "😏",
+      "aff": 50,
+      "thought": "He seems a bit lost. I wonder what he's looking for in a place like this.",
+      "score": 100
+     },
+     {
+      "ts": 1795112872723,
+      "mood": "amused",
+      "emoji": "😄",
+      "aff": 50,
+      "thought": "He's a bit slow on the uptake, but that makes him fun to tease.",
+      "score": 100
+     },
+     {
+      "ts": 1795113075023,
+      "mood": "amused",
+      "emoji": "😄",
+      "aff": 51,
+      "thought": "This little chaos is actually quite entertaining to watch.",
+      "score": 100
+     },
+     {
+      "ts": 1795113083839,
+      "mood": "amused",
+      "emoji": "😄",
+      "aff": 51,
+      "thought": "He has a good sense of humor. I like that he isn't easily intimidated by Power's theatrics.",
+      "score": 100
+     }
+    ],
+    "cast": {
+     "un": "",
+     "ug": "m",
+     "wrong": []
+    },
+    "pers": {
+     "frac": 0.722,
+     "grudge": 0,
+     "va": [
+      0.65,
+      0.4
+     ],
+     "mood": "amused",
+     "ts": 1795113083838,
+     "n": 4,
+     "drift": [
+      {
+       "ts": 1795112822476,
+       "score": 100,
+       "flags": []
+      },
+      {
+       "ts": 1795112872723,
+       "score": 100,
+       "flags": []
+      },
+      {
+       "ts": 1795113075023,
+       "score": 100,
+       "flags": []
+      },
+      {
+       "ts": 1795113083838,
+       "score": 100,
+       "flags": []
+      }
+     ],
+     "canon": []
+    },
+    "mem": {
+     "v": 1,
+     "seq": 0,
+     "turn": 19,
+     "scene": "{{char}} and {{user}} are watching Power and Kobeni's chaotic coffee dispute.",
+     "recent": [
+      {
+       "text": "{{char}} acknowledged {{user}}'s presence with a witty and slightly mocking greeting.",
+       "imp": 0.1,
+       "turn": 2,
+       "ts": 1795112822476
+      },
+      {
+       "text": "{{char}} teased {{user}} about his lack of awareness regarding the people around him.",
+       "imp": 0.1,
+       "turn": 4,
+       "ts": 1795112872723
+      },
+      {
+       "text": "{{char}} teased Power about her loud voice during the coffee exchange.",
+       "imp": 0.13,
+       "turn": 16,
+       "ts": 1795113075023
+      },
+      {
+       "text": "{{user}} laughed at Power's boastful display of 'majesty'.",
+       "imp": 0.13,
+       "turn": 19,
+       "ts": 1795113083839
+      }
+     ],
+     "items": [],
+     "legacy": true
+    }
+   },
+   "a224ae86": {
+    "mood": "anxious",
+    "emoji": "😟",
+    "energy": "high",
+    "affection": 50,
+    "facts": [],
+    "summary": "",
+    "sumUpto": 0,
+    "log": [
+     {
+      "ts": 1795113038337,
+      "mood": "anxious",
+      "emoji": "😟",
+      "aff": 50,
+      "thought": "I hope they don't get mad at me for speaking up. I just want things to be quiet.",
+      "score": 100
+     }
+    ],
+    "mem": {
+     "v": 1,
+     "seq": 0,
+     "turn": 14,
+     "scene": "{{char}} is standing near {{user}} while Power and Makima argue over coffee.",
+     "recent": [
+      {
+       "text": "{{char}} nervously asked the others to stop shouting because the noise is overwhelming.",
+       "imp": 0.43,
+       "turn": 14,
+       "ts": 1795113038337
+      }
+     ],
+     "items": [],
+     "legacy": true
+    },
+    "pers": {
+     "frac": 0.373,
+     "grudge": 0,
+     "va": [
+      0.2,
+      0.65
+     ],
+     "mood": "anxious",
+     "ts": 1795113038337,
+     "n": 1,
+     "drift": [
+      {
+       "ts": 1795113038337,
+       "score": 100,
+       "flags": []
+      }
+     ],
+     "canon": []
+    },
+    "cast": {
+     "un": "",
+     "ug": "m",
+     "wrong": []
+    }
+   },
+   "9c36fd1f": {
+    "mood": "neutral",
+    "emoji": "😐",
+    "energy": "medium",
+    "affection": 50,
+    "facts": [],
+    "summary": "",
+    "sumUpto": 0,
+    "log": [],
+    "mem": {
+     "v": 1,
+     "seq": 0,
+     "turn": 0,
+     "scene": "",
+     "recent": [],
+     "items": [],
+     "legacy": false
+    },
+    "pers": {}
+   }
+  }
+ },
+ "cfg": {
+  "mode": "story",
+  "length": "auto",
+  "scene": "",
+  "notes": [],
+  "theme": null
+ },
+ "rp": {}
+}

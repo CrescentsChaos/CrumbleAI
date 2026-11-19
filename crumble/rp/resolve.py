@@ -5,6 +5,7 @@ from .actions import AUTO, LAB, ROMS, classify
 from .combat import begin_fight, end_fight, fight_brief, fight_round, ev_row
 from .dice import TIER_TXT, TIER_UI, best, best_name, check, parse_stats
 from .mentions import find_ids
+from .relations import decline, effective
 from .romance import romance_beat
 from .intimacy import intimacy_beat, settings as intim_settings
 from .skills import AFF_FX, skill_dc
@@ -54,10 +55,16 @@ def rp_resolve(b):
             out["aff"][i] = -10
             if (rp.get("rom") or {}).get(i):
                 rp["rom"][i]["v"] = max(0, rp["rom"][i]["v"] - 15)
+            if (rp.get("rel") or {}).get(i):
+                rp["rel"][i]["v"] = max(0, rp["rel"][i].get("v", 0) - 15)
         started = True
     elif act in ROMS:
         c = byid.get(tids[0]) if tids else None
         if c:
+            path = effective(c, (rp.get("rel") or {}).get(c["id"]))
+            if path not in ("auto", "romance"):
+                decline(act, c, rp, user, out, path)
+                return out
             icfg = intim_settings(cfg.get("intimacy"))
             if act == "intimate" and icfg["on"]:
                 intimacy_beat(act, c, rp, aff, mood, ust, cfg, icfg, user, out)

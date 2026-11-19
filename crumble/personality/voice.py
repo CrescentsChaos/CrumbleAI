@@ -4,6 +4,7 @@ import statistics
 
 from . import canon as cn
 from . import lexicon as lx
+from . import register as rg
 
 
 def spoken(text):
@@ -50,10 +51,11 @@ def fingerprint(c):
 
 
 def check(c, prof, text, own, mode="story", canon=None, fp=None, threshold=65):
-    """Score a reply 0-100 for staying in character. -> {'score','flags':[str],'retry':bool,'note':str}"""
+    """Score a reply 0-100 for staying in character. -> {'score','flags':[str],'retry':bool,'hard':bool,'note':str}"""
     t, voice, rules = prof["traits"], prof["voice"], prof["rules"]
     s, m = spoken(text), metrics(text)
     found = []      # (penalty, flag, instruction for a retry)
+    hard = False    # the reply is plainly not in the register the sheet requires: worth a re-roll even in Quick mode
 
     if lx.AI_HARD.search(text):
         found.append((100, "breaks character (talks like an AI)", f"CRITICAL: Never mention being an AI, bot, chatbot, or assistant. You are {c.get('name') or 'Character'}, a living person in the scene. Speak strictly as this character."))
@@ -62,6 +64,10 @@ def check(c, prof, text, own, mode="story", canon=None, fp=None, threshold=65):
         ai_hits = len(lx.AI_SOFT.findall(text))
         penalty = min(80, 50 + 15 * (ai_hits - 1))
         found.append((penalty, "assistant-style phrasing", f"Do not talk like a helpful assistant or chatbot. Never say 'How are you doing today?', 'casual conversation', 'I'm here if you'd like to chat', 'What brings you here today?'. You are {c.get('name') or 'Character'}. Stay completely in character in the scene."))
+    reg = rg.detect(c, mode)
+    if reg:
+        rf, hard = rg.audit(reg, text)
+        found += rf
     if lx.LIST_LINE.search(text):
         found.append((15, "uses list or heading formatting", "Write in natural speech, not lists or headings."))
 
@@ -112,5 +118,5 @@ def check(c, prof, text, own, mode="story", canon=None, fp=None, threshold=65):
     found.sort(key=lambda x: -x[0])
     score = max(0, 100 - sum(p for p, _, _ in found))
     notes = [fix for _, _, fix in found if fix][:3]
-    return {"score": score, "flags": [f for _, f, _ in found][:4], "retry": score < threshold,
+    return {"score": score, "flags": [f for _, f, _ in found][:4], "retry": score < threshold, "hard": hard and score < threshold,
             "note": ("Your last attempt was off-voice. " + " ".join(notes)) if notes else ""}

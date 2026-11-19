@@ -26,8 +26,11 @@ $('#del').onclick=async()=>{if(!cur?.id||!confirm('Delete '+cur.name+' and its c
 $('#gen').onclick=async()=>{const concept=$('#concept').value.trim();if(!concept)return;$('#gstat').textContent='Drafting... (can take a minute)';
  const r=await api('/api/gen_char','POST',{concept});if(r.err){$('#gstat').textContent=r.err;return}
  $$('[data-k]').forEach(e=>{if(!e.value.trim()&&r[e.dataset.k])e.value=r[e.dataset.k]});$('#gstat').textContent='Done. Review the fields, then save.'};
-async function shrink(f,s=256){const bm=await createImageBitmap(f),side=Math.min(bm.width,bm.height),cv=document.createElement('canvas');cv.width=cv.height=s;
- cv.getContext('2d').drawImage(bm,(bm.width-side)/2,(bm.height-side)/2,side,side,0,0,s,s);return cv.toDataURL('image/jpeg',.86)}
+/* portraits are kept sharp enough for the big cards: cropped to 3:4 (the card shape), up to 640x853, instead of a 256px square */
+async function shrink(f,W=640){const bm=await createImageBitmap(f),R=3/4;let cw=bm.width,ch=bm.height,sx=0,sy=0;
+ if(cw/ch>R){cw=Math.round(ch*R);sx=Math.round((bm.width-cw)/2)}else{ch=Math.round(cw/R);sy=Math.round((bm.height-ch)*.15)}   // taller than 3:4: keep the top, where faces are
+ const w=Math.min(W,cw),h=Math.round(w/R),cv=document.createElement('canvas');cv.width=w;cv.height=h;const x=cv.getContext('2d');x.imageSmoothingQuality='high';
+ x.drawImage(bm,sx,sy,cw,ch,0,0,w,h);return cv.toDataURL('image/jpeg',.9)}
 $('#avup').onclick=()=>$('#avfile').click();
 $('#avfile').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(!f||!cur)return;try{cur.avatar=await shrink(f);avPrev(cur)}catch(x){alert('Could not read that image')}};
 $('#avrm').onclick=()=>{if(cur){cur.avatar='';avPrev(cur)}};

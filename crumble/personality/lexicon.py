@@ -70,7 +70,7 @@ def _rx(frag):
 
 UP_RX = {t: _rx(UP[t]) for t in TRAITS}
 DOWN_RX = {t: _rx(DOWN[t]) for t in TRAITS}
-NEGATORS = re.compile(r"(?:\bnot|\bnever|\bno|n't|\bwithout|\bhardly|\bbarely|\bneither|\bnor)\s+(?:\w+\s+){0,2}$", re.I)
+NEGATORS = re.compile(r"(?:\bnot|\bnever|\bno|n't|\bwithout|\bhardly|\bbarely|\bneither|\bnor|\brarely|\bseldom|\bscarcely|\bavoid(?:s|ing)?|\brefrain(?:s|ing)? from)\s+(?:\w+\s+){0,2}$", re.I)
 BOOST = re.compile(r"(?:very|extremely|incredibly|highly|deeply|fiercely|intensely|painfully|really|super|utterly|insanely|ridiculously)\s+$", re.I)
 HEDGE = re.compile(r"(?:somewhat|slightly|a bit|a little|kinda|fairly|moderately|mildly|occasionally|sometimes|can be)\s+$", re.I)
 

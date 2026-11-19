@@ -97,6 +97,17 @@ def _paren_to_narration(t):
     return re.sub(r"\(([^()\n]{3,})\)", lambda m: f"*{m[1].strip()}*", t)
 
 
+_VOICE = re.compile(r"\b(?:i|i'm|i've|i'll|i'd|me|my|mine|myself|we|we're|we'll|we've|us|our|ours|you|you're|you'll|you've|you'd|your|yours|yourself|thou|thee|thy|thine|ye|let's|lets)\b", re.I)
+_NARR_OPEN = re.compile(r"^(?:he|she|they|it|his|her|their|its|the|a|an|this|that|these|those|then|there|here|for|with|without|as|after|before|when|while|until|once|one|another|each|every|some|nothing|something|outside|inside|behind|beyond|across|above|below|around|far|several|no|silence|wind|rain|fire|light|shadows?)\b|^[a-z]+(?:ly|ing)\b", re.I)
+
+
+def looks_like_action(sent):
+    """A bare sentence with no quotes that reads as narration rather than speech: three or more words, nobody addressed or speaking
+    in the first or second person, and it opens the way a description does ('His eyes narrow.', 'Slowly, he turns.', 'Rain taps the glass.')."""
+    s = sent.strip().strip("*").strip()
+    return len(s.split()) >= 3 and not s.endswith("?") and not _VOICE.search(s) and bool(_NARR_OPEN.match(s))
+
+
 def enclose_narration(text, char="", user=()):
     """Put every non-dialogue passage between *asterisks*. Dialogue ("quoted" or plain first-person speech) is untouched.
     Deliberately conservative: a bare sentence counts as narration only when it starts with the character's or the user's
@@ -129,7 +140,7 @@ def enclose_narration(text, char="", user=()):
             for sent in _SENT.split(s.strip()):
                 if not sent.strip():
                     continue
-                if head and head.match(sent.strip()):
+                if (head and head.match(sent.strip())) or looks_like_action(sent):
                     buf.append(sent.strip().strip("*"))
                 else:
                     flush()

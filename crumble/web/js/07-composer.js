@@ -13,7 +13,7 @@ $('#log').onclick=e=>{const b=e.target.closest('button');
  else if(a=='esave'){const t=mEl.querySelector('textarea').value.trim();if(t){m.content=t;if(m.sw)m.sw[m.si].content=t;if(m.oid)noteSync(m)}saveChat();draw()}
  else if(a=='okind')oocCycle(i);else if(a=='oredo')oocRedo();else if(a=='ogo')oocGo();
  else if(a=='react')b.closest('.acts').classList.toggle('open');
- else if(a=='rx'){m.react=m.react==b.dataset.e?'':b.dataset.e;saveChat();draw()}
+ else if(a=='rx'){const pr=m.react;m.react=m.react==b.dataset.e?'':b.dataset.e;reactFx(m,pr);saveChat();draw()}
  else if(a=='speak')speak(m.content);
  else if(a=='del'){restore(m);hist.splice(i,1);saveChat();draw()}
  else if(a=='rewind'){if(!confirm('Delete this message and everything after it?'))return;const gone=hist.splice(i);[...gone].reverse().forEach(restore);saveChat();draw();head()}
@@ -46,7 +46,7 @@ $('#hchip').onclick=()=>tab('mem');
 const closeDrawer=()=>document.body.classList.remove('drawer'),touch=matchMedia('(hover:none)');
 $('#menu').onclick=()=>document.body.classList.toggle('drawer');$('#scrim').onclick=closeDrawer;$('#hmore').onclick=e=>{e.stopPropagation();$('.chead').classList.toggle('open')};document.addEventListener('click',e=>{if(!e.target.closest('.hctl,#hmore'))$('.chead').classList.remove('open')});
 let kbT=0;$('#inp').addEventListener('focus',()=>{clearTimeout(kbT);document.body.classList.add('kb');setTimeout(()=>{$('#log').scrollTop=1e9},250)});
-$('#inp').addEventListener('blur',()=>{kbT=setTimeout(()=>document.body.classList.remove('kb'),200)});$('#send').onmousedown=e=>e.preventDefault();if(innerWidth<=760)$('#inp').placeholder='Message…';
+$('#inp').addEventListener('blur',()=>{kbT=setTimeout(()=>document.body.classList.remove('kb'),200)});$('#send').onmousedown=e=>e.preventDefault();{const mq=matchMedia('(max-width:760px)'),ph=()=>typeof armUI=='function'?armUI():$('#inp').placeholder=mq.matches?'Message…':'Message… (Enter sends, Shift+Enter adds a line)';ph();mq.addEventListener('change',ph)}document.addEventListener('keydown',e=>{if(e.key=='Escape')$('.chead').classList.remove('open')});
 if(window.visualViewport)visualViewport.addEventListener('resize',()=>{document.documentElement.style.setProperty('--vh',visualViewport.height+'px');scrollTo(0,0);const L=$('#log');if(document.body.classList.contains('kb'))L.scrollTop=L.scrollHeight});
 $('#uname').oninput=e=>{U.uname=e.target.value;persist();cur&&draw()};$('#persona').oninput=e=>{U.persona=e.target.value;persist()};$('#ustats').oninput=e=>{U.ustats=e.target.value;persist()};$('#ugear').oninput=e=>{U.ugear=e.target.value;persist()};
 function pills(){for(const[id,k]of[['#tthink','think'],['#tact','actions'],['#tthoughts','thoughts'],['#tvoice','tts'],['#tact2','actbar']])$(id).classList.toggle('on',!!U[k]);persist()}

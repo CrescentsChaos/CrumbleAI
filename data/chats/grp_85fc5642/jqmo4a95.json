@@ -1,0 +1,130 @@
+{
+ "id": "jqmo4a95",
+ "title": "hi",
+ "updated": 1795116289.8044639,
+ "history": [
+  {
+   "role": "user",
+   "content": "hi",
+   "ts": 1795116272849
+  },
+  {
+   "role": "assistant",
+   "content": "*I look up from my documents, offering a small, composed smile.* Good evening to you.",
+   "think": "",
+   "ts": 1795116285308,
+   "stat": {
+    "tok": 26,
+    "ms": 10351
+   },
+   "pers": {
+    "score": 50,
+    "flags": [
+     "assistant-style phrasing"
+    ],
+    "retries": 1
+   },
+   "recalled": [],
+   "seen": 1795116272928,
+   "cid": "e8c41809",
+   "name": "Rias Gremory",
+   "mundo": {
+    "add": [],
+    "scene": "",
+    "recent": []
+   },
+   "snap": "{\"mood\":\"neutral\",\"emoji\":\"😐\",\"energy\":\"medium\",\"affection\":50,\"facts\":[],\"summary\":\"\",\"sumUpto\":0}",
+   "snapc": "e8c41809",
+   "thought": "He seems polite. I wonder what kind of man he is."
+  }
+ ],
+ "state": {
+  "mood": "neutral",
+  "emoji": "😐",
+  "energy": "medium",
+  "affection": 50,
+  "facts": [],
+  "summary": "",
+  "sumUpto": 0,
+  "log": [],
+  "members": {
+   "e8c41809": {
+    "mood": "neutral",
+    "emoji": "😐",
+    "energy": "medium",
+    "affection": 50,
+    "facts": [],
+    "summary": "",
+    "sumUpto": 0,
+    "log": [
+     {
+      "ts": 1795116289795,
+      "mood": "neutral",
+      "emoji": "😐",
+      "aff": 50,
+      "thought": "He seems polite. I wonder what kind of man he is.",
+      "score": 100
+     }
+    ],
+    "cast": {
+     "un": "",
+     "ug": "m",
+     "wrong": []
+    },
+    "pers": {
+     "frac": 0.933,
+     "grudge": 0,
+     "va": [
+      0,
+      0
+     ],
+     "mood": "neutral",
+     "ts": 1795116289793,
+     "n": 1,
+     "drift": [
+      {
+       "ts": 1795116289793,
+       "score": 100,
+       "flags": []
+      }
+     ],
+     "canon": []
+    },
+    "mem": {
+     "v": 1,
+     "seq": 0,
+     "turn": 2,
+     "scene": "{{char}} is sitting at her desk reviewing documents when {{user}} greets her.",
+     "recent": [
+      {
+       "text": "{{user}} greeted {{char}}.",
+       "imp": 0,
+       "turn": 2,
+       "ts": 1795116289795
+      }
+     ],
+     "items": [],
+     "legacy": true
+    }
+   },
+   "8924b0d6": {
+    "mood": "neutral",
+    "emoji": "😐",
+    "energy": "medium",
+    "affection": 50,
+    "facts": [],
+    "summary": "",
+    "sumUpto": 0,
+    "log": []
+   }
+  }
+ },
+ "cfg": {
+  "mode": "story",
+  "length": "auto",
+  "scene": "",
+  "notes": [],
+  "theme": null
+ },
+ "rp": {}
+}

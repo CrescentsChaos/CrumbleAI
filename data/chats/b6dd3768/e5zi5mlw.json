@@ -1,14 +1,8 @@
 {
- "id": "xeb0zd6i",
+ "id": "e5zi5mlw",
  "title": "New chat",
- "updated": 1794927343.9984055,
- "history": [
-  {
-   "role": "assistant",
-   "content": "*Bullies took my book away and you approach me.* Who are you?",
-   "ts": 1794927343995
-  }
- ],
+ "updated": 1795115149.9912074,
+ "history": [],
  "state": {
   "mood": "neutral",
   "emoji": "😐",
@@ -21,9 +15,10 @@
  },
  "cfg": {
   "mode": "story",
-  "length": "short",
+  "length": "auto",
   "scene": "",
-  "notes": []
+  "notes": [],
+  "theme": null
  },
  "rp": {}
 }

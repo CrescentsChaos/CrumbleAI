@@ -3,6 +3,7 @@ import re
 
 from .actions import LAB, ROMS
 from .dice import TIER_TXT, TIER_UI, check, md
+from .relations import adult
 
 ROM_STAGES = [(10, "no romantic spark yet"), (25, "curious, starting to notice them"), (45, "attracted and flirty"),
               (65, "smitten and romantic"), (85, "in love, a couple"), (101, "deeply committed")]

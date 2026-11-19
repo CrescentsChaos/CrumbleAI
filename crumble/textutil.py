@@ -133,10 +133,19 @@ def finish_reply(raw, finish, user, name, mode, others=(), narrate=True):
             "leak": bool(leak.get("leaked")), "flip": bool(leak.get("flipped"))}
 
 
+def close_open(t):
+    """Close a *star*, \"quote\" that is still being written, so the live preview does not drop or restyle half a sentence."""
+    if len(re.findall(r"(?<!\*)\*(?!\*)", t)) % 2:
+        t += "*"
+    if t.count('"') % 2:
+        t += '"'
+    return t
+
+
 TEXT_LINES = {"short": 2, "medium": 3, "long": 5, "auto": 4}   # most separate text messages (lines) in texting mode
 
 
-def cap_reply(text, mode, length, hi):
+def cap_reply(text, mode, length, hi, always=False):
     """Enforce the Length setting after the fact: models often ignore the limit in the prompt.
     Texting: at most N lines. Other modes with a fixed length: cut back to a whole sentence near the word limit."""
     if not text:
@@ -146,16 +155,25 @@ def cap_reply(text, mode, length, hi):
         n = TEXT_LINES.get(length, 4)
         if len(lines) > n:
             text = "\n".join(lines[:n])
-    if length in ("short", "medium") and len(text.split()) > hi * 1.5:
+    if length in ("short", "medium") and (always or len(text.split()) > hi * 1.5):   # always: the live preview never runs past what the finished reply keeps
         words, out = 0, []
         for sent in re.split(r"(?<=[.!?…])\s+", text):
             w = len(sent.split())
             if out and words + w > hi * 1.3:
                 break
+            if out and always and not re.search(r"[.!?…][\"'”’)\]*]*$", sent.strip()):   # preview: a later sentence appears once it is finished, so it is never shown and then cut
+                break
             out.append(sent)
             words += w
         text = " ".join(out)
     return balance(text)
+
+
+def preview_reply(raw, user, name, mode, others, narrate, length, hi, capped):
+    """The text so far, run through the same clean-up and length cap as the finished reply (for the live preview)."""
+    _, body, _ = split_think(raw)
+    v = finish_reply(close_open(body), None, user, name, mode, others, narrate)["text"]
+    return cap_reply(v, mode, length, hi, always=True) if capped else v
 
 
 def similar(t, prevs):

@@ -4,6 +4,7 @@ from ..config import CH, US
 from .combat import cond
 from .intimacy import intim_block, settings as intim_settings
 from .narrator import NARR_ID
+from .relations import effective, rel_block
 from .romance import rom_stage
 
 
@@ -73,7 +74,13 @@ def rp_blocks(c, o):
     # ---------------------------------------------------------
     rom = (rp.get("rom") or {}).get(c.get("id")) or {}
 
-    romance_enabled = cfg.get("romance", True)
+    rel = (rp.get("rel") or {}).get(c.get("id")) or {}
+    path = effective(c, rel)                      # auto and romance keep the romance block; every other path replaces it
+    rb = rel_block(c, rel, CH, US)
+    if rb:
+        ctx.append(rb)
+
+    romance_enabled = cfg.get("romance", True) and path in ("auto", "romance")
 
     if romance_enabled:
         romance_value = rom.get("v", 0)

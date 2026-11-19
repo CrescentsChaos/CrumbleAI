@@ -1,0 +1,36 @@
+Mood you can see and relationships that grow: instant reactions, mood colour, relationship paths with visual progress.
+Drop these over your project (same relative paths), delete the __pycache__ folders, restart.
+
+  crumble/rp/relations.py           NEW   relationship paths: Friendship, Romance, Partners, Master & disciple, Rivalry, Family (+ Undecided); stage names, prompt guidance, adult() check
+  crumble/feel.py                   NEW   instant, no-model read of how a message lands, shaped by the character's temperament (powers the live reaction)
+  crumble/server.py                       /api/feel endpoint; relationship paths are served with the app state
+  crumble/rp/blocks.py                    a non-romantic path replaces the romance block with its own guidance (a master teaches, a rival competes...)
+  crumble/rp/resolve.py                   romantic actions toward a non-romantic path (or a character under 18) get a kind in-character answer, no dice; attacks also wound the bond
+  crumble/rp/romance.py                   FIX: adult() was called but never defined, so any successful romantic beat crashed with NameError
+  crumble/web/js/21-bond.js         NEW   mood colour, instant reaction, relationship logic, milestones, the mood and relationship panel
+  crumble/web/css/11-bond.css       NEW   styles for all of the above (bottom sheet on phones, reduced-motion respected)
+  crumble/web/js/03-render.js             header + message hooks (mood tag on every reply)
+  crumble/web/js/06-generate.js           reaction starts the moment you send; relationship moves when the tracker answers
+  crumble/web/js/05-chats.js              undo / swipe / rewind also undo bond progress
+  crumble/web/js/07-composer.js           message reactions are noticed at once
+  crumble/web/js/13-roleplay.js           Memory tab gets a Relationships section
+  crumble/web/index.html                  relationship pill, panel and effects layer
+  tests/test_relations.py           NEW   10 tests
+
+Mood, immediately:
+  - The moment you send a message the header reacts (dashed chip, "Annoyed...", a floating "harsh words / kind words" note with the change). No waiting for the model:
+    the server reads the tone against the character's personality and triggers. A few seconds later the tracker's real answer replaces it, with a quiet update if it agrees.
+  - The header, avatar ring and every reply take the mood's colour; the ring pulses faster when the character is energetic. Each reply keeps a mood tag (😊 Happy ▲4).
+  - Reacting to a message (❤️ 👍 😂 😮 😢 😡) is noticed instantly and nudges how they feel (❤️ 👍 +1, 😡 -1). Undo/delete reverses it.
+  - Click the chip: mood card, energy, a mood-history chart (click a bar for that moment), and quick controls to set the mood by hand.
+
+Relationships, as progress:
+  - Pick a path per character: Friendship, Romance, Partners, Master & disciple (choose who is the master), Rivalry, Family, or leave it Undecided.
+    The character behaves accordingly and does not turn romantic on a non-romantic path unless you change it.
+  - Six stages per path (e.g. Acquaintances > Friendly > Friends > Close friends > Best friends > Inseparable), shown as a track with a filled bar and a ring in the header.
+  - It moves with how they feel about you: kind exchanges build it, hurtful ones damage it faster, and it never falls below 60% of its peak from words alone.
+  - Every stage reached pops a milestone card and is kept in the history. Undecided bonds ask "Where is this heading?" once they are close enough.
+  - Changing path keeps what you built (friends who become lovers start with a head start). Groups get a list of everyone's mood and bond.
+  - Memory tab > Relationships: path, role and progress for every character.
+Characters whose sheet says they are under 18 only ever get the friendship-style paths; romance is not offered for them.
+Known and untouched: the same 4 tests in tests/test_integration.py and tests/test_roleplay_fixes.py fail on the original code too.
