@@ -1,5 +1,5 @@
 /* ---------- chats ---------- */
-async function pick(id){const c=S.chars.find(c=>c.id==id);if(!c)return;G=null;MEN=null;cur=c;renderChars();renderForm(cur);
+async function pick(id){const c=S.chars.find(c=>c.id==id);if(!c)return;U.last=id;persist();G=null;MEN=null;cur=c;renderChars();renderForm(cur);
  chats=(await api('/api/chats/'+id)).chats||[];chats.length?await openChat(chats[0].id):await newChat()}
 async function openChat(chid){const r=await api(`/api/chat/${cur.id}/${chid}`);
  chat={id:chid,title:r.title,state:{...newState(),...(r.state||{})},cfg:{...newCfg(),...(r.cfg||{})},rp:r.rp||{}};if(G)chat.state.members=chat.state.members||{};hist=r.history||[];gi=0;lastAct=Date.now();nudges=0;

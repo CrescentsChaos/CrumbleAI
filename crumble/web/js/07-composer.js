@@ -44,7 +44,7 @@ $('#mode').onchange=e=>{if(!chat)return;chat.cfg.mode=U.mode=e.target.value;pers
 $('#len').onchange=e=>{if(!chat)return;chat.cfg.length=U.length=e.target.value;persist();saveChat()};
 $('#hchip').onclick=()=>tab('mem');
 const closeDrawer=()=>document.body.classList.remove('drawer'),touch=matchMedia('(hover:none)');
-$('#menu').onclick=()=>document.body.classList.toggle('drawer');$('#scrim').onclick=closeDrawer;$('#hmore').onclick=()=>$('.chead').classList.toggle('open');
+$('#menu').onclick=()=>document.body.classList.toggle('drawer');$('#scrim').onclick=closeDrawer;$('#hmore').onclick=e=>{e.stopPropagation();$('.chead').classList.toggle('open')};document.addEventListener('click',e=>{if(!e.target.closest('.hctl,#hmore'))$('.chead').classList.remove('open')});
 let kbT=0;$('#inp').addEventListener('focus',()=>{clearTimeout(kbT);document.body.classList.add('kb');setTimeout(()=>{$('#log').scrollTop=1e9},250)});
 $('#inp').addEventListener('blur',()=>{kbT=setTimeout(()=>document.body.classList.remove('kb'),200)});$('#send').onmousedown=e=>e.preventDefault();if(innerWidth<=760)$('#inp').placeholder='Message…';
 if(window.visualViewport)visualViewport.addEventListener('resize',()=>{document.documentElement.style.setProperty('--vh',visualViewport.height+'px');scrollTo(0,0);const L=$('#log');if(document.body.classList.contains('kb'))L.scrollTop=L.scrollHeight});

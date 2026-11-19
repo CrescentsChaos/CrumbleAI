@@ -1,7 +1,7 @@
 :root{--oc:#8ab4ff}[data-theme=light]{--oc:#3b6fd4}
 .ocb{align-self:center;flex:none;width:auto;padding:4px 11px;border-radius:99px;font-size:12px;font-weight:700;letter-spacing:.03em;color:var(--mu);background:var(--pn3);margin-right:0}
 .ocb.on{color:#0b1220;background:var(--oc);border-color:transparent}
-.comp.ooc{border-color:color-mix(in srgb,var(--oc) 60%,transparent);box-shadow:0 14px 44px -18px #000,0 0 0 3px color-mix(in srgb,var(--oc) 14%,transparent)}
+.comp.ooc{border-color:color-mix(in srgb,var(--oc) 60%,transparent);box-shadow:0 18px 50px -24px var(--shc),0 0 0 3px color-mix(in srgb,var(--oc) 14%,transparent)}
 .comp.ooc:focus-within{border-color:var(--oc)}
 #oockinds{max-width:800px;margin:0 auto 8px;display:flex;gap:6px;flex-wrap:wrap;align-items:center}#oockinds .lb{font-size:11px;color:var(--oc);font-weight:600;margin-left:4px}
 #oockinds .pill.arm{color:#0b1220;background:var(--oc);border-color:transparent}

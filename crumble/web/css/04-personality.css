@@ -6,8 +6,8 @@
 .psum{font-weight:600;margin:2px 0 8px}
 .ptags{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}.ptags span{padding:2px 9px;border-radius:99px;background:var(--pn3);font-size:12px}
 .pscore{margin-left:8px;font-weight:500;font-size:11px;padding:1px 7px;border-radius:99px;background:var(--pn3);color:var(--mu)}
-.pscore.ok{color:var(--ac)}.pscore.low{color:var(--bad)}
+.pscore.ok{color:var(--act)}.pscore.low{color:var(--bad)}
 .pcanon{display:flex;gap:6px;margin:4px 0}.pcanon input{flex:1}
 .pspark{display:block;width:100%;height:46px;margin:6px 0}
-.pspark polyline{fill:none;stroke:var(--ac);stroke-width:1.6}.pspark line{stroke:var(--ln)}
+.pspark polyline{fill:none;stroke:var(--act);stroke-width:1.6}.pspark line{stroke:var(--ln)}
 @media(max-width:760px){.pt{grid-template-columns:110px 1fr 26px}.pt small{display:none}}

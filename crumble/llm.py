@@ -39,9 +39,13 @@ def sampler(p):
     return s
 
 
-def run_llm(msgs, samp, stop, cap, send=None):
-    """Stream tokens internally (so Stop works and progress can be shown) but hand back only the finished text."""
-    t0, txt, fin, n = time.time(), "", None, 0
+HOLD = 14   # characters kept back from the live preview: a stop phrase ("\nUser:") is cut off by the model, but its first letters may already have been generated
+
+
+def run_llm(msgs, samp, stop, cap, send=None, live=False):
+    """Run the model. With live=True the text is also streamed to the page as it is written ({"d": new text}); the finished text
+    (after clean-up, repairs and any retries) always follows in the final message, so the preview can never leave a wrong reply behind."""
+    t0, txt, fin, n, out, last = time.time(), "", None, 0, 0, 0.0
     for ch in LLM["obj"].create_chat_completion(messages=msgs, stream=True, max_tokens=cap, stop=stop, **samp):
         c = ch["choices"][0]
         d = c["delta"].get("content")
@@ -50,6 +54,13 @@ def run_llm(msgs, samp, stop, cap, send=None):
             n += 1
             if send and n % 6 == 0:
                 send({"p": "think" if txt.rfind("<think>") > txt.rfind("</think>") else "reply", "n": n})
+            if send and live:
+                now = time.time()
+                if n <= 2 or now - last > .045:     # a few tokens per message: smooth on the page, light on the socket
+                    upto = len(txt) - HOLD
+                    if upto > out:
+                        send({"d": txt[out:upto]})
+                        out, last = upto, now
         if c.get("finish_reason"):
             fin = c["finish_reason"]
     return txt, fin, n, time.time() - t0
@@ -76,7 +87,9 @@ def ooc_reply(b, send):
         budget = cap + (1500 if think else 0)
         used, dropped = fit(msgs, n_ctx - budget - 16)
         budget = max(128, min(budget, n_ctx - used - 16))
-        raw, fin, ntoks, secs = run_llm(msgs, samp, stop, budget, send)
+        if send and p.get("stream"):
+            send({"rs": 1})
+        raw, fin, ntoks, secs = run_llm(msgs, samp, stop, budget, send, bool(p.get("stream")))
         r = finish_ooc(raw, fin, user)
         r.update(tok=ntoks, ms=int(secs * 1000), finish=fin)
         if r["empty"]:   # thinking ate the whole budget, or nothing came back: try again without thinking
@@ -168,7 +181,9 @@ def generate_reply(b, send):
         id_tail = identity.tail_notes(led)
     pool, id_pool = [], []
     best, retry_note, tries, dropped, used = None, "", 0, 0, 0
-    for attempt in range(3):
+    quick = bool(p.get("quick", False))   # Quick replies: at most one re-roll, and only for real mistakes (not for style nits)
+    tries_max = 2 if quick else 3
+    for attempt in range(tries_max):
         tries = attempt
         o = dict(state=b.get("state"), persona=b.get("persona"), scene=b.get("scene"), clock=b.get("clock"), sim=sim, amb=amb,
                  gap_s=gap_s, mode=mode, actions=p.get("actions", True), realism=p.get("realism", True),
@@ -180,7 +195,9 @@ def generate_reply(b, send):
         budget = cap + (1500 if think else 0)
         used, dropped = fit(msgs, n_ctx - budget - 16)
         budget = max(128, min(budget, n_ctx - used - 16))
-        raw, fin, ntoks, secs = run_llm(msgs, samp, stop, budget, send)
+        if send and p.get("stream"):
+            send({"rs": attempt + 1})    # a new attempt starts: the page clears its live preview
+        raw, fin, ntoks, secs = run_llm(msgs, samp, stop, budget, send, bool(p.get("stream")))
         r = finish_reply(raw, fin, user, c.get("name") or "Character", mode, others, narrate=p.get("actions", True))
         if kind in ("reply", "resume", "nudge") and not r["empty"]:
             r["text"] = cap_reply(r["text"], mode, p.get("length", "auto"), hi)
@@ -208,26 +225,26 @@ def generate_reply(b, send):
         ai_soft = bool(personality.lexicon.AI_SOFT.search(r["text"]))
         notes = []
         cn = c.get("name") or "Character"
-        if r.get("flip") and attempt < 2:    # the reply was headed 'Reply as <the user>': the model took the user's seat
+        if r.get("flip") and attempt < tries_max - 1:    # the reply was headed 'Reply as <the user>': the model took the user's seat
             notes.append(f"You are {cn}, not {user}. {user} is the other person; never write as {user}.")
-        elif r.get("leak") and attempt < 2:
+        elif r.get("leak") and attempt < tries_max - 1:
             notes.append("Do not write brackets, labels or instructions. Output only what the character says and does.")
         tn = simtime.time_note(r["text"], sim) if kind in ("reply", "nudge") else ""
-        if tn and attempt < 2:
+        if tn and not quick and attempt < tries_max - 1:
             notes.append(tn)
         en = ambience.env_note(r["text"], amb, sim) if kind in ("reply", "nudge") else ""
-        if en and attempt < 2:
+        if en and not quick and attempt < tries_max - 1:
             notes.append(en)
-        if kind == "reply" and attempt < 2 and last_user and similar(r["text"], [last_user]) and len(last_user.split()) > 3:
+        if kind == "reply" and not quick and attempt < tries_max - 1 and last_user and similar(r["text"], [last_user]) and len(last_user.split()) > 3:
             notes.append(f"You repeated {user}'s own message. Respond as {cn} with your own words, thoughts and decision.")
-        if ig and ig["issues"] and attempt < 2:
+        if ig and ig["issues"] and attempt < tries_max - 1:
             notes.append(ig["note"])
-        if (ai_hard or ai_soft) and attempt < 2:
+        if (ai_hard or ai_soft) and attempt < tries_max - 1:
             notes.append(f"CRITICAL: Do NOT talk like an AI assistant or chatbot (no 'How are you doing today?', 'casual conversation', 'I'm here if you'd like to chat', 'What brings you here?'). You are {c.get('name') or 'Character'}, a living person in this scene. Speak and act strictly from their perspective.")
-        elif kind == "reply" and attempt < 2 and similar(r["text"], prevs):
+        elif kind == "reply" and not quick and attempt < tries_max - 1 and similar(r["text"], prevs):
             samp = dict(samp, temperature=min(1.4, samp["temperature"] + .15), repeat_penalty=samp["repeat_penalty"] + .05)
             notes.append("Your last attempt was too close to an earlier reply. Say something clearly different.")
-        elif pg and pg["retry"] and attempt < 2 and pg["note"]:
+        elif pg and pg["retry"] and not quick and attempt < tries_max - 1 and pg["note"]:
             notes.append(pg["note"])
         if notes:
             retry_note = " ".join(notes)

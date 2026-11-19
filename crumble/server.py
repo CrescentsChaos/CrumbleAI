@@ -88,6 +88,12 @@ class H(BaseHTTPRequestHandler):
         return self.send({"err": "login" if a.get("why") == "login" else "Not allowed"}, 401 if a.get("why") == "login" else code)
 
     def do_GET(self):
+        m = re.fullmatch(r"/fonts/([\w.-]+\.woff2)", self.path.split("?")[0])
+        if m:   # the bundled typefaces: plain static files, nothing private, cached by the browser for a year
+            f = web.WEB / "fonts" / m.group(1)
+            if f.is_file():
+                return self.send(f.read_bytes(), ctype="font/woff2", headers=[("Cache-Control", "public, max-age=31536000, immutable")])
+            return self.send({"err": "not found"}, 404)
         a = self.auth()
         if self.path == "/":
             if a["role"]:

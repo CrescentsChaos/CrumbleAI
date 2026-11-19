@@ -1,0 +1,29 @@
+/* ===== chat style panel ===== */
+.studio{position:fixed;top:0;right:0;bottom:0;width:min(410px,100vw);z-index:70;background:var(--pn);border-left:1px solid var(--ln);display:flex;flex-direction:column;transform:translateX(104%);visibility:hidden;transition:transform .3s cubic-bezier(.2,.9,.3,1),visibility 0s .3s;box-shadow:-30px 0 70px -30px var(--shc)}
+.studio.open{transform:none;visibility:visible;transition:transform .3s cubic-bezier(.2,.9,.3,1)}
+.sth{display:flex;align-items:center;gap:10px;padding:16px 18px 12px}.sth h3{font:700 21px var(--f-disp);letter-spacing:-.025em;margin:0;flex:1}
+.seg{display:flex;padding:3px;border-radius:12px;background:var(--bg);border:1px solid var(--ln);gap:2px}
+.seg button{flex:1;border:0;background:none;border-radius:9px;padding:6px 10px;font-size:12.5px;color:var(--mu);font-weight:550}.seg button:hover{background:color-mix(in srgb,var(--tx) 7%,transparent);color:var(--tx)}.seg button.on{background:var(--pn3);color:var(--tx);box-shadow:inset 0 0 0 1px var(--ln)}
+.stscope{margin:0 18px 10px}
+.stb{flex:1;overflow:auto;padding:4px 18px 18px}
+.stb h4{font:650 13px var(--f-ui);margin:20px 0 9px;color:var(--tx);display:flex;align-items:center;gap:8px}.stb h4 small{font-weight:400;color:var(--mu);font-size:12px}
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.pset{--b:#111;--p:#222;--a:#fff;--a2:#888;--t:#fff;position:relative;padding:0;height:74px;border-radius:14px;overflow:hidden;border:1.5px solid var(--ln);background:var(--b);color:var(--t);display:block;text-align:left;font-weight:600}
+.pset:hover{background:var(--b);border-color:color-mix(in srgb,var(--a) 60%,transparent)}
+.pset.on{border-color:var(--a);box-shadow:0 0 0 2px var(--pn),0 0 0 4px var(--a)}
+.pset .pb{position:absolute;left:8px;top:8px;width:46%;height:15px;border-radius:7px 7px 7px 2px;background:var(--p)}
+.pset .pu{position:absolute;right:8px;top:28px;width:40%;height:15px;border-radius:7px 7px 2px 7px;background:var(--a);opacity:.9}
+.pset b{position:absolute;left:9px;bottom:6px;font-size:11.5px;letter-spacing:0}
+.pset .pd{position:absolute;right:9px;bottom:9px;width:9px;height:9px;border-radius:50%;background:var(--a2)}
+.swr{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.sw1{width:28px;height:28px;border-radius:50%;padding:0;border:2px solid var(--pn);box-shadow:0 0 0 1px var(--ln);background:var(--c)}.sw1:hover{background:var(--c);transform:scale(1.12)}.sw1.on{box-shadow:0 0 0 2px var(--tx)}
+.hue{width:100%;height:12px;border-radius:99px;appearance:none;-webkit-appearance:none;background:linear-gradient(90deg,hsl(0 60% 55%),hsl(60 60% 55%),hsl(120 60% 50%),hsl(180 60% 50%),hsl(240 60% 60%),hsl(300 60% 55%),hsl(360 60% 55%))!important;border:0;margin:8px 0}
+.hue::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:#fff;border:3px solid var(--bg);box-shadow:0 0 0 1px var(--ln)}
+.hue::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:#fff;border:3px solid var(--bg)}
+.chips{display:flex;flex-wrap:wrap;gap:7px}.chips button{padding:6px 12px;font-size:12.5px;border-radius:99px;font-weight:550;color:var(--mu);background:var(--bg)}.chips button.on{color:var(--ink);background:var(--ac);border-color:transparent}.chips button.on:hover{background:var(--ac)}
+.fchips{display:grid;grid-template-columns:1fr 1fr;gap:8px}.fchips button{flex-direction:column;align-items:flex-start;gap:2px;padding:10px 13px;border-radius:14px;background:var(--bg);font-weight:400;text-align:left}.fchips button b{font-size:22px;line-height:1.1;font-weight:500;color:var(--tx)}.fchips button small{font-family:var(--f-ui);font-size:11.5px;color:var(--mu)}.fchips button.on{border-color:var(--ac);box-shadow:0 0 0 1px var(--ac)}
+.stprev{margin:4px 0 2px;padding:14px;border-radius:16px;background:var(--bg);border:1px solid var(--ln);display:flex;flex-direction:column;gap:8px}.stprev .tx{font-size:calc(var(--fs) - 1px)}
+.stf{display:flex;gap:8px;flex-wrap:wrap;padding:12px 18px 16px;border-top:1px solid var(--ln)}.stf button{flex:1;font-size:12.5px;padding:8px 10px}
+.upl{display:flex;gap:8px}.upl button{flex:1}
+.thbtn{display:flex;align-items:center;gap:12px;width:100%;justify-content:flex-start;padding:12px 14px;border-radius:14px}.thbtn .tsw{display:flex;gap:4px}.thbtn .tsw i{width:18px;height:18px;border-radius:50%;border:1px solid var(--ln)}
+@media(min-width:761px){main{transition:margin-right .3s cubic-bezier(.2,.9,.3,1)}body.stopen main{margin-right:min(410px,100vw)}}

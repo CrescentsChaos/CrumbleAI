@@ -41,6 +41,12 @@ Depth **Light**, **Standard** and **Deep** control how much is added to the prom
 - Tavern **Character Card V2** import/export (JSON and PNG), lorebook, AI-drafted characters.
 - **Mobile-friendly** - drawer menu, bottom tabs, compact header, keyboard-aware layout.
 
+### A fresh look: themes, fonts and character cards
+- **Per-chat themes.** Click the palette in a chat's header: 10 presets (Cocoa, Milk, Midnight, Rosé, Moss, Arcade, Parchment, Noir, Ember, Frost), any accent colour, surface tint, dark or light, backdrops (glow, aurora, dots, grid, lines, grain, stars, the character's portrait, or your own image), bubble style (soft, glass, outline, open page), message font, text size, corner roundness and spacing. It is saved with the chat. **Settings -> Appearance** sets the default for chats without their own style, and **Use for new chats** makes a style the starting point.
+- **Fonts.** Bricolage Grotesque (headings), Figtree (interface), Literata (story text), JetBrains Mono. They are bundled in `crumble/web/fonts`, so the app looks the same offline.
+- **Character cards.** The **Cards** tab is a gallery: each card takes its colour from the portrait, opens a card sheet (about, personality, scenario, opening line, chats), and can be exported as a Tavern V2 **JSON or PNG card**. Drop a JSON/PNG onto the gallery to import.
+- **Faster chat.** Replies stream onto the page as they are written (no waiting for the whole reply, then typing it out). **Quick replies** (Settings -> Replies and sound) re-rolls at most once and only for real mistakes. Mood and memory updates wait until you have been quiet for a moment, so they never hold up your next message. Thinking is off by default for new installs. Stop keeps what was already written.
+
 ### Group chats and real roleplay
 - **Group chats** - put two or more characters in one chat (**＋ New group** in the sidebar). Each one keeps their own mood, memory and personality, and only knows what they would know. Add an optional **Narrator** (a game-master voice) and a shared setting.
 - **Realistic turn-taking** - not everyone answers everything. A "director" decides who speaks next from how chatty each character is (the new *Talkativeness* field, or guessed from their sheet), who was spoken to, what interests them and how fond they are of you. Quiet characters stay out of it, chatty ones jump in, the conversation winds down by itself, and a character can simply choose not to reply. Pick the **pace** per group: Quiet, Natural or Lively.

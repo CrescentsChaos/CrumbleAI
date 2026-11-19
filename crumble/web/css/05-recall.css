@@ -2,5 +2,5 @@
 .mrow{display:flex;gap:6px;align-items:center;margin:4px 0}.mrow input[data-mm=text]{flex:1;min-width:0}.mrow select{width:auto;max-width:98px}
 .mrow.used input[data-mm=text]{border-color:var(--ac)}.mrow .x{padding:2px 8px}.memo{font-size:16px}
 .mchips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}.mchips span{padding:2px 9px;border-radius:99px;background:var(--pn3);font-size:12px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.mtest{margin:6px 0}.mt{font-size:13px;margin:5px 0}.mt b{text-transform:capitalize;color:var(--ac)}.mt small{display:block;color:var(--mu);font-size:11.5px}
+.mtest{margin:6px 0}.mt{font-size:13px;margin:5px 0}.mt b{text-transform:capitalize;color:var(--act)}.mt small{display:block;color:var(--mu);font-size:11.5px}
 @media(max-width:760px){.mrow select{max-width:80px}}
