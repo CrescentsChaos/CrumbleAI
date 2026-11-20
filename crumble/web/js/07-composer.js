@@ -56,6 +56,6 @@ const SR=window.SpeechRecognition||window.webkitSpeechRecognition;let rec=null;
 if(SR){$('#mic').hidden=false;$('#mic').onclick=()=>{if(rec){rec.stop();return}rec=new SR();rec.lang=navigator.language;
  rec.onresult=e=>{const i=$('#inp');i.value+=(i.value?' ':'')+e.results[0][0].transcript;i.dispatchEvent(new Event('input'))};rec.onend=()=>{rec=null;$('#mic').classList.remove('on')};$('#mic').classList.add('on');rec.start()}}
 /* the character may follow up on its own if you go quiet (Settings > Initiative) */
-setInterval(()=>{if(!U.nudge||G||rounding||ctl||typingNow||!chat||!cur?.id||!S.loaded||document.hidden||$('#chat').hidden||nudges>=2)return;
+setInterval(()=>{if(!U.nudge||rounding||ctl||typingNow||!chat||!cur?.id||!S.loaded||document.hidden||$('#chat').hidden||nudges>=2)return;
  const l=hist.at(-1);if(!l||l.role!='assistant'||l.ooc||hist.length<2)return;
- if(Date.now()-Math.max(l.ts||0,lastAct)>U.nudge*6e4*(nudges+1)){nudges++;gen('nudge')}},10000);
+ if(Date.now()-Math.max(l.ts||0,lastAct)>U.nudge*6e4*(nudges+1)){nudges++;G?round({keep:true}):gen('nudge')}},10000);

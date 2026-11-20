@@ -1,5 +1,5 @@
 {
- "path": "E:\\AI\\Models\\NemoMix-Unleashed-12B-Q5_K_M.gguf",
- "n_ctx": 16384,
+ "path": "E:\\AI\\Models\\gemma-4-12b-heretic-IQ4_XS.gguf",
+ "n_ctx": 8192,
  "n_gpu": -1
 }

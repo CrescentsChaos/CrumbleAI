@@ -35,10 +35,11 @@ PLACES = [
     ("the park", r"\bpark\b|garden|bench\b|playground", False, "birds, leaves, distant children; cut grass, earth; open air"),
     ("the forest", r"forest|woods\b|woodland|trail\b|\bpath through", False, "branches creaking, leaves, something small moving unseen; pine, damp earth; uneven ground, filtered light"),
     ("the beach", r"beach|shore\b|seaside|\bdock\b|pier\b", False, "waves, gulls, wind; salt, seaweed; sand underfoot"),
-    ("the rooftop", r"rooftop|roof\b|balcony|terrace", False, "wind, the city far below; cold metal rails; open sky"),
+    ("the rooftop", r"rooftop|(?<!rain )(?<!rains )(?<!raining )(?<!drumming )(?<!patter )(?<!pattering )(?<!hail )on the roof\b|balcony|terrace", False, "wind, the city far below; cold metal rails; open sky"),
     ("the graveyard", r"graveyard|cemetery|tomb|mausoleum", False, "wind through stone, a distant bird, nothing else; wet earth, old stone; uneven ground, mist"),
     ("the restaurant", r"restaurant|diner\b|bar\b|pub\b|canteen|cafeteria", True, "cutlery, chatter, a kitchen clatter; food, spice, beer; crowded warmth"),
     ("the shop", r"shop\b|store\b|supermarket|mall\b|market\b", True, "tills beeping, music, trolleys; packaging, bakery; harsh lights"),
+    ("the garage", r"garage|workshop|mechanic'?s", True, "tools clinking, an engine ticking as it cools, a radio low; oil, rubber, metal; concrete underfoot, harsh work lights"),
     ("the gym", r"\bgym\b|sports hall|pool\b", True, "weights clanking, shoes squeaking; rubber, chlorine; heat and effort"),
 ]
 OUTSIDE = re.compile(r"(?i)\b(?:step(?:s|ped|ping)?|walk(?:s|ed|ing)?|head(?:s|ed|ing)?|go(?:es)?|went|run(?:s|ning)?|ran)\s+(?:back\s+)?(?:out(?:side)?|into the (?:rain|snow|storm|cold|night|fog))\b|\bout\s+the\s+door\b")

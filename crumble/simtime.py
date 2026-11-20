@@ -146,7 +146,7 @@ def derive(messages, scenario="", notes=()):
 
 def guide(sim, name="the character"):
     """The prompt line. It says what time it is in the story and that the real-world time does not exist for the character."""
-    s = f"Story time: {sim['clock']}. This is the only clock in the scene; the real-world date and time do not exist for {name}, so never mention them. "
+    s = f"In the story it is {sim['clock']}. This is the only clock in the scene; the real-world date and time do not exist for {name}, so never mention them. "
     if sim["night"]:
         s += "It is night: it is dark out and people are winding down or asleep."
     elif sim["daytime"]:

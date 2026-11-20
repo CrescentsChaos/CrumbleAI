@@ -82,7 +82,7 @@ class TimeTests(unittest.TestCase):
         self.assertEqual(len(fake.calls), 2)
         self.assertIn("lunch", r["text"])
         sysmsg = fake.calls[0][0]["content"]
-        self.assertIn("Story time: Monday, around 12:", sysmsg)
+        self.assertIn("In the story it is Monday, around 12:", sysmsg)
         self.assertNotIn("2:10 AM", sysmsg)       # the real clock never reaches the character once the story set the time
 
 

@@ -16,7 +16,9 @@ const dl=(txt,name,type)=>{const a=document.createElement('a');a.href=URL.create
 /* ---------- text formatting ---------- */
 function split(t){if(!t.includes('<think>')&&t.includes('</think>'))t='<think>'+t;let th='';
  const body=t.replace(/<think>([\s\S]*?)(<\/think>|$)/g,(m,x)=>{th+=x;return''});return{th:th.trim(),body:body.trim()}}
-function fmt(t,narr=true,mine=false){t=esc(t).replace(/\*\*([^*\n]+)\*\*/g,'<strong>$1</strong>');
+/* a model may write &quot; &amp; &#39; &lt;; esc() then showed them literally (or double-escaped them). Decode complete entities once, before escaping. The user's own text is shown as typed. */
+const ENT=/&(?:#\d{1,6}|#[xX][0-9a-fA-F]{1,6}|[A-Za-z][A-Za-z0-9]{1,8});/g,_ta=document.createElement('textarea'),dec=s=>{for(let i=0;i<3&&s.includes('&');i++){const n=s.replace(ENT,m=>{_ta.innerHTML=m;return _ta.value});if(n==s)break;s=n}return s};
+function fmt(t,narr=true,mine=false){t=esc(mine?t:dec(t)).replace(/\*\*([^*\n]+)\*\*/g,'<strong>$1</strong>');
  const act=x=>(U.actions||mine)?`<em class=act>${x}</em>`:'';
  t=t.replace(/\*([^*\n]+)\*/g,(m,x)=>act(x));if(narr)t=t.replace(/\(([^()\n]{3,})\)/g,(m,x)=>act('('+x+')'));
  const h=t.replace(/(&quot;|"|“)([^"“”\n]+)(&quot;|"|”)/g,'<span class=q>$1$2$3</span>').replace(/[ \t]{2,}/g,' ').trim();return MEN?h.replace(MEN,x=>'<span class=mn>'+x+'</span>'):h}

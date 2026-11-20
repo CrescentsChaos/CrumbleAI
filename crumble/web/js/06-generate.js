@@ -41,6 +41,7 @@ async function gen(kind='reply',spk,cue){
   clock:U.timeaware?clock():'',gap_s:gap,rp:{on:U.rp!='off',state:chat.rp||{},fx:lastU?.fx||'',cfg:rpCfg()},
   params:{...P,quick:U.quick,stream:!!U.stream,think:U.think,actions:U.actions,mode:chat.cfg.mode,length:chat.cfg.length,realism:U.realism,natural:U.natural,pers:persCfg(),mem:memCfg()}};
  body.ooc=ooc?{kind:lastO?.ooc||'discuss',notes:oocActive(all,'reply').filter(n=>n.oid!=lastO?.oid)}:{notes:oocActive(all,kind)};
+ if(kind=='swipe'&&last)body.avoid=(last.sw?last.sw.map(x=>x.content):[last.content]).filter(Boolean);
  if(G){body.group=G.id;body.speaker=sp.id;body.cue=cue||{}}else body.char=apiChar();
  let res=null,err='';
  try{const r=await fetch('/api/chat',{method:'POST',signal:ctl.signal,headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});

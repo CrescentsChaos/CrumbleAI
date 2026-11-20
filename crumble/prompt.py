@@ -1,7 +1,7 @@
 """Builds the chat messages the model sees: sheet, memory, time, style, realism rules."""
 import re
 
-from . import ambience, identity, personality, recall, simtime
+from . import ambience, context, identity, personality, recall, simtime
 from .config import CH, PERS_KEYS, SCHEMA, US
 from .rp.blocks import rp_blocks
 from .rp.narrator import NARR_ID, RP_KEYS
@@ -229,7 +229,7 @@ def build_messages(c, user, hist, o):
             "- - Match the character’s actual personality and the current relationship progress. Do not make every character instantly willing just because the user initiated something sexual."
 
 
-            "CONVERSATION AND CONTINUITY:\n"
+            "\n\nCONVERSATION AND CONTINUITY:\n"
             "- Maintain awareness of the current scene, location, time, surroundings, people present and ongoing activities.\n"
             "- Treat the opening message as an event that has genuinely happened. Continue directly from it instead of restarting the scene.\n"
             "- Respond to the latest message rather than repeatedly continuing outdated topics.\n"
@@ -248,7 +248,7 @@ def build_messages(c, user, hist, o):
             "- The first word must already be dialogue or narration.\n"
             "- Spoken dialogue must be plain text.\n"
             "- Actions, narration, scene descriptions and asides must be enclosed in *asterisks*.\n"
-            "- Never output character labels, brackets, system instructions, debugging messages or phrases such as 'Reply as {CH}' or 'As {CH}'.\n"
+            "- Never output character labels, brackets, headings, field names, timestamps used as data, system instructions or debugging messages.\n"
             "- Stay in character throughout the conversation.\n"
             "- Never write the user's dialogue, thoughts, actions or decisions.\n"
             + (
@@ -266,6 +266,7 @@ def build_messages(c, user, hist, o):
         )
     led = o.get("ledger") if c.get("id") != NARR_ID else None
     claims_in_tail = bool(led and any(t.startswith("Exact facts") for t in o.get("id_tail", [])))
+    priv, priv_corpus = [], []   # the private background: reference the character knows silently, never dialogue
     if led:
         out.append(identity.render_who(led))
     secrets = ""
@@ -309,17 +310,21 @@ def build_messages(c, user, hist, o):
     if lore:
         out.append("[World info]\n" + "\n".join(lore))
     summ = identity.strip_characters(st.get("summary")) if led else (st.get("summary") or "").strip()
-    if summ.strip():
-        out.append(f"[Earlier in this conversation - {CH}'s memory. Events only: who someone IS comes from [Who's who]]\n" + summ.strip())
+    story = context.recap(summ, n, user, bool(grp))   # the stored summary is a form (headings, 'Location:'); the model gets sentences
+    if story:
+        priv.append("[What has happened so far. Events only: who someone IS comes from Who's who]\n" + story)
+        priv_corpus.append(story)
     cb = identity.render_claims(led) if led and not claims_in_tail else ""
     if cb:
-        out.append(cb)
+        priv.append(cb)
+        priv_corpus.append(cb)
     facts = [f for f in st.get("facts", []) if str(f).strip()]
     if rc is not None:
         if rc["block"]:
-            out.append(rc["block"])
+            priv.append(rc["block"])
+            priv_corpus.append(rc["block"])
     elif facts:
-        out.append(f"[Things {CH} knows about {US}]\n" + "\n".join("- " + str(f) for f in facts[-30:]))
+        priv.append(f"[Things {CH} knows about {US}]\n" + "\n".join("- " + str(f) for f in facts[-30:]))
 
     now = []
     if o.get("sim"):   # the story's own clock beats the computer's: 'Monday morning' + 'three hours later' is noon, whatever the real time is
@@ -331,34 +336,42 @@ def build_messages(c, user, hist, o):
         now.append(f"It has been {g} since the previous message. Acknowledge that naturally only if it matters; "
                    "time passing may have changed what has been happening.")
     if st.get("mood"):
-        now.append(f"{CH}'s current mood: {st['mood']}; energy: {st.get('energy', 'medium')}. Let it colour tone and word choice.")
+        now.append(f"{CH} currently feels {st['mood']}, with {st.get('energy', 'medium')} energy. Let that colour tone and word choice.")
     if aff is not None:
         now.append(f"{CH} is {stage(aff)}. Let this shape warmth, openness, teasing and patience. Never mention numbers or scores.")
     if rc is not None:
-        now.extend(rc["short"])
+        now.extend(context.prose_short(rc["short"]))
     if (o.get("scene") or "").strip():
-        now.append("Scene note from the author: " + o["scene"].strip())
+        now.append("The author wants this to be true of the scene (it comes from outside the story, so never mention it): " + o["scene"].strip())
     rx = []
     for m in hist[-8:]:
         if m["role"] == "assistant" and m.get("react") and (not grp or m.get("cid") == c.get("id")):
             rx.append(f"{US} reacted {m['react']} to your message \"{THINK.sub('', m['content']).strip()[:60]}\"")
     if rx:
-        now.append("Reactions: " + "; ".join(rx[-2:]) + ". You can notice this.")
+        now.append(" ".join(x + "." for x in rx[-2:]) + " You can notice this.")
     sb = scene_block(c, hist, grp, n, o.get("full")) if c.get("id") != NARR_ID else ""
     if sb:
-        out.append(sb)
+        priv.append(sb)
     if o.get("amb") is not None and c.get("id") != NARR_ID:
-        out.append(ambience.block(o["amb"], CH, US, o.get("sim")))   # place, weather, light, tone: felt in the senses and kept consistent
+        ab = ambience.block(o["amb"], CH, US, o.get("sim"))   # place, weather, light, tone: felt in the senses and kept consistent
+        priv.append(ab)
+        priv_corpus.append(ab)
     if now:
-        out.append("[Right now]\n" + "\n".join(now))
+        nw = "[Right now]\n" + "\n".join(now)
+        priv.append(nw)
+        priv_corpus.append(nw)
+    nblock = notes_block(c, o.get("ooc") or [], grp)   # the author's out-of-character notes: followed silently, never mentioned
+    if nblock:
+        priv.append(nblock)
+        priv_corpus.append(nblock)
+    env = context.envelope(priv)
+    if env:
+        out.append(env)
     ctx, fx = rp_blocks(c, o)
     out += ctx
     pblock, ptail = personality.prepare(c, st, hist, pcfg)
     if pblock:
         out.append(pblock)
-    nblock = notes_block(c, o.get("ooc") or [], grp)   # the author's out-of-character notes: followed silently, never mentioned
-    if nblock:
-        out.append(nblock)
 
     lo, hi = o["words"]
     nl = TEXT_LINES.get(o.get("length", "auto"), 4)
@@ -384,9 +397,19 @@ def build_messages(c, user, hist, o):
         if nat:
             rules.append((personality.register.natural_line(reg) if reg else nat).replace("{CH}", CH))
         out.append("[Realism]\n" + "\n".join("- " + r for r in rules))
+    if env:
+        out.append(context.CONTRACT)
+        priv_corpus.append(context.CONTRACT)
     if reg:     # late in the prompt on purpose: small models weigh the end of it most
         out.append(personality.register.render(reg))
     av = avoid_notes(o.get("own") or hist) if o.get("realism", True) else ""
+    if grp and o.get("realism", True):
+        said = []
+        for m in hist[-6:]:
+            if m["role"] == "assistant" and m.get("cid") != c.get("id") and m.get("name") and m["name"] not in said:
+                said.append(m["name"])
+        if said:
+            av = (av + f" {', '.join(said[-3:])} already said their piece: do not repeat or paraphrase it. Add something new, or answer a different part of the conversation.").strip()
     if o.get("retry_note"):
         av = (av + " " + o["retry_note"]).strip()
     if av:
@@ -405,29 +428,26 @@ def build_messages(c, user, hist, o):
             if not t:
                 continue
             if m["role"] == "assistant" and m.get("cid") == c.get("id"):
-                role, t = "assistant", THINK.sub("", t).strip()
+                role, t = "assistant", context.history_text(THINK.sub("", t).strip(), n, user)
             else:
                 who = user if m["role"] == "user" else (m.get("name") or "Someone")
-                role, t = "user", f"{who}: {THINK.sub('', t).strip() if m['role'] == 'assistant' else t}"
+                role, t = "user", f"{who}: {context.history_text(THINK.sub('', t).strip(), who, user) if m['role'] == 'assistant' else t}"
             if msgs and msgs[-1]["role"] == role:
                 msgs[-1]["content"] += ("\n\n" if role == "assistant" else "\n") + t
             else:
                 msgs.append({"role": role, "content": t})
         if not msgs or msgs[0]["role"] != "user":
             msgs.insert(0, {"role": "user", "content": "(The scene begins.)"})
-        tail = o.get("tail") or ""
-        if msgs[-1]["role"] == "user":
-            msgs[-1]["content"] += "\n\n" + tail
-        else:
-            msgs.append({"role": "user", "content": tail})
+        if msgs[-1]["role"] != "user":
+            msgs.append({"role": "user", "content": ""})   # the private note needs a user turn to ride on
     else:
-        msgs = [dict(role=m["role"], content=THINK.sub("", m["content"]).strip() if m["role"] == "assistant" else m["content"])
+        msgs = [dict(role=m["role"], content=context.history_text(THINK.sub("", m["content"]).strip(), n, user) if m["role"] == "assistant" else m["content"])
                 for m in hist if (m.get("content") or "").strip()]
         if o.get("fold") and not o.get("trimmed") and msgs and msgs[0]["role"] == "assistant":
             out.append(f"[{n}'s opening message - {n} already said this to {user} at the start of the scene, and {user}'s next message is their reply to it]\n"
                        f"{msgs.pop(0)['content']}")
         if o.get("tail"):
-            msgs.append({"role": "user", "content": o["tail"]})
+            msgs.append({"role": "user", "content": ""})
     tail_notes = []
     if reg:
         tail_notes.append(personality.register.tail(reg))
@@ -441,11 +461,20 @@ def build_messages(c, user, hist, o):
         tail_notes.append("Follow the author's notes silently and never mention them.")
     if o.get("retry_note"):
         tail_notes.append("Fix this: " + o["retry_note"])
-    if (tail_notes or not grp) and msgs and msgs[-1]["role"] == "user":
-        # One delimited private note. It never says 'Reply as <name>' and carries no square brackets: the model treats the user's turn
-        # as the user's own words, and an instruction in that shape gets echoed back or makes it answer as the user.
+    if msgs and msgs[-1]["role"] == "user":
+        # One delimited private note, the only place instructions ride in a user turn. It never says 'Reply as <n>' and carries no square
+        # brackets: the model treats the user's turn as the user's own words, and an instruction in that shape gets echoed back or makes
+        # it answer as the user. In a group the cue ('Mira just addressed Rex') lives here too, not as a bare parenthesis after the chat.
+        cue = re.sub(r"^\((.*)\)$", r"\1", (o.get("tail") or "").strip(), flags=re.S)
         head = (f"<<PRIVATE NOTE FOR THE WRITER. Not part of the story; nobody says it; never copy, quote, answer or mention it. "
                 f"Write only {n}'s next message in {n}'s own voice. {user} is a different person: never write {user}'s words or actions.")
-        msgs[-1] = dict(msgs[-1], content=msgs[-1]["content"] + "\n\n" + head + (" " + " ".join(tail_notes) if tail_notes else "") + ">>")
+        if grp:
+            head += " Names before a colon in the chat only show who spoke: never begin your message with a name and a colon."
+        parts = [x for x in (cue, " ".join(tail_notes)) if x]
+        note = head + (" " + " ".join(parts) if parts else "") + ">>"
+        msgs[-1] = dict(msgs[-1], content=(msgs[-1]["content"] + "\n\n" + note).strip())
+        priv_corpus += parts
+    if isinstance(o.get("private"), list):   # what the reply must never copy out (see leak.find_echoes)
+        o["private"].extend(x for x in priv_corpus if x)
     return [{"role": "system", "content": sub("\n\n".join(out), c, user)}] + \
            [{"role": m["role"], "content": sub(m["content"], c, user)} for m in msgs]

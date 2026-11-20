@@ -442,7 +442,9 @@ class Summaries(unittest.TestCase):
                                 "SETTING & STATE\nLocation: the pier\nCurrent State: Faith and Crescent are walking\n\nPIVOTAL MOMENTS\n- Crescent promised a book")
         sim.say("keep walking", "ok")
         s = sim.system
-        self.assertIn("Location: the pier", s)
+        self.assertIn("takes place at the pier", s)
+        self.assertNotIn("Location:", s)
+        self.assertNotIn("SETTING & STATE", s)
         self.assertIn("Crescent promised a book", s)
         self.assertNotIn("Loves her sister Nadia", s)
         self.assertNotIn("20-year-old with a broken left wrist", s)

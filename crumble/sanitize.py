@@ -65,7 +65,9 @@ def strip_directives(text, char="", user=(), others=()):
         inner = m[1].strip()
         if BRACKET_HEAD.match(inner) or STRONG.search(inner) or inner.lower() in labels:
             return drop(m[0])
-        return f"*{inner}*" if inner else ""
+        if not inner:
+            return ""
+        return inner if m.string[:m.start()].count("*") % 2 else f"*{inner}*"   # already inside an *action*: no nested stars
     t = re.sub(r"\[([^\[\]\n]{1,400})\]", square, t)
     m = re.search(r"\[([^\]\n]{0,400})$", t)                                         # a bracket that was never closed (cut off)
     if m and (BRACKET_HEAD.match(m[1]) or STRONG.search(m[1]) or not m[1].strip()):
@@ -94,7 +96,15 @@ _SENT = re.compile(r"(?<=[.!?…])\s+")
 
 
 def _paren_to_narration(t):
-    return re.sub(r"\(([^()\n]{3,})\)", lambda m: f"*{m[1].strip()}*", t)
+    """(an aside) -> *an aside*, but only in the bare text between spans: a parenthesis inside an existing *action* or "quote" stays
+    as it is (wrapping it made '*She waits (quietly) here*' into '*She waits *quietly* here*', broken Markdown)."""
+    out, pos = [], 0
+    for m in _SPAN.finditer(t):
+        out.append(re.sub(r"\(([^()\n]{3,})\)", lambda x: f"*{x[1].strip()}*", t[pos:m.start()]))
+        out.append(m[0])
+        pos = m.end()
+    out.append(re.sub(r"\(([^()\n]{3,})\)", lambda x: f"*{x[1].strip()}*", t[pos:]))
+    return "".join(out)
 
 
 _VOICE = re.compile(r"\b(?:i|i'm|i've|i'll|i'd|me|my|mine|myself|we|we're|we'll|we've|us|our|ours|you|you're|you'll|you've|you'd|your|yours|yourself|thou|thee|thy|thine|ye|let's|lets)\b", re.I)
@@ -117,7 +127,8 @@ def enclose_narration(text, char="", user=()):
     names = _names(char, user)
     head = re.compile(r"^(?:" + "|".join(re.escape(n) for n in names) + r")\b(?!\s*[,!?:;])") if names else None
     out_lines = []
-    for line in _paren_to_narration(text).split("\n"):
+    for line in text.split("\n"):
+        line = _paren_to_narration(line)
         pieces, pos = [], 0
         for m in _SPAN.finditer(line):
             if m.start() > pos:

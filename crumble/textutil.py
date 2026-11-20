@@ -1,15 +1,18 @@
 """Small text helpers: <think> handling, reply clean-up, repetition checks, JSON recovery."""
-import difflib
+import html
+from html.entities import html5
 import json
 import random
 import re
 
-from . import sanitize
+from . import leak, repeat, sanitize
 from .config import CH, STAGES, STOPW, US
 
 
 def sub(t, c, u):
-    return (t or "").replace(CH, c.get("name") or "Character").replace(US, u)
+    n = c.get("name") or "Character"
+    # {CH} / {USER} are written literally in some prompt text; they used to reach the model unreplaced
+    return (t or "").replace(CH, n).replace(US, u).replace("{CH}", n).replace("{USER}", u)
 
 
 THINK = re.compile(r"^.*?</think>|<think>.*?(?:</think>|$)", re.S)
@@ -51,7 +54,9 @@ def trim_sentence(t):
 
 
 def _pair(t, o, c):
-    """Balance one kind of paired marker (quotes, parentheses). Close it if the thought is finished, else drop the stub."""
+    """Balance one kind of paired marker (quotes, parentheses). Close it when what follows is real text, drop the stub when it is a
+    cut-off fragment. (It used to drop everything after a dangling marker unless the text ended in . ! ? , - so a closing quote
+    after the full stop deleted the dialogue.)"""
     if o == c:
         bad = t.count(o) % 2
         i = t.rfind(o)
@@ -60,7 +65,8 @@ def _pair(t, o, c):
         i = t.rfind(o)
     if bad and i >= 0:
         tail = t[i + 1:].strip()
-        t = t.rstrip() + c if tail and re.search(r"[.!?…,]$", tail) else t[:i].rstrip()
+        real = bool(tail) and (len(tail.split()) >= 3 or re.search(r"[.!?…,][\"'”’)\]]*$", tail))
+        t = t.rstrip() + c if real else t[:i].rstrip()
     return t
 
 
@@ -70,6 +76,93 @@ def balance(t):
     t = _pair(t, "“", "”")
     t = _pair(t, "(", ")")
     return t.strip()
+
+
+_ENT = re.compile(r"&(?:#\d{1,6}|#[xX][0-9a-fA-F]{1,6}|[A-Za-z][A-Za-z0-9]{1,8});")
+
+
+def unescape(t):
+    """Models trained on web text write &quot; &amp; &#39; &lt;. The page escapes text itself, so an entity written by the model was
+    shown literally (and a second pass turned &amp;quot; into &amp;amp;quot;). Decode complete entities only (a bare '&' or 'R&D'
+    stays), up to three times for doubly escaped text."""
+    for _ in range(3):
+        if "&" not in t:
+            break
+        n = _ENT.sub(lambda m: html.unescape(m[0]) if (m[0][1] == "#" or m[0][1:] in html5) else m[0], t)
+        if n == t:
+            break
+        t = n
+    return t
+
+
+_BOLD_NARR = re.compile(r"\*\*([^*\n]+?)\*\*")
+
+
+def _narration_like(x):
+    x = x.strip()
+    return len(x.split()) >= 2 and bool(re.search(r"[.!?…]$", x))
+
+
+def fix_stars(t):
+    """Make every *action* span well formed: no spaces just inside the stars, a span that runs over a line break is closed at the break and
+    reopened on the next line (a model writes '*She walks over\\nand sits.*'; the page only styles spans that sit on one line), and one
+    that is never closed is closed at the end. **bold** emphasis is left alone."""
+    out, inside, reopen, strip_next = [], False, False, False
+    for part in re.split(r"(\*\*[^*\n]+\*\*|\*|\n)", t):
+        if part == "":
+            continue
+        if part == "*":
+            if inside:
+                while out and out[-1].strip() == "" and out[-1] != "*":
+                    out.pop()
+                if out and out[-1] != "*":
+                    out[-1] = out[-1].rstrip()
+                out.append("*")
+                inside = False
+            else:
+                out.append("*")
+                inside, strip_next, reopen = True, True, False
+        elif part == "\n":
+            if inside:
+                if out and out[-1] != "*":
+                    out[-1] = out[-1].rstrip()
+                out.append("*")
+                inside, reopen = False, True
+            out.append("\n")
+        else:
+            if part.startswith("**") and part.endswith("**"):
+                pass
+            elif reopen and part.strip():
+                out.append("*")
+                inside, reopen, strip_next = True, False, True
+            if strip_next and inside:
+                part = part.lstrip()
+                strip_next = not part
+            out.append(part)
+    if inside:
+        if out and out[-1] != "*":
+            out[-1] = out[-1].rstrip()
+        out.append("*")
+    r = "".join(out)
+    r = re.sub(r"\*[ \t]+\*", " ", r)          # an empty span
+    r = re.sub(r"(?<!\*)\*\*(?!\*)(?=\s|$)", "", r) if r.count("**") % 2 else r    # a stray unmatched ** marker
+    return r
+
+
+def strip_blocks(t):
+    """Markdown block syntax has no place in a chat message: code fences, backticks, # headings, horizontal rules."""
+    t = re.sub(r"(?m)^[ \t]*```[A-Za-z]*[ \t]*$\n?", "", t).replace("`", "")
+    t = re.sub(r"(?m)^[ \t]*#{1,6}[ \t]+", "", t)
+    return re.sub(r"(?m)^[ \t]*(?:-{3,}|_{3,}|\*{3,})[ \t]*$\n?", "", t)
+
+
+def tidy_markup(t):
+    """Normalise the Markdown a model may produce into the app's own format: *action*, plain dialogue, **emphasis**.
+    ***x*** and **a whole action sentence** become *x*; _x_ becomes *x*; spans are repaired by fix_stars()."""
+    t = re.sub(r"\*\*\*([^*\n]+?)\*\*\*", r"*\1*", strip_blocks(t))
+    t = _BOLD_NARR.sub(lambda m: f"*{m[1].strip()}*" if _narration_like(m[1]) and not m.string[:m.start()].count('"') % 2 else m[0], t)   # not inside spoken words
+    t = re.sub(r"(?<![\w*])_([^_\n]*\s[^_\n]*?)_(?![\w*])", lambda m: f"*{m[1].strip()}*", t)
+    return fix_stars(t)
 
 
 _META_LEAD = [
@@ -93,13 +186,19 @@ def strip_meta(b):
 
 
 def clean_body(body, user, name, mode, others=(), info=None):
-    b = body.replace("\r", "")
-    b, leak = sanitize.strip_directives(b, name, user, others)   # leaked prompt text ('[Reply as ...]', '<<note>>') never reaches the chat
+    b = unescape(body.replace("\r", ""))
+    b, found = leak.scrub(b, name, user, others)                # leaked state: 'Location: ...', 'Story time ...', ratings, headings
+    b, lk = sanitize.strip_directives(b, name, user, others)   # leaked prompt text ('[Reply as ...]', '<<note>>') never reaches the chat
     if info is not None:
-        info.update(leak)
+        info.update(lk)
+        info["found"] = found
+    b = tidy_markup(b) if mode == "story" else strip_blocks(b)
     b = strip_meta(b)
     b = re.sub(r"^\s*\**" + re.escape(name) + r"\**\s*:\s*", "", b)
     b = strip_meta(b)
+    labels = [n for x in [name, user, *others] for n in (x, x.split()[0] if x.strip() else "") if n and len(n) > 1]
+    if labels:   # a line that is only a name is a heading or a speaker label, not part of the story
+        b = re.sub(r"(?im)^[ \t]*\**(?:" + "|".join(re.escape(n) for n in sorted(set(labels), key=len, reverse=True)) + r")\**[ \t]*$\n?", "", b)
     m = re.search(r"(?im)^\s*\**" + re.escape(user) + r"\**\s*:", b)  # the model started writing the user's turn
     if m:
         b = b[:m.start()]
@@ -118,19 +217,23 @@ def clean_body(body, user, name, mode, others=(), info=None):
     return b.strip()
 
 
-def finish_reply(raw, finish, user, name, mode, others=(), narrate=True):
+def finish_reply(raw, finish, user, name, mode, others=(), narrate=True, private=None):
+    """`private`: the set of word runs from the private background (leak.corpus), or None when only structure is checked (live preview)."""
     th, body, think_open = split_think(raw)
-    leak = {}
-    body = clean_body(body, user, name, mode, others, leak)
+    info = {}
+    body = clean_body(body, user, name, mode, others, info)
     if mode == "story" and narrate:   # whatever is not dialogue is narration, and narration lives between *asterisks*
         body = sanitize.enclose_narration(body, name, user)
+    echoes = leak.find_echoes(body, private) if private else []
     cut = False
     if finish == "length" and body:  # ran out of tokens: never leave half a sentence on screen
         cut = True
         lines = body.split("\n")
         body = "\n".join(lines[:-1]) if mode == "text" and len(lines) > 1 else trim_sentence(body)
+    found = info.get("found") or []
     return {"think": th, "text": balance(body), "empty": not body.strip(), "cut": cut, "think_open": think_open,
-            "leak": bool(leak.get("leaked")), "flip": bool(leak.get("flipped"))}
+            "leak": bool(info.get("leaked")), "flip": bool(info.get("flipped")), "scrubbed": [f["kind"] for f in found],
+            "scrubbed_text": [f["text"] for f in found], "echo": echoes}
 
 
 def close_open(t):
@@ -177,12 +280,7 @@ def preview_reply(raw, user, name, mode, others, narrate, length, hi, capped):
 
 
 def similar(t, prevs):
-    a = re.sub(r"\W+", " ", t.lower()).strip()
-    for p in prevs:
-        b = re.sub(r"\W+", " ", p.lower()).strip()
-        if a and b and difflib.SequenceMatcher(None, a, b).ratio() > .8:
-            return True
-    return False
+    return repeat.worst(t, prevs)[0] > .8
 
 
 def avoid_notes(hist):

@@ -2,7 +2,7 @@
 import re
 import time
 
-from . import ambience, identity, personality, recall, simtime
+from . import ambience, identity, leak, personality, recall, repeat, simtime
 from .config import CH, LLM, US
 from .prompt import build_messages, cue_text
 from .rp.narrator import NARR_ID
@@ -164,12 +164,17 @@ def generate_reply(b, send):
     elif grp:
         tail = cue_text(b, c)
     own = [m for m in hist if m["role"] == "assistant" and (not grp or m.get("cid") == cid)]
-    prevs = [THINK.sub("", m["content"]) for m in own][-3:]
+    prevs = [THINK.sub("", m["content"]) for m in own][-4:]
+    # what was already said in this scene by anyone else (a group), and the alternatives already written for a swipe: a reply that
+    # repeats them is a mistake even in Quick mode
+    spoken_by_others = [THINK.sub("", m["content"]) for m in hist[-8:] if grp and m["role"] == "assistant" and m.get("cid") != cid][-4:]
+    seen_before = prevs + spoken_by_others + [str(x) for x in (b.get("avoid") or [])][:6]
     others = [m.get("name") or "" for m in (grp or {}).get("members", []) if m.get("id") != cid and m.get("name")] + ([] if not grp or cid == NARR_ID else ["Narrator"])
     if led:    # a line that starts 'Nadia:' or '<other name for the user>:' is the model writing someone else's turn
         others += [o["name"] for o in led["others"].values()] + [n for n in identity.user_labels(led) if n != user]
     stop = ["\n" + user + ":", "\n" + user + " :", "\n**" + user + ":"] + [s for o_ in others for s in ("\n" + o_ + ":", "\n**" + o_ + ":")]
-    stop += ["<<PRIVATE", "[Reply as", "[As ", "(Write only"]      # the model starts echoing an instruction: cut it off right there
+    stop += ["<<PRIVATE", "[Reply as", "[As ", "(Write only", "\n=== ", "=== PRIVATE", "\nSETTING & STATE", "\nRELATIONSHIP DYNAMIC", "\nPIVOTAL MOMENTS",
+             "\nLocation:", "\nCurrent State:", "\nPrimary Dynamic:", "\n[Right now", "\n[Scene]"]      # the model starts echoing an instruction: cut it off right there
     # story time: derived from the whole chat (scenario, messages, author's settings), so the character lives by the story's clock, not the PC's
     notes_ = clean_notes((b.get("ooc") or {}).get("notes"))
     sim = simtime.derive(full, (grp or {}).get("scenario") or c.get("scenario") or "", notes_ + ([{"kind": "setting", "text": b["scene"]}] if b.get("scene") else []))
@@ -201,7 +206,7 @@ def generate_reply(b, send):
     if led:   # now that the memory search is done, "does anyone know this?" can include what it found
         identity.analyze(led, full, known + [t_["text"] for t_ in (rc or {}).get("trace", [])] + list((rc or {}).get("short", [])), kind)
         id_tail = identity.tail_notes(led)
-    pool, id_pool = [], []
+    pool, id_pool, cands, grams = [], [], [], None
     best, retry_note, tries, dropped, used = None, "", 0, 0, 0
     quick = bool(p.get("quick", False))   # Quick replies: at most one re-roll, and only for real mistakes (not for style nits)
     tries_max = 2 if quick else 3
@@ -212,8 +217,9 @@ def generate_reply(b, send):
                  natural=p.get("natural", 2), think=think, fold=p.get("fold", False), words=(lo, hi), length=p.get("length", "auto"), tail=tail,
                  retry_note=retry_note, group=grp, rp=b.get("rp"), own=own, pers=p.get("pers"), mem=p.get("mem"), recall=rc, turn=turns,
                  ledger=led, id_tail=id_tail, full=full, trimmed=trimmed,
-                 ooc=clean_notes((b.get("ooc") or {}).get("notes")))
+                 ooc=clean_notes((b.get("ooc") or {}).get("notes")), private=[])
         msgs = build_messages(c, user, hist, o)
+        grams = leak.corpus(o["private"])      # the private background of this attempt, to notice a reply that copies it
         budget = cap + (1500 if think else 0)
         used, dropped = fit(msgs, n_ctx - budget - 16)
         budget = max(128, min(budget, n_ctx - used - 16))
@@ -223,7 +229,7 @@ def generate_reply(b, send):
             return preview_reply(t, user, c.get("name") or "Character", mode, others, p.get("actions", True), p.get("length", "auto"), hi,
                                  kind in ("reply", "resume", "nudge"))
         raw, fin, ntoks, secs = run_llm(msgs, samp, stop, budget, send, bool(p.get("stream")), view)
-        r = finish_reply(raw, fin, user, c.get("name") or "Character", mode, others, narrate=p.get("actions", True))
+        r = finish_reply(raw, fin, user, c.get("name") or "Character", mode, others, narrate=p.get("actions", True), private=grams)
         if kind in ("reply", "resume", "nudge") and not r["empty"]:
             r["text"] = cap_reply(r["text"], mode, p.get("length", "auto"), hi)
         r.update(tok=ntoks, ms=int(secs * 1000), finish=fin)
@@ -233,8 +239,13 @@ def generate_reply(b, send):
             think = False
             if r.get("leak"):
                 retry_note = "Your last attempt was only instruction text. Write what the character says and does, nothing else."
+            elif r.get("scrubbed"):
+                retry_note = ("Your last attempt was only field names, headings, times or ratings. Write what the character says and does in the story, "
+                              "and show feelings and time through behaviour and words.")
             continue
         best = r
+        r["_rep"] = repeat.worst(r["text"], seen_before)[0] if kind in ("reply", "resume", "nudge") else 0.0
+        cands.append(r)
         ig = identity.check(r["text"], led, mode) if led and kind in ("reply", "resume", "nudge") else None
         if ig:
             r["text"] = ig["text"]                     # repairable slips (the model wrote the user's lines) are cut out right away
@@ -254,6 +265,13 @@ def generate_reply(b, send):
             notes.append(f"You are {cn}, not {user}. {user} is the other person; never write as {user}.")
         elif r.get("leak") and attempt < tries_max - 1:
             notes.append("Do not write brackets, labels or instructions. Output only what the character says and does.")
+        if attempt < tries_max - 1:
+            # state that was echoed and cut out is only worth a retry when most of the reply was that (nothing real is left)
+            if r["scrubbed"] and len(r["text"].split()) < 4:
+                notes.append(f"Do not write field names, headings, times, moods, ratings or scene summaries. {cn} only says and does things in the story; "
+                             "show feelings and time through behaviour and words.")
+            elif r["echo"]:
+                notes.append(f"You copied wording from your private background. Never quote it; say it in {cn}'s own words, or leave it out.")
         tn = simtime.time_note(r["text"], sim) if kind in ("reply", "nudge") else ""
         if tn and not quick and attempt < tries_max - 1:
             notes.append(tn)
@@ -266,11 +284,12 @@ def generate_reply(b, send):
             notes.append(ig["note"])
         if (ai_hard or ai_soft) and attempt < tries_max - 1:
             notes.append(f"CRITICAL: Do NOT talk like an AI assistant or chatbot (no 'How are you doing today?', 'casual conversation', 'I'm here if you'd like to chat', 'What brings you here?'). You are {c.get('name') or 'Character'}, a living person in this scene. Speak and act strictly from their perspective.")
-        elif kind == "reply" and not quick and attempt < tries_max - 1 and similar(r["text"], prevs):
-            samp = dict(samp, temperature=min(1.4, samp["temperature"] + .15), repeat_penalty=samp["repeat_penalty"] + .05)
-            notes.append("Your last attempt was too close to an earlier reply. Say something clearly different.")
         elif pg and pg["retry"] and (not quick or pg.get("hard")) and attempt < tries_max - 1 and pg["note"]:
             notes.append(pg["note"])
+        if r["_rep"] >= repeat.SOFT and attempt < tries_max - 1:   # a real mistake in every mode, Quick included
+            samp = dict(samp, temperature=min(1.4, samp["temperature"] + .15), repeat_penalty=min(1.5, samp["repeat_penalty"] + .05))
+            who = "someone else in the scene" if grp and repeat.worst(r["text"], spoken_by_others)[0] >= repeat.SOFT else f"{cn}'s own earlier message"
+            notes.append(f"Your last attempt repeated what was already said by {who}. Say something clearly different: a new beat, new words, a new action.")
         if notes:
             retry_note = " ".join(notes)
             continue
@@ -293,9 +312,20 @@ def generate_reply(b, send):
             best["text"] = f"*{cname} looks at {user}, unsure of what to say.*"
     if not best:
         raise RuntimeError("The model returned an empty reply. Try again, or turn Thinking off.")
+    if len(cands) > 1 and best.get("_rep", 0) >= repeat.SOFT:   # out of attempts: the least repetitive one wins
+        alt = min(cands, key=lambda x: x["_rep"])
+        if alt["_rep"] + .1 <= best["_rep"]:
+            best = alt
+    if grp and best.get("_rep", 0) >= repeat.HARD and (b.get("cue") or {}).get("why") not in ("mention", "combat") and repeat.worst(best["text"], spoken_by_others)[0] >= repeat.HARD:
+        return {"pass": True, "text": "", "think": "", "tok": best.get("tok", 0), "ms": best.get("ms", 0), "ctx_used": used, "ctx": n_ctx, "dropped": dropped}   # someone just said exactly this: stay quiet
+    if best.get("echo") and grams:   # retries ran out: take out only the sentences that are almost entirely copied
+        best["text"] = leak.drop_echo_sentences(best["text"], grams)
     if reg and kind in ("reply", "resume", "nudge", "continue"):
         best["text"] = personality.register.repair(best["text"], reg)   # whatever else slipped, a formal or archaic voice never keeps contractions
     best.pop("_ni", None)
+    best.pop("_rep", None)
+    best["leaks"] = sorted(set(best.pop("scrubbed", []) or []) | ({"echo"} if best.pop("echo", None) else set()))
+    best.pop("scrubbed_text", None)
     best.update(ctx_used=used, ctx=n_ctx, dropped=dropped, retries=tries)
     if rc is not None:
         best.update(recalled=rc["ids"], recall=[{"id": t["id"], "t": t["t"], "why": t["why"]} for t in rc["trace"]])

@@ -4,7 +4,7 @@ import difflib
 import re
 import time
 
-from . import identity, personality, recall
+from . import context, identity, personality, recall
 from .config import EMO, LLM, LOCK
 from .recall import store as rstore
 from .textutil import THINK, loose_json, trim_sentence
@@ -21,6 +21,20 @@ def _ask(prompt, max_tokens=380):
     return THINK.sub("", r["choices"][0]["message"]["content"])
 
 
+def _line(m, n, user, cid=None, limit=500):
+    """One chat line for a helper prompt. In a group the other characters are labelled as other characters (they used to be tagged
+    '(the character)' too, so the mood tracker could credit someone else's words to the character it was tracking). Earlier replies are
+    cleaned first so a leaked label is not summarised into memory."""
+    t = THINK.sub("", m["content"])
+    if m["role"] != "assistant":
+        return f"{user} (the user): {t[:limit]}"
+    t = context.history_text(t, m.get("name") or n, user)[:limit]
+    who = m.get("name") or n
+    if cid and m.get("cid") and m["cid"] != cid:
+        return f"{who} (another character, not {n}): {t}"
+    return f"{who} (the character): {t}"
+
+
 def track(b):
     c, user, hist, st = b["char"], b["user"], b["history"][-6:], dict(b.get("state") or {})
     rcfg = recall.settings(b.get("mem"))
@@ -33,7 +47,7 @@ def track(b):
     guard = identity.make_guard(led, [THINK.sub("", m["content"]) for m in b["history"] if m["role"] == "user"])
     st["cast"] = led["seed"]
     aff, facts = int(st.get("affection", 50)), [str(f) for f in st.get("facts", [])]
-    convo = "\n".join(f"{(m.get('name') or n) + ' (the character)' if m['role'] == 'assistant' else user + ' (the user)'}: {THINK.sub('', m['content'])[:500]}" for m in hist)
+    convo = "\n".join(_line(m, n, user, c.get("id")) for m in hist)
     ask = (f"You track the inner state of a roleplay character named {n}. Personality: {(c.get('personality') or c.get('description') or '')[:400]}\n"
            f"{identity.roster(led)}\n"
            f"Previous mood: {st.get('mood', 'neutral')}. Affection toward {user} (0-100): {aff}.\n"
@@ -113,7 +127,7 @@ def summarize(b):
     n = c.get("name") or "Character"
     led = identity.build(c, user, b["history"], persona=b.get("persona"))
     user = led["user"]["name"]
-    convo = "\n".join(f"{(m.get('name') or n) + ' (the character)' if m['role'] == 'assistant' else user + ' (the user)'}: {THINK.sub('', m['content'])[:700]}" for m in b["history"])
+    convo = "\n".join(_line(m, n, user, None, 700) for m in b["history"])
     prev = identity.strip_characters(b.get("summary") or "") or "none"     # who someone is comes from the cast ledger, not from the summary
     ask = (identity_line(c, n) + identity.roster(led) + f"\nPrevious memory notes: {prev}\n\nNew events to fold in:\n{convo}\n\n"
            f"Update the memory using the conversation above. Return only these sections and fields, in this order:\n"
@@ -126,6 +140,8 @@ def summarize(b):
            f"Keep exact names, numbers and dates as written. Never guess anyone's age or gender (for {user} use 'they' unless the gender is stated). "
            "Keep every heading and field, use concise specific details, and write \"Not established\" when the chat does not provide an answer. "
            "Fold the new events into the previous notes without losing still-relevant facts. No preamble. /no_think")
+    if b.get("group"):   # a group has no single relationship: the recap says how everyone relates to the user and to each other
+        ask = ask.replace("[how their relationship currently works and how it has changed]", f"[how each character relates to {user} and to the other characters, and how that has changed]")
     with LOCK:
         r = LLM["obj"].create_chat_completion(messages=[{"role": "user", "content": ask}], temperature=.3, max_tokens=450)
     ch = r["choices"][0]

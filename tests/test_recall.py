@@ -376,7 +376,8 @@ class PromptTests(unittest.TestCase):
         self.assertIn("necklace on her birthday", sys_)
         self.assertNotIn("hiking", sys_)
         self.assertNotIn("nurse", sys_)
-        self.assertIn("Scene: A rainy evening", sys_)
+        self.assertIn("A rainy evening", sys_)
+        self.assertNotIn("Scene: A rainy", sys_)
         self.assertIn("[What Mira remembers", sys_)
 
     def test_names_are_filled_in_from_placeholders(self):
