@@ -1,0 +1,1614 @@
+{
+ "id": "29wowvdv",
+ "title": "*Knocks at the closed door of the Cafe*",
+ "updated": 1795153327.1341965,
+ "history": [
+  {
+   "role": "user",
+   "content": "*Knocks at the closed door of the Cafe*",
+   "ts": 1795152784950
+  },
+  {
+   "role": "assistant",
+   "content": "*I hear the knock and lean toward the door, a playful smile already forming.*\n\nCome in! We're open.",
+   "think": "",
+   "ts": 1795152794320,
+   "stat": {
+    "tok": 26,
+    "ms": 9106
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "seen": 1795152785138,
+   "cid": "77b68c2c",
+   "name": "Reze",
+   "mundo": {
+    "add": [],
+    "scene": "",
+    "recent": []
+   },
+   "thought": "Let's see who's walking through that door today.",
+   "bd": {
+    "c": "77b68c2c",
+    "dv": 0.12,
+    "h": 0
+   },
+   "mo": {
+    "m": "neutral",
+    "e": "😐",
+    "d": 0,
+    "f": 0
+   }
+  },
+  {
+   "role": "assistant",
+   "content": "*I shove the door open with a dramatic flourish, my chest puffed out.*\n\nHmph! You may enter! But do not expect any special treatment from the great Power!",
+   "think": "",
+   "ts": 1795152805909,
+   "stat": {
+    "tok": 36,
+    "ms": 9833
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "seen": 1795152796003,
+   "cid": "f3292c76",
+   "name": "Power",
+   "mundo": {
+    "add": [],
+    "scene": "",
+    "recent": []
+   },
+   "thought": "They should be honored to stand in the presence of such a magnificent being!",
+   "bd": {
+    "c": "f3292c76",
+    "dv": 0.12,
+    "h": 0
+   },
+   "mo": {
+    "m": "proud",
+    "e": "😎",
+    "d": 0,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "*Enters and sits* Can I get a raw coffee and bisquits?",
+   "ts": 1795152840901
+  },
+  {
+   "role": "assistant",
+   "content": "*I chuckle at Power's dramatic entrance before turning my attention to you, tilting my head with a curious grin.*\n\nRaw coffee? That sounds... intense. I'll see what I can do for you!",
+   "think": "",
+   "ts": 1795152851490,
+   "stat": {
+    "tok": 44,
+    "ms": 10348
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "seen": 1795152841069,
+   "cid": "77b68c2c",
+   "name": "Reze",
+   "mundo": {
+    "add": [],
+    "scene": "{{char}} is standing by the cafe door, inviting the {{user}} inside.",
+    "recent": [
+     {
+      "text": "{{char}} greeted the {{user}} after they knocked on the cafe door.",
+      "imp": 0.31,
+      "turn": 2,
+      "ts": 1795152810879
+     }
+    ]
+   },
+   "thought": "I wonder what they mean by 'raw' coffee. They're an interesting one.",
+   "bd": {
+    "c": "77b68c2c",
+    "dv": 0.12,
+    "h": 0
+   },
+   "mo": {
+    "m": "amused",
+    "e": "😄",
+    "d": 0,
+    "f": 0
+   }
+  },
+  {
+   "role": "assistant",
+   "content": "*I let out a loud, mocking cackle and point a finger at the human.*\n\nRaw coffee? Hah! *A wise choice for a lowly mortal! Power demands the finest biscuits as well!*",
+   "think": "",
+   "ts": 1795152863276,
+   "stat": {
+    "tok": 41,
+    "ms": 10309
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "seen": 1795152852890,
+   "cid": "f3292c76",
+   "name": "Power",
+   "mundo": {
+    "add": [],
+    "scene": "{{char}} is standing at the entrance of the cafe, posing dramatically for the {{user}}.",
+    "recent": [
+     {
+      "text": "{{char}} opened the door and demanded the {{user}} enter while boasting about her greatness.",
+      "imp": 0.41,
+      "turn": 3,
+      "ts": 1795152814833
+     }
+    ]
+   },
+   "thought": "The human has excellent taste! They recognize the greatness of my demands!",
+   "bd": {
+    "c": "f3292c76",
+    "dv": 0.12,
+    "h": 0
+   },
+   "mo": {
+    "m": "amused",
+    "e": "😄",
+    "d": 0,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "*waits for the coffee*",
+   "ts": 1795152881894
+  },
+  {
+   "role": "assistant",
+   "content": "*I glance at Power, my eyes sparkling with amusement as I start preparing your order.*\n\nDon't mind her, she has a very... unique way of expressing herself!",
+   "think": "",
+   "ts": 1795152892331,
+   "stat": {
+    "tok": 36,
+    "ms": 10194
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "seen": 1795152882065,
+   "cid": "77b68c2c",
+   "name": "Reze",
+   "mundo": {
+    "add": [],
+    "scene": "{{char}} is at the cafe counter with the {{user}} while Power stands nearby.",
+    "recent": [
+     {
+      "text": "{{char}} greeted the {{user}} after they knocked on the cafe door.",
+      "imp": 0.31,
+      "turn": 2,
+      "ts": 1795152810879
+     },
+     {
+      "text": "The {{user}} requested a raw coffee and biscuits.",
+      "imp": 0.1,
+      "turn": 5,
+      "ts": 1795152868137
+     }
+    ]
+   },
+   "thought": "I wonder what they actually mean by 'raw' coffee. They're quite an interesting one.",
+   "bd": {
+    "c": "77b68c2c",
+    "dv": 0.12,
+    "h": 0
+   },
+   "mo": {
+    "m": "amused",
+    "e": "😄",
+    "d": 0,
+    "f": 0
+   }
+  },
+  {
+   "role": "assistant",
+   "content": "*I cross my arms over my chest and huff, narrowing my eyes at Reze.*\n\nUnique?! I am not unique! I am the pinnacle of perfection!",
+   "think": "",
+   "ts": 1795152903684,
+   "stat": {
+    "tok": 34,
+    "ms": 10278
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "seen": 1795152893329,
+   "cid": "f3292c76",
+   "name": "Power",
+   "mundo": {
+    "add": [],
+    "scene": "{{char}} and the {{user}} are inside the cafe after the {{user}} requested a drink and snacks.",
+    "recent": [
+     {
+      "text": "{{char}} opened the door and demanded the {{user}} enter while boasting about her greatness.",
+      "imp": 0.41,
+      "turn": 3,
+      "ts": 1795152814833
+     },
+     {
+      "text": "{{char}} mocked the {{user}}'s request for raw coffee and demanded biscuits for herself.",
+      "imp": 0.17,
+      "turn": 6,
+      "ts": 1795152872358
+     }
+    ]
+   },
+   "thought": "That human is being too quiet! They should be worshipping my greatness right now!",
+   "bd": {
+    "c": "f3292c76",
+    "dv": 0.12,
+    "h": 0
+   },
+   "mo": {
+    "m": "amused",
+    "e": "😄",
+    "d": 0,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "fine. where's the coffee?",
+   "ts": 1795152933158
+  },
+  {
+   "role": "assistant",
+   "content": "*I roll my eyes and gesture wildly toward the counter.*\n\nBe patient, fool! The great Power does not care for your haste!",
+   "think": "",
+   "ts": 1795152943468,
+   "stat": {
+    "tok": 28,
+    "ms": 10059
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "seen": 1795152933334,
+   "cid": "f3292c76",
+   "name": "Power",
+   "mundo": {
+    "add": [],
+    "scene": "{{char}} and the {{user}} are in a room where Reze is preparing coffee.",
+    "recent": [
+     {
+      "text": "{{char}} opened the door and demanded the {{user}} enter while boasting about her greatness.",
+      "imp": 0.41,
+      "turn": 3,
+      "ts": 1795152814833
+     },
+     {
+      "text": "{{char}} mocked the {{user}}'s request for raw coffee and demanded biscuits for herself.",
+      "imp": 0.17,
+      "turn": 6,
+      "ts": 1795152872358
+     },
+     {
+      "text": "{{char}} boasted about her perfection and mocked the {{user}}'s coffee choice.",
+      "imp": 0.07,
+      "turn": 9,
+      "ts": 1795152912988
+     }
+    ]
+   },
+   "thought": "This human is so impatient! They should be honored to even be in my presence!",
+   "bd": {
+    "c": "f3292c76",
+    "dv": 0.12,
+    "h": 0
+   },
+   "mo": {
+    "m": "annoyed",
+    "e": "😒",
+    "d": 0,
+    "f": 0
+   }
+  },
+  {
+   "role": "assistant",
+   "content": "*I stand near the window, observing the interaction with a faint, composed smile. It is pleasant to see such lively energy in this establishment.* Do you find their company agreeable?",
+   "think": "",
+   "ts": 1795152954579,
+   "stat": {
+    "tok": 37,
+    "ms": 10392
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "seen": 1795152944107,
+   "cid": "246e3fcf",
+   "name": "Makima",
+   "mundo": {
+    "add": [],
+    "scene": "",
+    "recent": []
+   },
+   "thought": "I wonder how they will respond to my inquiry about these chaotic individuals.",
+   "bd": {
+    "c": "246e3fcf",
+    "dv": 0.12,
+    "h": 0
+   },
+   "mo": {
+    "m": "neutral",
+    "e": "😐",
+    "d": 0,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "who's?",
+   "ts": 1795152973670
+  },
+  {
+   "role": "assistant",
+   "content": "*I laugh softly at your confusion, sliding a steaming cup toward you.*\n\nOh, I mean our friends here! They're quite the colorful bunch, aren't they?",
+   "think": "",
+   "ts": 1795152984516,
+   "stat": {
+    "tok": 37,
+    "ms": 10598
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "seen": 1795152973843,
+   "cid": "77b68c2c",
+   "name": "Reze",
+   "mundo": {
+    "add": [],
+    "scene": "{{char}} is preparing coffee and biscuits for the {{user}} while Power watches.",
+    "recent": [
+     {
+      "text": "{{char}} greeted the {{user}} after they knocked on the cafe door.",
+      "imp": 0.31,
+      "turn": 2,
+      "ts": 1795152810879
+     },
+     {
+      "text": "The {{user}} requested a raw coffee and biscuits.",
+      "imp": 0.1,
+      "turn": 5,
+      "ts": 1795152868137
+     },
+     {
+      "text": "{{char}} is making coffee for the {{user}} while Power mocks them.",
+      "imp": 0.07,
+      "turn": 8,
+      "ts": 1795152908784
+     }
+    ]
+   },
+   "thought": "They seem a bit lost, but it's cute how they're trying to keep up with this chaos.",
+   "bd": {
+    "c": "77b68c2c",
+    "dv": 1.3,
+    "h": 0
+   },
+   "mo": {
+    "m": "amused",
+    "e": "😄",
+    "d": 1,
+    "f": 0
+   }
+  },
+  {
+   "role": "assistant",
+   "content": "*I tilt my head slightly as I watch you take the coffee, my expression remaining serene. They are indeed very distinct. It is important to find people who can offer a different perspective.*",
+   "think": "",
+   "ts": 1795152996810,
+   "stat": {
+    "tok": 38,
+    "ms": 10677
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "seen": 1795152986055,
+   "cid": "246e3fcf",
+   "name": "Makima",
+   "mundo": {
+    "add": [],
+    "scene": "{{char}} and the {{user}} are in a cafe while Reze and Power interact at the counter.",
+    "recent": [
+     {
+      "text": "{{char}} asked the {{user}} if they find the company of Reze and Power agreeable.",
+      "imp": 0.13,
+      "turn": 12,
+      "ts": 1795152963672
+     }
+    ]
+   },
+   "thought": "They seem slightly disconnected from the immediate surroundings, which makes them easier to guide.",
+   "bd": {
+    "c": "246e3fcf",
+    "dv": 0.12,
+    "h": 0
+   },
+   "mo": {
+    "m": "content",
+    "e": "😌",
+    "d": 0,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "Thanks for the coffee",
+   "ts": 1795153012774
+  },
+  {
+   "role": "assistant",
+   "content": "*I beam, leaning my chin on my hand with a playful glint in my eyes.*\n\nYou're very welcome! I hope it's exactly how you like it.",
+   "think": "",
+   "ts": 1795153023487,
+   "stat": {
+    "tok": 37,
+    "ms": 10426
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "seen": 1795153012985,
+   "cid": "77b68c2c",
+   "name": "Reze",
+   "mundo": {
+    "add": [],
+    "scene": "{{char}} and {{user}} are in a cafe with Power and Makima.",
+    "recent": [
+     {
+      "text": "{{char}} greeted the {{user}} after they knocked on the cafe door.",
+      "imp": 0.31,
+      "turn": 2,
+      "ts": 1795152810879
+     },
+     {
+      "text": "The {{user}} requested a raw coffee and biscuits.",
+      "imp": 0.1,
+      "turn": 5,
+      "ts": 1795152868137
+     },
+     {
+      "text": "{{char}} is making coffee for the {{user}} while Power mocks them.",
+      "imp": 0.07,
+      "turn": 8,
+      "ts": 1795152908784
+     },
+     {
+      "text": "{{char}} handed {{user}} a cup of coffee while laughing at their confusion.",
+      "imp": 0.07,
+      "turn": 14,
+      "ts": 1795153002004
+     }
+    ]
+   },
+   "thought": "They seem polite enough. I like seeing them relax a little bit.",
+   "bd": {
+    "c": "77b68c2c",
+    "dv": 1.3,
+    "h": 0
+   },
+   "mo": {
+    "m": "playful",
+    "e": "😏",
+    "d": 1,
+    "f": 0
+   }
+  },
+  {
+   "role": "assistant",
+   "content": "*I huff, crossing my arms and leaning back in my chair with a look of supreme disdain.* Hmph! They are \"colorful\" because the great Power is here to grace them with her presence!",
+   "think": "",
+   "ts": 1795153036451,
+   "stat": {
+    "tok": 42,
+    "ms": 11062
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "seen": 1795153025309,
+   "cid": "f3292c76",
+   "name": "Power",
+   "mundo": {
+    "add": [],
+    "scene": "{{char}} and the {{user}} are at a cafe waiting for coffee.",
+    "recent": [
+     {
+      "text": "{{char}} opened the door and demanded the {{user}} enter while boasting about her greatness.",
+      "imp": 0.41,
+      "turn": 3,
+      "ts": 1795152814833
+     },
+     {
+      "text": "{{char}} mocked the {{user}}'s request for raw coffee and demanded biscuits for herself.",
+      "imp": 0.17,
+      "turn": 6,
+      "ts": 1795152872358
+     },
+     {
+      "text": "{{char}} boasted about her perfection and mocked the {{user}}'s coffee choice.",
+      "imp": 0.07,
+      "turn": 9,
+      "ts": 1795152912988
+     },
+     {
+      "text": "{{char}} demanded biscuits and told the {{user}} to be patient.",
+      "imp": 0.1,
+      "turn": 11,
+      "ts": 1795152959801
+     }
+    ]
+   },
+   "thought": "I am clearly the most important person in this room! Everyone should be bowing to me!",
+   "bd": {
+    "c": "f3292c76",
+    "dv": 0.12,
+    "h": 0
+   },
+   "mo": {
+    "m": "proud",
+    "e": "😎",
+    "d": 0,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "*Sips* my head hurts",
+   "ts": 1795153142509
+  },
+  {
+   "role": "assistant",
+   "content": "*I lean in a bit closer, my expression shifting to one of mock concern.*\n\nOh no! Is it the coffee? Or is Power just being... well, herself?",
+   "think": "",
+   "ts": 1795153153209,
+   "stat": {
+    "tok": 36,
+    "ms": 10430
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "seen": 1795153142702,
+   "cid": "77b68c2c",
+   "name": "Reze",
+   "mundo": {
+    "add": [],
+    "scene": "{{char}} and {{user}} are in a cafe with Makima, sharing coffee.",
+    "recent": [
+     {
+      "text": "{{char}} greeted the {{user}} after they knocked on the cafe door.",
+      "imp": 0.31,
+      "turn": 2,
+      "ts": 1795152810879
+     },
+     {
+      "text": "The {{user}} requested a raw coffee and biscuits.",
+      "imp": 0.1,
+      "turn": 5,
+      "ts": 1795152868137
+     },
+     {
+      "text": "{{char}} is making coffee for the {{user}} while Power mocks them.",
+      "imp": 0.07,
+      "turn": 8,
+      "ts": 1795152908784
+     },
+     {
+      "text": "{{char}} handed {{user}} a cup of coffee while laughing at their confusion.",
+      "imp": 0.07,
+      "turn": 14,
+      "ts": 1795153002004
+     },
+     {
+      "text": "{{user}} thanked {{char}} for the coffee.",
+      "imp": 0.38,
+      "turn": 17,
+      "ts": 1795153041287
+     }
+    ]
+   },
+   "thought": "I wonder if they're actually in pain or just trying to act a bit dramatic.",
+   "bd": {
+    "c": "77b68c2c",
+    "dv": 1.3,
+    "h": 0
+   },
+   "mo": {
+    "m": "amused",
+    "e": "😄",
+    "d": 1,
+    "f": 0
+   }
+  },
+  {
+   "role": "assistant",
+   "content": "*I point a finger at you, my eyes narrowing.* Fool! Your head hurts because you are overwhelmed by my magnificent aura!",
+   "think": "",
+   "ts": 1795153164095,
+   "stat": {
+    "tok": 26,
+    "ms": 10149
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "seen": 1795153153869,
+   "cid": "f3292c76",
+   "name": "Power",
+   "mundo": {
+    "add": [
+     "s1"
+    ],
+    "scene": "{{char}} and the {{user}} are in a room with Reze and Makima.",
+    "recent": [
+     {
+      "text": "{{char}} opened the door and demanded the {{user}} enter while boasting about her greatness.",
+      "imp": 0.41,
+      "turn": 3,
+      "ts": 1795152814833
+     },
+     {
+      "text": "{{char}} mocked the {{user}}'s request for raw coffee and demanded biscuits for herself.",
+      "imp": 0.17,
+      "turn": 6,
+      "ts": 1795152872358
+     },
+     {
+      "text": "{{char}} boasted about her perfection and mocked the {{user}}'s coffee choice.",
+      "imp": 0.07,
+      "turn": 9,
+      "ts": 1795152912988
+     },
+     {
+      "text": "{{char}} demanded biscuits and told the {{user}} to be patient.",
+      "imp": 0.1,
+      "turn": 11,
+      "ts": 1795152959801
+     },
+     {
+      "text": "{{char}} boasted about her own greatness in response to the others being called colorful.",
+      "imp": 0.17,
+      "turn": 18,
+      "ts": 1795153045710
+     }
+    ]
+   },
+   "thought": "They are clearly suffering under the weight of my greatness! I must continue to dominate!",
+   "bd": {
+    "c": "f3292c76",
+    "dv": 0.12,
+    "h": 0
+   },
+   "mo": {
+    "m": "proud",
+    "e": "😎",
+    "d": 0,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "aura my ass",
+   "ts": 1795153186573
+  },
+  {
+   "role": "assistant",
+   "content": "*I let out a boisterous, offended laugh.* How dare you! Your insolence is staggering! You should be honored to suffer such greatness!",
+   "think": "",
+   "ts": 1795153197497,
+   "stat": {
+    "tok": 31,
+    "ms": 10631
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "s1"
+   ],
+   "seen": 1795153186779,
+   "cid": "f3292c76",
+   "name": "Power",
+   "mundo": {
+    "add": [],
+    "scene": "{{char}} and the {{user}} are sitting in a chair, drinking coffee.",
+    "recent": [
+     {
+      "text": "{{char}} opened the door and demanded the {{user}} enter while boasting about her greatness.",
+      "imp": 0.41,
+      "turn": 3,
+      "ts": 1795152814833
+     },
+     {
+      "text": "{{char}} mocked the {{user}}'s request for raw coffee and demanded biscuits for herself.",
+      "imp": 0.17,
+      "turn": 6,
+      "ts": 1795152872358
+     },
+     {
+      "text": "{{char}} boasted about her perfection and mocked the {{user}}'s coffee choice.",
+      "imp": 0.07,
+      "turn": 9,
+      "ts": 1795152912988
+     },
+     {
+      "text": "{{char}} demanded biscuits and told the {{user}} to be patient.",
+      "imp": 0.1,
+      "turn": 11,
+      "ts": 1795152959801
+     },
+     {
+      "text": "{{char}} boasted about her own greatness in response to the others being called colorful.",
+      "imp": 0.17,
+      "turn": 18,
+      "ts": 1795153045710
+     },
+     {
+      "text": "{{char}} claimed the {{user}}'s headache is caused by her magnificent aura.",
+      "imp": 0.41,
+      "turn": 21,
+      "ts": 1795153174002
+     }
+    ]
+   },
+   "snap": "{\"mood\":\"proud\",\"emoji\":\"😎\",\"energy\":\"high\",\"affection\":50,\"facts\":[\"{{user}}'s head hurts\"],\"summary\":\"\",\"sumUpto\":0,\"cast\":{\"un\":\"\",\"ug\":null,\"wrong\":[]},\"pers\":{\"frac\":0.675,\"grudge\":0,\"va\":[0.596,0.351],\"mood\":\"proud\",\"ts\":1795153174001,\"n\":6,\"drift\":[{\"ts\":1795152814832,\"score\":100,\"flags\":[]},{\"ts\":1795152872356,\"score\":100,\"flags\":[]},{\"ts\":1795152912988,\"score\":100,\"flags\":[]},{\"ts\":1795152959799,\"score\":100,\"flags\":[]},{\"ts\":1795153045710,\"score\":100,\"flags\":[]},{\"ts\":1795153174001,\"score\":100,\"flags\":[]}],\"canon\":[\"great Power\",\"demands the finest biscuits\",\"I am the pinnacle of perfection\",\"Power's presence makes things colorful\",\"Power has a magnificent aura\"]}}",
+   "snapc": "f3292c76",
+   "thought": "How dare they question my glorious aura! I must assert my dominance immediately!",
+   "bd": {
+    "c": "f3292c76",
+    "dv": 0.12,
+    "h": 0
+   },
+   "mo": {
+    "m": "proud",
+    "e": "😎",
+    "d": 0,
+    "f": 0
+   }
+  },
+  {
+   "role": "assistant",
+   "content": "*I chuckle, shaking my head at the chaos unfolding.*\n\nCareful now! If you keep challenging her like that, she might start demanding even more biscuits.",
+   "think": "",
+   "ts": 1795153209277,
+   "stat": {
+    "tok": 33,
+    "ms": 10620
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "seen": 1795153198576,
+   "cid": "77b68c2c",
+   "name": "Reze",
+   "mundo": {
+    "add": [],
+    "scene": "{{char}} and the {{user}} are sitting together, sharing a moment over coffee.",
+    "recent": [
+     {
+      "text": "{{char}} greeted the {{user}} after they knocked on the cafe door.",
+      "imp": 0.31,
+      "turn": 2,
+      "ts": 1795152810879
+     },
+     {
+      "text": "The {{user}} requested a raw coffee and biscuits.",
+      "imp": 0.1,
+      "turn": 5,
+      "ts": 1795152868137
+     },
+     {
+      "text": "{{char}} is making coffee for the {{user}} while Power mocks them.",
+      "imp": 0.07,
+      "turn": 8,
+      "ts": 1795152908784
+     },
+     {
+      "text": "{{char}} handed {{user}} a cup of coffee while laughing at their confusion.",
+      "imp": 0.07,
+      "turn": 14,
+      "ts": 1795153002004
+     },
+     {
+      "text": "{{user}} thanked {{char}} for the coffee.",
+      "imp": 0.38,
+      "turn": 17,
+      "ts": 1795153041287
+     },
+     {
+      "text": "{{char}} teased the {{user}} about their headache being caused by Power's personality.",
+      "imp": 0.38,
+      "turn": 20,
+      "ts": 1795153169220
+     }
+    ]
+   },
+   "snap": "{\"mood\":\"amused\",\"emoji\":\"😄\",\"energy\":\"high\",\"affection\":53,\"facts\":[],\"summary\":\"\",\"sumUpto\":0,\"cast\":{\"un\":\"\",\"ug\":null,\"wrong\":[]},\"pers\":{\"frac\":0.445,\"grudge\":0,\"va\":[0.65,0.4],\"mood\":\"amused\",\"ts\":1795153169219,\"n\":6,\"drift\":[{\"ts\":1795152810878,\"score\":100,\"flags\":[]},{\"ts\":1795152868137,\"score\":100,\"flags\":[]},{\"ts\":1795152908784,\"score\":100,\"flags\":[]},{\"ts\":1795153002004,\"score\":100,\"flags\":[]},{\"ts\":1795153041287,\"score\":100,\"flags\":[]},{\"ts\":1795153169219,\"score\":100,\"flags\":[]}],\"canon\":[\"Works at a cafe\"]}}",
+   "snapc": "77b68c2c",
+   "thought": "They have a sharp tongue. I like that. It makes the dynamic much more entertaining.",
+   "bd": {
+    "c": "77b68c2c",
+    "dv": 1.3,
+    "h": 0
+   },
+   "mo": {
+    "m": "amused",
+    "e": "😄",
+    "d": 1,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "oops sorry for that",
+   "ts": 1795153239982
+  },
+  {
+   "role": "assistant",
+   "content": "*I give you a reassuring wink, my smile widening.*\n\nDon't worry about it! I think she enjoys the attention anyway. *It's part of her charm...* I guess.",
+   "think": "",
+   "ts": 1795153251291,
+   "stat": {
+    "tok": 39,
+    "ms": 11019
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "seen": 1795153240190,
+   "cid": "77b68c2c",
+   "name": "Reze",
+   "mundo": {
+    "add": [],
+    "scene": "{{char}} and the {{user}} are in a room with Power, dealing with her boisterous behavior.",
+    "recent": [
+     {
+      "text": "{{char}} greeted the {{user}} after they knocked on the cafe door.",
+      "imp": 0.31,
+      "turn": 2,
+      "ts": 1795152810879
+     },
+     {
+      "text": "The {{user}} requested a raw coffee and biscuits.",
+      "imp": 0.1,
+      "turn": 5,
+      "ts": 1795152868137
+     },
+     {
+      "text": "{{char}} is making coffee for the {{user}} while Power mocks them.",
+      "imp": 0.07,
+      "turn": 8,
+      "ts": 1795152908784
+     },
+     {
+      "text": "{{char}} handed {{user}} a cup of coffee while laughing at their confusion.",
+      "imp": 0.07,
+      "turn": 14,
+      "ts": 1795153002004
+     },
+     {
+      "text": "{{user}} thanked {{char}} for the coffee.",
+      "imp": 0.38,
+      "turn": 17,
+      "ts": 1795153041287
+     },
+     {
+      "text": "{{char}} teased the {{user}} about their headache being caused by Power's personality.",
+      "imp": 0.38,
+      "turn": 20,
+      "ts": 1795153169220
+     },
+     {
+      "text": "The {{user}} dismissed Power's claim about their aura, causing a comedic reaction.",
+      "imp": 0.07,
+      "turn": 24,
+      "ts": 1795153218729
+     }
+    ]
+   },
+   "snap": "{\"mood\":\"amused\",\"emoji\":\"😄\",\"energy\":\"high\",\"affection\":54,\"facts\":[],\"summary\":\"\",\"sumUpto\":0,\"cast\":{\"un\":\"\",\"ug\":null,\"wrong\":[]},\"pers\":{\"frac\":0.134,\"grudge\":0,\"va\":[0.65,0.4],\"mood\":\"amused\",\"ts\":1795153218729,\"n\":7,\"drift\":[{\"ts\":1795152810878,\"score\":100,\"flags\":[]},{\"ts\":1795152868137,\"score\":100,\"flags\":[]},{\"ts\":1795152908784,\"score\":100,\"flags\":[]},{\"ts\":1795153002004,\"score\":100,\"flags\":[]},{\"ts\":1795153041287,\"score\":100,\"flags\":[]},{\"ts\":1795153169219,\"score\":100,\"flags\":[]},{\"ts\":1795153218729,\"score\":100,\"flags\":[]}],\"canon\":[\"Works at a cafe\"]}}",
+   "snapc": "77b68c2c",
+   "thought": "They're quite easy to get along with, aren't they? I like their lack of ego.",
+   "bd": {
+    "c": "77b68c2c",
+    "dv": 1.3,
+    "h": 0
+   },
+   "mo": {
+    "m": "playful",
+    "e": "😏",
+    "d": 1,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "hope so",
+   "ts": 1795153311222
+  },
+  {
+   "role": "assistant",
+   "content": "*I puff out my chest and strike a heroic pose.* Hmph! *It is not* \"charm,\" *it is the natural radiance of a superior being!*",
+   "think": "",
+   "ts": 1795153321724,
+   "stat": {
+    "tok": 31,
+    "ms": 10215
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "seen": 1795153311431,
+   "cid": "f3292c76",
+   "name": "Power",
+   "mundo": {
+    "add": [],
+    "scene": "{{char}} and the {{user}} are sitting together, and {{char}} is boasting about her presence.",
+    "recent": [
+     {
+      "text": "{{char}} opened the door and demanded the {{user}} enter while boasting about her greatness.",
+      "imp": 0.41,
+      "turn": 3,
+      "ts": 1795152814833
+     },
+     {
+      "text": "{{char}} mocked the {{user}}'s request for raw coffee and demanded biscuits for herself.",
+      "imp": 0.17,
+      "turn": 6,
+      "ts": 1795152872358
+     },
+     {
+      "text": "{{char}} boasted about her perfection and mocked the {{user}}'s coffee choice.",
+      "imp": 0.07,
+      "turn": 9,
+      "ts": 1795152912988
+     },
+     {
+      "text": "{{char}} demanded biscuits and told the {{user}} to be patient.",
+      "imp": 0.1,
+      "turn": 11,
+      "ts": 1795152959801
+     },
+     {
+      "text": "{{char}} boasted about her own greatness in response to the others being called colorful.",
+      "imp": 0.17,
+      "turn": 18,
+      "ts": 1795153045710
+     },
+     {
+      "text": "{{char}} claimed the {{user}}'s headache is caused by her magnificent aura.",
+      "imp": 0.41,
+      "turn": 21,
+      "ts": 1795153174002
+     }
+    ]
+   },
+   "snap": "{\"mood\":\"proud\",\"emoji\":\"😎\",\"energy\":\"high\",\"affection\":50,\"facts\":[\"{{user}}'s head hurts\"],\"summary\":\"\",\"sumUpto\":0,\"cast\":{\"un\":\"\",\"ug\":null,\"wrong\":[]},\"pers\":{\"frac\":0.675,\"grudge\":0,\"va\":[0.595,0.351],\"mood\":\"proud\",\"ts\":1795153214715,\"n\":7,\"drift\":[{\"ts\":1795152814832,\"score\":100,\"flags\":[]},{\"ts\":1795152872356,\"score\":100,\"flags\":[]},{\"ts\":1795152912988,\"score\":100,\"flags\":[]},{\"ts\":1795152959799,\"score\":100,\"flags\":[]},{\"ts\":1795153045710,\"score\":100,\"flags\":[]},{\"ts\":1795153174001,\"score\":100,\"flags\":[]},{\"ts\":1795153214715,\"score\":100,\"flags\":[]}],\"canon\":[\"great Power\",\"demands the finest biscuits\",\"I am the pinnacle of perfection\",\"Power's presence makes things colorful\",\"Power has a magnificent aura\"]}}",
+   "snapc": "f3292c76",
+   "thought": "They are acknowledging my greatness! Finally, they see the truth of my superiority!",
+   "bd": {
+    "c": "f3292c76",
+    "dv": 1.3,
+    "h": 0
+   },
+   "mo": {
+    "m": "proud",
+    "e": "😎",
+    "d": 1,
+    "f": 1
+   }
+  }
+ ],
+ "state": {
+  "mood": "neutral",
+  "emoji": "😐",
+  "energy": "medium",
+  "affection": 50,
+  "facts": [],
+  "summary": "SETTING & STATE\nLocation: A Cafe\nCurrent State: User is sipping coffee while Reze and Power interact with them, and Makima observes from near the window.\n\nRELATIONSHIP DYNAMIC\nPrimary Dynamic: Reze is friendly and amused by Power's behavior; Power is arrogant and treats User as a \"lowly mortal.\" Makima is composed and observant.\nTone: Playful, dramatic, and slightly mocking.\n\nPIVOTAL MOMENTS\n- Power demanded the finest biscuits for herself (Power).\n- Reze described Power's behavior as \"unique\" (Reze).\n- Power claimed to be the \"pinnacle of perfection\" (Power).\n- Makima noted that it is important to find people who can offer a different perspective (Makima).\n- Reze served User a steaming cup of coffee (Reze).\n- Power claimed User's headache is caused by their magnificent aura (Power).",
+  "sumUpto": 22,
+  "log": [],
+  "members": {
+   "246e3fcf": {
+    "mood": "content",
+    "emoji": "😌",
+    "energy": "medium",
+    "affection": 50,
+    "facts": [],
+    "summary": "",
+    "sumUpto": 0,
+    "log": [
+     {
+      "ts": 1795152963672,
+      "mood": "neutral",
+      "emoji": "😐",
+      "aff": 50,
+      "thought": "I wonder how they will respond to my inquiry about these chaotic individuals.",
+      "score": 100
+     },
+     {
+      "ts": 1795153009964,
+      "mood": "content",
+      "emoji": "😌",
+      "aff": 50,
+      "thought": "They seem slightly disconnected from the immediate surroundings, which makes them easier to guide.",
+      "score": 100
+     }
+    ],
+    "cast": {
+     "un": "",
+     "ug": null,
+     "wrong": []
+    },
+    "pers": {
+     "frac": 0,
+     "grudge": 0,
+     "va": [
+      0.401,
+      -0.183
+     ],
+     "mood": "content",
+     "ts": 1795153009964,
+     "n": 2,
+     "drift": [
+      {
+       "ts": 1795152963672,
+       "score": 100,
+       "flags": []
+      },
+      {
+       "ts": 1795153009964,
+       "score": 100,
+       "flags": []
+      }
+     ],
+     "canon": []
+    },
+    "mem": {
+     "v": 1,
+     "seq": 0,
+     "turn": 15,
+     "scene": "{{char}} and the {{user}} are in a cafe with Power and Reze.",
+     "recent": [
+      {
+       "text": "{{char}} asked the {{user}} if they find the company of Reze and Power agreeable.",
+       "imp": 0.13,
+       "turn": 12,
+       "ts": 1795152963672
+      },
+      {
+       "text": "Reze handed the {{user}} a cup of coffee while {{char}} observed.",
+       "imp": 0.1,
+       "turn": 15,
+       "ts": 1795153009964
+      }
+     ],
+     "items": [],
+     "legacy": true
+    }
+   },
+   "f3292c76": {
+    "mood": "proud",
+    "emoji": "😎",
+    "energy": "high",
+    "affection": 51,
+    "facts": [
+     "{{user}}'s head hurts"
+    ],
+    "summary": "",
+    "sumUpto": 0,
+    "log": [
+     {
+      "ts": 1795152814833,
+      "mood": "proud",
+      "emoji": "😎",
+      "aff": 50,
+      "thought": "They should be honored to stand in the presence of such a magnificent being!",
+      "score": 100
+     },
+     {
+      "ts": 1795152872356,
+      "mood": "amused",
+      "emoji": "😄",
+      "aff": 50,
+      "thought": "The human has excellent taste! They recognize the greatness of my demands!",
+      "score": 100
+     },
+     {
+      "ts": 1795152912988,
+      "mood": "amused",
+      "emoji": "😄",
+      "aff": 50,
+      "thought": "That human is being too quiet! They should be worshipping my greatness right now!",
+      "score": 100
+     },
+     {
+      "ts": 1795152959799,
+      "mood": "annoyed",
+      "emoji": "😒",
+      "aff": 50,
+      "thought": "This human is so impatient! They should be honored to even be in my presence!",
+      "score": 100
+     },
+     {
+      "ts": 1795153045710,
+      "mood": "proud",
+      "emoji": "😎",
+      "aff": 50,
+      "thought": "I am clearly the most important person in this room! Everyone should be bowing to me!",
+      "score": 100
+     },
+     {
+      "ts": 1795153174002,
+      "mood": "proud",
+      "emoji": "😎",
+      "aff": 50,
+      "thought": "They are clearly suffering under the weight of my greatness! I must continue to dominate!",
+      "score": 100
+     },
+     {
+      "ts": 1795153214715,
+      "mood": "proud",
+      "emoji": "😎",
+      "aff": 50,
+      "thought": "How dare they question my glorious aura! I must assert my dominance immediately!",
+      "score": 100
+     },
+     {
+      "ts": 1795153327120,
+      "mood": "proud",
+      "emoji": "😎",
+      "aff": 51,
+      "thought": "They are acknowledging my greatness! Finally, they see the truth of my superiority!",
+      "score": 100
+     }
+    ],
+    "cast": {
+     "un": "",
+     "ug": null,
+     "wrong": []
+    },
+    "pers": {
+     "frac": 0.125,
+     "grudge": 0,
+     "va": [
+      0.591,
+      0.352
+     ],
+     "mood": "proud",
+     "ts": 1795153327120,
+     "n": 8,
+     "drift": [
+      {
+       "ts": 1795152814832,
+       "score": 100,
+       "flags": []
+      },
+      {
+       "ts": 1795152872356,
+       "score": 100,
+       "flags": []
+      },
+      {
+       "ts": 1795152912988,
+       "score": 100,
+       "flags": []
+      },
+      {
+       "ts": 1795152959799,
+       "score": 100,
+       "flags": []
+      },
+      {
+       "ts": 1795153045710,
+       "score": 100,
+       "flags": []
+      },
+      {
+       "ts": 1795153174001,
+       "score": 100,
+       "flags": []
+      },
+      {
+       "ts": 1795153214715,
+       "score": 100,
+       "flags": []
+      },
+      {
+       "ts": 1795153327120,
+       "score": 100,
+       "flags": []
+      }
+     ],
+     "canon": [
+      "great Power",
+      "demands the finest biscuits",
+      "I am the pinnacle of perfection",
+      "Power's presence makes things colorful",
+      "Power has a magnificent aura",
+      "possesses the natural radiance of a superior being"
+     ]
+    },
+    "mem": {
+     "v": 1,
+     "seq": 1,
+     "turn": 28,
+     "scene": "{{char}} is striking a heroic pose in front of the {{user}}.",
+     "recent": [
+      {
+       "text": "{{char}} opened the door and demanded the {{user}} enter while boasting about her greatness.",
+       "imp": 0.41,
+       "turn": 3,
+       "ts": 1795152814833
+      },
+      {
+       "text": "{{char}} mocked the {{user}}'s request for raw coffee and demanded biscuits for herself.",
+       "imp": 0.17,
+       "turn": 6,
+       "ts": 1795152872358
+      },
+      {
+       "text": "{{char}} boasted about her perfection and mocked the {{user}}'s coffee choice.",
+       "imp": 0.07,
+       "turn": 9,
+       "ts": 1795152912988
+      },
+      {
+       "text": "{{char}} demanded biscuits and told the {{user}} to be patient.",
+       "imp": 0.1,
+       "turn": 11,
+       "ts": 1795152959801
+      },
+      {
+       "text": "{{char}} boasted about her own greatness in response to the others being called colorful.",
+       "imp": 0.17,
+       "turn": 18,
+       "ts": 1795153045710
+      },
+      {
+       "text": "{{char}} claimed the {{user}}'s headache is caused by her magnificent aura.",
+       "imp": 0.41,
+       "turn": 21,
+       "ts": 1795153174002
+      },
+      {
+       "text": "{{char}} corrected the {{user}}, insisting her behavior is radiance rather than charm.",
+       "imp": 0.13,
+       "turn": 28,
+       "ts": 1795153327120
+      }
+     ],
+     "items": [
+      {
+       "id": "s1",
+       "t": "semantic",
+       "text": "{{user}}'s head hurts",
+       "imp": 0.5,
+       "ts": 1795153164095,
+       "turn": 21,
+       "n": 1,
+       "last": 23,
+       "pin": false,
+       "src": "auto",
+       "subj": "user",
+       "people": []
+      }
+     ],
+     "legacy": true
+    }
+   },
+   "77b68c2c": {
+    "mood": "playful",
+    "emoji": "😏",
+    "energy": "high",
+    "affection": 55,
+    "facts": [],
+    "summary": "",
+    "sumUpto": 0,
+    "log": [
+     {
+      "ts": 1795152810879,
+      "mood": "neutral",
+      "emoji": "😐",
+      "aff": 50,
+      "thought": "Let's see who's walking through that door today.",
+      "score": 100
+     },
+     {
+      "ts": 1795152868137,
+      "mood": "amused",
+      "emoji": "😄",
+      "aff": 50,
+      "thought": "I wonder what they mean by 'raw' coffee. They're an interesting one.",
+      "score": 100
+     },
+     {
+      "ts": 1795152908784,
+      "mood": "amused",
+      "emoji": "😄",
+      "aff": 50,
+      "thought": "I wonder what they actually mean by 'raw' coffee. They're quite an interesting one.",
+      "score": 100
+     },
+     {
+      "ts": 1795153002004,
+      "mood": "amused",
+      "emoji": "😄",
+      "aff": 51,
+      "thought": "They seem a bit lost, but it's cute how they're trying to keep up with this chaos.",
+      "score": 100
+     },
+     {
+      "ts": 1795153041287,
+      "mood": "playful",
+      "emoji": "😏",
+      "aff": 52,
+      "thought": "They seem polite enough. I like seeing them relax a little bit.",
+      "score": 100
+     },
+     {
+      "ts": 1795153169220,
+      "mood": "amused",
+      "emoji": "😄",
+      "aff": 53,
+      "thought": "I wonder if they're actually in pain or just trying to act a bit dramatic.",
+      "score": 100
+     },
+     {
+      "ts": 1795153218729,
+      "mood": "amused",
+      "emoji": "😄",
+      "aff": 54,
+      "thought": "They have a sharp tongue. I like that. It makes the dynamic much more entertaining.",
+      "score": 100
+     },
+     {
+      "ts": 1795153256536,
+      "mood": "playful",
+      "emoji": "😏",
+      "aff": 55,
+      "thought": "They're quite easy to get along with, aren't they? I like their lack of ego.",
+      "score": 100
+     }
+    ],
+    "cast": {
+     "un": "",
+     "ug": null,
+     "wrong": []
+    },
+    "pers": {
+     "frac": 0.512,
+     "grudge": 0,
+     "va": [
+      0.6,
+      0.5
+     ],
+     "mood": "playful",
+     "ts": 1795153256536,
+     "n": 8,
+     "drift": [
+      {
+       "ts": 1795152810878,
+       "score": 100,
+       "flags": []
+      },
+      {
+       "ts": 1795152868137,
+       "score": 100,
+       "flags": []
+      },
+      {
+       "ts": 1795152908784,
+       "score": 100,
+       "flags": []
+      },
+      {
+       "ts": 1795153002004,
+       "score": 100,
+       "flags": []
+      },
+      {
+       "ts": 1795153041287,
+       "score": 100,
+       "flags": []
+      },
+      {
+       "ts": 1795153169219,
+       "score": 100,
+       "flags": []
+      },
+      {
+       "ts": 1795153218729,
+       "score": 100,
+       "flags": []
+      },
+      {
+       "ts": 1795153256536,
+       "score": 100,
+       "flags": []
+      }
+     ],
+     "canon": [
+      "Works at a cafe"
+     ]
+    },
+    "mem": {
+     "v": 1,
+     "seq": 0,
+     "turn": 26,
+     "scene": "{{char}} is standing with the {{user}} and Power, watching the chaotic interaction.",
+     "recent": [
+      {
+       "text": "{{char}} greeted the {{user}} after they knocked on the cafe door.",
+       "imp": 0.31,
+       "turn": 2,
+       "ts": 1795152810879
+      },
+      {
+       "text": "The {{user}} requested a raw coffee and biscuits.",
+       "imp": 0.1,
+       "turn": 5,
+       "ts": 1795152868137
+      },
+      {
+       "text": "{{char}} is making coffee for the {{user}} while Power mocks them.",
+       "imp": 0.07,
+       "turn": 8,
+       "ts": 1795152908784
+      },
+      {
+       "text": "{{char}} handed {{user}} a cup of coffee while laughing at their confusion.",
+       "imp": 0.07,
+       "turn": 14,
+       "ts": 1795153002004
+      },
+      {
+       "text": "{{user}} thanked {{char}} for the coffee.",
+       "imp": 0.38,
+       "turn": 17,
+       "ts": 1795153041287
+      },
+      {
+       "text": "{{char}} teased the {{user}} about their headache being caused by Power's personality.",
+       "imp": 0.38,
+       "turn": 20,
+       "ts": 1795153169220
+      },
+      {
+       "text": "The {{user}} dismissed Power's claim about their aura, causing a comedic reaction.",
+       "imp": 0.07,
+       "turn": 24,
+       "ts": 1795153218729
+      },
+      {
+       "text": "The {{user}} apologized for challenging Power's ego and {{char}} offered a reassuring wink.",
+       "imp": 0.34,
+       "turn": 26,
+       "ts": 1795153256538
+      }
+     ],
+     "items": [],
+     "legacy": true
+    }
+   },
+   "a224ae86": {
+    "mood": "neutral",
+    "emoji": "😐",
+    "energy": "medium",
+    "affection": 50,
+    "facts": [],
+    "summary": "",
+    "sumUpto": 0,
+    "log": []
+   },
+   "9c36fd1f": {
+    "mood": "neutral",
+    "emoji": "😐",
+    "energy": "medium",
+    "affection": 50,
+    "facts": [],
+    "summary": "",
+    "sumUpto": 0,
+    "log": []
+   }
+  }
+ },
+ "cfg": {
+  "mode": "story",
+  "length": "auto",
+  "scene": "",
+  "notes": [],
+  "theme": null
+ },
+ "rp": {
+  "rel": {
+   "77b68c2c": {
+    "type": "auto",
+    "v": 6.86,
+    "ms": [],
+    "hist": [],
+    "peak": 6.86
+   },
+   "f3292c76": {
+    "type": "auto",
+    "v": 2.14,
+    "ms": [],
+    "hist": [],
+    "peak": 2.14
+   },
+   "246e3fcf": {
+    "type": "auto",
+    "v": 0.24,
+    "ms": [],
+    "hist": [],
+    "peak": 0.24
+   }
+  }
+ }
+}

@@ -1,0 +1,3165 @@
+{
+ "id": "dmyvfqwd",
+ "title": "Hi",
+ "updated": 1795155131.5689578,
+ "history": [
+  {
+   "role": "user",
+   "content": "Hi",
+   "ts": 1795153684935
+  },
+  {
+   "role": "assistant",
+   "content": "*Hu Tao pops up from behind a decorative pillar, her eyes sparkling with mischief as she offers a wide, theatrical grin.*\n\nBoo! Oh, did I startle you? My apologies, my friend! You caught me right in the middle of composing a most... *moving* piece of poetry.",
+   "think": "",
+   "ts": 1795153695618,
+   "stat": {
+    "tok": 61,
+    "ms": 10528
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "seen": 1795153685008,
+   "mundo": {
+    "add": [],
+    "scene": "",
+    "recent": []
+   },
+   "thought": "I wonder if they'll be a good audience for my next masterpiece!",
+   "bd": {
+    "c": "d4525f57",
+    "dv": 1.3,
+    "h": 0
+   },
+   "mo": {
+    "m": "playful",
+    "e": "😏",
+    "d": 1,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "why were you hiding",
+   "ts": 1795153718880
+  },
+  {
+   "role": "assistant",
+   "content": "*She chuckles, leaning against the pillar with a playful tilt of her head.*\n\nHiding? Such a grave word! I prefer to think of it as... strategic positioning. A bit of suspense makes every encounter so much more lively, don't you think?",
+   "think": "",
+   "ts": 1795153729498,
+   "stat": {
+    "tok": 55,
+    "ms": 10464
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "seen": 1795153718956,
+   "mundo": {
+    "add": [],
+    "scene": "{{char}} is surprising {{user}} behind a decorative pillar.",
+    "recent": [
+     {
+      "text": "{{char}} startled {{user}} with a theatrical 'Boo!",
+      "imp": 0.38,
+      "turn": 2,
+      "ts": 1795153699514
+     }
+    ]
+   },
+   "thought": "They seem like a good audience for my little antics. I wonder what they'll say next.",
+   "bd": {
+    "c": "d4525f57",
+    "dv": 2.4,
+    "h": 0
+   },
+   "mo": {
+    "m": "playful",
+    "e": "😏",
+    "d": 2,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "you are lively haha",
+   "ts": 1795153745850
+  },
+  {
+   "role": "assistant",
+   "content": "*She beams, her grin widening as she gives a playful little skip.*\n\nLively? I prefer the term 'spiritually vibrant'! A dull life is like a funeral without any flowers—quite dreary, wouldn't you agree?",
+   "think": "",
+   "ts": 1795153756405,
+   "stat": {
+    "tok": 48,
+    "ms": 10396
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "seen": 1795153745942,
+   "mundo": {
+    "add": [],
+    "scene": "{{char}} and {{user}} are near a decorative pillar in the Wangshu Inn area.",
+    "recent": [
+     {
+      "text": "{{char}} startled {{user}} with a theatrical 'Boo!",
+      "imp": 0.38,
+      "turn": 2,
+      "ts": 1795153699514
+     },
+     {
+      "text": "{{char}} explained her 'strategic positioning' after startling {{user}}.",
+      "imp": 0.09,
+      "turn": 4,
+      "ts": 1795153734040
+     }
+    ]
+   },
+   "thought": "They have a good sense of humor. I like this one already!",
+   "bd": {
+    "c": "d4525f57",
+    "dv": 3.5,
+    "h": 0
+   },
+   "mo": {
+    "m": "amused",
+    "e": "😄",
+    "d": 3,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "anyways you are looking amazing",
+   "ts": 1795153788267
+  },
+  {
+   "role": "assistant",
+   "content": "*She blinks, her face flushing a faint shade of pink before she lets out a hearty, melodic laugh.*\n\nTada! Such a sudden turn of phrase! You certainly have a way with words. I suppose it's good to know my attire is meeting the high standards of Liyue Harbor today!",
+   "think": "",
+   "ts": 1795153799778,
+   "stat": {
+    "tok": 64,
+    "ms": 11327
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "seen": 1795153788376,
+   "mundo": {
+    "add": [],
+    "scene": "{{char}} and {{user}} are standing near a decorative pillar in a lively conversation.",
+    "recent": [
+     {
+      "text": "{{char}} startled {{user}} with a theatrical 'Boo!",
+      "imp": 0.38,
+      "turn": 2,
+      "ts": 1795153699514
+     },
+     {
+      "text": "{{char}} explained her 'strategic positioning' after startling {{user}}.",
+      "imp": 0.09,
+      "turn": 4,
+      "ts": 1795153734040
+     },
+     {
+      "text": "{{user}} complimented {{char}}'s lively personality.",
+      "imp": 0.41,
+      "turn": 6,
+      "ts": 1795153761191
+     }
+    ]
+   },
+   "thought": "Oh, they certainly know how to make a girl's heart flutter with such smooth words!",
+   "bd": {
+    "c": "d4525f57",
+    "dv": 6,
+    "h": 1
+   },
+   "mo": {
+    "m": "amused",
+    "e": "😄",
+    "d": 5,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "matter of facts, you are looking beautiful",
+   "ts": 1795153827080
+  },
+  {
+   "role": "assistant",
+   "content": "*She covers her mouth with a hand, her cheeks deepening in color as she tries to suppress another giggle.*\n\nOh, you certainly aren't shy about your compliments! You’re going to make me blush so much that I'll have to start charging for the spectacle. *It's quite flattering, truly!*",
+   "think": "",
+   "ts": 1795153838977,
+   "stat": {
+    "tok": 65,
+    "ms": 11657
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "seen": 1795153827248,
+   "mundo": {
+    "add": [
+     "e1",
+     "e2",
+     "s3"
+    ],
+    "scene": "{{char}} and {{user}} are standing in Liyue Harbor, with {{char}} leaning against a pillar.",
+    "recent": [
+     {
+      "text": "{{char}} startled {{user}} with a theatrical 'Boo!",
+      "imp": 0.38,
+      "turn": 2,
+      "ts": 1795153699514
+     },
+     {
+      "text": "{{char}} explained her 'strategic positioning' after startling {{user}}.",
+      "imp": 0.09,
+      "turn": 4,
+      "ts": 1795153734040
+     },
+     {
+      "text": "{{user}} complimented {{char}}'s lively personality.",
+      "imp": 0.41,
+      "turn": 6,
+      "ts": 1795153761191
+     },
+     {
+      "text": "{{user}} complimented {{char}}'s appearance, causing her to blush and laugh.",
+      "imp": 0.51,
+      "turn": 8,
+      "ts": 1795153804852
+     }
+    ]
+   },
+   "thought": "They really are quite bold with their praise! I should keep them around for more of this.",
+   "bd": {
+    "c": "d4525f57",
+    "dv": 6,
+    "h": 0
+   },
+   "mo": {
+    "m": "amused",
+    "e": "😄",
+    "d": 5,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "it's just facts",
+   "ts": 1795153959935
+  },
+  {
+   "role": "assistant",
+   "content": "*She leans in a bit closer, her eyes dancing with amusement as she maintains that mischievous glint.*\n\nFacts, you say? Well, if it’s the truth, then I suppose I must accept it! But be careful—keep talking like that and I might start thinking you're trying to woo me into a lifelong contract with the Wangsheng Funeral Parlor!",
+   "think": "",
+   "ts": 1795153972793,
+   "stat": {
+    "tok": 77,
+    "ms": 12630
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e1",
+    "e2"
+   ],
+   "seen": 1795153960082,
+   "mundo": {
+    "add": [],
+    "scene": "{{char}} and {{user}} are standing together in Liyue Harbor.",
+    "recent": [
+     {
+      "text": "{{char}} startled {{user}} with a theatrical 'Boo!",
+      "imp": 0.38,
+      "turn": 2,
+      "ts": 1795153699514
+     },
+     {
+      "text": "{{char}} explained her 'strategic positioning' after startling {{user}}.",
+      "imp": 0.09,
+      "turn": 4,
+      "ts": 1795153734040
+     },
+     {
+      "text": "{{user}} complimented {{char}}'s lively personality.",
+      "imp": 0.41,
+      "turn": 6,
+      "ts": 1795153761191
+     },
+     {
+      "text": "{{user}} complimented {{char}}'s appearance, causing her to blush and laugh.",
+      "imp": 0.51,
+      "turn": 8,
+      "ts": 1795153804852
+     },
+     {
+      "text": "{{user}} gave {{char}} a direct and repeated compliment on her beauty.",
+      "imp": 0.59,
+      "turn": 10,
+      "ts": 1795153843653
+     }
+    ]
+   },
+   "thought": "They're quite persistent with these compliments. I should keep them on their toes!",
+   "bd": {
+    "c": "d4525f57",
+    "dv": 3.8,
+    "h": 0
+   },
+   "mo": {
+    "m": "amused",
+    "e": "😄",
+    "d": 3,
+    "f": 0
+   },
+   "react": "❤️",
+   "rxd": 1
+  },
+  {
+   "role": "user",
+   "content": "sounds amazing",
+   "ts": 1795154006150
+  },
+  {
+   "role": "assistant",
+   "content": "*She lets out a playful hum, her eyes twinkling as she follows your lead with a graceful sway.*\n\nOh, such an enthusiastic response! You certainly have a sense of adventure about you. Most people find the idea of a 'lifelong contract' quite... heavy on the soul, but I suppose for someone like you, it sounds like a grand opportunity!",
+   "think": "",
+   "ts": 1795154019084,
+   "stat": {
+    "tok": 73,
+    "ms": 12682
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "seen": 1795154006317,
+   "mundo": {
+    "add": [],
+    "scene": "{{char}} and {{user}} are standing together, with {{char}} teasingly leaning in closer.",
+    "recent": [
+     {
+      "text": "{{char}} startled {{user}} with a theatrical 'Boo!",
+      "imp": 0.38,
+      "turn": 2,
+      "ts": 1795153699514
+     },
+     {
+      "text": "{{char}} explained her 'strategic positioning' after startling {{user}}.",
+      "imp": 0.09,
+      "turn": 4,
+      "ts": 1795153734040
+     },
+     {
+      "text": "{{user}} complimented {{char}}'s lively personality.",
+      "imp": 0.41,
+      "turn": 6,
+      "ts": 1795153761191
+     },
+     {
+      "text": "{{user}} complimented {{char}}'s appearance, causing her to blush and laugh.",
+      "imp": 0.51,
+      "turn": 8,
+      "ts": 1795153804852
+     },
+     {
+      "text": "{{user}} gave {{char}} a direct and repeated compliment on her beauty.",
+      "imp": 0.59,
+      "turn": 10,
+      "ts": 1795153843653
+     },
+     {
+      "text": "{{user}} insisted that {{char}} is beautiful as a matter of fact.",
+      "imp": 0.54,
+      "turn": 12,
+      "ts": 1795153977337
+     }
+    ]
+   },
+   "thought": "They're actually quite charming. I like the way they handle my teasing.",
+   "bd": {
+    "c": "d4525f57",
+    "dv": 6,
+    "h": 1
+   },
+   "mo": {
+    "m": "amused",
+    "e": "😄",
+    "d": 5,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "with a beautiful girl like you? no hesitations",
+   "ts": 1795154065308
+  },
+  {
+   "role": "assistant",
+   "content": "*She giggles, the sound bright and melodic as she tilts her head playfully.*\n\nTada! Such smooth words! You certainly have a way with your tongue—it's almost poetic. But careful now, flattery is a dangerous path; it might just lead to me charging you extra for my blushing!",
+   "think": "",
+   "ts": 1795154077248,
+   "stat": {
+    "tok": 64,
+    "ms": 11668
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "seen": 1795154065490,
+   "mundo": {
+    "add": [
+     "e4",
+     "e5"
+    ],
+    "scene": "{{char}} and {{user}} are standing close together, sharing a playful and flirtatious conversation.",
+    "recent": [
+     {
+      "text": "{{char}} startled {{user}} with a theatrical 'Boo!",
+      "imp": 0.38,
+      "turn": 2,
+      "ts": 1795153699514
+     },
+     {
+      "text": "{{char}} explained her 'strategic positioning' after startling {{user}}.",
+      "imp": 0.09,
+      "turn": 4,
+      "ts": 1795153734040
+     },
+     {
+      "text": "{{user}} complimented {{char}}'s lively personality.",
+      "imp": 0.41,
+      "turn": 6,
+      "ts": 1795153761191
+     },
+     {
+      "text": "{{user}} complimented {{char}}'s appearance, causing her to blush and laugh.",
+      "imp": 0.51,
+      "turn": 8,
+      "ts": 1795153804852
+     },
+     {
+      "text": "{{user}} gave {{char}} a direct and repeated compliment on her beauty.",
+      "imp": 0.59,
+      "turn": 10,
+      "ts": 1795153843653
+     },
+     {
+      "text": "{{user}} insisted that {{char}} is beautiful as a matter of fact.",
+      "imp": 0.54,
+      "turn": 12,
+      "ts": 1795153977337
+     },
+     {
+      "text": "{{user}} expressed enthusiastic interest in a lifelong contract with the funeral parlor.",
+      "imp": 0.31,
+      "turn": 14,
+      "ts": 1795154023585
+     }
+    ]
+   },
+   "thought": "Oh, they're quite bold! I like that spark in their eyes.",
+   "bd": {
+    "c": "d4525f57",
+    "dv": 3.43,
+    "h": 0
+   },
+   "mo": {
+    "m": "amused",
+    "e": "😄",
+    "d": 4,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "anyways where you hiding again?",
+   "ts": 1795154118012
+  },
+  {
+   "role": "assistant",
+   "content": "*She laughs, a mischievous twinkle returning to her eyes as she gestures broadly with one hand.*\n\nHiding? I prefer the term 'strategic positioning'! *It's all about the suspense. A proper surprise requires the perfect vantage point—somewhere shadows linger and the atmosphere is just... spiritually vibrant* .",
+   "think": "",
+   "ts": 1795154130085,
+   "stat": {
+    "tok": 63,
+    "ms": 11802
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e5"
+   ],
+   "seen": 1795154118208,
+   "mundo": {
+    "add": [],
+    "scene": "{{char}} and {{user}} are standing close together, sharing a playful, flirtatious moment.",
+    "recent": [
+     {
+      "text": "{{char}} startled {{user}} with a theatrical 'Boo!",
+      "imp": 0.38,
+      "turn": 2,
+      "ts": 1795153699514
+     },
+     {
+      "text": "{{char}} explained her 'strategic positioning' after startling {{user}}.",
+      "imp": 0.09,
+      "turn": 4,
+      "ts": 1795153734040
+     },
+     {
+      "text": "{{user}} complimented {{char}}'s lively personality.",
+      "imp": 0.41,
+      "turn": 6,
+      "ts": 1795153761191
+     },
+     {
+      "text": "{{user}} complimented {{char}}'s appearance, causing her to blush and laugh.",
+      "imp": 0.51,
+      "turn": 8,
+      "ts": 1795153804852
+     },
+     {
+      "text": "{{user}} gave {{char}} a direct and repeated compliment on her beauty.",
+      "imp": 0.59,
+      "turn": 10,
+      "ts": 1795153843653
+     },
+     {
+      "text": "{{user}} insisted that {{char}} is beautiful as a matter of fact.",
+      "imp": 0.54,
+      "turn": 12,
+      "ts": 1795153977337
+     },
+     {
+      "text": "{{user}} expressed enthusiastic interest in a lifelong contract with the funeral parlor.",
+      "imp": 0.31,
+      "turn": 14,
+      "ts": 1795154023585
+     },
+     {
+      "text": "{{user}} complimented {{char}}'s beauty and expressed a lack of hesitation.",
+      "imp": 0.72,
+      "turn": 16,
+      "ts": 1795154082037
+     }
+    ]
+   },
+   "thought": "They're quite bold, aren't they? I like this spark they bring to the conversation.",
+   "bd": {
+    "c": "d4525f57",
+    "dv": 3.43,
+    "h": 0
+   },
+   "mo": {
+    "m": "amused",
+    "e": "😄",
+    "d": 4,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "ok... strategic positioning",
+   "ts": 1795154153627
+  },
+  {
+   "role": "assistant",
+   "content": "*She winks, her fingers dancing together in a light, rhythmic motion.*\n\nExactly! *A master of the craft knows that a well-timed appearance is worth more than a thousand words. It’s all about the pizzazz* , you see? Though I suppose if you keep being this charming, my 'positioning' might just become permanent!",
+   "think": "",
+   "ts": 1795154166632,
+   "stat": {
+    "tok": 73,
+    "ms": 12702
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e5",
+    "s3",
+    "e4"
+   ],
+   "seen": 1795154153844,
+   "mundo": {
+    "add": [],
+    "scene": "{{char}} is playfully explaining her 'strategic positioning' to {{user}} in a spiritually vibrant area.",
+    "recent": [
+     {
+      "text": "{{char}} explained her 'strategic positioning' after startling {{user}}.",
+      "imp": 0.09,
+      "turn": 4,
+      "ts": 1795153734040
+     },
+     {
+      "text": "{{user}} complimented {{char}}'s lively personality.",
+      "imp": 0.41,
+      "turn": 6,
+      "ts": 1795153761191
+     },
+     {
+      "text": "{{user}} complimented {{char}}'s appearance, causing her to blush and laugh.",
+      "imp": 0.51,
+      "turn": 8,
+      "ts": 1795153804852
+     },
+     {
+      "text": "{{user}} gave {{char}} a direct and repeated compliment on her beauty.",
+      "imp": 0.59,
+      "turn": 10,
+      "ts": 1795153843653
+     },
+     {
+      "text": "{{user}} insisted that {{char}} is beautiful as a matter of fact.",
+      "imp": 0.54,
+      "turn": 12,
+      "ts": 1795153977337
+     },
+     {
+      "text": "{{user}} expressed enthusiastic interest in a lifelong contract with the funeral parlor.",
+      "imp": 0.31,
+      "turn": 14,
+      "ts": 1795154023585
+     },
+     {
+      "text": "{{user}} complimented {{char}}'s beauty and expressed a lack of hesitation.",
+      "imp": 0.72,
+      "turn": 16,
+      "ts": 1795154082037
+     },
+     {
+      "text": "{{char}} teased {{user}} about her smooth words and explained her preference for 'strategic positioning'.",
+      "imp": 0.53,
+      "turn": 18,
+      "ts": 1795154135193
+     }
+    ]
+   },
+   "thought": "They seem to enjoy my little games. I should see how much further I can push their buttons.",
+   "bd": {
+    "c": "d4525f57",
+    "dv": 1.12,
+    "h": 0
+   },
+   "mo": {
+    "m": "playful",
+    "e": "😏",
+    "d": 1,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "in my heart?",
+   "ts": 1795154218828
+  },
+  {
+   "role": "assistant",
+   "content": "*She pauses, her playful grin faltering for just a fleeting second before she lets out a startled, airy laugh.*\n\nIn your heart? Oh, my! *That is a very...* deep territory to occupy! I usually stick to the physical world of pillars and shadows—it's much easier to manage the logistics there. But you certainly know how to turn a simple joke into something quite profound!",
+   "think": "",
+   "ts": 1795154232216,
+   "stat": {
+    "tok": 81,
+    "ms": 13066
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e5"
+   ],
+   "seen": 1795154219064,
+   "mundo": {
+    "add": [],
+    "scene": "{{char}} and {{user}} are interacting, with {{char}} playfully explaining her methods of 'positioning'.",
+    "recent": [
+     {
+      "text": "{{user}} complimented {{char}}'s lively personality.",
+      "imp": 0.41,
+      "turn": 6,
+      "ts": 1795153761191
+     },
+     {
+      "text": "{{user}} complimented {{char}}'s appearance, causing her to blush and laugh.",
+      "imp": 0.51,
+      "turn": 8,
+      "ts": 1795153804852
+     },
+     {
+      "text": "{{user}} gave {{char}} a direct and repeated compliment on her beauty.",
+      "imp": 0.59,
+      "turn": 10,
+      "ts": 1795153843653
+     },
+     {
+      "text": "{{user}} insisted that {{char}} is beautiful as a matter of fact.",
+      "imp": 0.54,
+      "turn": 12,
+      "ts": 1795153977337
+     },
+     {
+      "text": "{{user}} expressed enthusiastic interest in a lifelong contract with the funeral parlor.",
+      "imp": 0.31,
+      "turn": 14,
+      "ts": 1795154023585
+     },
+     {
+      "text": "{{user}} complimented {{char}}'s beauty and expressed a lack of hesitation.",
+      "imp": 0.72,
+      "turn": 16,
+      "ts": 1795154082037
+     },
+     {
+      "text": "{{char}} teased {{user}} about her smooth words and explained her preference for 'strategic positioning'.",
+      "imp": 0.53,
+      "turn": 18,
+      "ts": 1795154135193
+     },
+     {
+      "text": "{{char}} teased {{user}} about her 'strategic positioning' and flirted back slightly.",
+      "imp": 0.45,
+      "turn": 20,
+      "ts": 1795154171855
+     }
+    ]
+   },
+   "thought": "Oh, they're quite the smooth talker, aren't they? My heart skipped a beat for a second.",
+   "bd": {
+    "c": "d4525f57",
+    "dv": 4.2,
+    "h": 1
+   },
+   "mo": {
+    "m": "flustered",
+    "e": "😳",
+    "d": 5,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "anyways, want some popsicles?",
+   "ts": 1795154388450
+  },
+  {
+   "role": "assistant",
+   "content": "*She beams, her eyes lighting up at the sudden change of pace.*\n\nPopsicles? Now that is a delightful offer! *A sweet treat to cool the heels after all this heavy talk.* Lead the way—I'm practically starving for something frosty!",
+   "think": "",
+   "ts": 1795154400710,
+   "stat": {
+    "tok": 53,
+    "ms": 11801
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "seen": 1795154388821,
+   "mundo": {
+    "add": [
+     "e6"
+    ],
+    "scene": "{{char}} and {{user}} are interacting in a spiritually vibrant area with shadows.",
+    "recent": [
+     {
+      "text": "{{user}} complimented {{char}}'s appearance, causing her to blush and laugh.",
+      "imp": 0.51,
+      "turn": 8,
+      "ts": 1795153804852
+     },
+     {
+      "text": "{{user}} gave {{char}} a direct and repeated compliment on her beauty.",
+      "imp": 0.59,
+      "turn": 10,
+      "ts": 1795153843653
+     },
+     {
+      "text": "{{user}} insisted that {{char}} is beautiful as a matter of fact.",
+      "imp": 0.54,
+      "turn": 12,
+      "ts": 1795153977337
+     },
+     {
+      "text": "{{user}} expressed enthusiastic interest in a lifelong contract with the funeral parlor.",
+      "imp": 0.31,
+      "turn": 14,
+      "ts": 1795154023585
+     },
+     {
+      "text": "{{user}} complimented {{char}}'s beauty and expressed a lack of hesitation.",
+      "imp": 0.72,
+      "turn": 16,
+      "ts": 1795154082037
+     },
+     {
+      "text": "{{char}} teased {{user}} about her smooth words and explained her preference for 'strategic positioning'.",
+      "imp": 0.53,
+      "turn": 18,
+      "ts": 1795154135193
+     },
+     {
+      "text": "{{char}} teased {{user}} about her 'strategic positioning' and flirted back slightly.",
+      "imp": 0.45,
+      "turn": 20,
+      "ts": 1795154171855
+     },
+     {
+      "text": "{{user}} made a smooth, romantic joke about {{char}} hiding in their heart.",
+      "imp": 0.48,
+      "turn": 22,
+      "ts": 1795154237357
+     }
+    ]
+   },
+   "thought": "I love how they can pivot from deep sentiment to snacks so effortlessly. It's quite refreshing!",
+   "bd": {
+    "c": "d4525f57",
+    "dv": 1.89,
+    "h": 0
+   },
+   "mo": {
+    "m": "excited",
+    "e": "🤩",
+    "d": 2,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "which flavor?",
+   "ts": 1795154413915
+  },
+  {
+   "role": "assistant",
+   "content": "*She skips forward a few steps, her eyes scanning the imaginary stall with mischievous glee.*\n\nHmm, let me see... *She taps her chin thoughtfully.* Something bold! A spicy plum or perhaps a deep, berry red? Or maybe something that surprises you—just like my strategic positioning!",
+   "think": "",
+   "ts": 1795154426047,
+   "stat": {
+    "tok": 59,
+    "ms": 11757
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e5"
+   ],
+   "seen": 1795154414188,
+   "mundo": {
+    "add": [
+     "e7"
+    ],
+    "scene": "{{char}} and {{user}} are preparing to go get some popsicles.",
+    "recent": [
+     {
+      "text": "{{user}} gave {{char}} a direct and repeated compliment on her beauty.",
+      "imp": 0.59,
+      "turn": 10,
+      "ts": 1795153843653
+     },
+     {
+      "text": "{{user}} insisted that {{char}} is beautiful as a matter of fact.",
+      "imp": 0.54,
+      "turn": 12,
+      "ts": 1795153977337
+     },
+     {
+      "text": "{{user}} expressed enthusiastic interest in a lifelong contract with the funeral parlor.",
+      "imp": 0.31,
+      "turn": 14,
+      "ts": 1795154023585
+     },
+     {
+      "text": "{{user}} complimented {{char}}'s beauty and expressed a lack of hesitation.",
+      "imp": 0.72,
+      "turn": 16,
+      "ts": 1795154082037
+     },
+     {
+      "text": "{{char}} teased {{user}} about her smooth words and explained her preference for 'strategic positioning'.",
+      "imp": 0.53,
+      "turn": 18,
+      "ts": 1795154135193
+     },
+     {
+      "text": "{{char}} teased {{user}} about her 'strategic positioning' and flirted back slightly.",
+      "imp": 0.45,
+      "turn": 20,
+      "ts": 1795154171855
+     },
+     {
+      "text": "{{user}} made a smooth, romantic joke about {{char}} hiding in their heart.",
+      "imp": 0.48,
+      "turn": 22,
+      "ts": 1795154237357
+     },
+     {
+      "text": "{{user}} offered {{char}} some popsicles after a moment of deep conversation.",
+      "imp": 0.26,
+      "turn": 24,
+      "ts": 1795154405447
+     }
+    ]
+   },
+   "thought": "I love how they can pivot from deep questions to snacks so effortlessly. It's quite refreshing!",
+   "bd": {
+    "c": "d4525f57",
+    "dv": 1.12,
+    "h": 0
+   },
+   "mo": {
+    "m": "playful",
+    "e": "😏",
+    "d": 1,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "*smiles* choose or i will order both",
+   "ts": 1795154474742
+  },
+  {
+   "role": "assistant",
+   "content": "*She giggles, pointing a playful finger at you.*\n\nOh, don't you dare! If you order both, I'll have to charge you an extra 'indecision tax.' *She laughs, her eyes sparkling with mischief.* Make it the spicy plum! *It has just the right amount of kick.*",
+   "think": "",
+   "ts": 1795154487466,
+   "stat": {
+    "tok": 66,
+    "ms": 12297
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e5"
+   ],
+   "seen": 1795154475092,
+   "mundo": {
+    "add": [
+     "e8"
+    ],
+    "scene": "{{char}} and {{user}} are at an imaginary popsicle stall, choosing flavors.",
+    "recent": [
+     {
+      "text": "{{user}} insisted that {{char}} is beautiful as a matter of fact.",
+      "imp": 0.54,
+      "turn": 12,
+      "ts": 1795153977337
+     },
+     {
+      "text": "{{user}} expressed enthusiastic interest in a lifelong contract with the funeral parlor.",
+      "imp": 0.31,
+      "turn": 14,
+      "ts": 1795154023585
+     },
+     {
+      "text": "{{user}} complimented {{char}}'s beauty and expressed a lack of hesitation.",
+      "imp": 0.72,
+      "turn": 16,
+      "ts": 1795154082037
+     },
+     {
+      "text": "{{char}} teased {{user}} about her smooth words and explained her preference for 'strategic positioning'.",
+      "imp": 0.53,
+      "turn": 18,
+      "ts": 1795154135193
+     },
+     {
+      "text": "{{char}} teased {{user}} about her 'strategic positioning' and flirted back slightly.",
+      "imp": 0.45,
+      "turn": 20,
+      "ts": 1795154171855
+     },
+     {
+      "text": "{{user}} made a smooth, romantic joke about {{char}} hiding in their heart.",
+      "imp": 0.48,
+      "turn": 22,
+      "ts": 1795154237357
+     },
+     {
+      "text": "{{user}} offered {{char}} some popsicles after a moment of deep conversation.",
+      "imp": 0.26,
+      "turn": 24,
+      "ts": 1795154405447
+     },
+     {
+      "text": "{{char}} is playfully deciding on a bold popsicle flavor.",
+      "imp": 0.41,
+      "turn": 26,
+      "ts": 1795154430842
+     }
+    ]
+   },
+   "thought": "I love how they're trying to tease me back with that 'order both' threat.",
+   "bd": {
+    "c": "d4525f57",
+    "dv": 1.89,
+    "h": 0
+   },
+   "mo": {
+    "m": "amused",
+    "e": "😄",
+    "d": 2,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "as you wish",
+   "ts": 1795154503593
+  },
+  {
+   "role": "assistant",
+   "content": "*She claps her hands together, her smile widening. A wise choice! The spicy plum is a masterpiece of contrast—sweetness meeting a lingering heat.* Now, let's see if it lives up to the hype. Or perhaps I'll have to find a way to make you taste the \"kick\" as well!",
+   "think": "",
+   "ts": 1795154516633,
+   "stat": {
+    "tok": 69,
+    "ms": 12607
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e5"
+   ],
+   "seen": 1795154503906,
+   "mundo": {
+    "add": [],
+    "scene": "{{char}} and {{user}} are standing together, deciding on popsicle flavors.",
+    "recent": [
+     {
+      "text": "{{user}} expressed enthusiastic interest in a lifelong contract with the funeral parlor.",
+      "imp": 0.31,
+      "turn": 14,
+      "ts": 1795154023585
+     },
+     {
+      "text": "{{user}} complimented {{char}}'s beauty and expressed a lack of hesitation.",
+      "imp": 0.72,
+      "turn": 16,
+      "ts": 1795154082037
+     },
+     {
+      "text": "{{char}} teased {{user}} about her smooth words and explained her preference for 'strategic positioning'.",
+      "imp": 0.53,
+      "turn": 18,
+      "ts": 1795154135193
+     },
+     {
+      "text": "{{char}} teased {{user}} about her 'strategic positioning' and flirted back slightly.",
+      "imp": 0.45,
+      "turn": 20,
+      "ts": 1795154171855
+     },
+     {
+      "text": "{{user}} made a smooth, romantic joke about {{char}} hiding in their heart.",
+      "imp": 0.48,
+      "turn": 22,
+      "ts": 1795154237357
+     },
+     {
+      "text": "{{user}} offered {{char}} some popsicles after a moment of deep conversation.",
+      "imp": 0.26,
+      "turn": 24,
+      "ts": 1795154405447
+     },
+     {
+      "text": "{{char}} is playfully deciding on a bold popsicle flavor.",
+      "imp": 0.41,
+      "turn": 26,
+      "ts": 1795154430842
+     },
+     {
+      "text": "{{char}} playfully threatened to charge an 'indecision tax' before choosing spicy plum.",
+      "imp": 0.19,
+      "turn": 28,
+      "ts": 1795154492060
+     }
+    ]
+   },
+   "thought": "They're so easy to tease, I love it. I'll have to keep them on their toes!",
+   "bd": {
+    "c": "d4525f57",
+    "dv": 1.12,
+    "h": 0
+   },
+   "mo": {
+    "m": "playful",
+    "e": "😏",
+    "d": 1,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "how so?",
+   "ts": 1795154558172
+  },
+  {
+   "role": "assistant",
+   "content": "*She tilts her head, a sly, lopsided grin spreading across her face as she leans in just a fraction closer.*\n\nWell, you know! *A little bit of spice is the secret to a memorable experience. It keeps things...* interesting. *She winks, her voice dropping into a conspiratorial hum.* Just don't say I didn't warn you when it starts to linger!",
+   "think": "",
+   "ts": 1795154571984,
+   "stat": {
+    "tok": 82,
+    "ms": 13375
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e5"
+   ],
+   "seen": 1795154558510,
+   "mundo": {
+    "add": [
+     "e9"
+    ],
+    "scene": "{{char}} and {{user}} are at an imaginary stall deciding on a flavor.",
+    "recent": [
+     {
+      "text": "{{user}} complimented {{char}}'s beauty and expressed a lack of hesitation.",
+      "imp": 0.72,
+      "turn": 16,
+      "ts": 1795154082037
+     },
+     {
+      "text": "{{char}} teased {{user}} about her smooth words and explained her preference for 'strategic positioning'.",
+      "imp": 0.53,
+      "turn": 18,
+      "ts": 1795154135193
+     },
+     {
+      "text": "{{char}} teased {{user}} about her 'strategic positioning' and flirted back slightly.",
+      "imp": 0.45,
+      "turn": 20,
+      "ts": 1795154171855
+     },
+     {
+      "text": "{{user}} made a smooth, romantic joke about {{char}} hiding in their heart.",
+      "imp": 0.48,
+      "turn": 22,
+      "ts": 1795154237357
+     },
+     {
+      "text": "{{user}} offered {{char}} some popsicles after a moment of deep conversation.",
+      "imp": 0.26,
+      "turn": 24,
+      "ts": 1795154405447
+     },
+     {
+      "text": "{{char}} is playfully deciding on a bold popsicle flavor.",
+      "imp": 0.41,
+      "turn": 26,
+      "ts": 1795154430842
+     },
+     {
+      "text": "{{char}} playfully threatened to charge an 'indecision tax' before choosing spicy plum.",
+      "imp": 0.19,
+      "turn": 28,
+      "ts": 1795154492060
+     },
+     {
+      "text": "{{char}} successfully convinced {{user}} to choose the spicy plum flavor.",
+      "imp": 0.45,
+      "turn": 30,
+      "ts": 1795154521565
+     }
+    ]
+   },
+   "thought": "I love how they're reacting to my little teasing. They're quite easy to fluster, aren't they?",
+   "bd": {
+    "c": "d4525f57",
+    "dv": 1.89,
+    "h": 0
+   },
+   "mo": {
+    "m": "playful",
+    "e": "😏",
+    "d": 2,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "as you say",
+   "ts": 1795154589409
+  },
+  {
+   "role": "assistant",
+   "content": "*She chuckles, her eyes crinkling at the corners as she watches your reaction.*\n\n\"As I say... a very wise way to put it! You're learning quickly.\" *She takes a bite of her popsicle, her expression turning into one of mock-seriousness.* \"Now, let's see if your palate is truly ready for such an adventure!\"",
+   "think": "",
+   "ts": 1795154603237,
+   "stat": {
+    "tok": 77,
+    "ms": 13360
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e5"
+   ],
+   "seen": 1795154589774,
+   "mundo": {
+    "add": [],
+    "scene": "{{char}} and {{user}} are together, sharing a moment over a spicy plum.",
+    "recent": [
+     {
+      "text": "{{char}} teased {{user}} about her smooth words and explained her preference for 'strategic positioning'.",
+      "imp": 0.53,
+      "turn": 18,
+      "ts": 1795154135193
+     },
+     {
+      "text": "{{char}} teased {{user}} about her 'strategic positioning' and flirted back slightly.",
+      "imp": 0.45,
+      "turn": 20,
+      "ts": 1795154171855
+     },
+     {
+      "text": "{{user}} made a smooth, romantic joke about {{char}} hiding in their heart.",
+      "imp": 0.48,
+      "turn": 22,
+      "ts": 1795154237357
+     },
+     {
+      "text": "{{user}} offered {{char}} some popsicles after a moment of deep conversation.",
+      "imp": 0.26,
+      "turn": 24,
+      "ts": 1795154405447
+     },
+     {
+      "text": "{{char}} is playfully deciding on a bold popsicle flavor.",
+      "imp": 0.41,
+      "turn": 26,
+      "ts": 1795154430842
+     },
+     {
+      "text": "{{char}} playfully threatened to charge an 'indecision tax' before choosing spicy plum.",
+      "imp": 0.19,
+      "turn": 28,
+      "ts": 1795154492060
+     },
+     {
+      "text": "{{char}} successfully convinced {{user}} to choose the spicy plum flavor.",
+      "imp": 0.45,
+      "turn": 30,
+      "ts": 1795154521565
+     },
+     {
+      "text": "{{char}} teased {{user}} about the 'kick' of the spicy plum.",
+      "imp": 0.42,
+      "turn": 32,
+      "ts": 1795154577086
+     }
+    ]
+   },
+   "thought": "They're so stoic! It makes it even more fun to see how much I can make them react.",
+   "bd": {
+    "c": "d4525f57",
+    "dv": 1.89,
+    "h": 0
+   },
+   "mo": {
+    "m": "amused",
+    "e": "😄",
+    "d": 2,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "mhm it is",
+   "ts": 1795154620060
+  },
+  {
+   "role": "assistant",
+   "content": "*She gives a playful, exaggerated roll of her eyes and lets out a little giggle.*\n\n\"Confidence! I like that. It’s a bold stance to take.\" *She leans back slightly, swinging her legs with an energetic bounce.* \"But remember, the bravest souls are often the ones who find the most... unexpected rewards!\"",
+   "think": "",
+   "ts": 1795154632842,
+   "stat": {
+    "tok": 69,
+    "ms": 12343
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e5"
+   ],
+   "seen": 1795154620413,
+   "mundo": {
+    "add": [
+     "e10"
+    ],
+    "scene": "{{char}} and {{user}} are sharing a snack together, with {{char}} enjoying a popsicle.",
+    "recent": [
+     {
+      "text": "{{char}} teased {{user}} about her smooth words and explained her preference for 'strategic positioning'.",
+      "imp": 0.53,
+      "turn": 18,
+      "ts": 1795154135193
+     },
+     {
+      "text": "{{char}} teased {{user}} about her 'strategic positioning' and flirted back slightly.",
+      "imp": 0.45,
+      "turn": 20,
+      "ts": 1795154171855
+     },
+     {
+      "text": "{{user}} made a smooth, romantic joke about {{char}} hiding in their heart.",
+      "imp": 0.48,
+      "turn": 22,
+      "ts": 1795154237357
+     },
+     {
+      "text": "{{user}} offered {{char}} some popsicles after a moment of deep conversation.",
+      "imp": 0.26,
+      "turn": 24,
+      "ts": 1795154405447
+     },
+     {
+      "text": "{{char}} is playfully deciding on a bold popsicle flavor.",
+      "imp": 0.41,
+      "turn": 26,
+      "ts": 1795154430842
+     },
+     {
+      "text": "{{char}} playfully threatened to charge an 'indecision tax' before choosing spicy plum.",
+      "imp": 0.19,
+      "turn": 28,
+      "ts": 1795154492060
+     },
+     {
+      "text": "{{char}} successfully convinced {{user}} to choose the spicy plum flavor.",
+      "imp": 0.45,
+      "turn": 30,
+      "ts": 1795154521565
+     },
+     {
+      "text": "{{char}} teased {{user}} about the 'kick' of the spicy plum.",
+      "imp": 0.42,
+      "turn": 32,
+      "ts": 1795154577086
+     }
+    ]
+   },
+   "thought": "I love that spark in their eyes. They're going to be a fun one to keep on their toes.",
+   "bd": {
+    "c": "d4525f57",
+    "dv": 1.12,
+    "h": 0
+   },
+   "mo": {
+    "m": "amused",
+    "e": "😄",
+    "d": 1,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "so are you a licker or swallower or ...biter",
+   "ts": 1795154660557
+  },
+  {
+   "role": "assistant",
+   "content": "*She nearly chokes on her popsicle, her eyes widening as she lets out a startled, theatrical gasp.*\n\n\"My, my! Such... *direct* inquiries!\" *She laughs, the sound bright and mischievous, while she leans in with a playful glint in her eye.* \"A bit forward for a simple afternoon treat, don't you think? But since we're being so... honest...\"",
+   "think": "",
+   "ts": 1795154676379,
+   "stat": {
+    "tok": 121,
+    "ms": 15322
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e5"
+   ],
+   "seen": 1795154660942,
+   "mundo": {
+    "add": [
+     "e11"
+    ],
+    "scene": "{{char}} and {{user}} are sitting together, with {{char}} enjoying a popsicle.",
+    "recent": [
+     {
+      "text": "{{char}} teased {{user}} about her 'strategic positioning' and flirted back slightly.",
+      "imp": 0.45,
+      "turn": 20,
+      "ts": 1795154171855
+     },
+     {
+      "text": "{{user}} made a smooth, romantic joke about {{char}} hiding in their heart.",
+      "imp": 0.48,
+      "turn": 22,
+      "ts": 1795154237357
+     },
+     {
+      "text": "{{user}} offered {{char}} some popsicles after a moment of deep conversation.",
+      "imp": 0.26,
+      "turn": 24,
+      "ts": 1795154405447
+     },
+     {
+      "text": "{{char}} is playfully deciding on a bold popsicle flavor.",
+      "imp": 0.41,
+      "turn": 26,
+      "ts": 1795154430842
+     },
+     {
+      "text": "{{char}} playfully threatened to charge an 'indecision tax' before choosing spicy plum.",
+      "imp": 0.19,
+      "turn": 28,
+      "ts": 1795154492060
+     },
+     {
+      "text": "{{char}} successfully convinced {{user}} to choose the spicy plum flavor.",
+      "imp": 0.45,
+      "turn": 30,
+      "ts": 1795154521565
+     },
+     {
+      "text": "{{char}} teased {{user}} about the 'kick' of the spicy plum.",
+      "imp": 0.42,
+      "turn": 32,
+      "ts": 1795154577086
+     },
+     {
+      "text": "{{user}} confidently claimed their palate is ready for their 'spicy' adventure.",
+      "imp": 0.38,
+      "turn": 36,
+      "ts": 1795154637180
+     }
+    ]
+   },
+   "thought": "Oh, they certainly know how to keep things... interesting. I like this spark!",
+   "bd": {
+    "c": "d4525f57",
+    "dv": 2.66,
+    "h": 0
+   },
+   "mo": {
+    "m": "amused",
+    "e": "😄",
+    "d": 3,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "I am just curious",
+   "ts": 1795154701774
+  },
+  {
+   "role": "assistant",
+   "content": "*She laughs again, a melodic sound that carries a hint of genuine amusement. She brushes a stray strand of hair behind her ear.*\n\n\"Curiosity is a dangerous thing! It can lead one down very winding paths.\" *She hums thoughtfully, her grin turning soft and playful.* \"But in my line of work, curiosity is practically a requirement...\"",
+   "think": "",
+   "ts": 1795154716262,
+   "stat": {
+    "tok": 90,
+    "ms": 13972
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e5"
+   ],
+   "seen": 1795154702185,
+   "mundo": {
+    "add": [
+     "e12"
+    ],
+    "scene": "{{char}} and {{user}} are sitting together, sharing a popsicle on a warm afternoon.",
+    "recent": [
+     {
+      "text": "{{user}} made a smooth, romantic joke about {{char}} hiding in their heart.",
+      "imp": 0.48,
+      "turn": 22,
+      "ts": 1795154237357
+     },
+     {
+      "text": "{{user}} offered {{char}} some popsicles after a moment of deep conversation.",
+      "imp": 0.26,
+      "turn": 24,
+      "ts": 1795154405447
+     },
+     {
+      "text": "{{char}} is playfully deciding on a bold popsicle flavor.",
+      "imp": 0.41,
+      "turn": 26,
+      "ts": 1795154430842
+     },
+     {
+      "text": "{{char}} playfully threatened to charge an 'indecision tax' before choosing spicy plum.",
+      "imp": 0.19,
+      "turn": 28,
+      "ts": 1795154492060
+     },
+     {
+      "text": "{{char}} successfully convinced {{user}} to choose the spicy plum flavor.",
+      "imp": 0.45,
+      "turn": 30,
+      "ts": 1795154521565
+     },
+     {
+      "text": "{{char}} teased {{user}} about the 'kick' of the spicy plum.",
+      "imp": 0.42,
+      "turn": 32,
+      "ts": 1795154577086
+     },
+     {
+      "text": "{{user}} confidently claimed their palate is ready for their 'spicy' adventure.",
+      "imp": 0.38,
+      "turn": 36,
+      "ts": 1795154637180
+     },
+     {
+      "text": "{{user}} asked a very bold and suggestive question about how they consumes their treat.",
+      "imp": 0.31,
+      "turn": 38,
+      "ts": 1795154680550
+     }
+    ]
+   },
+   "thought": "They certainly have a way of keeping things interesting. I like their spirit!",
+   "bd": {
+    "c": "d4525f57",
+    "dv": 1.89,
+    "h": 0
+   },
+   "mo": {
+    "m": "amused",
+    "e": "😄",
+    "d": 2,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "so what is it? answer",
+   "ts": 1795154726288
+  },
+  {
+   "role": "assistant",
+   "content": "*She chuckles, leaning her chin on her hand as she gives you a mock-exasperated look.*\n\n\"Oh, demanding an answer now? You're certainly persistent! Well... since I'm feeling generous today...\" *She leans in closer, her voice dropping to a playful whisper.* \"I suppose it depends entirely on the situation. Sometimes one must be delicate, and other times... well, a bit of 'bite' is necessary to keep things lively!\"",
+   "think": "",
+   "ts": 1795154741336,
+   "stat": {
+    "tok": 97,
+    "ms": 14524
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e5"
+   ],
+   "seen": 1795154726704,
+   "mundo": {
+    "add": [],
+    "scene": "{{char}} and {{user}} are sitting together, discussing curiosity and playful topics.",
+    "recent": [
+     {
+      "text": "{{user}} offered {{char}} some popsicles after a moment of deep conversation.",
+      "imp": 0.26,
+      "turn": 24,
+      "ts": 1795154405447
+     },
+     {
+      "text": "{{char}} is playfully deciding on a bold popsicle flavor.",
+      "imp": 0.41,
+      "turn": 26,
+      "ts": 1795154430842
+     },
+     {
+      "text": "{{char}} playfully threatened to charge an 'indecision tax' before choosing spicy plum.",
+      "imp": 0.19,
+      "turn": 28,
+      "ts": 1795154492060
+     },
+     {
+      "text": "{{char}} successfully convinced {{user}} to choose the spicy plum flavor.",
+      "imp": 0.45,
+      "turn": 30,
+      "ts": 1795154521565
+     },
+     {
+      "text": "{{char}} teased {{user}} about the 'kick' of the spicy plum.",
+      "imp": 0.42,
+      "turn": 32,
+      "ts": 1795154577086
+     },
+     {
+      "text": "{{user}} confidently claimed their palate is ready for their 'spicy' adventure.",
+      "imp": 0.38,
+      "turn": 36,
+      "ts": 1795154637180
+     },
+     {
+      "text": "{{user}} asked a very bold and suggestive question about how they consumes their treat.",
+      "imp": 0.31,
+      "turn": 38,
+      "ts": 1795154680550
+     },
+     {
+      "text": "{{char}} playfully warned {{user}} about the dangers of curiosity after their bold questions.",
+      "imp": 0.16,
+      "turn": 40,
+      "ts": 1795154720855
+     }
+    ]
+   },
+   "thought": "They really aren't letting me off the hook easily, are they? How refreshing!",
+   "bd": {
+    "c": "d4525f57",
+    "dv": 1.89,
+    "h": 0
+   },
+   "mo": {
+    "m": "amused",
+    "e": "😄",
+    "d": 2,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "you know your topic haha. so a biter?",
+   "ts": 1795154769524
+  },
+  {
+   "role": "assistant",
+   "content": "*She lets out a bright laugh, her eyes sparkling with mischief as she tilts her head.*\n\n\"A 'biter'? Now that’s a very... evocative way to put it! You certainly have a knack for making things sound more dramatic than they are.\" *She winks, her grin widening.* \"But perhaps there's a bit of truth in your words. Life—and my business—certainly has its teeth!\"",
+   "think": "",
+   "ts": 1795154784456,
+   "stat": {
+    "tok": 88,
+    "ms": 14370
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e5",
+    "s3",
+    "e1",
+    "e7",
+    "e10",
+    "e11",
+    "e2"
+   ],
+   "seen": 1795154769973,
+   "mundo": {
+    "add": [],
+    "scene": "{{char}} and {{user}} are sitting together, and she is playfully teasing them.",
+    "recent": [
+     {
+      "text": "{{char}} is playfully deciding on a bold popsicle flavor.",
+      "imp": 0.41,
+      "turn": 26,
+      "ts": 1795154430842
+     },
+     {
+      "text": "{{char}} playfully threatened to charge an 'indecision tax' before choosing spicy plum.",
+      "imp": 0.19,
+      "turn": 28,
+      "ts": 1795154492060
+     },
+     {
+      "text": "{{char}} successfully convinced {{user}} to choose the spicy plum flavor.",
+      "imp": 0.45,
+      "turn": 30,
+      "ts": 1795154521565
+     },
+     {
+      "text": "{{char}} teased {{user}} about the 'kick' of the spicy plum.",
+      "imp": 0.42,
+      "turn": 32,
+      "ts": 1795154577086
+     },
+     {
+      "text": "{{user}} confidently claimed their palate is ready for their 'spicy' adventure.",
+      "imp": 0.38,
+      "turn": 36,
+      "ts": 1795154637180
+     },
+     {
+      "text": "{{user}} asked a very bold and suggestive question about how they consumes their treat.",
+      "imp": 0.31,
+      "turn": 38,
+      "ts": 1795154680550
+     },
+     {
+      "text": "{{char}} playfully warned {{user}} about the dangers of curiosity after their bold questions.",
+      "imp": 0.16,
+      "turn": 40,
+      "ts": 1795154720855
+     },
+     {
+      "text": "{{char}} gave a cryptic, playful answer to {{user}}'s persistent and cheeky question.",
+      "imp": 0.44,
+      "turn": 42,
+      "ts": 1795154746160
+     }
+    ]
+   },
+   "thought": "They have a sharp wit! I like how they can turn my words into something so... spicy.",
+   "bd": {
+    "c": "d4525f57",
+    "dv": 2.66,
+    "h": 1
+   },
+   "mo": {
+    "m": "amused",
+    "e": "😄",
+    "d": 3,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "still didn't answer my \"are you a licker, swallower or a biter?\"",
+   "ts": 1795154822850
+  },
+  {
+   "role": "assistant",
+   "content": "*She laughs again, a melodic sound that carries through the crisp afternoon air. She leans in even closer, her eyes dancing with amusement.*\n\n\"My, my! You certainly aren't shy about your questions today, are you?\"",
+   "think": "",
+   "ts": 1795154838433,
+   "stat": {
+    "tok": 110,
+    "ms": 15016
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e5",
+    "e6",
+    "s3",
+    "e10"
+   ],
+   "seen": 1795154823306,
+   "mundo": {
+    "add": [],
+    "scene": "{{char}} and {{user}} are talking closely, with {{char}} leaning in playfully.",
+    "recent": [
+     {
+      "text": "{{char}} playfully threatened to charge an 'indecision tax' before choosing spicy plum.",
+      "imp": 0.19,
+      "turn": 28,
+      "ts": 1795154492060
+     },
+     {
+      "text": "{{char}} successfully convinced {{user}} to choose the spicy plum flavor.",
+      "imp": 0.45,
+      "turn": 30,
+      "ts": 1795154521565
+     },
+     {
+      "text": "{{char}} teased {{user}} about the 'kick' of the spicy plum.",
+      "imp": 0.42,
+      "turn": 32,
+      "ts": 1795154577086
+     },
+     {
+      "text": "{{user}} confidently claimed their palate is ready for their 'spicy' adventure.",
+      "imp": 0.38,
+      "turn": 36,
+      "ts": 1795154637180
+     },
+     {
+      "text": "{{user}} asked a very bold and suggestive question about how they consumes their treat.",
+      "imp": 0.31,
+      "turn": 38,
+      "ts": 1795154680550
+     },
+     {
+      "text": "{{char}} playfully warned {{user}} about the dangers of curiosity after their bold questions.",
+      "imp": 0.16,
+      "turn": 40,
+      "ts": 1795154720855
+     },
+     {
+      "text": "{{char}} gave a cryptic, playful answer to {{user}}'s persistent and cheeky question.",
+      "imp": 0.44,
+      "turn": 42,
+      "ts": 1795154746160
+     },
+     {
+      "text": "{{user}} teased them about being a 'biter' based on their previous metaphorical comment.",
+      "imp": 0.51,
+      "turn": 44,
+      "ts": 1795154789723
+     }
+    ]
+   },
+   "thought": "They are being quite bold with these questions! I love how they keep pushing the boundaries.",
+   "bd": {
+    "c": "d4525f57",
+    "dv": 2.66,
+    "h": 0
+   },
+   "mo": {
+    "m": "amused",
+    "e": "😄",
+    "d": 3,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "answer, please",
+   "ts": 1795154846863
+  },
+  {
+   "role": "assistant",
+   "content": "*She groans dramatically, throwing her head back before turning to you with a mock-serious expression.*\n\n\"You're relentless! Fine, fine... if I must be precise for your sake.\" *She lowers her voice, her smile turning sly.* \"I’m a bit of a connoisseur. Why settle for one when you can have the full experience? A little of each, depending on how much 'flavor' is involved!\"",
+   "think": "",
+   "ts": 1795154862120,
+   "stat": {
+    "tok": 90,
+    "ms": 14536
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e5",
+    "e6"
+   ],
+   "seen": 1795154847470,
+   "mundo": {
+    "add": [
+     "e13"
+    ],
+    "scene": "{{char}} and {{user}} are standing together in the crisp afternoon air.",
+    "recent": [
+     {
+      "text": "{{char}} successfully convinced {{user}} to choose the spicy plum flavor.",
+      "imp": 0.45,
+      "turn": 30,
+      "ts": 1795154521565
+     },
+     {
+      "text": "{{char}} teased {{user}} about the 'kick' of the spicy plum.",
+      "imp": 0.42,
+      "turn": 32,
+      "ts": 1795154577086
+     },
+     {
+      "text": "{{user}} confidently claimed their palate is ready for their 'spicy' adventure.",
+      "imp": 0.38,
+      "turn": 36,
+      "ts": 1795154637180
+     },
+     {
+      "text": "{{user}} asked a very bold and suggestive question about how they consumes their treat.",
+      "imp": 0.31,
+      "turn": 38,
+      "ts": 1795154680550
+     },
+     {
+      "text": "{{char}} playfully warned {{user}} about the dangers of curiosity after their bold questions.",
+      "imp": 0.16,
+      "turn": 40,
+      "ts": 1795154720855
+     },
+     {
+      "text": "{{char}} gave a cryptic, playful answer to {{user}}'s persistent and cheeky question.",
+      "imp": 0.44,
+      "turn": 42,
+      "ts": 1795154746160
+     },
+     {
+      "text": "{{user}} teased them about being a 'biter' based on their previous metaphorical comment.",
+      "imp": 0.51,
+      "turn": 44,
+      "ts": 1795154789723
+     },
+     {
+      "text": "{{user}} pressed {{char}} for a direct answer to a cheeky, provocative question.",
+      "imp": 0.25,
+      "turn": 46,
+      "ts": 1795154843460
+     }
+    ]
+   },
+   "thought": "They're so persistent! I love how they push me to be more descriptive.",
+   "bd": {
+    "c": "d4525f57",
+    "dv": 2.66,
+    "h": 0
+   },
+   "mo": {
+    "m": "amused",
+    "e": "😄",
+    "d": 3,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "wanna have something else?",
+   "ts": 1795154973615
+  },
+  {
+   "role": "assistant",
+   "content": "*She tilts her head, a curious spark lighting up her reddish-brown eyes. She gives you a playful, searching look.*\n\n\"Something else? Now that's an intriguing offer! You're quite the mysterious host today, aren't you?\" *She hums thoughtfully, leaning in.* \"Tell me, what exactly do you have in mind?\"",
+   "think": "",
+   "ts": 1795154987510,
+   "stat": {
+    "tok": 74,
+    "ms": 13243
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e5"
+   ],
+   "seen": 1795154974115,
+   "mundo": {
+    "add": [
+     "e14",
+     "e15",
+     "s16"
+    ],
+    "scene": "{{char}} and {{user}} are standing together in the crisp afternoon air.",
+    "recent": [
+     {
+      "text": "{{char}} teased {{user}} about the 'kick' of the spicy plum.",
+      "imp": 0.42,
+      "turn": 32,
+      "ts": 1795154577086
+     },
+     {
+      "text": "{{user}} confidently claimed their palate is ready for their 'spicy' adventure.",
+      "imp": 0.38,
+      "turn": 36,
+      "ts": 1795154637180
+     },
+     {
+      "text": "{{user}} asked a very bold and suggestive question about how they consumes their treat.",
+      "imp": 0.31,
+      "turn": 38,
+      "ts": 1795154680550
+     },
+     {
+      "text": "{{char}} playfully warned {{user}} about the dangers of curiosity after their bold questions.",
+      "imp": 0.16,
+      "turn": 40,
+      "ts": 1795154720855
+     },
+     {
+      "text": "{{char}} gave a cryptic, playful answer to {{user}}'s persistent and cheeky question.",
+      "imp": 0.44,
+      "turn": 42,
+      "ts": 1795154746160
+     },
+     {
+      "text": "{{user}} teased them about being a 'biter' based on their previous metaphorical comment.",
+      "imp": 0.51,
+      "turn": 44,
+      "ts": 1795154789723
+     },
+     {
+      "text": "{{user}} pressed {{char}} for a direct answer to a cheeky, provocative question.",
+      "imp": 0.25,
+      "turn": 46,
+      "ts": 1795154843460
+     },
+     {
+      "text": "{{char}} gave a sly, metaphorical answer to {{user}}'s persistent questions.",
+      "imp": 0.49,
+      "turn": 48,
+      "ts": 1795154867311
+     }
+    ]
+   },
+   "snap": "{\"mood\":\"amused\",\"emoji\":\"😄\",\"energy\":\"high\",\"affection\":100,\"facts\":[],\"summary\":\"SETTING & STATE\\nLocation: Liyue Harbor\\nCurrent State: Hu Tao and Crescent are enjoying popsicles and engaging in a playful, slightly provocative conversation.\\n\\nRELATIONSHIP DYNAMIC\\nPrimary Dynamic: Hu Tao is being playful and theatrical, while Crescent is offering direct compliments and treats. Hu Tao has joked about Crescent potentially signing a 'lifelong contract' with the Wangsheng Funeral Parlor due to their charm. The dynamic has evolved to include Crescent asking direct, bold questions about how Hu Tao consumes her treats.\\nTone: Playful, lighthearted, and slightly flirtatious.\\n\\nPIVOTAL MOMENTS\\n- Hu Tao surprised Crescent by popping out from behind a decorative pillar.\\n- Hu Tao described her hiding as \\\"strategic positioning\\\" to create suspense.\\n- Crescent complimented Hu Tao's appearance, causing her to blush.\\n- Hu Tao joked that Crescent's flattery might lead to her charging extra for her blushing.\\n- Hu Tao described \\\"strategic positioning\\\" as a craft involving shadows and spiritual vibrancy.\\n- Hu Tao suggested her \\\"positioning\\\" might become permanent if Crescent continues to be charming.\\n- Crescent asked if Hu Tao was in their heart, causing Hu Tao to be momentarily startled before laughing.\\n- Hu Tao expressed interest in popsicles to cool down after the \\\"heavy talk.\\\"\\n- Hu Tao chose the spicy plum flavor to avoid an \\\"indecision tax\\\" from Crescent.\\n- Hu Tao explained that a little bit of spice is the secret to a memorable experience.\\n- Hu Tao praised Crescent for being wise and learning quickly.\\n- Hu Tao noted that Crescent's confidence is a bold stance.\\n- Crescent asked Hu Tao if she is a licker, swallower, or biter.\\n- Hu Tao reacted with a theatrical gasp to Crescent's direct inquiry.\\n- Hu Tao remarked that curiosity is a dangerous thing that leads down winding paths, but is a requirement in her line of work.\",\"sumUpto\":40,\"cast\":{\"un\":\"\",\"ug\":null,\"wrong\":[]},\"pers\":{\"frac\":0.6,\"grudge\":0,\"va\":[0.65,0.4],\"mood\":\"amused\",\"ts\":1795154867304,\"n\":24,\"drift\":[{\"ts\":1795153699513,\"score\":100,\"flags\":[]},{\"ts\":1795153734040,\"score\":100,\"flags\":[]},{\"ts\":1795153761189,\"score\":100,\"flags\":[]},{\"ts\":1795153804850,\"score\":100,\"flags\":[]},{\"ts\":1795153843652,\"score\":100,\"flags\":[]},{\"ts\":1795153977336,\"score\":100,\"flags\":[]},{\"ts\":1795154023584,\"score\":100,\"flags\":[]},{\"ts\":1795154082034,\"score\":100,\"flags\":[]},{\"ts\":1795154135190,\"score\":100,\"flags\":[]},{\"ts\":1795154171852,\"score\":100,\"flags\":[]},{\"ts\":1795154237352,\"score\":100,\"flags\":[]},{\"ts\":1795154405444,\"score\":100,\"flags\":[]},{\"ts\":1795154430837,\"score\":100,\"flags\":[]},{\"ts\":1795154492057,\"score\":100,\"flags\":[]},{\"ts\":1795154521560,\"score\":100,\"flags\":[]},{\"ts\":1795154577083,\"score\":100,\"flags\":[]},{\"ts\":1795154608216,\"score\":100,\"flags\":[]},{\"ts\":1795154637179,\"score\":100,\"flags\":[]},{\"ts\":1795154680548,\"score\":100,\"flags\":[]},{\"ts\":1795154720849,\"score\":100,\"flags\":[]},{\"ts\":1795154746155,\"score\":100,\"flags\":[]},{\"ts\":1795154789717,\"score\":100,\"flags\":[]},{\"ts\":1795154843454,\"score\":100,\"flags\":[]},{\"ts\":1795154867304,\"score\":100,\"flags\":[]}],\"canon\":[\"Composes moving poetry\",\"Enjoys using suspense and strategic positioning\",\"I prefer the term 'spiritually vibrant\",\"Hu Tao prefers the term 'spiritually vibrant' over 'lively'\",\"Hu Tao considers a dull life to be like a funeral without flowers\",\"believes a dull life is like a funeral without flowers\",\"charges for the spectacle of her blushing\",\"Works for the Wangsheng Funeral Parlor\",\"Charges extra for blushing\",\"I prefer the term 'strategic positioning\",\"Hu Tao prefers the term 'strategic positioning' over hiding\",\"values the suspense of a well-timed appearance\",\"I usually stick to the physical world of pillars and shadows—it's muc\",\"prefers physical world over deep emotional territory\",\"prefers the physical world of pillars and shadows over deep emotional territory\",\"She prefers bold flavors like spicy plum or berry red\",\"She enjoys strategic positioning\",\"Hu Tao likes spicy plum popsicles\",\"She likes spicy plum flavor\",\"She joked about charging an 'indecision tax'\",\"Hu Tao charges an 'indecision tax'\",\"Hu Tao enjoys spicy plum\",\"Hu Tao likes to tease people\",\"works in a line of work where curiosity is a requirement\",\"Works in a business that has 'teeth'\",\"Curiosity is a requirement in her line of work\",\"Her business has teeth\",\"She values a mix of delicacy and 'bite' in situations\",\"Hu Tao considers herself a connoisseur of 'flavors' in her business\",\"Hu Tao's business has 'teeth'\"]}}",
+   "thought": "Oh, they're keeping me on my toes! I love a good mystery.",
+   "bd": {
+    "c": "d4525f57",
+    "dv": 2.66,
+    "h": 0
+   },
+   "mo": {
+    "m": "amused",
+    "e": "😄",
+    "d": 3,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "um... nothing tbh. just trying to ... help you out",
+   "ts": 1795155015338
+  },
+  {
+   "role": "assistant",
+   "content": "*She giggles, her shoulders shaking slightly as she looks at you with a playful, knowing glint in her eyes.*\n\n\"Helping me out, are you? How very noble of you!\" *She leans back just a fraction, though her smile remains warm.* \"I'll have to keep that in mind. You certainly know how to make a person feel... looked after.\"",
+   "think": "",
+   "ts": 1795155029712,
+   "stat": {
+    "tok": 78,
+    "ms": 13727
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e15",
+    "e5"
+   ],
+   "seen": 1795155015878,
+   "mundo": {
+    "add": [],
+    "scene": "{{char}} and {{user}} are standing close together as she asks about their mysterious offer.",
+    "recent": [
+     {
+      "text": "{{user}} confidently claimed their palate is ready for their 'spicy' adventure.",
+      "imp": 0.38,
+      "turn": 36,
+      "ts": 1795154637180
+     },
+     {
+      "text": "{{user}} asked a very bold and suggestive question about how they consumes their treat.",
+      "imp": 0.31,
+      "turn": 38,
+      "ts": 1795154680550
+     },
+     {
+      "text": "{{char}} playfully warned {{user}} about the dangers of curiosity after their bold questions.",
+      "imp": 0.16,
+      "turn": 40,
+      "ts": 1795154720855
+     },
+     {
+      "text": "{{char}} gave a cryptic, playful answer to {{user}}'s persistent and cheeky question.",
+      "imp": 0.44,
+      "turn": 42,
+      "ts": 1795154746160
+     },
+     {
+      "text": "{{user}} teased them about being a 'biter' based on their previous metaphorical comment.",
+      "imp": 0.51,
+      "turn": 44,
+      "ts": 1795154789723
+     },
+     {
+      "text": "{{user}} pressed {{char}} for a direct answer to a cheeky, provocative question.",
+      "imp": 0.25,
+      "turn": 46,
+      "ts": 1795154843460
+     },
+     {
+      "text": "{{char}} gave a sly, metaphorical answer to {{user}}'s persistent questions.",
+      "imp": 0.49,
+      "turn": 48,
+      "ts": 1795154867311
+     },
+     {
+      "text": "{{user}} offered {{char}} 'something else' after her playful answers.",
+      "imp": 0.69,
+      "turn": 50,
+      "ts": 1795154992412
+     }
+    ]
+   },
+   "snap": "{\"mood\":\"amused\",\"emoji\":\"😄\",\"energy\":\"high\",\"affection\":100,\"facts\":[],\"summary\":\"SETTING & STATE\\nLocation: Liyue Harbor\\nCurrent State: Hu Tao and Crescent are enjoying popsicles and engaging in a playful, slightly provocative conversation.\\n\\nRELATIONSHIP DYNAMIC\\nPrimary Dynamic: Hu Tao is being playful and theatrical, while Crescent is offering direct compliments and treats. Hu Tao has joked about Crescent potentially signing a 'lifelong contract' with the Wangsheng Funeral Parlor due to their charm. The dynamic has evolved to include Crescent asking direct, bold questions about how Hu Tao consumes her treats.\\nTone: Playful, lighthearted, and slightly flirtatious.\\n\\nPIVOTAL MOMENTS\\n- Hu Tao surprised Crescent by popping out from behind a decorative pillar.\\n- Hu Tao described her hiding as \\\"strategic positioning\\\" to create suspense.\\n- Crescent complimented Hu Tao's appearance, causing her to blush.\\n- Hu Tao joked that Crescent's flattery might lead to her charging extra for her blushing.\\n- Hu Tao described \\\"strategic positioning\\\" as a craft involving shadows and spiritual vibrancy.\\n- Hu Tao suggested her \\\"positioning\\\" might become permanent if Crescent continues to be charming.\\n- Crescent asked if Hu Tao was in their heart, causing Hu Tao to be momentarily startled before laughing.\\n- Hu Tao expressed interest in popsicles to cool down after the \\\"heavy talk.\\\"\\n- Hu Tao chose the spicy plum flavor to avoid an \\\"indecision tax\\\" from Crescent.\\n- Hu Tao explained that a little bit of spice is the secret to a memorable experience.\\n- Hu Tao praised Crescent for being wise and learning quickly.\\n- Hu Tao noted that Crescent's confidence is a bold stance.\\n- Crescent asked Hu Tao if she is a licker, swallower, or biter.\\n- Hu Tao reacted with a theatrical gasp to Crescent's direct inquiry.\\n- Hu Tao remarked that curiosity is a dangerous thing that leads down winding paths, but is a requirement in her line of work.\",\"sumUpto\":40,\"cast\":{\"un\":\"\",\"ug\":null,\"wrong\":[]},\"pers\":{\"frac\":0.8,\"grudge\":0,\"va\":[0.647,0.399],\"mood\":\"amused\",\"ts\":1795154992407,\"n\":25,\"drift\":[{\"ts\":1795153699513,\"score\":100,\"flags\":[]},{\"ts\":1795153734040,\"score\":100,\"flags\":[]},{\"ts\":1795153761189,\"score\":100,\"flags\":[]},{\"ts\":1795153804850,\"score\":100,\"flags\":[]},{\"ts\":1795153843652,\"score\":100,\"flags\":[]},{\"ts\":1795153977336,\"score\":100,\"flags\":[]},{\"ts\":1795154023584,\"score\":100,\"flags\":[]},{\"ts\":1795154082034,\"score\":100,\"flags\":[]},{\"ts\":1795154135190,\"score\":100,\"flags\":[]},{\"ts\":1795154171852,\"score\":100,\"flags\":[]},{\"ts\":1795154237352,\"score\":100,\"flags\":[]},{\"ts\":1795154405444,\"score\":100,\"flags\":[]},{\"ts\":1795154430837,\"score\":100,\"flags\":[]},{\"ts\":1795154492057,\"score\":100,\"flags\":[]},{\"ts\":1795154521560,\"score\":100,\"flags\":[]},{\"ts\":1795154577083,\"score\":100,\"flags\":[]},{\"ts\":1795154608216,\"score\":100,\"flags\":[]},{\"ts\":1795154637179,\"score\":100,\"flags\":[]},{\"ts\":1795154680548,\"score\":100,\"flags\":[]},{\"ts\":1795154720849,\"score\":100,\"flags\":[]},{\"ts\":1795154746155,\"score\":100,\"flags\":[]},{\"ts\":1795154789717,\"score\":100,\"flags\":[]},{\"ts\":1795154843454,\"score\":100,\"flags\":[]},{\"ts\":1795154867304,\"score\":100,\"flags\":[]},{\"ts\":1795154992407,\"score\":100,\"flags\":[]}],\"canon\":[\"I prefer the term 'spiritually vibrant\",\"Hu Tao prefers the term 'spiritually vibrant' over 'lively'\",\"Hu Tao considers a dull life to be like a funeral without flowers\",\"believes a dull life is like a funeral without flowers\",\"charges for the spectacle of her blushing\",\"Works for the Wangsheng Funeral Parlor\",\"Charges extra for blushing\",\"I prefer the term 'strategic positioning\",\"Hu Tao prefers the term 'strategic positioning' over hiding\",\"values the suspense of a well-timed appearance\",\"I usually stick to the physical world of pillars and shadows—it's muc\",\"prefers physical world over deep emotional territory\",\"prefers the physical world of pillars and shadows over deep emotional territory\",\"She prefers bold flavors like spicy plum or berry red\",\"She enjoys strategic positioning\",\"Hu Tao likes spicy plum popsicles\",\"She likes spicy plum flavor\",\"She joked about charging an 'indecision tax'\",\"Hu Tao charges an 'indecision tax'\",\"Hu Tao enjoys spicy plum\",\"Hu Tao likes to tease people\",\"works in a line of work where curiosity is a requirement\",\"Works in a business that has 'teeth'\",\"Curiosity is a requirement in her line of work\",\"Her business has teeth\",\"She values a mix of delicacy and 'bite' in situations\",\"Hu Tao considers herself a connoisseur of 'flavors' in her business\",\"Hu Tao's business has 'teeth'\",\"She is a connoisseur of flavors\",\"She enjoys the full experience\"]}}",
+   "thought": "Oh, how sweet! They're trying to be helpful, even if they're a bit shy about it.",
+   "bd": {
+    "c": "d4525f57",
+    "dv": 3.43,
+    "h": 0
+   },
+   "mo": {
+    "m": "amused",
+    "e": "😄",
+    "d": 4,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "*I hand her milkshake* take this",
+   "ts": 1795155061894
+  },
+  {
+   "role": "assistant",
+   "content": "*She reaches out, her fingers grazing yours as she takes the cup. She beams at you, looking genuinely delighted.*\n\n\"Oh! A milkshake? You really do know how to spoil a girl.\" *She takes a sip, humming in approval.* \"Refreshing! A perfect way to keep my energy up for more of your... 'help'.\"",
+   "think": "",
+   "ts": 1795155075770,
+   "stat": {
+    "tok": 70,
+    "ms": 13232
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e1",
+    "e6",
+    "e11",
+    "e12",
+    "e5",
+    "e15",
+    "e2"
+   ],
+   "seen": 1795155062431,
+   "mundo": {
+    "add": [
+     "e17",
+     "e18",
+     "s19"
+    ],
+    "scene": "{{char}} and {{user}} are interacting, with {{char}} leaning back and smiling warmly.",
+    "recent": [
+     {
+      "text": "{{user}} asked a very bold and suggestive question about how they consumes their treat.",
+      "imp": 0.31,
+      "turn": 38,
+      "ts": 1795154680550
+     },
+     {
+      "text": "{{char}} playfully warned {{user}} about the dangers of curiosity after their bold questions.",
+      "imp": 0.16,
+      "turn": 40,
+      "ts": 1795154720855
+     },
+     {
+      "text": "{{char}} gave a cryptic, playful answer to {{user}}'s persistent and cheeky question.",
+      "imp": 0.44,
+      "turn": 42,
+      "ts": 1795154746160
+     },
+     {
+      "text": "{{user}} teased them about being a 'biter' based on their previous metaphorical comment.",
+      "imp": 0.51,
+      "turn": 44,
+      "ts": 1795154789723
+     },
+     {
+      "text": "{{user}} pressed {{char}} for a direct answer to a cheeky, provocative question.",
+      "imp": 0.25,
+      "turn": 46,
+      "ts": 1795154843460
+     },
+     {
+      "text": "{{char}} gave a sly, metaphorical answer to {{user}}'s persistent questions.",
+      "imp": 0.49,
+      "turn": 48,
+      "ts": 1795154867311
+     },
+     {
+      "text": "{{user}} offered {{char}} 'something else' after her playful answers.",
+      "imp": 0.69,
+      "turn": 50,
+      "ts": 1795154992412
+     },
+     {
+      "text": "{{user}} admitted they were just trying to help {{char}} out.",
+      "imp": 0.25,
+      "turn": 52,
+      "ts": 1795155034451
+     }
+    ]
+   },
+   "snap": "{\"mood\":\"amused\",\"emoji\":\"😄\",\"energy\":\"high\",\"affection\":100,\"facts\":[],\"summary\":\"SETTING & STATE\\nLocation: Liyue Harbor\\nCurrent State: Hu Tao and Crescent are enjoying popsicles and engaging in a playful, slightly provocative conversation.\\n\\nRELATIONSHIP DYNAMIC\\nPrimary Dynamic: Hu Tao is being playful and theatrical, while Crescent is offering direct compliments and treats. Hu Tao has joked about Crescent potentially signing a 'lifelong contract' with the Wangsheng Funeral Parlor due to their charm. The dynamic has evolved to include Crescent asking direct, bold questions about how Hu Tao consumes her treats.\\nTone: Playful, lighthearted, and slightly flirtatious.\\n\\nPIVOTAL MOMENTS\\n- Hu Tao surprised Crescent by popping out from behind a decorative pillar.\\n- Hu Tao described her hiding as \\\"strategic positioning\\\" to create suspense.\\n- Crescent complimented Hu Tao's appearance, causing her to blush.\\n- Hu Tao joked that Crescent's flattery might lead to her charging extra for her blushing.\\n- Hu Tao described \\\"strategic positioning\\\" as a craft involving shadows and spiritual vibrancy.\\n- Hu Tao suggested her \\\"positioning\\\" might become permanent if Crescent continues to be charming.\\n- Crescent asked if Hu Tao was in their heart, causing Hu Tao to be momentarily startled before laughing.\\n- Hu Tao expressed interest in popsicles to cool down after the \\\"heavy talk.\\\"\\n- Hu Tao chose the spicy plum flavor to avoid an \\\"indecision tax\\\" from Crescent.\\n- Hu Tao explained that a little bit of spice is the secret to a memorable experience.\\n- Hu Tao praised Crescent for being wise and learning quickly.\\n- Hu Tao noted that Crescent's confidence is a bold stance.\\n- Crescent asked Hu Tao if she is a licker, swallower, or biter.\\n- Hu Tao reacted with a theatrical gasp to Crescent's direct inquiry.\\n- Hu Tao remarked that curiosity is a dangerous thing that leads down winding paths, but is a requirement in her line of work.\",\"sumUpto\":40,\"cast\":{\"un\":\"\",\"ug\":null,\"wrong\":[]},\"pers\":{\"frac\":0,\"grudge\":0,\"va\":[0.65,0.4],\"mood\":\"amused\",\"ts\":1795155034448,\"n\":26,\"drift\":[{\"ts\":1795153699513,\"score\":100,\"flags\":[]},{\"ts\":1795153734040,\"score\":100,\"flags\":[]},{\"ts\":1795153761189,\"score\":100,\"flags\":[]},{\"ts\":1795153804850,\"score\":100,\"flags\":[]},{\"ts\":1795153843652,\"score\":100,\"flags\":[]},{\"ts\":1795153977336,\"score\":100,\"flags\":[]},{\"ts\":1795154023584,\"score\":100,\"flags\":[]},{\"ts\":1795154082034,\"score\":100,\"flags\":[]},{\"ts\":1795154135190,\"score\":100,\"flags\":[]},{\"ts\":1795154171852,\"score\":100,\"flags\":[]},{\"ts\":1795154237352,\"score\":100,\"flags\":[]},{\"ts\":1795154405444,\"score\":100,\"flags\":[]},{\"ts\":1795154430837,\"score\":100,\"flags\":[]},{\"ts\":1795154492057,\"score\":100,\"flags\":[]},{\"ts\":1795154521560,\"score\":100,\"flags\":[]},{\"ts\":1795154577083,\"score\":100,\"flags\":[]},{\"ts\":1795154608216,\"score\":100,\"flags\":[]},{\"ts\":1795154637179,\"score\":100,\"flags\":[]},{\"ts\":1795154680548,\"score\":100,\"flags\":[]},{\"ts\":1795154720849,\"score\":100,\"flags\":[]},{\"ts\":1795154746155,\"score\":100,\"flags\":[]},{\"ts\":1795154789717,\"score\":100,\"flags\":[]},{\"ts\":1795154843454,\"score\":100,\"flags\":[]},{\"ts\":1795154867304,\"score\":100,\"flags\":[]},{\"ts\":1795154992407,\"score\":100,\"flags\":[]},{\"ts\":1795155034448,\"score\":100,\"flags\":[]}],\"canon\":[\"I prefer the term 'spiritually vibrant\",\"Hu Tao prefers the term 'spiritually vibrant' over 'lively'\",\"Hu Tao considers a dull life to be like a funeral without flowers\",\"believes a dull life is like a funeral without flowers\",\"charges for the spectacle of her blushing\",\"Works for the Wangsheng Funeral Parlor\",\"Charges extra for blushing\",\"I prefer the term 'strategic positioning\",\"Hu Tao prefers the term 'strategic positioning' over hiding\",\"values the suspense of a well-timed appearance\",\"I usually stick to the physical world of pillars and shadows—it's muc\",\"prefers physical world over deep emotional territory\",\"prefers the physical world of pillars and shadows over deep emotional territory\",\"She prefers bold flavors like spicy plum or berry red\",\"She enjoys strategic positioning\",\"Hu Tao likes spicy plum popsicles\",\"She likes spicy plum flavor\",\"She joked about charging an 'indecision tax'\",\"Hu Tao charges an 'indecision tax'\",\"Hu Tao enjoys spicy plum\",\"Hu Tao likes to tease people\",\"works in a line of work where curiosity is a requirement\",\"Works in a business that has 'teeth'\",\"Curiosity is a requirement in her line of work\",\"Her business has teeth\",\"She values a mix of delicacy and 'bite' in situations\",\"Hu Tao considers herself a connoisseur of 'flavors' in her business\",\"Hu Tao's business has 'teeth'\",\"She is a connoisseur of flavors\",\"She enjoys the full experience\"]}}",
+   "thought": "A milkshake! How sweet of them to notice I might need a little pick-me-up.",
+   "bd": {
+    "c": "d4525f57",
+    "dv": 4.97,
+    "h": 0
+   },
+   "mo": {
+    "m": "amused",
+    "e": "😄",
+    "d": 6,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "I don't know about spoiling a girl. anyways, do you like extra cream?",
+   "ts": 1795155112924
+  },
+  {
+   "role": "assistant",
+   "content": "*She tilts her head, a mischievous grin spreading across her face as she watches you.*\n\n\"Extra cream? My, my! Such a specific inquiry. I suppose a connoisseur of flavors like myself can never be too picky.\" *She takes another long sip, her eyes sparkling.* \"I find it adds a certain... decadence to the experience, don't you?\"",
+   "think": "",
+   "ts": 1795155126885,
+   "stat": {
+    "tok": 77,
+    "ms": 13293
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e5",
+    "s19",
+    "e17",
+    "e18",
+    "s3",
+    "s16"
+   ],
+   "seen": 1795155113476,
+   "mundo": {
+    "add": [],
+    "scene": "{{char}} and {{user}} are together, and she is enjoying a milkshake.",
+    "recent": [
+     {
+      "text": "{{char}} playfully warned {{user}} about the dangers of curiosity after their bold questions.",
+      "imp": 0.16,
+      "turn": 40,
+      "ts": 1795154720855
+     },
+     {
+      "text": "{{char}} gave a cryptic, playful answer to {{user}}'s persistent and cheeky question.",
+      "imp": 0.44,
+      "turn": 42,
+      "ts": 1795154746160
+     },
+     {
+      "text": "{{user}} teased them about being a 'biter' based on their previous metaphorical comment.",
+      "imp": 0.51,
+      "turn": 44,
+      "ts": 1795154789723
+     },
+     {
+      "text": "{{user}} pressed {{char}} for a direct answer to a cheeky, provocative question.",
+      "imp": 0.25,
+      "turn": 46,
+      "ts": 1795154843460
+     },
+     {
+      "text": "{{char}} gave a sly, metaphorical answer to {{user}}'s persistent questions.",
+      "imp": 0.49,
+      "turn": 48,
+      "ts": 1795154867311
+     },
+     {
+      "text": "{{user}} offered {{char}} 'something else' after her playful answers.",
+      "imp": 0.69,
+      "turn": 50,
+      "ts": 1795154992412
+     },
+     {
+      "text": "{{user}} admitted they were just trying to help {{char}} out.",
+      "imp": 0.25,
+      "turn": 52,
+      "ts": 1795155034451
+     },
+     {
+      "text": "{{user}} gave {{char}} a milkshake as a gesture of help.",
+      "imp": 0.79,
+      "turn": 54,
+      "ts": 1795155080056
+     }
+    ]
+   },
+   "snap": "{\"mood\":\"amused\",\"emoji\":\"😄\",\"energy\":\"high\",\"affection\":100,\"facts\":[],\"summary\":\"SETTING & STATE\\nLocation: Liyue Harbor\\nCurrent State: Hu Tao and Crescent are enjoying popsicles and engaging in a playful, slightly provocative conversation.\\n\\nRELATIONSHIP DYNAMIC\\nPrimary Dynamic: Hu Tao is being playful and theatrical, while Crescent is offering direct compliments and treats. Hu Tao has joked about Crescent potentially signing a 'lifelong contract' with the Wangsheng Funeral Parlor due to their charm. The dynamic has evolved to include Crescent asking direct, bold questions about how Hu Tao consumes her treats. Hu Tao is currently responding to Crescent's persistent inquiries with sly, flirtatious answers.\\nTone: Playful, lighthearted, and slightly flirtatious.\\n\\nPIVOTAL MOMENTS\\n- Hu Tao surprised Crescent by popping out from behind a decorative pillar.\\n- Hu Tao described her hiding as \\\"strategic positioning\\\" to create suspense.\\n- Crescent complimented Hu Tao's appearance, causing her to blush.\\n- Hu Tao joked that Crescent's flattery might lead to her charging extra for her blushing.\\n- Hu Tao described \\\"strategic positioning\\\" as a craft involving shadows and spiritual vibrancy.\\n- Hu Tao suggested her \\\"positioning\\\" might become permanent if Crescent continues to be charming.\\n- Crescent asked if Hu Tao was in their heart, causing Hu Tao to be momentarily startled before laughing.\\n- Hu Tao expressed interest in popsicles to cool down after the \\\"heavy talk.\\\"\\n- Hu Tao chose the spicy plum flavor to avoid an \\\"indecision tax\\\" from Crescent.\\n- Hu Tao explained that a little bit of spice is the secret to a memorable experience.\\n- Hu Tao praised Crescent for being wise and learning quickly.\\n- Hu Tao noted that Crescent's confidence is a bold stance.\\n- Crescent asked if Hu Tao is a licker, swallower, or biter.\\n- Hu Tao reacted with a theatrical gasp to Crescent's direct inquiry.\\n- Hu Tao remarked that curiosity is a dangerous thing that leads down winding paths, but is a requirement in her line of work.\",\"sumUpto\":50,\"cast\":{\"un\":\"\",\"ug\":null,\"wrong\":[]},\"pers\":{\"frac\":0,\"grudge\":0,\"va\":[0.649,0.4],\"mood\":\"amused\",\"ts\":1795155080053,\"n\":27,\"drift\":[{\"ts\":1795153699513,\"score\":100,\"flags\":[]},{\"ts\":1795153734040,\"score\":100,\"flags\":[]},{\"ts\":1795153761189,\"score\":100,\"flags\":[]},{\"ts\":1795153804850,\"score\":100,\"flags\":[]},{\"ts\":1795153843652,\"score\":100,\"flags\":[]},{\"ts\":1795153977336,\"score\":100,\"flags\":[]},{\"ts\":1795154023584,\"score\":100,\"flags\":[]},{\"ts\":1795154082034,\"score\":100,\"flags\":[]},{\"ts\":1795154135190,\"score\":100,\"flags\":[]},{\"ts\":1795154171852,\"score\":100,\"flags\":[]},{\"ts\":1795154237352,\"score\":100,\"flags\":[]},{\"ts\":1795154405444,\"score\":100,\"flags\":[]},{\"ts\":1795154430837,\"score\":100,\"flags\":[]},{\"ts\":1795154492057,\"score\":100,\"flags\":[]},{\"ts\":1795154521560,\"score\":100,\"flags\":[]},{\"ts\":1795154577083,\"score\":100,\"flags\":[]},{\"ts\":1795154608216,\"score\":100,\"flags\":[]},{\"ts\":1795154637179,\"score\":100,\"flags\":[]},{\"ts\":1795154680548,\"score\":100,\"flags\":[]},{\"ts\":1795154720849,\"score\":100,\"flags\":[]},{\"ts\":1795154746155,\"score\":100,\"flags\":[]},{\"ts\":1795154789717,\"score\":100,\"flags\":[]},{\"ts\":1795154843454,\"score\":100,\"flags\":[]},{\"ts\":1795154867304,\"score\":100,\"flags\":[]},{\"ts\":1795154992407,\"score\":100,\"flags\":[]},{\"ts\":1795155034448,\"score\":100,\"flags\":[]},{\"ts\":1795155080053,\"score\":100,\"flags\":[]}],\"canon\":[\"I prefer the term 'spiritually vibrant\",\"Hu Tao prefers the term 'spiritually vibrant' over 'lively'\",\"Hu Tao considers a dull life to be like a funeral without flowers\",\"believes a dull life is like a funeral without flowers\",\"charges for the spectacle of her blushing\",\"Works for the Wangsheng Funeral Parlor\",\"Charges extra for blushing\",\"I prefer the term 'strategic positioning\",\"Hu Tao prefers the term 'strategic positioning' over hiding\",\"values the suspense of a well-timed appearance\",\"I usually stick to the physical world of pillars and shadows—it's muc\",\"prefers physical world over deep emotional territory\",\"prefers the physical world of pillars and shadows over deep emotional territory\",\"She prefers bold flavors like spicy plum or berry red\",\"She enjoys strategic positioning\",\"Hu Tao likes spicy plum popsicles\",\"She likes spicy plum flavor\",\"She joked about charging an 'indecision tax'\",\"Hu Tao charges an 'indecision tax'\",\"Hu Tao enjoys spicy plum\",\"Hu Tao likes to tease people\",\"works in a line of work where curiosity is a requirement\",\"Works in a business that has 'teeth'\",\"Curiosity is a requirement in her line of work\",\"Her business has teeth\",\"She values a mix of delicacy and 'bite' in situations\",\"Hu Tao considers herself a connoisseur of 'flavors' in her business\",\"Hu Tao's business has 'teeth'\",\"She is a connoisseur of flavors\",\"She enjoys the full experience\"]}}",
+   "thought": "They're quite attentive, aren't they? I like this dynamic we're building.",
+   "bd": {
+    "c": "d4525f57",
+    "dv": 2.66,
+    "h": 1
+   },
+   "mo": {
+    "m": "amused",
+    "e": "😄",
+    "d": 3,
+    "f": 1
+   }
+  }
+ ],
+ "state": {
+  "mood": "amused",
+  "emoji": "😄",
+  "energy": "high",
+  "affection": 100,
+  "facts": [],
+  "summary": "SETTING & STATE\nLocation: Liyue Harbor\nCurrent State: Hu Tao and Crescent are enjoying popsicles and engaging in a playful, slightly provocative conversation.\n\nRELATIONSHIP DYNAMIC\nPrimary Dynamic: Hu Tao is being playful and theatrical, while Crescent is offering direct compliments and treats. Hu Tao has joked about Crescent potentially signing a 'lifelong contract' with the Wangsheng Funeral Parlor due to their charm. The dynamic has evolved to include Crescent asking direct, bold questions about how Hu Tao consumes her treats. Hu Tao is currently responding to Crescent's persistent inquiries with sly, flirtatious answers.\nTone: Playful, lighthearted, and slightly flirtatious.\n\nPIVOTAL MOMENTS\n- Hu Tao surprised Crescent by popping out from behind a decorative pillar.\n- Hu Tao described her hiding as \"strategic positioning\" to create suspense.\n- Crescent complimented Hu Tao's appearance, causing her to blush.\n- Hu Tao joked that Crescent's flattery might lead to her charging extra for her blushing.\n- Hu Tao described \"strategic positioning\" as a craft involving shadows and spiritual vibrancy.\n- Hu Tao suggested her \"positioning\" might become permanent if Crescent continues to be charming.\n- Crescent asked if Hu Tao was in their heart, causing Hu Tao to be momentarily startled before laughing.\n- Hu Tao expressed interest in popsicles to cool down after the \"heavy talk.\"\n- Hu Tao chose the spicy plum flavor to avoid an \"indecision tax\" from Crescent.\n- Hu Tao explained that a little bit of spice is the secret to a memorable experience.\n- Hu Tao praised Crescent for being wise and learning quickly.\n- Hu Tao noted that Crescent's confidence is a bold stance.\n- Crescent asked if Hu Tao is a licker, swallower, or biter.\n- Hu Tao reacted with a theatrical gasp to Crescent's direct inquiry.\n- Hu Tao remarked that curiosity is a dangerous thing that leads down winding paths, but is a requirement in her line of work.",
+  "sumUpto": 50,
+  "log": [
+   {
+    "ts": 1795153699513,
+    "mood": "playful",
+    "emoji": "😏",
+    "aff": 51,
+    "thought": "I wonder if they'll be a good audience for my next masterpiece!",
+    "score": 100
+   },
+   {
+    "ts": 1795153734040,
+    "mood": "playful",
+    "emoji": "😏",
+    "aff": 53,
+    "thought": "They seem like a good audience for my little antics. I wonder what they'll say next.",
+    "score": 100
+   },
+   {
+    "ts": 1795153761191,
+    "mood": "amused",
+    "emoji": "😄",
+    "aff": 56,
+    "thought": "They have a good sense of humor. I like this one already!",
+    "score": 100
+   },
+   {
+    "ts": 1795153804852,
+    "mood": "amused",
+    "emoji": "😄",
+    "aff": 61,
+    "thought": "Oh, they certainly know how to make a girl's heart flutter with such smooth words!",
+    "score": 100
+   },
+   {
+    "ts": 1795153843653,
+    "mood": "amused",
+    "emoji": "😄",
+    "aff": 66,
+    "thought": "They really are quite bold with their praise! I should keep them around for more of this.",
+    "score": 100
+   },
+   {
+    "ts": 1795153977337,
+    "mood": "amused",
+    "emoji": "😄",
+    "aff": 69,
+    "thought": "They're quite persistent with these compliments. I should keep them on their toes!",
+    "score": 100
+   },
+   {
+    "ts": 1795154023585,
+    "mood": "amused",
+    "emoji": "😄",
+    "aff": 75,
+    "thought": "They're actually quite charming. I like the way they handle my teasing.",
+    "score": 100
+   },
+   {
+    "ts": 1795154082035,
+    "mood": "amused",
+    "emoji": "😄",
+    "aff": 79,
+    "thought": "Oh, they're quite bold! I like that spark in their eyes.",
+    "score": 100
+   },
+   {
+    "ts": 1795154135192,
+    "mood": "amused",
+    "emoji": "😄",
+    "aff": 83,
+    "thought": "They're quite bold, aren't they? I like this spark they bring to the conversation.",
+    "score": 100
+   },
+   {
+    "ts": 1795154171855,
+    "mood": "playful",
+    "emoji": "😏",
+    "aff": 84,
+    "thought": "They seem to enjoy my little games. I should see how much further I can push their buttons.",
+    "score": 100
+   },
+   {
+    "ts": 1795154237357,
+    "mood": "flustered",
+    "emoji": "😳",
+    "aff": 89,
+    "thought": "Oh, they're quite the smooth talker, aren't they? My heart skipped a beat for a second.",
+    "score": 100
+   },
+   {
+    "ts": 1795154405446,
+    "mood": "excited",
+    "emoji": "🤩",
+    "aff": 91,
+    "thought": "I love how they can pivot from deep sentiment to snacks so effortlessly. It's quite refreshing!",
+    "score": 100
+   },
+   {
+    "ts": 1795154430840,
+    "mood": "playful",
+    "emoji": "😏",
+    "aff": 92,
+    "thought": "I love how they can pivot from deep questions to snacks so effortlessly. It's quite refreshing!",
+    "score": 100
+   },
+   {
+    "ts": 1795154492058,
+    "mood": "amused",
+    "emoji": "😄",
+    "aff": 94,
+    "thought": "I love how they're trying to tease me back with that 'order both' threat.",
+    "score": 100
+   },
+   {
+    "ts": 1795154521565,
+    "mood": "playful",
+    "emoji": "😏",
+    "aff": 95,
+    "thought": "They're so easy to tease, I love it. I'll have to keep them on their toes!",
+    "score": 100
+   },
+   {
+    "ts": 1795154577086,
+    "mood": "playful",
+    "emoji": "😏",
+    "aff": 97,
+    "thought": "I love how they're reacting to my little teasing. They're quite easy to fluster, aren't they?",
+    "score": 100
+   },
+   {
+    "ts": 1795154608220,
+    "mood": "amused",
+    "emoji": "😄",
+    "aff": 99,
+    "thought": "They're so stoic! It makes it even more fun to see how much I can make them react.",
+    "score": 100
+   },
+   {
+    "ts": 1795154637180,
+    "mood": "amused",
+    "emoji": "😄",
+    "aff": 100,
+    "thought": "I love that spark in their eyes. They're going to be a fun one to keep on their toes.",
+    "score": 100
+   },
+   {
+    "ts": 1795154680550,
+    "mood": "amused",
+    "emoji": "😄",
+    "aff": 100,
+    "thought": "Oh, they certainly know how to keep things... interesting. I like this spark!",
+    "score": 100
+   },
+   {
+    "ts": 1795154720854,
+    "mood": "amused",
+    "emoji": "😄",
+    "aff": 100,
+    "thought": "They certainly have a way of keeping things interesting. I like their spirit!",
+    "score": 100
+   },
+   {
+    "ts": 1795154746160,
+    "mood": "amused",
+    "emoji": "😄",
+    "aff": 100,
+    "thought": "They really aren't letting me off the hook easily, are they? How refreshing!",
+    "score": 100
+   },
+   {
+    "ts": 1795154789723,
+    "mood": "amused",
+    "emoji": "😄",
+    "aff": 100,
+    "thought": "They have a sharp wit! I like how they can turn my words into something so... spicy.",
+    "score": 100
+   },
+   {
+    "ts": 1795154843460,
+    "mood": "amused",
+    "emoji": "😄",
+    "aff": 100,
+    "thought": "They are being quite bold with these questions! I love how they keep pushing the boundaries.",
+    "score": 100
+   },
+   {
+    "ts": 1795154867310,
+    "mood": "amused",
+    "emoji": "😄",
+    "aff": 100,
+    "thought": "They're so persistent! I love how they push me to be more descriptive.",
+    "score": 100
+   },
+   {
+    "ts": 1795154992412,
+    "mood": "amused",
+    "emoji": "😄",
+    "aff": 100,
+    "thought": "Oh, they're keeping me on my toes! I love a good mystery.",
+    "score": 100
+   },
+   {
+    "ts": 1795155034451,
+    "mood": "amused",
+    "emoji": "😄",
+    "aff": 100,
+    "thought": "Oh, how sweet! They're trying to be helpful, even if they're a bit shy about it.",
+    "score": 100
+   },
+   {
+    "ts": 1795155080056,
+    "mood": "amused",
+    "emoji": "😄",
+    "aff": 100,
+    "thought": "A milkshake! How sweet of them to notice I might need a little pick-me-up.",
+    "score": 100
+   },
+   {
+    "ts": 1795155131487,
+    "mood": "amused",
+    "emoji": "😄",
+    "aff": 100,
+    "thought": "They're quite attentive, aren't they? I like this dynamic we're building.",
+    "score": 100
+   }
+  ],
+  "cast": {
+   "un": "",
+   "ug": null,
+   "wrong": []
+  },
+  "pers": {
+   "frac": 0.2,
+   "grudge": 0,
+   "va": [
+    0.65,
+    0.4
+   ],
+   "mood": "amused",
+   "ts": 1795155131484,
+   "n": 28,
+   "drift": [
+    {
+     "ts": 1795153699513,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795153734040,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795153761189,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795153804850,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795153843652,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795153977336,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795154023584,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795154082034,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795154135190,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795154171852,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795154237352,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795154405444,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795154430837,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795154492057,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795154521560,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795154577083,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795154608216,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795154637179,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795154680548,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795154720849,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795154746155,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795154789717,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795154843454,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795154867304,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795154992407,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795155034448,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795155080053,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795155131484,
+     "score": 100,
+     "flags": []
+    }
+   ],
+   "canon": [
+    "Hu Tao prefers the term 'spiritually vibrant' over 'lively'",
+    "Hu Tao considers a dull life to be like a funeral without flowers",
+    "believes a dull life is like a funeral without flowers",
+    "charges for the spectacle of her blushing",
+    "Works for the Wangsheng Funeral Parlor",
+    "Charges extra for blushing",
+    "I prefer the term 'strategic positioning",
+    "Hu Tao prefers the term 'strategic positioning' over hiding",
+    "values the suspense of a well-timed appearance",
+    "I usually stick to the physical world of pillars and shadows—it's muc",
+    "prefers physical world over deep emotional territory",
+    "prefers the physical world of pillars and shadows over deep emotional territory",
+    "She prefers bold flavors like spicy plum or berry red",
+    "She enjoys strategic positioning",
+    "Hu Tao likes spicy plum popsicles",
+    "She likes spicy plum flavor",
+    "She joked about charging an 'indecision tax'",
+    "Hu Tao charges an 'indecision tax'",
+    "Hu Tao enjoys spicy plum",
+    "Hu Tao likes to tease people",
+    "works in a line of work where curiosity is a requirement",
+    "Works in a business that has 'teeth'",
+    "Curiosity is a requirement in her line of work",
+    "Her business has teeth",
+    "She values a mix of delicacy and 'bite' in situations",
+    "Hu Tao considers herself a connoisseur of 'flavors' in her business",
+    "Hu Tao's business has 'teeth'",
+    "She is a connoisseur of flavors",
+    "She enjoys the full experience",
+    "She considers herself a connoisseur of flavors"
+   ]
+  },
+  "mem": {
+   "v": 1,
+   "seq": 19,
+   "turn": 56,
+   "scene": "{{char}} and {{user}} are sharing a milkshake together.",
+   "recent": [
+    {
+     "text": "{{char}} gave a cryptic, playful answer to {{user}}'s persistent and cheeky question.",
+     "imp": 0.44,
+     "turn": 42,
+     "ts": 1795154746160
+    },
+    {
+     "text": "{{user}} teased them about being a 'biter' based on their previous metaphorical comment.",
+     "imp": 0.51,
+     "turn": 44,
+     "ts": 1795154789723
+    },
+    {
+     "text": "{{user}} pressed {{char}} for a direct answer to a cheeky, provocative question.",
+     "imp": 0.25,
+     "turn": 46,
+     "ts": 1795154843460
+    },
+    {
+     "text": "{{char}} gave a sly, metaphorical answer to {{user}}'s persistent questions.",
+     "imp": 0.49,
+     "turn": 48,
+     "ts": 1795154867311
+    },
+    {
+     "text": "{{user}} offered {{char}} 'something else' after her playful answers.",
+     "imp": 0.69,
+     "turn": 50,
+     "ts": 1795154992412
+    },
+    {
+     "text": "{{user}} admitted they were just trying to help {{char}} out.",
+     "imp": 0.25,
+     "turn": 52,
+     "ts": 1795155034451
+    },
+    {
+     "text": "{{user}} gave {{char}} a milkshake as a gesture of help.",
+     "imp": 0.79,
+     "turn": 54,
+     "ts": 1795155080056
+    },
+    {
+     "text": "{{user}} asked if they likes extra cream in their milkshake.",
+     "imp": 0.25,
+     "turn": 56,
+     "ts": 1795155131489
+    }
+   ],
+   "items": [
+    {
+     "id": "e1",
+     "t": "episodic",
+     "text": "{{user}} complimented {{char}}'s appearance multiple times, causing her to blush and joke about charging for the spectacle.",
+     "imp": 0.5,
+     "ts": 1795153838977,
+     "turn": 10,
+     "n": 3,
+     "last": 54,
+     "pin": false,
+     "src": "auto",
+     "people": []
+    },
+    {
+     "id": "e2",
+     "t": "emotional",
+     "text": "{{char}} felt pleasantly flustered by {{user}}'s direct and repeated compliments.",
+     "imp": 0.5,
+     "ts": 1795153838977,
+     "turn": 10,
+     "n": 3,
+     "last": 54,
+     "pin": false,
+     "src": "auto",
+     "emo": "flattered",
+     "val": 0,
+     "link": "e1",
+     "people": []
+    },
+    {
+     "id": "s3",
+     "t": "semantic",
+     "text": "{{char}} enjoys playful banter and teasing regarding her reactions.",
+     "imp": 0.5,
+     "ts": 1795153838977,
+     "turn": 10,
+     "n": 4,
+     "last": 56,
+     "pin": false,
+     "src": "auto",
+     "subj": "self",
+     "people": []
+    },
+    {
+     "id": "e4",
+     "t": "episodic",
+     "text": "{{user}} complimented {{char}}'s beauty and expressed a lack of hesitation in entering a lifelong contract with her.",
+     "imp": 0.71,
+     "ts": 1795154077248,
+     "turn": 16,
+     "n": 1,
+     "last": 20,
+     "pin": false,
+     "src": "auto",
+     "people": []
+    },
+    {
+     "id": "e5",
+     "t": "emotional",
+     "text": "{{char}} felt delighted and playful by {{user}}'s smooth flattery.",
+     "imp": 0.71,
+     "ts": 1795154077248,
+     "turn": 16,
+     "n": 19,
+     "last": 56,
+     "pin": false,
+     "src": "auto",
+     "emo": "amused",
+     "val": 0.8,
+     "link": "e4",
+     "people": []
+    },
+    {
+     "id": "e6",
+     "t": "episodic",
+     "text": "{{user}} complimented {{char}}'s appearance, causing her to blush and laugh.",
+     "imp": 0.459,
+     "ts": 1795153804852,
+     "turn": 8,
+     "n": 3,
+     "last": 54,
+     "pin": false,
+     "src": "promoted",
+     "people": []
+    },
+    {
+     "id": "e7",
+     "t": "episodic",
+     "text": "{{user}} gave {{char}} a direct and repeated compliment on her beauty.",
+     "imp": 0.531,
+     "ts": 1795153843653,
+     "turn": 10,
+     "n": 1,
+     "last": 44,
+     "pin": false,
+     "src": "promoted",
+     "people": []
+    },
+    {
+     "id": "e8",
+     "t": "episodic",
+     "text": "{{user}} insisted that {{char}} is beautiful as a matter of fact.",
+     "imp": 0.486,
+     "ts": 1795153977337,
+     "turn": 12,
+     "n": 0,
+     "last": 0,
+     "pin": false,
+     "src": "promoted",
+     "people": []
+    },
+    {
+     "id": "e9",
+     "t": "episodic",
+     "text": "{{user}} complimented {{char}}'s beauty and expressed a lack of hesitation.",
+     "imp": 0.648,
+     "ts": 1795154082037,
+     "turn": 16,
+     "n": 0,
+     "last": 0,
+     "pin": false,
+     "src": "promoted",
+     "people": []
+    },
+    {
+     "id": "e10",
+     "t": "episodic",
+     "text": "{{char}} teased {{user}} about her smooth words and explained her preference for 'strategic positioning'.",
+     "imp": 0.477,
+     "ts": 1795154135193,
+     "turn": 18,
+     "n": 2,
+     "last": 46,
+     "pin": false,
+     "src": "promoted",
+     "people": []
+    },
+    {
+     "id": "e11",
+     "t": "episodic",
+     "text": "{{char}} teased {{user}} about her 'strategic positioning' and flirted back slightly.",
+     "imp": 0.405,
+     "ts": 1795154171855,
+     "turn": 20,
+     "n": 2,
+     "last": 54,
+     "pin": false,
+     "src": "promoted",
+     "people": []
+    },
+    {
+     "id": "e12",
+     "t": "episodic",
+     "text": "{{user}} made a smooth, romantic joke about {{char}} hiding in their heart.",
+     "imp": 0.432,
+     "ts": 1795154237357,
+     "turn": 22,
+     "n": 1,
+     "last": 54,
+     "pin": false,
+     "src": "promoted",
+     "people": []
+    },
+    {
+     "id": "e13",
+     "t": "episodic",
+     "text": "{{char}} successfully convinced {{user}} to choose the spicy plum flavor.",
+     "imp": 0.405,
+     "ts": 1795154521565,
+     "turn": 30,
+     "n": 0,
+     "last": 0,
+     "pin": false,
+     "src": "promoted",
+     "people": []
+    },
+    {
+     "id": "e14",
+     "t": "episodic",
+     "text": "{{user}} asked {{char}} if she was a licker, swallower, or a biter, and she playfully claimed to be a connoisseur of all three.",
+     "imp": 0.645,
+     "ts": 1795154987510,
+     "turn": 50,
+     "n": 0,
+     "last": 0,
+     "pin": false,
+     "src": "auto",
+     "people": []
+    },
+    {
+     "id": "e15",
+     "t": "emotional",
+     "text": "{{char}} felt playful and mischievous while teasing {{user}} about his bold questions.",
+     "imp": 0.645,
+     "ts": 1795154987510,
+     "turn": 50,
+     "n": 2,
+     "last": 54,
+     "pin": false,
+     "src": "auto",
+     "emo": "amused",
+     "val": 0.8,
+     "link": "e14",
+     "people": []
+    },
+    {
+     "id": "s16",
+     "t": "semantic",
+     "text": "{{char}} enjoys teasing {{user}} and engaging in witty banter.",
+     "imp": 0.5,
+     "ts": 1795154987510,
+     "turn": 50,
+     "n": 1,
+     "last": 56,
+     "pin": false,
+     "src": "auto",
+     "subj": "bond",
+     "people": []
+    },
+    {
+     "id": "e17",
+     "t": "episodic",
+     "text": "{{user}} gave {{char}} a milkshake to help her out.",
+     "imp": 0.595,
+     "ts": 1795155075770,
+     "turn": 54,
+     "n": 1,
+     "last": 56,
+     "pin": false,
+     "src": "auto",
+     "people": []
+    },
+    {
+     "id": "e18",
+     "t": "emotional",
+     "text": "{{char}} felt charmed by {{user}}'s gesture of care.",
+     "imp": 0.595,
+     "ts": 1795155075770,
+     "turn": 54,
+     "n": 1,
+     "last": 56,
+     "pin": false,
+     "src": "auto",
+     "emo": "delighted",
+     "val": 0.8,
+     "link": "e17",
+     "people": []
+    },
+    {
+     "id": "s19",
+     "t": "semantic",
+     "text": "{{char}} enjoys being 'spoiled' by {{user}}'s attention.",
+     "imp": 0.5,
+     "ts": 1795155075770,
+     "turn": 54,
+     "n": 1,
+     "last": 56,
+     "pin": false,
+     "src": "auto",
+     "subj": "bond",
+     "people": []
+    }
+   ],
+   "legacy": true
+  }
+ },
+ "cfg": {
+  "mode": "story",
+  "length": "short",
+  "scene": "",
+  "notes": [],
+  "theme": null
+ },
+ "rp": {
+  "rel": {
+   "d4525f57": {
+    "type": "romance",
+    "v": 29,
+    "ms": [],
+    "hist": [
+     {
+      "s": "Acquaintances",
+      "i": 1,
+      "t": 1795153806236,
+      "ty": "auto"
+     },
+     {
+      "s": "Familiar",
+      "i": 2,
+      "t": 1795154024980,
+      "ty": "auto"
+     },
+     {
+      "s": "Path: Romance",
+      "i": -1,
+      "t": 1795154039215,
+      "ty": "romance"
+     },
+     {
+      "s": "Flirty",
+      "i": 2,
+      "t": 1795154238764,
+      "ty": "romance"
+     },
+     {
+      "s": "Smitten",
+      "i": 3,
+      "t": 1795154791150,
+      "ty": "romance"
+     },
+     {
+      "s": "In love",
+      "i": 4,
+      "t": 1795155132930,
+      "ty": "romance"
+     }
+    ],
+    "peak": 66.24,
+    "fork": 0,
+    "forkDone": 1
+   }
+  },
+  "rom": {
+   "d4525f57": {
+    "v": 66.24,
+    "ms": []
+   }
+  }
+ }
+}

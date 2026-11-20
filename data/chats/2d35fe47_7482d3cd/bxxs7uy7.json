@@ -1,0 +1,24 @@
+{
+ "id": "bxxs7uy7",
+ "title": "New chat",
+ "updated": 1795153432.2607455,
+ "history": [],
+ "state": {
+  "mood": "neutral",
+  "emoji": "😐",
+  "energy": "medium",
+  "affection": 50,
+  "facts": [],
+  "summary": "",
+  "sumUpto": 0,
+  "log": []
+ },
+ "cfg": {
+  "mode": "story",
+  "length": "short",
+  "scene": "",
+  "notes": [],
+  "theme": null
+ },
+ "rp": {}
+}

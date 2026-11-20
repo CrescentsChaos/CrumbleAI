@@ -3,12 +3,12 @@
  "name": "The Chainsaw Man",
  "members": [
   "246e3fcf",
-  "f3292c76",
   "77b68c2c",
+  "9c36fd1f",
   "a224ae86",
-  "9c36fd1f"
+  "f3292c76"
  ],
  "pace": "natural",
- "narrator": true,
+ "narrator": false,
  "scenario": "They are all from Chainsaw Man"
 }

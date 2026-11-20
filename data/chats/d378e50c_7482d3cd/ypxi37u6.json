@@ -1,0 +1,24 @@
+{
+ "id": "ypxi37u6",
+ "title": "New chat",
+ "updated": 1795155241.2568433,
+ "history": [],
+ "state": {
+  "mood": "neutral",
+  "emoji": "😐",
+  "energy": "medium",
+  "affection": 50,
+  "facts": [],
+  "summary": "",
+  "sumUpto": 0,
+  "log": []
+ },
+ "cfg": {
+  "mode": "story",
+  "length": "short",
+  "scene": "",
+  "notes": [],
+  "theme": null
+ },
+ "rp": {}
+}

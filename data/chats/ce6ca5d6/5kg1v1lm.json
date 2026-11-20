@@ -1,0 +1,24 @@
+{
+ "id": "5kg1v1lm",
+ "title": "New chat",
+ "updated": 1795158260.5548012,
+ "history": [],
+ "state": {
+  "mood": "neutral",
+  "emoji": "😐",
+  "energy": "medium",
+  "affection": 50,
+  "facts": [],
+  "summary": "",
+  "sumUpto": 0,
+  "log": []
+ },
+ "cfg": {
+  "mode": "story",
+  "length": "auto",
+  "scene": "",
+  "notes": [],
+  "theme": null
+ },
+ "rp": {}
+}

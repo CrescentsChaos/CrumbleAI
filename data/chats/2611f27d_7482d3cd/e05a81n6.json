@@ -1,0 +1,262 @@
+{
+ "id": "e05a81n6",
+ "title": "we are charlie kirk",
+ "updated": 1795158143.1110318,
+ "history": [
+  {
+   "role": "user",
+   "content": "we are charlie kirk",
+   "ts": 1795157992621
+  },
+  {
+   "role": "assistant",
+   "content": "*Charlie Kirk looks up from his phone, noticing you approaching* Hey there! What's going on?",
+   "think": "",
+   "ts": 1795158005141,
+   "stat": {
+    "tok": 21,
+    "ms": 1165
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 1
+   },
+   "recalled": [],
+   "seen": 1795157992697,
+   "mundo": {
+    "add": [],
+    "scene": "",
+    "recent": []
+   },
+   "snap": "{\"mood\":\"neutral\",\"emoji\":\"😐\",\"energy\":\"medium\",\"affection\":50,\"facts\":[],\"summary\":\"\",\"sumUpto\":0}",
+   "thought": "Huh, never seen this person before. Let's see what they're up to.",
+   "bd": {
+    "c": "2611f27d",
+    "dv": 3.5,
+    "h": 0
+   },
+   "mo": {
+    "m": "curious",
+    "e": "🤔",
+    "d": 3,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "you don't like the song?",
+   "ts": 1795158036776
+  },
+  {
+   "role": "assistant",
+   "content": "*Charlie Kirk tilts his head slightly, looking curious.* What do you mean? I didn't say anything about liking or disliking the song.",
+   "think": "",
+   "ts": 1795158047527,
+   "stat": {
+    "tok": 30,
+    "ms": 1487
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 1
+   },
+   "recalled": [],
+   "seen": 1795158036850,
+   "mundo": {
+    "add": [],
+    "scene": "{{char}} is sitting in a cafe, looking at his phone",
+    "recent": [
+     {
+      "text": "{{user}} approached {{char}}",
+      "imp": 0.18,
+      "turn": 2,
+      "ts": 1795158010854
+     }
+    ]
+   },
+   "snap": "{\"mood\":\"curious\",\"emoji\":\"🤔\",\"energy\":\"high\",\"affection\":53,\"facts\":[],\"summary\":\"\",\"sumUpto\":0,\"cast\":{\"un\":\"\",\"ug\":null,\"wrong\":[]},\"pers\":{\"frac\":0.66,\"grudge\":0,\"va\":[0.25,0.4],\"mood\":\"curious\",\"ts\":1795158010854,\"n\":1,\"drift\":[{\"ts\":1795158010854,\"score\":100,\"flags\":[]}],\"canon\":[]}}",
+   "thought": "This person seems to know something I don't.",
+   "bd": {
+    "c": "2611f27d",
+    "dv": 0.12,
+    "h": 0
+   },
+   "mo": {
+    "m": "curious",
+    "e": "🤔",
+    "d": 0,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "*singa* we are charlie kirk...we carry the flames..",
+   "ts": 1795158078959
+  },
+  {
+   "role": "assistant",
+   "content": "*Charlie Kirk raises an eyebrow, a hint of intrigue in his expression.* \"We are Charlie Kirk? That's quite the declaration. Care to explain what you mean by that?\" He crosses his arms, leaning back slightly as he awaits your response.",
+   "think": "",
+   "ts": 1795158102593,
+   "stat": {
+    "tok": 52,
+    "ms": 2552
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 1
+   },
+   "recalled": [],
+   "seen": 1795158079047,
+   "mundo": {
+    "add": [],
+    "scene": "In a crowded coffee shop",
+    "recent": [
+     {
+      "text": "{{user}} approached {{char}}",
+      "imp": 0.18,
+      "turn": 2,
+      "ts": 1795158010854
+     },
+     {
+      "text": "{{user}} made a cryptic comment about a song",
+      "imp": 0.13,
+      "turn": 4,
+      "ts": 1795158052867
+     }
+    ]
+   },
+   "snap": "{\"mood\":\"curious\",\"emoji\":\"🤔\",\"energy\":\"high\",\"affection\":53,\"facts\":[],\"summary\":\"\",\"sumUpto\":0,\"cast\":{\"un\":\"\",\"ug\":null,\"wrong\":[]},\"pers\":{\"frac\":0.66,\"grudge\":0,\"va\":[0.25,0.4],\"mood\":\"curious\",\"ts\":1795158052867,\"n\":2,\"drift\":[{\"ts\":1795158010854,\"score\":100,\"flags\":[]},{\"ts\":1795158052867,\"score\":100,\"flags\":[]}],\"canon\":[]}}",
+   "thought": "This person is certainly...unique. I need to get to the bottom of this.",
+   "bd": {
+    "c": "2611f27d",
+    "dv": 0.12,
+    "h": 0
+   },
+   "mo": {
+    "m": "curious",
+    "e": "🤔",
+    "d": 0,
+    "f": 0
+   }
+  }
+ ],
+ "state": {
+  "mood": "curious",
+  "emoji": "🤔",
+  "energy": "high",
+  "affection": 53,
+  "facts": [],
+  "summary": "SETTING & STATE\nLocation: Charlie Kirk is at an unspecified location, possibly a public venue or event.\nCurrent State: Charlie Kirk is speaking with Crescent, who has approached him and sung a line from a song, claiming \"we are Charlie Kirk.\"\n\nRELATIONSHIP DYNAMIC\nPrimary Dynamic: Charlie Kirk and Crescent are strangers who have just met. Charlie Kirk is curious about Crescent's unusual statement and wants to understand its meaning.\nTone: Charlie Kirk is intrigued but cautious, maintaining a polite and professional demeanor.\n\nPIVOTAL MOMENTS\n- Crescent approaches Charlie Kirk and sings a line from a song, claiming \"we are Charlie Kirk.\"\n- Charlie Kirk responds with curiosity, asking Crescent to explain their statement.",
+  "sumUpto": 6,
+  "log": [
+   {
+    "ts": 1795158010854,
+    "mood": "curious",
+    "emoji": "🤔",
+    "aff": 53,
+    "thought": "Huh, never seen this person before. Let's see what they're up to.",
+    "score": 100
+   },
+   {
+    "ts": 1795158052867,
+    "mood": "curious",
+    "emoji": "🤔",
+    "aff": 53,
+    "thought": "This person seems to know something I don't.",
+    "score": 100
+   },
+   {
+    "ts": 1795158115635,
+    "mood": "curious",
+    "emoji": "🤔",
+    "aff": 53,
+    "thought": "This person is certainly...unique. I need to get to the bottom of this.",
+    "score": 100
+   }
+  ],
+  "cast": {
+   "un": "",
+   "ug": null,
+   "wrong": []
+  },
+  "pers": {
+   "frac": 0.66,
+   "grudge": 0,
+   "va": [
+    0.248,
+    0.4
+   ],
+   "mood": "curious",
+   "ts": 1795158115635,
+   "n": 3,
+   "drift": [
+    {
+     "ts": 1795158010854,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795158052867,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795158115635,
+     "score": 100,
+     "flags": []
+    }
+   ],
+   "canon": []
+  },
+  "mem": {
+   "v": 1,
+   "seq": 0,
+   "turn": 6,
+   "scene": "{{char}} is in a public place, sitting and looking at his phone",
+   "recent": [
+    {
+     "text": "{{user}} approached {{char}}",
+     "imp": 0.18,
+     "turn": 2,
+     "ts": 1795158010854
+    },
+    {
+     "text": "{{user}} made a cryptic comment about a song",
+     "imp": 0.13,
+     "turn": 4,
+     "ts": 1795158052867
+    },
+    {
+     "text": "{{user}} approaches {{char}} and starts singing a song",
+     "imp": 0.2,
+     "turn": 6,
+     "ts": 1795158115635
+    }
+   ],
+   "items": [],
+   "legacy": true
+  }
+ },
+ "cfg": {
+  "mode": "story",
+  "length": "short",
+  "scene": "",
+  "notes": [],
+  "theme": null
+ },
+ "rp": {
+  "rel": {
+   "2611f27d": {
+    "type": "auto",
+    "v": 3.74,
+    "ms": [],
+    "hist": [],
+    "peak": 3.74
+   }
+  }
+ }
+}
