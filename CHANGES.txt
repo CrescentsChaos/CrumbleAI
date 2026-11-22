@@ -1,3 +1,31 @@
+Places: location / scene cards you can explore, that characters live in, and whose residents can wander into a one-to-one chat.
+Drop these over your project (same relative paths, this zip also contains the wildlife update), delete the __pycache__ folders, restart. Old chats keep working. New data goes in data/places/ (cards) and data/places/img/ (background pictures).
+
+  PLACE CARDS
+  crumble/places.py                 NEW   a card has name, biome, description, atmosphere, background picture, objects, characters (existing characters that belong there), activities,
+                                          exits, events, history and secrets. Saved as data/places/<id>.json. Guests only get the public view (no secrets, events or history).
+                                          Also: the prompt block, the card's own events, and the logic for who wanders over in a one-to-one chat
+  crumble/server.py                       GET/POST /api/places, DELETE /api/places/<id> (host only to change), GET /places/img/<file> (sign-in required), POST /api/places/visit (no model call),
+                                          POST /api/gen_place (the loaded model drafts a card from a sentence), and a one-to-one chat that has visitors is staged as a small group for the prompt
+  crumble/llm.py                          the card the chat stands in joins the prompt (also when the story engine is off); the place is fed to the weather / indoors / light readers; visitors get their own instruction
+  crumble/story/__init__.py               build()/overview() take the place: description, atmosphere, objects, activities, exits, past, secrets (hinted only when earned), people who belong there,
+                                          the card's own events now and then (replacing the generic "small thing"), and the place's biome and description tell the wildlife where it is
+
+  PAGE
+  crumble/web/js/23-places.js       NEW   header chip "📍 Place" (click it): "Here" tab with the current place (tap an object, activity or exit; tap a person to call them over),
+                                          "All places" gallery, editor with picture upload and "✨ Draft" (host only), travel by exit, /places /go Name /leave, and "Move the scene to X?" when your
+                                          message says you are heading to a known place. The background picture shows behind the messages
+  crumble/web/css/14-places.css     NEW
+  crumble/web/js/03-render.js             visitor messages show their own name and face; header hook
+  crumble/web/js/06-generate.js           visitors: after the character replies, a resident may join in (gen takes a visitor); the place is sent with every reply; slash commands
+  crumble/web/js/10-settings.js, 22-world.js  settings "Visitors from the place" and "Show the place as the chat background"; the world panel knows the place
+  tests/test_places.py              NEW   37 tests: storage, pictures, guest view, prompt block, events, calling by name, arrivals, chiming in, sleepers, staging, tails
+
+  HOW VISITORS WORK (one-to-one chats; settings Off / Rare / Now and then / Lively)
+  Speak to someone who belongs to the place ("Mira, ...", "hey Mira", "@Mira", "call Mira") and they answer. Otherwise one of them now and then wanders over (not asleep by their routine, never in a
+  sad, tender or leave-taking moment), says something, may chime in again for a few turns, then drifts off. Position-derived like the rest of the engine: swipes and rewinds keep the same visitor.
+  Visitors keep no mood or memory of their own yet, and once someone has joined, the main character's prompt switches to the small-group format so everyone is labelled.
+
 Wildlife encounters from data/animals/Animals.json, and the context is no longer capped at 8000 tokens.
 Drop these over your project (same relative paths), delete the __pycache__ folders, restart. Old chats keep working.
 

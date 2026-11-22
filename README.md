@@ -57,6 +57,14 @@ Animals from `data/animals/Animals.json` (3,400+ species) turn up where they act
 - **Sprites.** Put pictures in `data/animals/sprites/` named after the animal in lowercase with underscores: `American Black Bear` -> `american_black_bear.png`, `White's Bat` -> `white_s_bat.png`, `Long-tailed Cat` -> `long_tailed_cat.png`. Each reply that tells an encounter shows a small card with the sprite, the animal's name, its tone and the stage it has reached. A missing sprite falls back to an icon.
 - **Settings -> Living world:** *Wildlife encounters* (off / rare / now and then / lively) and *How scary* (gentle / some scares / dark).
 
+### Places: location cards
+Make as many places as you like (**📍 chip in a chat header**). A card has a **name, biome, description, atmosphere, background picture, objects, characters, activities, exits, events, history and secrets**; **✨ Draft** lets the loaded model write one from a sentence.
+
+- **Explore.** Open the chip to see where you are. Tap an object, an activity or an exit to do it (it is sent as an action); an exit that matches another card's name moves the scene there. `/places`, `/go Name` and `/leave` work too, and when you write "let's walk to the pier" Crumble offers to move the scene. The chat background becomes the place's picture. Rewinding walks you back to where you were.
+- **The place is in the story.** The character knows the description, atmosphere, objects, activities, exits and the place's past, the card's events happen now and then, and the biome tells the wildlife and the weather where you are. **Secrets** are never volunteered: they only come out when you search, investigate or ask someone who would know, one small piece at a time.
+- **People who belong there.** Pick existing characters for a place. In a one-to-one chat they may wander over and talk to you (**Settings -> Living world -> Visitors from the place**), and always answer when you speak to them by name (or tap them in the card to call them over). They keep to their daily routine (nobody wanders in at 3 AM).
+- **Guests** can explore the places and meet the people there; only the host edits cards, and secrets, events and history never leave the host's PC.
+
 ### Group chats and real roleplay
 - **Group chats** - put two or more characters in one chat (**＋ New group** in the sidebar). Each one keeps their own mood, memory and personality, and only knows what they would know. Add an optional **Narrator** (a game-master voice) and a shared setting.
 - **Realistic turn-taking** - not everyone answers everything. A "director" decides who speaks next from how chatty each character is (the new *Talkativeness* field, or guessed from their sheet), who was spoken to, what interests them and how fond they are of you. Quiet characters stay out of it, chatty ones jump in, the conversation winds down by itself, and a character can simply choose not to reply. Pick the **pace** per group: Quiet, Natural or Lively.

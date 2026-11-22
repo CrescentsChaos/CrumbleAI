@@ -2,7 +2,7 @@
 import re
 import time
 
-from . import ambience, chronicle, identity, leak, personality, recall, repeat, simtime, story
+from . import ambience, chronicle, identity, leak, personality, places, recall, repeat, simtime, story
 from .config import CH, LLM, US
 from .prompt import build_messages, cue_text
 from .rp.narrator import NARR_ID
@@ -165,7 +165,7 @@ def generate_reply(b, send):
         tail = (f"({US} has not replied for {g}. Write {CH}'s natural follow-up, the way this person would: "
                 "a short nudge, a new thought, or a reaction to the silence. Do not scold them.)")
     elif grp:
-        tail = cue_text(b, c)
+        tail = places.visit_tail(b, CH, US) if b.get("visit") else cue_text(b, c)     # a resident of the place joining a one-to-one chat
     own = [m for m in hist if m["role"] == "assistant" and (not grp or m.get("cid") == cid)]
     prevs = [THINK.sub("", m["content"]) for m in own][-4:]
     # what was already said in this scene by anyone else (a group), and the alternatives already written for a swipe: a reply that
@@ -187,7 +187,8 @@ def generate_reply(b, send):
     if not sim and b.get("clock"):     # the story never says what time it is: with "time aware" on, follow the real clock
         sim = simtime.from_clock(b["clock"])
     gap_s = sim["elapsed"] if sim else b.get("gap_s")
-    amb = ambience.derive(full, (grp or {}).get("scenario") or c.get("scenario") or "", notes_ + ([{"kind": "setting", "text": b["scene"]}] if b.get("scene") else []), sim)
+    loc = places.context(b.get("place"), turns)     # the location card this chat stands in (the page sends {id, since}; the server reads the card itself)
+    amb = ambience.derive(full, (grp or {}).get("scenario") or c.get("scenario") or "", notes_ + ([{"kind": "setting", "text": b["scene"]}] if b.get("scene") else []) + ([places.note(loc)] if loc else []), sim)
     scfg = story.settings(p.get("story"))
     scen_ = (grp or {}).get("scenario") or c.get("scenario") or ""
     wx = story.sky(sim, amb, [scen_] + [m_.get("content") or "" for m_ in full[-8:]], ((grp or {}).get("name") or c.get("name") or "") + scen_[:200], scfg) if scfg["on"] else None
@@ -195,7 +196,7 @@ def generate_reply(b, send):
         amb = dict(amb, weather=wx["weather"])
     sto = story.build(c, user, b.get("state") or {}, hist, sim, amb, (b.get("rp") or {}).get("state") or {}, p.get("story"), turns, [THINK.sub("", m["content"]) for m in own][-6:],
                       mode, grp, (b.get("state") or {}).get("chron") if isinstance((b.get("state") or {}).get("chron"), dict) else None,
-                      str((b.get("rp") or {}).get("uskills") or ""), str((b.get("rp") or {}).get("ugear") or ""), wx, (grp or {}).get("members"), narrator=(cid == NARR_ID)) if scfg["on"] else {"info": {"on": False}}
+                      str((b.get("rp") or {}).get("uskills") or ""), str((b.get("rp") or {}).get("ugear") or ""), wx, (grp or {}).get("members"), narrator=(cid == NARR_ID), loc=loc) if scfg["on"] else dict(places.standalone(loc, CH, US, turns), info={"on": False})
     if kind not in ("reply", "nudge", "resume"):
         sto = dict(sto, tail="", plan=None)
     if p.get("length", "auto") == "auto" and kind in ("reply", "nudge"):   # room for atmosphere in a horror or intimate beat

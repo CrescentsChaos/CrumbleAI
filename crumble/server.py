@@ -11,7 +11,7 @@ from http.server import BaseHTTPRequestHandler
 from pathlib import Path
 
 from .config import CHARS, CHATS, EMO, EXT_KEYS, GROUPS, KEYS, LLM, LLM_VERBOSE, LOCK, MODELS, ROOT, SCHEMA, Llama, gpu_status
-from . import personality, recall
+from . import personality, places, recall
 from .feel import peek as feel_peek
 from .llm import generate_reply
 from .memory import memorize, summarize, summary_details, track
@@ -122,6 +122,15 @@ class H(BaseHTTPRequestHandler):
             return self.deny(a)
         if self.path == "/api/state":
             return self.send(state(a))
+        if self.path == "/api/places":   # location cards: guests get the public view (no secrets, events or history)
+            return self.send({"places": [places.view(p, a["role"] == "admin") for p in places.load_all()], "biomes": places.BIOMES})
+        m = re.fullmatch(r"/places/img/([\w]+\.(?:png|jpg|webp|gif))", self.path.split("?")[0])
+        if m:   # a place's background picture (only for people who are signed in)
+            f = places.image_file(m.group(1))
+            if f:
+                ext = f.suffix.lower()[1:]
+                return self.send(f.read_bytes(), ctype="image/" + ("jpeg" if ext == "jpg" else ext), headers=[("Cache-Control", "private, max-age=3600")])
+            return self.send({"err": "not found"}, 404)
         if self.path == "/api/share":
             if a["role"] != "admin":
                 return self.deny(a)
@@ -154,6 +163,11 @@ class H(BaseHTTPRequestHandler):
                 if re.fullmatch(re.escape(m[1]) + r"_[0-9a-f]{8}", d.name):
                     shutil.rmtree(d, ignore_errors=True)
             shutil.rmtree(CHATS/m[1], ignore_errors=True)
+        m = re.match(r"/api/places/(\w+)$", self.path)
+        if m:
+            if a["role"] != "admin":
+                return self.deny(a)
+            places.remove(m[1])
         m = re.match(r"/api/groups/(\w+)$", self.path)
         if m:
             if a["role"] != "admin":
@@ -202,7 +216,7 @@ class H(BaseHTTPRequestHandler):
         if self.path not in ("/api/chat", "/api/chat_save") and isinstance(b.get("history"), list):   # out-of-character talk is not part of the story the memory systems read
             b["history"] = [m for m in b["history"] if not (isinstance(m, dict) and m.get("ooc"))]
         adm, guest = a["role"] == "admin", a["role"] == "guest"
-        if self.path in ("/api/load", "/api/chars", "/api/gen_char", "/api/share", "/api/groups", "/api/personality") and not adm:
+        if self.path in ("/api/load", "/api/chars", "/api/gen_char", "/api/share", "/api/groups", "/api/personality", "/api/places", "/api/gen_place") and not adm:
             return self.deny(a)
         if self.path == "/api/share":
             return self.share(b)
@@ -224,6 +238,52 @@ class H(BaseHTTPRequestHandler):
                 return self.send({"ok": True, "loaded": b["path"]})
             except Exception as e:
                 return self.send({"err": str(e)})
+        if self.path == "/api/places":   # host only: create or change a location card (a picture comes as bg_data, bg_clear removes it)
+            try:
+                old = places.get(b.get("id")) if b.get("id") else None
+                p = places.clean(b, old)
+                if b.get("bg_data"):
+                    p = places.save_image(p, b["bg_data"])
+                elif b.get("bg_clear"):
+                    p = places.clear_image(p)
+                places.save(p)
+                return self.send(places.view(p))
+            except ValueError as e:
+                return self.send({"err": str(e)})
+        if self.path == "/api/places/visit":   # in a one-to-one chat: does someone from this place join in? (no model call, nothing saved)
+            card = places.get((b.get("place") or {}).get("id")) if isinstance(b.get("place"), dict) else None
+            main = get_char(str(b.get("cid"))) if b.get("cid") else None
+            if not card or not main:
+                return self.send({"visit": None})
+            try:
+                from . import simtime
+                chars = {i: c for i in card["characters"] if (c := get_char(i))}
+                hist = [dict(m, content=str(m.get("content", ""))[:4000]) for m in (b.get("history") or [])[-300:] if isinstance(m, dict) and not m.get("ooc")]
+                full = (main.get("scenario") or "") + (" " + str(b.get("story_start") or "")[:80] if b.get("story_start") else "")
+                sim = simtime.derive(hist, full, [{"kind": "setting", "text": str(b["scene"])}] if b.get("scene") else []) or simtime.from_clock(str(b.get("clock") or ""))
+                scfg = story.settings(b.get("story"))
+                v = places.visit(card, main["id"], chars, hist, int(b.get("turn") or len(hist)), str(b.get("text") or "")[:2000], str(b.get("setting") or "normal"),
+                                 str(b.get("seed") or main["id"]), [str(x) for x in (b.get("dead") or [])], sim, str(b.get("force") or ""), scfg["routines"] and scfg["on"],
+                                 int((b["place"] or {}).get("since") or 0))
+                return self.send({"visit": v})
+            except Exception as e:
+                return self.send({"err": str(e)})
+        if self.path == "/api/gen_place":   # host only: the loaded model drafts a whole card from a sentence
+            if not LLM["obj"]:
+                return self.send({"err": "Load a model first."})
+            keys = list(places.TEXTS) + list(places.LISTS)
+            ask = ("Invent a detailed roleplay location from this concept. Reply with ONLY a JSON object using exactly these keys: " + ", ".join(keys) +
+                   ". name, biome (one or two words), description, atmosphere (sound, smell, light, temperature, mood) and history are plain strings; "
+                   "objects, activities, exits, events and secrets are arrays of short strings (objects: things like 'the brass telescope'; activities: short verb phrases like 'fish off the pier'; "
+                   "exits: names of nearby places; events: things that can happen here; secrets: hidden truths about the place). Be specific and vivid. Leave a key empty if unsure.\n\nConcept: " + str(b.get("concept") or "")[:1000])
+            try:
+                with LOCK:
+                    r = LLM["obj"].create_chat_completion(messages=[{"role": "user", "content": ask}], temperature=.85, max_tokens=min(3000, LLM["n_ctx"] // 2))
+                data = loose_json(r["choices"][0]["message"]["content"])
+                d = places.clean({k: v for k, v in data.items() if k in keys and k != "id"})
+                return self.send({k: d[k] for k in keys})
+            except Exception as e:
+                return self.send({"err": f"Model did not return usable JSON ({e}). Try again."})
         if self.path == "/api/chars":
             c = {k: b.get(k, "") for k in KEYS}
             c["lore"], c["avatar"] = b.get("lore", []), b.get("avatar", "")
@@ -280,7 +340,8 @@ class H(BaseHTTPRequestHandler):
                 hist = [dict(m, content=str(m.get("content", ""))[:4000]) for m in (b.get("history") or [])[-300:] if isinstance(m, dict) and not m.get("ooc")]
                 return self.send({"world": story.overview(mem, hist, str((g or mem[0]).get("scenario") or ""), b.get("story"), str(b.get("clock") or ""),
                                                           str(b.get("story_start") or "")[:80], notes=([{"kind": "setting", "text": str(b["scene"])}] if b.get("scene") else []),
-                                                          seed=((g or {}).get("name") or mem[0].get("name") or ""))})
+                                                          seed=((g or {}).get("name") or mem[0].get("name") or ""),
+                                                          loc=places.context(b.get("place"), len(hist)))})
             except Exception as e:
                 return self.send({"err": str(e)})
         if self.path == "/api/feel":   # instant, provisional reaction to the message just sent (no model call, nothing saved)
@@ -356,6 +417,8 @@ class H(BaseHTTPRequestHandler):
                     b["history"] = [dict(m, content=str(m.get("content", ""))[:8000]) for m in b.get("history", [])[-300:]]
                     b["params"] = dict(b.get("params") or {}, max_tokens=min(int((b.get("params") or {}).get("max_tokens", 512)), 1024))
                     sess["busy"] = True
+                if not b.get("group"):      # a one-to-one chat with visitors from a place becomes a small group for the prompt (everyone labelled)
+                    places.stage(b, get_char)
                 if b.get("group"):  # a group reply: the server loads the group and every sheet itself, for host and guests alike
                     g = get_group(str(b["group"]))
                     if not g:

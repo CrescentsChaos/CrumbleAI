@@ -15,7 +15,7 @@ import re
 
 from ..config import CH, US
 from . import beats, endings, humor, moment, routine, tension, wildlife, world
-from .. import ambience
+from .. import ambience, places
 
 DEFAULTS = {"on": True, "routines": True, "weather": "dynamic", "events": "normal", "humor": "auto", "endings": True, "wildlife": "normal", "scare": "some"}
 COMMIT = {"work", "class", "shift", "commute", "exercise", "sleep", "social", "errands"}
@@ -88,7 +88,7 @@ def plans(chron, sim):
     return out[:2]
 
 
-def build(c, user, st, hist, sim, amb, rp, p, turn, own, mode="story", grp=None, chron=None, uskills="", ugear="", wx=None, members=None, narrator=False):
+def build(c, user, st, hist, sim, amb, rp, p, turn, own, mode="story", grp=None, chron=None, uskills="", ugear="", wx=None, members=None, narrator=False, loc=None):
     cfg = settings(p)
     name = c.get("name") or "Character"
     kinds_msg = next((m.get("content") for m in reversed(hist or []) if m.get("role") == "user"), "")
@@ -104,6 +104,8 @@ def build(c, user, st, hist, sim, amb, rp, p, turn, own, mode="story", grp=None,
     info = {"on": cfg["on"], "clock": (sim or {}).get("clock", ""), "period": period, "day": (sim or {}).get("day", ""), "season": (wx or {}).get("season", ""),
             "weather": w, "wsrc": (wx or {}).get("src", ""), "trend": (wx or {}).get("trend", ""), "place": place, "indoors": amb.get("indoors"), "tension": lvl,
             "beat": "", "who": [], "real": bool((sim or {}).get("real"))}
+    if loc:
+        info["loc"] = {"id": loc["card"]["id"], "name": loc["card"]["name"]}
     if not cfg["on"]:
         return {"block": "", "compact": "", "tail": "", "plan": None, "info": info}
     roster = [c] + [m for m in (members or []) if m.get("id") != c.get("id") and m.get("id") != "__narrator__"]
@@ -119,10 +121,16 @@ def build(c, user, st, hist, sim, amb, rp, p, turn, own, mode="story", grp=None,
     sd = "" if bt or skip or not rt else beats.seed(turn, cid, rt["key"])
     info["beat"] = bt
 
+    # ---- the location card this chat stands in: description, atmosphere, objects, exits, secrets, residents and its own events
+    lp = places.parts(loc, CH, US, turn, cfg["events"], skip or narrator, narrator) if loc else None
+    if lp and lp["event"]:
+        bt = sd = ""            # the card's own event takes the place of a generic small thing
+        info["beat"] = ""
+
     # ---- wildlife: a real animal from data/animals/Animals.json, met where it really lives, played over a few messages
     enc = None
     if cfg["wildlife"] != "off" and mode not in ("text", "call"):
-        scen = (grp or {}).get("scenario") or c.get("scenario") or ""
+        scen = ((grp or {}).get("scenario") or c.get("scenario") or "") + (" " + places.climate_text(loc) if loc else "")     # the location card tells the animals where they are
         per = 2 if not grp else max(2, len([m for m in (members or [])]) + 1)
         enc = wildlife.encounter(int(turn) // per, str((grp or {}).get("id") or (grp or {}).get("name") or cid), [scen] + [re.sub(r"(?s)<think>.*?(?:</think>|$)", "", t) for t in texts[-6:]],
                                  place, amb.get("indoors"), period, cfg["wildlife"], cfg["scare"])
@@ -140,6 +148,8 @@ def build(c, user, st, hist, sim, amb, rp, p, turn, own, mode="story", grp=None,
             L.append(f"It is {sim['clock']}.")
         if w:
             L.append(f"Weather: {w}" + (f" ({wx['trend']})" if (wx or {}).get("trend") else "") + ". It changes how people feel and what they do.")
+        if lp:
+            L.extend(places.narrator_lines(loc, turn))
         if info["who"]:
             L.append("Where everyone is in their day: " + "; ".join(f"{s['name']}: {s['act']}" for s in info["who"] if s["name"]) + ".")
         if bt:
@@ -152,6 +162,9 @@ def build(c, user, st, hist, sim, amb, rp, p, turn, own, mode="story", grp=None,
 
     L.append("[Daily life, time and world - keep the person real]")
     L.append(f"{CH} is a person with a day, a body and moods, living in a world that keeps moving. Whatever the story has already established always wins over what follows.")
+    if lp:
+        L.extend(lp["lines"])
+        C.extend(lp["compact"])
     # ---- routine and time
     if rt:
         daykind = "weekend" if rt["weekend"] else "weekday"
@@ -230,6 +243,8 @@ def build(c, user, st, hist, sim, amb, rp, p, turn, own, mode="story", grp=None,
         T.append(f"A small thing happens in the world during this reply (texture only, nothing {US} must answer): {bt}. Work it into one detail if it suits the moment.")
     elif sd:
         T.append(f"If it comes up naturally, {CH} may mention something from their own day: {sd}.")
+    if lp and lp["event"]:
+        T.append(lp["event"])
     return {"block": "\n".join(L), "compact": "\n".join(["[Daily life]"] + C), "tail": " ".join(T), "plan": ep, "info": info}
 
 
@@ -253,17 +268,17 @@ def repair(text, plan):
     return endings.repair(text, plan)
 
 
-def overview(members, hist, scenario, p, clock="", start="", notes=(), seed=""):
+def overview(members, hist, scenario, p, clock="", start="", notes=(), seed="", loc=None):
     """Status for the page's World panel (no model call, nothing saved)."""
     from .. import simtime
     cfg = settings(p)
     full = (scenario or "") + (" " + start if start else "")
     sim = simtime.derive(hist or [], full, notes or []) or simtime.from_clock(clock)
-    amb = ambience.derive(hist or [], full, notes or [], sim)
+    amb = ambience.derive(hist or [], full, list(notes or []) + ([places.note(loc)] if loc else []), sim)
     texts = [full] + [m.get("content") or "" for m in (hist or [])[-8:]]
     wx = sky(sim, amb, texts, seed or full[:200], cfg)
     c = (members or [{}])[0]
-    out = build(c, "", {}, hist or [], sim, amb, {}, p, len(hist or []), [], members=members, wx=wx)
+    out = build(c, "", {}, hist or [], sim, amb, {}, p, len(hist or []), [], members=members, wx=wx, loc=loc)
     info = out["info"]
     info.pop("wild", None)      # the page shows an encounter on the reply that tells it, never ahead of it
     info["clock_set"] = bool(sim)

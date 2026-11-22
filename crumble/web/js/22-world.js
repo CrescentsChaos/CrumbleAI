@@ -11,7 +11,7 @@ function worldHead(){const e=$('#hworld');if(!e)return;const wk=chat?(chat.id+':
  e.hidden=false;e.innerHTML=`<span>${wIcon(i)}</span><b>${esc(wShort(i))}</b>${i.weather?`<span class=small>${esc((WX[i.weather]||[0,i.weather])[1])}</span>`:''}`;
  e.title='Story time, weather and what everyone is doing. Click for details';if(W.open)worldDraw()}
 function worldRefresh(now){clearTimeout(W.t);const go=async()=>{if(!chat||!cur?.id||U.story===false){W.info=null;worldHead();return}
-  try{const ic=hist.filter(m=>!m.ooc);const r=await api('/api/world','POST',{...(G?{group:G.id}:{cid:cur.id}),history:apiHist(ic),scene:chat.cfg.scene||'',clock:U.timeaware?clock():'',story_start:chat.cfg.start||'',story:storyCfg()});
+  try{const ic=hist.filter(m=>!m.ooc);const r=await api('/api/world','POST',{...(G?{group:G.id}:{cid:cur.id}),history:apiHist(ic),scene:chat.cfg.scene||'',clock:U.timeaware?clock():'',story_start:chat.cfg.start||'',story:storyCfg(),place:placeSpec()});
    if(r&&r.world){W.info=r.world;worldHead()}}catch(e){}};
  if(now)go();else W.t=setTimeout(go,250)}
 const freeW=f=>f>=.8?'free to talk':f>=.55?'a bit busy':f>=.3?'busy':'not available';
