@@ -1,73 +1,73 @@
 
-"""Prompt blocks for fights, romance and intimacy."""
+"""Prompt blocks for conflict, romance and intimacy."""
 from ..config import CH, US
-from .combat import cond
+from . import body as B
+from . import skillset as SK
+from ..story import tension
 from .intimacy import intim_block, settings as intim_settings
 from .narrator import NARR_ID
 from .relations import effective, rel_block
 from .romance import rom_stage
 
 
+def body_blocks(c, o, rp):
+    """Wounds, sickness and death: how this body must be written, and who is gone. (The dead never reach a prompt: they do not speak.)"""
+    bodies = rp.get("body") or {}
+    members = ((o.get("group") or {}).get("members")) or []
+    names = {m.get("id"): m.get("name") for m in members}
+    out = []
+    mine = bodies.get(c.get("id")) or {}
+    if mine and not mine.get("dead") and c.get("id") != NARR_ID:
+        g = B.guidance(mine, CH, US)
+        if g:
+            out.append(g)
+    ub = bodies.get("user") or {}
+    if ub and not ub.get("dead") and c.get("id") != NARR_ID:
+        g = B.guidance(ub, CH, US, you=True)
+        if g:
+            out.append(g)
+    gone = [(cid, v) for cid, v in bodies.items() if cid != "user" and isinstance(v, dict) and v.get("dead")]
+    if gone:
+        who = [f"{names.get(cid) or 'someone'} ({(v.get('died') or {}).get('how') or 'died'})" for cid, v in gone]
+        out.append("[Loss]\n" + "; ".join(who) + (" has" if len(who) == 1 else " have") + " died. The dead never speak, act, think or answer again unless brought back by a resurrection. "
+                   f"Those who knew them carry the loss in their own way (grief, anger, numbness, guilt, relief, silence) and may mention them, but never talk as if they were alive.")
+    if c.get("id") == NARR_ID:
+        L = []
+        for cid, v in bodies.items():
+            if isinstance(v, dict) and not v.get("dead"):
+                d = B.describe(v, cid == "user")[:2]
+                if d:
+                    L.append(f"{US if cid == 'user' else (names.get(cid) or 'someone')}: " + "; ".join(d))
+        if L:
+            out.append("[Bodies in the scene]\nThe wounded and sick are still hurt until the story gives them time and care: " + " | ".join(L) + ". Show it in how they move and speak.")
+    return out
+
+
 def rp_blocks(c, o):
     """Return roleplay context blocks and resolved-outcome instructions."""
     r = o.get("rp") or {}
 
-    if not r.get("on", True) or c.get("id") == NARR_ID:
+    if not r.get("on", True):
         return [], ""
+    if c.get("id") == NARR_ID:
+        rp0 = r.get("state") or {}
+        fx0 = str(r.get("fx") or "")[:3500]
+        outn = ("[Resolved this turn - these are established facts. Narrate them happening without changing who succeeded or failed]\n" + fx0.strip()
+                + "\nNever mention dice, numbers, hit points or game rules.") if fx0.strip() else ""
+        return body_blocks(c, o, rp0), outn
 
     cfg = r.get("cfg") or {}
     rp = r.get("state") or {}
     fx = str(r.get("fx") or "")[:3500]
 
-    ctx = []
-    cb = (rp.get("combat") or {}) if (rp.get("combat") or {}).get("on") else None
-
+    ctx = body_blocks(c, o, rp)
     # ---------------------------------------------------------
-    # COMBAT
+    # CONFLICT (story, not a fight engine): the guidance appears only once tension is really brewing
     # ---------------------------------------------------------
-    if cb or "[Combat" in fx:
-        mine = (
-            next(
-                (u for u in cb.get("units", []) if u.get("id") == c.get("id")),
-                None
-            )
-            if cb else None
-        )
-
-        if mine and mine.get("side") == "foe":
-            role = f"{CH} is fighting against {US}."
-        elif mine and mine.get("side") == "ally":
-            role = f"{CH} is fighting on {US}'s side."
-        else:
-            role = (
-                f"{CH} is not fighting: watching, fleeing, pleading "
-                f"or stepping in, as fits {CH}."
-            )
-
-        s = "[Fight]\n" + role
-
-        if cb:
-            units = cb.get("units", [])
-            if units:
-                s += "\nConditions: " + "; ".join(
-                    f"{u.get('name', 'Unknown')}: {cond(u)}"
-                    for u in units
-                ) + "."
-
-        fighting_style = (c.get("combat") or "").strip()
-        if fighting_style:
-            s += f"\n{CH}'s fighting style and gear: {fighting_style}"
-
-        s += (
-            f"\nFight the way {CH} would. Use the character's fighting "
-            f"style, surroundings, personality and emotions. Show pain, "
-            f"fear, anger, hesitation, confidence or desperation when "
-            f"appropriate. Keep combat vivid and consistent with the scene. "
-            f"A badly injured or exhausted fighter should behave accordingly. "
-            f"Never mention game mechanics, hit points, dice or numerical stats."
-        )
-
-        ctx.append(s)
+    st = o.get("story") or {}
+    cblock = tension.block(c, int((st.get("info") or {}).get("tension") or 0), CH, US, str(r.get("uskills") or "")[:1200], str(r.get("ugear") or "")[:400])
+    if cblock:
+        ctx.append(cblock)
 
     # ---------------------------------------------------------
     # ROMANCE
@@ -142,7 +142,7 @@ def rp_blocks(c, o):
     # ---------------------------------------------------------
     icfg = intim_settings(cfg.get("intimacy"))
     if icfg["on"]:
-        rp_state = rp  # same state dict that holds rom, combat, etc.
+        rp_state = rp  # same state dict that holds rom, rel, body, etc.
         ib = intim_block(c, rp_state, icfg)
         if ib:
             ctx.append(ib)

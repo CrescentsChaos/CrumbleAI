@@ -11,5 +11,5 @@ async function init(){S=await api('/api/state');
  $('#msel').innerHTML='<option value="">(choose from ./models)</option>'+S.models.map(m=>`<option>${esc(m)}</option>`).join('');
  $('#mstat').textContent=S.backend?((S.loaded?'Loaded: '+S.loaded:'No model loaded')+(S.gpu?' (GPU)':' - CPU ONLY build: see the console to enable the GPU')):'llama-cpp-python missing: pip install llama-cpp-python';
  document.body.classList.toggle('guest',S.role=='guest');if(S.role=='guest'&&(!U.uname||U.uname=='User'))U.uname=S.name;
- $('#uname').value=U.uname;$('#persona').value=U.persona;$('#ustats').value=U.ustats||'';$('#ugear').value=U.ugear||'';S.groups=S.groups||[];renderChars();renderSettings();applyUI();mchip();$('#meav').textContent=ini(U.uname||'U');
+ $('#uname').value=U.uname;$('#persona').value=U.persona;$('#ustats').value=U.ustats||'';$('#ugear').value=U.ugear||'';$('#uskills').value=U.uskills||'';S.groups=S.groups||[];renderChars();renderSettings();applyUI();mchip();$('#meav').textContent=ini(U.uname||'U');
  const first=S.chars.find(c=>c.id==U.last)||S.chars[0];if(first){await pick(first.id);if(!S.chars.some(c=>c.id==U.last))tab('cards')}else openNew()}

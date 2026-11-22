@@ -121,7 +121,7 @@ class InitialContext(unittest.TestCase):
 # --------------------------------------------------------------------------------------------------------------------- 2 + 5
 class IdentitySeparationAndImpersonation(unittest.TestCase):
     NADIA = '*Nadia\'s face lights up as she sees Faith approach.* "Faith! It\'s been too long, dear sister."'
-    FINE = '*Faith pulls her book to her chest.* Who is Nadia? And who are you?'
+    FINE = '*Faith pulls her book to her chest.* I do not know any Nadia.'
 
     def test_who_is_who_block_separates_everyone(self):
         sim = Sim()

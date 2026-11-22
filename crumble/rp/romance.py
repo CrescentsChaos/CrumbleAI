@@ -2,7 +2,7 @@
 import re
 
 from .actions import LAB, ROMS
-from .dice import TIER_TXT, TIER_UI, check, md
+from .dice import TIER_TXT, TIER_UI, check, edge, md
 from .relations import adult
 
 ROM_STAGES = [(10, "no romantic spark yet"), (25, "curious, starting to notice them"), (45, "attracted and flirty"),
@@ -64,5 +64,5 @@ def romance_beat(act, c, rp, aff, mood, ust, cfg, user, out):
             else "Keep it sweet and PG. " if cfg.get("tone") == "sweet" else "")
     out["brief"] = (f"[Romantic beat] {user} tries to {LAB[act][0].lower()} with {nm}. Result: {TIER_TXT[r['tier']]}.\n{react}\n"
                     f"{nm}'s feelings toward {user} are now: {rom_stage(rom['v'])}. {tone}")
-    out["card"] = {"type": act, "title": title, "rows": [{"who": f"{user} → {nm}", "d": f"d20 {r['roll']}{r['bonus']:+d} = {r['total']} vs DC {max(6, dc)}",
+    out["card"] = {"type": act, "title": title, "rows": [{"who": f"{user} → {nm}", "d": edge(r),
                    "res": TIER_UI[r["tier"]], "tier": r["tier"], "ex": f"💞 {rom_stage(rom['v'])} ({d:+d})"}], "note": ""}

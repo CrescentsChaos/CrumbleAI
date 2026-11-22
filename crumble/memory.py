@@ -4,7 +4,7 @@ import difflib
 import re
 import time
 
-from . import context, identity, personality, recall
+from . import chronicle, context, identity, personality, recall
 from .config import EMO, LLM, LOCK
 from .recall import store as rstore
 from .textutil import THINK, loose_json, trim_sentence
@@ -107,6 +107,7 @@ def track(b):
     if score is not None:
         st["log"][-1]["score"] = score
     out = {"state": st, "thought": thought, "delta": delta}
+    chronicle.update(st, [m for m in b["history"] if not m.get("ooc")], user, n, int(b.get("turn") or len(b["history"])), b.get("used") or [])
     if rcfg["on"]:   # hierarchical memory: short-term, semantic facts, and (for important moments) an episode + its feeling
         turn = int(b.get("turn") or ((st.get("mem") or {}).get("turn", 0) + 2))
         rec = recall.update(st, j, b["history"], user=user, char=n, persona=(c.get("personality") or c.get("description") or ""), cfg=rcfg,
@@ -160,3 +161,13 @@ def memorize(b):
     res = recall.backfill(st, hist_, user=led["user"]["name"], char=c.get("name") or "Character",
                           persona=(c.get("personality") or c.get("description") or ""), cfg=rcfg, ask=_ask, max_calls=int(b.get("max_calls") or 8), guard=guard)
     return {"state": st, "added": len(res["added"]), "calls": res["calls"], "scanned": res["scanned"]}
+
+
+def summary_details(b):
+    """Every detail in the messages being folded into the summary, kept verbatim in the chronicle (the summary is prose; this is the exact record)."""
+    try:
+        from . import chronicle
+        n = (b.get("char") or {}).get("name") or "Character"
+        return chronicle.extract([m for m in b.get("history", []) if not m.get("ooc")], b.get("user") or "User", n, int(b.get("turn0") or 0))
+    except Exception:
+        return []

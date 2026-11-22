@@ -4,7 +4,8 @@ Layout
     config.py     paths, shared state, character-sheet schema
     storage.py    characters, groups and chats on disk
     textutil.py   reply clean-up, repetition checks, JSON recovery
-    rp/           the roleplay engine: dice, fights, romance, group turn-taking
+    rp/           the roleplay engine: skills (no dice), wounds and death, romance, group turn-taking
+    story/        the living world: daily routines, story clock, weather, humour, varied endings, world events, conflict as story
     personality/  the personality engine: stable traits, dynamics, canon, consistency guard
     prompt.py     builds the messages the model sees
     llm.py        runs the model and the reply pipeline

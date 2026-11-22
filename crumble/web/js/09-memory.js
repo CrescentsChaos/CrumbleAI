@@ -26,7 +26,8 @@ $('#memf').onclick=async e=>{const b=e.target.closest('button'),k=b?.dataset.m,s
  if(k=='reset'){Object.assign(st,{mood:'neutral',emoji:'😐',energy:'medium',affection:50,log:[]});if(st.pers)Object.assign(st.pers,{va:null,grudge:0,frac:0,mood:null})}
  else if(k=='delfact')st.facts.splice(+b.dataset.i,1);
  else if(k=='addfact'){const v=$('#newfact').value.trim();if(!v)return;st.facts.push(v)}
- else if(k=='rest'){chat.rp.hp={};chat.rp.combat=null}
- else if(k=='endfight'){chat.rp.combat=null}
+ else if(k=='rest'){if(!ctl&&!rounding)post('*rests for 8 hours to recover*','rest');return}
+ else if(k=='revive'){if(!ctl&&!rounding){const c=(G?memberById(b.dataset.c):cur);post(`*${c?.name||'the fallen'} is brought back from the dead*`,'revive')}return}
+ else if(k=='heal1'){const bd=chat.rp?.body?.[b.dataset.c];if(bd){bd.ko=false;(bd.inj||[]).forEach(i=>{i.care=true;if(i.k=='bleeding'){i.k='stabilised wound';i.s=3}});(bd.ill||[]).forEach(i=>i.care=true);bd.tired=Math.max(0,(bd.tired||0)-40)}}
  else if(k=='sumnow'){b.disabled=true;$('#msum').textContent='Summarizing…';try{const r=await maybeSummarize(true);$('#msum').textContent=r?.err||(r?.summary?'Done.':'No new chat messages to summarize.')}catch(e){$('#msum').textContent=e.message||'Could not summarize chat.'}finally{b.disabled=false}if(chat?.state?.summary)return}
  else return;head();saveSoon();renderMem()};

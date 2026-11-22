@@ -2,7 +2,7 @@
 import re
 import time
 
-from . import ambience, identity, leak, personality, recall, repeat, simtime
+from . import ambience, chronicle, identity, leak, personality, recall, repeat, simtime, story
 from .config import CH, LLM, US
 from .prompt import build_messages, cue_text
 from .rp.narrator import NARR_ID
@@ -129,9 +129,12 @@ def generate_reply(b, send):
     kind = b.get("kind", "reply")
     if kind == "ooc":
         return ooc_reply(b, send)
+    rp_in = b.get("rp") or {}
+    if rp_in.get("on", True) and ((rp_in.get("state") or {}).get("body") or {}).get(cid, {}).get("dead") and kind != "ooc":
+        return {"pass": True, "dead": True, "text": "", "think": "", "tok": 0, "ms": 0, "ctx_used": 0, "ctx": LLM["n_ctx"], "dropped": 0}   # the dead do not speak
     hist = [m for m in hist if not m.get("ooc")]   # out-of-character talk is never heard by the characters (the author's notes carry what matters)
     mode = p.get("mode", "story")
-    n_ctx = LLM["n_ctx"]
+    n_ctx = LLM["n_ctx"]                    # the model's whole window: no hard ceiling (the governor below still squeezes if the prompt gets heavy)
     start = int(b.get("from") or 0)
     turns = int(b.get("turn") or len(hist))   # position in the whole chat, which out-of-character messages also count toward
     full = hist                                # the whole in-character chat: identity, names and what the user said are read from all of it
@@ -178,8 +181,23 @@ def generate_reply(b, send):
     # story time: derived from the whole chat (scenario, messages, author's settings), so the character lives by the story's clock, not the PC's
     notes_ = clean_notes((b.get("ooc") or {}).get("notes"))
     sim = simtime.derive(full, (grp or {}).get("scenario") or c.get("scenario") or "", notes_ + ([{"kind": "setting", "text": b["scene"]}] if b.get("scene") else []))
+    s_start = str(b.get("story_start") or "")[:80]
+    if s_start:      # the author set the story clock by hand ("Tuesday 7:40 AM"): it is where the story begins
+        sim = simtime.derive(full, ((grp or {}).get("scenario") or c.get("scenario") or "") + " " + s_start, notes_ + ([{"kind": "setting", "text": b["scene"]}] if b.get("scene") else [])) or sim
+    if not sim and b.get("clock"):     # the story never says what time it is: with "time aware" on, follow the real clock
+        sim = simtime.from_clock(b["clock"])
     gap_s = sim["elapsed"] if sim else b.get("gap_s")
     amb = ambience.derive(full, (grp or {}).get("scenario") or c.get("scenario") or "", notes_ + ([{"kind": "setting", "text": b["scene"]}] if b.get("scene") else []), sim)
+    scfg = story.settings(p.get("story"))
+    scen_ = (grp or {}).get("scenario") or c.get("scenario") or ""
+    wx = story.sky(sim, amb, [scen_] + [m_.get("content") or "" for m_ in full[-8:]], ((grp or {}).get("name") or c.get("name") or "") + scen_[:200], scfg) if scfg["on"] else None
+    if wx and wx["src"] == "dynamic":      # the day's own weather joins the scene, so the physics, the checks and the retries all see the same sky
+        amb = dict(amb, weather=wx["weather"])
+    sto = story.build(c, user, b.get("state") or {}, hist, sim, amb, (b.get("rp") or {}).get("state") or {}, p.get("story"), turns, [THINK.sub("", m["content"]) for m in own][-6:],
+                      mode, grp, (b.get("state") or {}).get("chron") if isinstance((b.get("state") or {}).get("chron"), dict) else None,
+                      str((b.get("rp") or {}).get("uskills") or ""), str((b.get("rp") or {}).get("ugear") or ""), wx, (grp or {}).get("members"), narrator=(cid == NARR_ID)) if scfg["on"] else {"info": {"on": False}}
+    if kind not in ("reply", "nudge", "resume"):
+        sto = dict(sto, tail="", plan=None)
     if p.get("length", "auto") == "auto" and kind in ("reply", "nudge"):   # room for atmosphere in a horror or intimate beat
         k = ambience.boost(amb)
         lo, hi = int(lo * (1 + (k - 1) / 2)), int(hi * k)
@@ -206,6 +224,9 @@ def generate_reply(b, send):
     if led:   # now that the memory search is done, "does anyone know this?" can include what it found
         identity.analyze(led, full, known + [t_["text"] for t_ in (rc or {}).get("trace", [])] + list((rc or {}).get("short", [])), kind)
         id_tail = identity.tail_notes(led)
+    chron = (b.get("state") or {}).get("chron") if isinstance((b.get("state") or {}).get("chron"), dict) else None
+    qtxt = " ".join(str(m.get("content") or "") for m in hist[-3:])
+    chron_add = []
     pool, id_pool, cands, grams = [], [], [], None
     best, retry_note, tries, dropped, used = None, "", 0, 0, 0
     quick = bool(p.get("quick", False))   # Quick replies: at most one re-roll, and only for real mistakes (not for style nits)
@@ -216,12 +237,25 @@ def generate_reply(b, send):
                  gap_s=gap_s, mode=mode, actions=p.get("actions", True), realism=p.get("realism", True),
                  natural=p.get("natural", 2), think=think, fold=p.get("fold", False), words=(lo, hi), length=p.get("length", "auto"), tail=tail,
                  retry_note=retry_note, group=grp, rp=b.get("rp"), own=own, pers=p.get("pers"), mem=p.get("mem"), recall=rc, turn=turns,
-                 ledger=led, id_tail=id_tail, full=full, trimmed=trimmed,
+                 ledger=led, id_tail=id_tail, full=full, trimmed=trimmed, story=sto,
                  ooc=clean_notes((b.get("ooc") or {}).get("notes")), private=[])
-        msgs = build_messages(c, user, hist, o)
-        grams = leak.corpus(o["private"])      # the private background of this attempt, to notice a reply that copies it
         budget = cap + (1500 if think else 0)
-        used, dropped = fit(msgs, n_ctx - budget - 16)
+        level = 0
+        while True:     # the context governor: if the prompt is heavy, carry less of the bulky layers (never the details: those live in the chronicle)
+            plan = chronicle.budget(n_ctx, budget, level)
+            h_use, h_drop = chronicle.trim_history(hist, plan["hist"])
+            lines = chronicle.pick(chron, qtxt, turns, plan["chron"], veto) if chron else []
+            o.update(squeeze=plan, chron_block=chronicle.render(lines, user, c.get("name") or "Character"), private=[])
+            msgs = build_messages(c, user, h_use, o)
+            if sum(ntok(m["content"]) for m in msgs) <= plan["target"] or level >= 3:
+                break
+            level += 1
+        grams = leak.corpus(o["private"])      # the private background of this attempt, to notice a reply that copies it
+        used, dropped = fit(msgs, plan["room"])
+        if h_drop:      # messages that left the window: make sure their details are in the chronicle (the page keeps them for the next track)
+            cov = (chron or {}).get("covered", 0)
+            chron_add = [f for f in chronicle.extract(h_drop, user, c.get("name") or "Character", start) if f["turn"] >= cov]
+        dropped += len(h_drop)
         budget = max(128, min(budget, n_ctx - used - 16))
         if send and p.get("stream"):
             send({"rs": attempt + 1})    # a new attempt starts: the page clears its live preview
@@ -275,6 +309,9 @@ def generate_reply(b, send):
         tn = simtime.time_note(r["text"], sim) if kind in ("reply", "nudge") else ""
         if tn and not quick and attempt < tries_max - 1:
             notes.append(tn)
+        qn = story.check(r["text"], sto.get("plan")) if kind in ("reply", "nudge", "resume") and scfg["endings"] else ""
+        if qn and attempt < tries_max - 1:
+            notes.append(qn)
         en = ambience.env_note(r["text"], amb, sim) if kind in ("reply", "nudge") else ""
         if en and not quick and attempt < tries_max - 1:
             notes.append(en)
@@ -316,17 +353,21 @@ def generate_reply(b, send):
         alt = min(cands, key=lambda x: x["_rep"])
         if alt["_rep"] + .1 <= best["_rep"]:
             best = alt
-    if grp and best.get("_rep", 0) >= repeat.HARD and (b.get("cue") or {}).get("why") not in ("mention", "combat") and repeat.worst(best["text"], spoken_by_others)[0] >= repeat.HARD:
+    if grp and best.get("_rep", 0) >= repeat.HARD and (b.get("cue") or {}).get("why") not in ("mention", "react") and repeat.worst(best["text"], spoken_by_others)[0] >= repeat.HARD:
         return {"pass": True, "text": "", "think": "", "tok": best.get("tok", 0), "ms": best.get("ms", 0), "ctx_used": used, "ctx": n_ctx, "dropped": dropped}   # someone just said exactly this: stay quiet
     if best.get("echo") and grams:   # retries ran out: take out only the sentences that are almost entirely copied
         best["text"] = leak.drop_echo_sentences(best["text"], grams)
+    if scfg["endings"] and kind in ("reply", "nudge", "resume") and sto.get("plan"):
+        best["text"] = story.repair(best["text"], sto["plan"])      # out of attempts: a closing question that is not wanted is cut, never kept
+    best["world"] = sto.get("info") or {}
     if reg and kind in ("reply", "resume", "nudge", "continue"):
         best["text"] = personality.register.repair(best["text"], reg)   # whatever else slipped, a formal or archaic voice never keeps contractions
     best.pop("_ni", None)
     best.pop("_rep", None)
     best["leaks"] = sorted(set(best.pop("scrubbed", []) or []) | ({"echo"} if best.pop("echo", None) else set()))
     best.pop("scrubbed_text", None)
-    best.update(ctx_used=used, ctx=n_ctx, dropped=dropped, retries=tries)
+    best.update(ctx_used=used, ctx=n_ctx, dropped=dropped, retries=tries, squeeze=level, chron_add=chron_add,
+                chron_used=[i["id"] for i in lines] if chron else [])
     if rc is not None:
         best.update(recalled=rc["ids"], recall=[{"id": t["id"], "t": t["t"], "why": t["why"]} for t in rc["trace"]])
     return best

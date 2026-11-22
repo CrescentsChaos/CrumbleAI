@@ -22,13 +22,36 @@ const PRESETS=[
  {id:'parchment',n:'Parchment',mode:'light',h:38,s:48,bg:'#efe3cc',pn:'#f8efdc',pn2:'#ecdcbf',pn3:'#dfcba6',tx:'#3a2a1b',mu:'#7a6245',ac:'#8d4a24',ac2:'#b0752f',wall:'grain',bub:'open',font:'story'},
  {id:'noir',n:'Noir',mode:'dark',h:0,s:0,bg:'#0b0b0c',pn:'#131314',pn2:'#1c1c1e',pn3:'#29292c',tx:'#f2f2f2',mu:'#9a9a9f',ac:'#f2f2f2',ac2:'#9a9a9f',wall:'none',bub:'outline',font:'clean'},
  {id:'ember',n:'Ember',mode:'dark',h:20,s:30,bg:'#130d0b',pn:'#1b1311',pn2:'#261b17',pn3:'#36261f',tx:'#f6ece6',mu:'#a8958b',ac:'#f0a35c',ac2:'#e5806a',wall:'glow',bub:'soft',font:'auto'},
- {id:'frost',n:'Frost',mode:'light',h:214,s:42,bg:'#edf2f8',pn:'#fbfdff',pn2:'#e4ecf6',pn3:'#d3dfee',tx:'#172234',mu:'#5b6f8a',ac:'#2f6fed',ac2:'#19b6c9',wall:'aurora',bub:'glass',font:'clean'}];
+ {id:'frost',n:'Frost',mode:'light',h:214,s:42,bg:'#edf2f8',pn:'#fbfdff',pn2:'#e4ecf6',pn3:'#d3dfee',tx:'#172234',mu:'#5b6f8a',ac:'#2f6fed',ac2:'#19b6c9',wall:'aurora',bub:'glass',font:'clean'},
+  {id:'forest',n:'Forest',env:1,mode:'dark',h:150,s:28,bg:'#0c1511',pn:'#111f18',pn2:'#182a21',pn3:'#20392d',tx:'#ebf4f0',mu:'#9ab6a8',ac:'#9be28a',ac2:'#e8d58a',wall:'forest',bub:'soft',font:'story'},
+  {id:'ocean',n:'Ocean',env:1,mode:'dark',h:200,s:50,bg:'#081319',pn:'#0c1c24',pn2:'#112732',pn3:'#163443',tx:'#ebf1f4',mu:'#9aadb6',ac:'#5fd0e6',ac2:'#7ea6ff',wall:'waves',bub:'glass',font:'clean'},
+  {id:'rain',n:'Rainy night',env:1,mode:'dark',h:215,s:24,bg:'#0d1015',pn:'#12171e',pn2:'#192029',pn3:'#222b37',tx:'#eceff3',mu:'#9aa6b6',ac:'#8fb3d9',ac2:'#c3a6ff',wall:'rain',bub:'glass',font:'auto'},
+  {id:'snow',n:'Snowfall',env:1,mode:'dark',h:212,s:34,bg:'#0b1016',pn:'#101820',pn2:'#16202c',pn3:'#1d2c3c',tx:'#ebeff4',mu:'#9aa7b6',ac:'#9cc7ff',ac2:'#d6e6ff',wall:'snow',bub:'glass',font:'clean'},
+  {id:'dunes',n:'Dunes',env:1,mode:'light',h:30,s:60,bg:'#f7f1eb',pn:'#fdfbfa',pn2:'#f2e9e1',pn3:'#e9dacb',tx:'#2e2114',mu:'#836b54',ac:'#b8501c',ac2:'#d98a2b',wall:'dunes',bub:'soft',font:'story'},
+  {id:'sakura',n:'Sakura',env:1,mode:'light',h:345,s:55,bg:'#f7ebee',pn:'#fdfafa',pn2:'#f2e1e5',pn3:'#e9cbd3',tx:'#2e141b',mu:'#83545f',ac:'#d6457c',ac2:'#f08aa8',wall:'petals',bub:'soft',font:'story'},
+  {id:'volcano',n:'Volcano',env:1,mode:'dark',h:8,s:45,bg:'#180b09',pn:'#23100d',pn2:'#301612',pn3:'#411e19',tx:'#f4eceb',mu:'#b69e9a',ac:'#ff7a3d',ac2:'#ffc14d',wall:'embers',bub:'soft',font:'auto'},
+  {id:'space',n:'Deep space',env:1,mode:'dark',h:262,s:55,bg:'#0e071a',pn:'#150b26',pn2:'#1c0f33',pn3:'#261445',tx:'#eeebf4',mu:'#a59ab6',ac:'#b69cff',ac2:'#6fe3ff',wall:'nebula',bub:'glass',font:'clean'},
+  {id:'city',n:'Neon city',env:1,mode:'dark',h:285,s:45,bg:'#140918',pn:'#1e0d23',pn2:'#291230',pn3:'#371941',tx:'#f2ebf4',mu:'#af9ab6',ac:'#ff4fb0',ac2:'#3de1ff',wall:'skyline',bub:'outline',font:'clean'},
+  {id:'tavern',n:'Tavern',env:1,mode:'dark',h:28,s:38,bg:'#17100a',pn:'#21180f',pn2:'#2e2015',pn3:'#3e2b1c',tx:'#f4efeb',mu:'#b6a79a',ac:'#f2b25c',ac2:'#d98a5c',wall:'candle',bub:'soft',font:'story'},
+  {id:'meadow',n:'Meadow',env:1,mode:'light',h:95,s:45,bg:'#f0f7eb',pn:'#fbfdfa',pn2:'#e8f2e1',pn3:'#d8e9cb',tx:'#1f2e14',mu:'#678354',ac:'#4f8a2b',ac2:'#e2a93a',wall:'sun',bub:'soft',font:'auto'}];
 const PRE=Object.fromEntries(PRESETS.map(p=>[p.id,p]));
-const WALLS=[['none','None'],['glow','Glow'],['aurora','Aurora'],['dots','Dots'],['grid','Grid'],['lines','Lines'],['grain','Grain'],['stars','Stars'],['avatar','Portrait'],['image','Your image']];
+const WALLS=[['none','None'],['glow','Glow'],['aurora','Aurora'],['dots','Dots'],['grid','Grid'],['lines','Lines'],['grain','Grain'],['stars','Stars'],['forest','Forest'],['waves','Ocean'],['rain','Rain'],['snow','Snow'],['dunes','Dunes'],['petals','Blossom'],['embers','Embers'],['nebula','Space'],['skyline','City'],['candle','Candlelight'],['sun','Sunlight'],['avatar','Portrait'],['image','Your image']];
 const BUBS=[['soft','Soft'],['glass','Glass'],['outline','Outline'],['open','Open page']];
 const FONTS=[['auto','Auto','Story in roleplay, clean in texting','var(--f-auto)'],['story','Story','Literata','var(--f-story)'],['clean','Clean','Figtree','var(--f-clean)'],['display','Display','Bricolage','var(--f-disp)'],['mono','Mono','JetBrains Mono','var(--f-mono)'],['sys','System','Your device font','var(--f-sys)']];
 const RADS={sharp:['8px','8px','6px'],soft:['16px','20px','11px'],round:['22px','27px','15px']};
 const ACCS=['#bfdc90','#f2a9b9','#7ea6ff','#ffb454','#ff6fa5','#5ad1c0','#c3a6ff','#ff7a59','#ece6df','#9bd16b'];
+/* "Match the story": the look follows the place the story is in (rain, forest, tavern, space...), read from the latest messages and the scene note */
+const ENVK={rain:/\b(?:rain\w*|storm\w*|thunder\w*|drizzl\w*|downpour|umbrella|puddles?|lightning)\b/gi,snow:/\b(?:snow\w*|blizzard|frost\w*|frozen|winter|icy|sleigh)\b/gi,
+ ocean:/\b(?:ocean|sea|beach|shore|waves?|ship|harbou?r|boat|sail\w*|swim\w*|dock|island|tide)\b/gi,forest:/\b(?:forest|woods?|trees?|grove|jungle|campfire|moss|thicket|trail)\b/gi,
+ dunes:/\b(?:desert|dunes?|sand|oasis|canyon|caravan|scorching)\b/gi,sakura:/\b(?:cherry blossoms?|sakura|petals|blossoms?|shrine)\b/gi,volcano:/\b(?:lava|volcan\w*|inferno|forge|molten|ember\w*|burning|ashes)\b/gi,
+ space:/\b(?:space|starship|spaceship|galaxy|nebula|orbit|planet|asteroid|cosmos|astronaut|airlock)\b/gi,city:/\b(?:neon|cyberpunk|skyscrapers?|downtown|alley|nightclub|arcade|subway|rooftops?)\b/gi,
+ tavern:/\b(?:tavern|inn|pub|candles?|fireplace|hearth|cabin|lantern|bar counter|ale|mead)\b/gi,meadow:/\b(?:meadow|fields?|sunny|garden|picnic|farm|sunshine|orchard|hillside)\b/gi};
+let lastEnv=null;
+function sceneEnv(){if(!chat)return lastEnv;const ms=(typeof hist!='undefined'?hist:[]).filter(m=>!m.ooc&&m.content).slice(-8),sc={};
+ const add=(txt,w)=>{for(const[k,rx]of Object.entries(ENVK)){const n=(txt.match(rx)||[]).length;if(n)sc[k]=(sc[k]||0)+n*w}};
+ ms.forEach((m,i)=>add(m.content,1+i*.4));add(chat.cfg?.scene||'',3);
+ const best=Object.entries(sc).sort((a,b)=>b[1]-a[1])[0];if(best&&best[1]>=1.5)lastEnv=best[0];return lastEnv}
+const envOf=t=>{if(!t.auto)return t;const e=sceneEnv();return e&&PRE[e]?{...t,p:e,ac:null,hue:null,mode:null,wall:PRE[e].wall,bub:t.bub||PRE[e].bub,font:t.font||PRE[e].font}:t};
 const legacyT=()=>({p:U.theme=='light'?'milk':'cocoa'});
 const themeOf=()=>chat?.cfg?.theme||U.theme2||legacyT();
 function themeVars(t){const b=PRE[t.p]||PRE.cocoa,mode=t.mode||b.mode;let v={...b};
@@ -36,7 +59,7 @@ function themeVars(t){const b=PRE[t.p]||PRE.cocoa,mode=t.mode||b.mode;let v={...
  if(t.ac){v.ac=t.ac;v.ac2=hsl2hex((hex2hsl(t.ac)[0]+38)%360,Math.max(40,hex2hsl(t.ac)[1]),Math.max(55,Math.min(72,hex2hsl(t.ac)[2])))}
  return{...v,mode,wall:t.wall||b.wall,bub:t.bub||b.bub,font:t.font||b.font,rad:RADS[t.rad||'soft'],dens:t.dens||'cozy'}}
 let themeSig='';
-function applyTheme(t,force){t=t||themeOf();const sig=JSON.stringify([t,cur?.id||'',cur?.avatar?cur.avatar.length:0,U.fs]);if(sig==themeSig&&!force)return;themeSig=sig;
+function applyTheme(t,force){t=envOf(t||themeOf());const sig=JSON.stringify([t,cur?.id||'',cur?.avatar?cur.avatar.length:0,U.fs]);if(sig==themeSig&&!force)return;themeSig=sig;
  const v=themeVars(t),r=document.documentElement,st=r.style,dark=v.mode=='dark';
  const vars={'--bg':v.bg,'--pn':v.pn,'--pn2':v.pn2,'--pn3':v.pn3,'--tx':v.tx,'--mu':v.mu,'--ac':v.ac,'--ac2':v.ac2,'--act':readable(v.ac,v.pn2,dark),'--ink':inkOn(v.ac),
   '--ln':dark?'rgba(255,240,230,.09)':'rgba(40,25,15,.11)','--shc':dark?'rgba(0,0,0,.55)':'rgba(70,45,30,.22)','--bad':dark?'#f28b82':'#c8372d','--ok':dark?'#8fd6a0':'#2f8f4a',
@@ -61,7 +84,8 @@ function stRender(){const el=$('#studio');if(!el)return;const sc=el.querySelecto
  <div class=stb>
  <div class=stprev><div class="m assistant" style="margin:0"><div class=bub><div class=nm>${esc(pn)}</div><div class=tx><em class=act>glances up from her book.</em> <span class=q>“There you are. Sit, you look cold.”</span></div></div></div><div class="m user" style="margin:0"><div class=bub><div class=tx>Thanks. It was a long walk.</div></div></div></div>
  ${stScope=='chat'&&inChat?`<div class=small style="margin:8px 2px 0">${own?'This chat has its own style, saved with it.':'This chat follows the app default. Change anything to give it its own style.'}</div>`:''}
- <h4>Theme</h4><div class=pgrid>${PRESETS.map(p=>`<button class="pset${on(p.id,t.p||'cocoa')}" data-st=preset data-v=${p.id} style="--b:${p.bg};--p:${p.pn2};--a:${p.ac};--a2:${p.ac2};--t:${p.tx}"><span class=pb></span><span class=pu></span><b>${p.n}</b><span class=pd></span></button>`).join('')}</div>
+ <h4>Theme</h4><div class=chips style="margin-bottom:8px"><button class="${t.auto?'on':''}" data-st=auto title="The look follows the place your story is in">🌦 Match the story</button></div>${t.auto?`<div class=small style="margin:-2px 2px 8px">The look follows the story: ${lastEnv?'now '+esc(PRE[lastEnv].n)+'.':'it shows your chosen theme until the story names a place (rain, forest, tavern, space, beach...).'}</div>`:''}<div class=pgrid>${PRESETS.filter(p=>!p.env).map(p=>`<button class="pset${on(p.id,t.p||'cocoa')}" data-st=preset data-v=${p.id} style="--b:${p.bg};--p:${p.pn2};--a:${p.ac};--a2:${p.ac2};--t:${p.tx}"><span class=pb></span><span class=pu></span><b>${p.n}</b><span class=pd></span></button>`).join('')}</div>
+  <h4>Environments <small>places that move</small></h4><div class=pgrid>${PRESETS.filter(p=>p.env).map(p=>`<button class="pset${on(p.id,t.p||'cocoa')}" data-st=preset data-v=${p.id} style="--b:${p.bg};--p:${p.pn2};--a:${p.ac};--a2:${p.ac2};--t:${p.tx}"><span class=pb></span><span class=pu></span><b>${p.n}</b><span class=pd></span></button>`).join('')}</div>
  <h4>Accent</h4><div class=swr>${ACCS.map(c=>`<button class="sw1${on(c,t.ac)}" data-st=ac data-v=${c} style="--c:${c}" title=${c}></button>`).join('')}<input type=color data-st=acin value="${t.ac||v.ac}" title="Pick any colour"></div>
  <h4>Surface <small>tint and brightness</small></h4><div class="seg" style="margin-bottom:4px"><button data-st=mode data-v=dark class="${on(v.mode,'dark').trim()}">Dark</button><button data-st=mode data-v=light class="${on(v.mode,'light').trim()}">Light</button></div>
  <input type=range class=hue min=0 max=360 value="${t.hue??(PRE[t.p||'cocoa'].h)}" data-st=hue aria-label="Surface tint">
@@ -83,7 +107,8 @@ $('#studio').onclick=async e=>{const b=e.target.closest('[data-st]');if(!b||b.ty
  if(a=='close')closeStudio();
  else if(a=='scope'){stScope=v;stRender()}
  else if(a=='preset'){const p=PRE[v];stSet({p:v,ac:null,hue:null,mode:null,wall:p.wall,bub:p.bub,font:p.font})}
- else if(a=='ac')stSet({ac:v});
+ else if(a=='auto'){const cur_=stT();stSet({auto:cur_.auto?null:true})}
+  else if(a=='ac')stSet({ac:v});
  else if(a=='mode')stSet({mode:v});
  else if(['wall','bub','font','rad','dens'].includes(a))stSet({[a]:v});
  else if(a=='img'){const f=document.createElement('input');f.type='file';f.accept='image/*';f.onchange=async()=>{const x=f.files[0];if(!x)return;try{stSet({wall:'image',img:await shrinkTo(x,1100,.6)})}catch(e){alert('Could not read that image')}};f.click()}

@@ -11,5 +11,6 @@ const saveSoon=()=>{clearTimeout(saveT);saveT=setTimeout(saveChat,500)};
 function drawChats(){$('#chsel').innerHTML=chats.map(c=>`<option value=${c.id} ${chat&&c.id==chat.id?'selected':''}>${esc(c.title)} (${c.n})</option>`).join('')}
 function resetChat(i=0){const g=greetings(cur);hist=g.length?[{role:'assistant',content:g[i%g.length],ts:Date.now()}]:[]}
 function restore(m){if(m?.oid)dropNote(m.oid);const mc=m?.snapc;if(m?.snap){try{const o=JSON.parse(m.snap);if(m.snapc)Object.assign(mst(m.snapc),o);else chat.state={...chat.state,...o}}catch(e){}delete m.snap;delete m.snapc}
+ if(m?.obsnap){try{chat.rp=JSON.parse(m.obsnap)}catch(e){}delete m.obsnap}
  if(m?.rpsnap){try{chat.rp=JSON.parse(m.rpsnap)}catch(e){}for(const[id,d]of Object.entries(m.affd||{}))addAff(id,-d);delete m.rpsnap;delete m.affd}
  if(m?.mundo){undoMem(m.mundo,mc);delete m.mundo}bondUndo(m)}

@@ -63,7 +63,7 @@ def plan_next(g, members, hist, spoke, cap, n, user, o):
             return res(i, "mention")
     for i in o.get("acting") or []:
         if i in by_id and i not in spoke:
-            return res(i, "combat")
+            return res(i, "react")
     for i in aforced:
         if i not in spoke and i in by_id and len(talked) < cap:
             return res(i, "mention")

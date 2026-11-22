@@ -2,7 +2,7 @@
 const SET = [['Realism', [
     ['realism', 'chk', 'Realism rules', 'Every prompt tells the character to talk like a real person: contractions, opinions, moods, no assistant-speak, no repeated openings.'],
     ['natural', 'sel', 'Speech naturalness', [[0, 'Off'], [1, 'Subtle'], [2, 'Natural'], [3, 'Messy']], 'Fillers, self-corrections, trailing off, tangents.'],
-    ['timeaware', 'chk', 'Time awareness', 'The character knows the date, the time of day and how long it has been since you last spoke.'],
+    ['timeaware', 'chk', 'Time awareness', 'The character knows how long it has been since you last spoke. If the story never says what time it is, it follows your real clock (the story always wins when it names a time).'],
     ['track', 'chk', 'Emotions and memory', 'After each reply the character updates its mood, how it feels about you, and remembers facts about you. Long chats are summarised automatically.'],
     ['thoughts', 'chk', 'Show inner thoughts', 'A private thought under each message (needs Emotions and memory).'],
     ['nudge', 'sel', 'Initiative', [[0, 'Off'], [1, 'After 1 min of silence'], [3, 'After 3 min'], [10, 'After 10 min']], 'The character follows up on its own if you go quiet (at most twice in a row).']]],
@@ -10,8 +10,17 @@ const SET = [['Realism', [
     ['mem', 'chk', 'Hierarchical memory', 'Four layers: short-term (the scene), episodic (what happened), semantic (lasting facts) and emotional (how it felt). Each reply gets only the few memories that matter for what you just said, ranked by relevance, recency and importance. Needs Emotions and memory to learn new ones.'],
     ['memDepth', 'sel', 'How much to recall', [['light', 'Light (about 4 memories)'], ['standard', 'Standard (about 7)'], ['deep', 'Deep (about 10, notices more moments)']], 'More depth uses more of the context window.'],
     ['memLearn', 'chk', 'Write memories after important moments', 'After a gift, promise, fight, confession or \"remember this\", one extra small model call writes the episode and how the character felt. Turn off to only keep facts.']]],
+['Story engine', [
+    ['story', 'chk', 'Living world', 'Replaces the old fight system. Time matters, every character has a daily routine, the weather and the hour change how they feel, small things happen around you, and people joke and feel instead of just answering.'],
+    ['storyRoutines', 'chk', 'Daily routines', 'Characters sleep, work, eat, get tired and have places to be. Write a “Daily routine” on the character sheet, or it is guessed from their occupation.'],
+    ['storyWeather', 'sel', 'Weather', [['dynamic', 'The day has its own weather (unless the story says otherwise)'], ['story', 'Only what the story says']], 'Weather follows the season, builds over the day and changes how people feel and what they do.'],
+    ['storyEvents', 'sel', 'Things happening around you', [['off', 'Off'], ['rare', 'Rare'], ['normal', 'Now and then'], ['lively', 'Lively']], 'A bus passing, a kettle clicking off, thunder. Never during sad, tender or dangerous moments.'],
+    ['storyWildlife', 'sel', 'Wildlife encounters', [['off', 'Off'], ['rare', 'Rare'], ['normal', 'Now and then'], ['lively', 'Lively']], 'Real animals from data/animals/Animals.json turn up where they live (forest, jungle, desert, shore, open sea, river, a basement...) and an encounter plays out over a few messages. Never starts in a sad or tender moment. Not used in Texting or Voice call.'],
+    ['storyScare', 'sel', 'How scary', [['gentle', 'Gentle: wonder and mischief, no real danger'], ['some', 'Some scares: wonder, fun, close calls and the odd terror'], ['lots', 'Dark: more stand-offs and terror']], 'Animals are as dangerous as they really are. Night, and scenarios that sound like horror or survival, make frights more likely.'],
+    ['storyHumor', 'sel', 'Humour', [['auto', 'As written on the sheet'], ['more', 'More jokes and banter'], ['less', 'Fewer jokes']], ''],
+    ['storyEndings', 'chk', 'Not every line ends in a question', 'Replies rarely end by asking something; the character states, reacts, teases, trails off or just does something.']]],
 ['Roleplay engine', [
-    ['rp', 'sel', 'Action engine', [['auto', 'Auto: detect actions and roll'], ['manual', 'Manual: only the action buttons'], ['off', 'Off: plain chat']], 'Fights get real combat (HP, turns, damage). Persuading, sneaking and romance get dice and pacing, so the story has stakes. Every roll is shown, and you can re-roll or ignore it.'],
+    ['rp', 'sel', 'Action engine', [['auto', 'Auto: detect actions and resolve them'], ['manual', 'Manual: only the action buttons'], ['off', 'Off: plain chat']], 'No dice and no fight system: conflict is story. Skill attempts (persuade, sneak, aid...) are judged from your stats and the skills you describe under “About you”. Wounds and sickness last and heal with time and care; the dead stay dead unless someone brings them back. Every outcome is shown, and you can ignore it.'],
     ['diff', 'sel', 'Difficulty', [['easy', 'Easy'], ['normal', 'Normal'], ['hard', 'Hard']], ''],
     ['romance', 'chk', 'Romance system', 'Slow-burn romance with stages, pacing and consequences.'],
     ['tone', 'sel', 'Romance tone', [['sweet', 'Sweet (kisses at most)'], ['steamy', 'Steamy, tasteful (fades to black)']], ''],

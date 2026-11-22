@@ -1,26 +1,21 @@
 """Action labels and the classifier that guesses which action a message performs."""
 import re
 
-LAB = {"attack": ("Attack", ("STR", "DEX")), "special": ("Power", ("INT", "WIS", "CHA")), "defend": ("Defend", ()),
-       "flee": ("Flee", ("DEX",)), "heal": ("Aid", ("WIS", "INT")), "intimidate": ("Intimidate", ("STR", "CHA")),
+LAB = {"heal": ("Aid", ("WIS", "INT")), "intimidate": ("Intimidate", ("STR", "CHA")),
        "persuade": ("Persuade", ("CHA",)), "deceive": ("Deceive", ("CHA", "INT")), "sneak": ("Sneak", ("DEX",)),
        "steal": ("Sleight of hand", ("DEX",)), "athletics": ("Athletics", ("STR", "DEX")),
        "investigate": ("Investigate", ("INT", "WIS")), "craft": ("Craft or repair", ("INT", "DEX")),
        "comfort": ("Comfort", ("WIS", "CHA")), "flirt": ("Flirt", ("CHA",)), "touch": ("Tender touch", ("CHA",)),
        "date": ("Ask on a date", ("CHA",)), "kiss": ("Kiss", ("CHA",)), "confess": ("Confess feelings", ("CHA",)),
-       "intimate": ("Get closer", ("CHA",))}
+       "intimate": ("Get closer", ("CHA",)), "revive": ("Resurrect", ("WIS", "CHA"))}
 ROMS = {"flirt": 10, "touch": 25, "date": 30, "kiss": 50, "confess": 55, "intimate": 75}   # how warm they must already be
-AUTO = {"attack", "special", "flee", "defend", "heal", "intimidate", "persuade", "deceive", "sneak", "steal"} | set(ROMS)
+AUTO = {"heal", "intimidate", "persuade", "deceive", "sneak", "steal", "revive"} | set(ROMS)
 
 
 # (act, narrated-action words, words that count only when written as "I ..." or inside *asterisks*, words that count even when spoken, where)
 RX = [
-    ("attack", r"punch\w*|stab\w*|slash\w*|shoot\w*|shot|kick\w*|tackl\w*|strangl\w*|headbutt\w*|backhand\w*|bludgeon\w*|impal\w*|lung\w* at|swing\w* at|charg\w* at|open\w* fire|attack\w*|ambush\w*|clobber\w*|pummel\w*|whack\w*|smack\w*|brawl\w*|duel\w*|square\w* up|draw\w* (?:my|a|the|his|her) (?:sword|blade|gun|knife|weapon|pistol|dagger)",
-     r"hit\w*|fight\w*|kill\w*|cut\w*|slap\w*|shov\w+|bit\w+|strik\w+|smash\w*|throw\w*|swing\w*|fir\w+", r"fight me|let'?s fight|come at me|put (?:up )?your fists up", ""),
-    ("special", r"conjur\w*|summon\w*|unleash\w*|invok\w*|hex\w*|blast\w*|channel\w* (?:my|the) (?:power|magic|energy)|use\w* my (?:power|powers|ability|abilities|magic|gift|spells?)|cast\w* (?:a |an |the |my )?(?:spell|fireball|bolt|curse|hex|ward|shield)", "", "", ""),
-    ("flee", r"flee\w*|run\w* away|escap\w*|retreat\w*|make\w* a run|get\w* out of here|dash\w* (?:away|off)|bolt\w* (?:away|out)", "", "", ""),
-    ("defend", r"block\w*|dodg\w*|brac\w+|guard\w* (?:myself|up)|go on guard|parr\w+|duck\w*|take\w* cover|raise\w* (?:my|the) shield", "", "", "c"),
-    ("heal", r"heal\w*|bandag\w*|drink\w* (?:a|the) potion|patch\w* (?:up|myself)|first aid|treat\w* (?:my|the) wounds?", "", "", "c"),
+    ("revive", r"resurrect\w*|reviv\w*|bring\w* (?:\w+ ){0,2}back (?:to life|from the dead)|raise\w* (?:\w+ ){0,2}from the dead|reanimat\w*|restor\w* (?:\w+ ){0,2}to life|breath\w* life (?:back )?into|cast\w* (?:resurrection|revive)|use\w* (?:the |my )?(?:phoenix|ankh|elixir of life)", "", "", ""),
+    ("heal", r"heal(?:s|ed|ing)? (?:myself|him|her|them|my|his|their|the|\w+'s)|bandag\w*|dress\w* (?:the |his |her |their |\w+'s )?wound\w*|drink\w* (?:a|the) potion|patch\w* (?:up|myself|him|her|them)|first aid|treat\w* (?:my|the|his|her|their|\w+'s) (?:wounds?|injur\w*)|nurs(?:e|es|ed|ing) (?:my|the|his|her|their|\w+'s) (?:wounds?|injur\w*|arm|leg)|stitch\w*|suture\w*|set\w* (?:the|his|her|their) (?:bone|arm|leg)|tend\w* (?:to )?(?:the |his |her |their |\w+'s )?(?:wounds?|injur\w*)", "", "", ""),
     ("intimidate", r"intimidat\w*|threaten\w*|menac\w*|growl\w* at|loom\w* over|glar\w+ at|bully\w*|snarl\w* at|warn\w* (?:him|her|them)", "",
      r"or else|you(?:'ll| will) regret (?:this|it)|i'?ll (?:kill|hurt|end) you|back off or", ""),
     ("persuade", r"persuad\w*|convinc\w*|plead\w*|bargain\w*|negotiat\w*|reason\w* with|appeal\w* to|talk\w* (?:him|her|them) into|haggl\w*|sweet-?talk\w*|beg\w* (?:him|her|them|you) (?:to|for)", "", r"i'?m begging you|hear me out", ""),
@@ -44,10 +39,12 @@ def classify(text, combat=False, romance=True):
     """Guess which action a message performs. Spoken lines (inside quotes) only count for the few acts that can be spoken."""
     full = " ".join((text or "").lower().split())
     narr = re.sub(r'["“][^"”“]*["”]', " ", full)
+    stars = " ".join(re.findall(r"\*([^*]+)\*", narr))
+    scope = stars if stars else narr      # with *actions* only the actions count; plain chat needs an explicit "I ..." (so "he convinced me" starts nothing)
     for key, strong, weak, speech, where in RX:
         if (where == "c" and not combat) or (key in ROMS and not romance):
             continue
-        rxs = [(r"\b(?:%s)\b" % strong, narr)] if strong else []
+        rxs = [((r"\b(?:%s)\b" if stars else r"\bi(?:'ll| will| try to| attempt to| want to| decide to|'m going to| gonna)? (?:%s)\b") % strong, scope)] if strong else []
         if weak:
             rxs.append((r"(?:\bi(?:'ll| will| try to| attempt to| want to| decide to|'m going to| gonna)? |\*\s*)(?:%s)\b" % weak, narr))
         if speech:

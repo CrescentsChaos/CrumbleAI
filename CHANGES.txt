@@ -1,3 +1,102 @@
+Wildlife encounters from data/animals/Animals.json, and the context is no longer capped at 8000 tokens.
+Drop these over your project (same relative paths), delete the __pycache__ folders, restart. Old chats keep working.
+
+  WILDLIFE
+  crumble/story/wildlife.py         NEW   reads the scene's habitat (jungle, swamp, desert, mountain, cave, shore, open sea, river, lake, street, basement...), picks an animal that really lives there
+                                          and is awake at that hour (rarity-weighted, regions respected when the story names one, prehistoric species only in prehistoric stories), and plays it as a
+                                          2-4 message encounter: awe, fun, tense or terror. Danger is judged from class, diet, size, weight and the description (cetaceans and house cats never terrify; bears, big
+                                          cats, crocodiles and sharks can). No model call; derived from the chat position, so swipes and rewinds keep their encounter and one encounter keeps one animal
+  crumble/story/__init__.py               the encounter joins the prompt (facts, real behaviour, this stage's direction) and the world report; settings "wildlife" and "scare"; not used in Texting / Voice call;
+                                          never starts in a sad, tender or leave-taking moment or over a fight; the world beat steps aside while an animal is in the scene
+  crumble/server.py                       /animals/sprites/<name>.png serves data/animals/sprites (american_black_bear.png, white_s_bat.png, long_tailed_cat.png)
+  crumble/web/js/22-world.js, 03-render.js, 06-generate.js, 10-settings.js, css/13-world.css
+                                          encounter card on the reply (sprite, name, tone, stage dots; icon if the sprite is missing); settings "Wildlife encounters" and "How scary"
+  tests/test_wildlife.py            NEW   21 tests: data, sprite names, danger, habitats, hours, regions, steadiness, tones, prompt, server route
+
+  NO CONTEXT CEILING
+  crumble/chronicle.py, llm.py            HARD_CTX (8000) is gone. The model's whole window is usable, and the token plan scales with it: an 8192 window keeps the plan it was tuned for, a bigger one
+                                          carries proportionally more recent chat and more remembered details, so a 16k or 32k context is actually used. The governor still squeezes if a prompt gets heavy
+  tests/test_body_and_skills.py           the two ceiling tests now check the new behaviour. The full suite has the same 4 known failures as before and no new ones.
+
+A living world instead of a fight engine: time matters, everyone has a daily routine, the weather and the hour change how people feel, and conversations stop ending in questions.
+Drop these over your project (same relative paths), DELETE crumble/rp/combat.py, delete the __pycache__ folders, restart. Old chats keep working (a fight saved in progress simply carries on as a story).
+
+  COMBAT IS GONE
+  crumble/rp/combat.py                    DELETED. No rounds, no hit points, no fight panel, no "Start a fight" button, no /fight /peace /roll
+  crumble/rp/actions.py                   attack, power, defend and flee are no longer actions. The classifier is stricter everywhere: with *actions* only the actions count,
+                                          in plain chat it needs an explicit "I ..." ("he convinced me", "I hit snooze", "she nursed a coffee" start nothing)
+  crumble/rp/resolve.py, blocks.py        only skill attempts (persuade, sneak, aid...), romance, care and resurrection are judged. Violence is written as story:
+                                          wounds and deaths are still read from the narration and kept by the body module (wounds last, the dead stay dead)
+  crumble/story/tension.py          NEW   conflict as story: people argue, posture, back off, leave; violence only when the people and the moment lead there, never from a word.
+                                          The character's "fighting skills" and your skills only enter the prompt once tension is real
+
+  THE STORY ENGINE (crumble/story/, no model call, derived from the chat every turn so swipes and rewinds stay correct)
+  routine.py                        NEW   every character has a day: sleep, groggy waking, commute, work/class/shift, lunch, afternoon, dinner, winding down. Guessed from
+                                          occupation (student, teacher, nurse, baker, guard, bartender, artist, noble...), shifted for night owls and early birds, weekends differ.
+                                          New sheet field "Daily routine" is read too: "Weekdays: up 6:30, bakery 7-3, gym 5pm, in bed by 11. Weekends: sleeps in till 10, market 11-1"
+                                          Asleep at 3 AM = groggy and wanting bed; mid-shift = short, distracted; ten minutes before they must leave = they watch the clock and excuse themselves
+  world.py                          NEW   season and weather. What the story says always wins; if it never mentions the sky the day gets its own (stable all day, builds:
+                                          "clouds thickening, rain by 3 PM"). Weather changes mood, body and plans, and each person's likes and fears count (loves rain, terrified of storms).
+                                          Time of day changes bodies too: hunger at lunch, the afternoon slump, late-night looseness
+  humor.py                          NEW   a style from the "Sense of humour" field (dry, teasing, goofy, deadpan, dark, self-mocking, absurd, gentle) and a cadence of playful beats;
+                                          held back for grief, danger and tender moments, met when you joke
+  moment.py                         NEW   reads your last message: grief gets no jokes, a goodbye gets a goodbye, a one-word message gets a short answer
+  endings.py                        NEW   most replies no longer end on a question: a per-turn ending (statement, gesture, aside, trailing thought, change of subject...); never two
+                                          question-endings in a row; a bad ending is retried once and, if it persists, the closing question is cut
+  beats.py                          NEW   small things happen around you (a bus sighs past, the kettle clicks off, thunder), fitted to place, hour and weather; never in sad, tender
+                                          or dangerous moments. Characters also bring up small things from their own day
+  crumble/story/__init__.py         NEW   puts it together: block for the prompt, per-turn private note, status for the page, plans from earlier ("meet at 7") noticed against the clock
+  crumble/simtime.py                      from_clock(): with Time awareness on and no time in the story, the real clock drives the routines. Story-set time always wins
+  crumble/llm.py, prompt.py               the engine joins every reply (compact when the context is squeezed); replies report the world state to the page
+  crumble/server.py                       /api/world: the clock, weather and where everyone is in their day (no model call)
+  crumble/config.py, rp/narrator.py       new "Daily life" section on the sheet (Daily routine, Places, Weather and seasons); the Narrator describes the hour, the weather and what everyone is busy with
+
+  PAGE
+  crumble/web/js/22-world.js, css/13-world.css   NEW  header chip (story time + sky) and a World panel: set the clock, skip time (+30 min, +2 h, evening, night, next morning),
+                                          see what each character is doing right now, how free they are, and what is next. Slash: /later 3 hours, /later evening
+  crumble/web/js/10-settings.js           new "Story engine" settings: living world, daily routines, weather (own or story-only), things happening around you (off/rare/now and then/lively),
+                                          humour, "not every line ends in a question"
+  crumble/web/js/13-roleplay.js, 09-memory.js, 03-render.js, 06-generate.js, 01-core.js, index.html   combat panel and buttons removed, story options sent with every reply
+
+  tests/test_story.py               NEW   19 tests. test_body_and_skills.py: the fight tests were replaced by tests that nothing ever starts a fight and that wounds/deaths still work.
+                                          The full suite has the same 4 known failures as before and no new ones.
+
+Real bodies, real deaths, skill-based fights (no dice), a context that never fills up, and environment themes.
+Drop these over your project (same relative paths), delete the __pycache__ folders, restart. Old chats keep working (they gain the new data as you play).
+
+  NO DICE
+  crumble/rp/dice.py                      rewritten: outcomes are judged by comparing what you bring (ability, skill, how well you described the move, health, momentum) with what stands in the way. Same situation, same result. No randomness anywhere in the engine.
+  crumble/rp/romance.py, intimacy.py      outcome cards show "edge +3" / "short by 2" instead of a d20 roll
+  crumble/web/js/13-roleplay.js           dice icon, re-roll button and /roll removed (/roll now says there are no dice); outcome cards can still be ignored
+
+  SKILLS DRIVE FIGHTS
+  crumble/rp/skillset.py            NEW   reads the free-text skills you write ("Master swordsman, 12 years of kenjutsu. Fire magic (level 4). Weak to water.") into techniques, levels, weaknesses and limits, with no model call
+  crumble/rp/combat.py                    rewritten: units are built from stats + described skills + real body condition; the technique your action names is the one used; weaknesses are exploited; tactics (feint, high ground) help and flailing does not; NPCs act from morale and sense
+  crumble/web/index.html                  "About you" gets a Skills and abilities box (stats and gear stay)
+  crumble/rp/blocks.py                    the model is told what each side can really do (and its limits) so fights are written with the true techniques
+
+  INJURY, SICKNESS, DEATH
+  crumble/rp/body.py                NEW   wounds and illness that persist, ease only with story time, care and rest, change how a body fights and speaks, and can be treated; critical wounds bleed out within the hour unless tended; narrated wounds/sickness/deaths are read from the story itself
+  crumble/rp/resolve.py                   time passes (a little per message, a lot on "three days later" or a rest); aid actually treats wounds; deaths are final; resurrection by action needs real revival power in your skills (or the author's /revive); a helpless target can be finished off
+  crumble/server.py                       /api/rp/observe (read the narration for wounds, sickness, deaths); group_next never picks the dead
+  crumble/llm.py                          a dead character never gets a turn (generation returns nothing)
+  DEATH: the dead do not speak, act or think; their mood and bond are set aside (kept only so a resurrection can restore them); the page shows a skull; living characters carry the loss
+  crumble/web/js/13-roleplay.js, 09-memory.js   Bodies panel (wounds, sickness, exhaustion, Treat, Bring back), /rest 3 days, /revive Name, deaths and returns announced
+
+  CONTEXT THAT NEVER FILLS UP (details preserved)
+  crumble/chronicle.py              NEW   every detail (names, numbers, times, promises, secrets, objects, plans, family, injuries, deaths) is kept as a verbatim line the moment it happens; only the relevant ones enter each prompt; small unused ones are deleted after a while; pinned ones never are
+  crumble/llm.py                          the prompt plus reply can never reach 8000 tokens (even if the model allows more): a governor squeezes the bulky layers in steps (older raw messages, recap, memories) while the chronicle keeps the details; messages that leave the window are read first
+  crumble/prompt.py                       carries the chronicle block and honours the squeeze plan
+  crumble/memory.py                       the chronicle is updated every turn; summaries also hand back the details of what they fold
+  crumble/recall/store.py, learn.py       memory decay: small, never-recalled memories are forgotten after ~140-220 messages
+  crumble/web/js/06-generate.js           summaries run sooner when text piles up; pressure shown in the context meter
+
+  ENVIRONMENT THEMES
+  crumble/web/js/18-theme.js              11 new themes: Forest, Ocean, Rainy night, Snowfall, Dunes, Sakura, Volcano, Deep space, Neon city, Tavern, Meadow; 11 new backdrops; "Match the story" makes the look follow the place the story is in
+  crumble/web/css/12-environments.css NEW CSS-only animated scenes (fireflies, waves, rain and lightning, snow, drifting petals, embers, nebula, window lights, candle flicker, sun rays); still when motion is reduced
+
+  tests/test_body_and_skills.py     NEW   28 tests; the full suite has the same 4 known failures as before and no new ones
+
 Mood you can see and relationships that grow: instant reactions, mood colour, relationship paths with visual progress.
 Drop these over your project (same relative paths), delete the __pycache__ folders, restart.
 

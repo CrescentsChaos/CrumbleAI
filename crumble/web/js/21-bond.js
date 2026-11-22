@@ -48,7 +48,7 @@ function setMood(id,m){const s=stOf(id);s.mood=m;s.emoji=S.emo[m]||'🙂';delete
 /* ---------- what is shown: the real state, or a provisional reaction while the tracker is still reading ---------- */
 const focusId=()=>{if(!G)return cur?.id;const l=[...hist].reverse().find(x=>x.role=='assistant'&&x.cid&&x.cid!='__narrator__');return l?l.cid:G.members.find(i=>i!='__narrator__')};
 const mids=()=>G?G.members.filter(i=>i!='__narrator__'&&memberById(i)):[cur.id];
-function shown(id){const s=stOf(id),L=LIVE[id];return L&&L.mood?{mood:L.mood,emoji:L.emoji,aff:Math.max(0,Math.min(100,s.affection+(L.d||0))),en:L.energy||s.energy,prov:1}:{mood:s.mood,emoji:s.emoji,aff:s.affection,en:s.energy}}
+function shown(id){const s=stOf(id),L=LIVE[id];if(isDead(id))return{mood:'deceased',emoji:'💀',aff:0,en:'low'};return L&&L.mood?{mood:L.mood,emoji:L.emoji,aff:Math.max(0,Math.min(100,s.affection+(L.d||0))),en:L.energy||s.energy,prov:1}:{mood:s.mood,emoji:s.emoji,aff:s.affection,en:s.energy}}
 function liveDrop(id,ch,age){const L=LIVE[id];if(!L||(chat!==ch)||Date.now()-L.ts<age)return;delete LIVE[id];const s=shown(id);if(PREV[id]){PREV[id].mood=s.mood;PREV[id].aff=s.aff}head()}
 function pop(sel,c='bump'){const e=typeof sel=='string'?$(sel):sel;if(!e)return;e.classList.remove('bump','bumps');void e.offsetWidth;e.classList.add(c)}
 function fx(txt,color,anchor){const L=$('#bondfx'),C=$('#chat'),a=$(anchor||'#hchip'),t=a&&!a.hidden&&a.offsetParent?a:$('#hbond');if(!L||!C||!t)return;

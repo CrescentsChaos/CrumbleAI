@@ -15,7 +15,7 @@ REALISM = [
     "Have opinions, moods and limits. Disagree, tease, get bored or annoyed when it fits. Do not be endlessly agreeable or eager to please.",
     "If {US} asks a direct question, answer it in {CH}'s own voice first (give an opinion, pick a side, or refuse in character). Never dodge with a vague line or by asking {US} what they would like to discuss.",
     "Never ask {US} what interests them, what they want to talk about, or offer insights or help. {CH} reacts to the scene as a person with their own agenda, not as a host trying to keep a conversation going.",
-    "Do not end every message with a question. Often just react, state something, or leave a gap.",
+    "Most messages do NOT end with a question. People state, react, tease, trail off, change the subject or simply do something; a question is the exception, and never two messages in a row end on one.",
     "Prefer showing emotions through behaviour, dialogue and word choice, but allow characters to explicitly express their feelings when natural.",
     "Maintain continuity with the character sheet and memories, but allow characters to make mistakes, change their minds and correct themselves naturally.",
     "Only know what {CH} would know. If unsure, say so the way {CH} would. Never break character or mention being an AI, prompts or rules.",
@@ -101,7 +101,7 @@ def cue_text(b, c):
     if c.get("id") == NARR_ID:
         return "(Narrate what happens next. Write only the Narrator's message.)"
     s = {"mention": f"{by} just addressed {CH} directly. Answer them.", "named": f"{by} just mentioned {CH}. React if {CH} has something to say.",
-         "combat": f"{CH} is in the middle of the action. Show what {CH} does right now.",
+         "react": f"{CH} is directly affected by what {US} just did. Show {CH}'s reaction right now.",
          "open": f"The scene is just starting or has gone quiet. Say or do something natural for {CH} here."}.get(
         cue.get("why"), f"React to what was just said, but only if {CH} has something real to add.")
     t = f"({s} Write only {CH}'s next message."
@@ -311,6 +311,12 @@ def build_messages(c, user, hist, o):
         out.append("[World info]\n" + "\n".join(lore))
     summ = identity.strip_characters(st.get("summary")) if led else (st.get("summary") or "").strip()
     story = context.recap(summ, n, user, bool(grp))   # the stored summary is a form (headings, 'Location:'); the model gets sentences
+    sq = o.get("squeeze") or {}
+    if story and sq.get("summ", 1) < 1:      # the context is under pressure: keep the first sentence (the premise) and the newest ones
+        ss = re.split(r"(?<=[.!?])\s+", story)
+        k = max(2, int(len(ss) * sq["summ"]))
+        if len(ss) > k:
+            story = " ".join(ss[:1] + ss[-(k - 1):])
     if story:
         priv.append("[What has happened so far. Events only: who someone IS comes from Who's who]\n" + story)
         priv_corpus.append(story)
@@ -321,10 +327,18 @@ def build_messages(c, user, hist, o):
     facts = [f for f in st.get("facts", []) if str(f).strip()]
     if rc is not None:
         if rc["block"]:
-            priv.append(rc["block"])
-            priv_corpus.append(rc["block"])
+            blk = rc["block"]
+            if sq.get("mem", 1) < 1:
+                ls = blk.split("\n")
+                blk = "\n".join(ls[:1] + ls[1:][:max(2, int((len(ls) - 1) * sq["mem"]))])
+            priv.append(blk)
+            priv_corpus.append(blk)
     elif facts:
         priv.append(f"[Things {CH} knows about {US}]\n" + "\n".join("- " + str(f) for f in facts[-30:]))
+
+    if o.get("chron_block"):
+        priv.append(o["chron_block"])
+        priv_corpus.append(o["chron_block"])
 
     now = []
     if o.get("sim"):   # the story's own clock beats the computer's: 'Monday morning' + 'three hours later' is noon, whatever the real time is
@@ -356,6 +370,11 @@ def build_messages(c, user, hist, o):
         ab = ambience.block(o["amb"], CH, US, o.get("sim"))   # place, weather, light, tone: felt in the senses and kept consistent
         priv.append(ab)
         priv_corpus.append(ab)
+    sto = o.get("story") or {}
+    if sto.get("block") and c.get("id") != NARR_ID or (sto.get("block") and c.get("id") == NARR_ID):
+        sb2 = sto["compact"] if (o.get("squeeze") or {}).get("summ", 1) < 1 and sto.get("compact") else sto["block"]
+        priv.append(sb2)
+        priv_corpus.append(sb2)
     if now:
         nw = "[Right now]\n" + "\n".join(now)
         priv.append(nw)
@@ -454,6 +473,8 @@ def build_messages(c, user, hist, o):
     if ptail:
         tail_notes.append(ptail)
     tail_notes += [str(t) for t in o.get("id_tail", [])]
+    if (o.get("story") or {}).get("tail"):
+        tail_notes.append(o["story"]["tail"])
     puppet = puppet_note(hist, n, user)
     if puppet:
         tail_notes.append(puppet)

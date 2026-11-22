@@ -14,12 +14,13 @@ from .config import CHARS, CHATS, EMO, EXT_KEYS, GROUPS, KEYS, LLM, LLM_VERBOSE,
 from . import personality, recall
 from .feel import peek as feel_peek
 from .llm import generate_reply
-from .memory import memorize, summarize, track
+from .memory import memorize, summarize, summary_details, track
 from .rp.director import PACE, plan_next
 from .rp.narrator import NARRATOR, NARR_ID
 from .rp.ooc import OOC_CHAR, clean_notes
 from .rp.relations import public as rel_paths
-from .rp.resolve import rp_resolve
+from . import story
+from .rp.resolve import rp_observe, rp_resolve
 from .sharing import FAILS, FWD, LOCAL, MAX_BODY, MAX_QUEUE, MYIPS, QL, QUEUE, SESS, SHARE, lan_urls, save_share
 from .storage import chat_list, cdir, get_char, get_group, group_members, load_chars, load_groups, pub, rj, wj
 from .textutil import loose_json
@@ -95,6 +96,13 @@ class H(BaseHTTPRequestHandler):
             f = web.WEB / "fonts" / m.group(1)
             if f.is_file():
                 return self.send(f.read_bytes(), ctype="font/woff2", headers=[("Cache-Control", "public, max-age=31536000, immutable")])
+            return self.send({"err": "not found"}, 404)
+        m = re.fullmatch(r"/animals/sprites/([a-z0-9_]+\.(?:png|webp|jpg|gif))", self.path.split("?")[0])
+        if m:   # animal sprites (data/animals/sprites/american_black_bear.png ...): public pictures, nothing private
+            f = ROOT / "data" / "animals" / "sprites" / m.group(1)
+            if f.is_file():
+                ext = f.suffix.lower()[1:]
+                return self.send(f.read_bytes(), ctype="image/" + ("jpeg" if ext == "jpg" else ext), headers=[("Cache-Control", "public, max-age=3600")])
             return self.send({"err": "not found"}, 404)
         m = re.fullmatch(r"/(logo|favicon-32|icon-192|icon-512|apple-touch-icon)\.png|/(favicon)\.ico", self.path.split("?")[0])
         if m:   # the web icon: public static files from <project>/assets, also needed by the sign-in page
@@ -242,7 +250,7 @@ class H(BaseHTTPRequestHandler):
                  "scenario": str(b.get("scenario") or "")[:4000]}
             wj(GROUPS/f"{gid}.json", g)
             return self.send(g)
-        if self.path in ("/api/group_next", "/api/rp/resolve"):
+        if self.path in ("/api/group_next", "/api/rp/resolve", "/api/rp/observe"):
             g = get_group(str(b.get("group"))) if b.get("group") else None
             if b.get("group") and not g:
                 return self.send({"err": "Unknown group."})
@@ -252,9 +260,27 @@ class H(BaseHTTPRequestHandler):
             try:
                 if self.path == "/api/rp/resolve":
                     return self.send(rp_resolve(dict(b, members=mem)))
+                if self.path == "/api/rp/observe":
+                    return self.send(rp_observe(dict(b, members=mem)))
+                gone = {str(i) for i in (b.get("dead") or [])}      # the dead never speak: they are not even considered
+                mem = [c for c in mem if c["id"] not in gone]
+                if not mem:
+                    return self.send({"next": None, "why": "dead", "by": str(b.get("user") or "User"), "cap": 0, "pass": False})
                 hist = [dict(m, content=str(m.get("content", ""))[:4000]) for m in (b.get("history") or [])[-30:]]
                 return self.send(plan_next(g, mem, hist, list(b.get("spoke") or []), int(b.get("cap") or 0), int(b.get("n") or 0),
                                            str(b.get("user") or "User"), b))
+            except Exception as e:
+                return self.send({"err": str(e)})
+        if self.path == "/api/world":   # the story clock, weather and everyone's place in their day (no model call, nothing saved)
+            g = get_group(str(b.get("group"))) if b.get("group") else None
+            mem = [m for m in (group_members(g) if g else [get_char(str(b.get("cid")))]) if m]
+            if not mem:
+                return self.send({"err": "Unknown character."})
+            try:
+                hist = [dict(m, content=str(m.get("content", ""))[:4000]) for m in (b.get("history") or [])[-300:] if isinstance(m, dict) and not m.get("ooc")]
+                return self.send({"world": story.overview(mem, hist, str((g or mem[0]).get("scenario") or ""), b.get("story"), str(b.get("clock") or ""),
+                                                          str(b.get("story_start") or "")[:80], notes=([{"kind": "setting", "text": str(b["scene"])}] if b.get("scene") else []),
+                                                          seed=((g or {}).get("name") or mem[0].get("name") or ""))})
             except Exception as e:
                 return self.send({"err": str(e)})
         if self.path == "/api/feel":   # instant, provisional reaction to the message just sent (no model call, nothing saved)
@@ -303,7 +329,7 @@ class H(BaseHTTPRequestHandler):
                     cid_ = str((b.get("char") or {}).get("id"))
                     b["char"] = get_char(cid_) or ({"name": g_["name"]} if (g_ := get_group(cid_)) else {"name": "Character"})
                     b["history"] = [dict(m, content=str(m.get("content", ""))[:8000]) for m in b.get("history", [])[-60:]]
-                return self.send(track(b) if self.path == "/api/track" else memorize(b) if self.path == "/api/memorize" else {"summary": summarize(b)})
+                return self.send(track(b) if self.path == "/api/track" else memorize(b) if self.path == "/api/memorize" else {"summary": summarize(b), "chron_add": summary_details(b)})
             except Exception as e:
                 return self.send({"err": str(e)})
         if self.path == "/api/chat":

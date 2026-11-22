@@ -141,7 +141,29 @@ def derive(messages, scenario="", notes=()):
     day = DAYS[int(c.t // 1440) % 7] if c.day_known else ""
     per = _period(hr)
     return {"clock": (f"{day}, " if day else "") + f"around {stamp} ({per})", "period": per, "daytime": 5 <= hr < 19,
-            "night": hr >= 21 or hr < 5, "elapsed": elapsed, "hour": hr, "day": day}
+            "night": hr >= 21 or hr < 5, "elapsed": elapsed, "hour": hr, "day": day, "dayn": int(c.t // 1440), "abs": c.t}
+
+
+_CLOCK_RX = re.compile(r"(?i)\b(?P<day>monday|tuesday|wednesday|thursday|friday|saturday|sunday)\b.*?\b(?P<h>\d{1,2}):(?P<m>\d{2})\s*(?P<ap>am|pm)\b")
+MONTH_SEASON = {"december": "winter", "january": "winter", "february": "winter", "march": "spring", "april": "spring", "may": "spring",
+                "june": "summer", "july": "summer", "august": "summer", "september": "autumn", "october": "autumn", "november": "autumn"}
+
+
+def from_clock(clock):
+    """The page's real-world clock ('Sunday, November 22, 2026 at 3:12 PM (afternoon)') as a sim dict, for people who chose to let the story
+    follow the real time. Same shape as derive(); None when the string cannot be read."""
+    m = _CLOCK_RX.search(clock or "")
+    if not m:
+        return None
+    h = int(m["h"]) % 12 + (12 if m["ap"].lower() == "pm" else 0)
+    hr = h + int(m["m"]) / 60
+    mins = int(round(hr * 12)) * 5 % 1440
+    h12 = (mins // 60) % 12 or 12
+    per = _period(hr)
+    mo = re.search(r"(?i)\b(" + "|".join(MONTH_SEASON) + r")\b", clock or "")
+    return {"clock": f"{m['day'].capitalize()}, around {h12}:{mins % 60:02d} {'AM' if mins // 60 < 12 else 'PM'} ({per})", "period": per, "daytime": 5 <= hr < 19,
+            "night": hr >= 21 or hr < 5, "elapsed": 0.0, "hour": hr, "day": m["day"].capitalize(), "real": True,
+            "season": MONTH_SEASON[mo.group(1).lower()] if mo else "", "dayn": DAYS.index(m["day"].capitalize())}
 
 
 def guide(sim, name="the character"):

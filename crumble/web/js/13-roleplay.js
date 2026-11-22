@@ -1,43 +1,45 @@
-/* dice cards */
+/* outcome cards (no dice: every outcome is judged from skills, condition and situation) */
+const isDead=id=>!!chat?.rp?.body?.[id]?.dead,bodyOf=id=>chat?.rp?.body?.[id]||null;
+const CARDI={heal:'🩹',revive:'☠',rest:'🛏',persuade:'💬',intimidate:'😠'};
 function cardHTML(c){const rows=(c.rows||[]).map(r=>`<div class=fxr><span class=fxw>${esc(r.who||'')}</span>${r.d?`<code>${esc(r.d)}</code>`:''}<b style="color:${TIERC[r.tier]||'var(--tx)'}">${esc(r.res||'')}</b>${r.ex?`<span class=small>${esc(r.ex)}</span>`:''}</div>`).join('');
- return`<div class=fxc><div class=fxh>🎲 ${esc(c.title||'')}<span class=sp></span><button data-a=fxre title="Re-roll">↻</button><button data-a=fxno title="Ignore this roll">✕</button></div>${rows}${c.note?`<div class="small fxn">${esc(c.note)}</div>`:''}</div>`}
+ return`<div class=fxc><div class=fxh>${CARDI[c.type]||'✦'} ${esc(c.title||'')}<span class=sp></span><button data-a=fxno title="Ignore this outcome">✕</button></div>${rows}${c.note?`<div class="small fxn">${esc(c.note)}</div>`:''}</div>`}
 async function resolveFx(m,forced){
  m.rpsnap=JSON.stringify(chat.rp||{});const ids=G?G.members:[cur.id],aff={},mood={};ids.forEach(i=>{const s=G?mst(i):chat.state;aff[i]=s.affection;mood[i]=s.mood});
  const lastSp=[...hist].reverse().find(x=>x.role=='assistant'&&x.cid)?.cid||'';
- const r=await api('/api/rp/resolve','POST',{...(G?{group:G.id}:{cid:cur.id}),text:m.content,forced:forced||null,user:uname(),ustats:U.ustats,ugear:U.ugear,rp:chat.rp||{},aff,mood,last:lastSp,cfg:rpCfg()});
+ const r=await api('/api/rp/resolve','POST',{...(G?{group:G.id}:{cid:cur.id}),text:m.content,forced:forced||null,user:uname(),ustats:U.ustats,ugear:U.ugear,uskills:U.uskills||'',turn:hist.length,rp:chat.rp||{},aff,mood,last:lastSp,cfg:rpCfg()});
  if(r.err||!r.rp){delete m.rpsnap;return}
  chat.rp=r.rp;if(!r.card&&!r.brief){delete m.rpsnap;return}
- m.card=r.card;m.fx=r.brief;m.acting=r.acting||[];m.affd=r.aff||{};for(const[id,d]of Object.entries(m.affd))addAff(id,d)}
-async function fxRe(i){if(ctl||rounding)return;const m=hist[i];if(!m?.card)return;if(i<hist.length-1&&!confirm('Re-roll and replace the replies after this message?'))return;
- const k=m.card.type;restore(m);hist.splice(i+1);delete m.card;delete m.fx;draw();await resolveFx(m,k);draw();saveChat();G?await round():await gen('reply')}
+ m.card=r.card;m.fx=r.brief;m.acting=r.acting||[];m.affd=r.aff||{};for(const[id,d]of Object.entries(m.affd))addAff(id,d);bodyNews(r)}
+/* deaths and returns: say so loudly; the bond of the dead is set aside by the server and returns only with a resurrection */
+function bodyNews(r){const nm=id=>(G?memberById(id):cur)?.name||'They';
+ for(const id of r.deaths||[])bodyToast('☠',nm(id)+' has died','The dead cannot speak. Only a resurrection can bring them back.');
+ for(const id of Object.keys(r.revived||{})){const s=G?mst(id):chat.state;if(s){s.mood='shaken';s.emoji='😵';s.energy='low'}bodyToast('✨',nm(id)+' returns from the dead','Frail and shaken, remembering dying.')}
+ head()}
+function bodyToast(i,b,s){try{toast('up','#c0392b',i,'Roleplay',esc(b),esc(s),null)}catch(e){}}
+/* what the narration itself says happened to a body (a wound, a sickness, a death, time passing) */
+async function observeFx(text,m){if(U.rp=='off'||!chat||!text)return;const ids=G?G.members:[cur.id],aff={},mood={};ids.forEach(i=>{const s=G?mst(i):chat.state;aff[i]=s.affection;mood[i]=s.mood});
+ try{const snap=JSON.stringify(chat.rp||{});const r=await api('/api/rp/observe','POST',{...(G?{group:G.id}:{cid:cur.id}),text,user:uname(),rp:chat.rp||{},aff,mood,turn:hist.length});
+  if(r.err||!r.rp)return;if(JSON.stringify(r.rp)==snap)return;if(!m.rpsnap&&!m.obsnap)m.obsnap=snap;chat.rp=r.rp;bodyNews(r);saveChat();if(!$('#mem').hidden)renderMem()}catch(e){}}
 function fxNo(i){const m=hist[i];if(!m)return;restore(m);delete m.card;delete m.fx;delete m.acting;saveChat();draw()}
 
-/* combat panel + action bar */
-const ACTS={combat:[['attack','⚔','Attack','*attacks*'],['special','✨','Power','*unleashes a power*'],['defend','🛡','Defend','*braces and guards*'],['heal','🩹','Aid','*tends to wounds*'],['flee','🏃','Flee','*tries to flee*'],['persuade','🕊','Talk down','"Stop! We do not have to do this!"']],
- social:[['persuade','💬','Persuade'],['intimidate','😠','Intimidate'],['deceive','🎭','Deceive'],['comfort','🫶','Comfort'],['investigate','🔍','Investigate'],['sneak','🤫','Sneak'],['steal','🖐','Sleight of hand'],['athletics','🧗','Athletics'],['craft','🔧','Craft'],['attack','⚔','Start a fight']],
+/* action bar (no fight engine: conflict is story) */
+const ACTS={social:[['persuade','💬','Persuade'],['intimidate','😠','Intimidate'],['deceive','🎭','Deceive'],['comfort','🫶','Comfort'],['investigate','🔍','Investigate'],['sneak','🤫','Sneak'],['steal','🖐','Sleight of hand'],['athletics','🧗','Athletics'],['craft','🔧','Craft'],['heal','🩹','Aid']],
  romance:[['flirt','😏','Flirt'],['touch','🤝','Touch'],['date','🌹','Ask out'],['kiss','💋','Kiss'],['confess','💞','Confess'],['intimate','🌙','Closer']]};
-function cbtDraw(){const cb=chat?.rp?.combat,e=$('#cbt');
- if(!cb||!cb.on||U.rp=='off'){e.hidden=true;rpbarDraw();return}
- e.hidden=false;e.innerHTML=`<div class=cbh><b>⚔ Combat · round ${cb.round}</b><span class=small>${G?'@Name to pick a target':''}</span><span class=sp></span><button data-c=peace class=ghost>🕊 End fight</button></div><div class=units>${cb.units.map(u=>{const p=Math.max(0,u.hp/u.max*100),st=u.fled?'🏃 fled':u.hp<=0?'💫 down':u.def?'🛡 braced':'';
-  return`<div class="unit ${u.side}"><div class=un>${esc(u.name)}${u.side=='ally'?' 🤝':u.side=='player'?' (you)':''}</div><div class=hp><i style="width:${p}%;background:${p>50?'#58d68d':p>25?'var(--ac)':'var(--bad)'}"></i></div><div class=small>${Math.max(0,u.hp)}/${u.max} ${st}</div></div>`}).join('')}</div>`;rpbarDraw()}
-$('#cbt').onclick=e=>{if(e.target.dataset.c=='peace'&&!ctl&&!rounding)post('*lowers their guard and calls off the fight*','peace')};
-function armUI(){$$('#rpbar .pill').forEach(b=>b.classList.toggle('arm',b.dataset.k==armed&&!b.dataset.d));$('#inp').placeholder=oocOn?(innerWidth<=760?'Out of character…':'Out of character: discuss the story, correct someone, change the setting or give directions…'):armed?innerWidth<=760?'Describe your move… (Enter to send)':`Describe how you try to ${(ACTS.combat.concat(ACTS.social,ACTS.romance).find(a=>a[0]==armed)||[0,0,armed])[2].toLowerCase()}… (Enter to send)`:(innerWidth<=760?'Message…':'Message… (Enter sends, Shift+Enter adds a line)')}
-function rpbarDraw(){const e=$('#rpbar'),cb=chat?.rp?.combat?.on&&U.rp!='off';$('#tact2').hidden=U.rp=='off';$('#keep').hidden=!G;
- e.hidden=oocOn||!(cb||(U.actbar&&U.rp!='off'));if(e.hidden)return;
+function armUI(){$$('#rpbar .pill').forEach(b=>b.classList.toggle('arm',b.dataset.k==armed&&!b.dataset.d));$('#inp').placeholder=oocOn?(innerWidth<=760?'Out of character…':'Out of character: discuss the story, correct someone, change the setting or give directions…'):armed?innerWidth<=760?'Describe your move… (Enter to send)':`Describe how you try to ${(ACTS.social.concat(ACTS.romance).find(a=>a[0]==armed)||[0,0,armed])[2].toLowerCase()}… (Enter to send)`:(innerWidth<=760?'Message…':'Message… (Enter sends, Shift+Enter adds a line)')}
+function rpbarDraw(){const e=$('#rpbar');$('#tact2').hidden=U.rp=='off';$('#keep').hidden=!G;
+ e.hidden=oocOn||!(U.actbar&&U.rp!='off');if(e.hidden)return;
  const pl=(l,a)=>`<span class=lb>${l}</span>`+a.map(x=>`<button class=pill data-k=${x[0]} ${x[3]?`data-d="${at(x[3])}"`:''} title="${x[2]}">${x[1]} ${x[2]}</button>`).join('');
- e.innerHTML=cb?pl('Combat',ACTS.combat):pl('Do',ACTS.social)+(U.romance?pl('Romance',ACTS.romance):'');armUI()}
+ e.innerHTML=pl('Do',ACTS.social)+(U.romance?pl('Romance',ACTS.romance):'');armUI()}
 $('#rpbar').onclick=e=>{const b=e.target.closest('button');if(!b||ctl||rounding)return;const k=b.dataset.k,d=b.dataset.d,t=$('#inp').value.trim();
  if(t){armed=k;send()}else if(d){$('#inp').value=d;armed=k;send()}else{armed=armed==k?null:k;armUI();$('#inp').focus()}};
 $('#tact2').onclick=()=>{U.actbar=!U.actbar;pills();rpbarDraw()};
 
 /* slash commands */
 function slash(t){const[c,...r]=t.slice(1).split(/\s+/),arg=r.join(' ').trim();
- if(c=='roll'){const m=/^(\d*)d(\d+)\s*([+-]\s*\d+)?$/i.exec(arg||'1d20');if(!m)return{text:'*tries to roll dice* (usage: /roll 2d6+3)',nofx:1};
-  const n=Math.min(20,+m[1]||1),s=Math.min(1000,+m[2]),b=+(m[3]||'0').replace(/\s/g,''),ds=Array.from({length:n},()=>1+Math.floor(Math.random()*s));
-  return{text:`🎲 *rolls ${n}d${s}${b?(b>0?'+':'')+b:''}* → **${ds.reduce((a,x)=>a+x,0)+b}**${n>1?' ('+ds.join(' + ')+(b?', '+(b>0?'+':'')+b:'')+')':''}`,nofx:1}}
- if(c=='fight')return{text:`*attacks${arg?' '+arg.replace(/^@/,''):''}*`,forced:'attack'};
- if(c=='peace')return{text:'*lowers their guard and calls off the fight*',forced:'peace'};
- if(c=='rest')return{text:'*takes a long rest to recover*',forced:'rest'};
+ if(c=='roll'||c=='fight'||c=='peace')return{text:'*there are no dice and no fights to start here: whatever happens comes from the people and the moment*',nofx:1,local:1};
+ if(c=='rest')return{text:`*rests ${arg?'for '+arg:'for 8 hours'} to recover*`,forced:'rest'};
+ if(c=='revive')return{text:`*${arg||'the fallen'} is brought back from the dead*`,forced:'revive'};
+ if(c=='later'||c=='skip'||c=='time')return{text:worldSkip(arg||'1 hour'),nofx:0};
  return null}
 
 /* group round: the server decides who speaks next, one speaker at a time */
@@ -46,7 +48,7 @@ async function round(opts={}){
  const lu=hist.at(-1),acting=lu?.role=='user'?(lu.acting||[]):[],fx0=!!lu?.fx;
  try{for(let n=0;n<9&&!roundAbort;n++){
   const aff={};G.members.forEach(i=>aff[i]=mst(i).affection);
-  const r=await api('/api/group_next','POST',{group:G.id,user:uname(),history:apiHist(hist.slice(-30)),spoke,cap,n,keep:!!opts.keep,fx:n==0&&fx0,acting,aff,pers:U.pers});
+  const r=await api('/api/group_next','POST',{group:G.id,user:uname(),history:apiHist(hist.slice(-30)),spoke,cap,n,keep:!!opts.keep,fx:n==0&&fx0,acting,aff,pers:U.pers,dead:Object.keys(chat.rp?.body||{}).filter(isDead)});
   if(r.err){errBox(r.err,'round');break}
   cap=r.cap;if(!r.next)break;
   if(n>0){setStatus('typing…');await sleep(500+Math.random()*1300)}if(roundAbort)break;
@@ -56,11 +58,16 @@ $('#keep').onclick=()=>{if(!ctl&&!rounding&&chat)round({keep:true})};
 
 /* roleplay memory section */
 function rpMem(){const rp=chat.rp||{},ids=G?G.members:[cur.id];
- return`<details open><summary>Roleplay</summary><label>Romance with each character (your choices and the dice move this; you can adjust it)</label>${ids.map(i=>{const c=memberById(i)||cur,r=rp.rom?.[i]?.v||0;
+ return`<details open><summary>Roleplay</summary><label>Romance with each character (your choices move this; you can adjust it)</label>${ids.map(i=>{const c=memberById(i)||cur,r=rp.rom?.[i]?.v||0;
   return`<label>${esc(c.name)}: <b>${romStage(r)} (${r})</b></label><input type=range min=0 max=100 value=${r} data-m=rom data-c=${i}>`+(rp.rom?.[i]?.ms?.length?`<div class=small>${esc(rp.rom[i].ms.join(' · '))}</div>`:'')}).join('')}`
  +(U.intimacy?`<label style="margin-top:8px">Physical intimacy with each character (adult characters only; you can adjust it)</label>${ids.map(i=>{const c=memberById(i)||cur,iv=rp.intim?.[i]?.iv||0;
   return`<label>${esc(c.name)}: <b>${intimStage(iv)} (${iv})</b></label><input type=range min=0 max=100 value=${iv} data-m=intim data-c=${i}>`+(rp.intim?.[i]?.acts?.length?`<div class=small>${esc(rp.intim[i].acts.join(' · '))}</div>`:'')}).join('')}`:'')
- +`<div class=row><button data-m=rest>🛏 Rest (heal everyone)</button>${rp.combat?.on?'<button class=x data-m=endfight>End the fight</button>':''}</div><div class=small>Set your stats and gear under “About you” in the sidebar. Dice, combat, romance and intimacy can be changed in Settings.</div></details>`}
+ +`<div class=row><button data-m=rest>🛏 Rest 8 hours</button></div><div class=small>Set your stats, skills and gear under “About you” in the sidebar. Skill attempts are judged from them (no dice). Wounds heal with time, care and rest.</div></details>`+bodyMem(ids)}
+function bodyMem(ids){const all=[['user',uname()],...ids.map(i=>[i,(memberById(i)||cur).name])],rp=chat.rp||{};
+ const rows=all.map(([id,n])=>{const b=rp.body?.[id];if(!b)return'';const L=[...(b.inj||[]).map(i=>`${i.k} (${i.p}, ${['','minor','painful','serious','critical'][i.s]}${i.care?', tended':''})`),...(b.ill||[]).map(i=>`${i.k} (${['','mild','real','bad','dangerous'][i.s]})`)];
+  if(b.dead)return`<label>☠ ${esc(n)}: <b>dead</b>${b.died?.how?' · '+esc(b.died.how):''}</label><div class=row><button data-m=revive data-c=${id}>✨ Bring back (author)</button></div>`;
+  return L.length||b.tired>=50?`<label>${esc(n)}: <b>${esc(L.join('; ')||'worn out')}</b>${b.tired>=50?' · exhausted':''}</label><div class=row><button data-m=heal1 data-c=${id}>🩹 Treat</button></div>`:''}).join('');
+ return rows?`<details open><summary>Bodies</summary>${rows}<div class=small>Serious wounds need treatment; the dying bleed out within the hour. The dead stay dead unless someone with real revival power (or you, as the author) brings them back.</div></details>`:''}
 function renderMemG(){const f=$('#memf'),st=chat.state;
  f.innerHTML=`<details open><summary>Characters in this group</summary>${gmem().map(c=>{const s=mst(c.id);return`<label>${esc(c.name)}: <b>${s.emoji||'😐'} ${esc(s.mood||'neutral')}</b> · feels about you: <b>${stg(s.affection)} (${s.affection})</b></label><input type=range min=0 max=100 value=${s.affection} data-m=gaff data-c=${c.id}>`}).join('')}</details>
  <details open><summary>Scene note</summary><label>Steer the situation. It stays in every prompt for this chat.</label><textarea data-m=scene rows=3>${esc(chat.cfg.scene||'')}</textarea></details>

@@ -134,6 +134,7 @@ def update(st, j, hist, *, user, char, persona="", cfg, turn, delta=0, mood_befo
         if r["imp"] >= .45 and gd(r["text"], "episode"):
             store.add(m, "episodic", r["text"], imp=r["imp"] * .9, turn=r["turn"], ts=r["ts"], src="promoted")
     store.compact(m, turn)
+    store.decay(m, turn)      # and forget what never mattered, after a while
     st["facts"] = store.user_facts_mirror(m)
     return {"added": [i["id"] for i in m["items"] if i["id"] not in before], "moment": mom}
 

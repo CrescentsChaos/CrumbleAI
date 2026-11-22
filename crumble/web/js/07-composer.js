@@ -6,7 +6,7 @@ $('#log').onclick=e=>{const b=e.target.closest('button');
  const a=b.dataset.a,mEl=b.closest('.m'),i=mEl?+mEl.dataset.i:-1,m=hist[i];if(!a)return;
  if(a=='retry'){b.closest('.sys').remove();return void(b.dataset.k=='round'?round():gen(b.dataset.k))}
  if(!m)return;
- if(a=='fxre')return void fxRe(i);if(a=='fxno')return void fxNo(i);
+ if(a=='fxno')return void fxNo(i);
  if(a=='copy')navigator.clipboard?.writeText(plain(m));
  else if(a=='edit')editMsg(i);
  else if(a=='ecancel')draw();
@@ -48,7 +48,7 @@ $('#menu').onclick=()=>document.body.classList.toggle('drawer');$('#scrim').oncl
 let kbT=0;$('#inp').addEventListener('focus',()=>{clearTimeout(kbT);document.body.classList.add('kb');setTimeout(()=>{$('#log').scrollTop=1e9},250)});
 $('#inp').addEventListener('blur',()=>{kbT=setTimeout(()=>document.body.classList.remove('kb'),200)});$('#send').onmousedown=e=>e.preventDefault();{const mq=matchMedia('(max-width:760px)'),ph=()=>typeof armUI=='function'?armUI():$('#inp').placeholder=mq.matches?'Message…':'Message… (Enter sends, Shift+Enter adds a line)';ph();mq.addEventListener('change',ph)}document.addEventListener('keydown',e=>{if(e.key=='Escape')$('.chead').classList.remove('open')});
 if(window.visualViewport)visualViewport.addEventListener('resize',()=>{document.documentElement.style.setProperty('--vh',visualViewport.height+'px');scrollTo(0,0);const L=$('#log');if(document.body.classList.contains('kb'))L.scrollTop=L.scrollHeight});
-$('#uname').oninput=e=>{U.uname=e.target.value;persist();cur&&draw()};$('#persona').oninput=e=>{U.persona=e.target.value;persist()};$('#ustats').oninput=e=>{U.ustats=e.target.value;persist()};$('#ugear').oninput=e=>{U.ugear=e.target.value;persist()};
+$('#uname').oninput=e=>{U.uname=e.target.value;persist();cur&&draw()};$('#persona').oninput=e=>{U.persona=e.target.value;persist()};$('#ustats').oninput=e=>{U.ustats=e.target.value;persist()};$('#ugear').oninput=e=>{U.ugear=e.target.value;persist()};$('#uskills').oninput=e=>{U.uskills=e.target.value;persist()};
 function pills(){for(const[id,k]of[['#tthink','think'],['#tact','actions'],['#tthoughts','thoughts'],['#tvoice','tts'],['#tact2','actbar']])$(id).classList.toggle('on',!!U[k]);persist()}
 $('#tthink').onclick=()=>{U.think=!U.think;pills();draw()};$('#tact').onclick=()=>{U.actions=!U.actions;pills();draw()};
 $('#tthoughts').onclick=()=>{U.thoughts=!U.thoughts;pills();draw();renderSettings()};$('#tvoice').onclick=()=>{U.tts=!U.tts;if(!U.tts)speechSynthesis?.cancel?.();pills();renderSettings()};

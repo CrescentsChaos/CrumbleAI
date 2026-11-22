@@ -17,7 +17,7 @@ State (stored alongside rp.rom.<cid>):
 import re
 
 from ..config import CH, US
-from .dice import TIER_TXT, TIER_UI, check, md
+from .dice import TIER_TXT, TIER_UI, check, edge, md
 from .romance import rom_stage
 
 # ── intimacy thresholds ─────────────────────────────────────────────
@@ -355,7 +355,7 @@ def intimacy_beat(act, c, rp_state, aff, mood, ust, cfg, icfg, user, out):
         "type": act, "title": title,
         "rows": [{
             "who": f"{user} → {nm}",
-            "d": f"d20 {r['roll']}{r['bonus']:+d} = {r['total']} vs DC {dc}",
+            "d": edge(r),
             "res": TIER_UI[r["tier"]],
             "tier": r["tier"],
             "ex": f"💫 {intim_stage(new_iv)} ({delta:+d})",

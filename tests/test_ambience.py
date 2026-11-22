@@ -68,7 +68,7 @@ class GuardTests(unittest.TestCase):
 
     def test_pipeline_retries_and_boosts(self):
         hist = M("The storm hammers the old house. Thunder, lightning, a scream from the cellar.", "I grab the torch")
-        fake = h.install(h.FakeLLM(["*Sunlight streams in as she smiles.* Lovely day.", "*Thunder cracks. Faith freezes, breath shallow.* Did you hear that?"]))
+        fake = h.install(h.FakeLLM(["*Sunlight streams in as she smiles.* Lovely day.", "*Thunder cracks. Faith freezes, breath shallow.* I heard that."]))
         r = generate_reply({"char": C, "user": "Crescent", "history": hist, "state": {}, "params": {"mode": "story", "think": False, "max_tokens": 200}}, None)
         self.assertEqual(len(fake.calls), 2)
         self.assertIn("Thunder", r["text"])

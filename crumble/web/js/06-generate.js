@@ -29,17 +29,18 @@ async function gen(kind='reply',spk,cue){
  if(!cur?.id||!chat||ctl)return null;skipTyping();
  const ooc=kind=='ooc',swp=kind=='swipe'||kind=='continue',li=swp?icLast():hist.length-1,last=hist[li];if(swp&&!last)return null;
  const sp=ooc?OOCSP:G?memberById(spk||last?.cid):cur;if(!sp)return null;
+  if(!ooc&&U.rp!='off'&&isDead(sp.id))return 'pass';   // the dead do not speak
  const all=kind=='swipe'?hist.slice(0,li):hist,ic=all.filter(m=>!m.ooc),base=ooc?all:ic,lastU=[...ic].reverse().find(m=>m.role=='user'),started=Date.now(),
   lastO=ooc?[...hist].reverse().find(m=>m.role=='user'&&m.ooc):null;
  pendWho=ooc?OOCSP:G?sp:null;ctl=new AbortController();busy(true);phase('reading…');live={raw:'',shown:0,on:false,raf:0,sp:pendWho||cur,ooc};
  const rt=setTimeout(()=>{if(pendLabel=='reading…')phase('typing…')},Math.min(350,200+(lastU?lastU.content.split(' ').length*10:0)));
  const a=ic.at(-1)?.ts,b=ic.at(-2)?.ts;
  const gap=ooc||!U.timeaware?0:kind=='nudge'||kind=='continue'?(Date.now()-(a||Date.now()))/1000:(a&&b?(a-b)/1000:0);
- const s=chat.state,ms=ooc?{summary:s.summary}:G?{...mst(sp.id),summary:s.summary,log:undefined}:{...s,log:undefined},
+ const s=chat.state,ms=ooc?{summary:s.summary}:G?{...mst(sp.id),summary:s.summary,chron:s.chron,chron_in:s.chron_in,log:undefined}:{...s,log:undefined},
   body={user:uname(),persona:U.persona,history:apiHist(base,ooc),turn:all.length,kind:kind=='swipe'?'reply':kind,
   from:ooc?0:U.track&&s.summary?Math.max(0,Math.min(all.slice(0,s.sumUpto).filter(m=>!m.ooc).length,ic.length-2)):0,state:U.track?ms:{},scene:chat.cfg.scene,
-  clock:U.timeaware?clock():'',gap_s:gap,rp:{on:U.rp!='off',state:chat.rp||{},fx:lastU?.fx||'',cfg:rpCfg()},
-  params:{...P,quick:U.quick,stream:!!U.stream,think:U.think,actions:U.actions,mode:chat.cfg.mode,length:chat.cfg.length,realism:U.realism,natural:U.natural,pers:persCfg(),mem:memCfg()}};
+  clock:U.timeaware?clock():'',story_start:chat.cfg.start||'',gap_s:gap,rp:{on:U.rp!='off',state:chat.rp||{},fx:lastU?.fx||'',cfg:rpCfg(),uskills:U.uskills||'',ugear:U.ugear||''},
+  params:{...P,quick:U.quick,stream:!!U.stream,think:U.think,actions:U.actions,mode:chat.cfg.mode,length:chat.cfg.length,realism:U.realism,natural:U.natural,pers:persCfg(),mem:memCfg(),story:storyCfg()}};
  body.ooc=ooc?{kind:lastO?.ooc||'discuss',notes:oocActive(all,'reply').filter(n=>n.oid!=lastO?.oid)}:{notes:oocActive(all,kind)};
  if(kind=='swipe'&&last)body.avoid=(last.sw?last.sw.map(x=>x.content):[last.content]).filter(Boolean);
  if(G){body.group=G.id;body.speaker=sp.id;body.cue=cue||{}}else body.char=apiChar();
@@ -58,19 +59,23 @@ async function gen(kind='reply',spk,cue){
   draw();return null}
  if(res&&res.pass)return 'pass';
  if(!res||!res.text){draw();errBox(err||'The model returned nothing.',G&&!ooc?'round':kind);return null}
- let idx;const v={content:res.text,think:res.think,ts:Date.now(),stat:{tok:res.tok,ms:res.ms},pers:res.pers,recalled:res.recalled};
+ let idx;const v={content:res.text,think:res.think,ts:Date.now(),stat:{tok:res.tok,ms:res.ms},pers:res.pers,wild:(!ooc&&res.world&&res.world.wild)||undefined,recalled:[...(res.recalled||[]),...(res.chron_used||[])]};
  if(ooc){hist.push({role:'assistant',content:res.text,think:res.think,ts:Date.now(),stat:v.stat,ooc:lastO?.ooc||'discuss'});idx=hist.length-1}
  else if(kind=='swipe'){restore(last);if(!last.sw)last.sw=[{content:last.content,think:last.think,ts:last.ts,stat:last.stat,thought:last.thought,pers:last.pers}];
   last.sw.push(v);last.si=last.sw.length-1;Object.assign(last,v,{thought:'',react:''});idx=li}
  else if(kind=='continue'){last.content=last.content.trimEnd()+(chat.cfg.mode=='text'?'\n':'\n\n')+res.text;if(last.sw)last.sw[last.si].content=last.content;idx=li}
  else{hist.push({role:'assistant',...v,seen:started,nudge:kind=='nudge'?1:undefined,...(G?{cid:sp.id,name:sp.name}:{})});idx=hist.length-1}
- $('#ctxm').textContent=(res.cut?'Reply hit the length cap and was trimmed to a full sentence. Use Continue for more. · ':'')+`prompt ${res.ctx_used.toLocaleString()} / ${res.ctx.toLocaleString()} tokens`+(res.recalled?.length?` · recalled ${res.recalled.length} ${res.recalled.length==1?'memory':'memories'}`:'')+(res.dropped?` · ${res.dropped} oldest messages left out`:'');
+ $('#ctxm').textContent=(res.cut?'Reply hit the length cap and was trimmed to a full sentence. Use Continue for more. · ':'')+`prompt ${res.ctx_used.toLocaleString()} / ${res.ctx.toLocaleString()} tokens`+(res.recalled?.length?` · recalled ${res.recalled.length} ${res.recalled.length==1?'memory':'memories'}`:'')+(res.squeeze?` · compacted (details kept)`:'')+(res.dropped?` · ${res.dropped} oldest messages left out of the window (their details are kept)`:'');
+  if(res.chron_add?.length&&!ooc){const cs=chat.state;cs.chron_in=[...(cs.chron_in||[]),...res.chron_add].slice(-80)}
+ if(res.world&&!ooc&&res.world.on!==false){W.info=res.world;worldHead()}
  saveChat();draw();beep();lastAct=Date.now();
  if(U.tts&&!ooc)speak(hist[idx].content);
  if(!U.stream)await typeMsg(idx);lastAct=Date.now();
- if(!ooc)trackSoon(idx);return true}
-async function post(t,forced,nofx){const m={role:'user',content:t,ts:Date.now()};hist.push(m);beep(520,.05);nudges=0;lastAct=Date.now();draw();feelPeek(t);
- if(U.rp!='off'&&!nofx){await resolveFx(m,forced);draw()}saveChat();G?await round():await gen('reply')}
+ if(!ooc){observeFx(hist[idx].content,hist[idx]);trackSoon(idx)}return true}
+async function post(t,forced,nofx){const m={role:'user',content:t,ts:Date.now()};hist.push(m);beep(520,.05);nudges=0;lastAct=Date.now();draw();feelPeek(t);worldRefresh();
+ if(U.rp!='off'&&!nofx){await resolveFx(m,forced);draw();if(!m.card&&!m.fx)observeFx(m.content,m)}
+ saveChat();if(!G&&U.rp!='off'&&isDead(cur.id)){bodyToast('☠',cur.name+' is dead','They cannot answer. Only a resurrection can change that.');return}
+ G?await round():await gen('reply')}
 async function send(){let t=$('#inp').value.trim();if(!t||ctl||rounding||!cur?.id||!chat)return;skipTyping();window.speechSynthesis?.cancel();
  $('#inp').value='';$('#inp').style.height='';hideMnu();
  const o=oocRoute(t);   // out of character? (OOC button, ((text)), //text, ooc: text, /ooc /correct /setting /direct) or back in with /ic
@@ -81,19 +86,20 @@ async function send(){let t=$('#inp').value.trim();if(!t||ctl||rounding||!cur?.i
 /* ---------- inner state + long-term memory (runs after the reply, never delays it) ---------- */
 async function trackState(i){
  if(!U.track||!S.loaded||!chat)return;const ch=chat,m=hist[i];if(!m)return;
- const sp=G?memberById(m.cid):cur;if(!sp||sp.id=='__narrator__')return;
+ const sp=G?memberById(m.cid):cur;if(!sp||sp.id=='__narrator__')return;if(U.rp!='off'&&isDead(sp.id))return;
  const stt=G?mst(sp.id):ch.state,{log,mem:memPrev,...rest}=stt,snap=JSON.stringify(rest);
- try{const r=await api('/api/track','POST',{char:apiChar(sp),user:uname(),persona:U.persona,history:apiHist(hist.slice(Math.max(0,i-5),i+1)),state:stt,group:G?G.id:undefined,pers:persCfg(),mem:memCfg(),turn:i+1,used:m.recalled||[]});
+ try{const r=await api('/api/track','POST',{char:apiChar(sp),user:uname(),persona:U.persona,history:apiHist(hist.slice(Math.max(0,i-5),i+1)),state:G?{...stt,chron:ch.state.chron,chron_in:ch.state.chron_in}:stt,group:G?G.id:undefined,pers:persCfg(),mem:memCfg(),turn:i+1,used:m.recalled||[]});
   if(r.err||!r.state||chat!==ch||hist[i]!==m)return;
   if(U.mem)m.mundo={add:r.mem_added||[],scene:memPrev?.scene||'',recent:memPrev?.recent||[]};
   m.snap=snap;if(G)m.snapc=sp.id;m.thought=r.thought||'';hist.forEach((x,k)=>{if(k<i-6){delete x.snap;delete x.snapc}});
-  if(G)ch.state.members[sp.id]={...stt,...r.state};else ch.state={...ch.state,...r.state};bondAfterTrack(m,G?sp.id:cur.id,r);
+  if(G){const{chron,...rs}=r.state;ch.state.members[sp.id]={...stt,...rs};if(chron)ch.state.chron=chron}else ch.state={...ch.state,...r.state};delete ch.state.chron_in;bondAfterTrack(m,G?sp.id:cur.id,r);
   head();redrawMsg(i);saveChat();if(!$('#mem').hidden)renderMem();maybeSummarize()}catch(e){}}
 const SUM_EVERY=10,SUM_KEEP=4;   // auto-summarize every 10 new messages; the newest 4 stay word-for-word in the prompt
 let sumBusy=false;
 async function maybeSummarize(force){
  if((!force&&!U.track)||!S.loaded||!chat||sumBusy)return;const ch=chat,s=ch.state,upto=force?hist.length:hist.length-SUM_KEEP;
- if((!force&&upto-s.sumUpto<SUM_EVERY)||upto<=s.sumUpto)return;
+ const press=hist.slice(s.sumUpto,upto).reduce((a,x)=>a+(x.content||'').length,0)/3.4>1500;   // a long stretch of text is folded in sooner: the prompt stays well under the context limit
+  if((!force&&upto-s.sumUpto<(press?4:SUM_EVERY))||upto<=s.sumUpto)return;
  sumBusy=true;try{
- const r=await api('/api/summarize','POST',{char:apiChar(),user:uname(),persona:U.persona,group:G?G.id:undefined,history:apiHist(hist.slice(s.sumUpto,upto)),summary:s.summary});
- if(r.summary&&chat===ch){s.summary=r.summary;s.sumUpto=upto;saveChat();if(!$('#mem').hidden)renderMem()}return r}finally{sumBusy=false}}
+ const r=await api('/api/summarize','POST',{char:apiChar(),user:uname(),persona:U.persona,group:G?G.id:undefined,history:apiHist(hist.slice(s.sumUpto,upto)),summary:s.summary,turn0:s.sumUpto});
+ if(r.summary&&chat===ch){s.summary=r.summary;s.sumUpto=upto;if(r.chron_add?.length)s.chron_in=[...(s.chron_in||[]),...r.chron_add].slice(-120);saveChat();if(!$('#mem').hidden)renderMem()}return r}finally{sumBusy=false}}

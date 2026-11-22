@@ -156,6 +156,27 @@ def keep_score(i, turn):
     return (9.0 if i.get("pin") else 0.0) + i.get("imp", .5) + .25 * (.5 ** (age / 150)) + .06 * min(i.get("n", 0), 5)
 
 
+def decay(m, turn):
+    """Forget what no longer matters: a small memory that was never recalled is deleted after a while (episodes and feelings ~140 messages,
+    plain facts ~220). Pinned memories and anything recalled lately stay; a feeling whose episode is gone goes with it."""
+    keep = []
+    for i in m["items"]:
+        age = turn - i.get("turn", 0)
+        used = i.get("n", 0) > 0 and turn - i.get("last", 0) < 200
+        imp = i.get("imp", .5)
+        if i.get("pin") or used:
+            keep.append(i)
+        elif i["t"] in ("episodic", "emotional") and imp < .4 and age > 140:
+            continue
+        elif i["t"] == "semantic" and imp < .3 and age > 220:
+            continue
+        else:
+            keep.append(i)
+    ids = {i["id"] for i in keep}
+    m["items"] = [i for i in keep if not (i["t"] == "emotional" and i.get("link") and i["link"] not in ids)]
+    return m
+
+
 def compact(m, turn=None):
     """Keep each layer under its cap by dropping the least important, oldest, never-recalled memories (pinned ones stay)."""
     turn = m.get("turn", 0) if turn is None else turn
