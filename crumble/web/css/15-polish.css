@@ -1,0 +1,117 @@
+/* ===== 15 polish: design-law pass (see skill.md) =====
+   Loaded last, so it refines the earlier files without touching them. Each block names the law or rule it serves. */
+
+/* Tabular nums: anything that counts or ticks keeps its width, so nothing jitters while it updates */
+.ts,.seen,#ctxm,.pscore,.cnt,.lede,.mfacts b,.tl,#hstage,.chip b,.mchip{font-variant-numeric:tabular-nums}
+
+/* Wrap headlines properly: balanced headings, no orphans in body copy */
+h1,h2,h3,.chd h2,.gh,.who b,.mbox .mart .cap b,.card .cn,summary{text-wrap:balance}
+.chd .lede,.mbody p,.mgreet,label.chk small,.small{text-wrap:pretty}
+
+/* Improve text contrast: muted text was too faint at 11-11.5px; raise the floor and darken the dim timestamps */
+.nm .ts{opacity:.85;font-size:12px}
+.seen,.ch span small,.av .bd{font-size:12px}
+.who small,.sw,.mchip,.small{font-size:12.5px}
+:root{--mu:color-mix(in srgb,var(--tx) 66%,var(--bg))}
+[data-mode=light]{--mu:color-mix(in srgb,var(--tx) 72%,var(--bg))}
+.card .cs{color:hsl(var(--h) 40% 90%/.9)}.card .ct i{font-size:12px;background:hsl(var(--h) 60% 80%/.22)}
+
+/* Remove embellishments: no tilting cards, no blur on every surface, calmer shadows */
+.card{transform:translateY(var(--ty,0px))}
+.card.t{transition:transform .28s cubic-bezier(.2,.8,.2,1),box-shadow .28s,border-color .28s}
+.card:hover{box-shadow:0 18px 30px -22px hsl(var(--h) 80% 50%/.5)}
+.card:active{transform:scale(.99)}
+.card .ct i,.card .cm,.comp,.chead{backdrop-filter:none;-webkit-backdrop-filter:none}
+.comp{background:var(--pn);box-shadow:none}
+.comp:focus-within{box-shadow:0 0 0 4px color-mix(in srgb,var(--ac) 14%,transparent)}
+.chead{background:var(--bg)}
+[data-wall=glass] .chead,.chead.sticky{backdrop-filter:blur(12px)}
+
+/* Keep icons consistent: one stroke weight everywhere */
+.ic,#send .ic,#stop .ic{stroke-width:1.75}
+.ic.f{stroke:none}
+
+/* Inner radius = outer radius - padding */
+.comp{border-radius:26px;padding:6px 6px 6px 20px}      /* 26 - 6 = 20 */
+#send,#stop,#mic{border-radius:20px}                    /* buttons sit as rounded squares inside the pill */
+nav .tabs{border-radius:14px;padding:4px}nav button{border-radius:10px}
+.acts{border-radius:11px;padding:2px}.acts button{border-radius:9px}
+.hctl{border-radius:var(--r);padding:12px}.hctl select,.hctl .dd{border-radius:calc(var(--r) - 12px + 6px)}
+.sbsearch{border-radius:var(--rs)}
+
+/* Emphasize the CTA: Send is the one filled, accent-coloured control in the composer; everything around it is quiet */
+#send{background:var(--ac);color:var(--ink);border:0;box-shadow:0 6px 16px -8px color-mix(in srgb,var(--ac) 80%,transparent)}
+#send:not(:disabled):hover{transform:translateY(-1px);filter:brightness(1.07)}
+#send:disabled{background:var(--pn3);color:var(--mu);box-shadow:none;opacity:1}
+.ocb{color:var(--mu);background:none;border-color:transparent;font-weight:650;font-size:12.5px}
+.ocb:hover{color:var(--tx);background:var(--pn3)}
+
+/* Von Restorff + similarity: the open tab and the active chat each carry the accent, nothing else in the bar does */
+nav button.on{background:color-mix(in srgb,var(--ac) 14%,var(--pn3));box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--ac) 30%,transparent)}
+nav button.on .ic{color:var(--ac)}
+.mchip{background:none}
+
+/* Progressive disclosure: secondary toggles sit quiet until asked for, active ones light up */
+.pill{background:none;border-color:transparent;padding:5px 11px 5px 9px}
+.pill:hover{background:var(--pn2);border-color:var(--ln)}
+.pill.on{background:color-mix(in srgb,var(--ac) 18%,transparent);color:var(--act);border-color:color-mix(in srgb,var(--ac) 38%,transparent)}
+.pill.on:hover{background:color-mix(in srgb,var(--ac) 26%,transparent);filter:none}
+.tools .ghost{font-size:12.5px}
+
+/* Occam's razor / Pareto: the header keeps the name, the mood word and the bond; the meter and stage text only appear when there is room */
+@media(max-width:1180px){.chip .meter,.chip #hstage{display:none}}
+
+/* Law of proximity + common region: the sidebar groups by spacing instead of extra lines */
+.sec{margin:20px 10px 6px;letter-spacing:.01em}
+.sblist{padding:4px 8px 12px}
+.ch{margin:1px 0}
+.ch.on{box-shadow:inset 3px 0 0 var(--ac)}
+.sbfoot{background:var(--pn);padding:14px}
+details.mdl{background:none}
+.me{margin-bottom:10px}
+details:not(.think):not(.mdl){margin-bottom:16px}
+label{margin:16px 0 6px}label.chk{margin:14px 0}
+.row{margin:8px 0}
+
+/* Messages: the speaker's name and time stay quiet, the text carries the weight; consecutive bubbles from one speaker read as one group */
+.nm{font-weight:550}
+.tx+.tx{margin-top:3px}
+
+/* Aesthetic-usability: one consistent focus ring and hover lift */
+button:not(.card):not(.ib):not(.ghost):not(.pill):hover{transform:translateY(-1px)}
+button:active,button:not(.card):not(.ib):not(.ghost):not(.pill):active{transform:scale(.97)}
+.card:focus-visible{outline-offset:3px;border-radius:24px}
+
+/* Add loading states: while a reply is being written the composer shows it, and any button can be marked .busy */
+.comp:has(#stop:not([hidden])){border-color:color-mix(in srgb,var(--ac) 50%,transparent)}
+.comp:has(#stop:not([hidden]))::before{content:"";position:absolute;left:20px;right:20px;bottom:-1px;height:2px;border-radius:2px;background:linear-gradient(90deg,transparent,var(--ac),transparent);background-size:40% 100%;background-repeat:no-repeat;animation:sweep 1.3s ease-in-out infinite}
+.comp{position:relative}
+@keyframes sweep{from{background-position:-40% 0}to{background-position:140% 0}}
+button.busy{pointer-events:none;color:transparent!important;position:relative}
+button.busy::after{content:"";position:absolute;width:15px;height:15px;border-radius:50%;border:2px solid color-mix(in srgb,var(--tx) 30%,transparent);border-top-color:var(--tx);animation:spin .7s linear infinite}
+button.go.busy::after{border-color:color-mix(in srgb,var(--ink) 30%,transparent);border-top-color:var(--ink)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.sk{position:relative;overflow:hidden;background:var(--pn2);border-radius:var(--r);min-height:1em}
+.sk::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,color-mix(in srgb,var(--tx) 8%,transparent) 50%,transparent 70%);transform:translateX(-100%);animation:shim 1.4s infinite}
+@keyframes shim{to{transform:translateX(100%)}}
+.mchip i{transition:background .3s}
+.mchip:not(.on) i{animation:pl 1.6s infinite}
+
+/* Animate useful feedback: toggles, the context counter and the mood meter respond to change, nothing animates for show */
+label.chk input,.pill,.tagc,.ch{transition:background .18s,border-color .18s,color .18s,box-shadow .18s}
+.tagc:hover{color:var(--tx);border-color:color-mix(in srgb,var(--tx) 22%,transparent)}
+.tagc.on{background:color-mix(in srgb,var(--ac) 18%,transparent);color:var(--act);border:1px solid color-mix(in srgb,var(--ac) 40%,transparent)}
+.meter i{transition:width .6s cubic-bezier(.2,.8,.2,1)}
+
+/* Cards: the gallery is the product, so the art gets the room and the headline gets bigger; the "new" card stays clearly secondary */
+.chd h2{font-size:44px}
+.card .cn{font-size:23px}
+.card.new{border-width:1.5px;background:color-mix(in srgb,var(--pn) 60%,transparent)}
+
+/* Mobile bottom bar: bigger tap targets, the open tab shows with colour and weight, not only a tint */
+@media(max-width:760px){
+ nav button{min-height:48px}nav button.on{background:none;box-shadow:none;color:var(--ac)}
+ nav button.on span{font-weight:650}
+ .comp{padding:4px 4px 4px 12px;border-radius:24px}#send,#stop,#mic{border-radius:20px}
+ .chd h2{font-size:30px}
+}

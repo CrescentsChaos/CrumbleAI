@@ -1,0 +1,241 @@
+{
+ "id": "rj8sx50i",
+ "title": "“Let them talk”",
+ "updated": 1795631178.2838633,
+ "history": [
+  {
+   "role": "user",
+   "content": "“Let them talk”",
+   "ts": 1795631135501
+  },
+  {
+   "role": "assistant",
+   "content": "*Paul turns to the other trainer, his expression neutral* So? You've seen my team. *He crosses his arms, waiting for their response.*\n\n*Paul's eyes scan over the Pokémon, taking in their types and moves.* Alright then. Let's see what you've got. *He steps forward, ready to begin the battle.*\n\nSo? You gonna pick your starter or just stand there like a wet noodle? *His voice is sharp with challenge, but not unkindly so.* I haven't got all day, ya know.\n\n*Paul raises an eyebrow, unimpressed by the other trainer's choice of Pokémon. He smirks slightly.* So you think you can take me on with just them? Let's see what you've got then.\n\n*He selects his starter Pokémon and steps forward to initiate the battle.*\n\nYou ready for this? I'm not gonna go easy on ya. *He chuckles dryly, but there's a glimmer of excitement in his eyes.*\n\n*Paul looks at the sky, letting out a low sigh.* Just my luck, getting caught in this downpour. *He turns back to Crescent, smirking slightly.*\n\nWell, it's not like I can't handle a little rain. Let's get this battle started before we both turn into prunes, huh?\n\n*Paul selects his starter Pokémon, ready to begin the battle. He smirks confidently.* Let's see what you've got then. I'm not gonna go easy on ya.",
+   "think": "",
+   "ts": 1795631142816,
+   "stat": {
+    "tok": 37,
+    "ms": 7036
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "dyn": {
+    "tone": "deadpan",
+    "quirk": null,
+    "len": "short"
+   },
+   "seen": 1795631135681,
+   "cid": "c8cd1f0a",
+   "name": "Paul",
+   "mundo": {
+    "add": [],
+    "scene": "{{char}} and {{user}} are at a Pokémon battle",
+    "recent": [
+     {
+      "text": "{{char}} challenges another trainer's team",
+      "imp": 0.13,
+      "turn": 2,
+      "ts": 1795631147113
+     },
+     {
+      "text": "{{char}} challenged {{user}} to a Pokémon battle",
+      "imp": 0.41,
+      "turn": 2,
+      "ts": 1795631159464
+     }
+    ]
+   },
+   "snap": "{\"mood\":\"neutral\",\"emoji\":\"😐\",\"energy\":\"medium\",\"affection\":50,\"facts\":[],\"summary\":\"\",\"sumUpto\":0,\"cast\":{\"un\":\"\",\"ug\":\"m\",\"wrong\":[]},\"pers\":{\"frac\":0,\"grudge\":0,\"va\":[0,0],\"mood\":\"neutral\",\"ts\":1795631159463,\"n\":2,\"drift\":[{\"ts\":1795631147113,\"score\":100,\"flags\":[]},{\"ts\":1795631159463,\"score\":100,\"flags\":[]}],\"canon\":[]}}",
+   "snapc": "c8cd1f0a",
+   "thought": "He seems hesitant. Not a good sign.",
+   "bd": {
+    "c": "c8cd1f0a",
+    "dv": 0.12,
+    "h": 0
+   },
+   "mo": {
+    "m": "neutral",
+    "e": "😐",
+    "d": 0,
+    "f": 1
+   }
+  }
+ ],
+ "state": {
+  "mood": "neutral",
+  "emoji": "😐",
+  "energy": "medium",
+  "affection": 50,
+  "facts": [],
+  "summary": "",
+  "sumUpto": 0,
+  "log": [],
+  "members": {
+   "2abb601c": {
+    "mood": "neutral",
+    "emoji": "😐",
+    "energy": "medium",
+    "affection": 50,
+    "facts": [],
+    "summary": "",
+    "sumUpto": 0,
+    "log": []
+   },
+   "c8cd1f0a": {
+    "mood": "neutral",
+    "emoji": "😐",
+    "energy": "medium",
+    "affection": 50,
+    "facts": [],
+    "summary": "",
+    "sumUpto": 0,
+    "log": [
+     {
+      "ts": 1795631147113,
+      "mood": "neutral",
+      "emoji": "😐",
+      "aff": 50,
+      "thought": "I wonder what they're trying to prove.",
+      "score": 100
+     },
+     {
+      "ts": 1795631159463,
+      "mood": "neutral",
+      "emoji": "😐",
+      "aff": 50,
+      "thought": "Let's see what this one's made of.",
+      "score": 100
+     },
+     {
+      "ts": 1795631178275,
+      "mood": "neutral",
+      "emoji": "😐",
+      "aff": 50,
+      "thought": "He seems hesitant. Not a good sign.",
+      "score": 100
+     }
+    ],
+    "cast": {
+     "un": "",
+     "ug": "m",
+     "wrong": []
+    },
+    "pers": {
+     "frac": 0,
+     "grudge": 0,
+     "va": [
+      0,
+      0
+     ],
+     "mood": "neutral",
+     "ts": 1795631178275,
+     "n": 3,
+     "drift": [
+      {
+       "ts": 1795631147113,
+       "score": 100,
+       "flags": []
+      },
+      {
+       "ts": 1795631159463,
+       "score": 100,
+       "flags": []
+      },
+      {
+       "ts": 1795631178275,
+       "score": 100,
+       "flags": []
+      }
+     ],
+     "canon": []
+    },
+    "mem": {
+     "v": 1,
+     "seq": 0,
+     "turn": 2,
+     "scene": "{{char}} and {{user}} are about to begin a Pokémon battle",
+     "recent": [
+      {
+       "text": "{{char}} challenges another trainer's team",
+       "imp": 0.13,
+       "turn": 2,
+       "ts": 1795631147113
+      },
+      {
+       "text": "{{char}} challenged {{user}} to a Pokémon battle",
+       "imp": 0.41,
+       "turn": 2,
+       "ts": 1795631159464
+      }
+     ],
+     "items": [],
+     "legacy": true
+    }
+   }
+  },
+  "chron": {
+   "v": 1,
+   "seq": 0,
+   "turn": 2,
+   "covered": 2,
+   "items": []
+  }
+ },
+ "cfg": {
+  "mode": "story",
+  "length": "auto",
+  "scene": "",
+  "notes": [],
+  "theme": null
+ },
+ "rp": {
+  "body": {
+   "user": {
+    "inj": [],
+    "ill": [],
+    "tired": 0,
+    "dead": false,
+    "died": null,
+    "stash": null,
+    "rev": 0,
+    "n": 0,
+    "ko": false
+   },
+   "2abb601c": {
+    "inj": [],
+    "ill": [],
+    "tired": 0,
+    "dead": false,
+    "died": null,
+    "stash": null,
+    "rev": 0,
+    "n": 0,
+    "ko": false
+   },
+   "c8cd1f0a": {
+    "inj": [],
+    "ill": [],
+    "tired": 0,
+    "dead": false,
+    "died": null,
+    "stash": null,
+    "rev": 0,
+    "n": 0,
+    "ko": false
+   }
+  },
+  "rel": {
+   "c8cd1f0a": {
+    "type": "auto",
+    "v": 0.36,
+    "ms": [],
+    "hist": [],
+    "peak": 0.36
+   }
+  }
+ }
+}
