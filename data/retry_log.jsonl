@@ -43,3 +43,8 @@
 {"t": 1795630210, "kind": "reply", "mode": "story", "attempts": 1, "ms": 8547, "events": [{"attempt": 0, "rules": ["ending", "identity_misgender"], "retried": false, "why_not": "", "ms": 8547}], "kept": ["ending", "identity_misgender"]}
 {"t": 1795631029, "kind": "reply", "mode": "story", "attempts": 1, "ms": 7672, "events": [{"attempt": 0, "rules": ["ending"], "retried": false, "why_not": "", "ms": 7672}], "kept": ["ending"]}
 {"t": 1795631142, "kind": "reply", "mode": "story", "attempts": 1, "ms": 7093, "events": [{"attempt": 0, "rules": ["ending"], "retried": false, "why_not": "", "ms": 7093}], "kept": ["ending"]}
+{"t": 1795631963, "kind": "reply", "mode": "story", "attempts": 2, "ms": 10155, "events": [{"attempt": 0, "rules": ["pattern_open"], "retried": true, "why_not": "", "ms": 5469}], "kept": []}
+{"t": 1795634885, "kind": "reply", "mode": "story", "attempts": 1, "ms": 11844, "events": [{"attempt": 0, "rules": ["ending"], "retried": false, "why_not": "", "ms": 11844}], "kept": ["ending"]}
+{"t": 1795634909, "kind": "reply", "mode": "story", "attempts": 1, "ms": 5375, "events": [{"attempt": 0, "rules": ["parrot"], "retried": false, "why_not": "", "ms": 5375}], "kept": ["parrot"]}
+{"t": 1795634939, "kind": "reply", "mode": "story", "attempts": 1, "ms": 9203, "events": [{"attempt": 0, "rules": ["ending"], "retried": false, "why_not": "", "ms": 9203}], "kept": ["ending"]}
+{"t": 1795635024, "kind": "reply", "mode": "story", "attempts": 1, "ms": 9938, "events": [{"attempt": 0, "rules": ["ending", "parrot", "ai_speak"], "retried": false, "why_not": "", "ms": 9938}], "kept": ["ai_speak", "ending", "parrot"]}

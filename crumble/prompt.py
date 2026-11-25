@@ -223,7 +223,14 @@ def build_messages(c, user, hist, o):
         rc = o.get("recall") or recall.select(st, hist, user=user, char=n, cfg=rcfg, turn=o.get("turn"),
                                                known_extra=[m.get("name") for m in (grp or {}).get("members", [])])
     tier = o["tier"] if o.get("tier") is not None else model_tier()   # 0 small, 1 mid, 2 large: how many generic rules the model carries
-    out = [core_head(tier) + "\n\n" + INTIMACY + "\n\n" + core_tail(tier, bool(grp))]
+    INTIMACY = INTIMACY.replace("{USER}", "{US}")
+    out = [
+        core_head(tier)
+        + "\n\n"
+        + _fill(INTIMACY)
+        + "\n\n"
+        + core_tail(tier, bool(grp))
+    ]
 
     if (c.get("system_prompt") or "").strip():
         out.append(
