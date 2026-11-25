@@ -1,7 +1,7 @@
 """The story engine: a living world around the conversation. It replaces the old fight engine.
 
-Time matters, every character has a daily routine, the weather and the hour change how people feel, small things happen in the world, people joke
-and feel and do not end every line with a question. All of it is derived from the chat itself on every turn (like the identity ledger and the
+Time matters, what each character is doing right now is worked out by the model for the moment (never a fixed timetable), the weather and the hour change
+how people feel, small things happen in the world, people joke and feel and do not end every line with a question. All of it is derived from the chat itself on every turn (like the identity ledger and the
 story clock), with no model call, so edits, swipes and rewinds can never leave it stale.
 
     settings(p)                               normalise the page's options
@@ -14,7 +14,7 @@ Modules: routine (daily life), world (season, weather, body clock), humor, momen
 import re
 
 from ..config import CH, US
-from . import beats, endings, humor, moment, routine, tension, wildlife, world
+from . import beats, doing as doing_mod, endings, humor, moment, routine, tension, wildlife, world
 from .. import ambience, places
 
 DEFAULTS = {"on": True, "routines": True, "weather": "dynamic", "events": "normal", "humor": "auto", "endings": True, "wildlife": "normal", "scare": "some"}
@@ -52,10 +52,16 @@ def sky(sim, amb, texts, seed, cfg):
     return {"weather": "", "src": "", "trend": "", "season": seasn}
 
 
-def status(c, sim, cfg):
-    """One character's place in the day, for the prompt and the page."""
+def status(c, sim, cfg, dg=None):
+    """One character's place in the day, for the prompt and the page. The model's answer for this moment (dg) wins; without one, only a routine the
+    author wrote themselves is used. A timetable guessed from the job is never shown as a fact about the character."""
+    if dg is not None:
+        if not cfg.get("routines", True):
+            return None
+        return {"id": c.get("id"), "name": c.get("name") or "", "act": doing_mod.label(dg), "state": dg.get("state", "free") if dg.get("here", True) else "away",
+                "free": dg.get("free", .7), "mins": 0, "next": "", "weekend": False, "own": False, "key": "doing", "here": dg.get("here", True), "ai": True}
     rt = routine.now(c, sim) if (cfg.get("routines") and sim) else None
-    if not rt:
+    if not rt or not rt["own"]:
         return None
     return {"id": c.get("id"), "name": c.get("name") or "", "act": rt["label"], "state": rt["state"], "free": rt["free"], "mins": rt["mins_left"], "next": rt["next"],
             "weekend": rt["weekend"], "own": rt["own"], "key": rt["key"]}
@@ -88,8 +94,9 @@ def plans(chron, sim):
     return out[:2]
 
 
-def build(c, user, st, hist, sim, amb, rp, p, turn, own, mode="story", grp=None, chron=None, uskills="", ugear="", wx=None, members=None, narrator=False, loc=None):
+def build(c, user, st, hist, sim, amb, rp, p, turn, own, mode="story", grp=None, chron=None, uskills="", ugear="", wx=None, members=None, narrator=False, loc=None, doing=None):
     cfg = settings(p)
+    doing = doing if isinstance(doing, dict) else {}
     name = c.get("name") or "Character"
     kinds_msg = next((m.get("content") for m in reversed(hist or []) if m.get("role") == "user"), "")
     mo = moment.read(kinds_msg) if kinds_msg else {"kinds": [], "words": 0, "shape": ""}
@@ -109,8 +116,11 @@ def build(c, user, st, hist, sim, amb, rp, p, turn, own, mode="story", grp=None,
     if not cfg["on"]:
         return {"block": "", "compact": "", "tail": "", "plan": None, "info": info}
     roster = [c] + [m for m in (members or []) if m.get("id") != c.get("id") and m.get("id") != "__narrator__"]
-    info["who"] = [s for s in (status(m, sim, cfg) for m in roster) if s]
-    rt = routine.now(c, sim) if (cfg["routines"] and sim and not narrator) else None
+    info["who"] = [s for s in (status(m, sim, cfg, doing.get(m.get("id"))) for m in roster) if s]
+    dg = doing.get(cid) if (cfg["routines"] and not narrator) else None      # what the model says they are doing right now
+    rt = routine.now(c, sim) if (cfg["routines"] and sim and not narrator and dg is None) else None
+    if rt and not rt["own"]:
+        rt = None       # a timetable guessed from the job (asleep at night, working by day) is not a fact about this person: only one the author wrote counts
     hour = (sim or {}).get("hour")
     L, C = [], []   # full block, compact block
     sad_or_hot = "sad" in mo["kinds"] or "hostile" in mo["kinds"]
@@ -118,11 +128,11 @@ def build(c, user, st, hist, sim, amb, rp, p, turn, own, mode="story", grp=None,
     # ---- the beat of the world (texture) or a small thing from the character's own day
     skip = sad_or_hot or tender == 2 or lvl >= 2 or "bye" in mo["kinds"]
     bt = beats.beat(turn, cid, place, amb.get("indoors") is not False, period, w, horror, cfg["events"], skip)
-    sd = "" if bt or skip or not rt else beats.seed(turn, cid, rt["key"])
+    sd = "" if bt or skip or not (rt or dg) else beats.seed(turn, cid, rt["key"] if rt else "custom")
     info["beat"] = bt
 
     # ---- the location card this chat stands in: description, atmosphere, objects, exits, secrets, residents and its own events
-    lp = places.parts(loc, CH, US, turn, cfg["events"], skip or narrator, narrator) if loc else None
+    lp = places.parts(loc, CH, US, turn, cfg["events"], skip or narrator, narrator, doing) if loc else None
     if lp and lp["event"]:
         bt = sd = ""            # the card's own event takes the place of a generic small thing
         info["beat"] = ""
@@ -149,9 +159,9 @@ def build(c, user, st, hist, sim, amb, rp, p, turn, own, mode="story", grp=None,
         if w:
             L.append(f"Weather: {w}" + (f" ({wx['trend']})" if (wx or {}).get("trend") else "") + ". It changes how people feel and what they do.")
         if lp:
-            L.extend(places.narrator_lines(loc, turn))
-        if info["who"]:
-            L.append("Where everyone is in their day: " + "; ".join(f"{s['name']}: {s['act']}" for s in info["who"] if s["name"]) + ".")
+            L.extend(places.narrator_lines(loc, turn, doing, US))
+        if info["who"] and not (lp and loc.get("people")):
+            L.append("What everyone is doing: " + "; ".join(f"{s['name']}: {s['act']}" for s in info["who"] if s["name"] and s.get("here", True)) + ".")
         if bt:
             L.append(f"Let this small thing happen in the world during this message (texture, nothing anyone must answer): {bt}.")
         if wl:
@@ -161,38 +171,39 @@ def build(c, user, st, hist, sim, amb, rp, p, turn, own, mode="story", grp=None,
         return {"block": "\n".join(L), "compact": "\n".join(L[:3]), "tail": "", "plan": None, "info": info}
 
     L.append("[Daily life, time and world - keep the person real]")
-    L.append(f"{CH} is a person with a day, a body and moods, living in a world that keeps moving. Whatever the story has already established always wins over what follows.")
+    L.append(f"{CH} is a person with a day, a body and moods in a world that keeps moving. Whatever the story has already established always wins.")
     if lp:
         L.extend(lp["lines"])
         C.extend(lp["compact"])
-    # ---- routine and time
-    if rt:
+    # ---- what they are doing now and the time
+    in_place = bool(loc and loc.get("card"))
+    if dg is not None:
+        for ln in doing_mod.lines(dg, CH, US, in_place):
+            L.append(ln)
+            C.append(ln)
+        if sim:
+            L.append(f"The hour in the body: {world.bodyclock(hour, routine.chrono(c))}. (That is a tendency of the body, not a schedule: {CH} is not bound to sleep, work or eat by the clock.)")
+    elif rt:        # the author's own written routine: their words, as a usual rhythm and never a rule
         daykind = "weekend" if rt["weekend"] else "weekday"
         if rt["state"] == "asleep":
-            s = (f"It is a {daykind} and by {CH}'s usual rhythm this is when they sleep. {CH} is awake only because of this conversation or the situation: "
-                 f"show it (yawning, rumpled, slow, short-tempered or soft and honest), and let {CH} want to get back to sleep, more so the later it gets. "
-                 f"If {US} woke them, they say so in their own way. If the scene already shows {CH} up and active for a reason, keep that.")
+            s = (f"It is a {daykind}. By the routine the author wrote, {CH} would usually be asleep about now. Whether they are is up to the scene: if the story shows {CH} up and active, "
+                 f"keep that; if {US} woke them, show it in their own way.")
         elif rt["state"] == "groggy":
-            s = f"It is a {daykind} and {CH} is just up and getting ready: slow, not fully awake, wants coffee or quiet before conversation."
+            s = f"It is a {daykind}. By the author's routine {CH} is usually just up and getting ready about now: slow, not fully awake."
         else:
-            s = f"It is a {daykind}. {CH}'s usual rhythm right now: {rt['label']}. {STATE_SENT(rt['state'], CH)}"
+            s = f"It is a {daykind}. {CH}'s usual rhythm right now, from the author's routine: {rt['label']}. {STATE_SENT(rt['state'], CH)}"
         L.append(s)
         C.append(s)
         if rt["state"] != "asleep" and rt["mins_left"] <= 45 and rt["next_key"] in COMMIT and rt["next_key"] != rt["key"]:
-            s2 = (f"In {mins_txt(rt['mins_left'])} {CH}'s day moves on to: {rt['next']}. Keep an eye on the time; mention it once if it comes up naturally, "
-                  f"and excuse themselves or wrap up when it is time (people have somewhere to be). Let the conversation end naturally when it must.")
+            s2 = (f"In {mins_txt(rt['mins_left'])} {CH}'s usual day moves on to: {rt['next']}. If it comes up naturally, mention it once; people have somewhere to be.")
             L.append(s2)
             C.append(s2)
-        if rt["earlier"] and turn % 3 == 0:
-            L.append(f"Earlier today, by their routine: {', '.join(rt['earlier'])}. {CH} may mention it in passing; invent nothing big.")
-        el = (sim or {}).get("elapsed", 0)
-        if el >= 1200 and hour is not None:
-            prev = routine.now(c, sim, hour=(hour - el / 3600) % 24)
-            if prev and prev["label"] != rt["label"]:
-                L.append(f"{human(el)} of story time passed since the last message; in that time {CH} went from {prev['label']} to {rt['label']}. Let it show (a different mood, something they did, a change of place) instead of resetting.")
         L.append(f"The hour in the body: {world.bodyclock(hour, routine.chrono(c))}.")
     elif sim:
         L.append(f"The hour in the body: {world.bodyclock(hour)}.")
+    el = (sim or {}).get("elapsed", 0)
+    if el >= 1200 and sim:
+        L.append(f"{human(el)} of story time passed since the last message. Let it show (a different mood, something they did, a change of place) instead of resetting.")
     # ---- weather and what it does to this person
     if w:
         f = world.feel(c, w)
@@ -212,9 +223,8 @@ def build(c, user, st, hist, sim, amb, rp, p, turn, own, mode="story", grp=None,
     # ---- inner weather
     mood = (st or {}).get("mood") or ""
     en = (st or {}).get("energy") or ""
-    L.append(f"Inner weather: {CH} is {mood or 'in an ordinary mood'}" + (f" with {en} energy" if en else "") + ". Feelings carry over: a mood does not reset each message. "
-             f"It shifts a little at a time with what happens (a good joke lifts a sour mood; a snub lingers for several messages). Show it through behaviour and word choice instead of announcing it. "
-             f"Let {CH} be moved by small things: amused, embarrassed, irritated, bored, wistful, jealous, proud, tender.")
+    L.append(f"Inner weather: {CH} is {mood or 'in an ordinary mood'}" + (f" with {en} energy" if en else "") + ". Feelings carry over and shift a little at a time with what happens (a good joke lifts a sour mood; a snub lingers). Show them through behaviour and word choice, never announce them. "
+             f"Let {CH} be moved by small things (amused, embarrassed, irritated, wistful, jealous, proud, tender).")
     C.append(f"{CH} is {mood or 'in an ordinary mood'}; feelings carry over between messages and show in behaviour, not announcements.")
     hp = humor.profile(c)
     if hp["level"]:
@@ -231,7 +241,7 @@ def build(c, user, st, hist, sim, amb, rp, p, turn, own, mode="story", grp=None,
         T.append(ep["rule"])
     if mo["shape"]:
         T.append(mo["shape"].replace("{CH}", CH).replace("{US}", US))
-    hc = humor.cue(hp, CH, US, turn, cid, mo, mood, lvl, horror, tender, cfg["humor"], tired=bool(rt and rt["state"] in ("asleep", "groggy")))
+    hc = humor.cue(hp, CH, US, turn, cid, mo, mood, lvl, horror, tender, cfg["humor"], tired=bool((rt and rt["state"] in ("asleep", "groggy")) or (dg and dg.get("state") == "resting")))
     if hc:
         T.append(hc)
     if wl:
@@ -268,7 +278,7 @@ def repair(text, plan):
     return endings.repair(text, plan)
 
 
-def overview(members, hist, scenario, p, clock="", start="", notes=(), seed="", loc=None):
+def overview(members, hist, scenario, p, clock="", start="", notes=(), seed="", loc=None, doing=None):
     """Status for the page's World panel (no model call, nothing saved)."""
     from .. import simtime
     cfg = settings(p)
@@ -278,7 +288,7 @@ def overview(members, hist, scenario, p, clock="", start="", notes=(), seed="", 
     texts = [full] + [m.get("content") or "" for m in (hist or [])[-8:]]
     wx = sky(sim, amb, texts, seed or full[:200], cfg)
     c = (members or [{}])[0]
-    out = build(c, "", {}, hist or [], sim, amb, {}, p, len(hist or []), [], members=members, wx=wx, loc=loc)
+    out = build(c, "", {}, hist or [], sim, amb, {}, p, len(hist or []), [], members=members, wx=wx, loc=loc, doing=doing)
     info = out["info"]
     info.pop("wild", None)      # the page shows an encounter on the reply that tells it, never ahead of it
     info["clock_set"] = bool(sim)

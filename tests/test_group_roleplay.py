@@ -1,8 +1,10 @@
 """Regression tests for group roleplay: prompt separation, repeated lines between speakers, swipes, leaks in a group reply."""
 import unittest
+from unittest import mock
 
 from tests import helpers as h
 from crumble import context, repeat
+from crumble import llm
 from crumble.llm import generate_reply
 from crumble.prompt import build_messages
 
@@ -37,7 +39,7 @@ class GroupPrompt(unittest.TestCase):
         self.assertIn("never begin your message with a name and a colon", note)
 
     def test_group_summary_and_scene_are_private_prose(self):
-        s = self.msgs("(x)")[0]["content"]
+        s = h.ptxt(self.msgs("(x)"))
         self.assertTrue(s.index(context.START) < s.index("takes place at the garage") < s.index(context.END))
         self.assertNotIn("Location:", s)
         self.assertIn("already said their piece", s)            # Rex spoke: Mira is told not to repeat him
@@ -84,7 +86,8 @@ class GroupReplies(unittest.TestCase):
         a = '*Rex wipes his hands.* "You look like death, Sam."'
         b = '*Rex wipes his hands.* "You look like death, Sam. Really."'
         c = '*Mira wipes a table.* "You look like death warmed over, Sam, honestly."'
-        _, r = group_req([a, b, c], cue={"why": "mention", "by": "Sam"}, quick=False)
+        with mock.patch.object(llm, "TIME_BUDGET", 100):    # the replies come back instantly here, so pin the clock out of it
+            _, r = group_req([a, b, c], cue={"why": "mention", "by": "Sam"}, quick=False)
         self.assertEqual(r["text"], c)
 
     def test_swipe_alternatives_are_not_repeated(self):

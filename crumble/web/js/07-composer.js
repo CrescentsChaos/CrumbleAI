@@ -48,7 +48,23 @@ $('#menu').onclick=()=>document.body.classList.toggle('drawer');$('#scrim').oncl
 let kbT=0;$('#inp').addEventListener('focus',()=>{clearTimeout(kbT);document.body.classList.add('kb');setTimeout(()=>{$('#log').scrollTop=1e9},250)});
 $('#inp').addEventListener('blur',()=>{kbT=setTimeout(()=>document.body.classList.remove('kb'),200)});$('#send').onmousedown=e=>e.preventDefault();{const mq=matchMedia('(max-width:760px)'),ph=()=>typeof armUI=='function'?armUI():$('#inp').placeholder=mq.matches?'Message…':'Message… (Enter sends, Shift+Enter adds a line)';ph();mq.addEventListener('change',ph)}document.addEventListener('keydown',e=>{if(e.key=='Escape')$('.chead').classList.remove('open')});
 if(window.visualViewport)visualViewport.addEventListener('resize',()=>{document.documentElement.style.setProperty('--vh',visualViewport.height+'px');scrollTo(0,0);const L=$('#log');if(document.body.classList.contains('kb'))L.scrollTop=L.scrollHeight});
-$('#uname').oninput=e=>{U.uname=e.target.value;persist();cur&&draw()};$('#persona').oninput=e=>{U.persona=e.target.value;persist()};$('#ustats').oninput=e=>{U.ustats=e.target.value;persist()};$('#ugear').oninput=e=>{U.ugear=e.target.value;persist()};$('#uskills').oninput=e=>{U.uskills=e.target.value;persist()};
+/* who you are (name, about you, stats, skills, gear) is kept on the host as well as in this browser, so a new browser, a cleared cache or a new share link still knows you (js/07-composer.js) */
+const PROF=['uname','persona','ustats','ugear','uskills'];let profT=0;
+const profBody=()=>Object.fromEntries(PROF.map(k=>[k,U[k]||'']));
+const profileSave=()=>{clearTimeout(profT);profT=setTimeout(()=>{api('/api/profile','POST',profBody()).catch(()=>{})},500)};
+async function profileLoad(){try{const r=await api('/api/profile'),p=r&&r.profile||{};
+  if(PROF.some(k=>p[k])){PROF.forEach(k=>{if(typeof p[k]=='string')U[k]=p[k]});persist()}   // the host's copy wins in a browser that has forgotten you
+  else if(PROF.some(k=>U[k]&&U[k]!='User'))api('/api/profile','POST',profBody()).catch(()=>{})}catch(e){}}   // first time: what this browser already knows is sent up
+/* every option (Settings tab, sampling, theme) is kept on the host too, the same way */
+const setBody=()=>({U,P});
+let setReady=false;
+const settingsSave=()=>{if(!setReady)return;clearTimeout(setT);setT=setTimeout(()=>{setT=0;api('/api/settings','POST',setBody()).catch(()=>{})},700)};
+async function settingsLoad(){try{const r=await api('/api/settings'),u=r&&r.U||{},p=r&&r.P||{};
+  if(Object.keys(u).length||Object.keys(p).length){Object.assign(U,u);Object.assign(P,p);try{localStorage.crumbleUI=JSON.stringify(U);localStorage.crumbleP=JSON.stringify(P)}catch(e){}}   // the host's copy wins in a browser that forgot
+  else api('/api/settings','POST',setBody()).catch(()=>{})}catch(e){}setReady=true}   // first time: this browser's options go up
+addEventListener('pagehide',()=>{if(setT){clearTimeout(setT);setT=0;try{navigator.sendBeacon('/api/settings',new Blob([JSON.stringify(setBody())],{type:'application/json'}))}catch(e){}}});
+addEventListener('pagehide',()=>{if(profT){clearTimeout(profT);profT=0;try{navigator.sendBeacon('/api/profile',new Blob([JSON.stringify(profBody())],{type:'application/json'}))}catch(e){}}});
+$('#uname').oninput=e=>{U.uname=e.target.value;persist();profileSave();cur&&draw()};$('#persona').oninput=e=>{U.persona=e.target.value;persist();profileSave()};$('#ustats').oninput=e=>{U.ustats=e.target.value;persist();profileSave()};$('#ugear').oninput=e=>{U.ugear=e.target.value;persist();profileSave()};$('#uskills').oninput=e=>{U.uskills=e.target.value;persist();profileSave()};
 function pills(){for(const[id,k]of[['#tthink','think'],['#tact','actions'],['#tthoughts','thoughts'],['#tvoice','tts'],['#tact2','actbar']])$(id).classList.toggle('on',!!U[k]);persist()}
 $('#tthink').onclick=()=>{U.think=!U.think;pills();draw()};$('#tact').onclick=()=>{U.actions=!U.actions;pills();draw()};
 $('#tthoughts').onclick=()=>{U.thoughts=!U.thoughts;pills();draw();renderSettings()};$('#tvoice').onclick=()=>{U.tts=!U.tts;if(!U.tts)speechSynthesis?.cancel?.();pills();renderSettings()};
@@ -58,4 +74,4 @@ if(SR){$('#mic').hidden=false;$('#mic').onclick=()=>{if(rec){rec.stop();return}r
 /* the character may follow up on its own if you go quiet (Settings > Initiative) */
 setInterval(()=>{if(!U.nudge||rounding||ctl||typingNow||!chat||!cur?.id||!S.loaded||document.hidden||$('#chat').hidden||nudges>=2)return;
  const l=hist.at(-1);if(!l||l.role!='assistant'||l.ooc||hist.length<2)return;
- if(Date.now()-Math.max(l.ts||0,lastAct)>U.nudge*6e4*(nudges+1)){nudges++;G?round({keep:true}):gen('nudge')}},10000);
+ if(Date.now()-Math.max(l.ts||0,lastAct)>U.nudge*6e4*(nudges+1)){nudges++;G?round({keep:true}):gen('nudge',undefined,{reason:'idle'})}},10000);

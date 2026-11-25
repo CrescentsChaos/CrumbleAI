@@ -47,7 +47,7 @@ def track(b):
     guard = identity.make_guard(led, [THINK.sub("", m["content"]) for m in b["history"] if m["role"] == "user"])
     st["cast"] = led["seed"]
     aff, facts = int(st.get("affection", 50)), [str(f) for f in st.get("facts", [])]
-    convo = "\n".join(_line(m, n, user, c.get("id")) for m in hist)
+    convo = "\n".join(_line(m, n, user, c.get("id")) for m in hist if not (isinstance(m.get("dyn"), dict) and m["dyn"].get("quirk") == "lie"))   # a lie the character chose to tell is not learned as fact
     ask = (f"You track the inner state of a roleplay character named {n}. Personality: {(c.get('personality') or c.get('description') or '')[:400]}\n"
            f"{identity.roster(led)}\n"
            f"Previous mood: {st.get('mood', 'neutral')}. Affection toward {user} (0-100): {aff}.\n"
@@ -123,8 +123,23 @@ def identity_line(c, n):
     return (f"Fixed facts about {n} from the character sheet (copy them exactly, never change them): " + "; ".join(bits) + ".\n") if bits else ""
 
 
+def pin_location(text, where):
+    """The summary's `Location:` is the place card the chat stands in, whatever the model guessed (or kept from an older summary)."""
+    where = re.sub(r"\s+", " ", str(where or "")).strip()
+    if not where or not text.strip():
+        return text
+    rx = re.compile(r"(?im)^([ \t#*-]*Location[ \t*]*:[ \t*]*).*$")
+    if rx.search(text):
+        return rx.sub(lambda m: m.group(1) + where, text, count=1)
+    head = re.search(r"(?im)^[ \t#*]*SETTING\s*&\s*STATE[ \t*]*:?[ \t]*$", text)
+    if head:
+        return text[:head.end()] + f"\nLocation: {where}" + text[head.end():]
+    return f"SETTING & STATE\nLocation: {where}\n" + text
+
+
 def summarize(b):
     c, user = b["char"], b["user"]
+    where = re.sub(r"\s+", " ", str(b.get("place_name") or "")).strip()[:80]
     n = c.get("name") or "Character"
     led = identity.build(c, user, b["history"], persona=b.get("persona"))
     user = led["user"]["name"]
@@ -132,7 +147,7 @@ def summarize(b):
     prev = identity.strip_characters(b.get("summary") or "") or "none"     # who someone is comes from the cast ledger, not from the summary
     ask = (identity_line(c, n) + identity.roster(led) + f"\nPrevious memory notes: {prev}\n\nNew events to fold in:\n{convo}\n\n"
            f"Update the memory using the conversation above. Return only these sections and fields, in this order:\n"
-           "SETTING & STATE\nLocation: [where they are]\nCurrent State: [what is happening now]\n"
+           "SETTING & STATE\nLocation: " + (f"{where} (the place card the story stands in: copy it exactly)" if where else "[where they are]") + "\nCurrent State: [what is happening now]\n"
            "RELATIONSHIP DYNAMIC\nPrimary Dynamic: [how their relationship currently works and how it has changed]\n"
            "Tone: [the emotional tone between them]\n"
            "PIVOTAL MOMENTS\n- [important events, statements, or promises, each with the real name of who did or said it; include prior pivotal moments that still matter]\n"
@@ -148,7 +163,7 @@ def summarize(b):
     ch = r["choices"][0]
     txt = THINK.sub("", ch["message"]["content"]).strip()
     txt = trim_sentence(txt) if ch.get("finish_reason") == "length" else txt
-    return identity.sanitize_summary(txt, led, [m["content"] for m in b["history"] if m["role"] == "user"], b.get("persona") or "")
+    return pin_location(identity.sanitize_summary(txt, led, [m["content"] for m in b["history"] if m["role"] == "user"], b.get("persona") or ""), where)
 
 
 def memorize(b):
@@ -171,3 +186,13 @@ def summary_details(b):
         return chronicle.extract([m for m in b.get("history", []) if not m.get("ooc")], b.get("user") or "User", n, int(b.get("turn0") or 0))
     except Exception:
         return []
+
+
+def keep_update(b):
+    """The keeper after a summary: the replaced summary archived, key events and people recorded, bond changes noted (no model call)."""
+    from . import keeper
+    c = b.get("char") or {}
+    hist = [m for m in b.get("history", []) if isinstance(m, dict)]
+    t0 = int(b.get("turn0") or 0)
+    return keeper.fold(b.get("keep"), b.get("summary") or "", hist, b.get("user") or "User", c.get("name") or "Character", t0, t0 + len(hist),
+                       b.get("aff") if isinstance(b.get("aff"), (int, float)) else None)

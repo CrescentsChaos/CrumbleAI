@@ -1,0 +1,26 @@
+{
+ "id": "020d7a70",
+ "name": "Eiffel Tower",
+ "biome": "Urban",
+ "description": "An enormous iron lattice tower and one of the world's most recognizable landmarks. Standing prominently above Paris, it features multiple observation levels, restaurants, elevators, and panoramic views of the surrounding city.",
+ "atmosphere": "Romantic, lively, and breathtaking. The area is filled with tourists, street performers, photographers, vendors, and the distant sounds of the bustling city. At night, thousands of lights illuminate the tower.",
+ "history": "Designed by engineer Gustave Eiffel's company and completed in 1889 for the World's Fair, the Eiffel Tower was initially criticized by some artists and intellectuals. Originally intended as a temporary structure, it survived because of its scientific and communication applications and eventually became an enduring symbol of Paris and France.",
+ "objects": [
+  "Iron support beams, observation platforms, elevators, staircases, telescopes, security barriers, ticket booths, restaurants, souvenir shops, benches, and decora"
+ ],
+ "activities": [
+  "Sightseeing, photography, exploring observation decks, dining at restaurants, shopping for souvenirs, enjoying city views, attending guided tours, and relaxing "
+ ],
+ "exits": [
+  "Multiple pedestrian paths lead toward Champ de Mars and Trocadéro. Nearby roads, bridges, metro stations, and river pathways connect the tower to other parts of"
+ ],
+ "events": [
+  "Evening light displays, seasonal celebrations, public gatherings, guided tours, tourist activities, and occasional fireworks or special commemorations."
+ ],
+ "secrets": [
+  "Hidden maintenance passages, restricted technical areas, historical engineering details, and forgotten construction records reveal lesser-known aspects of the tower's history."
+ ],
+ "characters": [],
+ "bg": "020d7a70.jpg",
+ "bg_v": 1
+}

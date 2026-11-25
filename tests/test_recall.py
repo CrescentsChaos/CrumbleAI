@@ -361,8 +361,8 @@ class LearnTests(unittest.TestCase):
 
 class PromptTests(unittest.TestCase):
     def build(self, st, text, mem=ON, user="Sam", hist=None):
-        return build_messages(h.SHY, user, hist or [{"role": "user", "content": text}],
-                              {"state": st, "mem": mem, "mode": "story", "words": (20, 60), "turn": 61})[0]["content"]
+        return h.ptxt(build_messages(h.SHY, user, hist or [{"role": "user", "content": text}],
+                              {"state": st, "mem": mem, "mode": "story", "words": (20, 60), "turn": 61}))
 
     def setUp(self):
         self.st = mem_with(("episodic", "{{user}} gave {{char}} a necklace on her birthday.", dict(imp=.8, turn=10)),
@@ -410,7 +410,7 @@ class PipelineTests(unittest.TestCase):
         r = generate_reply(b, None)
         self.assertEqual(r["recalled"], ["e1"])
         self.assertEqual(r["recall"][0]["t"], "episodic")
-        self.assertIn("necklace on her birthday", fake.calls[0][0]["content"])
+        self.assertIn("necklace on her birthday", h.ptxt(fake.calls[0]))
 
     def test_off_adds_nothing(self):
         h.install(h.FakeLLM(["Fine."]))

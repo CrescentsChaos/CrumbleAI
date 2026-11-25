@@ -1,11 +1,12 @@
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const esc=s=>String(s??'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])),at=s=>esc(s).replace(/"/g,'&quot;');
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
-const D={quick:true,stream:true,theme2:null,defTheme:null,last:'',pers:true,persDepth:'standard',persDyn:true,persCanon:true,persGuard:true,persScore:false,think:false,actions:true,realism:true,natural:2,timeaware:true,story:true,storyRoutines:true,storyWeather:'dynamic',storyEvents:'normal',storyHumor:'auto',storyEndings:true,track:true,thoughts:false,typing:'normal',typos:true,sound:false,stamps:true,nudge:0,theme:'dark',fs:15,tts:false,voice:'',rate:1,uname:'User',persona:'',mode:'story',length:'auto',rp:'auto',diff:'normal',romance:true,tone:'steamy',oocReply:'all',intimacy:true,intimLevel:'fade',intimPacing:'natural',ustats:'',ugear:'',uskills:'',actbar:false,mem:true,memDepth:'standard',memLearn:true};
+const D={quick:true,stream:true,theme2:null,defTheme:null,last:'',pers:true,persDepth:'standard',persDyn:true,persCanon:true,persGuard:true,persScore:false,think:false,actions:true,realism:true,natural:2,timeaware:true,story:true,storyRoutines:true,doingAnywhere:false,storyWeather:'dynamic',storyEvents:'normal',storyHumor:'auto',storyEndings:true,track:true,trackEvery:2,fast:true,thoughts:false,typing:'normal',typos:true,sound:false,stamps:true,nudge:0,theme:'dark',fs:15,tts:false,voice:'',rate:1,uname:'User',persona:'',mode:'story',length:'auto',rp:'auto',diff:'normal',romance:true,tone:'steamy',oocReply:'all',intimacy:true,intimLevel:'fade',intimPacing:'natural',ustats:'',ugear:'',uskills:'',actbar:false,mem:true,memDepth:'standard',memLearn:true,dyn:2,greetH:6,past:true};
 const DP={temperature:.8,top_p:.95,top_k:40,min_p:.05,repeat_penalty:1.1,presence_penalty:0,frequency_penalty:0,max_tokens:512,seed:-1,fold:false};
 const load=(k,d)=>{try{return{...d,...JSON.parse(localStorage[k]||'{}')}}catch(e){return{...d}}};
 const U=load('crumbleUI',D),P=load('crumbleP',DP);
-const persist=()=>{try{localStorage.crumbleUI=JSON.stringify(U);localStorage.crumbleP=JSON.stringify(P)}catch(e){}};
+let setT=0;
+const persist=()=>{try{localStorage.crumbleUI=JSON.stringify(U);localStorage.crumbleP=JSON.stringify(P)}catch(e){}if(typeof settingsSave=='function')settingsSave()};
 let live=null,S,cur=null,hist=[],ctl=null,chat=null,chats=[],gi=0,anim=0,typingNow=false,status='online',pendLabel='',nudges=0,lastAct=Date.now(),saveT=0,G=null,MEN=null,rounding=false,roundAbort=false,pendWho=null,armed=null,oocOn=false,oocKind='auto';
 const api=(u,m='GET',b)=>fetch(u,{method:m,headers:{'Content-Type':'application/json'},body:b?JSON.stringify(b):undefined}).then(r=>{if(r.status==401){location.reload();return{err:'login'}}return r.json()});
 const blank=()=>({id:'',lore:[],avatar:'',...Object.fromEntries(S.schema.flatMap(([,f])=>f.map(x=>[x[0],''])))});

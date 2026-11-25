@@ -10,11 +10,11 @@ from http.cookies import SimpleCookie
 from http.server import BaseHTTPRequestHandler
 from pathlib import Path
 
-from .config import CHARS, CHATS, EMO, EXT_KEYS, GROUPS, KEYS, LLM, LLM_VERBOSE, LOCK, MODELS, ROOT, SCHEMA, Llama, gpu_status
-from . import personality, places, recall
+from .config import CHARS, CHATS, EMO, EXT_KEYS, GROUPS, KEYS, LLM, LLM_VERBOSE, LOCK, MODELS, load_llama, ROOT, SCHEMA, Llama, gpu_status
+from . import keeper, personality, places, presence, profile, recall
 from .feel import peek as feel_peek
 from .llm import generate_reply
-from .memory import memorize, summarize, summary_details, track
+from .memory import keep_update, memorize, summarize, summary_details, track
 from .rp.director import PACE, plan_next
 from .rp.narrator import NARRATOR, NARR_ID
 from .rp.ooc import OOC_CHAR, clean_notes
@@ -122,6 +122,10 @@ class H(BaseHTTPRequestHandler):
             return self.deny(a)
         if self.path == "/api/state":
             return self.send(state(a))
+        if self.path == "/api/profile":     # who you are (name, about you, stats, skills, gear): kept on the host so it follows you to any browser
+            return self.send({"profile": profile.load(a)})
+        if self.path == "/api/settings":    # the page's options (Settings tab and sampling): kept on the host so they follow you to any browser
+            return self.send(profile.load_settings(a))
         if self.path == "/api/places":   # location cards: guests get the public view (no secrets, events or history)
             return self.send({"places": [places.view(p, a["role"] == "admin") for p in places.load_all()], "biomes": places.BIOMES})
         m = re.fullmatch(r"/places/img/([\w]+\.(?:png|jpg|webp|gif))", self.path.split("?")[0])
@@ -168,6 +172,11 @@ class H(BaseHTTPRequestHandler):
             if a["role"] != "admin":
                 return self.deny(a)
             places.remove(m[1])
+            sid = places.scene_id(m[1])
+            for d in CHATS.glob(sid + "_*"):
+                if re.fullmatch(re.escape(sid) + r"_[0-9a-f]{8}", d.name):
+                    shutil.rmtree(d, ignore_errors=True)
+            shutil.rmtree(CHATS/sid, ignore_errors=True)
         m = re.match(r"/api/groups/(\w+)$", self.path)
         if m:
             if a["role"] != "admin":
@@ -218,6 +227,10 @@ class H(BaseHTTPRequestHandler):
         adm, guest = a["role"] == "admin", a["role"] == "guest"
         if self.path in ("/api/load", "/api/chars", "/api/gen_char", "/api/share", "/api/groups", "/api/personality", "/api/places", "/api/gen_place") and not adm:
             return self.deny(a)
+        if self.path == "/api/profile":
+            return self.send({"profile": profile.save(a, b)})
+        if self.path == "/api/settings":
+            return self.send(profile.save_settings(a, b))
         if self.path == "/api/share":
             return self.share(b)
         if self.path == "/api/load":
@@ -232,7 +245,7 @@ class H(BaseHTTPRequestHandler):
                     if gpu_layers == 0:
                         gpu_layers = -1
                         
-                    LLM["obj"] = Llama(model_path=b["path"], n_ctx=n_ctx, n_gpu_layers=gpu_layers, verbose=LLM_VERBOSE)
+                    LLM["obj"] = load_llama(b["path"], n_ctx, gpu_layers, LLM_VERBOSE)
                     LLM["path"], LLM["n_ctx"] = b["path"], n_ctx
                 wj(ROOT/"data"/"last_model.json", {"path": b["path"], "n_ctx": n_ctx, "n_gpu": gpu_layers})
                 return self.send({"ok": True, "loaded": b["path"]})
@@ -268,6 +281,13 @@ class H(BaseHTTPRequestHandler):
                 return self.send({"visit": v})
             except Exception as e:
                 return self.send({"err": str(e)})
+        if self.path == "/api/doing":   # who is here and what is everybody doing right now: one model call per stretch of story time (the page keeps the answer)
+            try:
+                if guest:
+                    b["history"] = [dict(m, content=str(m.get("content", ""))[:4000]) for m in (b.get("history") or [])[-60:] if isinstance(m, dict)]
+                return self.send(presence.run(b))
+            except Exception as e:
+                return self.send({"err": str(e)})
         if self.path == "/api/gen_place":   # host only: the loaded model drafts a whole card from a sentence
             if not LLM["obj"]:
                 return self.send({"err": "Load a model first."})
@@ -287,6 +307,7 @@ class H(BaseHTTPRequestHandler):
         if self.path == "/api/chars":
             c = {k: b.get(k, "") for k in KEYS}
             c["lore"], c["avatar"] = b.get("lore", []), b.get("avatar", "")
+            c["start_place"] = places.start_id(b.get("start_place"))      # the place card a new chat with this character begins in ("" = none)
             c["id"] = re.sub(r"\W", "", str(b.get("id") or "")) or uuid.uuid4().hex[:8]
             wj(CHARS/f"{c['id']}.json", c)
             return self.send(c)
@@ -305,6 +326,8 @@ class H(BaseHTTPRequestHandler):
             return self.send({"title": title[:80]})
         if self.path == "/api/groups":
             gid = re.sub(r"\W", "", str(b.get("id") or "")) or "grp_" + uuid.uuid4().hex[:8]
+            if places.is_scene(gid):      # pl_<id> is a visit to a place, not a saved group
+                gid = "grp_" + uuid.uuid4().hex[:8]
             g = {"id": gid, "name": str(b.get("name") or "Group chat")[:60], "members": [str(i) for i in (b.get("members") or [])][:8],
                  "pace": b.get("pace") if b.get("pace") in PACE else "natural", "narrator": bool(b.get("narrator")),
                  "scenario": str(b.get("scenario") or "")[:4000]}
@@ -315,6 +338,8 @@ class H(BaseHTTPRequestHandler):
             if b.get("group") and not g:
                 return self.send({"err": "Unknown group."})
             mem = group_members(g) if g else [c for c in [get_char(str(b.get("cid")))] if c]
+            if g and places.is_scene(g["id"]):      # a visit: only the people who are in the place right now count
+                mem = places.only_present(mem, b.get("present") if isinstance(b.get("present"), list) else None)
             if not mem:
                 return self.send({"err": "Unknown character."})
             try:
@@ -341,7 +366,7 @@ class H(BaseHTTPRequestHandler):
                 return self.send({"world": story.overview(mem, hist, str((g or mem[0]).get("scenario") or ""), b.get("story"), str(b.get("clock") or ""),
                                                           str(b.get("story_start") or "")[:80], notes=([{"kind": "setting", "text": str(b["scene"])}] if b.get("scene") else []),
                                                           seed=((g or {}).get("name") or mem[0].get("name") or ""),
-                                                          loc=places.context(b.get("place"), len(hist)))})
+                                                          loc=places.context(b.get("place"), len(hist)), doing=story.doing_mod.clean_map(b.get("doing")))})
             except Exception as e:
                 return self.send({"err": str(e)})
         if self.path == "/api/feel":   # instant, provisional reaction to the message just sent (no model call, nothing saved)
@@ -390,7 +415,10 @@ class H(BaseHTTPRequestHandler):
                     cid_ = str((b.get("char") or {}).get("id"))
                     b["char"] = get_char(cid_) or ({"name": g_["name"]} if (g_ := get_group(cid_)) else {"name": "Character"})
                     b["history"] = [dict(m, content=str(m.get("content", ""))[:8000]) for m in b.get("history", [])[-60:]]
-                return self.send(track(b) if self.path == "/api/track" else memorize(b) if self.path == "/api/memorize" else {"summary": summarize(b), "chron_add": summary_details(b)})
+                if self.path == "/api/summarize" and isinstance(b.get("place"), dict):     # the summary remembers which place the story stands in
+                    card_ = places.get(b["place"].get("id"))
+                    b["place_name"] = card_["name"] if card_ else ""
+                return self.send(track(b) if self.path == "/api/track" else memorize(b) if self.path == "/api/memorize" else {"summary": summarize(b), "chron_add": summary_details(b), "keep": keep_update(b)})
             except Exception as e:
                 return self.send({"err": str(e)})
         if self.path == "/api/chat":
@@ -417,6 +445,7 @@ class H(BaseHTTPRequestHandler):
                     b["history"] = [dict(m, content=str(m.get("content", ""))[:8000]) for m in b.get("history", [])[-300:]]
                     b["params"] = dict(b.get("params") or {}, max_tokens=min(int((b.get("params") or {}).get("max_tokens", 512)), 1024))
                     sess["busy"] = True
+                b["past"] = self.past_chats(a, b) if (b.get("params") or {}).get("past") and not b.get("group") and b.get("kind") != "ooc" else []
                 if not b.get("group"):      # a one-to-one chat with visitors from a place becomes a small group for the prompt (everyone labelled)
                     places.stage(b, get_char)
                 if b.get("group"):  # a group reply: the server loads the group and every sheet itself, for host and guests alike
@@ -424,6 +453,8 @@ class H(BaseHTTPRequestHandler):
                     if not g:
                         raise RuntimeError("Unknown group.")
                     mem = group_members(g)
+                    if places.is_scene(g["id"]):
+                        mem = places.only_present(mem, b.get("present") if isinstance(b.get("present"), list) else None)
                     spk = str(b.get("speaker"))
                     c = OOC_CHAR if b.get("kind") == "ooc" else NARRATOR if spk == NARR_ID else next((m for m in mem if m["id"] == spk), None)
                     if not c:
@@ -448,6 +479,28 @@ class H(BaseHTTPRequestHandler):
             self.sse("[DONE]")
             return
         self.send({"err": "not found"}, 404)
+
+    def past_chats(self, a, b):
+        """Earlier conversations with this character, boiled down (the page can switch this off, or mark one chat as a fresh start)."""
+        try:
+            cid = str((b.get("char") or {}).get("id") or "")
+            chid = str(b.get("chat_id") or "")
+            k = self.key(a, cid) if cid else None
+            if not k or not re.fullmatch(r"\w+", k):
+                return []
+            out = []
+            for f in sorted((CHATS/k).glob("*.json"), key=lambda f: -f.stat().st_mtime)[:8]:
+                if f.stem == chid:
+                    continue
+                ch = rj(f)
+                if not isinstance(ch, dict) or (ch.get("cfg") or {}).get("fresh"):
+                    continue
+                d = keeper.digest(ch, str(b.get("user") or "User"), (b.get("char") or {}).get("name") or "Character")
+                if d:
+                    out.append(d)
+            return out[:4]
+        except Exception:
+            return []
 
     def login(self, a, b):
         ip = self.client_address[0]

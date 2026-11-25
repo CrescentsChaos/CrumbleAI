@@ -5,15 +5,21 @@ function renderChars(){if(!$('#cards').hidden)renderCards();const q=($('#csearch
 $('#clist').onclick=e=>{const d=e.target.closest('.ch');if(d){pick(d.dataset.id);closeDrawer();tab('chat')}};$('#csearch').oninput=renderChars;
 function renderForm(c){let h='';for(const[sec,fs]of S.schema){h+=`<details ${sec=='Core'?'open':''}><summary>${sec}</summary>`;
  for(const[k,l,r]of fs)h+=`<label>${l}</label><textarea data-k=${k} rows=${r}>${esc(c[k]||'')}</textarea>`;h+='</details>'}
- h+=persForm();h+=`<details><summary>Lorebook (inserted when a key appears in the last few messages; no keys = always)</summary><div id=lore></div><button id=addlore>Add entry</button></details>`;
- $('#form').innerHTML=h;$('#lore').innerHTML='';(c.lore||[]).forEach(loreRow);$('#addlore').onclick=()=>loreRow({keys:'',content:''});avPrev(c);persPreview()}
+ h+=`<details open><summary>Starting place</summary><div id=cstart></div></details>`;h+=persForm();h+=`<details><summary>Lorebook (inserted when a key appears in the last few messages; no keys = always)</summary><div id=lore></div><button id=addlore>Add entry</button></details>`;
+ $('#form').innerHTML=h;startMount(c);$('#lore').innerHTML='';(c.lore||[]).forEach(loreRow);$('#addlore').onclick=()=>loreRow({keys:'',content:''});avPrev(c);persPreview()}
 function avPrev(c){$('#eav').style.cssText=avs(c);$('#eav').textContent=c.avatar?'':ini(c.name);edLive()}
 function edLive(){const n=($('[data-k=name]')?.value||'').trim(),t=($('[data-k=tags]')?.value||'').split(',').map(s=>s.trim()).filter(Boolean);$('#epn').textContent=n||'New character';$('#ept').innerHTML=t.slice(0,6).map(x=>`<i>${esc(x)}</i>`).join('');if(cur&&!cur.avatar){$('#eav').style.cssText=`background:${grad(n||'?')}`;$('#eav').textContent=ini(n||'?')}}
 $('#form').addEventListener('input',e=>{if(e.target.dataset.k=='name'||e.target.dataset.k=='tags')edLive()});
 function loreRow(e){const d=document.createElement('div');d.className='lore';
  d.innerHTML=`<input placeholder="keys, comma separated" value="${at(e.keys||'')}"><textarea rows=3 placeholder="Entry text">${esc(e.content||'')}</textarea><button class=x>Remove</button>`;
  d.querySelector('button').onclick=()=>d.remove();$('#lore').append(d)}
-function collect(){const c={id:cur?.id||'',avatar:cur?.avatar||''};$$('[data-k]').forEach(e=>c[e.dataset.k]=e.value);
+/* where a new chat with this character begins: a searchable pick among the place cards (nothing chosen = wherever the scenario says) */
+const plPool=()=>(typeof PL!='undefined'?PL.list:[]).map(p=>({id:p.id,name:p.name,tags:p.biome||'',sub:[p.biome,(p.description||'').replace(/\s+/g,' ').slice(0,60)].filter(Boolean).join(' · ')}));
+function startMount(c){if(!$('#cstart'))return;const sel=()=>c.start_place&&typeof plById=='function'&&plById(c.start_place)?[c.start_place]:[];
+ mpMount('#cstart','cs',{sel:sel(),pool:plPool,max:1,placeholder:'Search places…',empty:'No starting place. A new chat begins wherever the scenario says.',hint:'A new chat with this character begins here. You can still move on from the 📍 chip.'});
+ if(typeof PL!='undefined'&&!PL.loaded)placesLoad().then(()=>{if(cur===c&&$('#cstart')&&PL.loaded)startMount(c)})}
+const startPick=()=>typeof PL!='undefined'&&PL.loaded&&MP.cs&&$('#cstart')?(mpSelected('cs')[0]||''):(cur?.start_place||'');
+function collect(){const c={id:cur?.id||'',avatar:cur?.avatar||'',start_place:startPick()};$$('[data-k]').forEach(e=>c[e.dataset.k]=e.value);
  c.lore=[...$$('.lore')].map(d=>({keys:d.children[0].value,content:d.children[1].value}));return c}
 function openNew(){G=null;MEN=null;cur=blank();hist=[];chat=null;chats=[];drawChats();draw();renderForm(cur);renderChars();tab('editor')}
 $('#new').onclick=openNew;

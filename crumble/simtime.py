@@ -172,7 +172,7 @@ def guide(sim, name="the character"):
     if sim["night"]:
         s += "It is night: it is dark out and people are winding down or asleep."
     elif sim["daytime"]:
-        s += f"It is daytime ({sim['period']}): it is light out, people are up and about, classes, shops and offices are running. Do NOT describe or act as if it were night, late, dark or bedtime."
+        s += f"It is daytime ({sim['period']}): it is light out and people are up and about. Do NOT describe or act as if it were night, late, dark or bedtime."
     else:
         s += f"It is {sim['period']}: the light is fading and the day is ending."
     return s

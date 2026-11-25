@@ -21,7 +21,7 @@ def clean(raw, mode="story"):
 def system(**o):
     base = {"mode": "story", "state": STATE, "words": (10, 30), "clock": "Friday 3:15 PM", "gap_s": 700}
     base.update(o)
-    return build_messages(MIRA, "Sam", [{"role": "user", "content": "hi"}], base)[0]["content"]
+    return h.ptxt(build_messages(MIRA, "Sam", [{"role": "user", "content": "hi"}], base))
 
 
 class StructuralLeaks(unittest.TestCase):
@@ -103,7 +103,7 @@ class PromptSeparation(unittest.TestCase):
         inside = s[a:b]
         for want in ("What has happened so far", "In the story it is" if False else "Mira currently feels happy", "Sam likes tea"):
             self.assertIn(want, inside)
-        self.assertIn("[How to use the private background]", s[b:])
+        self.assertIn("[How to use the private background]", s)     # the usage rule is part of the fixed system message (kept cacheable)
         self.assertLess(s.index("[Mira - Core]"), a)
 
     def test_summary_form_is_not_in_the_prompt(self):

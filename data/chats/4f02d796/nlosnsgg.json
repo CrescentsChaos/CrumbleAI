@@ -1,0 +1,24 @@
+{
+ "id": "nlosnsgg",
+ "title": "New chat",
+ "updated": 1795429852.2728677,
+ "history": [],
+ "state": {
+  "mood": "neutral",
+  "emoji": "😐",
+  "energy": "medium",
+  "affection": 50,
+  "facts": [],
+  "summary": "",
+  "sumUpto": 0,
+  "log": []
+ },
+ "cfg": {
+  "mode": "story",
+  "length": "auto",
+  "scene": "",
+  "notes": [],
+  "theme": null
+ },
+ "rp": {}
+}

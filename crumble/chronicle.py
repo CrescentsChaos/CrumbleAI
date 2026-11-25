@@ -87,8 +87,8 @@ def extract(msgs, user="", char="", turn0=0):
     """Details in these messages, as short verbatim lines. msgs: [{role, content, name?}]"""
     found = []
     for n, m in enumerate(msgs or []):
-        if m.get("ooc"):
-            continue
+        if m.get("ooc") or (isinstance(m.get("dyn"), dict) and m["dyn"].get("quirk") in ("lie", "misunderstand")):
+            continue            # a lie the character chose to tell is not a fact; a deliberate misreading is not what was said
         t = THINK.sub("", str(m.get("content") or ""))
         t = re.sub(r"[*_]{1,2}", "", t)
         who = user if m.get("role") == "user" else (m.get("name") or char or "Character")
@@ -193,8 +193,26 @@ def budget(n_ctx, reply, level=0):
     return {"room": room, "target": int(room * .8), **pl}
 
 
-def trim_history(hist, tokens, keep=3):
-    """Newest messages that fit in `tokens`. Returns (kept, dropped list). The dropped ones' details are already in the chronicle."""
+_WIN = {}     # chat -> (fingerprint of the first message kept, how many were dropped before it)
+
+
+def trim_history(hist, tokens, keep=3, key=None):
+    """Newest messages that fit in `tokens`. Returns (kept, dropped list). The dropped ones' details are already in the chronicle.
+    With a `key` the window moves in steps: it keeps the same first message until the chat outgrows the budget, then drops down to ~65% of it.
+    A window that slid by one message every turn changed the start of the prompt every time, so the model could never reuse what it had read."""
+    if key is not None and len(hist) > keep:
+        fp, n = _WIN.get(key, (None, 0))
+        if fp and n < len(hist) - keep and _fp(hist[n]) == fp:
+            if sum(_tokens(THINK.sub("", str(m.get("content") or ""))) for m in hist[n:]) <= tokens:
+                return hist[n:], hist[:n]
+        kept, dropped = trim_history(hist, int(tokens * .65), keep)
+        if dropped:
+            if len(_WIN) > 64:
+                _WIN.clear()
+            _WIN[key] = (_fp(kept[0]), len(dropped))
+        else:
+            _WIN.pop(key, None)
+        return kept, dropped
     cnt = [_tokens(THINK.sub("", str(m.get("content") or ""))) for m in hist]
     total, start = 0, len(hist)
     for k in range(len(hist) - 1, -1, -1):
@@ -203,6 +221,10 @@ def trim_history(hist, tokens, keep=3):
         total += cnt[k]
         start = k
     return hist[start:], hist[:start]
+
+
+def _fp(m):
+    return hash((m.get("role"), str(m.get("content") or "")[:120]))
 
 
 def update(st, window, user, char, turn, used=()):

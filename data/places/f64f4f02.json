@@ -1,0 +1,28 @@
+{
+ "id": "f64f4f02",
+ "name": "Gotham City",
+ "biome": "City",
+ "description": "A massive, crime-ridden city known for its corruption, organized crime, dangerous streets, and mysterious criminal underworld. Despite its wealth and impressive architecture, Gotham struggles with poverty, political corruption, gang violence, and recurring supervillain threats.",
+ "atmosphere": "Dark, gloomy, and oppressive. Heavy rain, thick fog, neon signs, flickering streetlights, police sirens, and distant screams create a constant feeling of danger. Even wealthy districts carry an underlying sense of paranoia.",
+ "history": "Gotham was founded centuries ago and gradually developed into a major industrial and financial center. Generations of corruption, organized crime, political manipulation, and institutional decay transformed it into one of America's most dangerous cities. The emergence of Batman changed its criminal landscape, but new threats and powerful criminal organizations continue to challenge the city.",
+ "objects": [
+  "Skyscrapers, streetlamps, abandoned vehicles, police cruisers, dumpsters, fire escapes, neon advertisements, security cameras, payphones, underground entrances,"
+ ],
+ "activities": [
+  "Patrolling streets, investigating crimes, pursuing criminals, fighting gangs, interrogating suspects, visiting nightclubs, exploring abandoned buildings, conduc"
+ ],
+ "exits": [
+  "Highways connect Gotham to neighboring regions. Bridges, tunnels, train stations, harbors, and Gotham International Airport provide access to the outside world."
+ ],
+ "events": [
+  "Bank robberies, gang shootouts, hostage situations, police pursuits, prison escapes, mysterious murders, organized crime operations, and occasional supervillain attacks. Random street crimes occur throughout the city."
+ ],
+ "secrets": [
+  "Hidden Batcave entrances, abandoned underground facilities, secret criminal headquarters, corrupt political connections, forgotten subway tunnels, and concealed evidence of Gotham's darkest conspiracies."
+ ],
+ "characters": [
+  "06a661c7"
+ ],
+ "bg": "f64f4f02.jpg",
+ "bg_v": 1
+}

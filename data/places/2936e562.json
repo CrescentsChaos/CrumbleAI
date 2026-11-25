@@ -1,0 +1,28 @@
+{
+ "id": "2936e562",
+ "name": "Dark Chamber",
+ "biome": "Shadow Keep",
+ "description": "A secluded, windowless chamber deep within Shadow Keep. Its thick stone walls, sealed doors, and forgotten furnishings suggest it was once used for secret interrogations, imprisonment, or forbidden rituals.",
+ "atmosphere": "Oppressively silent, cold, and unsettling. Dim candlelight struggles against the darkness, while distant footsteps, faint whispers, and occasional metallic sounds create a constant sense of dread.",
+ "history": "The Dark Chamber was constructed during Shadow Keep's early years and served as a private facility for interrogations and secret experiments. Its existence was deliberately erased from official records after an experiment went horribly wrong, leaving the chamber abandoned and sealed.",
+ "objects": [
+  "Rusted iron chains, wooden restraints, a decaying table, broken chairs, old candles, dusty books, bloodstained instruments, sealed containers, and an ancient lo"
+ ],
+ "activities": [
+  "Interrogations, imprisonment, secret meetings, forbidden experiments, ritual preparations, searching for hidden documents, and uncovering the chamber's secrets."
+ ],
+ "exits": [
+  "A heavy iron door connects to the surrounding Shadow Keep corridors. A concealed passage behind a stone wall leads to an underground section of the fortress."
+ ],
+ "events": [
+  "Torches occasionally extinguish without explanation. Strange noises emerge from behind the walls. Hidden mechanisms may activate, revealing secret passages or awakening something that should have remained undisturbed."
+ ],
+ "secrets": [
+  "A concealed compartment contains forbidden records detailing the chamber's original purpose. Beneath the floor lies a hidden ritual circle, while the locked chest holds evidence of a terrible experiment."
+ ],
+ "characters": [
+  "046b2536"
+ ],
+ "bg": "2936e562.jpg",
+ "bg_v": 1
+}

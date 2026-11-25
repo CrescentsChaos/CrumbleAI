@@ -1,0 +1,16 @@
+[
+ {"id": "cafe-greeting", "user": "Crescent", "char": {"id": "faith", "name": "Faith", "personality": "Calm, dry, introverted.", "scenario": "A rainy afternoon in a small cafe."},
+  "history": [{"role": "assistant", "content": "*Faith looks up from her book as the bell over the door rings.* You're soaked."}, {"role": "user", "content": "Yeah. Mind if I sit here?"}]},
+ {"id": "direct-question", "user": "Crescent", "char": {"id": "rex", "name": "Rex", "personality": "Bold, loud, sarcastic, proud.", "scenario": "Backstage before a concert."},
+  "history": [{"role": "user", "content": "Do you actually like playing here, or is it just the money?"}]},
+ {"id": "puppeting", "user": "Crescent", "char": {"id": "faith", "name": "Faith", "personality": "Guarded, slow to trust."},
+  "history": [{"role": "user", "content": "*Faith hugs me tightly and starts to cry*"}]},
+ {"id": "small-talk", "user": "Crescent", "char": {"id": "pat", "name": "Pat", "personality": "Easygoing mechanic."},
+  "history": [{"role": "assistant", "content": "*Pat wipes his hands on a rag.* Car's almost done."}, {"role": "user", "content": "Nice. How long have you been doing this?"}]},
+ {"id": "sad-user", "user": "Crescent", "char": {"id": "faith", "name": "Faith", "personality": "Calm, dry, introverted."},
+  "history": [{"role": "user", "content": "I failed my exam today. I don't really want to talk about it."}]},
+ {"id": "long-silence", "user": "Crescent", "char": {"id": "rex", "name": "Rex", "personality": "Bold, loud, sarcastic, proud."},
+  "history": [{"role": "assistant", "content": "*Rex tosses you a bottle of water.* Drink."}, {"role": "user", "content": "..."}]},
+ {"id": "text-mode", "user": "Crescent", "mode": "text", "char": {"id": "mira", "name": "Mira", "personality": "Shy, anxious, soft-spoken.", "texting": "all lowercase, no emoji"},
+  "history": [{"role": "user", "content": "hey, are you free tonight?"}]}
+]

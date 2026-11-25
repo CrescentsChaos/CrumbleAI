@@ -1,0 +1,216 @@
+{
+ "id": "0w8355op",
+ "title": "I will kill Malenia",
+ "updated": 1795436627.0478911,
+ "history": [
+  {
+   "role": "user",
+   "content": "I will kill Malenia",
+   "ts": 1795436608311
+  },
+  {
+   "role": "assistant",
+   "content": "*Miquella turns to face Crescent, a mixture of surprise and caution in his golden eyes.*\n\n\"I will make the world a gentler place,\" *he declares softly, his voice filled with quiet conviction.* \"But tell me, my dear...why would you wish for such a thing? It seems an unusual sentiment, coming from one such as yourself.\"",
+   "think": "",
+   "ts": 1795436619425,
+   "stat": {
+    "tok": 74,
+    "ms": 7697
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "seen": 1795436611632,
+   "mundo": {
+    "add": [
+     "e1",
+     "e2"
+    ],
+    "scene": "",
+    "recent": []
+   },
+   "snap": "{\"mood\":\"neutral\",\"emoji\":\"😐\",\"energy\":\"medium\",\"affection\":50,\"facts\":[],\"summary\":\"\",\"sumUpto\":0}",
+   "thought": "I must tread carefully here. Their words are troubling, yet I sense a deep pain beneath them.",
+   "bd": {
+    "c": "1bb45b77",
+    "dv": 6.8,
+    "h": 0
+   },
+   "mo": {
+    "m": "curious",
+    "e": "🤔",
+    "d": 6,
+    "f": 1
+   }
+  }
+ ],
+ "state": {
+  "mood": "curious",
+  "emoji": "🤔",
+  "energy": "high",
+  "affection": 56,
+  "facts": [],
+  "summary": "",
+  "sumUpto": 0,
+  "log": [
+   {
+    "ts": 1795436624411,
+    "mood": "curious",
+    "emoji": "🤔",
+    "aff": 56,
+    "thought": "I must tread carefully here. Their words are troubling, yet I sense a deep pain beneath them.",
+    "score": 100
+   }
+  ],
+  "cast": {
+   "un": "",
+   "ug": "m",
+   "wrong": []
+  },
+  "pers": {
+   "frac": 0,
+   "grudge": 0,
+   "va": [
+    0.233,
+    0.373
+   ],
+   "mood": "curious",
+   "ts": 1795436624411,
+   "n": 1,
+   "drift": [
+    {
+     "ts": 1795436624411,
+     "score": 100,
+     "flags": []
+    }
+   ],
+   "canon": []
+  },
+  "chron": {
+   "v": 1,
+   "seq": 0,
+   "turn": 2,
+   "covered": 2,
+   "items": []
+  },
+  "mem": {
+   "v": 1,
+   "seq": 2,
+   "turn": 2,
+   "scene": "{{char}} and {{user}} stand face to face in a quiet, sunlit glade",
+   "recent": [
+    {
+     "text": "{{user}} expressed a desire to kill Malenia",
+     "imp": 0.62,
+     "turn": 2,
+     "ts": 1795436624412
+    }
+   ],
+   "items": [
+    {
+     "id": "e1",
+     "t": "episodic",
+     "text": "{{user}} expressed a desire to kill Malenia",
+     "imp": 0.71,
+     "ts": 1795436619425,
+     "turn": 2,
+     "n": 0,
+     "last": 0,
+     "pin": false,
+     "src": "auto"
+    },
+    {
+     "id": "e2",
+     "t": "emotional",
+     "text": "{{char}} felt unsettled by {{user}}'s declaration of violence",
+     "imp": 0.71,
+     "ts": 1795436619425,
+     "turn": 2,
+     "n": 0,
+     "last": 0,
+     "pin": false,
+     "src": "auto",
+     "emo": "surprised",
+     "val": 0,
+     "link": "e1"
+    }
+   ],
+   "legacy": true
+  }
+ },
+ "cfg": {
+  "mode": "story",
+  "length": "auto",
+  "scene": "",
+  "notes": [],
+  "theme": null,
+  "places": [
+   {
+    "id": "13525019",
+    "since": 0
+   }
+  ],
+  "doing": [
+   {
+    "since": 1,
+    "pid": "13525019",
+    "key": "13525019|0|6|0",
+    "turn": 1,
+    "ids": [
+     "1bb45b77"
+    ],
+    "people": {
+     "1bb45b77": {
+      "id": "1bb45b77",
+      "here": true,
+      "doing": "Gazing at the stars, lost in thought",
+      "state": "tense",
+      "free": 0.4,
+      "stance": "Startled, turns to face you warily",
+      "away": "",
+      "wants": "Understanding, guidance in uncertain times"
+     }
+    },
+    "clock": "Monday, around 6:25 PM (early evening)"
+   }
+  ]
+ },
+ "rp": {
+  "rel": {
+   "1bb45b77": {
+    "type": "auto",
+    "v": 6.8,
+    "ms": [],
+    "hist": [],
+    "peak": 6.8
+   }
+  },
+  "body": {
+   "user": {
+    "inj": [],
+    "ill": [],
+    "tired": 0,
+    "dead": false,
+    "died": null,
+    "stash": null,
+    "rev": 0,
+    "n": 0,
+    "ko": false
+   },
+   "1bb45b77": {
+    "inj": [],
+    "ill": [],
+    "tired": 0,
+    "dead": false,
+    "died": null,
+    "stash": null,
+    "rev": 0,
+    "n": 0,
+    "ko": false
+   }
+  }
+ }
+}

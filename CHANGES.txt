@@ -1,3 +1,171 @@
+History keeper and conversation dynamics.
+Drop these over your project (same relative paths), delete the __pycache__ folders, restart. New files are listed first.
+
+  NEW crumble/keeper.py              Older chapters, key-event timeline, relationships, earlier-chat digests (pure functions, no model call).
+  NEW crumble/director.py            Length, tone and quirk planning (interrupt, misunderstand, joke, lie, change topic), repeat-pattern checks, characters speaking first.
+  NEW crumble/web/js/26-keeper.js    Memory-tab view of the keeper, greeting when you come back, settings helper.
+  NEW tests/test_keeper.py, tests/test_director.py   59 tests (the full suite is 502; the 12 failures that were there before, 11 of them wildlife tests that need data/animals/Animals.json, are unchanged).
+  llm.py       plan per reply, the length band, nudge/return openers, the repeated-opening retry (pattern_open), keeper and earlier-chat blocks, `dyn` on the result.
+  prompt.py    [Conversation dynamics] block and the private-note line; older-history blocks in the private background.
+  memory.py    keep_update after a summary; the mood tracker no longer learns a lie as fact.
+  chronicle.py lies and deliberate misreadings are not recorded as facts.
+  server.py    /api/summarize also returns `keep`; /api/chat reads the same character's other chats itself.
+  web/js       01-core (defaults), 05-chats, 06-generate, 07-composer, 09-memory, 10-settings, 13-roleplay.
+  Settings     Conversation dynamics, Greet me when I come back, Remember earlier chats.
+
+Intimacy block condensed: the fixed system prompt is ~36% smaller (about 3,300 to 2,100 tokens at the mid tier).
+Drop prompt.py over your project, delete the __pycache__ folders, restart.
+
+  prompt.py   The ROMANCE AND INTIMACY text is now one constant (INTIMACY) with each idea said once; before, the same lists of acts, "no fade-to-black" and the pacing/willingness rules
+              were repeated several times. Same directives: build-up first, character-driven willingness, explicit and uncensored once built up, tender and rough both allowed, the user
+              controls how far it goes, reluctant/non-con allowed as fiction, direct commands followed, only the character's side written, physical coherence.
+              One line added: everyone in an intimate scene is an adult.
+
+Faster again: a steady chat window, a Fast mode, and a timing line that shows where the time goes.
+Drop these over your project (same relative paths), delete the __pycache__ folders, restart.
+
+  Timing.          Every reply now prints one line in the console: how long the model took to the first word (reading the prompt), then tokens per second while writing.
+                   Under ~3 s to the first word means the prompt is no longer the problem; the rest is the model's writing speed (smaller or lower-quant model, GPU layers). CRUMBLE_TIMING=0 hides it.
+  Steady window.   chronicle.trim_history: once a chat was long enough for old messages to leave the prompt, the window slid by one message every turn, which changed the start of the prompt
+                   and made the model re-read everything each time. It now moves in steps (drops to ~65% when full), so the cache holds for many turns in a row. Details of dropped messages still go to the chronicle.
+  Fast mode.       New setting `fast` (on by default; set fast:false in crumbleUI to turn off): the story/weather blocks sent each turn use their compact form (~25% fewer per-turn tokens).
+  Typing.          Mood/memory updates wait while the message box has text in it, so they never start under a reply you are about to send.
+  Retries.         Unchanged: a second generation only for real mistakes (repeat, broken voice, wrote as the user, leaked instructions).
+
+  crumble/llm.py, prompt.py, chronicle.py, ambience.py, web/js/01-core.js, 06-generate.js
+
+Replies in seconds: the model no longer re-reads the whole prompt every message, and far fewer helper calls run around a reply.
+Drop these over your project (same relative paths), delete the __pycache__ folders, restart (the model is reloaded with new options). Nothing on disk changed.
+
+  Why it was slow.  Every message the model re-read ~5,000 tokens from scratch: the mood, time, memory and weather sat in the middle of the system message, so nothing after them
+                    (and none of the chat) could be reused; and the small helper calls (mood/memory, activities, summary) each overwrote the model's cached prompt, so the next reply started cold.
+  Prompt layout.    prompt.py: everything that changes every turn (private background: memory, weather, time, mood, scene; relationship state; personality directives; style/length; variety notes)
+                    now rides on the newest user turn, together with the private note. The system message and the chat before it are identical from one message to the next, so the model
+                    only reads what is new (about 1.2k tokens instead of 5k, and much less once the cache is warm). The wording of every block is unchanged, only where it sits; the
+                    usage rule and the sheet stay in the system message. The ROMANCE AND INTIMACY block is untouched. A few repeated sentences in the per-turn blocks were shortened
+                    (ambience.py, simtime.py, story/__init__.py).
+  Model loading.    config.load_llama (used by the sidebar Load button and the start-up auto-load): flash attention and a 1024 batch (CRUMBLE_N_BATCH to change), and a RAM prompt cache
+                    (CRUMBLE_CACHE_MB, default 1536, 0 = off) so the helper calls between two replies no longer throw the chat prompt away. Each option falls back if your build does not support it.
+  Activities.       "What is everyone doing" no longer blocks a reply when an answer already exists: the old answer is used for this reply and refreshed right after it, while you read
+                    (place changes still wait). An answer is kept for 3 story hours / 20 messages (was 1.5 / 12); the call itself is shorter (people's sheets 450 chars, last 4 lines, 600 tokens).
+  Mood and memory.  One call per 2 replies instead of every reply (it reads the last 6 messages, so nothing is missed). Set trackEvery to 1 in the browser's crumbleUI setting to get every reply back.
+  Summaries.        Every 14 new messages (was 10); a long stretch of text is still folded in sooner.
+  Tests.            tests now read the whole prompt (system + newest turn) through tests/helpers.ptxt; same results as before (the 12 environment failures are unchanged).
+
+  crumble/prompt.py, config.py, server.py, app.py, ambience.py, simtime.py, story/__init__.py, story/doing.py, presence.py, web/js/01-core.js, 06-generate.js, 25-doing.js
+  tests/helpers.py and the tests that read the prompt
+
+Settings are saved on the host; fewer model calls per message.
+Drop these over your project (same relative paths), delete the __pycache__ folders, restart. Nothing on disk changed; data/profiles/<owner>.settings.json is new.
+
+  Settings.        Every option (Settings tab, sampling, theme) is kept on the host as well as in the browser (GET/POST /api/settings, crumble/profile.py), the same way as your profile:
+                   loaded at start (the host's copy wins in a browser that forgot), saved 0.7 s after a change and when the tab closes, one file per guest. Nothing is saved until the load
+                   has finished, so a fresh browser cannot overwrite the host's copy with its defaults.
+  Speed.           Before every reply the page asked the model "what is everyone doing" whenever its answer was out of date, in any chat. Now it only does that in a place or a visit; elsewhere it
+                   is the new Settings option "Activities outside places too" (off). The call is also shorter (at most 800 tokens, was 1400) and plain (/no_think).
+                   Still running after each reply, as before: the mood/memory update (Settings -> Emotions and memory) and a summary every 10 messages. Turn those off to speed up a slow model.
+
+  crumble/profile.py, server.py, presence.py, web/js/01-core.js, 07-composer.js, 10-settings.js, 11-nav.js, 25-doing.js, tests/test_place_authority.py
+
+The place you are in is the truth: starting places, a saved profile, summaries that remember the place, activities that fit where you are.
+Drop these over your project (same relative paths), delete the __pycache__ folders, restart. Nothing on disk changed; data/profiles/ is new and written as you type your name or "About you".
+
+  Place wins.      The World panel said "the apartment" at the Gate of Divinity because the place was guessed from words (the scenario said apartment) and a card's name only counted if its
+                   text happened to match a word list. A place card is now the place: ambience.derive puts it into the story at the message it was chosen (since), the name, the
+                   indoors/outdoors (from the card's words, else its biome; unknown is simply not claimed) and the atmosphere come from the card, and words in the chat can no longer
+                   rename it (a room or "step outside" still changes indoors/outdoors). Rewinding past the move brings the old place back. Without a card nothing changed.
+  Activities.      story/doing.py: everyone marked "here" is tied to the place ("what they do has to be possible THERE; someone who would be elsewhere is here=false and the page says where"),
+                   and a place the story has without a card is passed too. The page keeps the place an answer was made for (pid): after you move, what was worked out for the old place is
+                   dropped at once from the panel and the prompt, then asked again.
+  Summaries.       /api/summarize gets the place you stood in when the summarised stretch ended (the id; the server reads the card). The model is told it, and the "Location:" line is set to
+                   it afterwards whatever the model wrote or the older summary said (memory.pin_location). In the prompt the recap says "Right now the story is at <place>" instead of
+                   the place the summary was written at (context.recap(place=)); only a real card does this, a place guessed from words does not.
+  Your profile.    Name, About you, stats, skills and gear lived only in the browser, so a new browser, cleared site data or a different share address meant "User" again. They are now also kept
+                   on the host (crumble/profile.py, GET/POST /api/profile, data/profiles/host.json and one file per guest): loaded at start (the host's copy wins in a browser that forgot
+                   you; a browser that knows you but the host does not sends it up once), saved 0.5 s after you type and when the tab closes. An emptied field is a real change; a missing
+                   one never wipes a saved one.
+  Starting place.  Character editor -> "Starting place": a search box over your place cards (name, biome, description). A new one-to-one chat with that character begins in it (the chip, the
+                   background and the world panel all start there; you can still move on). Saved as start_place on the character (checked against real cards, a deleted place means none);
+                   guests get it too, so their chats start there as well. Existing chats are not moved.
+
+  crumble/places.py (scene, note, start_id), ambience.py, story/doing.py, presence.py, context.py, prompt.py, memory.py, profile.py (new), server.py, storage.py
+  crumble/web/js/05-chats.js, 06-generate.js, 07-composer.js, 08-characters.js, 11-nav.js, 23-places.js, 25-doing.js
+  tests/test_place_authority.py (new): 24 tests. The full suite has the same environment failures as before and no new ones.
+
+Places are visited, not chatted with; what people are doing is made up for the moment, never read off a timetable.
+Drop these over your project (same relative paths), delete the __pycache__ folders, restart. Nothing on disk changed. A visit is saved as a chat under the place's own id (pl_<place id>).
+
+  Visiting.   Place page: "Visit <place>" (and "Continue last visit"). You walk in alone; the Narrator describes the place and who is there. "Go there with someone" is the old
+              one-to-one chat, now a small option. Adding characters to a place only says they live or turn up there: it never opens a chat with them.
+  Presence.   One short model call per stretch of story time (story/doing.py, presence.py, POST /api/doing) decides who is in, what each is doing and how each meets you
+              (ignoring, wary, curt, warm). People can be away; nobody has to be on hand. The answer is kept in the chat, so swipes and rewinds stay stable.
+  No timetable. A schedule guessed from the job is no longer used (nobody is put to bed because it is night, and the clock no longer keeps residents from turning up). A routine the
+              author wrote on the sheet is passed as a usual rhythm, never a rule. Without a usable model answer nothing is invented.
+  Not an assistant. Residents and visitors are told they are not staff or helpers: no offers of help or cheerful greetings unless that is truly their way.
+
+  crumble/story/doing.py (new), crumble/presence.py (new), crumble/places.py, crumble/story/__init__.py, crumble/storage.py, crumble/server.py, crumble/llm.py, crumble/prompt.py
+  crumble/web/js/25-doing.js (new), 23-places.js, 22-world.js, 13-roleplay.js, 10-settings.js, 06-generate.js, crumble/web/css/14-places.css
+  tests/test_doing.py (new), tests/test_places.py, tests/test_story.py
+
+One reply, one generation (review item H8): retries only for hard failures, inside a time budget, and every rule that trips is logged.
+Drop these over your project (same relative paths), delete the __pycache__ folders, restart. Nothing on disk changed; data/retry_log.jsonl is new and written as replies trip rules.
+
+  crumble/llm.py                    generate_reply no longer regenerates for style. A new generation only happens for:
+                                      empty reply; wrote as the user ("user_voice", or the user's lines that could not be cut out); instruction/prompt text ("leak", "scrubbed",
+                                      "echo_all": what is left after the echoed sentences are cut is under 4 words); who-is-who and record errors (wrong name, impersonation,
+                                      contradicting what the user said, ignoring or inventing a fact); a mandatory voice broken ("persona_hard"); a near-verbatim repeat ("dup").
+                                    Everything else is repaired in place or flagged on the reply (reply["flags"]) and left alone: AI-speak (the assistant sentences are cut), echoed
+                                    background (the copied sentences are cut), a closing question (story.repair), a wrong time of day or atmosphere ("time", "env"), a wrong pronoun
+                                    ("identity_misgender"), parroting the user, soft repeats, soft persona notes. The sets are HARD_RETRY / SOFT_RETRY at the top of the file:
+                                    to bring a rule back as a retry, add its name to SOFT_RETRY (it is ignored in Quick mode).
+                                    Time budget: all attempts together may not take more than TIME_BUDGET (2x) the first one. The first retry is always allowed; a third attempt only
+                                    if the retries are getting faster. An empty reply ignores the budget (there is nothing to show). When no retry is left, an attempt without hard failures beats a later one with.
+                                    Every reply that trips any rule appends one line to data/retry_log.jsonl (rule names, whether it retried or why not, milliseconds; never text);
+                                    CRUMBLE_RETRY_LOG=0 switches it off. The reply also carries "retry_log" and "flags".
+  crumble/story/endings.py          repair() now removes stacked closing questions ("Anything else? Really?"), since it is the only fix left for them
+  tools/retry_stats.py        NEW   python -m tools.retry_stats: per rule, how often it tripped, retried, or was held back by the budget or the cap: delete the noisy ones
+  tests/test_retries.py       NEW   empty always retries; soft rules never do (and can be brought back by name, not in Quick mode); the budget with a fake clock; the log
+  tests/test_story.py, test_integration.py, test_roleplay_fixes.py, test_ambience.py, test_group_roleplay.py
+                                    six tests that asserted "retried on a style rule" now assert "repaired or flagged, one call" (the group one pins TIME_BUDGET because fakes answer instantly)
+  The full suite: the same environment failures as before minus two that now pass (test_engine_off_is_untouched, test_guard_off_means_no_rerolls), and no new ones.
+
+Prompt diet (review item H12): shorter rules, no repeats, joins fixed, fewer rules for small models.
+Drop these over your project (same relative paths), delete the __pycache__ folders, restart. Nothing on disk changed.
+
+  crumble/prompt.py                 the generic rules are now one list per topic (ROLE, CONVERSATION, OUTPUT, REALISM, GROUP_RULES), each rule tagged with the smallest model tier that needs it.
+                                    "Never write the user's words..." was said 4-5 times and is said once; the two banned-phrase lists are gone (personality/lexicon.py already catches that speech);
+                                    the core no longer demands *asterisks* (that is the [Style] block's job, and it was wrong in text and call mode). The group rule still holds with realism off.
+                                    Romance/intimacy wording is unchanged. Only its broken joins were fixed ("forbidden.- Characters", "- - Match") and "wont" -> "won't".
+                                    About 4,300 -> 3,100 tokens (small model) / 3,300 (mid) before any sheet. ~1,460 of what is left is the intimacy block.
+  crumble/config.py                 model_tier(): 0 small (<= ~8B), 1 mid (default when unknown), 2 large (>= ~25B), read from the file name, then the GGUF metadata.
+                                    CRUMBLE_PROMPT_TIER=small|mid|large overrides it
+  tests/test_prompt_budget.py NEW   token budget per tier, no glued bullets, no typos, one "never write the user" rule, tiers shrink, the register hook still finds its rule
+  tests/golden/conversations.json   NEW   seven golden conversations (greeting, direct question, puppeting, small talk, sad user, silence, texting)
+  tools/prompt_eval.py        NEW   answers the golden set with a real model and scores assistant-speak, closing questions, writing for the user, lists, length:
+                                    run it on the old project and the new one, then --compare before.json after.json. --dry prints the prompt sizes with no model
+  The full suite has the same 14 environment failures as before and no new ones.
+
+Places become a page of their own: universal (any chat, any group), a real editor page, searchable people, and the picture is the chat's background.
+Drop these over your project (same relative paths), delete the __pycache__ folders, restart. Old chats and saved places keep working; nothing on disk changed.
+
+  PLACES PAGE + EDITOR (like the character pages)
+  crumble/web/index.html                  new "Places" tab (top bar), a Places gallery page, a full-page place editor and a place sheet; map-pin icon
+  crumble/web/js/23-places.js             gallery with search (name, biome, description, objects, people) and biome filters; click a place for its sheet: about, atmosphere, people, and
+                                          "Start a chat here" (search any character or group, opens a new chat set in that place) or "Use in current chat" / "Leave this place".
+                                          The editor is now a page (live side card, AI draft, basics, who is here, chat background with a live preview, things here, author notes),
+                                          not a popup. The header chip popup stays for quick moves and now has a search box and a link to the page
+  crumble/web/js/11-nav.js                tab() knows the Places pages
+  places are universal: they are not tied to one chat. Any one-to-one chat or group can be set in any place, from the page or from the header chip
+
+  PEOPLE PICKER (nothing lists every character any more)
+  crumble/web/js/24-picker.js       NEW   chosen people are small chips (first 8, "+N more"); everyone else is found by typing, six matches at a time, with keyboard support
+  crumble/web/js/12-groups.js             the group editor uses the same picker instead of a checkbox for every character; places use it for who belongs there (up to 16)
+
+  BACKGROUND
+  crumble/web/css/14-places.css           the place picture now sits behind the whole chat (header, messages, composer) with a soft veil for readability, in one-to-one and group chats,
+                                          replacing the animated backdrop while you are at a place. Settings -> "Show the place as the chat background" still switches it off
+  tests/test_places.py                    +5 tests for the wiring (page, picker, background). The full suite has the same 14 environment failures as the original zip and no new ones
+
 Places: location / scene cards you can explore, that characters live in, and whose residents can wander into a one-to-one chat.
 Drop these over your project (same relative paths, this zip also contains the wildlife update), delete the __pycache__ folders, restart. Old chats keep working. New data goes in data/places/ (cards) and data/places/img/ (background pictures).
 

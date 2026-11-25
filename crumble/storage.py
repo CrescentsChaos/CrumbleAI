@@ -87,7 +87,7 @@ PUBLIC = ("name", "tags", "description", "first_mes", "alts", "gender", "age", "
 def pub(c):
     """A character as guests see it: enough to pick and greet, never the prompt, secrets or backstory."""
     out = {k: (c.get(k, "") if k in PUBLIC else "") for k in KEYS}
-    out.update(id=c["id"], avatar=c.get("avatar", ""), lore=[])
+    out.update(id=c["id"], avatar=c.get("avatar", ""), lore=[], start_place=c.get("start_place", ""))
     return out
 
 
@@ -105,6 +105,9 @@ def load_groups():
 
 
 def get_group(gid):
+    if str(gid or "").startswith("pl_"):      # a visit to a place: the place card is the group (nothing is stored for it, only its chats)
+        from . import places
+        return places.scene_group(gid)
     return rj(GROUPS/f"{gid}.json") if re.fullmatch(r"\w+", str(gid or "")) else None
 
 

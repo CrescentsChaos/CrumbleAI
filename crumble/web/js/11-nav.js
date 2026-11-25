@@ -3,11 +3,11 @@ $('#load').onclick=async()=>{const path=$('#mpath').value.trim()||$('#msel').val
 function mchip(){const e=$('#mchip');if(!e||!S)return;e.classList.toggle('on',!!S.loaded);e.querySelector('span').textContent=S.backend?(S.loaded?String(S.loaded).split(/[\\/]/).pop().replace(/\.gguf$/i,''):'No model loaded'):'llama-cpp missing';e.title=(S.loaded?'Loaded: '+S.loaded:'No model loaded')+(S.backend?(S.gpu?' (GPU)':' (CPU only)'):'')+'. Click to open the model box'}
 $('#mchip').onclick=()=>{if(S.role=='guest')return;document.body.classList.add('drawer');const d=$('#side details.mdl.adm');if(d){d.open=true;$('#msel').focus()}};
 $('#uname').addEventListener('input',()=>{$('#meav').textContent=ini($('#uname').value||'U')});
-function tab(t){closeDrawer();if(t=='samp')renderShare(true);$$('nav button').forEach(b=>b.classList.toggle('on',b.dataset.t==t));
- for(const id of['chat','cards','editor','mem','samp','gedit'])$('#'+id).hidden=id!=t;if(t=='mem')renderMem();if(t=='cards')renderCards();if(t=='chat'){const L=$('#log');L.scrollTop=L.scrollHeight}}
+function tab(t){closeDrawer();if(t=='samp')renderShare(true);$$('nav button').forEach(b=>b.classList.toggle('on',b.dataset.t==(t=='pedit'?'places':t)));
+ for(const id of['chat','cards','editor','mem','samp','gedit','places','pedit'])$('#'+id).hidden=id!=t;if(t=='mem')renderMem();if(t=='cards')renderCards();if(t=='places'&&typeof placesPage=='function')placesPage();if(t=='chat'){const L=$('#log');L.scrollTop=L.scrollHeight}}
 document.querySelector('nav').onclick=e=>{const b=e.target.closest('[data-t]');if(b)tab(b.dataset.t)};
 
-async function init(){S=await api('/api/state');
+async function init(){S=await api('/api/state');await profileLoad();await settingsLoad();
  $('#msel').innerHTML='<option value="">(choose from ./models)</option>'+S.models.map(m=>`<option>${esc(m)}</option>`).join('');
  $('#mstat').textContent=S.backend?((S.loaded?'Loaded: '+S.loaded:'No model loaded')+(S.gpu?' (GPU)':' - CPU ONLY build: see the console to enable the GPU')):'llama-cpp-python missing: pip install llama-cpp-python';
  document.body.classList.toggle('guest',S.role=='guest');if(S.role=='guest'&&(!U.uname||U.uname=='User'))U.uname=S.name;

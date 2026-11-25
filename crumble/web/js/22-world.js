@@ -11,13 +11,13 @@ function worldHead(){const e=$('#hworld');if(!e)return;const wk=chat?(chat.id+':
  e.hidden=false;e.innerHTML=`<span>${wIcon(i)}</span><b>${esc(wShort(i))}</b>${i.weather?`<span class=small>${esc((WX[i.weather]||[0,i.weather])[1])}</span>`:''}`;
  e.title='Story time, weather and what everyone is doing. Click for details';if(W.open)worldDraw()}
 function worldRefresh(now){clearTimeout(W.t);const go=async()=>{if(!chat||!cur?.id||U.story===false){W.info=null;worldHead();return}
-  try{const ic=hist.filter(m=>!m.ooc);const r=await api('/api/world','POST',{...(G?{group:G.id}:{cid:cur.id}),history:apiHist(ic),scene:chat.cfg.scene||'',clock:U.timeaware?clock():'',story_start:chat.cfg.start||'',story:storyCfg(),place:placeSpec()});
+  try{const ic=hist.filter(m=>!m.ooc);const r=await api('/api/world','POST',{...(G?{group:G.id}:{cid:cur.id}),history:apiHist(ic),scene:chat.cfg.scene||'',clock:U.timeaware?clock():'',story_start:chat.cfg.start||'',story:storyCfg(),place:placeSpec(),doing:doingMap()});
    if(r&&r.world){W.info=r.world;worldHead()}}catch(e){}};
  if(now)go();else W.t=setTimeout(go,250)}
 const freeW=f=>f>=.8?'free to talk':f>=.55?'a bit busy':f>=.3?'busy':'not available';
 function worldDraw(){const el=$('#worldpop'),i=W.info;if(!el)return;if(!W.open||!i||!chat){el.hidden=true;return}
  const days=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
- const who=(i.who||[]).map(s=>`<div class=wrow><b>${esc(s.name||'')}</b><span>${esc(s.act)}</span><i style="--f:${Math.round(s.free*100)}%" title="${freeW(s.free)}"></i><small>${s.mins<90?`next in ~${s.mins} min: `:'next: '}${esc(s.next)}</small></div>`).join('');
+ const who=(i.who||[]).map(s=>`<div class=wrow><b>${esc(s.name||'')}</b><span>${esc(s.act)}</span><i style="--f:${Math.round(s.free*100)}%" title="${freeW(s.free)}"></i>${s.next?`<small>${s.mins<90?`next in ~${s.mins} min: `:'next: '}${esc(s.next)}</small>`:''}</div>`).join('');
  const wi=i.weather?WX[i.weather]||['🌡',i.weather]:null;
  el.hidden=false;el.innerHTML=`<div class=wh><b>${wIcon(i)} ${esc(i.clock||'The story has no clock yet')}</b><button class=ghost data-w=x>✕</button></div>
  <div class=wsec><div class=small>${i.day?(i.who?.[0]?.weekend?'Weekend':'Weekday'):''}${i.season?' · '+esc(i.season):''}${i.real?' · following the real clock':''}</div>
@@ -28,7 +28,7 @@ function worldDraw(){const el=$('#worldpop'),i=W.info;if(!el)return;if(!W.open||
  ${who?`<div class=wsec><div class=lb>Right now</div>${who}</div>`:''}
  <div class=wsec><div class=lb>Time</div><div class=wset><select id=wday>${days.map(d=>`<option>${d}</option>`).join('')}</select><input id=wtime type=time value="08:00"><button data-w=set>Set the clock</button></div>
   <div class=wset><button data-w=skip data-s="30 minutes">+30 min</button><button data-w=skip data-s="2 hours">+2 h</button><button data-w=skip data-s="evening">Evening</button><button data-w=skip data-s="night">Night</button><button data-w=skip data-s="morning">Next morning</button></div>
-  <div class=small>Setting the clock only tells the story where it begins; skipping adds a short “later” line to the chat. Characters live by this clock: they sleep, work, get hungry, and have to leave.</div></div>`;
+  <div class=small>Setting the clock only tells the story where it begins; skipping adds a short “later” line to the chat. The hour changes the light and how people feel; what each person is doing is worked out for the moment, not read off a timetable. They can get hungry, and have to leave.</div></div>`;
  if(chat.cfg.start){const m=/^(\w+) (\d+):(\d+)\s*(AM|PM)/i.exec(chat.cfg.start);if(m){$('#wday').value=days.find(d=>d.startsWith(m[1]))||'Monday';let h=+m[2]%12+(/pm/i.test(m[4])?12:0);$('#wtime').value=String(h).padStart(2,'0')+':'+m[3]}}}
 const worldClose=()=>{W.open=false;const e=$('#worldpop');if(e)e.hidden=true};
 function worldSkip(arg){const a=(arg||'').trim().toLowerCase();

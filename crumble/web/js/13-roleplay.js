@@ -6,7 +6,7 @@ function cardHTML(c){const rows=(c.rows||[]).map(r=>`<div class=fxr><span class=
 async function resolveFx(m,forced){
  m.rpsnap=JSON.stringify(chat.rp||{});const ids=G?G.members:[cur.id],aff={},mood={};ids.forEach(i=>{const s=G?mst(i):chat.state;aff[i]=s.affection;mood[i]=s.mood});
  const lastSp=[...hist].reverse().find(x=>x.role=='assistant'&&x.cid)?.cid||'';
- const r=await api('/api/rp/resolve','POST',{...(G?{group:G.id}:{cid:cur.id}),text:m.content,forced:forced||null,user:uname(),ustats:U.ustats,ugear:U.ugear,uskills:U.uskills||'',turn:hist.length,rp:chat.rp||{},aff,mood,last:lastSp,cfg:rpCfg()});
+ const r=await api('/api/rp/resolve','POST',{...(G?{group:G.id}:{cid:cur.id}),present:sceneOn()?presentIds():undefined,text:m.content,forced:forced||null,user:uname(),ustats:U.ustats,ugear:U.ugear,uskills:U.uskills||'',turn:hist.length,rp:chat.rp||{},aff,mood,last:lastSp,cfg:rpCfg()});
  if(r.err||!r.rp){delete m.rpsnap;return}
  chat.rp=r.rp;if(!r.card&&!r.brief){delete m.rpsnap;return}
  m.card=r.card;m.fx=r.brief;m.acting=r.acting||[];m.affd=r.aff||{};for(const[id,d]of Object.entries(m.affd))addAff(id,d);bodyNews(r)}
@@ -18,7 +18,7 @@ function bodyNews(r){const nm=id=>(G?memberById(id):cur)?.name||'They';
 function bodyToast(i,b,s){try{toast('up','#c0392b',i,'Roleplay',esc(b),esc(s),null)}catch(e){}}
 /* what the narration itself says happened to a body (a wound, a sickness, a death, time passing) */
 async function observeFx(text,m){if(U.rp=='off'||!chat||!text)return;const ids=G?G.members:[cur.id],aff={},mood={};ids.forEach(i=>{const s=G?mst(i):chat.state;aff[i]=s.affection;mood[i]=s.mood});
- try{const snap=JSON.stringify(chat.rp||{});const r=await api('/api/rp/observe','POST',{...(G?{group:G.id}:{cid:cur.id}),text,user:uname(),rp:chat.rp||{},aff,mood,turn:hist.length});
+ try{const snap=JSON.stringify(chat.rp||{});const r=await api('/api/rp/observe','POST',{...(G?{group:G.id}:{cid:cur.id}),present:sceneOn()?presentIds():undefined,text,user:uname(),rp:chat.rp||{},aff,mood,turn:hist.length});
   if(r.err||!r.rp)return;if(JSON.stringify(r.rp)==snap)return;if(!m.rpsnap&&!m.obsnap)m.obsnap=snap;chat.rp=r.rp;bodyNews(r);saveChat();if(!$('#mem').hidden)renderMem()}catch(e){}}
 function fxNo(i){const m=hist[i];if(!m)return;restore(m);delete m.card;delete m.fx;delete m.acting;saveChat();draw()}
 
@@ -48,7 +48,7 @@ async function round(opts={}){
  const lu=hist.at(-1),acting=lu?.role=='user'?(lu.acting||[]):[],fx0=!!lu?.fx;
  try{for(let n=0;n<9&&!roundAbort;n++){
   const aff={};G.members.forEach(i=>aff[i]=mst(i).affection);
-  const r=await api('/api/group_next','POST',{group:G.id,user:uname(),history:apiHist(hist.slice(-30)),spoke,cap,n,keep:!!opts.keep,fx:n==0&&fx0,acting,aff,pers:U.pers,dead:Object.keys(chat.rp?.body||{}).filter(isDead)});
+  const r=await api('/api/group_next','POST',{group:G.id,present:sceneOn()?presentIds():undefined,user:uname(),history:apiHist(hist.slice(-30)),spoke,cap,n,keep:!!opts.keep,fx:n==0&&fx0,acting,aff,pers:U.pers,dead:Object.keys(chat.rp?.body||{}).filter(isDead)});
   if(r.err){errBox(r.err,'round');break}
   cap=r.cap;if(!r.next)break;
   if(n>0){setStatus('typing…');await sleep(500+Math.random()*1300)}if(roundAbort)break;
@@ -71,5 +71,5 @@ function bodyMem(ids){const all=[['user',uname()],...ids.map(i=>[i,(memberById(i
 function renderMemG(){const f=$('#memf'),st=chat.state;
  f.innerHTML=`<details open><summary>Characters in this group</summary>${gmem().map(c=>{const s=mst(c.id);return`<label>${esc(c.name)}: <b>${s.emoji||'😐'} ${esc(s.mood||'neutral')}</b> · feels about you: <b>${stg(s.affection)} (${s.affection})</b></label><input type=range min=0 max=100 value=${s.affection} data-m=gaff data-c=${c.id}>`}).join('')}</details>
  <details open><summary>Scene note</summary><label>Steer the situation. It stays in every prompt for this chat.</label><textarea data-m=scene rows=3>${esc(chat.cfg.scene||'')}</textarea></details>
- <details open><summary>Memory of earlier conversation</summary><label>Long chats are summarised automatically. You can edit it.</label><textarea data-m=summary rows=6>${esc(st.summary||'')}</textarea><div class=row><button data-m=sumnow>Summarize now</button><span class=small id=msum></span></div></details>`+(U.mem?gmem().filter(c=>c.id!='__narrator__').map(c=>memHtml(mst(c.id),c.name,c.id)).join(''):'')+rpMem()}
+ <details open><summary>Memory of earlier conversation</summary><label>Long chats are summarised automatically. You can edit it.</label><textarea data-m=summary rows=6>${esc(st.summary||'')}</textarea><div class=row><button data-m=sumnow>Summarize now</button><span class=small id=msum></span></div></details>${keepHtml(st,G?G.name:'the group')}`+(U.mem?gmem().filter(c=>c.id!='__narrator__').map(c=>memHtml(mst(c.id),c.name,c.id)).join(''):'')+rpMem()}
 function renderMem(){if(!chat?.state){$('#memf').innerHTML='<p class=small>Open a chat first.</p>';return}if(G)renderMemG();else{renderMemOne();$('#memf').insertAdjacentHTML('beforeend',rpMem())}$('#memf').insertAdjacentHTML('beforeend',bondMem()+notesMem());persMem()}

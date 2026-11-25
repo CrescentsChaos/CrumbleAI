@@ -45,12 +45,13 @@ def _lower(x):
     return x[:1].lower() + x[1:] if x[:2] != "I " and not x[:2].isupper() else x
 
 
-def recap(summary, char="", user="", group=False):
+def recap(summary, char="", user="", group=False, place=""):
     """The stored summary as plain prose. A summary that does not follow the template (an older chat, or one the user edited by hand)
     is kept as written, only without its capital-letter headings and 'Label:' prefixes."""
     raw = (summary or "").strip()
     if not raw:
         return ""
+    place = re.sub(r"\s+", " ", str(place or "")).strip()
     fields, moments, loose, section = {}, [], [], ""
     for line in raw.split("\n"):
         if not line.strip():
@@ -70,7 +71,9 @@ def recap(summary, char="", user="", group=False):
             continue
         (moments if "pivotal" in section or line.lstrip().startswith(("-", "•")) else loose).append(item)
     out = []
-    if fields.get("location"):
+    if place:       # where the story stands now beats the place the summary was written at (the story may have moved on)
+        out.append(f"Right now the story is at {place}.")
+    elif fields.get("location"):
         out.append(f"The story so far takes place at {_lower(fields['location']).rstrip('.')}.")
     if fields.get("current state"):
         out.append(_sentence(fields["current state"]))

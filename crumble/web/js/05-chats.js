@@ -3,8 +3,10 @@ async function pick(id){const c=S.chars.find(c=>c.id==id);if(!c)return;U.last=id
  chats=(await api('/api/chats/'+id)).chats||[];chats.length?await openChat(chats[0].id):await newChat()}
 async function openChat(chid){const r=await api(`/api/chat/${cur.id}/${chid}`);
  chat={id:chid,title:r.title,state:{...newState(),...(r.state||{})},cfg:{...newCfg(),...(r.cfg||{})},rp:r.rp||{}};if(G)chat.state.members=chat.state.members||{};hist=r.history||[];gi=0;lastAct=Date.now();nudges=0;
- $('#ctxm').textContent='';drawChats();draw();if(!$('#mem').hidden)renderMem()}
-async function newChat(){chat={id:rid(),title:'New chat',state:{...newState(),...(G?{members:{}}:{})},cfg:newCfg(),rp:{}};gi=0;resetChat();await saveChat();draw()}
+ $('#ctxm').textContent='';drawChats();draw();if(!$('#mem').hidden)renderMem();setTimeout(greetCheck,700)}
+async function newChat(){chat={id:rid(),title:'New chat',state:{...newState(),...(G?{members:{}}:{})},cfg:newCfg(),rp:{}};gi=0;resetChat();
+ if(!G&&cur?.start_place){try{await placesLoad()}catch(e){}if(typeof plById=='function'&&plById(cur.start_place))chat.cfg.places=[{id:cur.start_place,since:0}]}   // the character's starting place
+ await saveChat();draw();if(chat.cfg.places?.length){if(typeof placeHead=='function'){placeHead();placeBg()}if(typeof worldRefresh=='function')worldRefresh(true)}}
 async function saveChat(){if(!cur?.id||!chat)return;const r=await api('/api/chat_save','POST',{cid:cur.id,id:chat.id,title:chat.title,history:hist,state:chat.state,cfg:chat.cfg,rp:chat.rp});
  if(r.err)return;chat.title=r.title;const m={id:chat.id,title:chat.title,n:hist.length},i=chats.findIndex(c=>c.id==chat.id);i<0?chats.unshift(m):chats[i]=m;drawChats()}
 const saveSoon=()=>{clearTimeout(saveT);saveT=setTimeout(saveChat,500)};

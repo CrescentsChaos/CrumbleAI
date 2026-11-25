@@ -59,12 +59,12 @@ class PromptTests(unittest.TestCase):
 
     def test_notes_reach_the_in_character_prompt(self):
         m = self.bm([note("setting", "The bar closed an hour ago")])
-        self.assertIn("The bar closed an hour ago", m[0]["content"])
+        self.assertIn("The bar closed an hour ago", h.ptxt(m))
         self.assertIn("Follow the author's notes silently", m[-1]["content"])
 
     def test_absent_without_notes(self):
         m = self.bm([])
-        self.assertNotIn("Author's notes", m[0]["content"])
+        self.assertNotIn("Author's notes", h.ptxt(m))
         self.assertNotIn("author's notes", m[-1]["content"])
 
 
@@ -91,7 +91,7 @@ class StorytellerTests(unittest.TestCase):
                 {"role": "user", "content": "Also, what happens next?", "ooc": "discuss"}]
         m = ooc_messages(MIRA, "Sam", hist, {"words": (15, 60), "kind": "discuss", "notes": clean_notes([note("correct", "less chatty")])})
         self.assertEqual([x["role"] for x in m], ["system", "user", "assistant", "user"])
-        s = m[0]["content"]
+        s = h.ptxt(m)
         self.assertIn("OUT OF CHARACTER", s)
         self.assertIn("Mira wipes the counter", s)                    # the story is context...
         self.assertNotIn("Can Mira be less chatty", s)                # ...the OOC talk is the conversation
@@ -110,7 +110,7 @@ class GenerateTests(unittest.TestCase):
         r = generate_reply(self.req(hist, kind="ooc", ooc={"kind": "discuss", "notes": []}), None)
         self.assertIn("shyness", r["text"])                           # no assistant-talk scrubbing, no persona guard
         self.assertEqual(len(fake.calls), 1)
-        self.assertIn("OUT OF CHARACTER", fake.calls[0][0]["content"])
+        self.assertIn("OUT OF CHARACTER", h.ptxt(fake.calls[0]))
 
     def test_characters_never_see_ooc_messages(self):
         fake = h.install(h.FakeLLM(["*nods slowly.*"]))

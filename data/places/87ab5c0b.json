@@ -1,0 +1,26 @@
+{
+ "id": "87ab5c0b",
+ "name": "Statue of Liberty",
+ "biome": "Shore",
+ "description": "A colossal copper statue depicting a robed woman holding a torch in one hand and a tablet in the other. It represents freedom, democracy, and hope, welcoming visitors arriving in the United States.",
+ "atmosphere": "Majestic, peaceful, and historically significant. Seagulls circle overhead, ferries cross the harbor, and visitors gather around the monument. The surrounding waters create a refreshing breeze and an open, scenic environment.",
+ "history": "Dedicated in 1886, the Statue of Liberty was a gift from France to the United States commemorating their friendship and shared ideals of liberty. Designed by Frédéric Auguste Bartholdi with an internal framework engineered by Gustave Eiffel, it became a symbol of freedom and a welcoming sight for millions of immigrants arriving in America.",
+ "objects": [
+  "Copper statue, stone pedestal, observation deck, torch, tablet, crown, flagpoles, informational plaques, museum exhibits, benches, security barriers, and ferry "
+ ],
+ "activities": [
+  "Sightseeing, photography, exploring the museum, climbing to the pedestal or crown, learning about American history, taking ferry rides, and enjoying panoramic h"
+ ],
+ "exits": [
+  "Ferry docks provide transportation to Manhattan and Ellis Island. Pedestrian pathways connect the monument to the island's visitor facilities and surrounding gr"
+ ],
+ "events": [
+  "Guided tours, educational exhibitions, cultural celebrations, historical commemorations, tourist gatherings, and special national holiday events."
+ ],
+ "secrets": [
+  "The original torch was replaced in 1986 and is now displayed inside the museum. Hidden structural details reveal how the statue's internal iron framework supports its enormous copper exterior. Conspiracy theory says its a statue of the devil himself!"
+ ],
+ "characters": [],
+ "bg": "87ab5c0b.jpg",
+ "bg_v": 1
+}

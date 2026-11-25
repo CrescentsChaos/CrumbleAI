@@ -1,0 +1,310 @@
+{
+ "id": "lyi4qd76",
+ "title": "*Opens the door*",
+ "updated": 1795433565.705917,
+ "history": [
+  {
+   "role": "assistant",
+   "content": "*My serpent judges you.* \"Mongrel Intruder. Thou'rt tarnished it seemeth.\" *Draws my flame in my hand* \"Mother...wouldst thou truly lordship sanction, in one so bereft of light?\" *Comes down of my throne* \"And yet...My purpose standeth unchanged.\" *The flame grows higher* \"Those stripped of the Grace of Gold shall all meet death, in the embrace of Messmer's flame.\"",
+   "ts": 1795433274654
+  },
+  {
+   "role": "user",
+   "content": "*Opens the door*",
+   "ts": 1795433276758
+  },
+  {
+   "role": "assistant",
+   "content": "*I narrow mine eyes as the heavy door groans, the flame flickering against the stone.* Thou art bold to enter. What purpose bringeth thee into mine own shadow?",
+   "think": "",
+   "ts": 1795433306529,
+   "stat": {
+    "tok": 35,
+    "ms": 23488
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "seen": 1795433282963,
+   "mundo": {
+    "add": [],
+    "scene": "",
+    "recent": []
+   },
+   "snap": "{\"mood\":\"neutral\",\"emoji\":\"😐\",\"energy\":\"medium\",\"affection\":50,\"facts\":[],\"summary\":\"\",\"sumUpto\":0}",
+   "thought": "A bold trespasser. Does he seek death or some trivial purpose?",
+   "bd": {
+    "c": "046b2536",
+    "dv": 0.12,
+    "h": 0
+   },
+   "mo": {
+    "m": "neutral",
+    "e": "😐",
+    "d": 0,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "always talking about purpose",
+   "ts": 1795433530902
+  },
+  {
+   "role": "assistant",
+   "content": "*Messmer's lip curls in a slight, disdainful sneer as the flame of his spear dances across the damp stone walls.* Thy tongue is sharp, yet it lacketh the weight of true conviction. Verily, thou seekest to mock my duty with such hollow jesting. *He turns his gaze toward the window, where the steady drumming of rain against the roof echoes through the chamber.*",
+   "think": "",
+   "ts": 1795433558133,
+   "stat": {
+    "tok": 82,
+    "ms": 27067
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e1",
+    "e2",
+    "c1"
+   ],
+   "seen": 1795433530972,
+   "mundo": {
+    "add": [],
+    "scene": "{{char}} stands before {{user}} in a shadowed chamber, his flame flickering.",
+    "recent": [
+     {
+      "text": "{{user}} opened the door and entered {{char}}'s domain.",
+      "imp": 0.44,
+      "turn": 3,
+      "ts": 1795433314250
+     }
+    ]
+   },
+   "snap": "{\"mood\":\"neutral\",\"emoji\":\"😐\",\"energy\":\"medium\",\"affection\":50,\"facts\":[],\"summary\":\"SETTING & STATE\\nLocation: Dark Chamber\\nCurrent State: Crescent has entered the chamber, and Messmer the Impaler is confronting them with his flame, questioning their purpose.\\n\\nRELATIONSHIP DYNAMIC\\nPrimary Dynamic: Messmer views Crescent as a \\\"Mongrel Intruder\\\" who is \\\"tarnished\\\" and \\\"bereft of light.\\\"\\nTone: Hostile, menacing, and authoritative.\\n\\nPIVOTAL MOMENTS\\n- Messmer the Impaler judged Crescent as a \\\"Mongrel Intruder\\\" who is \\\"tarnished.\\\"\\n- Messmer the Impaler questioned if his Mother would sanction lordship in one so \\\"bereft of light.\\\"\\n- Messmer the Impaler declared that those stripped of the Grace of Gold shall meet death in his flame.\\n- Messmer the Impaler challenged Crescent's purpose for entering his shadow.\",\"sumUpto\":3,\"cast\":{\"un\":\"\",\"ug\":\"m\",\"wrong\":[]},\"pers\":{\"frac\":0,\"grudge\":0,\"va\":[0,0],\"mood\":\"neutral\",\"ts\":1795433314248,\"n\":1,\"drift\":[{\"ts\":1795433314248,\"score\":100,\"flags\":[]}],\"canon\":[\"I am the one who judges with my serpent\",\"I am the one who wields the flame\",\"I seek to execute those stripped of the Grace of Gold\"]},\"chron\":{\"v\":1,\"seq\":1,\"turn\":3,\"covered\":3,\"items\":[{\"id\":\"c1\",\"t\":\"{{user}}: Opens the door\",\"k\":\"object\",\"w\":2,\"turn\":1,\"keys\":[\"door\",\"open\"],\"pin\":false,\"n\":0,\"last\":0}]},\"chron_in\":[{\"t\":\"{{user}}: Opens the door\",\"k\":\"object\",\"w\":2,\"turn\":1,\"pin\":false}]}",
+   "thought": "His insolence is tiresome, yet I find his lack of fear... curious.",
+   "bd": {
+    "c": "046b2536",
+    "dv": -0.05,
+    "h": 0
+   },
+   "mo": {
+    "m": "annoyed",
+    "e": "😒",
+    "d": -1,
+    "f": 1
+   }
+  }
+ ],
+ "state": {
+  "mood": "annoyed",
+  "emoji": "😒",
+  "energy": "high",
+  "affection": 49,
+  "facts": [],
+  "summary": "SETTING & STATE\nLocation: Dark Chamber\nCurrent State: Crescent has entered the chamber, and Messmer the Impaler is confronting them with his flame, questioning their purpose.\n\nRELATIONSHIP DYNAMIC\nPrimary Dynamic: Messmer views Crescent as a \"Mongrel Intruder\" who is \"tarnished\" and \"bereft of light.\"\nTone: Hostile, menacing, and authoritative.\n\nPIVOTAL MOMENTS\n- Messmer the Impaler judged Crescent as a \"Mongrel Intruder\" who is \"tarnished.\"\n- Messmer the Impaler questioned if his Mother would sanction lordship in one so \"bereft of light.\"\n- Messmer the Impaler declared that those stripped of the Grace of Gold shall meet death in his flame.\n- Messmer the Impaler challenged Crescent's purpose for entering his shadow.",
+  "sumUpto": 3,
+  "log": [
+   {
+    "ts": 1795433314248,
+    "mood": "neutral",
+    "emoji": "😐",
+    "aff": 50,
+    "thought": "A bold trespasser. Does he seek death or some trivial purpose?",
+    "score": 100
+   },
+   {
+    "ts": 1795433565691,
+    "mood": "annoyed",
+    "emoji": "😒",
+    "aff": 49,
+    "thought": "His insolence is tiresome, yet I find his lack of fear... curious.",
+    "score": 100
+   }
+  ],
+  "cast": {
+   "un": "",
+   "ug": "m",
+   "wrong": []
+  },
+  "pers": {
+   "frac": -0.606,
+   "grudge": 0,
+   "va": [
+    -0.5,
+    0.4
+   ],
+   "mood": "annoyed",
+   "ts": 1795433565689,
+   "n": 2,
+   "drift": [
+    {
+     "ts": 1795433314248,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795433565689,
+     "score": 100,
+     "flags": []
+    }
+   ],
+   "canon": [
+    "I am the one who judges with my serpent",
+    "I am the one who wields the flame",
+    "I seek to execute those stripped of the Grace of Gold",
+    "Messmer's purpose is to kill those stripped of the Grace of Gold"
+   ]
+  },
+  "chron": {
+   "v": 1,
+   "seq": 1,
+   "turn": 5,
+   "covered": 5,
+   "items": [
+    {
+     "id": "c1",
+     "t": "{{user}}: Opens the door",
+     "k": "object",
+     "w": 3,
+     "turn": 1,
+     "keys": [
+      "door",
+      "open"
+     ],
+     "pin": false,
+     "n": 1,
+     "last": 5
+    }
+   ]
+  },
+  "mem": {
+   "v": 1,
+   "seq": 2,
+   "turn": 5,
+   "scene": "{{char}} and {{user}} are in a damp chamber where the flame flickers against the stone.",
+   "recent": [
+    {
+     "text": "{{user}} opened the door and entered {{char}}'s domain.",
+     "imp": 0.44,
+     "turn": 3,
+     "ts": 1795433314250
+    },
+    {
+     "text": "{{user}} mocked {{char}}'s constant talk of purpose.",
+     "imp": 0.17,
+     "turn": 5,
+     "ts": 1795433565691
+    }
+   ],
+   "items": [
+    {
+     "id": "e1",
+     "t": "episodic",
+     "text": "{{user}} entered {{char}}'s domain despite the threat of his flame.",
+     "imp": 0.65,
+     "ts": 1795433306529,
+     "turn": 3,
+     "n": 1,
+     "last": 5,
+     "pin": false,
+     "src": "auto",
+     "people": []
+    },
+    {
+     "id": "e2",
+     "t": "emotional",
+     "text": "{{char}} felt a sense of wary curiosity regarding {{user}}'s audacity.",
+     "imp": 0.65,
+     "ts": 1795433306529,
+     "turn": 3,
+     "n": 1,
+     "last": 5,
+     "pin": false,
+     "src": "auto",
+     "emo": "suspicion",
+     "val": 0,
+     "link": "e1",
+     "people": []
+    }
+   ],
+   "legacy": true
+  }
+ },
+ "cfg": {
+  "mode": "story",
+  "length": "auto",
+  "scene": "",
+  "notes": [],
+  "theme": null,
+  "places": [
+   {
+    "id": "2936e562",
+    "since": 0
+   }
+  ],
+  "doing": [
+   {
+    "since": 2,
+    "pid": "2936e562",
+    "key": "2936e562|0|5|0",
+    "turn": 2,
+    "ids": [
+     "046b2536"
+    ],
+    "people": {
+     "046b2536": {
+      "id": "046b2536",
+      "here": true,
+      "doing": "Standing amidst the shadows, his spear flickering with a dying, hateful flame as he prepares to strike.",
+      "state": "tense",
+      "free": 0.4,
+      "stance": "He narrows his eyes, his voice a low, trembling growl of divine fury.",
+      "away": "",
+      "wants": "To purge the unworthy from his shadow."
+     }
+    },
+    "clock": "Monday, around 5:25 PM (early evening)"
+   }
+  ]
+ },
+ "rp": {
+  "rel": {
+   "046b2536": {
+    "type": "auto",
+    "v": 0.07,
+    "ms": [],
+    "hist": [],
+    "peak": 0.12
+   }
+  },
+  "body": {
+   "user": {
+    "inj": [],
+    "ill": [],
+    "tired": 0,
+    "dead": false,
+    "died": null,
+    "stash": null,
+    "rev": 0,
+    "n": 0,
+    "ko": false
+   },
+   "046b2536": {
+    "inj": [],
+    "ill": [],
+    "tired": 0,
+    "dead": false,
+    "died": null,
+    "stash": null,
+    "rev": 0,
+    "n": 0,
+    "ko": false
+   }
+  }
+ }
+}

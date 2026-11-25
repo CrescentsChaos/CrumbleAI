@@ -51,7 +51,7 @@ class LeakTests(unittest.TestCase):
         m = build_messages(FAITH, "Crescent", [{"role": "user", "content": "hi"}], {"mode": "story", "state": {}, "words": (10, 30)})
         self.assertNotIn("[Reply as", m[-1]["content"])
         self.assertIn("never write Crescent's words", m[-1]["content"])
-        self.assertIn("WHO IS WHO", m[0]["content"])
+        self.assertIn("WHO IS WHO", h.ptxt(m))
 
 
 class TimeTests(unittest.TestCase):
@@ -76,12 +76,12 @@ class TimeTests(unittest.TestCase):
         s = simtime.derive([{"role": "user", "content": "It's Monday evening."}, {"role": "assistant", "content": "The next morning, she wakes."}])
         self.assertEqual((s["day"], s["period"]), ("Tuesday", "morning"))
 
-    def test_night_talk_at_noon_is_caught_and_retried(self):
+    def test_night_talk_at_noon_is_flagged_not_retried(self):    # H8: no repair exists for it, and it is not a hard failure
         fake, r = req(["*yawns* It's so late, I should go to bed.", "*opens her laptop* The library is packed at lunch."], self.H,
                       clock="Wednesday, 2:10 AM (late at night)")
-        self.assertEqual(len(fake.calls), 2)
-        self.assertIn("lunch", r["text"])
-        sysmsg = fake.calls[0][0]["content"]
+        self.assertEqual(len(fake.calls), 1)
+        self.assertIn("time", r["flags"])
+        sysmsg = h.ptxt(fake.calls[0])
         self.assertIn("In the story it is Monday, around 12:", sysmsg)
         self.assertNotIn("2:10 AM", sysmsg)       # the real clock never reaches the character once the story set the time
 

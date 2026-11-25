@@ -20,7 +20,7 @@ def bm(c, pers, hist=None):
 
 class PromptTests(unittest.TestCase):
     def sysmsg(self, pers, c=h.SHY, hist=None):
-        return bm(c, pers, hist)[0]["content"]
+        return h.ptxt(bm(c, pers, hist))
 
     def test_block_present_only_when_on(self):
         self.assertIn("Mira - Behaviour", self.sysmsg(ON))
@@ -40,10 +40,10 @@ class PromptTests(unittest.TestCase):
     def test_tail_reminder_only_deep_and_not_in_history(self):
         deep = dict(ON, depth="deep")
         m = bm(h.SHY, deep)
-        self.assertIn("Voice", m[-1]["content"])
+        self.assertIn("Voice: Mira stays", m[-1]["content"])
         self.assertEqual(HIST[0]["content"], "you're an idiot, shut up")
         m = bm(h.SHY, ON)
-        self.assertNotIn("Voice", m[-1]["content"])
+        self.assertNotIn("Voice: Mira stays", m[-1]["content"])
 
 
 class GenerateTests(unittest.TestCase):
@@ -53,13 +53,15 @@ class GenerateTests(unittest.TestCase):
         self.assertEqual(r["text"], "Oh please. Try harder.")
         self.assertGreaterEqual(r["pers"]["score"], 65)
         self.assertEqual(len(fake.calls), 2)
-        self.assertIn("off-voice", fake.calls[1][0]["content"])           # the retry note reached the model
+        self.assertIn("off-voice", h.ptxt(fake.calls[1]))           # the retry note reached the model
 
-    def test_keeps_best_when_all_attempts_bad(self):
-        h.install(h.FakeLLM(["As an AI language model, hello.", "As an AI, I'd be happy to help! Feel free to ask.", "As an AI language model hi"]))
+    def test_assistant_speak_is_cut_not_retried(self):    # H8: the assistant sentences are removed from the one reply; no second generation
+        fake = h.install(h.FakeLLM(["*Rex nods.* As an AI language model, hello. Sit down."]))
         r = generate_reply(req(h.BOLD), None)
-        self.assertEqual(r["retries"], 2)
-        self.assertEqual(r["pers"]["score"], max(r["pers"]["score"], 0))
+        self.assertEqual(len(fake.calls), 1)
+        self.assertEqual(r["retries"], 0)
+        self.assertNotIn("language model", r["text"])
+        self.assertIn("ai_speak", r["flags"])
 
     def test_engine_off_is_untouched(self):
         fake = h.install(h.FakeLLM(["As an AI language model, I'd be happy to help!"]))
@@ -100,7 +102,7 @@ class SummarizeTests(unittest.TestCase):
                    {"role": "assistant", "name": "Eva", "content": "I promised to stay."}]
         result = summarize({"char": {"name": "Eva"}, "user": "Crescent", "history": history,
                             "summary": "They met yesterday."})
-        ask = fake.calls[-1][0]["content"]
+        ask = h.ptxt(fake.calls[-1])
         self.assertEqual(result, "A short summary.")
         for field in ("SETTING & STATE", "Location:", "Current State:", "RELATIONSHIP DYNAMIC", "Primary Dynamic:", "Tone:",
                       "PIVOTAL MOMENTS", "Who's who:", "Eva (the character)", "Crescent (the user)"):

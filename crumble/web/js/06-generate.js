@@ -1,7 +1,7 @@
 /* ---------- generation: the whole reply is made first, then typed out ---------- */
 const apiChar=(c=cur)=>{const{avatar,...x}=c;return x};
 /* out-of-character messages are left out unless asked for: the characters, the memory and the summaries only know the story */
-const apiHist=(a,withOoc=false)=>a.filter(m=>m.content&&m.content.trim()&&(withOoc||!m.ooc)).map(m=>({role:m.role,content:m.content,ts:m.ts,react:m.react,name:m.name,cid:m.cid,ooc:m.ooc,vis:m.vis,pl:m.pl}));
+const apiHist=(a,withOoc=false)=>a.filter(m=>m.content&&m.content.trim()&&(withOoc||!m.ooc)).map(m=>({role:m.role,content:m.content,ts:m.ts,react:m.react,name:m.name,cid:m.cid,ooc:m.ooc,vis:m.vis,pl:m.pl,dyn:m.dyn}));
 /* ---------- live reply: the text appears while the model is still writing it ---------- */
 const liveFix=t=>{ // close a dangling *action*, "quote" or (aside) so the preview does not flip style when the closing mark arrives
  if(((t.replace(/\*\*/g,'').match(/\*/g)||[]).length)%2)t+='*';
@@ -22,8 +22,10 @@ function livePaint(){const L=live;if(!L||!chat)return;const body=split(liveFix(L
  $('#lv').innerHTML=parts.map((p,k)=>{const h=fmt(p,mode!='text'),end=k==parts.length-1;return h?`<div class="tx${end?' live':''}">${h}${end?'<span class=caret></span>':''}</div>`:''}).join('');autoscroll()}
 /* mood, memory and summary run after the reply, once you have been quiet for a moment, so they never hold up your next message */
 const trackQ=new Map();let trackT=0;
-function trackSoon(i){const m=hist[i];trackQ.set(G?m?.cid||'_':'_',i);clearTimeout(trackT);trackT=setTimeout(runTrack,1200)}
-async function runTrack(){if(ctl||rounding||typingNow){trackT=setTimeout(runTrack,700);return}
+let trackN=0;
+function trackSoon(i){const m=hist[i];if(U.trackEvery>1&&hist.length>6&&(++trackN%U.trackEvery)){maybeSummarize();return}   // Settings: mood and memory are updated every 2nd reply (every one with trackEvery:1); the model reads the last 6 messages, so nothing is lost
+ trackQ.set(G?m?.cid||'_':'_',i);clearTimeout(trackT);trackT=setTimeout(runTrack,1200)}
+async function runTrack(){if(ctl||rounding||typingNow||($('#inp')&&$('#inp').value.trim())){trackT=setTimeout(runTrack,700);return}
  const jobs=[...trackQ.values()];trackQ.clear();for(const i of jobs){if(ctl||rounding){trackQ.set('_'+i,i);continue}await trackState(i)}if(trackQ.size)trackT=setTimeout(runTrack,900)}
 async function gen(kind='reply',spk,cue,vis){
  if(!cur?.id||!chat||ctl)return null;skipTyping();
@@ -37,11 +39,11 @@ async function gen(kind='reply',spk,cue,vis){
  const rt=setTimeout(()=>{if(pendLabel=='reading…')phase('typing…')},Math.min(350,200+(lastU?lastU.content.split(' ').length*10:0)));
  const a=ic.at(-1)?.ts,b=ic.at(-2)?.ts;
  const gap=ooc||!U.timeaware?0:kind=='nudge'||kind=='continue'?(Date.now()-(a||Date.now()))/1000:(a&&b?(a-b)/1000:0);
- const s=chat.state,ms=ooc?{summary:s.summary}:vis?{summary:s.summary,chron:s.chron,chron_in:s.chron_in}:G?{...mst(sp.id),summary:s.summary,chron:s.chron,chron_in:s.chron_in,log:undefined}:{...s,log:undefined},
-  body={user:uname(),persona:U.persona,history:apiHist(base,ooc),turn:all.length,kind:kind=='swipe'?'reply':kind,
+ const s=chat.state,ms=ooc?{summary:s.summary}:vis?{summary:s.summary,chron:s.chron,chron_in:s.chron_in,keep:s.keep}:G?{...mst(sp.id),summary:s.summary,chron:s.chron,chron_in:s.chron_in,keep:s.keep,log:undefined}:{...s,log:undefined},
+  body={user:uname(),persona:U.persona,history:apiHist(base,ooc),turn:all.length,chat_id:chat.id,reason:kind=='nudge'&&cue&&cue.reason?cue.reason:undefined,kind:kind=='swipe'?'reply':kind,
   from:ooc?0:U.track&&s.summary?Math.max(0,Math.min(all.slice(0,s.sumUpto).filter(m=>!m.ooc).length,ic.length-2)):0,state:U.track?ms:{},scene:chat.cfg.scene,
   clock:U.timeaware?clock():'',story_start:chat.cfg.start||'',gap_s:gap,rp:{on:U.rp!='off',state:chat.rp||{},fx:lastU?.fx||'',cfg:rpCfg(),uskills:U.uskills||'',ugear:U.ugear||''},
-  place:placeSpec(),params:{...P,quick:U.quick,stream:!!U.stream,think:U.think,actions:U.actions,mode:chat.cfg.mode,length:chat.cfg.length,realism:U.realism,natural:U.natural,pers:persCfg(),mem:memCfg(),story:storyCfg()}};
+  place:placeSpec(),doing:doingMap(),present:sceneOn()?presentIds():undefined,params:{...P,quick:U.quick,fast:U.fast!==false,stream:!!U.stream,think:U.think,actions:U.actions,mode:chat.cfg.mode,length:chat.cfg.length,realism:U.realism,natural:U.natural,pers:persCfg(),mem:memCfg(),story:storyCfg(),dyn:dynCfg(),past:U.past!==false&&!chat.cfg.fresh}};
  body.ooc=ooc?{kind:lastO?.ooc||'discuss',notes:oocActive(all,'reply').filter(n=>n.oid!=lastO?.oid)}:{notes:oocActive(all,kind)};
  if(kind=='swipe'&&last)body.avoid=(last.sw?last.sw.map(x=>x.content):[last.content]).filter(Boolean);
  if(G){body.group=G.id;body.speaker=sp.id;body.cue=cue||{}}else if(vis){body.char=apiChar(sp);body.visit={main:cur.id,why:vis.why}}else body.char=apiChar();
@@ -60,7 +62,7 @@ async function gen(kind='reply',spk,cue,vis){
   draw();return null}
  if(res&&res.pass)return 'pass';
  if(!res||!res.text){draw();errBox(err||'The model returned nothing.',G&&!ooc?'round':kind);return null}
- let idx;const v={content:res.text,think:res.think,ts:Date.now(),stat:{tok:res.tok,ms:res.ms},pers:res.pers,wild:(!ooc&&res.world&&res.world.wild)||undefined,recalled:[...(res.recalled||[]),...(res.chron_used||[])]};
+ let idx;const v={content:res.text,think:res.think,ts:Date.now(),stat:{tok:res.tok,ms:res.ms},pers:res.pers,wild:(!ooc&&res.world&&res.world.wild)||undefined,recalled:[...(res.recalled||[]),...(res.chron_used||[])],dyn:res.dyn||undefined};
  if(ooc){hist.push({role:'assistant',content:res.text,think:res.think,ts:Date.now(),stat:v.stat,ooc:lastO?.ooc||'discuss'});idx=hist.length-1}
  else if(kind=='swipe'){restore(last);if(!last.sw)last.sw=[{content:last.content,think:last.think,ts:last.ts,stat:last.stat,thought:last.thought,pers:last.pers}];
   last.sw.push(v);last.si=last.sw.length-1;Object.assign(last,v,{thought:'',react:''});idx=li}
@@ -75,8 +77,9 @@ async function gen(kind='reply',spk,cue,vis){
  if(!ooc&&!vis){observeFx(hist[idx].content,hist[idx]);trackSoon(idx)}return true}
 async function post(t,forced,nofx){const m={role:'user',content:t,ts:Date.now()};hist.push(m);beep(520,.05);nudges=0;lastAct=Date.now();draw();feelPeek(t);worldRefresh();
  if(U.rp!='off'&&!nofx){await resolveFx(m,forced);draw();if(!m.card&&!m.fx)observeFx(m.content,m)}
- saveChat();if(!G&&U.rp!='off'&&isDead(cur.id)){bodyToast('☠',cur.name+' is dead','They cannot answer. Only a resurrection can change that.');return}
- if(G)await round();else if(await gen('reply')===true){await placeVisit(t);placeSuggest(t)}}
+ saveChat();if(doingNow())doingLater=true;else await doingEnsure();if(!G&&U.rp!='off'&&isDead(cur.id)){bodyToast('☠',cur.name+' is dead','They cannot answer. Only a resurrection can change that.');return}
+ if(G)await round();else if(await gen('reply')===true){await placeVisit(t);placeSuggest(t)}
+ if(doingLater){doingLater=false;doingEnsure({quiet:1})}}   // an out-of-date answer is used for this reply and refreshed afterwards, while you read
 async function send(){let t=$('#inp').value.trim();if(!t||ctl||rounding||!cur?.id||!chat)return;skipTyping();window.speechSynthesis?.cancel();
  $('#inp').value='';$('#inp').style.height='';hideMnu();
  const o=oocRoute(t);   // out of character? (OOC button, ((text)), //text, ooc: text, /ooc /correct /setting /direct) or back in with /ic
@@ -96,12 +99,12 @@ async function trackState(i){
   m.snap=snap;if(G)m.snapc=sp.id;m.thought=r.thought||'';hist.forEach((x,k)=>{if(k<i-6){delete x.snap;delete x.snapc}});
   if(G){const{chron,...rs}=r.state;ch.state.members[sp.id]={...stt,...rs};if(chron)ch.state.chron=chron}else ch.state={...ch.state,...r.state};delete ch.state.chron_in;bondAfterTrack(m,G?sp.id:cur.id,r);
   head();redrawMsg(i);saveChat();if(!$('#mem').hidden)renderMem();maybeSummarize()}catch(e){}}
-const SUM_EVERY=10,SUM_KEEP=4;   // auto-summarize every 10 new messages; the newest 4 stay word-for-word in the prompt
+const SUM_EVERY=14,SUM_KEEP=4;   // auto-summarize every 14 new messages; the newest 4 stay word-for-word in the prompt
 let sumBusy=false;
 async function maybeSummarize(force){
  if((!force&&!U.track)||!S.loaded||!chat||sumBusy)return;const ch=chat,s=ch.state,upto=force?hist.length:hist.length-SUM_KEEP;
  const press=hist.slice(s.sumUpto,upto).reduce((a,x)=>a+(x.content||'').length,0)/3.4>1500;   // a long stretch of text is folded in sooner: the prompt stays well under the context limit
   if((!force&&upto-s.sumUpto<(press?4:SUM_EVERY))||upto<=s.sumUpto)return;
  sumBusy=true;try{
- const r=await api('/api/summarize','POST',{char:apiChar(),user:uname(),persona:U.persona,group:G?G.id:undefined,history:apiHist(hist.slice(s.sumUpto,upto)),summary:s.summary,turn0:s.sumUpto});
- if(r.summary&&chat===ch){s.summary=r.summary;s.sumUpto=upto;if(r.chron_add?.length)s.chron_in=[...(s.chron_in||[]),...r.chron_add].slice(-120);saveChat();if(!$('#mem').hidden)renderMem()}return r}finally{sumBusy=false}}
+ const r=await api('/api/summarize','POST',{char:apiChar(),user:uname(),persona:U.persona,group:G?G.id:undefined,place:placeSpecAt(upto),history:apiHist(hist.slice(s.sumUpto,upto)),summary:s.summary,turn0:s.sumUpto,keep:s.keep,aff:G?undefined:s.affection});
+ if(r.summary&&chat===ch){s.summary=r.summary;s.sumUpto=upto;if(r.keep)s.keep=r.keep;if(r.chron_add?.length)s.chron_in=[...(s.chron_in||[]),...r.chron_add].slice(-120);saveChat();if(!$('#mem').hidden)renderMem()}return r}finally{sumBusy=false}}

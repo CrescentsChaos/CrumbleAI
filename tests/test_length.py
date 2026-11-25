@@ -28,7 +28,7 @@ class LengthTests(unittest.TestCase):
              "params": {"mode": "text", "length": "short", "think": False, "max_tokens": 200}}
         r = generate_reply(b, None)
         self.assertEqual(len(r["text"].split("\n")), 2)
-        self.assertIn("at most 2 lines", fake.calls[0][0]["content"])
+        self.assertIn("at most 2 lines", h.ptxt(fake.calls[0]))
 
 
 if __name__ == "__main__":

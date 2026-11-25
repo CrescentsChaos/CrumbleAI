@@ -6,7 +6,7 @@ import webbrowser
 from http.server import ThreadingHTTPServer
 from pathlib import Path
 
-from .config import LLM, LLM_VERBOSE, MODELS, ROOT, GPU_HELP, Llama, gpu_status
+from .config import LLM, LLM_VERBOSE, MODELS, ROOT, GPU_HELP, Llama, gpu_status, load_llama
 from .server import H
 from .sharing import SHAREF, SHARE, lan_urls, save_share
 from .storage import rj, wj
@@ -39,7 +39,7 @@ def main():
             print(f"Loading model {mp} ... (this can take a while)")
             try:
                 # CHANGE n_gpu_layers to -1 here
-                LLM["obj"] = Llama(model_path=mp, n_ctx=int(last.get("n_ctx", 8192)), n_gpu_layers=-1, verbose=LLM_VERBOSE)
+                LLM["obj"] = load_llama(mp, int(last.get("n_ctx", 8192)), -1, LLM_VERBOSE)
                 LLM["path"], LLM["n_ctx"] = mp, int(last.get("n_ctx", 8192))
                 wj(ROOT/"data"/"last_model.json", {"path": mp, "n_ctx": LLM["n_ctx"], "n_gpu": -1})
                 print("Model ready." + ("  (running on the GPU)" if gpu_status()[0] else "  (running on the CPU)"))

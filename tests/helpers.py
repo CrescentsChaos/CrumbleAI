@@ -59,3 +59,9 @@ def call(srv, method, path, body=None, host=None):
         return r.status, json.loads(data)
     except ValueError:
         return r.status, data
+
+
+def ptxt(msgs):
+    """The whole prompt text the model gets: the fixed system message plus the newest turn, which now carries what changes every turn
+    (the private background, mood, time, style, variety). Tests that look for a block anywhere in the prompt read this."""
+    return msgs[0]["content"] + "\n\n" + msgs[-1]["content"]

@@ -117,23 +117,25 @@ class PipelineTests(unittest.TestCase):
     def test_the_prompt_carries_the_day_and_the_reply_reports_the_world(self):
         hist = M("Monday morning, 7:30 AM. Mira flips the sign on the bakery door.", "lol morning. is it always this cold?")
         fake, r = self.run_reply(["*rubs her hands.* Only before the ovens warm up. Sit anywhere."], hist)
-        sysm = fake.calls[0][0]["content"]
+        sysm = h.ptxt(fake.calls[0])
         self.assertIn("[Daily life, time and world", sysm)
-        self.assertIn("usual rhythm", sysm)
+        self.assertNotIn("usual rhythm", sysm)           # a timetable guessed from the job is never stated as a fact
+        self.assertNotIn("this is when they sleep", sysm)
         self.assertEqual(r["world"]["day"], "Monday")
-        self.assertTrue(r["world"]["who"])
+        self.assertEqual(r["world"]["who"], [])
         self.assertIn("Do not end this reply with a question", fake.calls[0][-1]["content"])
 
-    def test_a_closing_question_is_retried_then_cut(self):
+    def test_a_closing_question_is_cut_in_place_not_retried(self):    # H8: a style call, repaired by story.repair: no second generation
         hist = M("Monday morning, 7:30 AM. Mira flips the sign.", "morning", "Morning. Coffee?", "yes please")
         fake, r = self.run_reply(["Fine. Anything else? Really?", "I have a lot of bread to bake. What do you want?", "Take a seat. How was your night?"], hist)
         self.assertFalse(endings.ends_on_question(r["text"]))
-        self.assertGreaterEqual(len(fake.calls), 2)
+        self.assertEqual(len(fake.calls), 1)
+        self.assertIn("ending", r["flags"])
 
     def test_switch_it_off(self):
         hist = M("Monday morning, 7:30 AM. Mira flips the sign.", "hi")
         fake, r = self.run_reply(["Hello. Want something?"], hist, story={"on": False})
-        self.assertNotIn("[Daily life", fake.calls[0][0]["content"])
+        self.assertNotIn("[Daily life", h.ptxt(fake.calls[0]))
         self.assertEqual(len(fake.calls), 1)
         self.assertEqual(r["text"], "Hello. Want something?")
 
@@ -145,7 +147,10 @@ class ApiTests(unittest.TestCase):
         self.assertIn("err", d)
         st, d = h.call(srv, "POST", "/api/chars", dict(BAKER, id="bakerx"))
         st, d = h.call(srv, "POST", "/api/world", {"cid": "bakerx", "history": M("Tuesday, 3 AM. Mira is awake.", "hey"), "story": {}})
-        self.assertEqual(d["world"]["who"][0]["state"], "asleep")
+        self.assertEqual(d["world"]["who"], [])        # nothing is guessed from the clock
+        st, d = h.call(srv, "POST", "/api/world", {"cid": "bakerx", "history": M("Tuesday, 3 AM. Mira is awake.", "hey"), "story": {},
+                                                   "doing": {"bakerx": {"here": True, "doing": "kneading dough in the dark", "state": "busy"}}})
+        self.assertEqual((d["world"]["who"][0]["act"], d["world"]["who"][0]["state"]), ("kneading dough in the dark", "busy"))
         self.assertEqual(d["world"]["clock_set"], True)
         h.call(srv, "DELETE", "/api/chars/bakerx")
         srv.shutdown()

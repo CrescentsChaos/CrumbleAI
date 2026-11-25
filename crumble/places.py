@@ -33,6 +33,12 @@ BIOMES = ["Forest", "Jungle", "Swamp", "Desert", "Savanna", "Plains", "Mountain"
           "Village", "City street", "Market", "Home", "Tavern", "School", "Hospital", "Ruins", "Castle", "Ship", "Spaceship", "Underground", "Laboratory", "Garden"]
 
 
+def start_id(x):
+    """The id of an existing place card to start in, or "" (a card that was deleted, or something that is not an id, means no starting place)."""
+    pid = _id(x)
+    return pid if pid and get(pid) else ""
+
+
 def home():
     return ROOT / "data" / "places"
 
@@ -164,16 +170,17 @@ def context(spec, turn=0, getter=None):
         return None
     if getter is None:
         from .storage import get_char as getter
-    people = []
+    people, ids = [], []
     for i in card["characters"]:
         c = getter(i)
         if c and c.get("name"):
             people.append(c["name"])
+            ids.append(i)
     try:
         since = int(spec.get("since") or 0)
     except (TypeError, ValueError):
         since = 0
-    return {"card": card, "since": since, "people": people, "turn": int(turn or 0)}
+    return {"card": card, "since": since, "people": people, "ids": ids, "turn": int(turn or 0)}
 
 
 def climate_text(loc):
@@ -184,9 +191,35 @@ def climate_text(loc):
     return f"{c['name']}. {c['biome']}. {c['description']}"[:600]
 
 
+OUTDOOR_BIOMES = {"forest", "jungle", "swamp", "desert", "savanna", "plains", "mountain", "tundra", "taiga", "shore", "open sea", "river", "lake",
+                  "village", "city street", "market", "ruins", "garden"}
+INDOOR_BIOMES = {"cave", "home", "tavern", "school", "hospital", "castle", "ship", "spaceship", "underground", "laboratory"}
+
+
+def scene(loc):
+    """The place the scene readers must treat as true: {'name', 'indoors', 'sense'}. The card wins over anything guessed from the words of the
+    chat (a scenario that says "apartment" must not keep calling the Gate of Divinity an apartment)."""
+    if not loc:
+        return None
+    from . import ambience
+    c = loc["card"]
+    text = f"{c['name']} {c.get('biome', '')} {c.get('description', '')}"
+    indoors = None
+    for _, rx, ind, _ in ambience.PLACES:
+        if re.search(rx, text, re.I):
+            indoors = ind
+            break
+    b = (c.get("biome") or "").strip().lower()
+    if indoors is None:
+        indoors = True if b in INDOOR_BIOMES else False if b in OUTDOOR_BIOMES else None
+    sense = re.sub(r"\s+", " ", c.get("atmosphere") or c.get("description") or "").strip()[:220]
+    return {"name": c["name"], "indoors": indoors, "sense": sense or "whatever the place card describes", "card": True}
+
+
 def note(loc):
-    """The author's-setting note the scene readers (place, indoors, light) get for this place."""
-    return {"kind": "setting", "text": climate_text(loc)} if loc else None
+    """The author's-setting note the scene readers (place, indoors, light) get for this place. `place` says where the chat stands and `since` from
+    which message on (earlier messages were somewhere else), so the reader can put it at the right point in the story."""
+    return {"kind": "setting", "text": climate_text(loc), "place": scene(loc), "since": int(loc.get("since") or 0)} if loc else None
 
 
 def _pick(seed, n):
@@ -204,7 +237,7 @@ def event(loc, turn, setting="normal", skip=False):
     return c["events"][_pick(f"{c['id']}:{turn // n}", len(c["events"]))]
 
 
-def parts(loc, ch, us, turn, events="normal", skip=False, narrator=False):
+def parts(loc, ch, us, turn, events="normal", skip=False, narrator=False, doing=None):
     """{'lines', 'compact', 'event'} for the prompt. `ch` and `us` are the names (or placeholders) of the character and the user."""
     c = loc["card"]
     arrived = turn - loc["since"] <= 1 and loc["since"] > 0
@@ -228,8 +261,7 @@ def parts(loc, ch, us, turn, events="normal", skip=False, narrator=False):
         L.append("Hidden things about this place (the world's own secrets): " + " | ".join(c["secrets"]) +
                  f". Never state, hint at or hand over one unless {us} actually searches, investigates, follows a clue or asks someone who would really know. "
                  "Then give one small piece at a time, the way the scene would, and never all at once.")
-    if loc["people"]:
-        L.append("People who belong here: " + ", ".join(loc["people"]) + ". They may be around in the background, and they have their own business here.")
+    L.extend(people_lines(loc, doing, us))
     compact = [f"At {c['name']}" + (f" ({c['biome']})" if c["biome"] else "") + (f": {c['description'][:160]}" if c["description"] else ".") +
                (f" Atmosphere: {c['atmosphere'][:100]}" if c["atmosphere"] else "")]
     ev = event(loc, turn, events, skip or narrator)
@@ -240,15 +272,25 @@ def parts(loc, ch, us, turn, events="normal", skip=False, narrator=False):
     return out
 
 
-def narrator_lines(loc, turn):
+def people_lines(loc, doing, us):
+    """Who lives or turns up here. With the model's answer for this moment it says who is in and what each is doing; without it, only that they exist."""
+    if not loc or not loc.get("people"):
+        return []
+    items = {i: d for i, d in (doing or {}).items() if i in loc.get("ids", [])}
+    if items:
+        from .story import doing as dm
+        return dm.roster_lines(items, dict(zip(loc["ids"], loc["people"])), us)
+    return ["People who live or turn up here: " + ", ".join(loc["people"]) + ". They are not always in, they have their own business, and nobody has to be on hand for " + us + "."]
+
+
+def narrator_lines(loc, turn, doing=None, us="the user"):
     c = loc["card"]
     L = [f"Place: {c['name']}" + (f" ({c['biome']})" if c["biome"] else "") + (f". {c['description']}" if c["description"] else ".")]
     if c["atmosphere"]:
         L.append(f"Atmosphere to convey: {c['atmosphere']}")
     if c["objects"]:
         L.append("Things here you may describe: " + "; ".join(c["objects"]) + ".")
-    if loc["people"]:
-        L.append("People who belong here: " + ", ".join(loc["people"]) + ".")
+    L.extend(people_lines(loc, doing, us))
     return L
 
 
@@ -258,6 +300,40 @@ def standalone(loc, ch, us, turn):
         return {}
     p = parts(loc, ch, us, turn, "off")
     return {"block": "\n".join(p["lines"]), "compact": "\n".join(p["compact"]), "tail": "", "plan": None}
+
+
+# ---------------------------------------------------------------- visiting a place (a scene of its own)
+
+SCENE = "pl_"        # a visit is a chat that belongs to the place: its id is pl_<place id>
+
+
+def scene_id(pid):
+    return SCENE + _id(pid)
+
+
+def is_scene(gid):
+    return str(gid or "").startswith(SCENE) and len(str(gid)) > len(SCENE)
+
+
+def scene_group(gid):
+    """The group a visit to a place runs as, or None. The people who live or turn up there are its cast; who is actually in right now is decided
+    in the scene (story/doing.py) and sent with each request as `present`. A Narrator always describes the place and what goes on in it."""
+    if not is_scene(gid):
+        return None
+    card = get(str(gid)[len(SCENE):])
+    if not card:
+        return None
+    sc = " ".join(x for x in (f"{card['name']}" + (f" ({card['biome']})" if card["biome"] else "") + ".", card["description"]) if x)
+    return {"id": scene_id(card["id"]), "name": card["name"], "members": list(card["characters"])[:16], "pace": "natural", "narrator": True,
+            "scenario": sc[:1200], "place": card["id"]}
+
+
+def only_present(members, present):
+    """The members that are in the scene right now. `present` is None for an ordinary chat (everyone counts)."""
+    if present is None:
+        return members
+    keep = {str(i) for i in present} if isinstance(present, (list, tuple, set)) else set()
+    return [m for m in members if m.get("id") in keep]
 
 
 # ---------------------------------------------------------------- visitors
@@ -282,15 +358,6 @@ def called(text, names):
     return out
 
 
-def asleep(c, sim):
-    try:
-        from .story import routine
-        r = routine.now(c, sim) if sim else None
-        return bool(r and r.get("state") == "asleep")
-    except Exception:
-        return False
-
-
 def mood_blocks(text):
     """True when the user's last message is grief, a goodbye or a quarrel: nobody wanders in."""
     try:
@@ -304,6 +371,8 @@ def mood_blocks(text):
 def visit(card, main_id, chars, hist, turn, text, setting="normal", seed="", dead=(), sim=None, force="", routines=True, since=0):
     """Does a resident of this place join the one-to-one chat now? -> {'id', 'name', 'why'} or None.
 
+    sim, routines: kept for older callers and ignored. Nobody is kept out by the clock: what a resident is doing, or whether they are around at all, is for the
+    model to decide in the scene (see story/doing.py), so a vigilante can turn up at 3 AM and a baker can be up before dawn.
     chars: {id: character} for the card's residents. why: 'called' (you spoke to them or asked for them), 'chime' (they are already
     in the scene and join in again) or 'arrive' (they wander over). Deterministic from the chat position: swipes and rewinds keep it."""
     pool = [chars[i] for i in card["characters"] if i in chars and i != main_id and i not in set(dead)]
@@ -328,9 +397,6 @@ def visit(card, main_id, chars, hist, turn, text, setting="normal", seed="", dea
     if not n or turn < 3 or turn - since < 2 or turn % n != 0:
         return None
     if _pick(f"{seed}:{turn // n}:slot", 100) >= CHANCE.get(setting, 75):
-        return None
-    pool = [c for c in pool if not (routines and asleep(c, sim))]
-    if not pool:
         return None
     c = pool[_pick(f"{seed}:{turn // n}:who", len(pool))]
     return {"id": c["id"], "name": c["name"], "why": "arrive"}
@@ -377,10 +443,12 @@ def stage(b, getter):
 def visit_tail(b, ch, us):
     v = b.get("visit") or {}
     main, where = v.get("main") or "the other person", f" at {v['place']}" if v.get("place") else ""
-    base = f"{ch} is{where} with {us} and {main}. Write only {ch}'s next message, in {ch}'s own voice. Keep it short; do not take over the conversation. "
+    base = (f"{ch} is{where} with {us} and {main}. Write only {ch}'s next message, in {ch}'s own voice. Keep it short; do not take over the conversation. "
+            f"{ch} is a person with their own business, not staff and not a helper: no offers of help, no cheerful greeting unless that is truly {ch}'s way. ")
     if v.get("why") == "called":
-        return f"({us} has just spoken to {ch} or called them over. {base}Answer {us} directly, and let {ch} arrive or look up the way they naturally would.)"
+        return f"({us} has just spoken to {ch} or called them over. {base}Answer {us} directly, as {ch} really would; let {ch} arrive or look up the way they naturally would, and show their mood about being called.)"
     if v.get("why") == "arrive":
-        return (f"({ch} lives or works nearby and has just wandered into the scene where {us} and {main} are talking. {base}"
-                f"Show them arriving or noticing {us}, in keeping with what {ch} was doing. Do not interrupt anything urgent or tender.)")
+        return (f"({ch} lives or works nearby and has just turned up where {us} and {main} are talking. {base}"
+                f"Show what {ch} was in the middle of and why they are here, in keeping with who {ch} is: they may barely acknowledge {us}, be wary, curt or amused. "
+                f"Do not interrupt anything urgent or tender.)")
     return f"({ch} is already part of this scene. {base}Join in only with something {ch} would really say; react to what was just said instead of repeating anything.)"

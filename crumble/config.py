@@ -57,7 +57,62 @@ for d in (CHARS, CHATS, MODELS, GROUPS):
     d.mkdir(parents=True, exist_ok=True)
 LLM = {"obj": None, "path": None, "n_ctx": 8192}
 LLM_VERBOSE = bool(os.environ.get("CRUMBLE_LLM_LOG"))   # set CRUMBLE_LLM_LOG=1 to see llama.cpp's own log (shows "offloaded N/N layers to GPU")
+
+
+def model_tier(path=None):
+    """How many generic prompt rules the loaded model should carry: 0 = small (<= ~8B), 1 = mid (the default when unknown), 2 = large (>= ~25B).
+    CRUMBLE_PROMPT_TIER=small|mid|large overrides it. Size comes from the file name ("...-8B-..."), then from the GGUF metadata."""
+    import re
+    forced = (os.environ.get("CRUMBLE_PROMPT_TIER") or "").strip().lower()
+    if forced in ("small", "mid", "large"):
+        return ("small", "mid", "large").index(forced)
+    name = Path(path or LLM.get("path") or "").name
+    b = None
+    m = re.search(r"(?<![A-Za-z0-9.])(?:(\d+)x)?(\d+(?:\.\d+)?)[bB](?![A-Za-z])", name)
+    if m:
+        b = float(m.group(2)) * (2 if m.group(1) else 1)     # 8x7B: only ~2 experts run, so call it 14B
+    else:
+        try:
+            lab = str((getattr(LLM.get("obj"), "metadata", None) or {}).get("general.size_label") or "")
+            m = re.search(r"(\d+(?:\.\d+)?)\s*[bB]", lab)
+            b = float(m.group(1)) if m else None
+        except Exception:
+            b = None
+    if b is None:
+        return 1
+    return 0 if b <= 8.5 else 1 if b < 25 else 2
+
 LOCK = threading.Lock()
+
+
+def load_llama(path, n_ctx, n_gpu, verbose=False):
+    """Load the model with the settings that make replies fast.
+    flash_attn + a bigger batch: the prompt is read several times faster. A RAM prompt cache keeps the chat prompt's computed state, so the
+    small helper calls (mood, activities, summaries) that run between two replies no longer force the next reply to re-read the whole prompt.
+    Every option is optional: a llama-cpp-python build that refuses one is retried without it. CRUMBLE_CACHE_MB=0 turns the cache off."""
+    import os
+    n_batch = int(os.environ.get("CRUMBLE_N_BATCH", "1024"))
+    tries = [dict(flash_attn=True, n_batch=n_batch), dict(n_batch=n_batch), {}]
+    err = None
+    for extra in tries:
+        try:
+            llm = Llama(model_path=path, n_ctx=n_ctx, n_gpu_layers=n_gpu, verbose=verbose, **extra)
+            break
+        except Exception as e:      # an old build without that keyword, or a backend that cannot do flash attention
+            err = e
+            llm = None
+    if llm is None:
+        raise err
+    try:
+        mb = int(os.environ.get("CRUMBLE_CACHE_MB", "1536"))
+        if mb > 0:
+            from llama_cpp import LlamaRAMCache
+            llm.set_cache(LlamaRAMCache(capacity_bytes=mb * 1024 * 1024))
+    except Exception:
+        pass
+    return llm
+
+
 CH, US = "{{char}}", "{{user}}"
 
 # (section, [(key, label, rows)]) - the editor and the prompt builder both read this.

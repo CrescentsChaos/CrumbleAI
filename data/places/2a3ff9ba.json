@@ -1,0 +1,26 @@
+{
+ "id": "2a3ff9ba",
+ "name": "Times Square",
+ "biome": "City",
+ "description": "A world-famous commercial intersection known for its enormous digital billboards, colorful advertisements, Broadway theaters, and constant crowds. Often called the Crossroads of the World, it serves as one of New York City's busiest entertainment and tourism destinations.",
+ "atmosphere": "Extremely lively, chaotic, colorful, and energetic. Giant LED screens illuminate the streets day and night, while traffic horns, street performers, music, conversations, and police sirens create a constant urban soundtrack.",
+ "history": "Times Square was originally known as Longacre Square until 1904, when it was renamed after The New York Times moved its headquarters there. Its famous New Year's Eve celebration began in 1907. Over the decades, it transformed from an entertainment and theater district into one of the world's most recognizable commercial and tourist destinations.",
+ "objects": [
+  "Giant LED billboards, electronic advertisements, traffic lights, pedestrian crossings, street signs, newsstands, theater posters, souvenir shops, outdoor seatin"
+ ],
+ "activities": [
+  "Shopping, sightseeing, photography, watching street performances, attending Broadway shows, visiting restaurants, meeting friends, exploring entertainment venue"
+ ],
+ "exits": [
+  "Broadway and Seventh Avenue connect to surrounding Manhattan neighborhoods. Subway entrances, nearby streets, bus routes, and pedestrian pathways provide access"
+ ],
+ "events": [
+  "New Year's Eve Ball Drop, seasonal celebrations, public performances, promotional events, street festivals, live entertainment, and major cultural gatherings."
+ ],
+ "secrets": [
+  "Hidden rooftop viewpoints, underground subway infrastructure, historic theaters, forgotten architectural details, and concealed service passages reveal a lesser-known side of the crowded entertainment district."
+ ],
+ "characters": [],
+ "bg": "2a3ff9ba.jpg",
+ "bg_v": 1
+}

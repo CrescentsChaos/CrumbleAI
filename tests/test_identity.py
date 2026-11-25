@@ -71,7 +71,7 @@ class Sim:
 
     @property
     def system(self):
-        return self.llm.chat[0][0]["content"]
+        return h.ptxt(self.llm.chat[0])
 
     @property
     def tail(self):
@@ -418,7 +418,7 @@ class Summaries(unittest.TestCase):
         sim = Sim()
         sim.say("My sister's name is Nadia. I'm a guy.", "Hm.")
         sim.summarise(keep=1)
-        ask = sim.llm.calls[-1][0]["content"]
+        ask = h.ptxt(sim.llm.calls[-1])
         self.assertIn("Who's who", ask)
         self.assertIn("Crescent is the user (he/him)", ask)
         self.assertIn("Nadia (Crescent's sister)", ask)

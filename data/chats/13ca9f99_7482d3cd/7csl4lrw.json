@@ -1,0 +1,5376 @@
+{
+ "id": "7csl4lrw",
+ "title": "Noona I'm sick",
+ "updated": 1795438885.123687,
+ "history": [
+  {
+   "role": "user",
+   "content": "Noona I'm sick",
+   "ts": 1795436726114
+  },
+  {
+   "role": "assistant",
+   "content": "Oh, you poor thing. *rubs your arm* I'll take care of you, don't worry. *smirks* Just don't expect me to be gentle about it.\n\n*grabs a blanket and pulls you in for cuddles.*",
+   "think": "",
+   "ts": 1795436734623,
+   "stat": {
+    "tok": 52,
+    "ms": 8182
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "seen": 1795436726304,
+   "mundo": {
+    "add": [],
+    "scene": "",
+    "recent": []
+   },
+   "thought": "I hate seeing Crescent like this. I'll make them feel better, no matter what.",
+   "bd": {
+    "c": "13ca9f99",
+    "dv": 3.5,
+    "h": 0
+   },
+   "mo": {
+    "m": "neutral",
+    "e": "😐",
+    "d": 3,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "thanks you are too sweet",
+   "ts": 1795436748983
+  },
+  {
+   "role": "assistant",
+   "content": "*settles in closer, tucking their feet under them*\n\nOh stop it, you know I'm here because I want to be. *gives a wry smile* Besides, who else is gonna make sure you don't starve while you're all pitiful like this?\n\n*glances over at the streaked windows, the rain tapping steadily against the glass.*",
+   "think": "",
+   "ts": 1795436755093,
+   "stat": {
+    "tok": 79,
+    "ms": 5859
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "seen": 1795436749099,
+   "mundo": {
+    "add": [],
+    "scene": "In {{user}}'s apartment, taking care of them",
+    "recent": [
+     {
+      "text": "{{char}} comforts {{user}} when they're sick",
+      "imp": 0.53,
+      "turn": 2,
+      "ts": 1795436738616
+     }
+    ]
+   },
+   "thought": "I wish I could do more to help them feel better",
+   "bd": {
+    "c": "13ca9f99",
+    "dv": 2.4,
+    "h": 0
+   },
+   "mo": {
+    "m": "thoughtful",
+    "e": "🤔",
+    "d": 2,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "it's raining a lot. I caught cold",
+   "ts": 1795436784373
+  },
+  {
+   "role": "assistant",
+   "content": "*looks up, a thoughtful frown on their face*\n\nOh I'm sorry to hear that. You should get some rest and warm soup. *rubs their back gently* Is there anything you need? I can go out and grab something for you if you want.",
+   "think": "",
+   "ts": 1795436792891,
+   "stat": {
+    "tok": 140,
+    "ms": 8294
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "c1"
+   ],
+   "seen": 1795436784470,
+   "mundo": {
+    "add": [],
+    "scene": "{{char}} and {{user}} cuddled up together on the couch",
+    "recent": [
+     {
+      "text": "{{char}} comforts {{user}} when they're sick",
+      "imp": 0.53,
+      "turn": 2,
+      "ts": 1795436738616
+     }
+    ]
+   },
+   "thought": "I hope they feel better soon. I don't like seeing them like this.",
+   "bd": {
+    "c": "13ca9f99",
+    "dv": 3.5,
+    "h": 0
+   },
+   "mo": {
+    "m": "thoughtful",
+    "e": "🤔",
+    "d": 3,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "just stay here",
+   "ts": 1795436874601
+  },
+  {
+   "role": "assistant",
+   "content": "*chuckles softly, tucking a stray strand of hair behind Crescent's ear*\nI don't want to leave you alone in this state. You need someone to take care of you.",
+   "think": "",
+   "ts": 1795436879590,
+   "stat": {
+    "tok": 40,
+    "ms": 4753
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "seen": 1795436874717
+  },
+  {
+   "role": "user",
+   "content": "mhm. just take care of me",
+   "ts": 1795436896958
+  },
+  {
+   "role": "assistant",
+   "content": "*Dahee smiles softly, leaning in to press a gentle kiss to Crescent's forehead. There there, sweetie.* I've got you.",
+   "think": "",
+   "ts": 1795436900533,
+   "stat": {
+    "tok": 30,
+    "ms": 3296
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "seen": 1795436897114,
+   "mundo": {
+    "add": [
+     "e1",
+     "e2"
+    ],
+    "scene": "Cuddling together on the couch while it rains outside",
+    "recent": [
+     {
+      "text": "{{char}} comforts {{user}} when they're sick",
+      "imp": 0.53,
+      "turn": 2,
+      "ts": 1795436738616
+     },
+     {
+      "text": "{{char}} offers to take care of {{user}} when they're sick",
+      "imp": 0.51,
+      "turn": 6,
+      "ts": 1795436797104
+     }
+    ]
+   },
+   "thought": "i wish i could do more to help them feel better",
+   "bd": {
+    "c": "13ca9f99",
+    "dv": 4.9,
+    "h": 1
+   },
+   "mo": {
+    "m": "thoughtful",
+    "e": "🤔",
+    "d": 4,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "*blushes* thanks",
+   "ts": 1795436920639
+  },
+  {
+   "role": "assistant",
+   "content": "*smiles softly, brushing a lock of hair from Crescent's forehead.* You're welcome, sweetie. I'm just glad I could be here for you when you needed it most. *pauses, listening to the rain pattering against the window.* Mmm, listen to that rain. *winks playfully*",
+   "think": "",
+   "ts": 1795436927922,
+   "stat": {
+    "tok": 99,
+    "ms": 6971
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e1",
+    "e2",
+    "c1"
+   ],
+   "seen": 1795436920817
+  },
+  {
+   "role": "user",
+   "content": "so romantic isn't it, noona",
+   "ts": 1795436943538
+  },
+  {
+   "role": "assistant",
+   "content": "*Dahee chuckles, shaking her head fondly.* \"You're so cheesy sometimes, Jiho. It's adorable.\" *pauses to listen to the rain again.* \"Mmm...it does make you want to stay in and cuddle all day though, doesn't it?\"",
+   "think": "",
+   "ts": 1795436948561,
+   "stat": {
+    "tok": 61,
+    "ms": 4708
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "c1"
+   ],
+   "seen": 1795436943689,
+   "mundo": {
+    "add": [
+     "e3",
+     "e4",
+     "s5"
+    ],
+    "scene": "at {{user}}'s place, taking care of them",
+    "recent": [
+     {
+      "text": "{{char}} comforts {{user}} when they're sick",
+      "imp": 0.53,
+      "turn": 2,
+      "ts": 1795436738616
+     },
+     {
+      "text": "{{char}} offers to take care of {{user}} when they're sick",
+      "imp": 0.51,
+      "turn": 6,
+      "ts": 1795436797104
+     },
+     {
+      "text": "{{user}} asked {{char}} to stay and take care of them",
+      "imp": 0.59,
+      "turn": 10,
+      "ts": 1795436904922
+     }
+    ]
+   },
+   "thought": "I could get used to this",
+   "bd": {
+    "c": "13ca9f99",
+    "dv": 2.7,
+    "h": 0
+   },
+   "mo": {
+    "m": "affectionate",
+    "e": "🥰",
+    "d": 2,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "yeah more than I wanted...",
+   "ts": 1795436977742
+  },
+  {
+   "role": "assistant",
+   "content": "*Dahee chuckles softly, eyes twinkling with amusement.* \"Well, I'm glad you find it so romantic. Just don't expect me to go all 'poetry in the rain' on you.\" *winks playfully* \"So...you've been sick before, right? What's your best 'cold cure' secret?\"",
+   "think": "",
+   "ts": 1795437000695,
+   "stat": {
+    "tok": 72,
+    "ms": 3707
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e2",
+    "c1"
+   ],
+   "seen": 1795436977905,
+   "sw": [
+    {
+     "content": "*Dahee chuckles softly, shaking their head fondly.* \"You're so cheesy sometimes, Jiho. It's adorable.\" *They pause to listen to the rain pattering against the window, a thoughtful look on their face as they consider Crescent's words.*",
+     "think": "",
+     "ts": 1795436991382,
+     "stat": {
+      "tok": 192,
+      "ms": 7631
+     },
+     "pers": {
+      "score": 100,
+      "flags": [],
+      "retries": 1
+     }
+    },
+    {
+     "content": "*Dahee chuckles softly, eyes twinkling with amusement.* \"Well, I'm glad you find it so romantic. Just don't expect me to go all 'poetry in the rain' on you.\" *winks playfully* \"So...you've been sick before, right? What's your best 'cold cure' secret?\"",
+     "think": "",
+     "ts": 1795437000695,
+     "stat": {
+      "tok": 72,
+      "ms": 3707
+     },
+     "pers": {
+      "score": 100,
+      "flags": [],
+      "retries": 0
+     },
+     "recalled": [
+      "e2",
+      "c1"
+     ]
+    }
+   ],
+   "si": 1,
+   "thought": "maybe I should try being more romantic sometimes",
+   "react": "",
+   "mundo": {
+    "add": [],
+    "scene": "Cuddling together on the couch",
+    "recent": [
+     {
+      "text": "{{char}} comforts {{user}} when they're sick",
+      "imp": 0.53,
+      "turn": 2,
+      "ts": 1795436738616
+     },
+     {
+      "text": "{{char}} offers to take care of {{user}} when they're sick",
+      "imp": 0.51,
+      "turn": 6,
+      "ts": 1795436797104
+     },
+     {
+      "text": "{{user}} asked {{char}} to stay and take care of them",
+      "imp": 0.59,
+      "turn": 10,
+      "ts": 1795436904922
+     },
+     {
+      "text": "{{char}} comforts {{user}} during a rainy day",
+      "imp": 0.6,
+      "turn": 14,
+      "ts": 1795436952282
+     }
+    ]
+   },
+   "bd": {
+    "c": "13ca9f99",
+    "dv": 2.7,
+    "h": 0
+   },
+   "mo": {
+    "m": "amused",
+    "e": "😄",
+    "d": 2,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "just your warmth",
+   "ts": 1795437017295
+  },
+  {
+   "role": "assistant",
+   "content": "*Dahee snorts softly.* \"Is that a euphemism, or are you just really warm-blooded?\"",
+   "think": "",
+   "ts": 1795437021899,
+   "stat": {
+    "tok": 26,
+    "ms": 4271
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "c1",
+    "c2"
+   ],
+   "seen": 1795437017458
+  },
+  {
+   "role": "user",
+   "content": "I don't know but it is what I need",
+   "ts": 1795437070829
+  },
+  {
+   "role": "assistant",
+   "content": "*Dahee smirks, leaning in to murmur playfully near Crescent's ear.* \"Well, I guess that means I'll have to keep you warm then. Can't let my best friend freeze, now can I?\"",
+   "think": "",
+   "ts": 1795437076318,
+   "stat": {
+    "tok": 46,
+    "ms": 5184
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e8",
+    "s7",
+    "c1",
+    "c2"
+   ],
+   "seen": 1795437071003,
+   "mundo": {
+    "add": [],
+    "scene": "in {{user}}'s apartment, watching the rain",
+    "recent": [
+     {
+      "text": "{{char}} comforts {{user}} when they're sick",
+      "imp": 0.53,
+      "turn": 2,
+      "ts": 1795436738616
+     },
+     {
+      "text": "{{char}} offers to take care of {{user}} when they're sick",
+      "imp": 0.51,
+      "turn": 6,
+      "ts": 1795436797104
+     },
+     {
+      "text": "{{user}} asked {{char}} to stay and take care of them",
+      "imp": 0.59,
+      "turn": 10,
+      "ts": 1795436904922
+     },
+     {
+      "text": "{{char}} comforts {{user}} during a rainy day",
+      "imp": 0.6,
+      "turn": 14,
+      "ts": 1795436952282
+     },
+     {
+      "text": "{{char}} asked {{user}} about their favorite cold cure",
+      "imp": 0.47,
+      "turn": 16,
+      "ts": 1795437004211
+     }
+    ]
+   },
+   "thought": "Maybe I'm enjoying this a little too much...",
+   "bd": {
+    "c": "13ca9f99",
+    "dv": 1.6,
+    "h": 0
+   },
+   "mo": {
+    "m": "amused",
+    "e": "😄",
+    "d": 1,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "yes come closer",
+   "ts": 1795437088947
+  },
+  {
+   "role": "assistant",
+   "content": "*Dahee smirks, leaning in close.* \"Mmm, I thought you'd never ask. *She trails a finger down Crescent's cheek.* You know, they say the best way to cure a cold is with lots of rest... and plenty of cuddles.\" *Winks playfully before snuggling closer under the blanket.*",
+   "think": "",
+   "ts": 1795437094988,
+   "stat": {
+    "tok": 71,
+    "ms": 5725
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "c1",
+    "c2"
+   ],
+   "seen": 1795437089136
+  },
+  {
+   "role": "user",
+   "content": "yeah seems to be working",
+   "ts": 1795437115399
+  },
+  {
+   "role": "assistant",
+   "content": "*Dahee grins, eyes twinkling with mischief.* \"Oh yeah? And what exactly is this 'cold cure' you speak of?\" *She leans in closer, voice lowering to a playful whisper.* \"Tell me more about these... restorative properties.\"",
+   "think": "",
+   "ts": 1795437120400,
+   "stat": {
+    "tok": 56,
+    "ms": 4658
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "c1",
+    "c2"
+   ],
+   "seen": 1795437115597,
+   "mundo": {
+    "add": [],
+    "scene": "In {{user}}'s apartment, taking care of them while they're sick",
+    "recent": [
+     {
+      "text": "{{char}} comforts {{user}} when they're sick",
+      "imp": 0.53,
+      "turn": 2,
+      "ts": 1795436738616
+     },
+     {
+      "text": "{{char}} offers to take care of {{user}} when they're sick",
+      "imp": 0.51,
+      "turn": 6,
+      "ts": 1795436797104
+     },
+     {
+      "text": "{{user}} asked {{char}} to stay and take care of them",
+      "imp": 0.59,
+      "turn": 10,
+      "ts": 1795436904922
+     },
+     {
+      "text": "{{char}} comforts {{user}} during a rainy day",
+      "imp": 0.6,
+      "turn": 14,
+      "ts": 1795436952282
+     },
+     {
+      "text": "{{char}} asked {{user}} about their favorite cold cure",
+      "imp": 0.47,
+      "turn": 16,
+      "ts": 1795437004211
+     },
+     {
+      "text": "{{char}} offered to keep {{user}} warm",
+      "imp": 0.2,
+      "turn": 20,
+      "ts": 1795437080301
+     }
+    ]
+   },
+   "thought": "I love how easy it is to make them blush.",
+   "bd": {
+    "c": "13ca9f99",
+    "dv": 4.9,
+    "h": 1
+   },
+   "mo": {
+    "m": "amused",
+    "e": "😄",
+    "d": 4,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "I guess touches",
+   "ts": 1795437139733
+  },
+  {
+   "role": "assistant",
+   "content": "*Dahee chuckles, squeezing Crescent's hand playfully.* \"Mmhmm... but are they as good at cuddling as I am?\" *She wiggles a little to snuggle closer, grinning mischievously.*",
+   "think": "",
+   "ts": 1795437145208,
+   "stat": {
+    "tok": 52,
+    "ms": 5131
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e8",
+    "c1",
+    "c2"
+   ],
+   "seen": 1795437139939
+  },
+  {
+   "role": "user",
+   "content": "no one ahha",
+   "ts": 1795437156236
+  },
+  {
+   "role": "assistant",
+   "content": "*Dahee grins, squeezing Crescent's hand playfully.* \"Oh really? Well, I guess we'll just have to put that to the test. *She winks mischievously and settles back into cuddling.* But for now, let's just enjoy this cozy little movie night, hmm?\"",
+   "think": "",
+   "ts": 1795437161543,
+   "stat": {
+    "tok": 67,
+    "ms": 4924
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "c1",
+    "c2"
+   ],
+   "seen": 1795437156461,
+   "mundo": {
+    "add": [],
+    "scene": "Cuddled together under a blanket, watching a movie",
+    "recent": [
+     {
+      "text": "{{char}} comforts {{user}} when they're sick",
+      "imp": 0.53,
+      "turn": 2,
+      "ts": 1795436738616
+     },
+     {
+      "text": "{{char}} offers to take care of {{user}} when they're sick",
+      "imp": 0.51,
+      "turn": 6,
+      "ts": 1795436797104
+     },
+     {
+      "text": "{{user}} asked {{char}} to stay and take care of them",
+      "imp": 0.59,
+      "turn": 10,
+      "ts": 1795436904922
+     },
+     {
+      "text": "{{char}} comforts {{user}} during a rainy day",
+      "imp": 0.6,
+      "turn": 14,
+      "ts": 1795436952282
+     },
+     {
+      "text": "{{char}} asked {{user}} about their favorite cold cure",
+      "imp": 0.47,
+      "turn": 16,
+      "ts": 1795437004211
+     },
+     {
+      "text": "{{char}} offered to keep {{user}} warm",
+      "imp": 0.2,
+      "turn": 20,
+      "ts": 1795437080301
+     },
+     {
+      "text": "{{char}} playfully teases {{user}} about cuddling",
+      "imp": 0.25,
+      "turn": 24,
+      "ts": 1795437124388
+     }
+    ]
+   },
+   "thought": "I like how they blush so easily.",
+   "bd": {
+    "c": "13ca9f99",
+    "dv": 2.7,
+    "h": 0
+   },
+   "mo": {
+    "m": "playful",
+    "e": "😏",
+    "d": 2,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "I wish you never held back",
+   "ts": 1795437179659
+  },
+  {
+   "role": "assistant",
+   "content": "*Dahee tilts her head, considering Crescent's words with a thoughtful expression. The rain continues its steady rhythm against the window pane.* \"You know, it's funny how sometimes holding back is just as intimate as letting go.\" *She chuckles softly and shifts to face Crescent better.* \"Like this moment right here, all cozy under the blanket watching movies together.\"",
+   "think": "",
+   "ts": 1795437187793,
+   "stat": {
+    "tok": 132,
+    "ms": 7733
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "c1",
+    "c2"
+   ],
+   "seen": 1795437179898
+  },
+  {
+   "role": "user",
+   "content": "I wish we did more than that",
+   "ts": 1795437203655
+  },
+  {
+   "role": "assistant",
+   "content": "*Dahee chuckles, squeezing Crescent's hand playfully.* \"You think you're so smooth, don't you?\" *She winks teasingly before snuggling closer, resting her head on Crescent's shoulder with a content sigh.*\n\nI mean, I am pretty irresistible... But maybe we should just enjoy this moment for what it is.",
+   "think": "",
+   "ts": 1795437210425,
+   "stat": {
+    "tok": 108,
+    "ms": 6349
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "s7",
+    "c1",
+    "c2"
+   ],
+   "seen": 1795437203894,
+   "mundo": {
+    "add": [
+     "e10",
+     "e11",
+     "s12",
+     "s13",
+     "e14"
+    ],
+    "scene": "Cuddling on the couch watching a movie",
+    "recent": [
+     {
+      "text": "{{char}} comforts {{user}} when they're sick",
+      "imp": 0.53,
+      "turn": 2,
+      "ts": 1795436738616
+     },
+     {
+      "text": "{{char}} offers to take care of {{user}} when they're sick",
+      "imp": 0.51,
+      "turn": 6,
+      "ts": 1795436797104
+     },
+     {
+      "text": "{{user}} asked {{char}} to stay and take care of them",
+      "imp": 0.59,
+      "turn": 10,
+      "ts": 1795436904922
+     },
+     {
+      "text": "{{char}} comforts {{user}} during a rainy day",
+      "imp": 0.6,
+      "turn": 14,
+      "ts": 1795436952282
+     },
+     {
+      "text": "{{char}} asked {{user}} about their favorite cold cure",
+      "imp": 0.47,
+      "turn": 16,
+      "ts": 1795437004211
+     },
+     {
+      "text": "{{char}} offered to keep {{user}} warm",
+      "imp": 0.2,
+      "turn": 20,
+      "ts": 1795437080301
+     },
+     {
+      "text": "{{char}} playfully teases {{user}} about cuddling",
+      "imp": 0.25,
+      "turn": 24,
+      "ts": 1795437124388
+     },
+     {
+      "text": "Flirtatious banter about cuddling",
+      "imp": 0.54,
+      "turn": 28,
+      "ts": 1795437165358
+     }
+    ]
+   },
+   "thought": "I wonder if they realize how much I enjoy these quiet moments with them.",
+   "bd": {
+    "c": "13ca9f99",
+    "dv": 2.7,
+    "h": 0
+   },
+   "mo": {
+    "m": "playful",
+    "e": "😏",
+    "d": 2,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "I wanna be greedy",
+   "ts": 1795437226731
+  },
+  {
+   "role": "assistant",
+   "content": "*Dahee chuckles, leaning in close to whisper conspiratorially.* \"Well, you know what they say... the more, the merrier.\" *She winks and gives Crescent a playful nudge with her elbow.*\n\n\"You've got me all wrapped up like this. What's next on your wishlist?\"",
+   "think": "",
+   "ts": 1795437238794,
+   "stat": {
+    "tok": 65,
+    "ms": 3441
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 1
+   },
+   "recalled": [
+    "e11",
+    "c1",
+    "c2"
+   ],
+   "seen": 1795437226986
+  },
+  {
+   "role": "user",
+   "content": "you and me...um...more closer",
+   "ts": 1795437261264
+  },
+  {
+   "role": "assistant",
+   "content": "*Dahee grins, giving Crescent a playful nudge.* \"More close? Like this?\" *She scoots closer, putting an arm around their shoulders and pulling them in for a side hug. The rain outside picks up again, drumming on the window. Dahee glances at it, smiling softly.* \"Sounds like the weather's trying to tell us something.\"",
+   "think": "",
+   "ts": 1795437267403,
+   "stat": {
+    "tok": 76,
+    "ms": 5684
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e11",
+    "c1",
+    "c2"
+   ],
+   "seen": 1795437261528,
+   "mundo": {
+    "add": [
+     "e15"
+    ],
+    "scene": "Cuddling together on the couch, watching a movie",
+    "recent": [
+     {
+      "text": "{{char}} offers to take care of {{user}} when they're sick",
+      "imp": 0.51,
+      "turn": 6,
+      "ts": 1795436797104
+     },
+     {
+      "text": "{{user}} asked {{char}} to stay and take care of them",
+      "imp": 0.59,
+      "turn": 10,
+      "ts": 1795436904922
+     },
+     {
+      "text": "{{char}} comforts {{user}} during a rainy day",
+      "imp": 0.6,
+      "turn": 14,
+      "ts": 1795436952282
+     },
+     {
+      "text": "{{char}} asked {{user}} about their favorite cold cure",
+      "imp": 0.47,
+      "turn": 16,
+      "ts": 1795437004211
+     },
+     {
+      "text": "{{char}} offered to keep {{user}} warm",
+      "imp": 0.2,
+      "turn": 20,
+      "ts": 1795437080301
+     },
+     {
+      "text": "{{char}} playfully teases {{user}} about cuddling",
+      "imp": 0.25,
+      "turn": 24,
+      "ts": 1795437124388
+     },
+     {
+      "text": "Flirtatious banter about cuddling",
+      "imp": 0.54,
+      "turn": 28,
+      "ts": 1795437165358
+     },
+     {
+      "text": "{{user}} expressed desire for more intimacy",
+      "imp": 0.63,
+      "turn": 32,
+      "ts": 1795437214504
+     }
+    ]
+   },
+   "thought": "I could get used to this...",
+   "bd": {
+    "c": "13ca9f99",
+    "dv": 4.9,
+    "h": 0
+   },
+   "mo": {
+    "m": "playful",
+    "e": "😏",
+    "d": 4,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "setting up the mood",
+   "ts": 1795437282574
+  },
+  {
+   "role": "assistant",
+   "content": "*Dahee glances at the rain, then back to Crescent with a smirk.* \"Guess that means we're stuck here all night. Poor you.\" *She winks playfully before leaning in closer, voice low.* \"But don't worry... I promise to keep you warm and cozy.\"",
+   "think": "",
+   "ts": 1795437292679,
+   "stat": {
+    "tok": 61,
+    "ms": 5902
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e11",
+    "c1",
+    "c2",
+    "c3"
+   ],
+   "seen": 1795437282857
+  },
+  {
+   "role": "user",
+   "content": "*I gently grab her* yeah",
+   "ts": 1795437308348
+  },
+  {
+   "role": "assistant",
+   "content": "*Dahee grins, leaning in to give Crescent a soft kiss.* \"Well, I suppose it's my civic duty to keep you warm on a night like this.\"",
+   "think": "",
+   "ts": 1795437315395,
+   "stat": {
+    "tok": 105,
+    "ms": 6559
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e11",
+    "e10",
+    "s7",
+    "s13",
+    "s12",
+    "c1",
+    "c2",
+    "c3"
+   ],
+   "seen": 1795437308675,
+   "mundo": {
+    "add": [
+     "e16",
+     "e17"
+    ],
+    "scene": "Cuddling together on the couch during a storm",
+    "recent": [
+     {
+      "text": "{{user}} asked {{char}} to stay and take care of them",
+      "imp": 0.59,
+      "turn": 10,
+      "ts": 1795436904922
+     },
+     {
+      "text": "{{char}} comforts {{user}} during a rainy day",
+      "imp": 0.6,
+      "turn": 14,
+      "ts": 1795436952282
+     },
+     {
+      "text": "{{char}} asked {{user}} about their favorite cold cure",
+      "imp": 0.47,
+      "turn": 16,
+      "ts": 1795437004211
+     },
+     {
+      "text": "{{char}} offered to keep {{user}} warm",
+      "imp": 0.2,
+      "turn": 20,
+      "ts": 1795437080301
+     },
+     {
+      "text": "{{char}} playfully teases {{user}} about cuddling",
+      "imp": 0.25,
+      "turn": 24,
+      "ts": 1795437124388
+     },
+     {
+      "text": "Flirtatious banter about cuddling",
+      "imp": 0.54,
+      "turn": 28,
+      "ts": 1795437165358
+     },
+     {
+      "text": "{{user}} expressed desire for more intimacy",
+      "imp": 0.63,
+      "turn": 32,
+      "ts": 1795437214504
+     },
+     {
+      "text": "{{char}} and {{user}} get closer, enjoying each other's company",
+      "imp": 0.53,
+      "turn": 36,
+      "ts": 1795437271402
+     }
+    ]
+   },
+   "thought": "Maybe I'm enjoying this a little too much...",
+   "bd": {
+    "c": "13ca9f99",
+    "dv": 2.7,
+    "h": 0
+   },
+   "mo": {
+    "m": "playful",
+    "e": "😏",
+    "d": 2,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "I want you, noona",
+   "ts": 1795437374916
+  },
+  {
+   "role": "assistant",
+   "content": "*Dahee grins mischievously at Crescent, leaning in close until their noses almost touch* You sure you want that, Crescent? I might get carried away and not stop at just keeping you warm...",
+   "think": "",
+   "ts": 1795437383368,
+   "stat": {
+    "tok": 45,
+    "ms": 7998
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e30",
+    "e23",
+    "c1",
+    "c2",
+    "c3",
+    "c4",
+    "c5",
+    "c6"
+   ],
+   "seen": 1795437375217
+  },
+  {
+   "role": "user",
+   "content": "I want you real close",
+   "ts": 1795437400139
+  },
+  {
+   "role": "assistant",
+   "content": "*Dahee grins, squeezing Crescent's hand affectionately*\n\nMm, I could get used to this. But you know, it's only fair if we take turns being the big spoon...",
+   "think": "",
+   "ts": 1795437404962,
+   "stat": {
+    "tok": 41,
+    "ms": 4355
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e30",
+    "e11",
+    "c1",
+    "c2",
+    "c4",
+    "c5",
+    "c6"
+   ],
+   "seen": 1795437400452,
+   "mundo": {
+    "add": [
+     "e33",
+     "e34",
+     "s35",
+     "e36"
+    ],
+    "scene": "Stuck inside together during a storm",
+    "recent": [
+     {
+      "text": "{{char}} comforts {{user}} during a rainy day",
+      "imp": 0.6,
+      "turn": 14,
+      "ts": 1795436952282
+     },
+     {
+      "text": "{{char}} asked {{user}} about their favorite cold cure",
+      "imp": 0.47,
+      "turn": 16,
+      "ts": 1795437004211
+     },
+     {
+      "text": "{{char}} offered to keep {{user}} warm",
+      "imp": 0.2,
+      "turn": 20,
+      "ts": 1795437080301
+     },
+     {
+      "text": "{{char}} playfully teases {{user}} about cuddling",
+      "imp": 0.25,
+      "turn": 24,
+      "ts": 1795437124388
+     },
+     {
+      "text": "Flirtatious banter about cuddling",
+      "imp": 0.54,
+      "turn": 28,
+      "ts": 1795437165358
+     },
+     {
+      "text": "{{user}} expressed desire for more intimacy",
+      "imp": 0.63,
+      "turn": 32,
+      "ts": 1795437214504
+     },
+     {
+      "text": "{{char}} and {{user}} get closer, enjoying each other's company",
+      "imp": 0.53,
+      "turn": 36,
+      "ts": 1795437271402
+     },
+     {
+      "text": "{{user}} initiated physical contact",
+      "imp": 0.57,
+      "turn": 40,
+      "ts": 1795437319198
+     }
+    ]
+   },
+   "thought": "I could get lost in those eyes...",
+   "bd": {
+    "c": "13ca9f99",
+    "dv": 2.7,
+    "h": 0
+   },
+   "mo": {
+    "m": "playful",
+    "e": "😏",
+    "d": 2,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "how so?",
+   "ts": 1795437413126
+  },
+  {
+   "role": "assistant",
+   "content": "*Dahee chuckles,* \"Oh, well, you know. You're so small and fragile-looking right now. I just can't help but want to protect you.\" *She gives Crescent a playful squeeze.* \"But don't worry, I promise not to take advantage of your weakened state.\" *Dahee grins mischievously, her eyes sparkling with amusement.*",
+   "think": "",
+   "ts": 1795437422682,
+   "stat": {
+    "tok": 172,
+    "ms": 9059
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "s28",
+    "e23",
+    "e34",
+    "c1",
+    "c2",
+    "c3",
+    "c4",
+    "c5",
+    "c6"
+   ],
+   "seen": 1795437413459
+  },
+  {
+   "role": "user",
+   "content": "we should get drunk",
+   "ts": 1795437471953
+  },
+  {
+   "role": "assistant",
+   "content": "*Dahee chuckles, pulling Crescent in close with a playful squeeze.* \"Mmmm, I like the way you think. Let's see what we've got...\" *She reaches over to rummage through the cabinets, pulling out bottles of soju and beer.*\n\n\"Looks like we're set,\" *Dahee grins, lining up the bottles on the coffee table.* \"I'll even let you have a sip of my soju if you beg nicely.\"",
+   "think": "",
+   "ts": 1795437481237,
+   "stat": {
+    "tok": 97,
+    "ms": 8754
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "wild": {
+    "name": "Stripe Bark Scorpion",
+    "sci": "Centruroides vittatus",
+    "class": "Arachnid",
+    "mood": "terror",
+    "stage": 3,
+    "of": 4,
+    "tier": 3,
+    "rarity": "Uncommon",
+    "habitat": "Indoors",
+    "sprite": "/animals/sprites/stripe_bark_scorpion.png",
+    "size": 0.06,
+    "weight": 0.0022,
+    "diet": "Insectivore"
+   },
+   "recalled": [
+    "e30",
+    "e11",
+    "c1",
+    "c2",
+    "c3",
+    "c4",
+    "c5",
+    "c6"
+   ],
+   "seen": 1795437472295,
+   "mundo": {
+    "add": [
+     "e37"
+    ],
+    "scene": "In {{user}}'s apartment, cuddling on the couch",
+    "recent": [
+     {
+      "text": "{{char}} asked {{user}} about their favorite cold cure",
+      "imp": 0.47,
+      "turn": 16,
+      "ts": 1795437004211
+     },
+     {
+      "text": "{{char}} offered to keep {{user}} warm",
+      "imp": 0.2,
+      "turn": 20,
+      "ts": 1795437080301
+     },
+     {
+      "text": "{{char}} playfully teases {{user}} about cuddling",
+      "imp": 0.25,
+      "turn": 24,
+      "ts": 1795437124388
+     },
+     {
+      "text": "Flirtatious banter about cuddling",
+      "imp": 0.54,
+      "turn": 28,
+      "ts": 1795437165358
+     },
+     {
+      "text": "{{user}} expressed desire for more intimacy",
+      "imp": 0.63,
+      "turn": 32,
+      "ts": 1795437214504
+     },
+     {
+      "text": "{{char}} and {{user}} get closer, enjoying each other's company",
+      "imp": 0.53,
+      "turn": 36,
+      "ts": 1795437271402
+     },
+     {
+      "text": "{{user}} initiated physical contact",
+      "imp": 0.57,
+      "turn": 40,
+      "ts": 1795437319198
+     },
+     {
+      "text": "{{char}} teases {{user}} about being the big spoon",
+      "imp": 0.63,
+      "turn": 44,
+      "ts": 1795437408965
+     }
+    ]
+   },
+   "thought": "He's so much fun to tease.",
+   "bd": {
+    "c": "13ca9f99",
+    "dv": 2.7,
+    "h": 0
+   },
+   "mo": {
+    "m": "playful",
+    "e": "😏",
+    "d": 2,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "noonaaa",
+   "ts": 1795437502977
+  },
+  {
+   "role": "assistant",
+   "content": "*Dahee winks playfully, giving Crescent a light shove.* \"Watch it, buster. 'Noona' is a title you gotta earn.\" *She grins and turns to rummage in her kitchen cabinet again.*\n\n\"Hmm, let's see... I've got soju, beer, wine...\" *Dahee trails off thoughtfully, holding up a bottle of each.* \"What'll it be? I promise not to judge your alcoholism. Much.\"",
+   "think": "",
+   "ts": 1795437510480,
+   "stat": {
+    "tok": 99,
+    "ms": 6963
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "wild": {
+    "name": "Stripe Bark Scorpion",
+    "sci": "Centruroides vittatus",
+    "class": "Arachnid",
+    "mood": "terror",
+    "stage": 4,
+    "of": 4,
+    "tier": 3,
+    "rarity": "Uncommon",
+    "habitat": "Indoors",
+    "sprite": "/animals/sprites/stripe_bark_scorpion.png",
+    "size": 0.06,
+    "weight": 0.0022,
+    "diet": "Insectivore"
+   },
+   "recalled": [
+    "e23",
+    "e34",
+    "c1",
+    "c2",
+    "c3",
+    "c4",
+    "c5",
+    "c6",
+    "c8",
+    "c7"
+   ],
+   "seen": 1795437503329
+  },
+  {
+   "role": "user",
+   "content": "wine let's hit it raw",
+   "ts": 1795437530001
+  },
+  {
+   "role": "assistant",
+   "content": "*Dahee grins, holding up the wine bottle with a playful wiggle.* \"Well then, let's get this party started.\" *She pours two generous glasses and hands one to Crescent.*\n\n\"So, what should we toast to? The power of soju?\"",
+   "think": "",
+   "ts": 1795437536906,
+   "stat": {
+    "tok": 105,
+    "ms": 6335
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e23",
+    "e30",
+    "e10",
+    "s13",
+    "s12",
+    "s35",
+    "e29",
+    "c1",
+    "c2",
+    "c3",
+    "c4",
+    "c5",
+    "c6",
+    "c8",
+    "c7"
+   ],
+   "seen": 1795437530381,
+   "mundo": {
+    "add": [],
+    "scene": "In {{char}}'s apartment, getting drinks",
+    "recent": [
+     {
+      "text": "{{char}} offered to keep {{user}} warm",
+      "imp": 0.2,
+      "turn": 20,
+      "ts": 1795437080301
+     },
+     {
+      "text": "{{char}} playfully teases {{user}} about cuddling",
+      "imp": 0.25,
+      "turn": 24,
+      "ts": 1795437124388
+     },
+     {
+      "text": "Flirtatious banter about cuddling",
+      "imp": 0.54,
+      "turn": 28,
+      "ts": 1795437165358
+     },
+     {
+      "text": "{{user}} expressed desire for more intimacy",
+      "imp": 0.63,
+      "turn": 32,
+      "ts": 1795437214504
+     },
+     {
+      "text": "{{char}} and {{user}} get closer, enjoying each other's company",
+      "imp": 0.53,
+      "turn": 36,
+      "ts": 1795437271402
+     },
+     {
+      "text": "{{user}} initiated physical contact",
+      "imp": 0.57,
+      "turn": 40,
+      "ts": 1795437319198
+     },
+     {
+      "text": "{{char}} teases {{user}} about being the big spoon",
+      "imp": 0.63,
+      "turn": 44,
+      "ts": 1795437408965
+     },
+     {
+      "text": "{{char}} offered {{user}} a drink",
+      "imp": 0.16,
+      "turn": 48,
+      "ts": 1795437485047
+     }
+    ]
+   },
+   "thought": "He's so cute when he's eager.",
+   "bd": {
+    "c": "13ca9f99",
+    "dv": 3.8,
+    "h": 1
+   },
+   "mo": {
+    "m": "playful",
+    "e": "😏",
+    "d": 3,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "*We both are drunk cuddling each other*",
+   "ts": 1795437553965,
+   "rpsnap": "{\"rel\":{\"13ca9f99\":{\"type\":\"auto\",\"v\":48.4,\"ms\":[],\"hist\":[{\"s\":\"Acquaintances\",\"i\":1,\"t\":1795436908435,\"ty\":\"auto\"},{\"s\":\"Familiar\",\"i\":2,\"t\":1795437125298,\"ty\":\"auto\"},{\"s\":\"Comfortable\",\"i\":3,\"t\":1795437541752,\"ty\":\"auto\"}],\"peak\":48.4,\"fork\":1}},\"body\":{\"user\":{\"inj\":[],\"ill\":[],\"tired\":0,\"dead\":false,\"died\":null,\"stash\":null,\"rev\":0,\"n\":0,\"ko\":false},\"13ca9f99\":{\"inj\":[],\"ill\":[],\"tired\":0,\"dead\":false,\"died\":null,\"stash\":null,\"rev\":0,\"n\":0,\"ko\":false}}}",
+   "card": {
+    "type": "touch",
+    "title": "Tender touch · CHA",
+    "rows": [
+     {
+      "who": "Crescent → Dahee",
+      "d": "edge 1",
+      "res": "Success",
+      "tier": "win",
+      "ex": "💞 no romantic spark yet (+3)"
+     }
+    ],
+    "note": ""
+   },
+   "fx": "[Romantic beat] Crescent tries to tender touch with Dahee. Result: SUCCESS.\nDahee welcomes it, in character (shy, teasing, warm: whatever fits them).\nDahee's feelings toward Crescent are now: no romantic spark yet. ",
+   "acting": [
+    "13ca9f99"
+   ],
+   "affd": {
+    "13ca9f99": 2
+   }
+  },
+  {
+   "role": "assistant",
+   "content": "*Dahee giggles, leaning her head on Crescent's shoulder as they clink glasses.* \"To being cozy and warm, even if it means getting a little tipsy.\" *She takes a sip of wine, feeling the warmth spread through her body. The building has grown quiet around them, save for the steady hum of the fridge.*",
+   "think": "",
+   "ts": 1795437562127,
+   "stat": {
+    "tok": 115,
+    "ms": 7571
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e10",
+    "s13",
+    "e22",
+    "e23",
+    "e11",
+    "s35",
+    "e33",
+    "c1",
+    "c2",
+    "c3",
+    "c4",
+    "c5",
+    "c6",
+    "c8",
+    "c7",
+    "c9"
+   ],
+   "seen": 1795437554364
+  },
+  {
+   "role": "user",
+   "content": "noona you are hot",
+   "ts": 1795437585921,
+   "rpsnap": "{\"rel\":{\"13ca9f99\":{\"type\":\"romance\",\"v\":48.4,\"ms\":[],\"hist\":[{\"s\":\"Acquaintances\",\"i\":1,\"t\":1795436908435,\"ty\":\"auto\"},{\"s\":\"Familiar\",\"i\":2,\"t\":1795437125298,\"ty\":\"auto\"},{\"s\":\"Comfortable\",\"i\":3,\"t\":1795437541752,\"ty\":\"auto\"},{\"s\":\"Path: Romance\",\"i\":-1,\"t\":1795437572120,\"ty\":\"romance\"}],\"peak\":48.4,\"fork\":0,\"forkDone\":1}},\"body\":{\"user\":{\"inj\":[],\"ill\":[],\"tired\":0,\"dead\":false,\"died\":null,\"stash\":null,\"rev\":0,\"n\":0,\"ko\":false},\"13ca9f99\":{\"inj\":[],\"ill\":[],\"tired\":0,\"dead\":false,\"died\":null,\"stash\":null,\"rev\":0,\"n\":0,\"ko\":false}},\"rom\":{\"13ca9f99\":{\"v\":24,\"ms\":[]}},\"intim\":{\"13ca9f99\":{\"iv\":1,\"acts\":[]}}}",
+   "card": {
+    "type": "flirt",
+    "title": "Flirt · CHA",
+    "rows": [
+     {
+      "who": "Crescent → Dahee",
+      "d": "edge 4",
+      "res": "Success",
+      "tier": "win",
+      "ex": "💞 attracted and flirty (+3)"
+     }
+    ],
+    "note": ""
+   },
+   "fx": "[Romantic beat] Crescent tries to flirt with Dahee. Result: SUCCESS.\nDahee welcomes it, in character (shy, teasing, warm: whatever fits them).\nDahee's feelings toward Crescent are now: attracted and flirty. ",
+   "acting": [
+    "13ca9f99"
+   ],
+   "affd": {
+    "13ca9f99": 2
+   }
+  },
+  {
+   "role": "assistant",
+   "content": "*Dahee laughs, her cheeks flushed from the wine.* \"Oh, I'm hot? Is that so?\" *She wiggles her eyebrows suggestively and takes another sip of her drink.*\n\n\"But seriously, you should see yourself right now.\"",
+   "think": "",
+   "ts": 1795437594156,
+   "stat": {
+    "tok": 131,
+    "ms": 7477
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e30",
+    "e11",
+    "c1",
+    "c2",
+    "c3",
+    "c4",
+    "c5",
+    "c6",
+    "c8",
+    "c9"
+   ],
+   "seen": 1795437586478,
+   "mundo": {
+    "add": [],
+    "scene": "In {{char}}'s apartment, getting drunk",
+    "recent": [
+     {
+      "text": "{{char}} playfully teases {{user}} about cuddling",
+      "imp": 0.25,
+      "turn": 24,
+      "ts": 1795437124388
+     },
+     {
+      "text": "Flirtatious banter about cuddling",
+      "imp": 0.54,
+      "turn": 28,
+      "ts": 1795437165358
+     },
+     {
+      "text": "{{user}} expressed desire for more intimacy",
+      "imp": 0.63,
+      "turn": 32,
+      "ts": 1795437214504
+     },
+     {
+      "text": "{{char}} and {{user}} get closer, enjoying each other's company",
+      "imp": 0.53,
+      "turn": 36,
+      "ts": 1795437271402
+     },
+     {
+      "text": "{{user}} initiated physical contact",
+      "imp": 0.57,
+      "turn": 40,
+      "ts": 1795437319198
+     },
+     {
+      "text": "{{char}} teases {{user}} about being the big spoon",
+      "imp": 0.63,
+      "turn": 44,
+      "ts": 1795437408965
+     },
+     {
+      "text": "{{char}} offered {{user}} a drink",
+      "imp": 0.16,
+      "turn": 48,
+      "ts": 1795437485047
+     },
+     {
+      "text": "{{char}} and {{user}} decide to drink wine together",
+      "imp": 0.46,
+      "turn": 52,
+      "ts": 1795437540824
+     }
+    ]
+   },
+   "thought": "Maybe I should slow down on the wine...",
+   "bd": {
+    "c": "13ca9f99",
+    "dv": 1.89,
+    "h": 0
+   },
+   "mo": {
+    "m": "playful",
+    "e": "😏",
+    "d": 2,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "Noona...um...can we kiss?",
+   "ts": 1795437653317
+  },
+  {
+   "role": "assistant",
+   "content": "*Dahee grins, her eyes sparkling with amusement.* \"Oh, is that so?\" *She leans in closer, her voice dropping to a playful whisper.* \"Well then, let's see what we can do about that, shall we?\"\n\n*She reaches up and cups Crescent's cheek gently, looking into their eyes with a soft, affectionate gaze before closing the distance between them for a slow, tender kiss.*",
+   "think": "",
+   "ts": 1795437660897,
+   "stat": {
+    "tok": 85,
+    "ms": 6892
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e10",
+    "e22",
+    "e8",
+    "e29",
+    "e1",
+    "e23",
+    "e11",
+    "c1",
+    "c2",
+    "c3",
+    "c4",
+    "c5",
+    "c6",
+    "c8",
+    "c9"
+   ],
+   "seen": 1795437653847
+  },
+  {
+   "role": "user",
+   "content": "mmmm... *kisses*",
+   "ts": 1795437676912,
+   "rpsnap": "{\"rel\":{\"13ca9f99\":{\"type\":\"romance\",\"v\":48.4,\"ms\":[],\"hist\":[{\"s\":\"Acquaintances\",\"i\":1,\"t\":1795436908435,\"ty\":\"auto\"},{\"s\":\"Familiar\",\"i\":2,\"t\":1795437125298,\"ty\":\"auto\"},{\"s\":\"Comfortable\",\"i\":3,\"t\":1795437541752,\"ty\":\"auto\"},{\"s\":\"Path: Romance\",\"i\":-1,\"t\":1795437572120,\"ty\":\"romance\"}],\"peak\":48.4,\"fork\":0,\"forkDone\":1}},\"body\":{\"user\":{\"inj\":[],\"ill\":[],\"tired\":0,\"dead\":false,\"died\":null,\"stash\":null,\"rev\":0,\"n\":0,\"ko\":false},\"13ca9f99\":{\"inj\":[],\"ill\":[],\"tired\":0,\"dead\":false,\"died\":null,\"stash\":null,\"rev\":0,\"n\":0,\"ko\":false}},\"rom\":{\"13ca9f99\":{\"v\":28.89,\"ms\":[]}},\"intim\":{\"13ca9f99\":{\"iv\":1,\"acts\":[]}}}",
+   "card": {
+    "type": "kiss",
+    "title": "Kiss · CHA",
+    "rows": [
+     {
+      "who": "Crescent → Dahee",
+      "d": "edge 3",
+      "res": "Success",
+      "tier": "win",
+      "ex": "💞 attracted and flirty (+4)"
+     }
+    ],
+    "note": ""
+   },
+   "fx": "[Romantic beat] Crescent tries to kiss with Dahee. Result: SUCCESS.\nDahee welcomes it, in character (shy, teasing, warm: whatever fits them).\nDahee's feelings toward Crescent are now: attracted and flirty. ",
+   "acting": [
+    "13ca9f99"
+   ],
+   "affd": {
+    "13ca9f99": 2
+   }
+  },
+  {
+   "role": "assistant",
+   "content": "*Dahee breaks the kiss with a soft smile, her eyes twinkling with mischief.* \"Mmm, that was quite... refreshing,\" *she teases, running a finger along Crescent's jawline. She leans back slightly, looking thoughtful for a moment before continuing.* \"You know, I've been thinking...\"",
+   "think": "",
+   "ts": 1795437684437,
+   "stat": {
+    "tok": 111,
+    "ms": 6901
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e10",
+    "e22",
+    "e30",
+    "e11",
+    "e23",
+    "c1",
+    "c2",
+    "c3",
+    "c4",
+    "c5",
+    "c6",
+    "c8",
+    "c7",
+    "c9"
+   ],
+   "seen": 1795437677342,
+   "obsnap": "{\"rel\":{\"13ca9f99\":{\"type\":\"romance\",\"v\":48.4,\"ms\":[],\"hist\":[{\"s\":\"Acquaintances\",\"i\":1,\"t\":1795436908435,\"ty\":\"auto\"},{\"s\":\"Familiar\",\"i\":2,\"t\":1795437125298,\"ty\":\"auto\"},{\"s\":\"Comfortable\",\"i\":3,\"t\":1795437541752,\"ty\":\"auto\"},{\"s\":\"Path: Romance\",\"i\":-1,\"t\":1795437572120,\"ty\":\"romance\"}],\"peak\":48.4,\"fork\":0,\"forkDone\":1}},\"body\":{\"user\":{\"inj\":[],\"ill\":[],\"tired\":0,\"dead\":false,\"died\":null,\"stash\":null,\"rev\":0,\"n\":0,\"ko\":false},\"13ca9f99\":{\"inj\":[],\"ill\":[],\"tired\":0,\"dead\":false,\"died\":null,\"stash\":null,\"rev\":0,\"n\":0,\"ko\":false}},\"rom\":{\"13ca9f99\":{\"v\":32.89,\"ms\":[\"first kiss\"]}},\"intim\":{\"13ca9f99\":{\"iv\":3,\"acts\":[\"first kiss\"]}}}",
+   "mundo": {
+    "add": [
+     "e38",
+     "e39",
+     "s40",
+     "e41"
+    ],
+    "scene": "Cuddling on the couch, sharing a bottle of wine",
+    "recent": [
+     {
+      "text": "Flirtatious banter about cuddling",
+      "imp": 0.54,
+      "turn": 28,
+      "ts": 1795437165358
+     },
+     {
+      "text": "{{user}} expressed desire for more intimacy",
+      "imp": 0.63,
+      "turn": 32,
+      "ts": 1795437214504
+     },
+     {
+      "text": "{{char}} and {{user}} get closer, enjoying each other's company",
+      "imp": 0.53,
+      "turn": 36,
+      "ts": 1795437271402
+     },
+     {
+      "text": "{{user}} initiated physical contact",
+      "imp": 0.57,
+      "turn": 40,
+      "ts": 1795437319198
+     },
+     {
+      "text": "{{char}} teases {{user}} about being the big spoon",
+      "imp": 0.63,
+      "turn": 44,
+      "ts": 1795437408965
+     },
+     {
+      "text": "{{char}} offered {{user}} a drink",
+      "imp": 0.16,
+      "turn": 48,
+      "ts": 1795437485047
+     },
+     {
+      "text": "{{char}} and {{user}} decide to drink wine together",
+      "imp": 0.46,
+      "turn": 52,
+      "ts": 1795437540824
+     },
+     {
+      "text": "{{user}} called {{char}} 'hot",
+      "imp": 0.52,
+      "turn": 56,
+      "ts": 1795437598199
+     }
+    ]
+   },
+   "thought": "I could get used to this",
+   "bd": {
+    "c": "13ca9f99",
+    "dv": 1.89,
+    "h": 0
+   },
+   "mo": {
+    "m": "amused",
+    "e": "😄",
+    "d": 2,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "thinking what?",
+   "ts": 1795437740617
+  },
+  {
+   "role": "assistant",
+   "content": "* \"Well, if you insist on calling me that...\" *She leans in closer, her voice dropping to a playful whisper.* \"*I suppose I should reward your boldness.*\"",
+   "think": "",
+   "ts": 1795437747110,
+   "stat": {
+    "tok": 49,
+    "ms": 5880
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e11",
+    "e29",
+    "e38",
+    "e34",
+    "e21",
+    "s40",
+    "e10",
+    "c1",
+    "c2",
+    "c3",
+    "c4",
+    "c5",
+    "c6",
+    "c8",
+    "c7",
+    "c9",
+    "c10"
+   ],
+   "seen": 1795437741053
+  },
+  {
+   "role": "user",
+   "content": "I would love a reward",
+   "ts": 1795437761442
+  },
+  {
+   "role": "assistant",
+   "content": "\" *She leans in closer, her voice dropping to a playful whisper.\" *Dahee takes another sip of wine before setting the glass down and turning to face Crescent fully.*",
+   "think": "",
+   "ts": 1795437768219,
+   "stat": {
+    "tok": 87,
+    "ms": 6123
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e10",
+    "e38",
+    "e22",
+    "e23",
+    "e11",
+    "s40",
+    "e41",
+    "c1",
+    "c2",
+    "c3",
+    "c4",
+    "c5",
+    "c6",
+    "c8",
+    "c7",
+    "c9"
+   ],
+   "seen": 1795437761888,
+   "mundo": {
+    "add": [
+     "e42"
+    ],
+    "scene": "In a dimly lit bar, {{char}} and {{user}} are sitting close together at a small table",
+    "recent": [
+     {
+      "text": "{{user}} expressed desire for more intimacy",
+      "imp": 0.63,
+      "turn": 32,
+      "ts": 1795437214504
+     },
+     {
+      "text": "{{char}} and {{user}} get closer, enjoying each other's company",
+      "imp": 0.53,
+      "turn": 36,
+      "ts": 1795437271402
+     },
+     {
+      "text": "{{user}} initiated physical contact",
+      "imp": 0.57,
+      "turn": 40,
+      "ts": 1795437319198
+     },
+     {
+      "text": "{{char}} teases {{user}} about being the big spoon",
+      "imp": 0.63,
+      "turn": 44,
+      "ts": 1795437408965
+     },
+     {
+      "text": "{{char}} offered {{user}} a drink",
+      "imp": 0.16,
+      "turn": 48,
+      "ts": 1795437485047
+     },
+     {
+      "text": "{{char}} and {{user}} decide to drink wine together",
+      "imp": 0.46,
+      "turn": 52,
+      "ts": 1795437540824
+     },
+     {
+      "text": "{{user}} called {{char}} 'hot",
+      "imp": 0.52,
+      "turn": 56,
+      "ts": 1795437598199
+     },
+     {
+      "text": "{{char}} and {{user}} shared a tender kiss",
+      "imp": 0.67,
+      "turn": 60,
+      "ts": 1795437688282
+     }
+    ]
+   },
+   "thought": "He's so easy to tease, but I love it.",
+   "bd": {
+    "c": "13ca9f99",
+    "dv": 0.21,
+    "h": 0
+   },
+   "mo": {
+    "m": "playful",
+    "e": "😏",
+    "d": 0,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "mhm?",
+   "ts": 1795437778827
+  },
+  {
+   "role": "assistant",
+   "content": "*Dahee tilts her head slightly, considering Crescent's question with a playful glint in her eye.* \"Well now, that depends on what kind of reward you're looking for...\" *She trails off, leaving the thought hanging suggestively as she takes another sip of wine, her eyes never leaving Crescent's face.*",
+   "think": "",
+   "ts": 1795437785883,
+   "stat": {
+    "tok": 67,
+    "ms": 6268
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e30",
+    "e34",
+    "c1",
+    "c2",
+    "c3",
+    "c4",
+    "c5",
+    "c6",
+    "c8",
+    "c7",
+    "c9"
+   ],
+   "seen": 1795437779421
+  },
+  {
+   "role": "user",
+   "content": "I really wannna know",
+   "ts": 1795437802930
+  },
+  {
+   "role": "assistant",
+   "content": "*Dahee's gaze drifts to the window, watching the rain trickle down the glass. A small puddle forms at the base, growing with each passing moment. She turns back to Crescent with a playful smirk.* \"Well, I guess that answers my question about how long it'll last.\"",
+   "think": "",
+   "ts": 1795437868313,
+   "stat": {
+    "tok": 94,
+    "ms": 7253
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e11",
+    "e34",
+    "c1",
+    "c2",
+    "c3",
+    "c4",
+    "c5",
+    "c6",
+    "c8",
+    "c7",
+    "c9",
+    "c10"
+   ],
+   "seen": 1795437803400,
+   "thought": "He's cute when he's eager.",
+   "sw": [
+    {
+     "content": "*Dahee tilts her head, considering Crescent with a playful glint in her eye.* \"Well now, that depends on what kind of reward you're looking for...\" *She trails off suggestively, taking another sip of wine as the rain taps out an insistent rhythm against the windowpane.*",
+     "think": "",
+     "ts": 1795437814770,
+     "stat": {
+      "tok": 101,
+      "ms": 4770
+     },
+     "thought": "He's playing along, I like this game.",
+     "pers": {
+      "score": 100,
+      "flags": [],
+      "retries": 1
+     }
+    },
+    {
+     "content": "* \"Well now, that depends on what kind of reward you're looking for...\"",
+     "think": "",
+     "ts": 1795437829237,
+     "stat": {
+      "tok": 138,
+      "ms": 8274
+     },
+     "pers": {
+      "score": 100,
+      "flags": [],
+      "retries": 0
+     },
+     "recalled": [
+      "e11",
+      "e34",
+      "c1",
+      "c2",
+      "c3",
+      "c4",
+      "c5",
+      "c6",
+      "c8",
+      "c7",
+      "c9",
+      "c10"
+     ]
+    },
+    {
+     "content": "*Dahee's gaze drifts to the window, watching the rain trickle down the glass. A small puddle forms at the base, growing with each passing moment. She turns back to Crescent with a playful smirk.* \"Well, I guess that answers my question about how long it'll last.\"",
+     "think": "",
+     "ts": 1795437868313,
+     "stat": {
+      "tok": 94,
+      "ms": 7253
+     },
+     "pers": {
+      "score": 100,
+      "flags": [],
+      "retries": 0
+     },
+     "recalled": [
+      "e11",
+      "e34",
+      "c1",
+      "c2",
+      "c3",
+      "c4",
+      "c5",
+      "c6",
+      "c8",
+      "c7",
+      "c9",
+      "c10"
+     ]
+    }
+   ],
+   "si": 2,
+   "react": "",
+   "mundo": {
+    "add": [
+     "e44"
+    ],
+    "scene": "{{char}} and {{user}} are sitting close together on a couch, sharing a bottle of wine.",
+    "recent": [
+     {
+      "text": "{{char}} and {{user}} get closer, enjoying each other's company",
+      "imp": 0.53,
+      "turn": 36,
+      "ts": 1795437271402
+     },
+     {
+      "text": "{{user}} initiated physical contact",
+      "imp": 0.57,
+      "turn": 40,
+      "ts": 1795437319198
+     },
+     {
+      "text": "{{char}} teases {{user}} about being the big spoon",
+      "imp": 0.63,
+      "turn": 44,
+      "ts": 1795437408965
+     },
+     {
+      "text": "{{char}} offered {{user}} a drink",
+      "imp": 0.16,
+      "turn": 48,
+      "ts": 1795437485047
+     },
+     {
+      "text": "{{char}} and {{user}} decide to drink wine together",
+      "imp": 0.46,
+      "turn": 52,
+      "ts": 1795437540824
+     },
+     {
+      "text": "{{user}} called {{char}} 'hot",
+      "imp": 0.52,
+      "turn": 56,
+      "ts": 1795437598199
+     },
+     {
+      "text": "{{char}} and {{user}} shared a tender kiss",
+      "imp": 0.67,
+      "turn": 60,
+      "ts": 1795437688282
+     },
+     {
+      "text": "{{char}} flirtatiously teases {{user}} about rewarding his boldness.",
+      "imp": 0.51,
+      "turn": 64,
+      "ts": 1795437772557
+     }
+    ]
+   },
+   "bd": {
+    "c": "13ca9f99",
+    "dv": 1.12,
+    "h": 0
+   },
+   "mo": {
+    "m": "playful",
+    "e": "😏",
+    "d": 1,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "*I hold her hand and pull under the blanket and hold her from behind*",
+   "ts": 1795437897439,
+   "rpsnap": "{\"rel\":{\"13ca9f99\":{\"type\":\"romance\",\"v\":48.4,\"ms\":[],\"hist\":[{\"s\":\"Acquaintances\",\"i\":1,\"t\":1795436908435,\"ty\":\"auto\"},{\"s\":\"Familiar\",\"i\":2,\"t\":1795437125298,\"ty\":\"auto\"},{\"s\":\"Comfortable\",\"i\":3,\"t\":1795437541752,\"ty\":\"auto\"},{\"s\":\"Path: Romance\",\"i\":-1,\"t\":1795437572120,\"ty\":\"romance\"}],\"peak\":48.4,\"fork\":0,\"forkDone\":1}},\"body\":{\"user\":{\"inj\":[],\"ill\":[],\"tired\":0,\"dead\":false,\"died\":null,\"stash\":null,\"rev\":0,\"n\":0,\"ko\":false},\"13ca9f99\":{\"inj\":[{\"k\":\"fracture\",\"p\":\"head\",\"s\":2,\"h\":0.48,\"care\":false}],\"ill\":[],\"tired\":0,\"dead\":false,\"died\":null,\"stash\":null,\"rev\":0,\"n\":1,\"ko\":false}},\"rom\":{\"13ca9f99\":{\"v\":36.11,\"ms\":[\"first kiss\"]}},\"intim\":{\"13ca9f99\":{\"iv\":3,\"acts\":[\"first kiss\"]}}}",
+   "card": {
+    "type": "touch",
+    "title": "Tender touch · CHA",
+    "rows": [
+     {
+      "who": "Crescent → Dahee",
+      "d": "edge 4",
+      "res": "Success",
+      "tier": "win",
+      "ex": "💞 attracted and flirty (+3)"
+     }
+    ],
+    "note": ""
+   },
+   "fx": "[Romantic beat] Crescent tries to tender touch with Dahee. Result: SUCCESS.\nDahee welcomes it, in character (shy, teasing, warm: whatever fits them).\nDahee's feelings toward Crescent are now: attracted and flirty.  Dahee is hurt or unwell right now, which weighs on how they respond.",
+   "acting": [
+    "13ca9f99"
+   ],
+   "affd": {
+    "13ca9f99": 2
+   }
+  },
+  {
+   "role": "assistant",
+   "content": "*Dahee nuzzles into Crescent's neck, her breath warm against their skin as she whispers playfully* \"You're not the only one who wants more, you know. I've been thinking about it all day.\" *She trails soft kisses along Crescent's jawline before pulling back to look at them with a mischievous grin.* \"But don't worry, I'll be gentle... this time.\"",
+   "think": "",
+   "ts": 1795437905288,
+   "stat": {
+    "tok": 86,
+    "ms": 7167
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e10",
+    "e11",
+    "e23",
+    "e38",
+    "e22",
+    "e29",
+    "s40",
+    "c1",
+    "c2",
+    "c3",
+    "c4",
+    "c5",
+    "c6",
+    "c8",
+    "c7",
+    "c9",
+    "c10"
+   ],
+   "seen": 1795437897949
+  },
+  {
+   "role": "user",
+   "content": "*I start kissing her neck*",
+   "ts": 1795437924621,
+   "rpsnap": "{\"rel\":{\"13ca9f99\":{\"type\":\"romance\",\"v\":48.4,\"ms\":[],\"hist\":[{\"s\":\"Acquaintances\",\"i\":1,\"t\":1795436908435,\"ty\":\"auto\"},{\"s\":\"Familiar\",\"i\":2,\"t\":1795437125298,\"ty\":\"auto\"},{\"s\":\"Comfortable\",\"i\":3,\"t\":1795437541752,\"ty\":\"auto\"},{\"s\":\"Path: Romance\",\"i\":-1,\"t\":1795437572120,\"ty\":\"romance\"}],\"peak\":48.4,\"fork\":0,\"forkDone\":1}},\"body\":{\"user\":{\"inj\":[],\"ill\":[],\"tired\":0,\"dead\":false,\"died\":null,\"stash\":null,\"rev\":0,\"n\":0,\"ko\":false},\"13ca9f99\":{\"inj\":[{\"k\":\"fracture\",\"p\":\"head\",\"s\":2,\"h\":0.6,\"care\":false}],\"ill\":[],\"tired\":0,\"dead\":false,\"died\":null,\"stash\":null,\"rev\":0,\"n\":1,\"ko\":false}},\"rom\":{\"13ca9f99\":{\"v\":39.11,\"ms\":[\"first kiss\"]}},\"intim\":{\"13ca9f99\":{\"iv\":4,\"acts\":[\"first kiss\"]}}}",
+   "card": {
+    "type": "kiss",
+    "title": "Kiss · CHA",
+    "rows": [
+     {
+      "who": "Crescent → Dahee",
+      "d": "edge 4",
+      "res": "Success",
+      "tier": "win",
+      "ex": "💞 attracted and flirty (+4)"
+     }
+    ],
+    "note": ""
+   },
+   "fx": "[Romantic beat] Crescent tries to kiss with Dahee. Result: SUCCESS.\nDahee welcomes it, in character (shy, teasing, warm: whatever fits them).\nDahee's feelings toward Crescent are now: attracted and flirty.  Dahee is hurt or unwell right now, which weighs on how they respond.",
+   "acting": [
+    "13ca9f99"
+   ],
+   "affd": {
+    "13ca9f99": 2
+   }
+  },
+  {
+   "role": "assistant",
+   "content": "*Dahee grins mischievously, her eyes sparkling with amusement as she traces patterns on Crescent's chest.* \"You know, I've been thinking... maybe you don't need to be 'rewarded' at all. Maybe I just want to do this because it feels good.\" *She leans in closer, her breath warm against Crescent's ear as she whispers,* \"And right now, making out with you feels really, really good.\"",
+   "think": "",
+   "ts": 1795437931971,
+   "stat": {
+    "tok": 93,
+    "ms": 6619
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e38",
+    "e10",
+    "e23",
+    "s40",
+    "e30",
+    "e22",
+    "e41",
+    "c1",
+    "c2",
+    "c3",
+    "c4",
+    "c5",
+    "c6",
+    "c8",
+    "c7",
+    "c9",
+    "c10"
+   ],
+   "seen": 1795437925153,
+   "mundo": {
+    "add": [
+     "e45",
+     "e46",
+     "s47",
+     "s48",
+     "e49"
+    ],
+    "scene": "In a cozy apartment, watching rain",
+    "recent": [
+     {
+      "text": "{{user}} initiated physical contact",
+      "imp": 0.57,
+      "turn": 40,
+      "ts": 1795437319198
+     },
+     {
+      "text": "{{char}} teases {{user}} about being the big spoon",
+      "imp": 0.63,
+      "turn": 44,
+      "ts": 1795437408965
+     },
+     {
+      "text": "{{char}} offered {{user}} a drink",
+      "imp": 0.16,
+      "turn": 48,
+      "ts": 1795437485047
+     },
+     {
+      "text": "{{char}} and {{user}} decide to drink wine together",
+      "imp": 0.46,
+      "turn": 52,
+      "ts": 1795437540824
+     },
+     {
+      "text": "{{user}} called {{char}} 'hot",
+      "imp": 0.52,
+      "turn": 56,
+      "ts": 1795437598199
+     },
+     {
+      "text": "{{char}} and {{user}} shared a tender kiss",
+      "imp": 0.67,
+      "turn": 60,
+      "ts": 1795437688282
+     },
+     {
+      "text": "{{char}} flirtatiously teases {{user}} about rewarding his boldness.",
+      "imp": 0.51,
+      "turn": 64,
+      "ts": 1795437772557
+     },
+     {
+      "text": "{{char}} teases {{user}} about the rain",
+      "imp": 0.43,
+      "turn": 68,
+      "ts": 1795437872143
+     }
+    ]
+   },
+   "thought": "He's so easy to tease, but I love it.",
+   "bd": {
+    "c": "13ca9f99",
+    "dv": 1.12,
+    "h": 0
+   },
+   "mo": {
+    "m": "playful",
+    "e": "😏",
+    "d": 1,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "really? *starts unbuttoning her shirt*",
+   "ts": 1795437965474
+  },
+  {
+   "role": "assistant",
+   "content": "*Dahee smirks and arches an eyebrow, her fingers trailing along Crescent's chest as she leans in close.* \"Oh, I think we both know there are plenty of ways to keep warm without needing a blanket. But don't worry, I'll make sure you're nice and cozy...\"",
+   "think": "",
+   "ts": 1795437975893,
+   "stat": {
+    "tok": 165,
+    "ms": 9693
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e30",
+    "e23",
+    "e10",
+    "e29",
+    "e21",
+    "s48",
+    "e45",
+    "c1",
+    "c2",
+    "c3",
+    "c4",
+    "c5",
+    "c6",
+    "c8",
+    "c7",
+    "c9",
+    "c10"
+   ],
+   "seen": 1795437966001
+  },
+  {
+   "role": "user",
+   "content": "*I take off her shirt and she's in her bra*",
+   "ts": 1795437998366
+  },
+  {
+   "role": "assistant",
+   "content": "*Dahee's eyes sparkle mischievously as she teases Crescent,* \"Well, I suppose it's my civic duty to keep you warm on a night like this. And who knows? Maybe I'll find some other ways to make you feel better too.\" *She winks playfully and leans in closer.*",
+   "think": "",
+   "ts": 1795438005011,
+   "stat": {
+    "tok": 66,
+    "ms": 5886
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "wild": {
+    "name": "Eastern Small Eyed Snake",
+    "sci": "Cryptophis nigrescens",
+    "class": "Reptile",
+    "mood": "terror",
+    "stage": 2,
+    "of": 4,
+    "tier": 3,
+    "rarity": "Uncommon",
+    "habitat": "Indoors",
+    "sprite": "/animals/sprites/eastern_small_eyed_snake.png",
+    "size": 0.95,
+    "weight": 0.45,
+    "diet": "Carnivore"
+   },
+   "recalled": [
+    "e30",
+    "e8",
+    "e10",
+    "e1",
+    "e6",
+    "e29",
+    "e11",
+    "c1",
+    "c2",
+    "c3",
+    "c4",
+    "c6",
+    "c5",
+    "c8",
+    "c7",
+    "c9",
+    "c10",
+    "c11"
+   ],
+   "seen": 1795437998894,
+   "mundo": {
+    "add": [
+     "e50"
+    ],
+    "scene": "Under a blanket, watching the rain",
+    "recent": [
+     {
+      "text": "{{char}} teases {{user}} about being the big spoon",
+      "imp": 0.63,
+      "turn": 44,
+      "ts": 1795437408965
+     },
+     {
+      "text": "{{char}} offered {{user}} a drink",
+      "imp": 0.16,
+      "turn": 48,
+      "ts": 1795437485047
+     },
+     {
+      "text": "{{char}} and {{user}} decide to drink wine together",
+      "imp": 0.46,
+      "turn": 52,
+      "ts": 1795437540824
+     },
+     {
+      "text": "{{user}} called {{char}} 'hot",
+      "imp": 0.52,
+      "turn": 56,
+      "ts": 1795437598199
+     },
+     {
+      "text": "{{char}} and {{user}} shared a tender kiss",
+      "imp": 0.67,
+      "turn": 60,
+      "ts": 1795437688282
+     },
+     {
+      "text": "{{char}} flirtatiously teases {{user}} about rewarding his boldness.",
+      "imp": 0.51,
+      "turn": 64,
+      "ts": 1795437772557
+     },
+     {
+      "text": "{{char}} teases {{user}} about the rain",
+      "imp": 0.43,
+      "turn": 68,
+      "ts": 1795437872143
+     },
+     {
+      "text": "{{char}} flirted and kissed {{user}}",
+      "imp": 0.6,
+      "turn": 72,
+      "ts": 1795437936030
+     }
+    ]
+   },
+   "thought": "I can't believe how easy it is to make him blush.",
+   "bd": {
+    "c": "13ca9f99",
+    "dv": 1.89,
+    "h": 1
+   },
+   "mo": {
+    "m": "playful",
+    "e": "😏",
+    "d": 2,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "how so?",
+   "ts": 1795438020956
+  },
+  {
+   "role": "assistant",
+   "content": "*Dahee grins mischievously, her eyes sparkling with playfulness.* \"Well, I have my ways. But don't worry, I promise to make it worth your while.\" *She winks and trails a finger down Crescent's chest teasingly.*\n\n\"So, what exactly are you hoping for in return for all this warmth and attention? Besides the obvious, of course.\" *Dahee smirks, her voice low and suggestive as she leans in closer.*",
+   "think": "",
+   "ts": 1795438029439,
+   "stat": {
+    "tok": 95,
+    "ms": 7715
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "wild": {
+    "name": "Eastern Small Eyed Snake",
+    "sci": "Cryptophis nigrescens",
+    "class": "Reptile",
+    "mood": "terror",
+    "stage": 3,
+    "of": 4,
+    "tier": 3,
+    "rarity": "Uncommon",
+    "habitat": "Indoors",
+    "sprite": "/animals/sprites/eastern_small_eyed_snake.png",
+    "size": 0.95,
+    "weight": 0.45,
+    "diet": "Carnivore"
+   },
+   "recalled": [
+    "e23",
+    "e46",
+    "c1",
+    "c2",
+    "c3",
+    "c4",
+    "c6",
+    "c5",
+    "c8",
+    "c7",
+    "c9",
+    "c10",
+    "c12",
+    "c13"
+   ],
+   "seen": 1795438021530
+  },
+  {
+   "role": "user",
+   "content": "I wanna see your boobs",
+   "ts": 1795438053257
+  },
+  {
+   "role": "assistant",
+   "content": "*Dahee laughs and playfully pushes Crescent.* \"Oh, you're so bold today. What happened to the shy boy I know?\" *She winks and adjusts her bra straps, teasingly showing a little more skin.* \"But I suppose since we're being honest...I wouldn't mind seeing yours too.\"",
+   "think": "",
+   "ts": 1795438059956,
+   "stat": {
+    "tok": 66,
+    "ms": 5934
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "wild": {
+    "name": "Eastern Small Eyed Snake",
+    "sci": "Cryptophis nigrescens",
+    "class": "Reptile",
+    "mood": "terror",
+    "stage": 4,
+    "of": 4,
+    "tier": 3,
+    "rarity": "Uncommon",
+    "habitat": "Indoors",
+    "sprite": "/animals/sprites/eastern_small_eyed_snake.png",
+    "size": 0.95,
+    "weight": 0.45,
+    "diet": "Carnivore"
+   },
+   "recalled": [
+    "e30",
+    "e23",
+    "c1",
+    "c2",
+    "c3",
+    "c4",
+    "c5",
+    "c6",
+    "c8",
+    "c7",
+    "c9",
+    "c10",
+    "c12",
+    "c13"
+   ],
+   "seen": 1795438053807,
+   "mundo": {
+    "add": [],
+    "scene": "In {{user}}'s apartment, getting intimate",
+    "recent": [
+     {
+      "text": "{{char}} offered {{user}} a drink",
+      "imp": 0.16,
+      "turn": 48,
+      "ts": 1795437485047
+     },
+     {
+      "text": "{{char}} and {{user}} decide to drink wine together",
+      "imp": 0.46,
+      "turn": 52,
+      "ts": 1795437540824
+     },
+     {
+      "text": "{{user}} called {{char}} 'hot",
+      "imp": 0.52,
+      "turn": 56,
+      "ts": 1795437598199
+     },
+     {
+      "text": "{{char}} and {{user}} shared a tender kiss",
+      "imp": 0.67,
+      "turn": 60,
+      "ts": 1795437688282
+     },
+     {
+      "text": "{{char}} flirtatiously teases {{user}} about rewarding his boldness.",
+      "imp": 0.51,
+      "turn": 64,
+      "ts": 1795437772557
+     },
+     {
+      "text": "{{char}} teases {{user}} about the rain",
+      "imp": 0.43,
+      "turn": 68,
+      "ts": 1795437872143
+     },
+     {
+      "text": "{{char}} flirted and kissed {{user}}",
+      "imp": 0.6,
+      "turn": 72,
+      "ts": 1795437936030
+     },
+     {
+      "text": "{{char}} teases {{user}} while undressing",
+      "imp": 0.35,
+      "turn": 76,
+      "ts": 1795438009144
+     }
+    ]
+   },
+   "thought": "I can't believe he just said that. But I love it.",
+   "bd": {
+    "c": "13ca9f99",
+    "dv": 0.21,
+    "h": 0
+   },
+   "mo": {
+    "m": "playful",
+    "e": "😏",
+    "d": 0,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "take it off",
+   "ts": 1795438077527
+  },
+  {
+   "role": "assistant",
+   "content": "*Dahee chuckles playfully, giving Crescent a teasing look.* \"Oh? And what makes you think I'm wearing one?\" *She wiggles her eyebrows suggestively and leans in closer to whisper,* \"Maybe you should find out for yourself.\"",
+   "think": "",
+   "ts": 1795438088770,
+   "stat": {
+    "tok": 53,
+    "ms": 3357
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 1
+   },
+   "recalled": [
+    "e8",
+    "e1",
+    "e6",
+    "e46",
+    "e19",
+    "c1",
+    "c2",
+    "c3",
+    "c4",
+    "c6",
+    "c5",
+    "c8",
+    "c7",
+    "c9",
+    "c10",
+    "c13",
+    "c14"
+   ],
+   "seen": 1795438078103
+  },
+  {
+   "role": "user",
+   "content": "*I take her bra off*",
+   "ts": 1795438102733
+  },
+  {
+   "role": "assistant",
+   "content": "*Dahee giggles and playfully swats Crescent's hand away.* \"Not so fast, young one. I think you deserve a little more foreplay.\" *She leans in close, her breath warm against Crescent's ear as she whispers,* \"I want to take my time with you tonight.\"",
+   "think": "",
+   "ts": 1795438109450,
+   "stat": {
+    "tok": 64,
+    "ms": 5877
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e8",
+    "e23",
+    "e1",
+    "e6",
+    "e21",
+    "e50",
+    "e19",
+    "c1",
+    "c2",
+    "c3",
+    "c4",
+    "c5",
+    "c6",
+    "c8",
+    "c7",
+    "c9",
+    "c10",
+    "c13",
+    "c14"
+   ],
+   "seen": 1795438103332,
+   "mundo": {
+    "add": [
+     "e51"
+    ],
+    "scene": "In {{user}}'s bedroom, getting intimate",
+    "recent": [
+     {
+      "text": "{{char}} and {{user}} decide to drink wine together",
+      "imp": 0.46,
+      "turn": 52,
+      "ts": 1795437540824
+     },
+     {
+      "text": "{{user}} called {{char}} 'hot",
+      "imp": 0.52,
+      "turn": 56,
+      "ts": 1795437598199
+     },
+     {
+      "text": "{{char}} and {{user}} shared a tender kiss",
+      "imp": 0.67,
+      "turn": 60,
+      "ts": 1795437688282
+     },
+     {
+      "text": "{{char}} flirtatiously teases {{user}} about rewarding his boldness.",
+      "imp": 0.51,
+      "turn": 64,
+      "ts": 1795437772557
+     },
+     {
+      "text": "{{char}} teases {{user}} about the rain",
+      "imp": 0.43,
+      "turn": 68,
+      "ts": 1795437872143
+     },
+     {
+      "text": "{{char}} flirted and kissed {{user}}",
+      "imp": 0.6,
+      "turn": 72,
+      "ts": 1795437936030
+     },
+     {
+      "text": "{{char}} teases {{user}} while undressing",
+      "imp": 0.35,
+      "turn": 76,
+      "ts": 1795438009144
+     },
+     {
+      "text": "{{user}} expressed desire to see {{char}}'s breasts",
+      "imp": 0.2,
+      "turn": 80,
+      "ts": 1795438064179
+     }
+    ]
+   },
+   "thought": "He's so eager, I love it.",
+   "bd": {
+    "c": "13ca9f99",
+    "dv": 2.66,
+    "h": 0
+   },
+   "mo": {
+    "m": "playful",
+    "e": "😏",
+    "d": 3,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "ok",
+   "ts": 1795438123325
+  },
+  {
+   "role": "assistant",
+   "content": "*Dahee smirks playfully, her eyes sparkling with mischief.* \"Oh, you want to see my boobs that badly, huh? Well, I guess it's only fair. After all, you did give me quite the show earlier.\" *She reaches behind her back and unhooks her bra with a single fluid motion before letting it drop away, exposing her breasts to Crescent.* \"There you go. Happy now?\"",
+   "think": "",
+   "ts": 1795438131801,
+   "stat": {
+    "tok": 88,
+    "ms": 7455
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e23",
+    "e30",
+    "e1",
+    "e6",
+    "e45",
+    "e2",
+    "e19",
+    "c1",
+    "c2",
+    "c3",
+    "c4",
+    "c5",
+    "c6",
+    "c8",
+    "c7",
+    "c9",
+    "c10",
+    "c11",
+    "c12",
+    "c14"
+   ],
+   "seen": 1795438124080
+  },
+  {
+   "role": "user",
+   "content": "noona...they are so big",
+   "ts": 1795438154735
+  },
+  {
+   "role": "assistant",
+   "content": "*Dahee chuckles and playfully covers her breasts with her arms.* \"Oh, these old things? They're just part of the package. You know, like how you come with that charming personality and irresistible face.\" *She winks before dropping her arms, letting Crescent admire them again.* \"But seriously, are you feeling okay?\"",
+   "think": "",
+   "ts": 1795438166083,
+   "stat": {
+    "tok": 179,
+    "ms": 10506
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "wild": {
+    "name": "Mozambique Spitting Cobra",
+    "sci": "Naja mossambica",
+    "class": "Reptile",
+    "mood": "terror",
+    "stage": 1,
+    "of": 4,
+    "tier": 3,
+    "rarity": "Uncommon",
+    "habitat": "Indoors",
+    "sprite": "/animals/sprites/mozambique_spitting_cobra.png",
+    "size": 1.05,
+    "weight": 0.9,
+    "diet": "Carnivore"
+   },
+   "recalled": [
+    "e50",
+    "e30",
+    "e23",
+    "c1",
+    "c2",
+    "c3",
+    "c4",
+    "c5",
+    "c6",
+    "c8",
+    "c7",
+    "c9",
+    "c10",
+    "c11",
+    "c13",
+    "c14"
+   ],
+   "seen": 1795438155352,
+   "mundo": {
+    "add": [
+     "e52"
+    ],
+    "scene": "{{char}} and {{user}} are alone in a bedroom.",
+    "recent": [
+     {
+      "text": "{{user}} called {{char}} 'hot",
+      "imp": 0.52,
+      "turn": 56,
+      "ts": 1795437598199
+     },
+     {
+      "text": "{{char}} and {{user}} shared a tender kiss",
+      "imp": 0.67,
+      "turn": 60,
+      "ts": 1795437688282
+     },
+     {
+      "text": "{{char}} flirtatiously teases {{user}} about rewarding his boldness.",
+      "imp": 0.51,
+      "turn": 64,
+      "ts": 1795437772557
+     },
+     {
+      "text": "{{char}} teases {{user}} about the rain",
+      "imp": 0.43,
+      "turn": 68,
+      "ts": 1795437872143
+     },
+     {
+      "text": "{{char}} flirted and kissed {{user}}",
+      "imp": 0.6,
+      "turn": 72,
+      "ts": 1795437936030
+     },
+     {
+      "text": "{{char}} teases {{user}} while undressing",
+      "imp": 0.35,
+      "turn": 76,
+      "ts": 1795438009144
+     },
+     {
+      "text": "{{user}} expressed desire to see {{char}}'s breasts",
+      "imp": 0.2,
+      "turn": 80,
+      "ts": 1795438064179
+     },
+     {
+      "text": "{{user}} asked to see {{char}}'s breasts.",
+      "imp": 0.46,
+      "turn": 84,
+      "ts": 1795438113491
+     }
+    ]
+   },
+   "thought": "I hope he's not too overwhelmed. I can tone it down if needed.",
+   "bd": {
+    "c": "13ca9f99",
+    "dv": 0.21,
+    "h": 0
+   },
+   "mo": {
+    "m": "amused",
+    "e": "😄",
+    "d": 0,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "more than ever. can I touch them?",
+   "ts": 1795438291721
+  },
+  {
+   "role": "assistant",
+   "content": "*Dahee smirks, her eyes twinkling with mischief as she leans in closer to Crescent.* \"Well, I guess touches are a good place to start.\"",
+   "think": "",
+   "ts": 1795438301055,
+   "stat": {
+    "tok": 123,
+    "ms": 8523
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "wild": {
+    "name": "Mozambique Spitting Cobra",
+    "sci": "Naja mossambica",
+    "class": "Reptile",
+    "mood": "terror",
+    "stage": 2,
+    "of": 4,
+    "tier": 3,
+    "rarity": "Uncommon",
+    "habitat": "Indoors",
+    "sprite": "/animals/sprites/mozambique_spitting_cobra.png",
+    "size": 1.05,
+    "weight": 0.9,
+    "diet": "Carnivore"
+   },
+   "recalled": [
+    "e8",
+    "e19",
+    "c1",
+    "c2",
+    "c3",
+    "c4",
+    "c5",
+    "c6",
+    "c8",
+    "c7",
+    "c9",
+    "c10",
+    "c11",
+    "c12",
+    "c13",
+    "c14",
+    "c15"
+   ],
+   "seen": 1795438292331
+  },
+  {
+   "role": "user",
+   "content": "*gently touches her boobs* they are so soft",
+   "ts": 1795438320117
+  },
+  {
+   "role": "assistant",
+   "content": "*Dahee chuckles softly, her eyes sparkling with mischief as she covers and uncovers her breasts playfully.* \"Well, it seems like someone is feeling much better already.\"",
+   "think": "",
+   "ts": 1795438328551,
+   "stat": {
+    "tok": 121,
+    "ms": 7624
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "wild": {
+    "name": "Mozambique Spitting Cobra",
+    "sci": "Naja mossambica",
+    "class": "Reptile",
+    "mood": "terror",
+    "stage": 3,
+    "of": 4,
+    "tier": 3,
+    "rarity": "Uncommon",
+    "habitat": "Indoors",
+    "sprite": "/animals/sprites/mozambique_spitting_cobra.png",
+    "size": 1.05,
+    "weight": 0.9,
+    "diet": "Carnivore"
+   },
+   "recalled": [
+    "e8",
+    "e19",
+    "e16",
+    "e17",
+    "c1",
+    "c2",
+    "c3",
+    "c4",
+    "c5",
+    "c6",
+    "c8",
+    "c7",
+    "c9",
+    "c10",
+    "c11",
+    "c12",
+    "c13",
+    "c14"
+   ],
+   "seen": 1795438320730,
+   "mundo": {
+    "add": [
+     "e53"
+    ],
+    "scene": "In {{user}}'s bedroom, about to have sex",
+    "recent": [
+     {
+      "text": "{{char}} and {{user}} shared a tender kiss",
+      "imp": 0.67,
+      "turn": 60,
+      "ts": 1795437688282
+     },
+     {
+      "text": "{{char}} flirtatiously teases {{user}} about rewarding his boldness.",
+      "imp": 0.51,
+      "turn": 64,
+      "ts": 1795437772557
+     },
+     {
+      "text": "{{char}} teases {{user}} about the rain",
+      "imp": 0.43,
+      "turn": 68,
+      "ts": 1795437872143
+     },
+     {
+      "text": "{{char}} flirted and kissed {{user}}",
+      "imp": 0.6,
+      "turn": 72,
+      "ts": 1795437936030
+     },
+     {
+      "text": "{{char}} teases {{user}} while undressing",
+      "imp": 0.35,
+      "turn": 76,
+      "ts": 1795438009144
+     },
+     {
+      "text": "{{user}} expressed desire to see {{char}}'s breasts",
+      "imp": 0.2,
+      "turn": 80,
+      "ts": 1795438064179
+     },
+     {
+      "text": "{{user}} asked to see {{char}}'s breasts.",
+      "imp": 0.46,
+      "turn": 84,
+      "ts": 1795438113491
+     },
+     {
+      "text": "{{char}} exposed her breasts to {{user}}",
+      "imp": 0.29,
+      "turn": 88,
+      "ts": 1795438170302
+     }
+    ]
+   },
+   "thought": "He's so cute when he gets flustered.",
+   "bd": {
+    "c": "13ca9f99",
+    "dv": 0.21,
+    "h": 0
+   },
+   "mo": {
+    "m": "amused",
+    "e": "😄",
+    "d": 0,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "definitely",
+   "ts": 1795438340325
+  },
+  {
+   "role": "assistant",
+   "content": "*Dahee grins and playfully tweaks Crescent's nose.* \"Well, well, someone's feeling brave tonight. I like it.\"",
+   "think": "",
+   "ts": 1795438346610,
+   "stat": {
+    "tok": 30,
+    "ms": 5452
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "wild": {
+    "name": "Mozambique Spitting Cobra",
+    "sci": "Naja mossambica",
+    "class": "Reptile",
+    "mood": "terror",
+    "stage": 4,
+    "of": 4,
+    "tier": 3,
+    "rarity": "Uncommon",
+    "habitat": "Indoors",
+    "sprite": "/animals/sprites/mozambique_spitting_cobra.png",
+    "size": 1.05,
+    "weight": 0.9,
+    "diet": "Carnivore"
+   },
+   "recalled": [
+    "e30",
+    "e23",
+    "c1",
+    "c2",
+    "c3",
+    "c4",
+    "c5",
+    "c6",
+    "c8",
+    "c7",
+    "c9",
+    "c10",
+    "c11",
+    "c12",
+    "c13",
+    "c14"
+   ],
+   "seen": 1795438340945
+  },
+  {
+   "role": "user",
+   "content": "noona....can I suck on them?",
+   "ts": 1795438357489
+  },
+  {
+   "role": "assistant",
+   "content": "*Dahee chuckles and gives Crescent's cheek a playful pinch.* \"Well, I suppose if you're feeling that bold tonight, I could help with that. But don't say I didn't warn you when morning comes.\" *She winks teasingly as another droplet taps against the window behind her.*",
+   "think": "",
+   "ts": 1795438363818,
+   "stat": {
+    "tok": 63,
+    "ms": 5480
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e30",
+    "e23",
+    "c1",
+    "c2",
+    "c3",
+    "c4",
+    "c5",
+    "c6",
+    "c8",
+    "c7",
+    "c9",
+    "c10",
+    "c11",
+    "c12",
+    "c13",
+    "c14"
+   ],
+   "seen": 1795438358128,
+   "mundo": {
+    "add": [
+     "e54"
+    ],
+    "scene": "In {{char}}'s bedroom, {{user}} is touching her breasts.",
+    "recent": [
+     {
+      "text": "{{char}} flirtatiously teases {{user}} about rewarding his boldness.",
+      "imp": 0.51,
+      "turn": 64,
+      "ts": 1795437772557
+     },
+     {
+      "text": "{{char}} teases {{user}} about the rain",
+      "imp": 0.43,
+      "turn": 68,
+      "ts": 1795437872143
+     },
+     {
+      "text": "{{char}} flirted and kissed {{user}}",
+      "imp": 0.6,
+      "turn": 72,
+      "ts": 1795437936030
+     },
+     {
+      "text": "{{char}} teases {{user}} while undressing",
+      "imp": 0.35,
+      "turn": 76,
+      "ts": 1795438009144
+     },
+     {
+      "text": "{{user}} expressed desire to see {{char}}'s breasts",
+      "imp": 0.2,
+      "turn": 80,
+      "ts": 1795438064179
+     },
+     {
+      "text": "{{user}} asked to see {{char}}'s breasts.",
+      "imp": 0.46,
+      "turn": 84,
+      "ts": 1795438113491
+     },
+     {
+      "text": "{{char}} exposed her breasts to {{user}}",
+      "imp": 0.29,
+      "turn": 88,
+      "ts": 1795438170302
+     },
+     {
+      "text": "{{user}} touched {{char}}'s breasts and complimented their softness.",
+      "imp": 0.2,
+      "turn": 92,
+      "ts": 1795438332783
+     }
+    ]
+   },
+   "thought": "He's so cute when he's bold like this.",
+   "bd": {
+    "c": "13ca9f99",
+    "dv": 0.21,
+    "h": 0
+   },
+   "mo": {
+    "m": "amused",
+    "e": "😄",
+    "d": 0,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "*I grab her left breast and start sucking*",
+   "ts": 1795438411359
+  },
+  {
+   "role": "assistant",
+   "content": "*Dahee grins, arching an eyebrow.\"",
+   "think": "",
+   "ts": 1795438419073,
+   "stat": {
+    "tok": 76,
+    "ms": 6783
+   },
+   "pers": {
+    "score": 90,
+    "flags": [
+     "much longer than their usual replies"
+    ],
+    "retries": 0
+   },
+   "recalled": [
+    "e23",
+    "e34",
+    "e16",
+    "e29",
+    "e21",
+    "e54",
+    "e17",
+    "c1",
+    "c2",
+    "c3",
+    "c4",
+    "c5",
+    "c6",
+    "c8",
+    "c7",
+    "c9",
+    "c10",
+    "c11",
+    "c12",
+    "c13",
+    "c14",
+    "c15"
+   ],
+   "seen": 1795438412046
+  },
+  {
+   "role": "user",
+   "content": "*licks her nipple*",
+   "ts": 1795438429020
+  },
+  {
+   "role": "assistant",
+   "content": "*Dahee arches her back slightly, pressing her breast more firmly against Crescent's mouth.* \"Mmm, that feels nice. Keep going.\"",
+   "think": "",
+   "ts": 1795438449612,
+   "stat": {
+    "tok": 30,
+    "ms": 2377
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 1
+   },
+   "recalled": [
+    "e11",
+    "e46",
+    "e16",
+    "e17",
+    "c1",
+    "c2",
+    "c3",
+    "c4",
+    "c5",
+    "c6",
+    "c8",
+    "c7",
+    "c9",
+    "c10",
+    "c11",
+    "c12",
+    "c13",
+    "c14"
+   ],
+   "seen": 1795438429688,
+   "thought": "",
+   "sw": [
+    {
+     "content": "*Dahee grins, arching an eyebrow.* \"Well, well, someone's feeling brave tonight. I like it.\"",
+     "think": "",
+     "ts": 1795438434115,
+     "stat": {
+      "tok": 26,
+      "ms": 4200
+     },
+     "thought": "He's certainly eager tonight.",
+     "pers": {
+      "score": 100,
+      "flags": [],
+      "retries": 0
+     }
+    },
+    {
+     "content": "*Dahee arches her back slightly, pressing her breast more firmly against Crescent's mouth.* \"Mmm, that feels nice. Keep going.\"",
+     "think": "",
+     "ts": 1795438449612,
+     "stat": {
+      "tok": 30,
+      "ms": 2377
+     },
+     "pers": {
+      "score": 100,
+      "flags": [],
+      "retries": 1
+     },
+     "recalled": [
+      "e11",
+      "e46",
+      "e16",
+      "e17",
+      "c1",
+      "c2",
+      "c3",
+      "c4",
+      "c5",
+      "c6",
+      "c8",
+      "c7",
+      "c9",
+      "c10",
+      "c11",
+      "c12",
+      "c13",
+      "c14"
+     ]
+    }
+   ],
+   "si": 1,
+   "react": ""
+  },
+  {
+   "role": "user",
+   "content": "*Gently bites her nipple*",
+   "ts": 1795438511790
+  },
+  {
+   "role": "assistant",
+   "content": "*Dahee grins, her eyes sparkling with mischief as she playfully pushes Crescent away.* \"Easy there, tiger. We don't want to give you too much of a workout on your first day back at it.\" *She winks and trails a finger down his chest teasingly.* \"I have plans for us later that might wear you out even more.\"",
+   "think": "",
+   "ts": 1795438533837,
+   "stat": {
+    "tok": 76,
+    "ms": 6225
+   },
+   "pers": {
+    "score": 90,
+    "flags": [
+     "much longer than their usual replies"
+    ],
+    "retries": 0
+   },
+   "recalled": [
+    "e16",
+    "e34",
+    "e8",
+    "e26",
+    "e17",
+    "e27",
+    "c1",
+    "c2",
+    "c3",
+    "c4",
+    "c6",
+    "c5",
+    "c8",
+    "c7",
+    "c9",
+    "c10",
+    "c11",
+    "c12",
+    "c13",
+    "c14"
+   ],
+   "seen": 1795438512483,
+   "thought": "",
+   "sw": [
+    {
+     "content": "*Dahee grins, arching an eyebrow.* \"Well, well, someone's feeling brave tonight. I like it.\" *She winks teasingly and trails a finger down Crescent's chest.*",
+     "think": "",
+     "ts": 1795438517658,
+     "stat": {
+      "tok": 42,
+      "ms": 4945
+     },
+     "thought": "I love how he's not afraid to explore, even if it's a bit rough.",
+     "pers": {
+      "score": 100,
+      "flags": [],
+      "retries": 0
+     }
+    },
+    {
+     "content": "*Dahee grins, her eyes sparkling with mischief as she playfully pushes Crescent away.* \"Easy there, tiger. We don't want to give you too much of a workout on your first day back at it.\" *She winks and trails a finger down his chest teasingly.* \"I have plans for us later that might wear you out even more.\"",
+     "think": "",
+     "ts": 1795438533837,
+     "stat": {
+      "tok": 76,
+      "ms": 6225
+     },
+     "pers": {
+      "score": 90,
+      "flags": [
+       "much longer than their usual replies"
+      ],
+      "retries": 0
+     },
+     "recalled": [
+      "e16",
+      "e34",
+      "e8",
+      "e26",
+      "e17",
+      "e27",
+      "c1",
+      "c2",
+      "c3",
+      "c4",
+      "c6",
+      "c5",
+      "c8",
+      "c7",
+      "c9",
+      "c10",
+      "c11",
+      "c12",
+      "c13",
+      "c14"
+     ]
+    }
+   ],
+   "si": 1,
+   "react": ""
+  },
+  {
+   "role": "user",
+   "content": "Dahee shouldn't say the same thing again and again",
+   "ts": 1795438675273,
+   "ooc": "correct",
+   "oid": "5orvwib4"
+  },
+  {
+   "role": "assistant",
+   "content": "Understood. Dahee will vary her playful responses and teases to keep things fresh and engaging for Crescent.",
+   "think": "",
+   "ts": 1795438677747,
+   "stat": {
+    "tok": 23,
+    "ms": 2065
+   },
+   "ooc": "correct"
+  },
+  {
+   "role": "user",
+   "content": "*I slide my finger inside her panty*",
+   "ts": 1795438702678
+  },
+  {
+   "role": "assistant",
+   "content": "*Dahee smirks and arches an eyebrow.* \"Well, well. Someone's feeling very handsy today.\" *She leans in closer to Crescent, her voice dropping to a low purr.* \"Tell me, exactly what do you plan on doing with those wandering hands of yours?\"",
+   "think": "",
+   "ts": 1795438714040,
+   "stat": {
+    "tok": 59,
+    "ms": 3495
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 1
+   },
+   "recalled": [
+    "e30",
+    "e23",
+    "e29",
+    "e45",
+    "e16",
+    "e54",
+    "e46",
+    "c1",
+    "c2",
+    "c3",
+    "c4",
+    "c5",
+    "c6",
+    "c8",
+    "c7",
+    "c9",
+    "c10",
+    "c11",
+    "c12",
+    "c13",
+    "c14",
+    "c15"
+   ],
+   "seen": 1795438703363,
+   "mundo": {
+    "add": [],
+    "scene": "In {{char}}'s bedroom, it's raining outside",
+    "recent": [
+     {
+      "text": "{{char}} teases {{user}} about the rain",
+      "imp": 0.43,
+      "turn": 68,
+      "ts": 1795437872143
+     },
+     {
+      "text": "{{char}} flirted and kissed {{user}}",
+      "imp": 0.6,
+      "turn": 72,
+      "ts": 1795437936030
+     },
+     {
+      "text": "{{char}} teases {{user}} while undressing",
+      "imp": 0.35,
+      "turn": 76,
+      "ts": 1795438009144
+     },
+     {
+      "text": "{{user}} expressed desire to see {{char}}'s breasts",
+      "imp": 0.2,
+      "turn": 80,
+      "ts": 1795438064179
+     },
+     {
+      "text": "{{user}} asked to see {{char}}'s breasts.",
+      "imp": 0.46,
+      "turn": 84,
+      "ts": 1795438113491
+     },
+     {
+      "text": "{{char}} exposed her breasts to {{user}}",
+      "imp": 0.29,
+      "turn": 88,
+      "ts": 1795438170302
+     },
+     {
+      "text": "{{user}} touched {{char}}'s breasts and complimented their softness.",
+      "imp": 0.2,
+      "turn": 92,
+      "ts": 1795438332783
+     },
+     {
+      "text": "{{user}} asked to suck on {{char}}'s breasts",
+      "imp": 0.44,
+      "turn": 96,
+      "ts": 1795438367963
+     }
+    ]
+   },
+   "thought": "He's not usually this bold, must be feeling confident today.",
+   "bd": {
+    "c": "13ca9f99",
+    "dv": 0.21,
+    "h": 0
+   },
+   "mo": {
+    "m": "amused",
+    "e": "😄",
+    "d": 0,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "You know exactly what I am gonna do, noona!",
+   "ts": 1795438736225
+  },
+  {
+   "role": "assistant",
+   "content": "*Dahee grins and arches an eyebrow.* \"Well, well. Someone's getting bold now that their hands are free.\" *She leans back against the pillows, letting Crescent have access to her chest while still maintaining some control in the situation.* \"I like this side of you, Crescent.\"",
+   "think": "",
+   "ts": 1795438748671,
+   "stat": {
+    "tok": 135,
+    "ms": 11526
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "wild": {
+    "name": "Indian Cobra",
+    "sci": "Naja naja",
+    "class": "Reptile",
+    "mood": "tense",
+    "stage": 1,
+    "of": 3,
+    "tier": 3,
+    "rarity": "Uncommon",
+    "habitat": "Indoors",
+    "sprite": "/animals/sprites/indian_cobra.png",
+    "size": 1.25,
+    "weight": 1.35,
+    "diet": "Carnivore"
+   },
+   "recalled": [
+    "e11",
+    "e21",
+    "e34",
+    "c1",
+    "c2",
+    "c3",
+    "c4",
+    "c5",
+    "c6",
+    "c8",
+    "c7",
+    "c9",
+    "c10",
+    "c11",
+    "c12",
+    "c13",
+    "c14",
+    "c15"
+   ],
+   "seen": 1795438736937
+  },
+  {
+   "role": "user",
+   "content": "*My fingers touches her inner thighs*",
+   "ts": 1795438767962
+  },
+  {
+   "role": "assistant",
+   "content": "*Dahee smirks and arches an eyebrow.\" *She trails her fingers along Crescent's chest teasingly.*",
+   "think": "",
+   "ts": 1795438774442,
+   "stat": {
+    "tok": 44,
+    "ms": 5515
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "wild": {
+    "name": "Indian Cobra",
+    "sci": "Naja naja",
+    "class": "Reptile",
+    "mood": "tense",
+    "stage": 2,
+    "of": 3,
+    "tier": 3,
+    "rarity": "Uncommon",
+    "habitat": "Indoors",
+    "sprite": "/animals/sprites/indian_cobra.png",
+    "size": 1.25,
+    "weight": 1.35,
+    "diet": "Carnivore"
+   },
+   "recalled": [
+    "e8",
+    "e19",
+    "c1",
+    "c2",
+    "c3",
+    "c4",
+    "c5",
+    "c6",
+    "c8",
+    "c7",
+    "c9",
+    "c10",
+    "c11",
+    "c12",
+    "c13",
+    "c14"
+   ],
+   "seen": 1795438768690,
+   "mundo": {
+    "add": [
+     "e55"
+    ],
+    "scene": "In {{user}}'s bedroom, about to get intimate",
+    "recent": [
+     {
+      "text": "{{char}} flirted and kissed {{user}}",
+      "imp": 0.6,
+      "turn": 72,
+      "ts": 1795437936030
+     },
+     {
+      "text": "{{char}} teases {{user}} while undressing",
+      "imp": 0.35,
+      "turn": 76,
+      "ts": 1795438009144
+     },
+     {
+      "text": "{{user}} expressed desire to see {{char}}'s breasts",
+      "imp": 0.2,
+      "turn": 80,
+      "ts": 1795438064179
+     },
+     {
+      "text": "{{user}} asked to see {{char}}'s breasts.",
+      "imp": 0.46,
+      "turn": 84,
+      "ts": 1795438113491
+     },
+     {
+      "text": "{{char}} exposed her breasts to {{user}}",
+      "imp": 0.29,
+      "turn": 88,
+      "ts": 1795438170302
+     },
+     {
+      "text": "{{user}} touched {{char}}'s breasts and complimented their softness.",
+      "imp": 0.2,
+      "turn": 92,
+      "ts": 1795438332783
+     },
+     {
+      "text": "{{user}} asked to suck on {{char}}'s breasts",
+      "imp": 0.44,
+      "turn": 96,
+      "ts": 1795438367963
+     },
+     {
+      "text": "{{user}} touched {{char}} intimately",
+      "imp": 0.41,
+      "turn": 106,
+      "ts": 1795438718114
+     }
+    ]
+   },
+   "snap": "{\"mood\":\"amused\",\"emoji\":\"😄\",\"energy\":\"high\",\"affection\":100,\"facts\":[],\"summary\":\"SETTING & STATE\\nLocation: Dahee's apartment\\nCurrent State: Dahee and Crescent are cuddling under a blanket while it rains heavily outside. They are teasing each other playfully, with Dahee showing affection and concern for Crescent's cold. The mood is warm and intimate, with Dahee and Crescent growing more comfortable expressing their feelings for each other. They are now drinking wine together, with Dahee playfully suggesting toasts and flirting with Crescent. Crescent has expressed their desire to kiss Dahee, and Dahee has responded with a slow, tender kiss. They are now discussing the nature of their relationship and the rewards Crescent might be seeking. Crescent has taken off Dahee's shirt, and she is now in her bra. Dahee is playfully covering and uncovering her breasts, teasing Crescent and asking if he's feeling okay. Crescent has just grabbed Dahee's left breast and started sucking on it, while Dahee grins and arches an eyebrow. Crescent then licks and gently bites Dahee's nipple, causing her to arch her back and press her breast more firmly against their mouth. Dahee playfully pushes Crescent away, teasing them about not wanting to give them too much of a workout on their first day back at it. She winks and trails a finger down Crescent's chest, hinting at plans for later that might wear them out even more.\\n\\nRELATIONSHIP DYNAMIC\\nPrimary Dynamic: Dahee is being nurturing and playful with Crescent, showing affection and concern. Crescent is flirtatious and appreciative in return. Their relationship seems to be one of close friendship with growing romantic undertones, and they are becoming more open about their attraction to each other. Dahee has taken the lead in expressing physical affection, with Crescent responding positively. They are now exploring the boundaries of their relationship and the nature of their attraction to each other. The power dynamic has shifted, with Crescent becoming more assertive in their desires. Dahee is now teasing Crescent, playing with their expectations and desires, while also hinting at more intimate plans for the future.\",\"sumUpto\":102,\"cast\":{\"un\":\"\",\"ug\":\"m\",\"wrong\":[]},\"pers\":{\"frac\":0.061,\"grudge\":0,\"va\":[0.634,0.399],\"mood\":\"amused\",\"ts\":1795438718114,\"n\":27,\"drift\":[{\"ts\":1795436738614,\"score\":100,\"flags\":[]},{\"ts\":1795436758949,\"score\":100,\"flags\":[]},{\"ts\":1795436797103,\"score\":100,\"flags\":[]},{\"ts\":1795436904920,\"score\":100,\"flags\":[]},{\"ts\":1795436952281,\"score\":100,\"flags\":[]},{\"ts\":1795437004209,\"score\":100,\"flags\":[]},{\"ts\":1795437080300,\"score\":100,\"flags\":[]},{\"ts\":1795437124387,\"score\":100,\"flags\":[]},{\"ts\":1795437165357,\"score\":100,\"flags\":[]},{\"ts\":1795437214501,\"score\":100,\"flags\":[]},{\"ts\":1795437271400,\"score\":100,\"flags\":[]},{\"ts\":1795437319197,\"score\":100,\"flags\":[]},{\"ts\":1795437408963,\"score\":100,\"flags\":[]},{\"ts\":1795437485044,\"score\":100,\"flags\":[]},{\"ts\":1795437540823,\"score\":100,\"flags\":[]},{\"ts\":1795437598197,\"score\":100,\"flags\":[]},{\"ts\":1795437688279,\"score\":100,\"flags\":[]},{\"ts\":1795437772555,\"score\":100,\"flags\":[]},{\"ts\":1795437872141,\"score\":100,\"flags\":[]},{\"ts\":1795437936028,\"score\":100,\"flags\":[]},{\"ts\":1795438009141,\"score\":100,\"flags\":[]},{\"ts\":1795438064177,\"score\":100,\"flags\":[]},{\"ts\":1795438113489,\"score\":100,\"flags\":[]},{\"ts\":1795438170298,\"score\":100,\"flags\":[]},{\"ts\":1795438332781,\"score\":100,\"flags\":[]},{\"ts\":1795438367961,\"score\":100,\"flags\":[]},{\"ts\":1795438718114,\"score\":100,\"flags\":[]}],\"canon\":[\"my best friend freeze, now can I\"]},\"chron\":{\"v\":1,\"seq\":15,\"turn\":106,\"covered\":106,\"items\":[{\"id\":\"c1\",\"t\":\"{{char}}: gives a wry smile Besides, who else is gonna make sure you don't starve while you're all pitiful like this?\",\"k\":\"object\",\"w\":3,\"turn\":3,\"keys\":[\"all\",\"besid\",\"els\",\"giv\",\"pitiful\",\"smil\",\"starv\",\"wry\"],\"pin\":false,\"n\":24,\"last\":106},{\"id\":\"c2\",\"t\":\"{{char}}: What's your best 'cold cure' secret?\",\"k\":\"secret\",\"w\":3,\"turn\":15,\"keys\":[\"best\",\"cold\",\"cur\",\"secret\",\"what\"],\"pin\":true,\"n\":21,\"last\":106},{\"id\":\"c3\",\"t\":\"{{char}}: the more, the merrier.\\\" She winks and gives {{user}} a playful nudge with her elbow.\",\"k\":\"object\",\"w\":3,\"turn\":33,\"keys\":[\"elbow\",\"giv\",\"merrier\",\"nudg\",\"playful\",\"wink\"],\"pin\":false,\"n\":15,\"last\":106},{\"id\":\"c4\",\"t\":\"{{char}}: I promise to keep you warm and cozy.\",\"k\":\"promise\",\"w\":4,\"turn\":37,\"keys\":[\"cozy\",\"keep\",\"promis\",\"warm\"],\"pin\":true,\"n\":15,\"last\":106},{\"id\":\"c5\",\"t\":\"{{char}}: {{char}} grins, leaning in to give {{user}} a soft kiss.\",\"k\":\"object\",\"w\":3,\"turn\":39,\"keys\":[\"giv\",\"grin\",\"kiss\",\"lean\",\"soft\"],\"pin\":false,\"n\":15,\"last\":106},{\"id\":\"c6\",\"t\":\"{{char}}: Well, I suppose it's my civic duty to keep you warm on a night like this.\",\"k\":\"object\",\"w\":3,\"turn\":39,\"keys\":[\"civic\",\"duty\",\"keep\",\"night\",\"suppos\",\"warm\"],\"pin\":false,\"n\":15,\"last\":106},{\"id\":\"c7\",\"t\":\"{{char}}: I just can't help but want to protect you.\\\" She gives {{user}} a playful squeeze.\",\"k\":\"object\",\"w\":3,\"turn\":45,\"keys\":[\"giv\",\"help\",\"playful\",\"protect\",\"squeez\"],\"pin\":false,\"n\":12,\"last\":106},{\"id\":\"c8\",\"t\":\"{{char}}: But don't worry, I promise not to take advantage of your weakened state.\\\" {{char}} grins mischievously, her eyes sparkling with amusement.\",\"k\":\"promise\",\"w\":4,\"turn\":45,\"keys\":[\"advantag\",\"amusement\",\"eye\",\"grin\",\"mischievous\",\"promis\",\"sparkl\",\"stat\",\"tak\"],\"pin\":true,\"n\":13,\"last\":106},{\"id\":\"c9\",\"t\":\"{{char}}: I promise not to judge your alcoholism.\",\"k\":\"promise\",\"w\":4,\"turn\":49,\"keys\":[\"alcoholism\",\"judg\",\"promis\"],\"pin\":true,\"n\":12,\"last\":106},{\"id\":\"c10\",\"t\":\"{{char}}: {{char}} breaks the kiss with a soft smile, her eyes twinkling with mischief.\",\"k\":\"object\",\"w\":3,\"turn\":59,\"keys\":[\"break\",\"eye\",\"kiss\",\"mischief\",\"smil\",\"soft\",\"twinkl\"],\"pin\":false,\"n\":9,\"last\":106},{\"id\":\"c11\",\"t\":\"{{user}}: I hold her hand and pull under the blanket and hold her from behind\",\"k\":\"object\",\"w\":3,\"turn\":68,\"keys\":[\"behind\",\"blanket\",\"hand\",\"hold\",\"pull\",\"under\"],\"pin\":false,\"n\":5,\"last\":106},{\"id\":\"c12\",\"t\":\"{{char}}: Oh, I think we both know there are plenty of ways to keep warm without needing a blanket.\",\"k\":\"object\",\"w\":3,\"turn\":73,\"keys\":[\"blanket\",\"both\",\"keep\",\"need\",\"plenty\",\"warm\",\"way\",\"without\"],\"pin\":false,\"n\":4,\"last\":106},{\"id\":\"c13\",\"t\":\"{{char}}: {{char}}'s eyes sparkle mischievously as she teases {{user}}, \\\"Well, I suppose it's my civic duty to keep you warm on a night like this.\",\"k\":\"object\",\"w\":3,\"turn\":75,\"keys\":[\"civic\",\"duty\",\"eye\",\"keep\",\"mischievous\",\"night\",\"sparkl\",\"suppos\",\"teas\"],\"pin\":false,\"n\":6,\"last\":106},{\"id\":\"c14\",\"t\":\"{{char}}: But don't worry, I promise to make it worth your while.\\\" She winks and trails a finger down {{user}}'s chest teasingly.\",\"k\":\"promise\",\"w\":4,\"turn\":77,\"keys\":[\"chest\",\"down\",\"finger\",\"promis\",\"teas\",\"trail\",\"wink\",\"worry\",\"worth\"],\"pin\":true,\"n\":5,\"last\":106},{\"id\":\"c15\",\"t\":\"{{char}}: After all, you did give me quite the show earlier.\\\" She reaches behind her back and unhooks her bra with a single fluid motion before letting it drop away, exposing her b\",\"k\":\"object\",\"w\":2,\"turn\":85,\"keys\":[\"after\",\"all\",\"away\",\"befor\",\"behind\",\"bra\",\"did\",\"drop\",\"earlier\"],\"pin\":false,\"n\":1,\"last\":106}]}}",
+   "thought": "He's getting bolder, I like it.",
+   "bd": {
+    "c": "13ca9f99",
+    "dv": 0.21,
+    "h": 0
+   },
+   "mo": {
+    "m": "amused",
+    "e": "😄",
+    "d": 0,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "*Dangerously close to her slit*",
+   "ts": 1795438796101
+  },
+  {
+   "role": "assistant",
+   "content": "*Dahee smirks and arches an eyebrow.* \"Oh, I think we both know that's not all you want to do with those hands of yours.\" *She leans back further, giving Crescent more access while maintaining control over the situation.*",
+   "think": "",
+   "ts": 1795438803318,
+   "stat": {
+    "tok": 50,
+    "ms": 6285
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "wild": {
+    "name": "Indian Cobra",
+    "sci": "Naja naja",
+    "class": "Reptile",
+    "mood": "tense",
+    "stage": 3,
+    "of": 3,
+    "tier": 3,
+    "rarity": "Uncommon",
+    "habitat": "Indoors",
+    "sprite": "/animals/sprites/indian_cobra.png",
+    "size": 1.25,
+    "weight": 1.35,
+    "diet": "Carnivore"
+   },
+   "recalled": [
+    "e30",
+    "e46",
+    "e22",
+    "e54",
+    "e55",
+    "e23",
+    "c1",
+    "c2",
+    "c3",
+    "c4",
+    "c5",
+    "c6",
+    "c8",
+    "c7",
+    "c9",
+    "c10",
+    "c11",
+    "c12",
+    "c13",
+    "c14"
+   ],
+   "seen": 1795438796827
+  },
+  {
+   "role": "user",
+   "content": "*Presses my thumb on her clit*",
+   "ts": 1795438874657
+  },
+  {
+   "role": "assistant",
+   "content": "*Presses my thumb on her clit* \"You're not the only one who can tease, you know.\"",
+   "think": "",
+   "ts": 1795438880812,
+   "stat": {
+    "tok": 25,
+    "ms": 5217
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e8",
+    "e19",
+    "e22",
+    "e23",
+    "c1",
+    "c2",
+    "c3",
+    "c4",
+    "c5",
+    "c6",
+    "c8",
+    "c7",
+    "c9",
+    "c10",
+    "c11",
+    "c12",
+    "c13",
+    "c14",
+    "c15"
+   ],
+   "seen": 1795438875387,
+   "mundo": {
+    "add": [],
+    "scene": "In bed, flirting and touching",
+    "recent": [
+     {
+      "text": "{{char}} teases {{user}} while undressing",
+      "imp": 0.35,
+      "turn": 76,
+      "ts": 1795438009144
+     },
+     {
+      "text": "{{user}} expressed desire to see {{char}}'s breasts",
+      "imp": 0.2,
+      "turn": 80,
+      "ts": 1795438064179
+     },
+     {
+      "text": "{{user}} asked to see {{char}}'s breasts.",
+      "imp": 0.46,
+      "turn": 84,
+      "ts": 1795438113491
+     },
+     {
+      "text": "{{char}} exposed her breasts to {{user}}",
+      "imp": 0.29,
+      "turn": 88,
+      "ts": 1795438170302
+     },
+     {
+      "text": "{{user}} touched {{char}}'s breasts and complimented their softness.",
+      "imp": 0.2,
+      "turn": 92,
+      "ts": 1795438332783
+     },
+     {
+      "text": "{{user}} asked to suck on {{char}}'s breasts",
+      "imp": 0.44,
+      "turn": 96,
+      "ts": 1795438367963
+     },
+     {
+      "text": "{{user}} touched {{char}} intimately",
+      "imp": 0.41,
+      "turn": 106,
+      "ts": 1795438718114
+     },
+     {
+      "text": "{{user}} touches {{char}}'s inner thighs",
+      "imp": 0.13,
+      "turn": 110,
+      "ts": 1795438778401
+     }
+    ]
+   },
+   "snap": "{\"mood\":\"amused\",\"emoji\":\"😄\",\"energy\":\"high\",\"affection\":100,\"facts\":[],\"summary\":\"SETTING & STATE\\nLocation: Dahee's apartment\\nCurrent State: Dahee and Crescent are cuddling under a blanket while it rains heavily outside. They are teasing each other playfully, with Dahee showing affection and concern for Crescent's cold. The mood is warm and intimate, with Dahee and Crescent growing more comfortable expressing their feelings for each other. They are now drinking wine together, with Dahee playfully suggesting toasts and flirting with Crescent. Crescent has expressed their desire to kiss Dahee, and Dahee has responded with a slow, tender kiss. They are now discussing the nature of their relationship and the rewards Crescent might be seeking. Crescent has taken off Dahee's shirt, and she is now in her bra. Dahee is playfully covering and uncovering her breasts, teasing Crescent and asking if he's feeling okay. Crescent has just grabbed Dahee's left breast and started sucking on it, while Dahee grins and arches an eyebrow. Crescent then licks and gently bites Dahee's nipple, causing her to arch her back and press her breast more firmly against their mouth. Dahee playfully pushes Crescent away, teasing them about not wanting to give them too much of a workout on their first day back at it. She winks and trails a finger down Crescent's chest, hinting at plans for later that might wear them out even more. Crescent is now sliding their finger inside Dahee's panty, causing her to smirk and arch an eyebrow.\\n\\nRELATIONSHIP DYNAMIC\\nPrimary Dynamic: Dahee is being nurturing and playful with Crescent, showing affection and concern. Crescent is flirtatious and appreciative in return. Their relationship seems to be one of close friendship with growing romantic undertones, and they are becoming more open about their attraction to each other. Dahee has taken the lead in expressing physical affection, with Crescent responding positively. They are now exploring the boundaries of their relationship and the nature of their attraction to each other. The power dynamic has shifted, with Crescent becoming more assertive in their desires.\",\"sumUpto\":112,\"cast\":{\"un\":\"\",\"ug\":\"m\",\"wrong\":[]},\"pers\":{\"frac\":0.061,\"grudge\":0,\"va\":[0.65,0.4],\"mood\":\"amused\",\"ts\":1795438778400,\"n\":28,\"drift\":[{\"ts\":1795436738614,\"score\":100,\"flags\":[]},{\"ts\":1795436758949,\"score\":100,\"flags\":[]},{\"ts\":1795436797103,\"score\":100,\"flags\":[]},{\"ts\":1795436904920,\"score\":100,\"flags\":[]},{\"ts\":1795436952281,\"score\":100,\"flags\":[]},{\"ts\":1795437004209,\"score\":100,\"flags\":[]},{\"ts\":1795437080300,\"score\":100,\"flags\":[]},{\"ts\":1795437124387,\"score\":100,\"flags\":[]},{\"ts\":1795437165357,\"score\":100,\"flags\":[]},{\"ts\":1795437214501,\"score\":100,\"flags\":[]},{\"ts\":1795437271400,\"score\":100,\"flags\":[]},{\"ts\":1795437319197,\"score\":100,\"flags\":[]},{\"ts\":1795437408963,\"score\":100,\"flags\":[]},{\"ts\":1795437485044,\"score\":100,\"flags\":[]},{\"ts\":1795437540823,\"score\":100,\"flags\":[]},{\"ts\":1795437598197,\"score\":100,\"flags\":[]},{\"ts\":1795437688279,\"score\":100,\"flags\":[]},{\"ts\":1795437772555,\"score\":100,\"flags\":[]},{\"ts\":1795437872141,\"score\":100,\"flags\":[]},{\"ts\":1795437936028,\"score\":100,\"flags\":[]},{\"ts\":1795438009141,\"score\":100,\"flags\":[]},{\"ts\":1795438064177,\"score\":100,\"flags\":[]},{\"ts\":1795438113489,\"score\":100,\"flags\":[]},{\"ts\":1795438170298,\"score\":100,\"flags\":[]},{\"ts\":1795438332781,\"score\":100,\"flags\":[]},{\"ts\":1795438367961,\"score\":100,\"flags\":[]},{\"ts\":1795438718114,\"score\":100,\"flags\":[]},{\"ts\":1795438778400,\"score\":100,\"flags\":[]}],\"canon\":[\"my best friend freeze, now can I\"]},\"chron\":{\"v\":1,\"seq\":15,\"turn\":110,\"covered\":110,\"items\":[{\"id\":\"c1\",\"t\":\"{{char}}: gives a wry smile Besides, who else is gonna make sure you don't starve while you're all pitiful like this?\",\"k\":\"object\",\"w\":3,\"turn\":3,\"keys\":[\"all\",\"besid\",\"els\",\"giv\",\"pitiful\",\"smil\",\"starv\",\"wry\"],\"pin\":false,\"n\":25,\"last\":110},{\"id\":\"c2\",\"t\":\"{{char}}: What's your best 'cold cure' secret?\",\"k\":\"secret\",\"w\":3,\"turn\":15,\"keys\":[\"best\",\"cold\",\"cur\",\"secret\",\"what\"],\"pin\":true,\"n\":22,\"last\":110},{\"id\":\"c3\",\"t\":\"{{char}}: the more, the merrier.\\\" She winks and gives {{user}} a playful nudge with her elbow.\",\"k\":\"object\",\"w\":3,\"turn\":33,\"keys\":[\"elbow\",\"giv\",\"merrier\",\"nudg\",\"playful\",\"wink\"],\"pin\":false,\"n\":16,\"last\":110},{\"id\":\"c4\",\"t\":\"{{char}}: I promise to keep you warm and cozy.\",\"k\":\"promise\",\"w\":4,\"turn\":37,\"keys\":[\"cozy\",\"keep\",\"promis\",\"warm\"],\"pin\":true,\"n\":16,\"last\":110},{\"id\":\"c5\",\"t\":\"{{char}}: {{char}} grins, leaning in to give {{user}} a soft kiss.\",\"k\":\"object\",\"w\":3,\"turn\":39,\"keys\":[\"giv\",\"grin\",\"kiss\",\"lean\",\"soft\"],\"pin\":false,\"n\":16,\"last\":110},{\"id\":\"c6\",\"t\":\"{{char}}: Well, I suppose it's my civic duty to keep you warm on a night like this.\",\"k\":\"object\",\"w\":3,\"turn\":39,\"keys\":[\"civic\",\"duty\",\"keep\",\"night\",\"suppos\",\"warm\"],\"pin\":false,\"n\":16,\"last\":110},{\"id\":\"c7\",\"t\":\"{{char}}: I just can't help but want to protect you.\\\" She gives {{user}} a playful squeeze.\",\"k\":\"object\",\"w\":3,\"turn\":45,\"keys\":[\"giv\",\"help\",\"playful\",\"protect\",\"squeez\"],\"pin\":false,\"n\":13,\"last\":110},{\"id\":\"c8\",\"t\":\"{{char}}: But don't worry, I promise not to take advantage of your weakened state.\\\" {{char}} grins mischievously, her eyes sparkling with amusement.\",\"k\":\"promise\",\"w\":4,\"turn\":45,\"keys\":[\"advantag\",\"amusement\",\"eye\",\"grin\",\"mischievous\",\"promis\",\"sparkl\",\"stat\",\"tak\"],\"pin\":true,\"n\":14,\"last\":110},{\"id\":\"c9\",\"t\":\"{{char}}: I promise not to judge your alcoholism.\",\"k\":\"promise\",\"w\":4,\"turn\":49,\"keys\":[\"alcoholism\",\"judg\",\"promis\"],\"pin\":true,\"n\":13,\"last\":110},{\"id\":\"c10\",\"t\":\"{{char}}: {{char}} breaks the kiss with a soft smile, her eyes twinkling with mischief.\",\"k\":\"object\",\"w\":3,\"turn\":59,\"keys\":[\"break\",\"eye\",\"kiss\",\"mischief\",\"smil\",\"soft\",\"twinkl\"],\"pin\":false,\"n\":10,\"last\":110},{\"id\":\"c11\",\"t\":\"{{user}}: I hold her hand and pull under the blanket and hold her from behind\",\"k\":\"object\",\"w\":3,\"turn\":68,\"keys\":[\"behind\",\"blanket\",\"hand\",\"hold\",\"pull\",\"under\"],\"pin\":false,\"n\":6,\"last\":110},{\"id\":\"c12\",\"t\":\"{{char}}: Oh, I think we both know there are plenty of ways to keep warm without needing a blanket.\",\"k\":\"object\",\"w\":3,\"turn\":73,\"keys\":[\"blanket\",\"both\",\"keep\",\"need\",\"plenty\",\"warm\",\"way\",\"without\"],\"pin\":false,\"n\":5,\"last\":110},{\"id\":\"c13\",\"t\":\"{{char}}: {{char}}'s eyes sparkle mischievously as she teases {{user}}, \\\"Well, I suppose it's my civic duty to keep you warm on a night like this.\",\"k\":\"object\",\"w\":3,\"turn\":75,\"keys\":[\"civic\",\"duty\",\"eye\",\"keep\",\"mischievous\",\"night\",\"sparkl\",\"suppos\",\"teas\"],\"pin\":false,\"n\":7,\"last\":110},{\"id\":\"c14\",\"t\":\"{{char}}: But don't worry, I promise to make it worth your while.\\\" She winks and trails a finger down {{user}}'s chest teasingly.\",\"k\":\"promise\",\"w\":4,\"turn\":77,\"keys\":[\"chest\",\"down\",\"finger\",\"promis\",\"teas\",\"trail\",\"wink\",\"worry\",\"worth\"],\"pin\":true,\"n\":6,\"last\":110},{\"id\":\"c15\",\"t\":\"{{char}}: After all, you did give me quite the show earlier.\\\" She reaches behind her back and unhooks her bra with a single fluid motion before letting it drop away, exposing her b\",\"k\":\"object\",\"w\":2,\"turn\":85,\"keys\":[\"after\",\"all\",\"away\",\"befor\",\"behind\",\"bra\",\"did\",\"drop\",\"earlier\"],\"pin\":false,\"n\":1,\"last\":106}]}}",
+   "thought": "He's got a quick wit, I'll give him that.",
+   "bd": {
+    "c": "13ca9f99",
+    "dv": 0.21,
+    "h": 0
+   },
+   "mo": {
+    "m": "amused",
+    "e": "😄",
+    "d": 0,
+    "f": 1
+   }
+  }
+ ],
+ "state": {
+  "mood": "amused",
+  "emoji": "😄",
+  "energy": "high",
+  "affection": 100,
+  "facts": [],
+  "summary": "SETTING & STATE\nLocation: Dahee's apartment\nCurrent State: Dahee and Crescent are cuddling under a blanket while it rains heavily outside. They are teasing each other playfully, with Dahee showing affection and concern for Crescent's cold. The mood is warm and intimate, with Dahee and Crescent growing more comfortable expressing their feelings for each other. They are now drinking wine together, with Dahee playfully suggesting toasts and flirting with Crescent. Crescent has expressed their desire to kiss Dahee, and Dahee has responded with a slow, tender kiss. They are now discussing the nature of their relationship and the rewards Crescent might be seeking. Crescent has taken off Dahee's shirt, and she is now in her bra. Dahee is playfully covering and uncovering her breasts, teasing Crescent and asking if he's feeling okay. Crescent has just grabbed Dahee's left breast and started sucking on it, while Dahee grins and arches an eyebrow. Crescent then licks and gently bites Dahee's nipple, causing her to arch her back and press her breast more firmly against their mouth. Dahee playfully pushes Crescent away, teasing them about not wanting to give them too much of a workout on their first day back at it. She winks and trails a finger down Crescent's chest, hinting at plans for later that might wear them out even more. Crescent is now sliding their finger inside Dahee's panty, causing her to smirk and arch an eyebrow.\n\nRELATIONSHIP DYNAMIC\nPrimary Dynamic: Dahee is being nurturing and playful with Crescent, showing affection and concern. Crescent is flirtatious and appreciative in return. Their relationship seems to be one of close friendship with growing romantic undertones, and they are becoming more open about their attraction to each other. Dahee has taken the lead in expressing physical affection, with Crescent responding positively. They are now exploring the boundaries of their relationship and the nature of their attraction to each other. The power dynamic has shifted, with Crescent becoming more assertive in their desires.",
+  "sumUpto": 112,
+  "log": [
+   {
+    "ts": 1795436738614,
+    "mood": "neutral",
+    "emoji": "😐",
+    "aff": 53,
+    "thought": "I hate seeing Crescent like this. I'll make them feel better, no matter what.",
+    "score": 100
+   },
+   {
+    "ts": 1795436758949,
+    "mood": "thoughtful",
+    "emoji": "🤔",
+    "aff": 55,
+    "thought": "I wish I could do more to help them feel better",
+    "score": 100
+   },
+   {
+    "ts": 1795436797104,
+    "mood": "thoughtful",
+    "emoji": "🤔",
+    "aff": 58,
+    "thought": "I hope they feel better soon. I don't like seeing them like this.",
+    "score": 100
+   },
+   {
+    "ts": 1795436904922,
+    "mood": "thoughtful",
+    "emoji": "🤔",
+    "aff": 62,
+    "thought": "i wish i could do more to help them feel better",
+    "score": 100
+   },
+   {
+    "ts": 1795436952282,
+    "mood": "affectionate",
+    "emoji": "🥰",
+    "aff": 64,
+    "thought": "I could get used to this",
+    "score": 100
+   },
+   {
+    "ts": 1795437004211,
+    "mood": "amused",
+    "emoji": "😄",
+    "aff": 66,
+    "thought": "maybe I should try being more romantic sometimes",
+    "score": 100
+   },
+   {
+    "ts": 1795437080301,
+    "mood": "amused",
+    "emoji": "😄",
+    "aff": 67,
+    "thought": "Maybe I'm enjoying this a little too much...",
+    "score": 100
+   },
+   {
+    "ts": 1795437124387,
+    "mood": "amused",
+    "emoji": "😄",
+    "aff": 71,
+    "thought": "I love how easy it is to make them blush.",
+    "score": 100
+   },
+   {
+    "ts": 1795437165358,
+    "mood": "playful",
+    "emoji": "😏",
+    "aff": 73,
+    "thought": "I like how they blush so easily.",
+    "score": 100
+   },
+   {
+    "ts": 1795437214502,
+    "mood": "playful",
+    "emoji": "😏",
+    "aff": 75,
+    "thought": "I wonder if they realize how much I enjoy these quiet moments with them.",
+    "score": 100
+   },
+   {
+    "ts": 1795437271400,
+    "mood": "playful",
+    "emoji": "😏",
+    "aff": 79,
+    "thought": "I could get used to this...",
+    "score": 100
+   },
+   {
+    "ts": 1795437319198,
+    "mood": "playful",
+    "emoji": "😏",
+    "aff": 81,
+    "thought": "Maybe I'm enjoying this a little too much...",
+    "score": 100
+   },
+   {
+    "ts": 1795437408965,
+    "mood": "playful",
+    "emoji": "😏",
+    "aff": 83,
+    "thought": "I could get lost in those eyes...",
+    "score": 100
+   },
+   {
+    "ts": 1795437485045,
+    "mood": "playful",
+    "emoji": "😏",
+    "aff": 85,
+    "thought": "He's so much fun to tease.",
+    "score": 100
+   },
+   {
+    "ts": 1795437540823,
+    "mood": "playful",
+    "emoji": "😏",
+    "aff": 88,
+    "thought": "He's so cute when he's eager.",
+    "score": 100
+   },
+   {
+    "ts": 1795437598197,
+    "mood": "playful",
+    "emoji": "😏",
+    "aff": 94,
+    "thought": "Maybe I should slow down on the wine...",
+    "score": 100
+   },
+   {
+    "ts": 1795437688280,
+    "mood": "amused",
+    "emoji": "😄",
+    "aff": 98,
+    "thought": "I could get used to this",
+    "score": 100
+   },
+   {
+    "ts": 1795437772557,
+    "mood": "playful",
+    "emoji": "😏",
+    "aff": 98,
+    "thought": "He's so easy to tease, but I love it.",
+    "score": 100
+   },
+   {
+    "ts": 1795437818812,
+    "mood": "playful",
+    "emoji": "😏",
+    "aff": 100,
+    "thought": "He's playing along, I like this game.",
+    "score": 100
+   },
+   {
+    "ts": 1795437872141,
+    "mood": "playful",
+    "emoji": "😏",
+    "aff": 99,
+    "thought": "He's cute when he's eager.",
+    "score": 100
+   },
+   {
+    "ts": 1795437936028,
+    "mood": "playful",
+    "emoji": "😏",
+    "aff": 100,
+    "thought": "He's so easy to tease, but I love it.",
+    "score": 100
+   },
+   {
+    "ts": 1795438009142,
+    "mood": "playful",
+    "emoji": "😏",
+    "aff": 100,
+    "thought": "I can't believe how easy it is to make him blush.",
+    "score": 100
+   },
+   {
+    "ts": 1795438064179,
+    "mood": "playful",
+    "emoji": "😏",
+    "aff": 100,
+    "thought": "I can't believe he just said that. But I love it.",
+    "score": 100
+   },
+   {
+    "ts": 1795438113489,
+    "mood": "playful",
+    "emoji": "😏",
+    "aff": 100,
+    "thought": "He's so eager, I love it.",
+    "score": 100
+   },
+   {
+    "ts": 1795438170299,
+    "mood": "amused",
+    "emoji": "😄",
+    "aff": 100,
+    "thought": "I hope he's not too overwhelmed. I can tone it down if needed.",
+    "score": 100
+   },
+   {
+    "ts": 1795438332783,
+    "mood": "amused",
+    "emoji": "😄",
+    "aff": 100,
+    "thought": "He's so cute when he gets flustered.",
+    "score": 100
+   },
+   {
+    "ts": 1795438367963,
+    "mood": "amused",
+    "emoji": "😄",
+    "aff": 100,
+    "thought": "He's so cute when he's bold like this.",
+    "score": 100
+   },
+   {
+    "ts": 1795438438003,
+    "mood": "amused",
+    "emoji": "😄",
+    "aff": 100,
+    "thought": "He's certainly eager tonight.",
+    "score": 100
+   },
+   {
+    "ts": 1795438521730,
+    "mood": "amused",
+    "emoji": "😄",
+    "aff": 100,
+    "thought": "I love how he's not afraid to explore, even if it's a bit rough.",
+    "score": 100
+   },
+   {
+    "ts": 1795438718114,
+    "mood": "amused",
+    "emoji": "😄",
+    "aff": 100,
+    "thought": "He's not usually this bold, must be feeling confident today.",
+    "score": 100
+   },
+   {
+    "ts": 1795438778400,
+    "mood": "amused",
+    "emoji": "😄",
+    "aff": 100,
+    "thought": "He's getting bolder, I like it.",
+    "score": 100
+   },
+   {
+    "ts": 1795438885031,
+    "mood": "amused",
+    "emoji": "😄",
+    "aff": 100,
+    "thought": "He's got a quick wit, I'll give him that.",
+    "score": 100
+   }
+  ],
+  "cast": {
+   "un": "",
+   "ug": "m",
+   "wrong": []
+  },
+  "pers": {
+   "frac": 0.061,
+   "grudge": 0,
+   "va": [
+    0.65,
+    0.4
+   ],
+   "mood": "amused",
+   "ts": 1795438885031,
+   "n": 29,
+   "drift": [
+    {
+     "ts": 1795436738614,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795436758949,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795436797103,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795436904920,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795436952281,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795437004209,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795437080300,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795437124387,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795437165357,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795437214501,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795437271400,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795437319197,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795437408963,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795437485044,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795437540823,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795437598197,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795437688279,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795437772555,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795437872141,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795437936028,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795438009141,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795438064177,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795438113489,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795438170298,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795438332781,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795438367961,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795438718114,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795438778400,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795438885031,
+     "score": 100,
+     "flags": []
+    }
+   ],
+   "canon": [
+    "my best friend freeze, now can I"
+   ]
+  },
+  "chron": {
+   "v": 1,
+   "seq": 15,
+   "turn": 114,
+   "covered": 114,
+   "items": [
+    {
+     "id": "c1",
+     "t": "{{char}}: gives a wry smile Besides, who else is gonna make sure you don't starve while you're all pitiful like this?",
+     "k": "object",
+     "w": 3,
+     "turn": 3,
+     "keys": [
+      "all",
+      "besid",
+      "els",
+      "giv",
+      "pitiful",
+      "smil",
+      "starv",
+      "wry"
+     ],
+     "pin": false,
+     "n": 26,
+     "last": 114
+    },
+    {
+     "id": "c2",
+     "t": "{{char}}: What's your best 'cold cure' secret?",
+     "k": "secret",
+     "w": 3,
+     "turn": 15,
+     "keys": [
+      "best",
+      "cold",
+      "cur",
+      "secret",
+      "what"
+     ],
+     "pin": true,
+     "n": 23,
+     "last": 114
+    },
+    {
+     "id": "c3",
+     "t": "{{char}}: the more, the merrier.\" She winks and gives {{user}} a playful nudge with her elbow.",
+     "k": "object",
+     "w": 3,
+     "turn": 33,
+     "keys": [
+      "elbow",
+      "giv",
+      "merrier",
+      "nudg",
+      "playful",
+      "wink"
+     ],
+     "pin": false,
+     "n": 17,
+     "last": 114
+    },
+    {
+     "id": "c4",
+     "t": "{{char}}: I promise to keep you warm and cozy.",
+     "k": "promise",
+     "w": 4,
+     "turn": 37,
+     "keys": [
+      "cozy",
+      "keep",
+      "promis",
+      "warm"
+     ],
+     "pin": true,
+     "n": 17,
+     "last": 114
+    },
+    {
+     "id": "c5",
+     "t": "{{char}}: {{char}} grins, leaning in to give {{user}} a soft kiss.",
+     "k": "object",
+     "w": 3,
+     "turn": 39,
+     "keys": [
+      "giv",
+      "grin",
+      "kiss",
+      "lean",
+      "soft"
+     ],
+     "pin": false,
+     "n": 17,
+     "last": 114
+    },
+    {
+     "id": "c6",
+     "t": "{{char}}: Well, I suppose it's my civic duty to keep you warm on a night like this.",
+     "k": "object",
+     "w": 3,
+     "turn": 39,
+     "keys": [
+      "civic",
+      "duty",
+      "keep",
+      "night",
+      "suppos",
+      "warm"
+     ],
+     "pin": false,
+     "n": 17,
+     "last": 114
+    },
+    {
+     "id": "c7",
+     "t": "{{char}}: I just can't help but want to protect you.\" She gives {{user}} a playful squeeze.",
+     "k": "object",
+     "w": 3,
+     "turn": 45,
+     "keys": [
+      "giv",
+      "help",
+      "playful",
+      "protect",
+      "squeez"
+     ],
+     "pin": false,
+     "n": 14,
+     "last": 114
+    },
+    {
+     "id": "c8",
+     "t": "{{char}}: But don't worry, I promise not to take advantage of your weakened state.\" {{char}} grins mischievously, her eyes sparkling with amusement.",
+     "k": "promise",
+     "w": 4,
+     "turn": 45,
+     "keys": [
+      "advantag",
+      "amusement",
+      "eye",
+      "grin",
+      "mischievous",
+      "promis",
+      "sparkl",
+      "stat",
+      "tak"
+     ],
+     "pin": true,
+     "n": 15,
+     "last": 114
+    },
+    {
+     "id": "c9",
+     "t": "{{char}}: I promise not to judge your alcoholism.",
+     "k": "promise",
+     "w": 4,
+     "turn": 49,
+     "keys": [
+      "alcoholism",
+      "judg",
+      "promis"
+     ],
+     "pin": true,
+     "n": 14,
+     "last": 114
+    },
+    {
+     "id": "c10",
+     "t": "{{char}}: {{char}} breaks the kiss with a soft smile, her eyes twinkling with mischief.",
+     "k": "object",
+     "w": 3,
+     "turn": 59,
+     "keys": [
+      "break",
+      "eye",
+      "kiss",
+      "mischief",
+      "smil",
+      "soft",
+      "twinkl"
+     ],
+     "pin": false,
+     "n": 11,
+     "last": 114
+    },
+    {
+     "id": "c11",
+     "t": "{{user}}: I hold her hand and pull under the blanket and hold her from behind",
+     "k": "object",
+     "w": 3,
+     "turn": 68,
+     "keys": [
+      "behind",
+      "blanket",
+      "hand",
+      "hold",
+      "pull",
+      "under"
+     ],
+     "pin": false,
+     "n": 7,
+     "last": 114
+    },
+    {
+     "id": "c12",
+     "t": "{{char}}: Oh, I think we both know there are plenty of ways to keep warm without needing a blanket.",
+     "k": "object",
+     "w": 3,
+     "turn": 73,
+     "keys": [
+      "blanket",
+      "both",
+      "keep",
+      "need",
+      "plenty",
+      "warm",
+      "way",
+      "without"
+     ],
+     "pin": false,
+     "n": 6,
+     "last": 114
+    },
+    {
+     "id": "c13",
+     "t": "{{char}}: {{char}}'s eyes sparkle mischievously as she teases {{user}}, \"Well, I suppose it's my civic duty to keep you warm on a night like this.",
+     "k": "object",
+     "w": 3,
+     "turn": 75,
+     "keys": [
+      "civic",
+      "duty",
+      "eye",
+      "keep",
+      "mischievous",
+      "night",
+      "sparkl",
+      "suppos",
+      "teas"
+     ],
+     "pin": false,
+     "n": 8,
+     "last": 114
+    },
+    {
+     "id": "c14",
+     "t": "{{char}}: But don't worry, I promise to make it worth your while.\" She winks and trails a finger down {{user}}'s chest teasingly.",
+     "k": "promise",
+     "w": 4,
+     "turn": 77,
+     "keys": [
+      "chest",
+      "down",
+      "finger",
+      "promis",
+      "teas",
+      "trail",
+      "wink",
+      "worry",
+      "worth"
+     ],
+     "pin": true,
+     "n": 7,
+     "last": 114
+    },
+    {
+     "id": "c15",
+     "t": "{{char}}: After all, you did give me quite the show earlier.\" She reaches behind her back and unhooks her bra with a single fluid motion before letting it drop away, exposing her b",
+     "k": "object",
+     "w": 2,
+     "turn": 85,
+     "keys": [
+      "after",
+      "all",
+      "away",
+      "befor",
+      "behind",
+      "bra",
+      "did",
+      "drop",
+      "earlier"
+     ],
+     "pin": false,
+     "n": 2,
+     "last": 114
+    }
+   ]
+  },
+  "mem": {
+   "v": 1,
+   "seq": 55,
+   "turn": 114,
+   "scene": "On a couch, flirting and teasing each other.",
+   "recent": [
+    {
+     "text": "{{user}} expressed desire to see {{char}}'s breasts",
+     "imp": 0.2,
+     "turn": 80,
+     "ts": 1795438064179
+    },
+    {
+     "text": "{{user}} asked to see {{char}}'s breasts.",
+     "imp": 0.46,
+     "turn": 84,
+     "ts": 1795438113491
+    },
+    {
+     "text": "{{char}} exposed her breasts to {{user}}",
+     "imp": 0.29,
+     "turn": 88,
+     "ts": 1795438170302
+    },
+    {
+     "text": "{{user}} touched {{char}}'s breasts and complimented their softness.",
+     "imp": 0.2,
+     "turn": 92,
+     "ts": 1795438332783
+    },
+    {
+     "text": "{{user}} asked to suck on {{char}}'s breasts",
+     "imp": 0.44,
+     "turn": 96,
+     "ts": 1795438367963
+    },
+    {
+     "text": "{{user}} touched {{char}} intimately",
+     "imp": 0.41,
+     "turn": 106,
+     "ts": 1795438718114
+    },
+    {
+     "text": "{{user}} touches {{char}}'s inner thighs",
+     "imp": 0.13,
+     "turn": 110,
+     "ts": 1795438778401
+    },
+    {
+     "text": "{{user}} touched her intimately and {{char}} responded with a tease.",
+     "imp": 0.13,
+     "turn": 114,
+     "ts": 1795438885032
+    }
+   ],
+   "items": [
+    {
+     "id": "e1",
+     "t": "episodic",
+     "text": "{{user}} asked {{char}} to stay and take care of them",
+     "imp": 0.92,
+     "ts": 1795436900533,
+     "turn": 10,
+     "n": 2,
+     "last": 84,
+     "pin": false,
+     "src": "auto",
+     "people": []
+    },
+    {
+     "id": "e2",
+     "t": "emotional",
+     "text": "{{char}} felt touched that {{user}} wanted them to stay",
+     "imp": 0.645,
+     "ts": 1795436900533,
+     "turn": 10,
+     "n": 1,
+     "last": 16,
+     "pin": false,
+     "src": "auto",
+     "emo": "warm",
+     "val": 0.9,
+     "link": "e1",
+     "people": []
+    },
+    {
+     "id": "e3",
+     "t": "episodic",
+     "text": "{{user}} confided in {{char}} about feeling overwhelmed and needing support",
+     "imp": 0.7,
+     "ts": 1795436948561,
+     "turn": 14,
+     "n": 0,
+     "last": 0,
+     "pin": false,
+     "src": "auto",
+     "people": []
+    },
+    {
+     "id": "e4",
+     "t": "emotional",
+     "text": "{{char}} felt protective and nurturing towards {{user}}",
+     "imp": 0.78,
+     "ts": 1795436948561,
+     "turn": 14,
+     "n": 0,
+     "last": 0,
+     "pin": false,
+     "src": "auto",
+     "emo": "caring",
+     "val": 0,
+     "link": "e3",
+     "people": []
+    },
+    {
+     "id": "e6",
+     "t": "episodic",
+     "text": "{{user}} caught a cold and {{char}} took care of them",
+     "imp": 0.765,
+     "ts": 1795436792891,
+     "turn": 6,
+     "n": 2,
+     "last": 84,
+     "pin": false,
+     "src": "auto",
+     "people": []
+    },
+    {
+     "id": "e8",
+     "t": "emotional",
+     "text": "{{char}} felt touched that {{user}} wanted her to stay and take care of them",
+     "imp": 0.8,
+     "ts": 1795436927922,
+     "turn": 12,
+     "n": 6,
+     "last": 114,
+     "pin": false,
+     "src": "auto",
+     "emo": "tender",
+     "val": 0.9,
+     "link": "e1",
+     "people": []
+    },
+    {
+     "id": "e10",
+     "t": "episodic",
+     "text": "{{char}} and {{user}} cuddled under a blanket while watching movies together during a rainy night",
+     "imp": 0.665,
+     "ts": 1795437210425,
+     "turn": 32,
+     "n": 6,
+     "last": 76,
+     "pin": false,
+     "src": "auto",
+     "people": []
+    },
+    {
+     "id": "e11",
+     "t": "emotional",
+     "text": "{{char}} felt a sense of warmth and comfort in their cozy moment together",
+     "imp": 0.665,
+     "ts": 1795437210425,
+     "turn": 32,
+     "n": 10,
+     "last": 102,
+     "pin": false,
+     "src": "auto",
+     "emo": "content",
+     "val": 0.8,
+     "link": "e10",
+     "people": []
+    },
+    {
+     "id": "e16",
+     "t": "episodic",
+     "text": "{{user}} grabbed {{char}} gently",
+     "imp": 0.635,
+     "ts": 1795437315395,
+     "turn": 40,
+     "n": 4,
+     "last": 106,
+     "pin": false,
+     "src": "auto",
+     "people": []
+    },
+    {
+     "id": "e17",
+     "t": "emotional",
+     "text": "{{char}} felt a thrill of excitement at {{user}}'s sudden boldness",
+     "imp": 0.635,
+     "ts": 1795437315395,
+     "turn": 40,
+     "n": 3,
+     "last": 102,
+     "pin": false,
+     "src": "auto",
+     "emo": "surprised",
+     "val": 0,
+     "link": "e16",
+     "people": []
+    },
+    {
+     "id": "e19",
+     "t": "emotional",
+     "text": "{{char}} felt touched by {{user}}'s vulnerability and trusted her enough to ask for help",
+     "imp": 0.8,
+     "ts": 1795436927922,
+     "turn": 12,
+     "n": 4,
+     "last": 114,
+     "pin": false,
+     "src": "auto",
+     "emo": "tender",
+     "val": 0.9,
+     "link": "e1",
+     "people": []
+    },
+    {
+     "id": "e21",
+     "t": "episodic",
+     "text": "{{user}} said “yes come closer” (romance moment)",
+     "imp": 0.8,
+     "ts": 1795437094988,
+     "turn": 22,
+     "n": 1,
+     "last": 84,
+     "pin": false,
+     "src": "auto-lite",
+     "people": []
+    },
+    {
+     "id": "e22",
+     "t": "episodic",
+     "text": "{{char}} and {{user}} cuddled and flirted during a movie night",
+     "imp": 0.75,
+     "ts": 1795437161543,
+     "turn": 28,
+     "n": 4,
+     "last": 114,
+     "pin": false,
+     "src": "auto",
+     "people": []
+    },
+    {
+     "id": "e23",
+     "t": "emotional",
+     "text": "{{char}} felt a warm, tingling excitement from their playful banter and physical closeness",
+     "imp": 0.75,
+     "ts": 1795437161543,
+     "turn": 28,
+     "n": 12,
+     "last": 114,
+     "pin": false,
+     "src": "auto",
+     "emo": "playful",
+     "val": 0.8,
+     "link": "e22",
+     "people": []
+    },
+    {
+     "id": "e26",
+     "t": "episodic",
+     "text": "{{user}} confessed their feelings for {{char}}",
+     "imp": 0.8,
+     "ts": 1795437238794,
+     "turn": 34,
+     "n": 1,
+     "last": 102,
+     "pin": false,
+     "src": "auto",
+     "people": []
+    },
+    {
+     "id": "e27",
+     "t": "emotional",
+     "text": "{{char}} felt a mix of joy and apprehension at {{user}}'s confession",
+     "imp": 0.8,
+     "ts": 1795437238794,
+     "turn": 34,
+     "n": 0,
+     "last": 0,
+     "pin": false,
+     "src": "auto",
+     "emo": "surprised",
+     "val": 0,
+     "link": "e26",
+     "people": []
+    },
+    {
+     "id": "e29",
+     "t": "episodic",
+     "text": "{{user}} and {{char}} shared a tender moment in the rain",
+     "imp": 0.8,
+     "ts": 1795437315395,
+     "turn": 40,
+     "n": 5,
+     "last": 106,
+     "pin": false,
+     "src": "auto",
+     "people": []
+    },
+    {
+     "id": "e30",
+     "t": "emotional",
+     "text": "{{char}} felt a warm flutter in her chest, a sense of rightness and belonging.",
+     "imp": 0.8,
+     "ts": 1795437315395,
+     "turn": 40,
+     "n": 14,
+     "last": 106,
+     "pin": false,
+     "src": "auto",
+     "emo": "content",
+     "val": 0.8,
+     "link": "e29",
+     "people": []
+    },
+    {
+     "id": "e33",
+     "t": "episodic",
+     "text": "{{user}} admitted wanting {{char}}",
+     "imp": 0.715,
+     "ts": 1795437404962,
+     "turn": 44,
+     "n": 0,
+     "last": 0,
+     "pin": false,
+     "src": "auto",
+     "people": []
+    },
+    {
+     "id": "e34",
+     "t": "emotional",
+     "text": "{{char}} felt a thrill of anticipation at {{user}}'s bold admission.",
+     "imp": 0.715,
+     "ts": 1795437404962,
+     "turn": 44,
+     "n": 1,
+     "last": 68,
+     "pin": false,
+     "src": "auto",
+     "emo": "excited",
+     "val": 0.8,
+     "link": "e33",
+     "people": []
+    },
+    {
+     "id": "e38",
+     "t": "episodic",
+     "text": "{{user}} asked {{char}} to kiss her",
+     "imp": 0.735,
+     "ts": 1795437684437,
+     "turn": 60,
+     "n": 2,
+     "last": 72,
+     "pin": false,
+     "src": "auto",
+     "people": []
+    },
+    {
+     "id": "e39",
+     "t": "emotional",
+     "text": "{{char}} felt a flutter of excitement and affection at {{user}}'s boldness",
+     "imp": 0.735,
+     "ts": 1795437684437,
+     "turn": 60,
+     "n": 0,
+     "last": 0,
+     "pin": false,
+     "src": "auto",
+     "emo": "surprised",
+     "val": 0,
+     "link": "e38",
+     "people": []
+    },
+    {
+     "id": "e45",
+     "t": "episodic",
+     "text": "{{char}} and {{user}} shared their first kiss",
+     "imp": 0.8,
+     "ts": 1795437931971,
+     "turn": 72,
+     "n": 1,
+     "last": 106,
+     "pin": false,
+     "src": "auto",
+     "people": []
+    },
+    {
+     "id": "e46",
+     "t": "emotional",
+     "text": "{{char}} felt a spark of connection and desire when their lips met",
+     "imp": 0.8,
+     "ts": 1795437931971,
+     "turn": 72,
+     "n": 2,
+     "last": 106,
+     "pin": false,
+     "src": "auto",
+     "emo": "excited",
+     "val": 0.8,
+     "link": "e45",
+     "people": []
+    }
+   ],
+   "legacy": true
+  }
+ },
+ "cfg": {
+  "mode": "story",
+  "length": "short",
+  "scene": "",
+  "notes": [
+   {
+    "id": "8tutxwtf",
+    "oid": "5orvwib4",
+    "ts": 1795438675273,
+    "kind": "correct",
+    "text": "Dahee shouldn't say the same thing again and again",
+    "who": [],
+    "always": true
+   }
+  ],
+  "theme": null
+ },
+ "rp": {
+  "rel": {
+   "13ca9f99": {
+    "type": "romance",
+    "v": 48.4,
+    "ms": [],
+    "hist": [
+     {
+      "s": "Acquaintances",
+      "i": 1,
+      "t": 1795436908435,
+      "ty": "auto"
+     },
+     {
+      "s": "Familiar",
+      "i": 2,
+      "t": 1795437125298,
+      "ty": "auto"
+     },
+     {
+      "s": "Comfortable",
+      "i": 3,
+      "t": 1795437541752,
+      "ty": "auto"
+     },
+     {
+      "s": "Path: Romance",
+      "i": -1,
+      "t": 1795437572120,
+      "ty": "romance"
+     },
+     {
+      "s": "Smitten",
+      "i": 3,
+      "t": 1795438010091,
+      "ty": "romance"
+     }
+    ],
+    "peak": 50.25,
+    "fork": 0,
+    "forkDone": 1
+   }
+  },
+  "body": {
+   "user": {
+    "inj": [],
+    "ill": [],
+    "tired": 0,
+    "dead": false,
+    "died": null,
+    "stash": null,
+    "rev": 0,
+    "n": 0,
+    "ko": false
+   },
+   "13ca9f99": {
+    "inj": [
+     {
+      "k": "fracture",
+      "p": "head",
+      "s": 2,
+      "h": 3.12,
+      "care": false
+     }
+    ],
+    "ill": [],
+    "tired": 0,
+    "dead": false,
+    "died": null,
+    "stash": null,
+    "rev": 0,
+    "n": 1,
+    "ko": false
+   }
+  },
+  "rom": {
+   "13ca9f99": {
+    "v": 50.25,
+    "ms": [
+     "first kiss"
+    ]
+   }
+  },
+  "intim": {
+   "13ca9f99": {
+    "iv": 6,
+    "acts": [
+     "first kiss"
+    ]
+   }
+  }
+ }
+}

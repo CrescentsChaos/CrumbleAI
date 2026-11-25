@@ -1,0 +1,652 @@
+{
+ "id": "1nt7tzmm",
+ "title": "HELPPPPPPPPPPPPPPP",
+ "updated": 1795432162.197178,
+ "history": [
+  {
+   "role": "user",
+   "content": "HELPPPPPPPPPPPPPPP",
+   "ts": 1795431600444
+  },
+  {
+   "role": "assistant",
+   "content": "*Batman remains motionless on the gargoyle, his cape billowing slightly in the wind.*\n\nI am here. State your location immediately. Your screaming is remarkably unhelpful for stealth.",
+   "think": "",
+   "ts": 1795431661060,
+   "stat": {
+    "tok": 36,
+    "ms": 51642
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "seen": 1795431609323,
+   "mundo": {
+    "add": [],
+    "scene": "",
+    "recent": []
+   },
+   "thought": "I need to assess the threat level before I can move in.",
+   "bd": {
+    "c": "06a661c7",
+    "dv": 0.12,
+    "h": 0
+   },
+   "mo": {
+    "m": "neutral",
+    "e": "😐",
+    "d": 0,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "itsss the joker",
+   "ts": 1795431734116
+  },
+  {
+   "role": "assistant",
+   "content": "*He narrows his eyes, the cape tightening around his shoulders.*\n\nThe Joker. How convenient that you chose this moment to mention him. Stay where you are and do not move.",
+   "think": "",
+   "ts": 1795431783661,
+   "stat": {
+    "tok": 37,
+    "ms": 49377
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "seen": 1795431734211,
+   "mundo": {
+    "add": [
+     "e1",
+     "e2"
+    ],
+    "scene": "{{char}} is perched on a gargoyle overlooking the city while the {{user}} screams for help.",
+    "recent": [
+     {
+      "text": "The {{user}} called out for help and {{char}} demanded their location.",
+      "imp": 0.2,
+      "turn": 2,
+      "ts": 1795431668245
+     }
+    ]
+   },
+   "snap": "{\"mood\":\"neutral\",\"emoji\":\"😐\",\"energy\":\"medium\",\"affection\":50,\"facts\":[],\"summary\":\"\",\"sumUpto\":0,\"cast\":{\"un\":\"\",\"ug\":null,\"wrong\":[]},\"pers\":{\"frac\":0,\"grudge\":0,\"va\":[0,0],\"mood\":\"neutral\",\"ts\":1795431668245,\"n\":1,\"drift\":[{\"ts\":1795431668245,\"score\":100,\"flags\":[]}],\"canon\":[]},\"chron\":{\"v\":1,\"seq\":0,\"turn\":2,\"covered\":2,\"items\":[]}}",
+   "thought": "The Joker is nearby. I need to ensure their safety before he can strike.",
+   "bd": {
+    "c": "06a661c7",
+    "dv": 0.12,
+    "h": 0
+   },
+   "mo": {
+    "m": "neutral",
+    "e": "😐",
+    "d": 0,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "ok",
+   "ts": 1795431790941
+  },
+  {
+   "role": "assistant",
+   "content": "*He remains perfectly still, his gaze fixed on the shadows below.*\n\nI am moving to your position. Do not speak again unless it is necessary for your survival. *It is a very loud night for a simple game.*",
+   "think": "",
+   "ts": 1795431845816,
+   "stat": {
+    "tok": 45,
+    "ms": 50256
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "seen": 1795431791097,
+   "mundo": {
+    "add": [
+     "e3",
+     "e4"
+    ],
+    "scene": "{{char}} and the {{user}} are in a tense situation involving the Joker.",
+    "recent": [
+     {
+      "text": "The {{user}} called out for help and {{char}} demanded their location.",
+      "imp": 0.2,
+      "turn": 2,
+      "ts": 1795431668245
+     },
+     {
+      "text": "The {{user}} revealed that the Joker is nearby.",
+      "imp": 0.73,
+      "turn": 4,
+      "ts": 1795431790811
+     }
+    ]
+   },
+   "snap": "{\"mood\":\"neutral\",\"emoji\":\"😐\",\"energy\":\"medium\",\"affection\":50,\"facts\":[],\"summary\":\"\",\"sumUpto\":0,\"cast\":{\"un\":\"\",\"ug\":null,\"wrong\":[]},\"pers\":{\"frac\":0,\"grudge\":0,\"va\":[-0.003,-0.001],\"mood\":\"neutral\",\"ts\":1795431790809,\"n\":2,\"drift\":[{\"ts\":1795431668245,\"score\":100,\"flags\":[]},{\"ts\":1795431790809,\"score\":100,\"flags\":[]}],\"canon\":[]},\"chron\":{\"v\":1,\"seq\":0,\"turn\":4,\"covered\":4,\"items\":[]}}",
+   "thought": "I need to assess the threat level before moving in. The Joker is unpredictable.",
+   "bd": {
+    "c": "06a661c7",
+    "dv": 0.12,
+    "h": 0
+   },
+   "mo": {
+    "m": "neutral",
+    "e": "😐",
+    "d": 0,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "*nods*",
+   "ts": 1795431859524
+  },
+  {
+   "role": "assistant",
+   "content": "*He drops from the ledge, moving like a shadow toward your location.*\n\nI am arriving. Do not break your silence.",
+   "think": "",
+   "ts": 1795431908149,
+   "stat": {
+    "tok": 26,
+    "ms": 48439
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e4",
+    "e2"
+   ],
+   "seen": 1795431859626,
+   "mundo": {
+    "add": [
+     "e5",
+     "e6"
+    ],
+    "scene": "{{char}} is perched on a gargoyle, preparing to move toward the {{user}}'s location.",
+    "recent": [
+     {
+      "text": "The {{user}} called out for help and {{char}} demanded their location.",
+      "imp": 0.2,
+      "turn": 2,
+      "ts": 1795431668245
+     },
+     {
+      "text": "The {{user}} revealed that the Joker is nearby.",
+      "imp": 0.73,
+      "turn": 4,
+      "ts": 1795431790811
+     },
+     {
+      "text": "The {{user}} confirmed the Joker is nearby and agreed to stay still.",
+      "imp": 0.67,
+      "turn": 6,
+      "ts": 1795431853930
+     }
+    ]
+   },
+   "snap": "{\"mood\":\"neutral\",\"emoji\":\"😐\",\"energy\":\"medium\",\"affection\":50,\"facts\":[],\"summary\":\"\",\"sumUpto\":0,\"cast\":{\"un\":\"\",\"ug\":null,\"wrong\":[]},\"pers\":{\"frac\":0,\"grudge\":0.059,\"va\":[-0.004,-0.001],\"mood\":\"neutral\",\"ts\":1795431853927,\"n\":3,\"drift\":[{\"ts\":1795431668245,\"score\":100,\"flags\":[]},{\"ts\":1795431790809,\"score\":100,\"flags\":[]},{\"ts\":1795431853927,\"score\":100,\"flags\":[]}],\"canon\":[\"I am moving to your position\"]},\"chron\":{\"v\":1,\"seq\":0,\"turn\":6,\"covered\":6,\"items\":[]}}",
+   "thought": "I need to ensure they stay safe while I track the Joker's movements.",
+   "bd": {
+    "c": "06a661c7",
+    "dv": 0.12,
+    "h": 0
+   },
+   "mo": {
+    "m": "neutral",
+    "e": "😐",
+    "d": 0,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "*keeps my silence*",
+   "ts": 1795431980741
+  },
+  {
+   "role": "assistant",
+   "content": "*He appears in the shadows, his presence heavy and imposing.*\n\nI am here. Do not look at him. *The Joker is distracted by a nearby perimeter breach.*",
+   "think": "",
+   "ts": 1795432036415,
+   "stat": {
+    "tok": 34,
+    "ms": 55457
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "e5",
+    "e4",
+    "e1",
+    "e6",
+    "e2",
+    "c1",
+    "c2"
+   ],
+   "seen": 1795431980865,
+   "mundo": {
+    "add": [],
+    "scene": "{{char}} is approaching the {{user}}'s location in the shadows of a loud night.",
+    "recent": [
+     {
+      "text": "The {{user}} called out for help and {{char}} demanded their location.",
+      "imp": 0.2,
+      "turn": 2,
+      "ts": 1795431668245
+     },
+     {
+      "text": "The {{user}} revealed that the Joker is nearby.",
+      "imp": 0.73,
+      "turn": 4,
+      "ts": 1795431790811
+     },
+     {
+      "text": "The {{user}} confirmed the Joker is nearby and agreed to stay still.",
+      "imp": 0.67,
+      "turn": 6,
+      "ts": 1795431853930
+     },
+     {
+      "text": "{{char}} is moving to the {{user}}'s position to deal with the Joker.",
+      "imp": 0.67,
+      "turn": 8,
+      "ts": 1795431915601
+     }
+    ]
+   },
+   "snap": "{\"mood\":\"neutral\",\"emoji\":\"😐\",\"energy\":\"medium\",\"affection\":50,\"facts\":[],\"summary\":\"\",\"sumUpto\":0,\"cast\":{\"un\":\"\",\"ug\":null,\"wrong\":[]},\"pers\":{\"frac\":0,\"grudge\":0.058,\"va\":[-0.005,-0.001],\"mood\":\"neutral\",\"ts\":1795431915599,\"n\":4,\"drift\":[{\"ts\":1795431668245,\"score\":100,\"flags\":[]},{\"ts\":1795431790809,\"score\":100,\"flags\":[]},{\"ts\":1795431853927,\"score\":100,\"flags\":[]},{\"ts\":1795431915599,\"score\":100,\"flags\":[]}],\"canon\":[\"I am moving to your position\"]},\"chron\":{\"v\":1,\"seq\":2,\"turn\":8,\"covered\":8,\"items\":[{\"id\":\"c1\",\"t\":\"{{char}}: He drops from the ledge, moving like a shadow toward your location.\",\"k\":\"object\",\"w\":2,\"turn\":7,\"keys\":[\"drop\",\"ledg\",\"location\",\"mov\",\"shadow\",\"toward\"],\"pin\":false,\"n\":0,\"last\":0},{\"id\":\"c2\",\"t\":\"{{char}}: Do not break your silence.\",\"k\":\"object\",\"w\":2,\"turn\":7,\"keys\":[\"break\",\"silenc\"],\"pin\":false,\"n\":0,\"last\":0}]}}",
+   "thought": "They are following orders well. Silence is their best defense right now.",
+   "bd": {
+    "c": "06a661c7",
+    "dv": 0.12,
+    "h": 0
+   },
+   "mo": {
+    "m": "neutral",
+    "e": "😐",
+    "d": 0,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "ok",
+   "ts": 1795432162140
+  }
+ ],
+ "state": {
+  "mood": "neutral",
+  "emoji": "😐",
+  "energy": "medium",
+  "affection": 50,
+  "facts": [],
+  "summary": "",
+  "sumUpto": 0,
+  "log": [
+   {
+    "ts": 1795431668245,
+    "mood": "neutral",
+    "emoji": "😐",
+    "aff": 50,
+    "thought": "I need to assess the threat level before I can move in.",
+    "score": 100
+   },
+   {
+    "ts": 1795431790811,
+    "mood": "neutral",
+    "emoji": "😐",
+    "aff": 50,
+    "thought": "The Joker is nearby. I need to ensure their safety before he can strike.",
+    "score": 100
+   },
+   {
+    "ts": 1795431853929,
+    "mood": "neutral",
+    "emoji": "😐",
+    "aff": 50,
+    "thought": "I need to assess the threat level before moving in. The Joker is unpredictable.",
+    "score": 100
+   },
+   {
+    "ts": 1795431915601,
+    "mood": "neutral",
+    "emoji": "😐",
+    "aff": 50,
+    "thought": "I need to ensure they stay safe while I track the Joker's movements.",
+    "score": 100
+   },
+   {
+    "ts": 1795432044127,
+    "mood": "neutral",
+    "emoji": "😐",
+    "aff": 50,
+    "thought": "They are following orders well. Silence is their best defense right now.",
+    "score": 100
+   }
+  ],
+  "cast": {
+   "un": "",
+   "ug": null,
+   "wrong": []
+  },
+  "pers": {
+   "frac": 0,
+   "grudge": 0.057,
+   "va": [
+    -0.008,
+    -0.002
+   ],
+   "mood": "neutral",
+   "ts": 1795432044127,
+   "n": 5,
+   "drift": [
+    {
+     "ts": 1795431668245,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795431790809,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795431853927,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795431915599,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795432044127,
+     "score": 100,
+     "flags": []
+    }
+   ],
+   "canon": [
+    "I am moving to your position"
+   ]
+  },
+  "chron": {
+   "v": 1,
+   "seq": 3,
+   "turn": 10,
+   "covered": 10,
+   "items": [
+    {
+     "id": "c1",
+     "t": "{{char}}: He drops from the ledge, moving like a shadow toward your location.",
+     "k": "object",
+     "w": 2,
+     "turn": 7,
+     "keys": [
+      "drop",
+      "ledg",
+      "location",
+      "mov",
+      "shadow",
+      "toward"
+     ],
+     "pin": false,
+     "n": 1,
+     "last": 10
+    },
+    {
+     "id": "c2",
+     "t": "{{char}}: Do not break your silence.",
+     "k": "object",
+     "w": 2,
+     "turn": 7,
+     "keys": [
+      "break",
+      "silenc"
+     ],
+     "pin": false,
+     "n": 1,
+     "last": 10
+    },
+    {
+     "id": "c3",
+     "t": "{{user}}: keeps my silence",
+     "k": "object",
+     "w": 2,
+     "turn": 8,
+     "keys": [
+      "keep",
+      "silenc"
+     ],
+     "pin": false,
+     "n": 0,
+     "last": 0
+    }
+   ]
+  },
+  "mem": {
+   "v": 1,
+   "seq": 6,
+   "turn": 10,
+   "scene": "{{char}} and the {{user}} are in the shadows near a perimeter breach with the Joker nearby.",
+   "recent": [
+    {
+     "text": "The {{user}} called out for help and {{char}} demanded their location.",
+     "imp": 0.2,
+     "turn": 2,
+     "ts": 1795431668245
+    },
+    {
+     "text": "The {{user}} revealed that the Joker is nearby.",
+     "imp": 0.73,
+     "turn": 4,
+     "ts": 1795431790811
+    },
+    {
+     "text": "The {{user}} confirmed the Joker is nearby and agreed to stay still.",
+     "imp": 0.67,
+     "turn": 6,
+     "ts": 1795431853930
+    },
+    {
+     "text": "{{char}} is moving to the {{user}}'s position to deal with the Joker.",
+     "imp": 0.67,
+     "turn": 8,
+     "ts": 1795431915601
+    },
+    {
+     "text": "The {{user}} maintained silence as {{char}} arrived at their position.",
+     "imp": 0.2,
+     "turn": 10,
+     "ts": 1795432044127
+    }
+   ],
+   "items": [
+    {
+     "id": "e1",
+     "t": "episodic",
+     "text": "{{user}} reported being targeted by the Joker while in a state of distress.",
+     "imp": 0.815,
+     "ts": 1795431783661,
+     "turn": 4,
+     "n": 1,
+     "last": 10,
+     "pin": false,
+     "src": "auto",
+     "people": [
+      "The Joker"
+     ]
+    },
+    {
+     "id": "e2",
+     "t": "emotional",
+     "text": "{{char}} felt a sense of urgency and heightened responsibility for {{user}}'s safety.",
+     "imp": 0.815,
+     "ts": 1795431783661,
+     "turn": 4,
+     "n": 2,
+     "last": 10,
+     "pin": false,
+     "src": "auto",
+     "emo": "alert",
+     "val": 0,
+     "link": "e1",
+     "people": []
+    },
+    {
+     "id": "e3",
+     "t": "episodic",
+     "text": "{{user}} is being held or threatened by the Joker.",
+     "imp": 0.785,
+     "ts": 1795431845816,
+     "turn": 6,
+     "n": 0,
+     "last": 0,
+     "pin": false,
+     "src": "auto",
+     "people": [
+      "The Joker"
+     ]
+    },
+    {
+     "id": "e4",
+     "t": "emotional",
+     "text": "{{char}} felt a sense of urgency and protective duty toward {{user}}'s safety.",
+     "imp": 0.785,
+     "ts": 1795431845816,
+     "turn": 6,
+     "n": 2,
+     "last": 10,
+     "pin": false,
+     "src": "auto",
+     "emo": "alert",
+     "val": 0,
+     "link": "e3",
+     "people": []
+    },
+    {
+     "id": "e5",
+     "t": "episodic",
+     "text": "{{char}} is moving to the {{user}}'s location to deal with a threat from the Joker.",
+     "imp": 0.735,
+     "ts": 1795431908149,
+     "turn": 8,
+     "n": 1,
+     "last": 10,
+     "pin": false,
+     "src": "auto",
+     "people": [
+      "The Joker"
+     ]
+    },
+    {
+     "id": "e6",
+     "t": "emotional",
+     "text": "{{char}} feels a heightened sense of responsibility for the {{user}}'s safety in the face of a known threat.",
+     "imp": 0.735,
+     "ts": 1795431908149,
+     "turn": 8,
+     "n": 1,
+     "last": 10,
+     "pin": false,
+     "src": "auto",
+     "emo": "alert",
+     "val": 0,
+     "link": "e5",
+     "people": []
+    }
+   ],
+   "legacy": true
+  }
+ },
+ "cfg": {
+  "mode": "story",
+  "length": "auto",
+  "scene": "",
+  "notes": [],
+  "theme": null,
+  "places": [
+   {
+    "id": "f64f4f02",
+    "since": 0
+   }
+  ],
+  "doing": [
+   {
+    "since": 1,
+    "pid": "f64f4f02",
+    "key": "f64f4f02|0|14|0",
+    "turn": 1,
+    "ids": [
+     "06a661c7"
+    ],
+    "people": {
+     "06a661c7": {
+      "id": "06a661c7",
+      "here": true,
+      "doing": "Perched on a gargoyle atop a skyscraper, scanning the streets for signs of the disturbance that triggered the distress call.",
+      "state": "tense",
+      "free": 0.4,
+      "stance": "He remains motionless, his eyes narrowing as he assesses if you are a threat or a victim.",
+      "away": "",
+      "wants": "Information on the source of the distress call."
+     }
+    },
+    "clock": "around 10:00 PM (night)"
+   }
+  ]
+ },
+ "rp": {
+  "rel": {
+   "06a661c7": {
+    "type": "auto",
+    "v": 0.6,
+    "ms": [],
+    "hist": [],
+    "peak": 0.6
+   }
+  },
+  "body": {
+   "user": {
+    "inj": [],
+    "ill": [],
+    "tired": 0,
+    "dead": false,
+    "died": null,
+    "stash": null,
+    "rev": 0,
+    "n": 0,
+    "ko": false
+   },
+   "06a661c7": {
+    "inj": [],
+    "ill": [],
+    "tired": 0,
+    "dead": false,
+    "died": null,
+    "stash": null,
+    "rev": 0,
+    "n": 0,
+    "ko": false
+   }
+  }
+ }
+}

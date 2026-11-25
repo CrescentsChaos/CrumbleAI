@@ -1,0 +1,26 @@
+{
+ "id": "a9f38e9d",
+ "name": "Cloud Gate",
+ "biome": "City",
+ "description": "A massive, polished stainless-steel public sculpture created by artist Anish Kapoor. Its curved, mirror-like surface reflects and distorts the surrounding skyline, visitors, and clouds, creating an unusual interactive visual experience. It's also known as \"The Bean\".",
+ "atmosphere": "Artistic, lively, and modern. Tourists gather around the sculpture to take photographs, admire its reflections, and interact with its curved surfaces. The surrounding park offers a relaxed atmosphere amid the busy city.",
+ "history": "Designed by British-Indian artist Anish Kapoor, Cloud Gate was constructed between 2004 and 2006 and officially dedicated in 2006. Inspired by liquid mercury, its unusual bean-like shape quickly became one of Chicago's most recognizable landmarks and a popular symbol of the city's public art culture.",
+ "objects": [
+  "Stainless-steel sculpture, paved plaza, park benches, decorative gardens, streetlights, surrounding skyscrapers, public art installations, information plaques, "
+ ],
+ "activities": [
+  "Taking photographs, exploring distorted reflections, walking beneath the sculpture, meeting friends, sightseeing, sketching, relaxing, and exploring Millennium "
+ ],
+ "exits": [
+  "Pedestrian pathways connect to Millennium Park, Michigan Avenue, Crown Fountain, Lurie Garden, and nearby city streets. Public transportation and surrounding ro"
+ ],
+ "events": [
+  "Public art exhibitions, seasonal celebrations, outdoor concerts, cultural festivals, photography gatherings, and special events throughout Millennium Park."
+ ],
+ "secrets": [
+  "The sculpture's concave underside creates fascinating visual distortions. Its reflective surface is made from multiple precisely fitted stainless-steel panels, carefully polished to produce its seamless appearance."
+ ],
+ "characters": [],
+ "bg": "a9f38e9d.jpg",
+ "bg_v": 1
+}

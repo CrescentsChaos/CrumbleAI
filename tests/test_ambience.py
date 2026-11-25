@@ -51,7 +51,7 @@ class BlockTests(unittest.TestCase):
     def test_in_prompt(self):
         a = A.derive(M("Thunder rolls over the cabin.", "hi"))
         m = build_messages(C, "Crescent", M("Thunder rolls over the cabin.", "hi"), {"mode": "story", "state": {}, "words": (10, 30), "amb": a})
-        self.assertIn("[Environment", m[0]["content"])
+        self.assertIn("[Environment", h.ptxt(m))
 
 
 class GuardTests(unittest.TestCase):
@@ -66,13 +66,13 @@ class GuardTests(unittest.TestCase):
         a = A.derive(M("Ghost! A scream, blood on the wall, something is behind her.", "run"))
         self.assertIn("horror", A.env_note("*giggles cheerfully* It's fine!", a))
 
-    def test_pipeline_retries_and_boosts(self):
+    def test_pipeline_flags_and_boosts(self):
         hist = M("The storm hammers the old house. Thunder, lightning, a scream from the cellar.", "I grab the torch")
         fake = h.install(h.FakeLLM(["*Sunlight streams in as she smiles.* Lovely day.", "*Thunder cracks. Faith freezes, breath shallow.* I heard that."]))
         r = generate_reply({"char": C, "user": "Crescent", "history": hist, "state": {}, "params": {"mode": "story", "think": False, "max_tokens": 200}}, None)
-        self.assertEqual(len(fake.calls), 2)
-        self.assertIn("Thunder", r["text"])
-        self.assertIn("[Environment", fake.calls[0][0]["content"])
+        self.assertEqual(len(fake.calls), 1)                 # H8: a wrong atmosphere is flagged, not regenerated
+        self.assertIn("env", r["flags"])
+        self.assertIn("[Environment", h.ptxt(fake.calls[0]))
 
 
 if __name__ == "__main__":

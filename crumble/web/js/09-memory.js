@@ -11,12 +11,13 @@ function renderMemOne(){const f=$('#memf'),st=chat?.state;if(!chat||!st){f.inner
   <textarea data-m=scene rows=3 placeholder="e.g. It is raining and ${n} just got home from a double shift.">${esc(chat.cfg.scene||'')}</textarea></details>
   <details open><summary>Memory of earlier conversation</summary><label>Long chats are summarised automatically so ${n} remembers what happened. You can edit it.</label>
   <textarea data-m=summary rows=6>${esc(st.summary||'')}</textarea><div class=row><button data-m=sumnow>Summarize now</button><span class=small id=msum></span></div></details>
+  ${keepHtml(st,n)}
   ${U.mem?memHtml(st,cur?.name||'Character',''):`  <details open><summary>What ${n} knows about you</summary><div id=mfacts>${st.facts.map((x,i)=>`<div class=fact><input data-m=fact data-i=${i} value="${at(x)}"><button class=x data-m=delfact data-i=${i}>✕</button></div>`).join('')||'<p class=small>Nothing yet. Facts are picked up from the conversation.</p>'}</div>
   <div class=row><input id=newfact placeholder="Add a fact…"><button data-m=addfact>Add</button></div></details>`}
   <details><summary>Inner thoughts and mood history</summary>${(st.log||[]).slice(-12).reverse().map(l=>`<div class=tl>${l.emoji} <b>${esc(l.mood)}</b> · ${l.aff}/100 · ${hm(l.ts)}<br>${esc(l.thought||'')}</div>`).join('')||'<p class=small>Nothing yet.</p>'}</details>`}
 $('#memf').oninput=e=>{const k=e.target.dataset.m,st=chat?.state;if(!k||!st)return;const v=e.target.value;
  if(k=='affection'){st.affection=+v;$('#mstage').textContent=`${stg(st.affection)} (${v})`}
- else if(k=='scene')chat.cfg.scene=v;else if(k=='summary')st.summary=v;else if(k=='fact')st.facts[+e.target.dataset.i]=v;
+ else if(k=='scene')chat.cfg.scene=v;else if(k=='summary')st.summary=v;else if(k=='fresh')chat.cfg.fresh=e.target.checked;else if(k=='fact')st.facts[+e.target.dataset.i]=v;
   else if(k=='gaff'){mst(e.target.dataset.c).affection=+v;e.target.previousElementSibling.querySelector('b').textContent=`${stg(+v)} (${v})`}
   else if(k=='rom'){const r=(chat.rp.rom=chat.rp.rom||{});(r[e.target.dataset.c]=r[e.target.dataset.c]||{v:0,ms:[]}).v=+v;e.target.previousElementSibling.querySelector('b').textContent=`${romStage(+v)} (${v})`}
   else if(k=='intim'){const r=(chat.rp.intim=chat.rp.intim||{});(r[e.target.dataset.c]=r[e.target.dataset.c]||{iv:0,acts:[]}).iv=+v;e.target.previousElementSibling.querySelector('b').textContent=`${intimStage(+v)} (${v})`}else return;head();saveSoon()};

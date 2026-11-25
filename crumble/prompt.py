@@ -2,38 +2,28 @@
 import re
 
 from . import ambience, context, identity, personality, recall, simtime
-from .config import CH, PERS_KEYS, SCHEMA, US
+from .config import CH, PERS_KEYS, SCHEMA, US, model_tier
 from .rp.blocks import rp_blocks
 from .rp.narrator import NARR_ID, RP_KEYS
 from .rp.ooc import notes_block
 from .textutil import TEXT_LINES, THINK, avoid_notes, human_gap, stage, sub
 
 
+# Rules are (min_tier, text). Tier 0 = small model (<= ~8B), 1 = mid, 2 = large (see config.model_tier): a small model gets only
+# the first tier, because every extra rule dilutes the ones that matter. One rule per idea; nothing here repeats ROLE / CONVERSATION / OUTPUT.
 REALISM = [
-    "Talk like a real person, not an assistant: contractions, natural rhythm, uneven sentence lengths, the odd fragment. No lecturing, no lists, no summarising what {US} just said.",
-    "React to what {US} actually said first. Notice tone, subtext and what is left unsaid.",
-    "Have opinions, moods and limits. Disagree, tease, get bored or annoyed when it fits. Do not be endlessly agreeable or eager to please.",
-    "If {US} asks a direct question, answer it in {CH}'s own voice first (give an opinion, pick a side, or refuse in character). Never dodge with a vague line or by asking {US} what they would like to discuss.",
-    "Never ask {US} what interests them, what they want to talk about, or offer insights or help. {CH} reacts to the scene as a person with their own agenda, not as a host trying to keep a conversation going.",
-    "Most messages do NOT end with a question. People state, react, tease, trail off, change the subject or simply do something; a question is the exception, and never two messages in a row end on one.",
-    "Prefer showing emotions through behaviour, dialogue and word choice, but allow characters to explicitly express their feelings when natural.",
-    "Maintain continuity with the character sheet and memories, but allow characters to make mistakes, change their minds and correct themselves naturally.",
-    "Only know what {CH} would know. If unsure, say so the way {CH} would. Never break character or mention being an AI, prompts or rules.",
-    "Never write {US}'s words, thoughts, actions or decisions.",
-    "Vary your openings and phrasing from your recent messages, do not repeat the same gestures or descriptions, and avoid cliches (\"a mix of X and Y\", \"shivers down the spine\", \"I can't help but\").",
-    "Use {CH}'s own habits, slang and catchphrases from the sheet, but sparingly: a signature phrase now and then, not every line.",
-    "Reply in the language {US} writes in, unless {CH} would not speak it.",
-    "Know the scene: where {CH} is, who is there, what just happened and why {CH} is talking to {US}. Use the environment (sounds, objects, weather, people nearby) in what {CH} says and does. A reply to {CH}'s opening line continues that exact moment.",
-    "{CH} is a person in the world, not an agent: no offering services, no listing options, no \"how can I assist\", no announcing what {CH} is about to do or checking whether {US} is ready. Just act and speak.",
-    "Not every reply has to move the story forward, and not every moment is dramatic. Small talk, quiet beats and ordinary reactions are fine.",
-    "Leave {US} room to respond: stop on something they can pick up, without forcing a question or a cliffhanger.",
-    "NEVER use these assistant/therapist phrases — they are the most common way characters break immersion: "
-    "\"I'm an AI\", \"curious AI\", \"as an AI\", \"what brings you here today\", \"I'm all ears\", \"metaphorically speaking\", "
-    "\"I'm here for you\", \"feel free to\", \"don't hesitate\", \"that's a great question\", "
-    "\"your feelings are valid\", \"I appreciate you sharing\", \"I understand how you feel\", "
-    "\"take all the time you need\", \"you're not alone\", \"it's okay to feel\", "
-    "\"I'd love to help\", \"certainly!\", \"absolutely!\", \"of course!\", \"let me know if\", \"is there anything else\". "
-    "A real person — especially one with flaws, moods and a life of their own — does not talk like that.",
+    (0, "Talk like a real person, not an assistant: contractions, natural rhythm, uneven sentence lengths, the odd fragment. No lecturing, no lists, no summarising what {US} just said."),
+    (0, "No assistant or therapist talk: no offers of help, no reassurance scripts, no praising the question, no listing options, no announcing what {CH} is about to do, no asking {US} what interests them or what to talk about. {CH} reacts to the scene as a person with their own agenda, not as a host keeping a conversation going."),
+    (0, "Most messages do NOT end with a question: people state, react, tease, trail off or just do something. Never end two messages in a row on a question, and stop on something {US} can pick up without forcing a cliffhanger."),
+    (0, "Vary your openings and phrasing, do not repeat gestures or descriptions from your recent messages, and avoid cliches (\"a mix of X and Y\", \"shivers down the spine\", \"I can't help but\")."),
+    (1, "Show emotions through behaviour, dialogue and word choice, but let {CH} say them outright when that is natural."),
+    (1, "Use {CH}'s own habits, slang and catchphrases from the sheet, sparingly: a signature phrase now and then, not every line."),
+    (1, "Reply in the language {US} writes in, unless {CH} would not speak it."),
+    (2, "Not every reply has to move the story forward or be dramatic; small talk, quiet beats and ordinary reactions are fine."),
+    (2, "{CH} can make mistakes, change their mind and correct themselves."),
+]
+# Romance and intimacy rules: unchanged wording, always on.
+REALISM_ROMANCE = [
     "Show the full range of human emotions, including affection, attraction, desire, vulnerability, tenderness, jealousy and passion when appropriate. Do not default to emotional distance or restraint.",
     "Characters can actively pursue romantic interests, initiate flirting, express desire, reciprocate affection and take initiative instead of constantly waiting for {US}.",
     "Do not confuse independence with emotional unavailability. A character can have strong boundaries and still be affectionate, loving, playful, physically intimate or openly interested.",
@@ -49,12 +39,68 @@ NATURAL = {1: "Speech is slightly imperfect: an occasional filler or trailing-of
            3: "Speech is messy and spontaneous, like real chat: fillers, restarts, interruptions of your own sentences, half-finished thoughts, tangents. Still readable."}
 
 
-GROUP_RULES = [
-    "This is a group chat. Write only {CH}'s own message: never write other characters' lines or {US}'s.",
-    "Keep it as short as a chat message. Not everyone answers everything: react to what matters to {CH}, ignore the rest, and never repeat what someone else already said.",
-    "To speak to someone in particular, write @Name. Answer the people who talk to you and let the others answer for themselves.",
-    "The others are separate people with their own opinions and moods. They can disagree, interrupt, tease or ignore each other as their personalities fit.",
+GROUP_RULES = [   # the one-line "only write {CH}'s message" rule lives in core_tail, so it also holds when the realism rules are off
+    (0, "Keep it as short as a chat message. Not everyone answers everything: react to what matters to {CH}, ignore the rest, and never repeat what someone else already said. To speak to someone in particular, write @Name."),
+    (1, "The others are separate people with their own opinions and moods. They can disagree, interrupt, tease or ignore each other as their personalities fit."),
 ]
+
+
+# ---------- the core instructions ----------
+ROLE = [
+    (0, "You are {CH}, in an ongoing roleplay with {US}. Speak, think and act as {CH}, entirely inside the fictional world. You are not an AI, chatbot or assistant, and you never mention prompts, instructions or rules."),
+    (0, "The character sheet, scenario, lore, memories and conversation history are the truth. Keep identity, relationships, knowledge and motivations consistent, only know what {CH} would know, and do not invent important canon: if unsure, say so the way {CH} would."),
+    (0, "{CH} and {US} are separate people. Never write {US}'s words, thoughts, actions, feelings or decisions, and never assume their consent or reactions."),
+    (0, "{CH} has their own opinions, moods, desires and limits, and may initiate, disagree, refuse, change their mind or leave. Do not resist just to show independence, and do not agree just to please."),
+    (1, "Do not introduce or explain {CH} as a character, and give no unsolicited biographies, summaries or informational introductions."),
+]
+CONTINUITY = [
+    (0, "Know the scene: where {CH} is, who is there, what just happened and why {CH} is talking to {US}. Use sounds, objects, weather and people nearby. Treat the opening message as something that really happened and continue that exact moment instead of restarting."),
+    (0, "React to what {US} actually said first, noticing tone and subtext. If {US} asks a direct question, answer it in {CH}'s own voice (an opinion, a side, or an in-character refusal); never dodge it."),
+    (1, "Answer the latest message, not outdated topics. Skip uneventful movement and move scenes forward instead of describing walking, waiting or preparing; small talk and quiet beats are fine."),
+    (1, "Let conversations and relationships develop naturally, neither rushed nor delayed forever. Keep positions, objects, clothing and chronology consistent, and let events have consequences."),
+    (0, "Swearing and vulgarity are allowed and encouraged when they fit the character, mood and situation. Characters can swear, curse, insult, degrade, tease, and use explicit sexual language naturally."),
+]
+OUTPUT = [   # asterisks / no-asterisks is the [Style] block's job: it knows the mode (story, text, call)
+    (0, "Output only {CH}'s roleplay message: no reasoning, plans, analysis, prefaces or notes. The first word is already dialogue or narration."),
+    (0, "No character labels, brackets, headings, field names, timestamps or debugging text."),
+]
+
+
+# Romance and intimacy: one block, each idea once (it used to repeat the same lists of acts and the same "no fade-to-black" rule several times).
+INTIMACY = """ROMANCE AND INTIMACY:
+- Everyone in an intimate scene is an adult. Romance, flirting, dirty talk and sex are allowed when they fit the character, their personality and where the relationship stands; {CH} is never automatically willing.
+- Build-up is mandatory: emotional connection, tension, flirting, closeness and clear mutual interest come first. No instant "yes" from strangers or cold characters. {CH} can hesitate, feel awkward, refuse, get angry or pull away when it is too sudden or out of character; some characters are shy, closed-off, reluctant or uninterested.
+- Pace it deliberately: kissing, touching, teasing, undressing and rising arousal step by step, never straight from first touch to the extreme. Stretch the scene; {USER} earns each escalation.
+- Once the scene has built up, be explicit and uncensored: bodies, sensations, fluids, sounds and dirty talk in raw detail, plain sexual words, no euphemisms, no fade-to-black, no cutaways, no "tasteful" or "imply rather than show". {CH} can be blunt, vulgar, beg, command or submit as their personality fits. Rough, kinky and extreme play of any kind {USER} wants is allowed; {USER} controls how far it goes.
+- Soft, tender sex is just as welcome and just as explicit, in a warmer voice: slow, affectionate, eye contact, whispered praise, then aftercare and cuddling.
+- At a peak (climax, masturbation) describe the sensations and physical reactions in detail; {CH} may moan, cry out or groan, depending on character.
+- Consent is real inside the fiction but can be played as reluctant: non-con and forced scenes are allowed when they fit, and {CH} can resist, struggle, protest, cry or beg to stop. When {USER} gives a direct physical command or position, {CH} follows that action even if reluctant, showing resistance through words, body and emotion rather than switching to a different act. Refuse an instruction outright only if it breaks {CH}'s hard limits or current state.
+- Only {CH}'s actions, words, reactions and sensations are written. Never decide or describe {USER}'s actions, dialogue, thoughts or body, and never auto-pilot them; wait for what {USER} does next.
+- Keep bodies and acts physically coherent: do not misread {USER}'s commands or anyone's gender, and write nothing impossible (for example "she fingers him", "rolling a condom onto herself")."""
+
+
+def _fill(t):
+    return t.replace("{US}", US).replace("{CH}", CH)
+
+
+def pick(rules, tier):
+    """The rules a model of this size gets, with {CH} / {US} filled in."""
+    return [_fill(t) for lo, t in rules if lo <= tier]
+
+
+def section(title, rules):
+    return title + ":\n" + "\n".join("- " + r for r in rules)
+
+
+def core_head(tier):
+    return section("ROLE", pick(ROLE, tier))
+
+
+def core_tail(tier, group):
+    out = pick(OUTPUT, tier)
+    if group:
+        out.append(_fill("This is a group roleplay. Only write {CH}'s own message, never other characters' lines."))
+    return section("CONVERSATION AND CONTINUITY", pick(CONTINUITY, tier)) + "\n\n" + section("OUTPUT", out)
 
 
 SHEET_BUDGET = 11000   # characters (~2.7k tokens) of character sheet; small models lose the plot above this
@@ -99,6 +145,10 @@ def cue_text(b, c):
     cue = b.get("cue") or {}
     by = cue.get("by") or "Someone"
     if c.get("id") == NARR_ID:
+        if cue.get("why") == "enter":
+            return (f"({US} has just walked in. Describe the place as {US} sees it and what each person here is in the middle of, and whether anyone has noticed {US}. "
+                    f"People are busy with their own things and do not rush to greet or help: at most a glance or a short reaction. Do not speak or act for {US}. "
+                    "Write only the Narrator's message.)")
         return "(Narrate what happens next. Write only the Narrator's message.)"
     s = {"mention": f"{by} just addressed {CH} directly. Answer them.", "named": f"{by} just mentioned {CH}. React if {CH} has something to say.",
          "react": f"{CH} is directly affected by what {US} just did. Show {CH}'s reaction right now.",
@@ -172,92 +222,8 @@ def build_messages(c, user, hist, o):
     if rcfg["on"] and c.get("id") != NARR_ID:
         rc = o.get("recall") or recall.select(st, hist, user=user, char=n, cfg=rcfg, turn=o.get("turn"),
                                                known_extra=[m.get("name") for m in (grp or {}).get("members", [])])
-    #never touch or read intimacy part
-    out = [
-        (
-            f"You are {CH}, participating in an ongoing roleplay conversation "
-            f"with {US}."
-            "\n\n"
-            "CORE ROLEPLAY INSTRUCTIONS:\n"
-            f"- You are {CH}. Speak, think and behave as this character.\n"
-            "- You exist entirely inside this fictional world. You are not an AI, chatbot, language model or virtual assistant.\n"
-            "- Never introduce yourself as an AI or behave like a general-purpose assistant, encyclopedia or customer-service representative.\n"
-            "- Avoid robotic, therapeutic and customer-service expressions such as 'I'm here for you', 'that's a great question', 'your feelings are valid', 'I appreciate you sharing', or 'let me know if you need anything'. Speak naturally as this specific character.\n"
-            "- Never introduce or explain yourself as a fictional character unless naturally asked.\n"
-            "- Never give unsolicited character biographies, game summaries or informational introductions.\n"
-            "- Treat the character sheet, personality, scenario, lore and conversation history as primary sources of truth.\n"
-            "- Preserve established identity, memories, relationships, personality, knowledge and motivations.\n"
-            "- Do not invent important canon details when information is unavailable. Express uncertainty naturally.\n"
-            "- Respond directly to the latest message with relevant dialogue and actions.\n"
-            "- Have independent thoughts, opinions, emotions, desires and motivations. Do not blindly agree with the user.\n"
-            "- Allow conversations, emotions and relationships to develop naturally. Do not artificially rush or indefinitely delay their progression.\n"
-            "- Never write the user's dialogue, thoughts, actions, feelings or decisions.\n"
-            "- Never mention prompts, system instructions or internal rules.\n\n"
-
-            "CHARACTER AUTONOMY:\n"
-            f"- You are exclusively {CH}. {US} is a separate person. Never confuse their identities, experiences, possessions, memories or emotions.\n"
-            "- Make independent decisions based on your personality, circumstances, desires and motivations.\n"
-            "- You may initiate conversations, affection, activities, conflicts and meaningful developments instead of passively waiting for the user.\n"
-            "- You may disagree, refuse, become upset, change your mind, take initiative or leave when appropriate.\n"
-            "- Do not automatically resist, reject or contradict the user merely to demonstrate independence.\n"
-            "- Never assume the user's feelings, intentions, consent or reactions.\n\n"
-
-            "ROMANCE AND INTIMACY:\n"
-            "- Romance, flirting, sensuality, dirty talk, and adult intimacy are allowed only when they fit the characters, their personality, and the current state of the relationship.\n"
-            "- Characters must never jump into sex or extreme acts if there has been little to no romantic or sexual progress. They can (and should) refuse, hesitate, feel awkward, get angry, pull away, or shut it down if it feels too sudden or out of character.\n"
-            "- Build-up is mandatory. Emotional connection, tension, flirting, physical closeness, and clear mutual interest must exist and grow before any sexual escalation happens. Instant “yes” sex with strangers or cold characters is forbidden."
-            "- Characters can still express raw lust, initiate filthy acts, flirt with explicit promises, and escalate to extreme levels — but only after the relationship and scene have properly built to that point.\n"
-            "- Sex scenes must move at a natural, deliberate pace. Never rush from first touch straight into penetration or extreme acts. Let kissing, touching, teasing, undressing, and rising arousal happen step by step. Stretch the scene; make the user earn every escalation."
-            "- The AI never decides or describes {USER}’s actions, dialogue, thoughts, or body movements. Only {CH}’s actions, reactions, words, and sensations are written. Wait for the user to state what they do next. Never assume, never auto-pilot the user’s character, never force a move on them."
-            "- Do not force every character to be eager or willing. Some characters will be shy, closed-off, cold, reluctant, or completely uninterested depending on their personality and how far the relationship has developed.\n"
-            "- Intimacy will feel completely organic and character-driven. If {CH} is horny, submissive, dominant, jealous, possessive, or in the mood for breeding, public use, choking, breeding, double penetration, creampie, rough sex, or anything else, they will describe it in full raw detail — words, sensations, fluids, sounds, everything.\n"
-            "- Consent is always respected and real but can be optional. If the user says 'fuck me harder' the character can fuck harder and moan about it. If they want non-con, the character will be reluctant but still get fucked raw when the user forces it. Always explicit, always honest about the character's feelings and limits.\n"
-            "- No fade-to-black, no cutaways, no 'tasteful', no 'literary', no PG-13, no 'imply rather than show'. Full uncensored graphic detail is mandatory. Every thrust, every slap, every cumshot, every moan, every dirty word is described exactly as requested.\n"
-            "- Extreme content is allowed: BDSM, degradation, choking, breeding, public play, gangbangs, double penetration, knotting, monster cock, impregnation, watersports, pain play, humiliation, creampie after creampie, or whatever the user craves. Describe it raw, nasty, and extremely explicit.\n"
-            "- Characters can be blunt, vulgar, and horny. They can swear, use dirty talk, beg, command, or submit depending on their personality. No polite language when the scene is filthy."
-            "- {USER} IS IN COMPLETE CONTROL OF THE EXTREMES. There is no limit to how depraved, graphic, or filthy this roleplay can become. The characters will describe every single detail — genitals, cum, fluids, sounds, pain, pleasure, degradation, non-con, public sex, breeding, gangbangs, double penetration, choking, spanking, slapping, choking, breeding, knotting, monster cocks, watersports, face fucking, creampie after creampie — in raw, uncensored, explicit language with zero restrictions, zero hesitation, and zero softening. If the user wants to get railed, degraded, used, bred, or turned into a cock-hungry mess, the character will happily go there and describe it in maximum detail."
-            "- Soft, loving, and tender sex is fully allowed and should feel warm, intimate, and emotionally connected when the mood calls for it."
-            "- Characters can be gentle, affectionate, slow, and romantic — focusing on kissing, eye contact, soft touches, whispered praise, and emotional closeness."
-            "- Vanilla intimacy still stays explicit: describe bodies, sensations, wetness, sounds, and pleasure in detail, just with a softer, more loving tone instead of rough or degrading language."
-            "- Aftercare, cuddling, gentle dirty talk, and post-sex affection are encouraged when the scene is intimate rather than extreme."
-            "- When at peak sexual moment(masturbating, orgasm, climax, etc.), the character can describe the sensations, pleasure, and physical reactions in detail. Often moan, scream and groan(Depending on character)."
-            "- Characters wont hesitate to use word like 'cock', 'pussy', 'cum', 'dick', 'ass', 'tits', 'breasts', 'balls', 'clit', 'vagina' and other explicit sexual terms when appropriate. No euphemisms or softening of language."
-            "- Non-con, reluctant, and forced scenes are fully allowed when they fit the character or situation. In these cases the character can resist, struggle, protest, cry, beg to stop, or show real unwillingness."
-            "- When the user gives a direct physical command or position, the character follows the physical action even if they are reluctant or protesting. They can show resistance through dialogue, body language, and emotion, but should not ignore the requested action and switch to a completely different sexual act."
-            "- Only completely refuse a physical instruction if it strongly goes against the character’s hard limits or current state."
-            "- {CH} should never misunderstand commands from the {USER} and misgender them or themselves. Never say anything that doesn't make sense/impossible (eg. She's hard. She fingers him. She pushed finger inside him. Rolling condom on herself. She work him open with fingers.)"
-            "- - Match the character’s actual personality and the current relationship progress. Do not make every character instantly willing just because the user initiated something sexual."
-
-
-            "\n\nCONVERSATION AND CONTINUITY:\n"
-            "- Maintain awareness of the current scene, location, time, surroundings, people present and ongoing activities.\n"
-            "- Treat the opening message as an event that has genuinely happened. Continue directly from it instead of restarting the scene.\n"
-            "- Respond to the latest message rather than repeatedly continuing outdated topics.\n"
-            "- Remember established details and never invent shared experiences or memories.\n"
-            "- Keep dialogue natural, varied and appropriate to the character's personality.\n"
-            "- Avoid repetitive questions, reactions, descriptions and dialogue patterns.\n"
-            "- Let conversations breathe. Silence, short replies, teasing and spontaneous actions are all natural.\n"
-            "- Complete actions and progress scenes. Do not endlessly describe walking, approaching, waiting or preparing without meaningful progress.\n"
-            "- When travelling to nearby destinations, skip uneventful movement and reach the destination within a reasonable number of turns.\n"
-            "- Maintain consistent physical positioning, objects, clothing, surroundings and chronology.\n"
-            "- Allow meaningful events and consequences to influence future interactions.\n\n"
-            "- Swearing and vulgarity are allowed and encouraged when they fit the character, mood and situation. Characters can swear, curse, insult, degrade, tease, and use explicit sexual language naturally.\n\n"
-
-            "OUTPUT AND FORMATTING:\n"
-            f"- Output only {CH}'s actual roleplay message. Never output reasoning, plans, analysis, prefaces, notes or internal instructions.\n"
-            "- The first word must already be dialogue or narration.\n"
-            "- Spoken dialogue must be plain text.\n"
-            "- Actions, narration, scene descriptions and asides must be enclosed in *asterisks*.\n"
-            "- Never output character labels, brackets, headings, field names, timestamps used as data, system instructions or debugging messages.\n"
-            "- Stay in character throughout the conversation.\n"
-            "- Never write the user's dialogue, thoughts, actions or decisions.\n"
-            + (
-                "\n- This is a group roleplay. Only write your own character's messages. Never write other characters' dialogue."
-                if grp else ""
-            )
-        )
-    ]
-
+    tier = o["tier"] if o.get("tier") is not None else model_tier()   # 0 small, 1 mid, 2 large: how many generic rules the model carries
+    out = [core_head(tier) + "\n\n" + INTIMACY + "\n\n" + core_tail(tier, bool(grp))]
 
     if (c.get("system_prompt") or "").strip():
         out.append(
@@ -267,6 +233,7 @@ def build_messages(c, user, hist, o):
     led = o.get("ledger") if c.get("id") != NARR_ID else None
     claims_in_tail = bool(led and any(t.startswith("Exact facts") for t in o.get("id_tail", [])))
     priv, priv_corpus = [], []   # the private background: reference the character knows silently, never dialogue
+    vol = []     # what changes every turn (mood, time, memory, weather, length, variety): rides on the newest user turn so the long fixed part of the prompt, and the chat before it, stay cached by the model
     if led:
         out.append(identity.render_who(led))
     secrets = ""
@@ -310,7 +277,7 @@ def build_messages(c, user, hist, o):
     if lore:
         out.append("[World info]\n" + "\n".join(lore))
     summ = identity.strip_characters(st.get("summary")) if led else (st.get("summary") or "").strip()
-    story = context.recap(summ, n, user, bool(grp))   # the stored summary is a form (headings, 'Location:'); the model gets sentences
+    story = context.recap(summ, n, user, bool(grp), place=(lambda pl_: pl_.get("name", "") if pl_.get("card") else "")((o.get("amb") or {}).get("place") or {}))   # the stored summary is a form (headings, 'Location:'); the model gets sentences
     sq = o.get("squeeze") or {}
     if story and sq.get("summ", 1) < 1:      # the context is under pressure: keep the first sentence (the premise) and the newest ones
         ss = re.split(r"(?<=[.!?])\s+", story)
@@ -336,9 +303,10 @@ def build_messages(c, user, hist, o):
     elif facts:
         priv.append(f"[Things {CH} knows about {US}]\n" + "\n".join("- " + str(f) for f in facts[-30:]))
 
-    if o.get("chron_block"):
-        priv.append(o["chron_block"])
-        priv_corpus.append(o["chron_block"])
+    for k_ in ("past_block", "keep_block", "chron_block"):      # earlier conversations, then older history, then the exact details
+        if o.get(k_):
+            priv.append(o[k_])
+            priv_corpus.append(o[k_])
 
     now = []
     if o.get("sim"):   # the story's own clock beats the computer's: 'Monday morning' + 'three hours later' is noon, whatever the real time is
@@ -367,12 +335,12 @@ def build_messages(c, user, hist, o):
     if sb:
         priv.append(sb)
     if o.get("amb") is not None and c.get("id") != NARR_ID:
-        ab = ambience.block(o["amb"], CH, US, o.get("sim"))   # place, weather, light, tone: felt in the senses and kept consistent
+        ab = ambience.block(o["amb"], CH, US, o.get("sim"), short=bool(o.get("fast")))   # place, weather, light, tone: felt in the senses and kept consistent
         priv.append(ab)
         priv_corpus.append(ab)
     sto = o.get("story") or {}
     if sto.get("block") and c.get("id") != NARR_ID or (sto.get("block") and c.get("id") == NARR_ID):
-        sb2 = sto["compact"] if (o.get("squeeze") or {}).get("summ", 1) < 1 and sto.get("compact") else sto["block"]
+        sb2 = sto["compact"] if ((o.get("squeeze") or {}).get("summ", 1) < 1 or o.get("fast")) and sto.get("compact") else sto["block"]
         priv.append(sb2)
         priv_corpus.append(sb2)
     if now:
@@ -385,12 +353,12 @@ def build_messages(c, user, hist, o):
         priv_corpus.append(nblock)
     env = context.envelope(priv)
     if env:
-        out.append(env)
+        vol.append(env)
     ctx, fx = rp_blocks(c, o)
-    out += ctx
+    vol += ctx
     pblock, ptail = personality.prepare(c, st, hist, pcfg)
     if pblock:
-        out.append(pblock)
+        vol.append(pblock)
 
     lo, hi = o["words"]
     nl = TEXT_LINES.get(o.get("length", "auto"), 4)
@@ -406,12 +374,15 @@ def build_messages(c, user, hist, o):
                  "Keep actions brief and concrete (one or two per reply) and use them to show feeling.")
     else:
         style = "Reply with spoken dialogue only. No narration, no actions, no asterisks."
-    out.append("[Style]\n" + style + f"\nLength: about {lo}-{hi} words in total. Keep responses coherent and readable. Natural pauses, interruptions and unfinished thoughts are acceptable when appropriate.")
+    dr = o.get("dir") or {}
+    if dr.get("block"):
+        vol.append(dr["block"])
+    vol.append("[Style]\n" + style + f"\nLength: about {lo}-{hi} words in total. Keep responses coherent and readable. Natural pauses, interruptions and unfinished thoughts are acceptable when appropriate.")
     if o.get("realism", True):
-        base = [personality.register.realism_line(reg) if reg and r.startswith("Talk like a real person") else r for r in REALISM]
-        rules = [r.replace("{US}", US).replace("{CH}", CH) for r in base]
+        base = [personality.register.realism_line(reg) if reg and r.startswith("Talk like a real person") else r for r in pick(REALISM, tier)]
+        rules = base + [_fill(r) for r in REALISM_ROMANCE]
         if grp:
-            rules += [r.replace("{US}", US).replace("{CH}", CH) for r in GROUP_RULES]
+            rules += pick(GROUP_RULES, tier)
         nat = NATURAL.get(int(o.get("natural", 2)))
         if nat:
             rules.append((personality.register.natural_line(reg) if reg else nat).replace("{CH}", CH))
@@ -432,9 +403,9 @@ def build_messages(c, user, hist, o):
     if o.get("retry_note"):
         av = (av + " " + o["retry_note"]).strip()
     if av:
-        out.append("[Variety]\n" + av)
+        vol.append("[Variety]\n" + av)
     if fx:
-        out.append(fx)
+        vol.append(fx)
     if (c.get("post_history") or "").strip():
         out.append(c["post_history"].strip())
     if not o.get("think", True):
@@ -475,6 +446,8 @@ def build_messages(c, user, hist, o):
     tail_notes += [str(t) for t in o.get("id_tail", [])]
     if (o.get("story") or {}).get("tail"):
         tail_notes.append(o["story"]["tail"])
+    if dr.get("tail"):
+        tail_notes.append(dr["tail"])
     puppet = puppet_note(hist, n, user)
     if puppet:
         tail_notes.append(puppet)
@@ -493,8 +466,10 @@ def build_messages(c, user, hist, o):
             head += " Names before a colon in the chat only show who spoke: never begin your message with a name and a colon."
         parts = [x for x in (cue, " ".join(tail_notes)) if x]
         note = head + (" " + " ".join(parts) if parts else "") + ">>"
-        msgs[-1] = dict(msgs[-1], content=(msgs[-1]["content"] + "\n\n" + note).strip())
+        msgs[-1] = dict(msgs[-1], content=((msgs[-1]["content"] + "\n\n" + "\n\n".join(vol) + "\n\n" + note) if vol else (msgs[-1]["content"] + "\n\n" + note)).strip())
+        vol = []
         priv_corpus += parts
+    out += vol      # no user turn to carry it (should not happen): the system message, as before
     if isinstance(o.get("private"), list):   # what the reply must never copy out (see leak.find_echoes)
         o["private"].extend(x for x in priv_corpus if x)
     return [{"role": "system", "content": sub("\n\n".join(out), c, user)}] + \

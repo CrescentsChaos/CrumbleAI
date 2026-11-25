@@ -108,23 +108,34 @@ def _score(text, strong, weak):
 
 
 def derive(messages, scenario="", notes=(), sim=None):
-    texts = [("scenario", _strip(scenario))] + [(m.get("role"), _strip(m.get("content"))) for m in (messages or []) if (m.get("content") or "").strip()]
-    texts += [("note", n.get("text", "")) for n in (notes or []) if n.get("kind") in ("setting", "direct", "correct") or not n.get("kind")]
-    place, indoors, weather = None, None, ""
-    for _, t in texts:
+    msgs = [(m.get("role"), _strip(m.get("content")), None) for m in (messages or []) if (m.get("content") or "").strip()]
+    texts = [("scenario", _strip(scenario), None)]
+    cards = [n for n in (notes or []) if isinstance(n.get("place"), dict)]
+    texts += msgs
+    for n in cards:     # a place card says where the chat stands from message `since` on: it goes in at that point of the story
+        at = 1 + max(0, min(int(n.get("since") or 0), len(msgs)))
+        texts.insert(min(at, len(texts)), ("place", n.get("text", ""), n["place"]))
+    texts += [("note", n.get("text", ""), None) for n in (notes or []) if not isinstance(n.get("place"), dict) and (n.get("kind") in ("setting", "direct", "correct") or not n.get("kind"))]
+    place, indoors, weather, fixed = None, None, "", False
+    for _, t, card in texts:
+        if card:        # the place card is the truth about where this is: words in the chat can no longer rename it
+            place, indoors, fixed = dict(card), card.get("indoors"), True
         marks = []
-        for name, rx, ind, sense in PLACES:
+        for name, rx, ind, sense in ([] if card else PLACES):
             for m in re.finditer(rx, t, re.I):
                 marks.append((m.start(), "place", (name, ind, sense)))
-        for m in OUTSIDE.finditer(t):
+        for m in ([] if card else OUTSIDE.finditer(t)):
             marks.append((m.start(), "out", None))
-        for m in INSIDE.finditer(t):
+        for m in ([] if card else INSIDE.finditer(t)):
             marks.append((m.start(), "in", None))
         for pos, key in _weather_events(t):
             marks.append((pos, "weather", key))
         for _, kind, val in sorted(marks, key=lambda x: x[0]):
             if kind == "place":
-                place, indoors = {"name": val[0], "indoors": val[1], "sense": val[2]}, val[1]
+                if fixed:       # inside a place card a room or corner only tells indoors or outdoors, never another place
+                    indoors = val[1]
+                else:
+                    place, indoors = {"name": val[0], "indoors": val[1], "sense": val[2]}, val[1]
             elif kind == "out":
                 indoors = False
             elif kind == "in":
@@ -132,7 +143,7 @@ def derive(messages, scenario="", notes=(), sim=None):
             else:
                 weather = val
     # mood from the most recent messages (later = heavier), plus genre words in the scenario
-    recent = [t for r, t in texts if r in ("user", "assistant")][-RECENT:]
+    recent = [t for r, t, _ in texts if r in ("user", "assistant")][-RECENT:]
     sc = _strip(scenario)
     h = sum((i + 1) / len(recent) * _score(t, HORROR2, HORROR1) for i, t in enumerate(recent)) if recent else 0
     h += 3 * len(re.findall(r"horror|haunt|creepy|ghost|slasher|supernatural thriller", sc, re.I))
@@ -148,14 +159,15 @@ def boost(amb):
     return 1.3 if (amb.get("horror") == 2 or amb.get("tender") == 2) else 1.15 if (amb.get("horror") or amb.get("tender")) else 1.0
 
 
-def block(amb, char="the character", user="the other person", sim=None):
+def block(amb, char="the character", user="the other person", sim=None, short=False):
     L = ["[Environment - keep it real and consistent]"]
-    L.append("Whatever the scene has established (place, weather, light, temperature, objects, who is around, what anyone is wearing or injured by) stays true until the story changes it. "
-             "Nothing appears or vanishes without a reason: no rain that comes and goes between messages, no extra people, no lights that change by themselves.")
+    L.append("What the scene has established (place, weather, light, objects, who is around) stays true until the story changes it." if short else
+             "Whatever the scene has established (place, weather, light, objects, who is around, clothing, injuries) stays true until the story changes it. "
+             "Nothing appears or vanishes without a reason: no rain that comes and goes, no extra people.")
     p, w, ind = amb.get("place"), amb.get("weather"), amb.get("indoors")
     if p:
-        L.append(f"Place: {p['name']} ({'indoors' if ind else 'outdoors'}). What belongs here - hear, smell, feel, see: {p['sense']}. "
-                 f"Pick one or two of these per reply, vary them, and fold them into what {char} does and notices; never list them.")
+        L.append(f"Place: {p['name']}{'' if ind is None else ' (indoors)' if ind else ' (outdoors)'}. What belongs here - hear, smell, feel, see: {p['sense']}. "
+                 f"Pick one or two per reply and fold them into what {char} does and notices." if short else f"Pick one or two of these per reply, vary them, and fold them into what {char} does and notices; never list them.")
     if w:
         g = next((x for x in WEATHER if x[0] == w), None)
         if g:
@@ -164,8 +176,9 @@ def block(amb, char="the character", user="the other person", sim=None):
             else:
                 L.append(f"Weather: {w}, outside. {char} is indoors, so the weather is heard and seen, not felt on the skin: {g[3]}. "
                          f"Nobody is wet or windblown unless they just came in from it.")
-            L.append("Weather has physics: it follows its own logic, it does not change on a whim, and it affects what people say, wear, want and do.")
-    if sim:
+            if not short:
+                L.append("Weather has physics: it follows its own logic, it does not change on a whim, and it affects what people say, wear, want and do.")
+    if sim and not short:
         L.append("Light follows the story clock: " + ("sunlight, shadows and open shops by day." if sim.get("daytime") else "darkness and artificial light, quiet streets and tired people at night." if sim.get("night") else "low light, long shadows, lamps coming on."))
     if amb.get("horror"):
         full = amb["horror"] == 2

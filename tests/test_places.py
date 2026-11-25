@@ -230,16 +230,9 @@ class VisitTests(Base):
         h = [{"role": "assistant", "content": "hi", "cid": "tom", "pl": "elsewhere"}]
         self.assertTrue(all(x is None or x["why"] != "chime" for x in (self.v(turn=t, hist=h) for t in range(3, 80))))
 
-    def test_sleepers_do_not_wander_in(self):
-        real = pl.asleep
-        try:
-            pl.asleep = lambda c, sim: c["id"] != "kai"
-            for t in range(3, 300):
-                r = self.v(turn=t, routines=True, sim={"hour": 3})
-                if r:
-                    self.assertEqual(r["id"], "kai")
-        finally:
-            pl.asleep = real
+    def test_the_clock_never_keeps_a_resident_out(self):     # a vigilante is up at 3 AM: only the scene and the model decide, never a timetable
+        got = {r["id"] for r in (self.v(turn=t, routines=True, sim={"hour": 3}) for t in range(3, 300)) if r}
+        self.assertEqual(got, {"tom", "ana", "kai"})
 
     def test_not_right_after_arriving_at_the_place(self):
         self.assertIsNone(self.v(turn=12, since=11))
@@ -298,13 +291,45 @@ class StageTests(unittest.TestCase):
     def test_tails(self):
         mk = lambda why: pl.visit_tail({"visit": {"why": why, "main": "Mira Voss", "place": "Harbour Café"}}, "{{char}}", "{{user}}")
         self.assertIn("called", mk("called"))
-        self.assertIn("wandered into", mk("arrive"))
+        self.assertIn("has just turned up", mk("arrive"))
         self.assertIn("already part of this scene", mk("chime"))
         for why in ("called", "arrive", "chime"):
             self.assertIn("Mira Voss", mk(why))
             self.assertIn("Harbour Café", mk(why))
             self.assertIn("Write only {{char}}'s next message", mk(why))
+            self.assertIn("not staff and not a helper", mk(why))      # nobody who lives there greets a visitor like an assistant
 
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class PlacesPageWiring(unittest.TestCase):
+    """The Places page, its full-page editor, the people picker and the chat background are wired into the bundled page."""
+
+    @classmethod
+    def setUpClass(cls):
+        from crumble import web
+        cls.html = web.page_bytes().decode("utf-8")
+
+    def test_page_sections_and_nav(self):
+        for needle in ("data-t=places", "<section id=places", "<section id=pedit", 'id=pview class=modal', 'id=ps2', 'id=pesave'):
+            self.assertIn(needle, self.html)
+
+    def test_tab_knows_the_new_pages(self):
+        self.assertIn("'places','pedit'", self.html)
+        self.assertIn("placesPage()", self.html)
+
+    def test_picker_is_used_for_places_and_groups(self):
+        self.assertIn("mpMount('#pe-mem','pm'", self.html)
+        self.assertIn("mpMount('#gmem','ge'", self.html)
+        self.assertNotIn("data-gm=", self.html)         # the group editor no longer lists every character as a checkbox
+        self.assertIn("MP_SHOW=6", self.html)           # only a few matches are ever shown
+
+    def test_background_covers_the_whole_chat(self):
+        self.assertIn("#chat[data-pbg]::before", self.html)
+        self.assertIn("ch.dataset.pbg='1'", self.html)
+        self.assertNotIn("L.style.backgroundImage=v", self.html)   # no longer painted on the message log only
+
+    def test_old_modal_editor_is_gone(self):
+        self.assertNotIn("plmodal", self.html)

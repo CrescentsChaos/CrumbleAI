@@ -101,7 +101,19 @@ def check(text, pl):
 
 
 def repair(text, pl):
-    """Last resort: drop the closing question (keeping everything else). Never leaves the reply empty."""
+    """Drop the closing question (keeping everything else), again if the one before it was a question too ("Anything else? Really?").
+    Never leaves the reply empty. Since a reply is no longer regenerated for this, the repair is the whole fix."""
+    for _ in range(3):
+        out = _repair_once(text, pl)
+        if out == text:
+            break
+        text = out
+        if not ends_on_question(text):
+            break
+    return text
+
+
+def _repair_once(text, pl):
     if not pl or not pl.get("ban") or not ends_on_question(text):
         return text
     t = _clean(text)

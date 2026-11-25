@@ -1,0 +1,26 @@
+{
+ "id": "27ace74c",
+ "name": "Great Sphinx of Giza",
+ "biome": "Desert",
+ "description": "A colossal limestone statue featuring the body of a reclining lion and the head of a human, traditionally identified as Pharaoh Khafre. It stands as one of the world's oldest and most recognizable monumental sculptures, guarding the ancient Giza Necropolis.",
+ "atmosphere": "Ancient, mysterious, and imposing. Desert winds sweep across the monument while shifting sunlight creates dramatic shadows across its weathered face. The surrounding ruins give the area a sense of forgotten civilization and buried secrets.",
+ "history": "Believed to have been constructed during Egypt's Fourth Dynasty, around 2500 BCE, the Great Sphinx is generally associated with Pharaoh Khafre. Carved directly from a massive limestone outcrop, it was likely intended as a royal guardian symbolizing the pharaoh's strength and divine authority. Over thousands of years, it became buried beneath desert sand several times before being excavated and restored.",
+ "objects": [
+  "Limestone statue, stone pedestal, ancient temple ruins, ceremonial pathways, weathered inscriptions, archaeological tools, stone blocks, offering chambers, and "
+ ],
+ "activities": [
+  "Exploring the monument, photographing its enormous structure, studying ancient Egyptian history, examining archaeological remains, taking guided tours, and inve"
+ ],
+ "exits": [
+  "Pyramids of Giza"
+ ],
+ "events": [
+  "Archaeological excavations, historical tours, cultural celebrations, conservation activities, and occasional discoveries of ancient artifacts or previously overlooked structural details."
+ ],
+ "secrets": [
+  "Hidden cavities, underground archaeological remains, mysterious erosion patterns, and unresolved questions about its original construction and purpose. Its weathered body and missing nose have inspired numerous historical theories and legends."
+ ],
+ "characters": [],
+ "bg": "27ace74c.jpg",
+ "bg_v": 1
+}

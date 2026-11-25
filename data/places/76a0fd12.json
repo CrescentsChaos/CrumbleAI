@@ -1,0 +1,26 @@
+{
+ "id": "76a0fd12",
+ "name": "Pyramids of Giza",
+ "biome": "Desert",
+ "description": "An enormous ancient complex featuring three major pyramids built as royal tombs for Egyptian pharaohs. The Great Pyramid of Khufu dominates the landscape, accompanied by the pyramids of Khafre and Menkaure, along with the Great Sphinx and numerous smaller monuments.",
+ "atmosphere": "Mysterious, monumental, and timeless. Hot desert winds sweep across the sandy plateau while the immense pyramids cast long shadows. The silence of the desert contrasts with the steady presence of visitors and tour guides.",
+ "history": "Built during Egypt's Fourth Dynasty around 2600–2500 BCE, the Pyramids of Giza served as monumental royal tombs for Pharaohs Khufu, Khafre, and Menkaure. Constructed using enormous quantities of limestone and granite, they demonstrate the extraordinary engineering, organization, and architectural knowledge of ancient Egyptian civilization. The Great Pyramid remains the only surviving Wonder of the Ancient World.",
+ "objects": [
+  "Massive limestone blocks, granite chambers, ancient hieroglyphs, burial chambers, stone sarcophagi, desert pathways, temple ruins, statues, ceremonial objects, "
+ ],
+ "activities": [
+  "Exploring the pyramids, visiting burial chambers, studying ancient architecture, photographing monuments, taking guided tours, riding camels, examining archaeol"
+ ],
+ "exits": [
+  "Desert pathways lead toward the surrounding Giza Necropolis, nearby archaeological sites, and the Great Sphinx. Roads connect the plateau to Giza and Cairo."
+ ],
+ "events": [
+  "Archaeological excavations, guided historical tours, cultural celebrations, occasional sound and light shows, and discoveries of previously unexplored chambers or ancient artifacts."
+ ],
+ "secrets": [
+  "Hidden chambers, unexplored passages, ancient construction techniques, sealed burial spaces, and mysterious architectural alignments continue to attract researchers. The pyramids also contain internal corridors and chambers whose original purposes remain subjects of investigation."
+ ],
+ "characters": [],
+ "bg": "76a0fd12.jpg",
+ "bg_v": 1
+}

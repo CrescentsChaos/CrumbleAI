@@ -1,0 +1,28 @@
+{
+ "id": "13525019",
+ "name": "Gate of Divinity",
+ "biome": "",
+ "description": "A monumental gateway standing at the edge of the divine realm, constructed from enormous ancient stones and adorned with intricate carvings. It serves as the passage to the Gate of Divinity, where the boundary between mortal existence and godhood is challenged.",
+ "atmosphere": "Grand, mysterious, and oppressive. Golden light illuminates the ancient structures, contrasting with the darkness of the surrounding landscape. An overwhelming sense of divine power fills the air.",
+ "history": "The Gate of Divinity was established as the final passage toward godhood, deeply connected to Marika's ascension and the ancient rituals of the Hornsent. It became a sacred yet horrifying place where countless lives were sacrificed in pursuit of divine transcendence.",
+ "objects": [
+  "Massive stone pillars, ancient statues, engraved tablets, broken divine ornaments, golden ceremonial structures, scattered weapons, and remnants of ancient offe"
+ ],
+ "activities": [
+  "Exploring the ruins, examining ancient inscriptions, performing rituals, confronting powerful guardians, searching for hidden treasures, and attempting to pass "
+ ],
+ "exits": [
+  "The main path leads toward Enir-Ilim and the divine ascent. Smaller paths connect to nearby ruins and elevated sections of the Land of Shadow."
+ ],
+ "events": [
+  "Mysterious golden light occasionally radiates from the gateway. Ancient guardians may emerge to challenge intruders, while distant celestial sounds echo throughout the area."
+ ],
+ "secrets": [
+  "Hidden inscriptions reveal fragments of the divine ascension ritual. Concealed beneath the gateway are forgotten relics and evidence of sacrifices made during previous attempts to reach godhood."
+ ],
+ "characters": [
+  "1bb45b77"
+ ],
+ "bg": "13525019.jpg",
+ "bg_v": 1
+}
