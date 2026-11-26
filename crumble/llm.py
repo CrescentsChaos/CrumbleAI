@@ -1,10 +1,11 @@
 """Running the model: token budgeting, sampling, and the full reply pipeline."""
+import copy
 import json
 import os
 import re
 import time
 
-from . import ambience, chronicle, director, identity, keeper, leak, personality, places, recall, repeat, simtime, story
+from . import ambience, chronicle, vault, director, identity, keeper, leak, personality, places, recall, repeat, simtime, story
 from .config import CH, LLM, ROOT, US
 from .prompt import build_messages, cue_text
 from .rp.narrator import NARR_ID
@@ -163,6 +164,13 @@ def ooc_reply(b, send):
     return best
 
 
+def _num(v):
+    try:
+        return max(0, min(100, int(v)))
+    except (TypeError, ValueError):
+        return 50
+
+
 def generate_reply(b, send):
     p, c, user, hist = b["params"], b["char"], b["user"], b["history"]
     grp = b.get("grp")
@@ -279,8 +287,23 @@ def generate_reply(b, send):
             tt = set(lx.terms(t))
             return any(ct & tt and identity.claims.conflict(q, t) for ct, q in cts)
     rc = None   # search the memory once per reply (the retries below reuse it)
+    mem_state, mem_note = b.get("state"), {}
     if rcfg["on"] and cid != NARR_ID:
-        rc = recall.select(b.get("state"), hist, user=user, char=c.get("name") or "Character", cfg=rcfg, turn=turns,
+        # The server owns the memory: bring back what the page forgot (a fresh browser, cleared site data, a failed save), then read every message
+        # not yet read (including the one just sent), so what was said a moment ago is already findable. No model call.
+        mem_state = dict(b.get("state") or {})
+        if isinstance(mem_state.get("mem"), dict):
+            mem_state["mem"] = copy.deepcopy(mem_state["mem"])
+        vkey = b.get("_vault")
+        if vkey:
+            mem_note["restored"] = vault.restore_into(vkey, mem_state)
+        gnames = [m_.get("name") for m_ in (grp or {}).get("members", []) if m_.get("name")]
+        try:
+            ing_ = recall.ingest(mem_state, full, user=user, char=c.get("name") or "Character", group_names=gnames, viewer=c.get("name") or "Character")
+            mem_note.update(ingested=ing_["read"], rolled_back=ing_["rolled_back"])
+        except Exception as e_:      # memory trouble must never stop a reply
+            mem_note["error"] = str(e_)[:160]
+        rc = recall.select(mem_state, hist, user=user, char=c.get("name") or "Character", cfg=rcfg, turn=turns,
                            known_extra=[m_.get("name") for m_ in (grp or {}).get("members", [])], fresh=bool(led and led["fresh"]), veto=veto)
     if led:   # now that the memory search is done, "does anyone know this?" can include what it found
         identity.analyze(led, full, known + [t_["text"] for t_ in (rc or {}).get("trace", [])] + list((rc or {}).get("short", [])), kind)
@@ -291,17 +314,25 @@ def generate_reply(b, send):
     pool, id_pool, cands, grams = [], [], [], None
     best, retry_note, tries, dropped, used = None, "", 0, 0, 0
     tlog, spent, first_wall, last_wall = [], 0.0, 0.0, 0.0   # what fired, and the time the attempts took
+    circ_ = affs_ = rom_ = None
+    if grp and cid != NARR_ID:      # how the characters feel about each other (the page keeps it with the chat; the server only reads it)
+        from .rp import circle as _circ
+        ms_ = [m_ for m_ in grp.get("members", []) if m_.get("id") != NARR_ID]
+        circ_ = _circ.seed(ms_, b.get("circle")) if b.get("circle") else None
+        affs_ = {str(k_): _num(v_) for k_, v_ in (b.get("affs") or {}).items()} if isinstance(b.get("affs"), dict) else None
+        rom_ = {str(k_): _num(v_) for k_, v_ in (b.get("rom") or {}).items()} if isinstance(b.get("rom"), dict) else None
     quick = bool(p.get("quick", False))   # Quick replies: at most one re-roll, and only for real mistakes (not for style nits)
     tries_max = 2 if quick else 3
     for attempt in range(tries_max):
         tries = attempt
         t_att = time.monotonic()
-        o = dict(state=b.get("state"), persona=b.get("persona"), scene=b.get("scene"), clock=b.get("clock"), sim=sim, amb=amb,
+        o = dict(state=mem_state, persona=b.get("persona"), scene=b.get("scene"), clock=b.get("clock"), sim=sim, amb=amb,
                  gap_s=gap_s, mode=mode, actions=p.get("actions", True), realism=p.get("realism", True),
                  natural=p.get("natural", 2), think=think, fast=bool(p.get("fast", False)), fold=p.get("fold", False), words=(lo, hi), length=p.get("length", "auto"), tail=tail,
                  retry_note=retry_note, group=grp, rp=b.get("rp"), own=own, pers=p.get("pers"), mem=p.get("mem"), recall=rc, turn=turns,
                  ledger=led, id_tail=id_tail, full=full, trimmed=trimmed, story=sto,
-                 ooc=clean_notes((b.get("ooc") or {}).get("notes")), private=[], dir=dplan)
+                 ooc=clean_notes((b.get("ooc") or {}).get("notes")), private=[], dir=dplan,
+                 circle=circ_, affs=affs_, rom=rom_)
         budget = cap + (1500 if think else 0)
         level = 0
         while True:     # the context governor: if the prompt is heavy, carry less of the bulky layers (never the details: those live in the chronicle)
@@ -310,6 +341,11 @@ def generate_reply(b, send):
             lines = chronicle.pick(chron, qtxt, turns, plan["chron"], veto) if chron else []
             kb = keeper.render((b.get("state") or {}).get("keep"), qtxt, turns, int(plan["chron"] * .9), user, c.get("name") or "Character") if cid != NARR_ID else ""
             pb = keeper.past_block(b.get("past"), user, c.get("name") or "Character", 240 if level < 2 else 0) if cid != NARR_ID and not grp else ""
+            if rcfg["on"] and cid != NARR_ID and level > 0 and plan["mem"] < 1:
+                rc = recall.select(mem_state, hist, user=user, char=c.get("name") or "Character", cfg=rcfg, turn=turns,
+                                   known_extra=[m_.get("name") for m_ in (grp or {}).get("members", [])], fresh=bool(led and led["fresh"]), veto=veto, scale=plan["mem"])
+                rc["scaled"] = True
+                o["recall"] = rc
             o.update(squeeze=plan, chron_block=chronicle.render(lines, user, c.get("name") or "Character"), keep_block=kb, past_block=pb, private=[])
             msgs = build_messages(c, user, h_use, o)
             if sum(ntok(m["content"]) for m in msgs) <= plan["target"] or level >= 3:
@@ -474,4 +510,14 @@ def generate_reply(b, send):
                 chron_used=[i["id"] for i in lines] if chron else [])
     if rc is not None:
         best.update(recalled=rc["ids"], recall=[{"id": t["id"], "t": t["t"], "why": t["why"]} for t in rc["trace"]])
+        sent = msgs[-1]["content"] if msgs else ""
+        mem_note["injected"] = [t["id"] for t in rc["trace"] if t["text"].replace("{{user}}", user).replace("{{char}}", c.get("name") or "Character") in sent]
+        mem_note["gap"] = bool(rc.get("gap"))
+        mem_note["wanted"] = len(rc["trace"])
+    if rcfg["on"] and cid != NARR_ID and isinstance(mem_state.get("mem"), dict):
+        recall.touch(mem_state["mem"], rc["ids"] if rc else [], turns)
+        best["mem"] = mem_state["mem"]       # the page keeps this copy with the chat; the vault below keeps the other
+        if b.get("_vault"):
+            vault.save(b["_vault"], mem=mem_state["mem"], chron=(b.get("state") or {}).get("chron"), keep=(b.get("state") or {}).get("keep"))
+    best["mem_report"] = mem_note
     return best

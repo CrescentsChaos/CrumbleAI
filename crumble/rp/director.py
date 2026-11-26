@@ -4,6 +4,7 @@ import re
 
 from ..config import STOPW
 from .mentions import at_all, find_ids
+from . import circle as circ
 from .narrator import NARR_ID
 
 
@@ -33,13 +34,35 @@ def likes_hit(c, text):
     return bool(mine & set(re.findall(r"[a-z]{5,}", text.lower())))
 
 
-PACE = {"quiet": (.55, (1, 1, 2)), "natural": (1.0, (1, 2, 2, 3)), "lively": (1.5, (2, 3, 3, 4))}
+PACE = {"quiet": (.55, (1, 1, 1, 2)), "natural": (1.0, (1, 1, 2, 2, 3)), "lively": (1.5, (2, 2, 3, 4))}
+
+
+def _thread(hist, members_ids):
+    """The side conversation going on right now: the two characters who have been answering each other, and how long. -> (a, b, turns) or None."""
+    ids = []
+    for m in reversed(hist):
+        if m.get("role") != "assistant" or not m.get("cid") or m.get("cid") not in members_ids:
+            break
+        ids.append(m["cid"])
+    if len(ids) < 2 or ids[0] == ids[1]:
+        return None
+    a, b, n = ids[0], ids[1], 0
+    for k, i in enumerate(ids):
+        if i != (a if k % 2 == 0 else b):
+            break
+        n += 1
+    return (b, a, n) if n >= 2 else None
 
 
 def plan_next(g, members, hist, spoke, cap, n, user, o):
-    """Decide who speaks next (or nobody). Mentions get an answer, chatty characters speak more, and the talk winds down on its own."""
+    """Decide who speaks next (or nobody). Mentions get an answer, chatty characters speak more, and the talk winds down on its own.
+    With a circle (how the characters feel about each other) the rest of the room follows the relationships: rivals interrupt and
+    disagree, the jealous cut in, allies back each other up, two people can drift into a side conversation, and a character the
+    moment has nothing to do with stays out of it."""
     pm, caps = PACE.get(g.get("pace"), PACE["natural"])
     by_id = {c["id"]: c for c in members}
+    cc = circ.clean(o.get("circle"), list(by_id)) if o.get("circle") else None
+    affs = {str(k): v for k, v in (o.get("aff") or {}).items()}
     last = hist[-1] if hist else None
     by_user = bool(last) and last.get("role") == "user"
     text, lastc = str((last or {}).get("content") or ""), (last or {}).get("cid")
@@ -55,38 +78,86 @@ def plan_next(g, members, hist, spoke, cap, n, user, o):
     keep = bool(o.get("keep"))
     if utext:
         cap = max(cap, min(6, len(forced)))
-    res = lambda i, why, p=False: {"next": i, "why": why, "by": by, "cap": cap, "pass": p}
+
+    def res(i, why, p=False, to=None, about=None):
+        r = {"next": i, "why": why, "by": by, "cap": cap, "pass": p}
+        if to and to in by_id:
+            r["to"], r["to_name"] = to, by_id[to].get("name")
+        if about and about in by_id:
+            r["about"] = by_id[about].get("name")
+        return r
+
+    def can(i, limit=1):
+        return i in by_id and spoke.count(i) < limit
+
+    reply_to = lastc if (lastc and lastc in by_id and not by_user) else None
     if g.get("narrator") and o.get("fx") and n == 0 and NARR_ID not in spoke:
         return res(NARR_ID, "narrate")
     for i in forced:
-        if i not in spoke and i in by_id:
-            return res(i, "mention")
+        if can(i):
+            return res(i, "mention", to="")
     for i in o.get("acting") or []:
-        if i in by_id and i not in spoke:
+        if can(i):
             return res(i, "react")
     for i in aforced:
-        if i not in spoke and i in by_id and len(talked) < cap:
-            return res(i, "mention")
+        if can(i) and len(talked) < cap:
+            return res(i, "mention", to=lastc)
+    th = _thread(hist, set(by_id)) if (cc and not by_user and not forced) else None
+    if cc and reply_to and not by_user:
+        # an interruption: someone who cannot let what was just said stand, or who is jealous of the speaker
+        if len(talked) < cap + 1:
+            for i in random.sample(list(by_id), len(by_id)):
+                if i == reply_to or i in spoke or i == NARR_ID:
+                    continue
+                p = circ.pull(cc, i, reply_to)
+                heat = max(p["x"] - 50, (p["j"] - 35) * 1.1)
+                if heat > 0 and random.random() < min(.6, .12 + heat / 90) * (.6 + talk_of(by_id[i], bool(o.get("pers")))):
+                    return res(i, "jealous" if p["j"] >= 40 and p["j"] * 1.1 >= p["x"] - 15 else "interrupt", to=reply_to, about=reply_to)
+        # a side conversation carries on for a few turns between the two of them
+        if th and th[2] < 4 and len(talked) < cap + 2:
+            nxt = th[0] if lastc == th[1] else th[1]
+            if can(nxt, 2) and random.random() < .8 - .15 * th[2]:
+                return res(nxt, "thread", to=lastc)
     if len(talked) >= cap:
         return {"next": None, "cap": cap}
-    cands = [i for i in by_id if i not in spoke and (by_user or i != lastc)]
+    cands = [i for i in by_id if can(i) and (by_user or i != lastc)]
     if not cands:
         return {"next": None, "cap": cap}
-    aff = o.get("aff") or {}
     scored = []
     for i in cands:
         c = by_id[i]
-        s = .2 + .55 * talk_of(c, bool(o.get("pers"))) + (.5 if i in named else 0) + (.15 if likes_hit(c, text) else 0) + (int(aff.get(i, 50)) - 50) / 250
+        rel = 0.0
+        if cc and reply_to:
+            p = circ.pull(cc, i, reply_to)
+            rel = abs(p["f"] - 50) / 140 + p["x"] / 160 + (.15 if p["k"] not in ("auto",) else 0)
+        base = .12 + .5 * talk_of(c, bool(o.get("pers"))) + (.5 if i in named else 0) + (.15 if likes_hit(c, text) else 0) + rel + (int(affs.get(i, 50)) - 50) / 250
+        s = base
         if ment and not allf:
             s *= .3   # the user spoke to someone else: the rest mostly stay out of it
-        s = s * .7 ** len(talked) + random.uniform(0, .25)
+        if th and i not in (th[0], th[1]) and i not in named:
+            s *= .35  # two people are talking: the rest let them
+        if talked and not (i in named or likes_hit(c, text) or rel > .25):
+            s *= .45  # someone already answered and nothing here is about this one: they do not pile on
+        s = s * .7 ** len(talked) + random.uniform(0, .22)
         scored.append((s, i))
     scored.sort(reverse=True)
     must = (by_user or keep) and not talked
     for s, i in scored:
         if random.random() < min(.95, s * pm):
-            return res(i, "named" if i in named else "chat", not must)
+            why, to, about = "named" if i in named else "chat", reply_to, None
+            if cc and reply_to:
+                p = circ.pull(cc, i, reply_to)
+                if th and i not in (th[0], th[1]) and not named:
+                    why, to = "branch", ("user" if random.random() < .5 else None)
+                    to = None if to == "user" else to
+                elif p["x"] >= 35 and p["f"] < 60:
+                    why = "disagree"
+                elif p["k"] in ("ally", "friend", "family", "romance") and p["f"] >= 62 and p["t"] >= 55 and p["x"] < 30 and not by_user and random.random() < .5:
+                    why = "back"
+                elif (int(affs.get(i, 50)) - int(affs.get(reply_to, 50))) >= 35 or (int(affs.get(reply_to, 50)) - int(affs.get(i, 50))) >= 35:
+                    why = "disagree" if not by_user else why
+            return res(i, why, not must and why in ("chat", "named", "branch"), to=to, about=about)
     if must:
         i = scored[0][1]
-        return res(i, "open" if keep and not by_user else "chat")
+        return res(i, "open" if keep and not by_user else "chat", to=reply_to)
     return {"next": None, "cap": cap}

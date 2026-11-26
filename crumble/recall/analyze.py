@@ -51,7 +51,7 @@ def query(user_text, context=(), mood="", known=(), skip=()):
         for s in set(lx.terms(text)):
             qt[s] = max(qt[s], w) if s in qt else w
     skip = {s.lower() for s in skip if s}
-    return {"terms": qt, "people": [p for p in people_in(user_text, known) if p.lower() not in skip],
+    return {"text": str(user_text or ""), "terms": qt, "people": [p for p in people_in(user_text, known) if p.lower() not in skip],
             "events": lx.categories(user_text), "emo": lx.emotions_in(user_text), "mood": lx.emotion_group(mood),
             "reach": bool(lx.REACH_BACK.search(user_text or "")), "explicit": bool(lx.EXPLICIT_KEEP.search(user_text or ""))}
 

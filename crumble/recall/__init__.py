@@ -8,8 +8,10 @@
 
 The rest of the app calls only the names exported here.
 """
+from . import entities, ops, semantic
 from .learn import backfill, update
+from .ops import consolidate, ingest
 from .retrieve import DEPTH, rank, select, settings, short_term, view
 from .store import ensure, placeholders, remove, resolve, touch
 
-__all__ = ["DEPTH", "backfill", "ensure", "placeholders", "rank", "remove", "resolve", "select", "settings", "short_term", "touch", "update", "view"]
+__all__ = ["DEPTH", "backfill", "consolidate", "entities", "ingest", "ops", "semantic", "ensure", "placeholders", "rank", "remove", "resolve", "select", "settings", "short_term", "touch", "update", "view"]

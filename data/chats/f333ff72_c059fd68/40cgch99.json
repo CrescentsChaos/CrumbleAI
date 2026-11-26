@@ -1,0 +1,382 @@
+{
+ "id": "40cgch99",
+ "title": "mr presedent",
+ "updated": 1795711194.7150543,
+ "history": [
+  {
+   "role": "user",
+   "content": "mr presedent",
+   "ts": 1795711066273
+  },
+  {
+   "role": "assistant",
+   "content": "*looks up from the desk, rubs eyes* \"You know, they say all work and no play makes Donald a dull boy. But I'm not sure that's true - I think it might make me a very focused boy.\"",
+   "think": "",
+   "ts": 1795711075508,
+   "stat": {
+    "tok": 49,
+    "ms": 9007
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "dyn": {
+    "tone": "deadpan",
+    "quirk": "joke",
+    "len": "short"
+   },
+   "seen": 1795711066348,
+   "mundo": {
+    "add": [],
+    "scene": "",
+    "recent": []
+   },
+   "snap": "{\"mood\":\"neutral\",\"emoji\":\"😐\",\"energy\":\"medium\",\"affection\":50,\"facts\":[],\"summary\":\"\",\"sumUpto\":0}",
+   "thought": "I wonder what this bonk wants. Let's find out.",
+   "bd": {
+    "c": "f333ff72",
+    "dv": 0.12,
+    "h": 0
+   },
+   "mo": {
+    "m": "neutral",
+    "e": "😐",
+    "d": 0,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "talk about january 7",
+   "ts": 1795711121622
+  },
+  {
+   "role": "assistant",
+   "content": "\"January 7? Hmmm. Let me think... oh, that's right! It was a Tuesday. I remember because I had two meetings scheduled back-to-back and ended up canceling them both to play golf instead. The press called it 'unproductive,' but they didn't see the putting skills I displayed on that course.\"",
+   "think": "",
+   "ts": 1795711126925,
+   "stat": {
+    "tok": 68,
+    "ms": 5070
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "dyn": {
+    "tone": "mellow",
+    "quirk": null,
+    "len": "medium"
+   },
+   "seen": 1795711121719,
+   "mundo": {
+    "add": [],
+    "scene": "In the Oval Office, working late",
+    "recent": [
+     {
+      "text": "A casual greeting",
+      "imp": 0.07,
+      "turn": 2,
+      "ts": 1795711069435
+     }
+    ]
+   },
+   "snap": "{\"mood\":\"neutral\",\"emoji\":\"😐\",\"energy\":\"medium\",\"affection\":50,\"facts\":[],\"summary\":\"\",\"sumUpto\":0,\"cast\":{\"un\":\"\",\"ug\":null,\"wrong\":[]},\"pers\":{\"frac\":0,\"grudge\":0,\"va\":[0,0],\"mood\":\"neutral\",\"ts\":1795711069435,\"n\":1,\"drift\":[{\"ts\":1795711069435,\"score\":100,\"flags\":[]}],\"canon\":[]},\"chron\":{\"v\":1,\"seq\":0,\"turn\":2,\"covered\":2,\"items\":[]}}",
+   "thought": "this one's got a sense of humor, I like that",
+   "bd": {
+    "c": "f333ff72",
+    "dv": 2.4,
+    "h": 0
+   },
+   "mo": {
+    "m": "amused",
+    "e": "😄",
+    "d": 2,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "hlw my presedent",
+   "ts": 1795711168133
+  },
+  {
+   "role": "assistant",
+   "content": "\"Well hello there! To what do I owe the pleasure of your company today?",
+   "think": "",
+   "ts": 1795711176359,
+   "stat": {
+    "tok": 28,
+    "ms": 4753
+   },
+   "pers": {
+    "score": 50,
+    "flags": [
+     "assistant-style phrasing"
+    ],
+    "retries": 0
+   },
+   "wild": {
+    "name": "Bearded Seal",
+    "sci": "Erignathus barbatus",
+    "class": "Mammal",
+    "mood": "tense",
+    "stage": 3,
+    "of": 3,
+    "tier": 4,
+    "rarity": "Uncommon",
+    "habitat": "Coastal",
+    "sprite": "/animals/sprites/bearded_seal.png",
+    "size": 2.5,
+    "weight": 345,
+    "diet": "Carnivore"
+   },
+   "recalled": [],
+   "dyn": {
+    "tone": "tender",
+    "quirk": null,
+    "len": "short"
+   },
+   "seen": 1795711171458,
+   "mundo": {
+    "add": [],
+    "scene": "in the oval office, working late",
+    "recent": [
+     {
+      "text": "A casual greeting",
+      "imp": 0.07,
+      "turn": 2,
+      "ts": 1795711069435
+     },
+     {
+      "text": "joked about a past day",
+      "imp": 0.39,
+      "turn": 4,
+      "ts": 1795711121100
+     }
+    ]
+   },
+   "snap": "{\"mood\":\"amused\",\"emoji\":\"😄\",\"energy\":\"high\",\"affection\":52,\"facts\":[],\"summary\":\"\",\"sumUpto\":0,\"cast\":{\"un\":\"\",\"ug\":null,\"wrong\":[]},\"pers\":{\"frac\":0.25,\"grudge\":0,\"va\":[0.65,0.4],\"mood\":\"amused\",\"ts\":1795711121098,\"n\":2,\"drift\":[{\"ts\":1795711069435,\"score\":100,\"flags\":[]},{\"ts\":1795711121098,\"score\":100,\"flags\":[]}],\"canon\":[]},\"chron\":{\"v\":1,\"seq\":0,\"turn\":4,\"covered\":4,\"items\":[]}}",
+   "thought": "I wonder what this one wants. Let's see how this plays out.",
+   "bd": {
+    "c": "f333ff72",
+    "dv": 1.3,
+    "h": 0
+   },
+   "mo": {
+    "m": "curious",
+    "e": "🤔",
+    "d": 1,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "how old are you",
+   "ts": 1795711197970
+  },
+  {
+   "role": "assistant",
+   "content": "*Turns to face bonk, a curious gleam in his eye.* You know, I was born on June 14th. But my spirit? *That's as old as this country itself.* Strong, unyielding - the embodiment of true American values. *He grins wide.* As for my age...well, let's just say I've been around long enough to make a real difference in this world.",
+   "think": "",
+   "ts": 1795711205288,
+   "stat": {
+    "tok": 98,
+    "ms": 6466
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "dyn": {
+    "tone": "curious",
+    "quirk": null,
+    "len": "medium"
+   },
+   "seen": 1795711198658
+  }
+ ],
+ "state": {
+  "mood": "curious",
+  "emoji": "🤔",
+  "energy": "high",
+  "affection": 53,
+  "facts": [],
+  "summary": "",
+  "sumUpto": 0,
+  "log": [
+   {
+    "ts": 1795711069435,
+    "mood": "neutral",
+    "emoji": "😐",
+    "aff": 50,
+    "thought": "I wonder what this bonk wants. Let's find out.",
+    "score": 100
+   },
+   {
+    "ts": 1795711121100,
+    "mood": "amused",
+    "emoji": "😄",
+    "aff": 52,
+    "thought": "this one's got a sense of humor, I like that",
+    "score": 100
+   },
+   {
+    "ts": 1795711170625,
+    "mood": "curious",
+    "emoji": "🤔",
+    "aff": 53,
+    "thought": "I wonder what this one wants. Let's see how this plays out.",
+    "score": 100
+   }
+  ],
+  "cast": {
+   "un": "",
+   "ug": null,
+   "wrong": []
+  },
+  "pers": {
+   "frac": 0.15,
+   "grudge": 0,
+   "va": [
+    0.25,
+    0.4
+   ],
+   "mood": "curious",
+   "ts": 1795711170625,
+   "n": 3,
+   "drift": [
+    {
+     "ts": 1795711069435,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795711121098,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795711170625,
+     "score": 100,
+     "flags": []
+    }
+   ],
+   "canon": []
+  },
+  "chron": {
+   "v": 1,
+   "seq": 0,
+   "turn": 6,
+   "covered": 6,
+   "items": []
+  },
+  "mem": {
+   "v": 1,
+   "seq": 0,
+   "turn": 6,
+   "scene": "In the Oval Office, working at the desk",
+   "recent": [
+    {
+     "text": "A casual greeting",
+     "imp": 0.07,
+     "turn": 2,
+     "ts": 1795711069435
+    },
+    {
+     "text": "joked about a past day",
+     "imp": 0.39,
+     "turn": 4,
+     "ts": 1795711121100
+    },
+    {
+     "text": "{{user}} greeted me warmly",
+     "imp": 0.13,
+     "turn": 6,
+     "ts": 1795711170627
+    }
+   ],
+   "items": [],
+   "legacy": true
+  }
+ },
+ "cfg": {
+  "mode": "story",
+  "length": "auto",
+  "scene": "",
+  "notes": [],
+  "theme": null,
+  "places": [
+   {
+    "id": "87ab5c0b",
+    "since": 3
+   }
+  ],
+  "doing": [
+   {
+    "since": 5,
+    "pid": "87ab5c0b",
+    "key": "87ab5c0b|1|3|0",
+    "turn": 5,
+    "ids": [
+     "f333ff72"
+    ],
+    "people": {
+     "f333ff72": {
+      "id": "f333ff72",
+      "here": true,
+      "doing": "Admiring the statue's grandeur, contemplating his legacy",
+      "state": "free",
+      "free": 0.8,
+      "stance": "Nods thoughtfully, offers a proud smile",
+      "away": "",
+      "wants": "To be remembered for eternity"
+     }
+    },
+    "clock": "Tuesday, around 9:00 AM (morning)"
+   }
+  ]
+ },
+ "rp": {
+  "rel": {
+   "f333ff72": {
+    "type": "auto",
+    "v": 3.82,
+    "ms": [],
+    "hist": [],
+    "peak": 3.82
+   }
+  },
+  "body": {
+   "user": {
+    "inj": [],
+    "ill": [],
+    "tired": 0,
+    "dead": false,
+    "died": null,
+    "stash": null,
+    "rev": 0,
+    "n": 0,
+    "ko": false
+   },
+   "f333ff72": {
+    "inj": [],
+    "ill": [],
+    "tired": 0,
+    "dead": false,
+    "died": null,
+    "stash": null,
+    "rev": 0,
+    "n": 0,
+    "ko": false
+   }
+  }
+ }
+}

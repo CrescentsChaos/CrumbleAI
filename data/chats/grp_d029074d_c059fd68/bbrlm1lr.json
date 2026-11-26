@@ -1,0 +1,821 @@
+{
+ "id": "bbrlm1lr",
+ "title": "hlw",
+ "updated": 1795710817.0788233,
+ "history": [
+  {
+   "role": "user",
+   "content": "hlw",
+   "ts": 1795710609006,
+   "csnap": "null"
+  },
+  {
+   "role": "assistant",
+   "content": "\"Hello,\" *Asa replies, a hint of a smile playing at the corners of her mouth. The rain patters gently against the window behind her, casting a soft glow from the streetlights outside. She glances at bonk, curious to know more about this person who has greeted her so casually on this damp evening. Her posture is relaxed, but there's an air of guardedness in her eyes - she's not quite ready to let someone new into her world just yet.*",
+   "think": "",
+   "ts": 1795710622138,
+   "stat": {
+    "tok": 97,
+    "ms": 12281
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "dyn": {
+    "tone": "teasing",
+    "quirk": null,
+    "len": "medium"
+   },
+   "seen": 1795710609643,
+   "cid": "9c36fd1f",
+   "name": "Asa Mitaka",
+   "csnap": "{\"v\":1,\"pairs\":{\"246e3fcf|77b68c2c\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"77b68c2c\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|9c36fd1f\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"9c36fd1f\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|f3292c76\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|9c36fd1f\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"9c36fd1f\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|f3292c76\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"9c36fd1f|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"9c36fd1f\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"9c36fd1f|f3292c76\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"9c36fd1f\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"a224ae86|f3292c76\":{\"k\":\"ally\",\"f\":56,\"t\":62,\"x\":8,\"j\":{\"a224ae86\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0}}}",
+   "mundo": {
+    "add": [],
+    "scene": "",
+    "recent": []
+   },
+   "snap": "{\"mood\":\"neutral\",\"emoji\":\"😐\",\"energy\":\"medium\",\"affection\":50,\"facts\":[],\"summary\":\"\",\"sumUpto\":0}",
+   "snapc": "9c36fd1f",
+   "thought": "I wonder what their story is.",
+   "bd": {
+    "c": "9c36fd1f",
+    "dv": 2.4,
+    "h": 0
+   },
+   "mo": {
+    "m": "curious",
+    "e": "🤔",
+    "d": 2,
+    "f": 0
+   }
+  },
+  {
+   "role": "assistant",
+   "content": "*Power glances up from the table where she's been doodling on a napkin, her golden eyes catching the light. She cocks an eyebrow at bonk.* \"Hm? Hello to you too.\"",
+   "think": "",
+   "ts": 1795710634150,
+   "stat": {
+    "tok": 43,
+    "ms": 9724
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "dyn": {
+    "tone": "warm",
+    "quirk": null,
+    "len": "short"
+   },
+   "seen": 1795710624239,
+   "cid": "f3292c76",
+   "name": "Power",
+   "to": "9c36fd1f",
+   "csnap": "{\"v\":1,\"pairs\":{\"246e3fcf|77b68c2c\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"77b68c2c\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|9c36fd1f\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"9c36fd1f\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|f3292c76\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|9c36fd1f\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"9c36fd1f\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|f3292c76\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"9c36fd1f|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"9c36fd1f\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"9c36fd1f|f3292c76\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"9c36fd1f\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"a224ae86|f3292c76\":{\"k\":\"ally\",\"f\":56,\"t\":62,\"x\":8,\"j\":{\"a224ae86\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0}}}",
+   "mundo": {
+    "add": [],
+    "scene": "",
+    "recent": []
+   },
+   "snap": "{\"mood\":\"neutral\",\"emoji\":\"😐\",\"energy\":\"medium\",\"affection\":50,\"facts\":[],\"summary\":\"\",\"sumUpto\":0}",
+   "snapc": "f3292c76",
+   "thought": "this one seems interesting, maybe i should get to know them better",
+   "bd": {
+    "c": "f3292c76",
+    "dv": 2.4,
+    "h": 0
+   },
+   "mo": {
+    "m": "curious",
+    "e": "🤔",
+    "d": 2,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "hl @everyone",
+   "ts": 1795710752855,
+   "csnap": "{\"v\":1,\"pairs\":{\"246e3fcf|77b68c2c\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"77b68c2c\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|9c36fd1f\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"9c36fd1f\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|f3292c76\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|9c36fd1f\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"9c36fd1f\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|f3292c76\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"9c36fd1f|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"9c36fd1f\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"9c36fd1f|f3292c76\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"9c36fd1f\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"a224ae86|f3292c76\":{\"k\":\"ally\",\"f\":56,\"t\":62,\"x\":8,\"j\":{\"a224ae86\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0}}}"
+  },
+  {
+   "role": "assistant",
+   "content": "\"Hello, bonk.\" *Makima inclines her head in greeting.* \"It seems we are all here now.",
+   "think": "",
+   "ts": 1795710765332,
+   "stat": {
+    "tok": 37,
+    "ms": 10728
+   },
+   "pers": {
+    "score": 50,
+    "flags": [
+     "assistant-style phrasing"
+    ],
+    "retries": 0
+   },
+   "recalled": [],
+   "dyn": {
+    "tone": "curious",
+    "quirk": null,
+    "len": "short"
+   },
+   "seen": 1795710754412,
+   "cid": "246e3fcf",
+   "name": "Makima",
+   "csnap": "{\"v\":1,\"pairs\":{\"246e3fcf|77b68c2c\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"77b68c2c\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|9c36fd1f\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"9c36fd1f\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|f3292c76\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|9c36fd1f\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"9c36fd1f\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|f3292c76\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"9c36fd1f|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"9c36fd1f\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"9c36fd1f|f3292c76\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"9c36fd1f\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"a224ae86|f3292c76\":{\"k\":\"ally\",\"f\":56,\"t\":62,\"x\":8,\"j\":{\"a224ae86\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0}}}",
+   "mundo": {
+    "add": [],
+    "scene": "",
+    "recent": []
+   },
+   "snap": "{\"mood\":\"neutral\",\"emoji\":\"😐\",\"energy\":\"medium\",\"affection\":50,\"facts\":[],\"summary\":\"\",\"sumUpto\":0}",
+   "snapc": "246e3fcf",
+   "thought": "bonk seems to be a social individual, greeting everyone present.",
+   "bd": {
+    "c": "246e3fcf",
+    "dv": 0.12,
+    "h": 0
+   },
+   "mo": {
+    "m": "calm",
+    "e": "😌",
+    "d": 0,
+    "f": 0
+   }
+  },
+  {
+   "role": "assistant",
+   "content": "*Kobeni glances around, taking in the group. Her eyes widen slightly as she realizes everyone is looking at her.* \"Oh... h-hello to everyone too.\"",
+   "think": "",
+   "ts": 1795710777530,
+   "stat": {
+    "tok": 35,
+    "ms": 10012
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "dyn": {
+    "tone": "teasing",
+    "quirk": null,
+    "len": "short"
+   },
+   "seen": 1795710767309,
+   "cid": "a224ae86",
+   "name": "Kobeni Higashiyama",
+   "csnap": "{\"v\":1,\"pairs\":{\"246e3fcf|77b68c2c\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"77b68c2c\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|9c36fd1f\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"9c36fd1f\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|f3292c76\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|9c36fd1f\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"9c36fd1f\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|f3292c76\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"9c36fd1f|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"9c36fd1f\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"9c36fd1f|f3292c76\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"9c36fd1f\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"a224ae86|f3292c76\":{\"k\":\"ally\",\"f\":56,\"t\":62,\"x\":8,\"j\":{\"a224ae86\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0}}}",
+   "mundo": {
+    "add": [],
+    "scene": "",
+    "recent": []
+   },
+   "snap": "{\"mood\":\"neutral\",\"emoji\":\"😐\",\"energy\":\"medium\",\"affection\":50,\"facts\":[],\"summary\":\"\",\"sumUpto\":0}",
+   "snapc": "a224ae86",
+   "thought": "Why are they all looking at me?",
+   "bd": {
+    "c": "a224ae86",
+    "dv": 0.12,
+    "h": 0
+   },
+   "mo": {
+    "m": "anxious",
+    "e": "😟",
+    "d": 0,
+    "f": 0
+   }
+  },
+  {
+   "role": "assistant",
+   "content": "*Reze looks up from her book, a playful glint in her eye.* \"Well, well, look who's decided to join the party.\"",
+   "think": "",
+   "ts": 1795710789415,
+   "stat": {
+    "tok": 31,
+    "ms": 9709
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "dyn": {
+    "tone": "tender",
+    "quirk": "joke",
+    "len": "short"
+   },
+   "seen": 1795710779529,
+   "cid": "77b68c2c",
+   "name": "Reze",
+   "csnap": "{\"v\":1,\"pairs\":{\"246e3fcf|77b68c2c\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"77b68c2c\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|9c36fd1f\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"9c36fd1f\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|f3292c76\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|9c36fd1f\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"9c36fd1f\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|f3292c76\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"9c36fd1f|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"9c36fd1f\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"9c36fd1f|f3292c76\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"9c36fd1f\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"a224ae86|f3292c76\":{\"k\":\"ally\",\"f\":56,\"t\":62,\"x\":8,\"j\":{\"a224ae86\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0}}}"
+  },
+  {
+   "role": "assistant",
+   "content": "*Power grins, leaning back in her chair.* \"Well, well, well. Look who's decided to join the party.\"",
+   "think": "",
+   "ts": 1795710800514,
+   "stat": {
+    "tok": 27,
+    "ms": 9559
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "dyn": {
+    "tone": "playful",
+    "quirk": null,
+    "len": "short"
+   },
+   "seen": 1795710790778,
+   "cid": "f3292c76",
+   "name": "Power",
+   "csnap": "{\"v\":1,\"pairs\":{\"246e3fcf|77b68c2c\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"77b68c2c\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|9c36fd1f\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"9c36fd1f\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|f3292c76\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|9c36fd1f\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"9c36fd1f\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|f3292c76\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"9c36fd1f|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"9c36fd1f\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"9c36fd1f|f3292c76\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"9c36fd1f\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"a224ae86|f3292c76\":{\"k\":\"ally\",\"f\":56,\"t\":62,\"x\":8,\"j\":{\"a224ae86\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0}}}",
+   "mundo": {
+    "add": [],
+    "scene": "in a cozy cafe on a rainy night",
+    "recent": [
+     {
+      "text": "made eye contact and exchanged greetings",
+      "imp": 0.16,
+      "turn": 3,
+      "ts": 1795710631834
+     }
+    ]
+   },
+   "snap": "{\"mood\":\"curious\",\"emoji\":\"🤔\",\"energy\":\"high\",\"affection\":52,\"facts\":[],\"summary\":\"\",\"sumUpto\":0,\"cast\":{\"un\":\"\",\"ug\":null,\"wrong\":[]},\"pers\":{\"frac\":0.25,\"grudge\":0,\"va\":[0.25,0.4],\"mood\":\"curious\",\"ts\":1795710631833,\"n\":1,\"drift\":[{\"ts\":1795710631833,\"score\":100,\"flags\":[]}],\"canon\":[]}}",
+   "snapc": "f3292c76",
+   "thought": "they're a bit of a weirdo, but I like them already.",
+   "bd": {
+    "c": "f3292c76",
+    "dv": 1.3,
+    "h": 0
+   },
+   "mo": {
+    "m": "amused",
+    "e": "😄",
+    "d": 1,
+    "f": 1
+   }
+  },
+  {
+   "role": "assistant",
+   "content": "*Asa Mitaka leans forward, propping her elbows on the table and resting her chin on interlaced fingers. She cocks an eyebrow at Power.* \"Well, this is quite the little gathering we have here. Surely there must be more to this than a simple social call?\"",
+   "think": "",
+   "ts": 1795710815443,
+   "stat": {
+    "tok": 109,
+    "ms": 13300
+   },
+   "pers": {
+    "score": 38,
+    "flags": [
+     "assistant-style phrasing",
+     "uses contractions"
+    ],
+    "retries": 0
+   },
+   "recalled": [],
+   "dyn": {
+    "tone": "curious",
+    "quirk": null,
+    "len": "medium"
+   },
+   "seen": 1795710801937,
+   "cid": "9c36fd1f",
+   "name": "Asa Mitaka",
+   "csnap": "{\"v\":1,\"pairs\":{\"246e3fcf|77b68c2c\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"77b68c2c\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|9c36fd1f\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"9c36fd1f\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|f3292c76\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|9c36fd1f\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"9c36fd1f\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|f3292c76\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"9c36fd1f|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"9c36fd1f\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"9c36fd1f|f3292c76\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"9c36fd1f\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"a224ae86|f3292c76\":{\"k\":\"ally\",\"f\":56,\"t\":62,\"x\":8,\"j\":{\"a224ae86\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0}}}"
+  }
+ ],
+ "state": {
+  "mood": "neutral",
+  "emoji": "😐",
+  "energy": "medium",
+  "affection": 50,
+  "facts": [],
+  "summary": "",
+  "sumUpto": 0,
+  "log": [],
+  "members": {
+   "246e3fcf": {
+    "mood": "calm",
+    "emoji": "😌",
+    "energy": "low",
+    "affection": 50,
+    "facts": [],
+    "summary": "",
+    "sumUpto": 0,
+    "log": [
+     {
+      "ts": 1795710809632,
+      "mood": "calm",
+      "emoji": "😌",
+      "aff": 50,
+      "thought": "bonk seems to be a social individual, greeting everyone present.",
+      "score": 100
+     }
+    ],
+    "cast": {
+     "un": "",
+     "ug": null,
+     "wrong": []
+    },
+    "pers": {
+     "frac": 0,
+     "grudge": 0,
+     "va": [
+      0.226,
+      -0.377
+     ],
+     "mood": "calm",
+     "ts": 1795710809631,
+     "n": 1,
+     "drift": [
+      {
+       "ts": 1795710809631,
+       "score": 100,
+       "flags": []
+      }
+     ],
+     "canon": []
+    },
+    "mem": {
+     "v": 1,
+     "seq": 0,
+     "turn": 5,
+     "scene": "In a dimly lit café during a rainy evening",
+     "recent": [
+      {
+       "text": "Bonks greets everyone present",
+       "imp": 0.07,
+       "turn": 5,
+       "ts": 1795710809632
+      }
+     ],
+     "items": [],
+     "legacy": true
+    }
+   },
+   "77b68c2c": {
+    "mood": "neutral",
+    "emoji": "😐",
+    "energy": "medium",
+    "affection": 50,
+    "facts": [],
+    "summary": "",
+    "sumUpto": 0,
+    "log": []
+   },
+   "9c36fd1f": {
+    "mood": "curious",
+    "emoji": "🤔",
+    "energy": "high",
+    "affection": 52,
+    "facts": [],
+    "summary": "",
+    "sumUpto": 0,
+    "log": [
+     {
+      "ts": 1795710628089,
+      "mood": "curious",
+      "emoji": "🤔",
+      "aff": 52,
+      "thought": "I wonder what their story is.",
+      "score": 100
+     }
+    ],
+    "cast": {
+     "un": "",
+     "ug": null,
+     "wrong": []
+    },
+    "pers": {
+     "frac": 0.25,
+     "grudge": 0,
+     "va": [
+      0.25,
+      0.4
+     ],
+     "mood": "curious",
+     "ts": 1795710628089,
+     "n": 1,
+     "drift": [
+      {
+       "ts": 1795710628089,
+       "score": 100,
+       "flags": []
+      }
+     ],
+     "canon": []
+    },
+    "mem": {
+     "v": 1,
+     "seq": 0,
+     "turn": 2,
+     "scene": "{{char}} sits at her desk, rain pattering outside",
+     "recent": [
+      {
+       "text": "{{char}} and {{user}} greeted each other",
+       "imp": 0.16,
+       "turn": 2,
+       "ts": 1795710628089
+      }
+     ],
+     "items": [],
+     "legacy": true
+    }
+   },
+   "a224ae86": {
+    "mood": "anxious",
+    "emoji": "😟",
+    "energy": "high",
+    "affection": 50,
+    "facts": [],
+    "summary": "",
+    "sumUpto": 0,
+    "log": [
+     {
+      "ts": 1795710813250,
+      "mood": "anxious",
+      "emoji": "😟",
+      "aff": 50,
+      "thought": "Why are they all looking at me?",
+      "score": 100
+     }
+    ],
+    "cast": {
+     "un": "",
+     "ug": null,
+     "wrong": []
+    },
+    "pers": {
+     "frac": 0,
+     "grudge": 0,
+     "va": [
+      -0.5,
+      0.65
+     ],
+     "mood": "anxious",
+     "ts": 1795710813250,
+     "n": 1,
+     "drift": [
+      {
+       "ts": 1795710813250,
+       "score": 100,
+       "flags": []
+      }
+     ],
+     "canon": []
+    },
+    "mem": {
+     "v": 1,
+     "seq": 0,
+     "turn": 6,
+     "scene": "A dimly lit room with a group of people",
+     "recent": [],
+     "items": [],
+     "legacy": true
+    }
+   },
+   "f3292c76": {
+    "mood": "amused",
+    "emoji": "😄",
+    "energy": "high",
+    "affection": 53,
+    "facts": [],
+    "summary": "",
+    "sumUpto": 0,
+    "log": [
+     {
+      "ts": 1795710631833,
+      "mood": "curious",
+      "emoji": "🤔",
+      "aff": 52,
+      "thought": "this one seems interesting, maybe i should get to know them better",
+      "score": 100
+     },
+     {
+      "ts": 1795710816972,
+      "mood": "amused",
+      "emoji": "😄",
+      "aff": 53,
+      "thought": "they're a bit of a weirdo, but I like them already.",
+      "score": 100
+     }
+    ],
+    "cast": {
+     "un": "",
+     "ug": null,
+     "wrong": []
+    },
+    "pers": {
+     "frac": 0.6,
+     "grudge": 0,
+     "va": [
+      0.65,
+      0.4
+     ],
+     "mood": "amused",
+     "ts": 1795710816971,
+     "n": 2,
+     "drift": [
+      {
+       "ts": 1795710631833,
+       "score": 100,
+       "flags": []
+      },
+      {
+       "ts": 1795710816971,
+       "score": 100,
+       "flags": []
+      }
+     ],
+     "canon": []
+    },
+    "mem": {
+     "v": 1,
+     "seq": 0,
+     "turn": 8,
+     "scene": "in a cafe with friends",
+     "recent": [
+      {
+       "text": "made eye contact and exchanged greetings",
+       "imp": 0.16,
+       "turn": 3,
+       "ts": 1795710631834
+      },
+      {
+       "text": "{{char}} and {{user}} greeted each other",
+       "imp": 0.41,
+       "turn": 8,
+       "ts": 1795710816972
+      }
+     ],
+     "items": [],
+     "legacy": true
+    }
+   }
+  },
+  "chron": {
+   "v": 1,
+   "seq": 0,
+   "turn": 8,
+   "covered": 8,
+   "items": []
+  }
+ },
+ "cfg": {
+  "mode": "story",
+  "length": "auto",
+  "scene": "",
+  "notes": [],
+  "theme": null,
+  "circle": {
+   "v": 1,
+   "pairs": {
+    "246e3fcf|77b68c2c": {
+     "k": "auto",
+     "f": 45,
+     "t": 45,
+     "x": 10,
+     "j": {
+      "246e3fcf": 0,
+      "77b68c2c": 0
+     },
+     "fl": 0,
+     "ev": [],
+     "m": 0
+    },
+    "246e3fcf|9c36fd1f": {
+     "k": "auto",
+     "f": 45,
+     "t": 45,
+     "x": 10,
+     "j": {
+      "246e3fcf": 0,
+      "9c36fd1f": 0
+     },
+     "fl": 0,
+     "ev": [],
+     "m": 0
+    },
+    "246e3fcf|a224ae86": {
+     "k": "auto",
+     "f": 45,
+     "t": 45,
+     "x": 10,
+     "j": {
+      "246e3fcf": 0,
+      "a224ae86": 0
+     },
+     "fl": 0,
+     "ev": [],
+     "m": 0
+    },
+    "246e3fcf|f3292c76": {
+     "k": "auto",
+     "f": 45,
+     "t": 45,
+     "x": 10,
+     "j": {
+      "246e3fcf": 0,
+      "f3292c76": 0
+     },
+     "fl": 0,
+     "ev": [],
+     "m": 0
+    },
+    "77b68c2c|9c36fd1f": {
+     "k": "auto",
+     "f": 45,
+     "t": 45,
+     "x": 10,
+     "j": {
+      "77b68c2c": 0,
+      "9c36fd1f": 0
+     },
+     "fl": 0,
+     "ev": [],
+     "m": 0
+    },
+    "77b68c2c|a224ae86": {
+     "k": "auto",
+     "f": 45,
+     "t": 45,
+     "x": 10,
+     "j": {
+      "77b68c2c": 0,
+      "a224ae86": 0
+     },
+     "fl": 0,
+     "ev": [],
+     "m": 0
+    },
+    "77b68c2c|f3292c76": {
+     "k": "auto",
+     "f": 45,
+     "t": 45,
+     "x": 10,
+     "j": {
+      "77b68c2c": 0,
+      "f3292c76": 0
+     },
+     "fl": 0,
+     "ev": [],
+     "m": 0
+    },
+    "9c36fd1f|a224ae86": {
+     "k": "auto",
+     "f": 45,
+     "t": 45,
+     "x": 10,
+     "j": {
+      "9c36fd1f": 0,
+      "a224ae86": 0
+     },
+     "fl": 0,
+     "ev": [],
+     "m": 0
+    },
+    "9c36fd1f|f3292c76": {
+     "k": "auto",
+     "f": 45,
+     "t": 45,
+     "x": 10,
+     "j": {
+      "9c36fd1f": 0,
+      "f3292c76": 0
+     },
+     "fl": 0,
+     "ev": [],
+     "m": 0
+    },
+    "a224ae86|f3292c76": {
+     "k": "ally",
+     "f": 56,
+     "t": 62,
+     "x": 8,
+     "j": {
+      "a224ae86": 0,
+      "f3292c76": 0
+     },
+     "fl": 0,
+     "ev": [],
+     "m": 0
+    }
+   }
+  }
+ },
+ "rp": {
+  "body": {
+   "user": {
+    "inj": [],
+    "ill": [],
+    "tired": 0,
+    "dead": false,
+    "died": null,
+    "stash": null,
+    "rev": 0,
+    "n": 0,
+    "ko": false
+   },
+   "246e3fcf": {
+    "inj": [],
+    "ill": [],
+    "tired": 0,
+    "dead": false,
+    "died": null,
+    "stash": null,
+    "rev": 0,
+    "n": 0,
+    "ko": false
+   },
+   "77b68c2c": {
+    "inj": [],
+    "ill": [],
+    "tired": 0,
+    "dead": false,
+    "died": null,
+    "stash": null,
+    "rev": 0,
+    "n": 0,
+    "ko": false
+   },
+   "9c36fd1f": {
+    "inj": [],
+    "ill": [],
+    "tired": 0,
+    "dead": false,
+    "died": null,
+    "stash": null,
+    "rev": 0,
+    "n": 0,
+    "ko": false
+   },
+   "a224ae86": {
+    "inj": [],
+    "ill": [],
+    "tired": 0,
+    "dead": false,
+    "died": null,
+    "stash": null,
+    "rev": 0,
+    "n": 0,
+    "ko": false
+   },
+   "f3292c76": {
+    "inj": [],
+    "ill": [],
+    "tired": 0,
+    "dead": false,
+    "died": null,
+    "stash": null,
+    "rev": 0,
+    "n": 0,
+    "ko": false
+   }
+  },
+  "rel": {
+   "9c36fd1f": {
+    "type": "auto",
+    "v": 2.4,
+    "ms": [],
+    "hist": [],
+    "peak": 2.4
+   },
+   "f3292c76": {
+    "type": "auto",
+    "v": 3.7,
+    "ms": [],
+    "hist": [],
+    "peak": 3.7
+   },
+   "246e3fcf": {
+    "type": "auto",
+    "v": 0.12,
+    "ms": [],
+    "hist": [],
+    "peak": 0.12
+   },
+   "a224ae86": {
+    "type": "auto",
+    "v": 0.12,
+    "ms": [],
+    "hist": [],
+    "peak": 0.12
+   }
+  }
+ }
+}

@@ -48,3 +48,12 @@
 {"t": 1795634909, "kind": "reply", "mode": "story", "attempts": 1, "ms": 5375, "events": [{"attempt": 0, "rules": ["parrot"], "retried": false, "why_not": "", "ms": 5375}], "kept": ["parrot"]}
 {"t": 1795634939, "kind": "reply", "mode": "story", "attempts": 1, "ms": 9203, "events": [{"attempt": 0, "rules": ["ending"], "retried": false, "why_not": "", "ms": 9203}], "kept": ["ending"]}
 {"t": 1795635024, "kind": "reply", "mode": "story", "attempts": 1, "ms": 9938, "events": [{"attempt": 0, "rules": ["ending", "parrot", "ai_speak"], "retried": false, "why_not": "", "ms": 9938}], "kept": ["ai_speak", "ending", "parrot"]}
+{"t": 1795699840, "kind": "reply", "mode": "story", "attempts": 2, "ms": 11500, "events": [{"attempt": 0, "rules": ["ai_speak", "pattern_open"], "retried": true, "why_not": "", "ms": 9077}], "kept": []}
+{"t": 1795710416, "kind": "reply", "mode": "story", "attempts": 1, "ms": 11015, "events": [{"attempt": 0, "rules": ["ending", "ai_speak"], "retried": false, "why_not": "", "ms": 11015}], "kept": ["ai_speak", "ending"]}
+{"t": 1795710496, "kind": "reply", "mode": "story", "attempts": 1, "ms": 7375, "events": [{"attempt": 0, "rules": ["ending"], "retried": false, "why_not": "", "ms": 7375}], "kept": ["ending"]}
+{"t": 1795710511, "kind": "reply", "mode": "story", "attempts": 2, "ms": 13688, "events": [{"attempt": 0, "rules": ["dup"], "retried": true, "why_not": "", "ms": 10781}], "kept": []}
+{"t": 1795710611, "kind": "reply", "mode": "story", "attempts": 1, "ms": 12375, "events": [{"attempt": 0, "rules": ["identity_misgender"], "retried": false, "why_not": "", "ms": 12375}], "kept": ["identity_misgender"]}
+{"t": 1795710754, "kind": "reply", "mode": "story", "attempts": 1, "ms": 10797, "events": [{"attempt": 0, "rules": ["ai_speak"], "retried": false, "why_not": "", "ms": 10797}], "kept": ["ai_speak"]}
+{"t": 1795710804, "kind": "reply", "mode": "story", "attempts": 1, "ms": 13375, "events": [{"attempt": 0, "rules": ["ai_speak"], "retried": false, "why_not": "", "ms": 13375}], "kept": ["ai_speak"]}
+{"t": 1795711165, "kind": "reply", "mode": "story", "attempts": 1, "ms": 4811, "events": [{"attempt": 0, "rules": ["ai_speak"], "retried": false, "why_not": "", "ms": 4811}], "kept": ["ai_speak"]}
+{"t": 1795711194, "kind": "reply", "mode": "story", "attempts": 1, "ms": 6514, "events": [{"attempt": 0, "rules": ["ending", "identity_misgender"], "retried": false, "why_not": "", "ms": 6514}], "kept": ["ending", "identity_misgender"]}

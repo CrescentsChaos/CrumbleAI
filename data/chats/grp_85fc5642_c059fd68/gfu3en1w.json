@@ -1,0 +1,464 @@
+{
+ "id": "gfu3en1w",
+ "title": "hlw",
+ "updated": 1795710588.2138584,
+ "history": [
+  {
+   "role": "user",
+   "content": "hlw",
+   "ts": 1795710464282,
+   "csnap": "null"
+  },
+  {
+   "role": "assistant",
+   "content": "*Rias cuts across the conversation, her eyes sparkling with mischief and a soft blush on her cheeks*\n\n- Hang on, there's something I have been meaning to say... *She takes a deep breath* Bonk, would you like to come over for tea sometime? Just the two of us.",
+   "think": "",
+   "ts": 1795710477082,
+   "stat": {
+    "tok": 62,
+    "ms": 12379
+   },
+   "pers": {
+    "score": 73,
+    "flags": [
+     "uses list or heading formatting",
+     "uses contractions"
+    ],
+    "retries": 0
+   },
+   "recalled": [],
+   "dyn": {
+    "tone": "flustered",
+    "quirk": "interrupt",
+    "len": "medium"
+   },
+   "seen": 1795710464546,
+   "cid": "e8c41809",
+   "name": "Rias Gremory",
+   "csnap": "{\"v\":1,\"pairs\":{\"8924b0d6|e8c41809\":{\"k\":\"family\",\"f\":62,\"t\":60,\"x\":14,\"j\":{\"8924b0d6\":0,\"e8c41809\":0},\"fl\":0,\"ev\":[],\"m\":0}}}",
+   "mundo": {
+    "add": [
+     "e1",
+     "e2",
+     "s3"
+    ],
+    "scene": "",
+    "recent": []
+   },
+   "snap": "{\"mood\":\"neutral\",\"emoji\":\"😐\",\"energy\":\"medium\",\"affection\":50,\"facts\":[],\"summary\":\"\",\"sumUpto\":0}",
+   "snapc": "e8c41809",
+   "thought": "I hope they say yes. I want to spend more time with them.",
+   "bd": {
+    "c": "e8c41809",
+    "dv": 4.6,
+    "h": 0
+   },
+   "mo": {
+    "m": "neutral",
+    "e": "😐",
+    "d": 4,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "no",
+   "ts": 1795710499774,
+   "csnap": "{\"v\":1,\"pairs\":{\"8924b0d6|e8c41809\":{\"k\":\"family\",\"f\":62,\"t\":60,\"x\":14,\"j\":{\"8924b0d6\":0,\"e8c41809\":0},\"fl\":0,\"ev\":[],\"m\":0}}}"
+  },
+  {
+   "role": "assistant",
+   "content": "*Rias leans in, her voice a soft purr* - Bonk, you really know how to make a girl feel special with that 'no'. I suppose tea is too much to ask for after all. *She chuckles, but her eyes flash with curiosity.*",
+   "think": "",
+   "ts": 1795710507489,
+   "stat": {
+    "tok": 76,
+    "ms": 7309
+   },
+   "pers": {
+    "score": 85,
+    "flags": [
+     "uses list or heading formatting"
+    ],
+    "retries": 0
+   },
+   "recalled": [
+    "e1",
+    "e2"
+   ],
+   "dyn": {
+    "tone": "teasing",
+    "quirk": null,
+    "len": "medium"
+   },
+   "seen": 1795710500032,
+   "cid": "e8c41809",
+   "name": "Rias Gremory",
+   "csnap": "{\"v\":1,\"pairs\":{\"8924b0d6|e8c41809\":{\"k\":\"family\",\"f\":62,\"t\":60,\"x\":14,\"j\":{\"8924b0d6\":0,\"e8c41809\":0},\"fl\":0,\"ev\":[],\"m\":0}}}",
+   "mundo": {
+    "add": [],
+    "scene": "In a bustling cafe, surrounded by friends",
+    "recent": [
+     {
+      "text": "{{char}} invited {{user}} for tea",
+      "imp": 0.66,
+      "turn": 2,
+      "ts": 1795710471407
+     }
+    ]
+   },
+   "snap": "{\"mood\":\"neutral\",\"emoji\":\"😐\",\"energy\":\"medium\",\"affection\":54,\"facts\":[],\"summary\":\"\",\"sumUpto\":0,\"cast\":{\"un\":\"\",\"ug\":null,\"wrong\":[]},\"pers\":{\"frac\":0.665,\"grudge\":0,\"va\":[0,0],\"mood\":\"neutral\",\"ts\":1795710471407,\"n\":1,\"drift\":[{\"ts\":1795710471407,\"score\":73,\"flags\":[\"uses list or heading formatting\",\"uses contractions\"]}],\"canon\":[]}}",
+   "snapc": "e8c41809",
+   "thought": "I wonder what Bonk's deal is...",
+   "bd": {
+    "c": "e8c41809",
+    "dv": 3.5,
+    "h": 0
+   },
+   "mo": {
+    "m": "curious",
+    "e": "🤔",
+    "d": 3,
+    "f": 0
+   }
+  },
+  {
+   "role": "assistant",
+   "content": "*Akeno Himejima leans in, her eyes sparkling with playful mischief*\n\n- Ara ara, you certainly have a way of making one's heart race, bonk.",
+   "think": "",
+   "ts": 1795710522553,
+   "stat": {
+    "tok": 37,
+    "ms": 2843
+   },
+   "pers": {
+    "score": 71,
+    "flags": [
+     "uses list or heading formatting",
+     "too casual for this character"
+    ],
+    "retries": 1
+   },
+   "recalled": [],
+   "dyn": {
+    "tone": "flustered",
+    "quirk": null,
+    "len": "short"
+   },
+   "seen": 1795710508804,
+   "cid": "8924b0d6",
+   "name": "Akeno Himejima",
+   "to": "e8c41809",
+   "csnap": "{\"v\":1,\"pairs\":{\"8924b0d6|e8c41809\":{\"k\":\"family\",\"f\":62,\"t\":60,\"x\":14,\"j\":{\"8924b0d6\":0,\"e8c41809\":0},\"fl\":0,\"ev\":[],\"m\":0}}}",
+   "mundo": {
+    "add": [],
+    "scene": "",
+    "recent": []
+   },
+   "snap": "{\"mood\":\"neutral\",\"emoji\":\"😐\",\"energy\":\"medium\",\"affection\":50,\"facts\":[],\"summary\":\"\",\"sumUpto\":0}",
+   "snapc": "8924b0d6",
+   "thought": "He's playing hard to get, but I do love a challenge.",
+   "bd": {
+    "c": "8924b0d6",
+    "dv": 6.8,
+    "h": 0
+   },
+   "mo": {
+    "m": "amused",
+    "e": "😄",
+    "d": 6,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "call me tonoy . blue eyes white dragon down there",
+   "ts": 1795710542990,
+   "csnap": "{\"v\":1,\"pairs\":{\"8924b0d6|e8c41809\":{\"k\":\"family\",\"f\":62,\"t\":60,\"x\":14,\"j\":{\"8924b0d6\":0,\"e8c41809\":0},\"fl\":0,\"ev\":[],\"m\":0}}}"
+  }
+ ],
+ "state": {
+  "mood": "neutral",
+  "emoji": "😐",
+  "energy": "medium",
+  "affection": 50,
+  "facts": [],
+  "summary": "",
+  "sumUpto": 0,
+  "log": [],
+  "members": {
+   "e8c41809": {
+    "mood": "curious",
+    "emoji": "🤔",
+    "energy": "high",
+    "affection": 59,
+    "facts": [],
+    "summary": "",
+    "sumUpto": 0,
+    "log": [
+     {
+      "ts": 1795710471407,
+      "mood": "neutral",
+      "emoji": "😐",
+      "aff": 54,
+      "thought": "I hope they say yes. I want to spend more time with them.",
+      "score": 73
+     },
+     {
+      "ts": 1795710516812,
+      "mood": "curious",
+      "emoji": "🤔",
+      "aff": 57,
+      "thought": "I wonder what Bonk's deal is...",
+      "score": 100
+     }
+    ],
+    "cast": {
+     "un": "",
+     "ug": null,
+     "wrong": []
+    },
+    "pers": {
+     "frac": 0.464,
+     "grudge": 0,
+     "va": [
+      0.25,
+      0.4
+     ],
+     "mood": "curious",
+     "ts": 1795710516812,
+     "n": 2,
+     "drift": [
+      {
+       "ts": 1795710471407,
+       "score": 73,
+       "flags": [
+        "uses list or heading formatting",
+        "uses contractions"
+       ]
+      },
+      {
+       "ts": 1795710516812,
+       "score": 100,
+       "flags": []
+      }
+     ],
+     "canon": []
+    },
+    "mem": {
+     "v": 1,
+     "seq": 3,
+     "turn": 4,
+     "scene": "In a lively conversation with friends",
+     "recent": [
+      {
+       "text": "{{char}} invited {{user}} for tea",
+       "imp": 0.66,
+       "turn": 2,
+       "ts": 1795710471407
+      },
+      {
+       "text": "{{user}} politely declined {{char}}' invitation",
+       "imp": 0.25,
+       "turn": 4,
+       "ts": 1795710516814
+      }
+     ],
+     "items": [
+      {
+       "id": "e1",
+       "t": "episodic",
+       "text": "{{char}} invited {{user}} over for tea",
+       "imp": 0.68,
+       "ts": 1795710477082,
+       "turn": 2,
+       "n": 1,
+       "last": 4,
+       "pin": false,
+       "src": "auto",
+       "people": []
+      },
+      {
+       "id": "e2",
+       "t": "emotional",
+       "text": "{{char}} felt a flutter of anticipation and anxiety at finally expressing her feelings",
+       "imp": 0.68,
+       "ts": 1795710477082,
+       "turn": 2,
+       "n": 1,
+       "last": 4,
+       "pin": false,
+       "src": "auto",
+       "emo": "nervous",
+       "val": -0.7,
+       "link": "e1",
+       "people": []
+      },
+      {
+       "id": "s3",
+       "t": "semantic",
+       "text": "{{char}} has developed romantic feelings for {{user}}",
+       "imp": 0.5,
+       "ts": 1795710477082,
+       "turn": 2,
+       "n": 0,
+       "last": 0,
+       "pin": false,
+       "src": "auto",
+       "subj": "bond",
+       "people": []
+      }
+     ],
+     "legacy": true
+    }
+   },
+   "8924b0d6": {
+    "mood": "amused",
+    "emoji": "😄",
+    "energy": "high",
+    "affection": 56,
+    "facts": [],
+    "summary": "",
+    "sumUpto": 0,
+    "log": [
+     {
+      "ts": 1795710520490,
+      "mood": "amused",
+      "emoji": "😄",
+      "aff": 56,
+      "thought": "He's playing hard to get, but I do love a challenge.",
+      "score": 71
+     }
+    ],
+    "cast": {
+     "un": "",
+     "ug": null,
+     "wrong": []
+    },
+    "pers": {
+     "frac": 0,
+     "grudge": 0,
+     "va": [
+      0.65,
+      0.4
+     ],
+     "mood": "amused",
+     "ts": 1795710520490,
+     "n": 1,
+     "drift": [
+      {
+       "ts": 1795710520490,
+       "score": 71,
+       "flags": [
+        "uses list or heading formatting",
+        "too casual for this character"
+       ]
+      }
+     ],
+     "canon": []
+    },
+    "mem": {
+     "v": 1,
+     "seq": 0,
+     "turn": 5,
+     "scene": "In the Occult Research Club room",
+     "recent": [
+      {
+       "text": "{{char}} flirted with {{user}}",
+       "imp": 0.28,
+       "turn": 5,
+       "ts": 1795710520491
+      }
+     ],
+     "items": [],
+     "legacy": true
+    }
+   }
+  },
+  "chron": {
+   "v": 1,
+   "seq": 0,
+   "turn": 5,
+   "covered": 5,
+   "items": []
+  }
+ },
+ "cfg": {
+  "mode": "story",
+  "length": "auto",
+  "scene": "",
+  "notes": [],
+  "theme": null,
+  "circle": {
+   "v": 1,
+   "pairs": {
+    "8924b0d6|e8c41809": {
+     "k": "family",
+     "f": 62,
+     "t": 60,
+     "x": 14,
+     "j": {
+      "8924b0d6": 0,
+      "e8c41809": 0
+     },
+     "fl": 0,
+     "ev": [],
+     "m": 0
+    }
+   }
+  }
+ },
+ "rp": {
+  "body": {
+   "user": {
+    "inj": [],
+    "ill": [],
+    "tired": 0,
+    "dead": false,
+    "died": null,
+    "stash": null,
+    "rev": 0,
+    "n": 0,
+    "ko": false
+   },
+   "e8c41809": {
+    "inj": [],
+    "ill": [],
+    "tired": 0,
+    "dead": false,
+    "died": null,
+    "stash": null,
+    "rev": 0,
+    "n": 0,
+    "ko": false
+   },
+   "8924b0d6": {
+    "inj": [],
+    "ill": [],
+    "tired": 0,
+    "dead": false,
+    "died": null,
+    "stash": null,
+    "rev": 0,
+    "n": 0,
+    "ko": false
+   }
+  },
+  "rel": {
+   "e8c41809": {
+    "type": "auto",
+    "v": 8.1,
+    "ms": [],
+    "hist": [],
+    "peak": 8.1
+   },
+   "8924b0d6": {
+    "type": "auto",
+    "v": 6.8,
+    "ms": [],
+    "hist": [],
+    "peak": 6.8
+   }
+  }
+ }
+}

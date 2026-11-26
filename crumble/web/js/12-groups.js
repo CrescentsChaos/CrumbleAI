@@ -21,12 +21,12 @@ function renderGroups(){const q=($('#csearch').value||'').toLowerCase();
 $('#glist').onclick=e=>{const d=e.target.closest('.ch');if(d){pickGroup(d.dataset.gid);closeDrawer();tab('chat')}};
 let GE={};
 function openGroupEditor(g){GE=g?{...g}:{id:''};const e=g||{name:'',members:[],pace:'natural',narrator:false,scenario:''};
- $('#gname').value=e.name;$('#gpace').value=e.pace||'natural';$('#gnar').checked=!!e.narrator;$('#gscen').value=e.scenario||'';
+ $('#gname').value=e.name;$('#gpace').value=e.pace||'natural';$('#gnar').checked=!!e.narrator;$('#gscen').value=e.scenario||'';$('#gauto').checked=!!e.auto;$('#gautomax').value=e.auto_max||6;
  mpMount('#gmem','ge',{sel:e.members,pool:mpChars,placeholder:'Search characters to add…',empty:'Nobody yet. Search to add people.',hint:'At least two.'});
  $('#gdel').hidden=!GE.id;tab('gedit')}
 $('#newg').onclick=()=>openGroupEditor(null);
 $('#gsave').onclick=async()=>{const members=mpSelected('ge');if(members.length<2){alert('Pick at least two characters.');return}
- const g=await api('/api/groups','POST',{id:GE.id,name:$('#gname').value.trim()||'Group chat',members,pace:$('#gpace').value,narrator:$('#gnar').checked,scenario:$('#gscen').value});
+ const g=await api('/api/groups','POST',{id:GE.id,name:$('#gname').value.trim()||'Group chat',members,pace:$('#gpace').value,narrator:$('#gnar').checked,scenario:$('#gscen').value,auto:$('#gauto').checked,auto_max:+$('#gautomax').value||6});
  if(g.err){alert(g.err);return}S.groups=S.groups||[];const i=S.groups.findIndex(x=>x.id==g.id);i<0?S.groups.push(g):S.groups[i]=g;await pickGroup(g.id);tab('chat')};
 $('#gdel').onclick=async()=>{if(!GE.id||!confirm('Delete this group and all its chats?'))return;await api('/api/groups/'+GE.id,'DELETE');S.groups=S.groups.filter(x=>x.id!=GE.id);G=null;MEN=null;cur=null;chat=null;hist=[];renderChars();S.chars[0]?await pick(S.chars[0].id):openNew();tab('chat')};
 $('#gstrip').onclick=e=>{if(e.target.id=='gedit2'){openGroupEditor(G);return}const a=e.target.closest('[data-mid]');if(!a)return;const c=memberById(a.dataset.mid),i=$('#inp');i.value+=(i.value&&!/\s$/.test(i.value)?' ':'')+'@'+uniqueTag(c)+' ';i.focus()};

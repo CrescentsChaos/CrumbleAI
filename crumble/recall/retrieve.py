@@ -10,7 +10,10 @@ import time
 
 from ..config import CH, US
 from ..textutil import THINK, human_gap
-from . import analyze, lexicon as lx, store
+import re
+
+from . import analyze, entities as en, lexicon as lx, ops, semantic, store
+from .extract import HYPO as ex_HYPO
 
 DEPTH = {"light": dict(items=4, chars=520, core=2, sens=.65), "standard": dict(items=7, chars=950, core=3, sens=.55),
          "deep": dict(items=10, chars=1500, core=4, sens=.45)}
@@ -53,22 +56,36 @@ def _importance(i):
 def _idf(items):
     df, n = {}, max(1, len(items))
     for i in items:
-        for s in set(lx.terms(i["text"])):
+        for s in set(lx.terms(semantic.core(i["text"]))):
             df[s] = df.get(s, 0) + 1
     return {s: 1 + math.log(1 + n / (1 + c)) for s, c in df.items()}
 
 
-def _relevance(i, q, idf):
-    """-> (0..1, [why])  — topic words, people, event type and feeling, combined so any one strong signal is enough."""
+def _names(i):
+    return {p.lower() for p in list(i.get("people") or []) + list(i.get("about") or []) + ([i["who"]] if i.get("who") else []) if p and not p.startswith("{{")}
+
+
+def _relevance(i, q, idf, sem=None):
+    """-> (0..1, [why])  - topic words, meaning, people, event type and feeling, combined so any one strong signal is enough."""
     why, keep = [], 1.0
-    raw = sum(idf.get(s, 1.0) * q["terms"][s] for s in set(lx.terms(i["text"])) if s in q["terms"])
+    ctext = semantic.core(i["text"])
+    raw = sum(idf.get(s, 1.0) * q["terms"][s] for s in set(lx.terms(ctext)) if s in q["terms"])
+    if i.get("ctx"):      # the line before it in the chat: a supporting hint, at half weight, literal words only
+        raw += .5 * sum(idf.get(s, 1.0) * q["terms"][s] for s in set(lx.terms(i["ctx"])) - set(lx.terms(ctext)) if s in q["terms"])
     if raw:
         keep *= 1 - raw / (raw + 2.5)
         why.append("topic")
-    if q["people"] and {p.lower() for p in q["people"]} & {p.lower() for p in (i.get("people") or [])}:
+    if sem:
+        sc, sw, strength = semantic.score(sem[0], ctext + " " + str(i.get("obj") or ""), sem[1], i.get("kind", ""))
+        if sc:
+            keep *= 1 - sc
+            why += [w for w in sw if w not in why]
+            if strength >= 2:
+                why.append("strong meaning")
+    if q["people"] and {p.lower() for p in q["people"]} & _names(i):
         keep *= .5
         why.append("person")
-    if q["events"] and set(q["events"]) & set(lx.categories(i["text"])):
+    if q["events"] and set(q["events"]) & set(lx.categories(ctext)):
         keep *= .4
         why.append("event")
     g, v = lx.emotion_group(i.get("emo", ""))
@@ -85,14 +102,39 @@ def _relevance(i, q, idf):
     return 1 - keep, why
 
 
-def rank(m, q, turn, now):
-    """Every memory with its scores, best first. -> [{item, score, rel, rec, imp, why}]"""
-    idf = _idf(m["items"])
+HISTORY_CUE = re.compile(r"(?i)\b(?:used to|before|originally|at first|earlier|previously|no longer|changed|back then|formerly|old )\b")
+SCAFFOLD = {lx.stem(w) for w in "name happen ever last time thing things call called mean means anything something someone long ago first".split()}
+PAST_Q = re.compile(r"(?i)\b(?:remember|recall|last time|that time|told you|you said|you promised|i said|did (?:i|we|you)|what did|who gave|where did (?:we|i|you)|when did|"
+                    r"what was|what were|who was|what happened|which one|have (?:i|we|you) (?:ever )?\w+(?:ed|en)|had (?:i|we|you) (?:ever )?\w+(?:ed|en))\b")
+
+
+def rank(m, q, turn, now, viewer=""):
+    """Every visible memory with its scores, best first. -> [{item, score, rel, rec, imp, why}]"""
+    items = [i for i in m["items"] if ops.visible(i, viewer)]
+    idf = _idf(items)
+    sem = (semantic.prepare(q.get("text", "")), semantic.concept_idf(items)) if q.get("text") else None
+    hypo_q = bool(ex_HYPO.search(q.get("text", "")))
+    hist_q = bool(HISTORY_CUE.search(q.get("text", "")))
+    qt = q.get("text", "")
+    su, sc_ = re.search(r"(?i)\b(?:did i|do i|have i|i)\s+[a-z]+", qt), re.search(r"(?i)\b(?:did you|do you|have you|you)\s+[a-z]+", qt)
+    subj = "user" if su and (not sc_ or su.start() < sc_.start()) else "char" if sc_ and not su else ""    # who the question is about: "what did I give" vs "what did you give"
     out = []
-    for i in m["items"]:
-        rel, why = _relevance(i, q, idf)
+    for i in items:
+        rel, why = _relevance(i, q, idf, sem)
         rec, imp = _recency(i, turn, now), _importance(i)
         score = W_REL * rel + W_REC * rec + W_IMP * imp
+        st = i.get("status")
+        if subj and i.get("who") in ("{{user}}", "{{char}}"):
+            want = "{{user}}" if subj == "user" else "{{char}}"
+            score *= 1.25 if i["who"] == want and rel > 0 else .85 if i["who"] != want and rel > 0 else 1.0
+        if st == "hypothetical" and not hypo_q:
+            score *= .3
+        elif st == "outdated" and not hist_q:
+            score *= .2
+        elif st in ("uncertain", "disputed"):
+            score *= .92
+        if i.get("open"):
+            score *= 1.12
         if q["reach"] and i["t"] == "episodic":
             score *= 1.2
         if i.get("last") and turn - i["last"] <= 2 and rel < .5:    # it was just used: let something else have a turn
@@ -126,11 +168,11 @@ def _query_for(hist, m, st, user, char, known_extra, fresh=False):
     ctx = [] if fresh else [(THINK.sub("", x["content"])[:400], w) for x, w in zip(reversed([x for x in msgs if x is not last_user][-2:]), (.35, .2))]
     if (m.get("scene") or "").strip() and not fresh:     # the subject just changed: the old scene and old lines must not pull old memories in
         ctx.append((m["scene"], .3))
-    known = analyze.known_people(m["items"], skip=(user, char)) + [n for n in known_extra if n]
+    known = analyze.known_people(m["items"], skip=(user, char)) + [n for n in known_extra if n] + [n for n in en.known(m) if n.lower() not in {(user or "").lower(), (char or "").lower()}]
     return analyze.query(text, ctx, (st or {}).get("mood", ""), known, skip=(user, char))
 
 
-def select(st, hist, *, user="", char="", cfg=None, turn=None, now=None, known_extra=(), fresh=False, veto=None):
+def select(st, hist, *, user="", char="", cfg=None, turn=None, now=None, known_extra=(), fresh=False, veto=None, viewer=None, scale=1.0):
     """What goes into the prompt this turn.
     -> {block, short, ids, trace, q}   block = the memory text ("" if nothing earned a place), short = lines for the scene
     section, ids = what was used (so recalling it can strengthen it), trace = why each one was picked."""
@@ -140,8 +182,10 @@ def select(st, hist, *, user="", char="", cfg=None, turn=None, now=None, known_e
     now = now or store.now_ms()
     d = DEPTH[cfg["depth"]]
     q = _query_for(hist, m, st, user, char, known_extra, fresh)
-    ranked = rank(m, q, turn, now)
-    items_cap, chars = d["items"] + (2 if q["reach"] else 0), int(d["chars"] * (1.3 if q["reach"] else 1))
+    viewer = char if viewer is None else viewer
+    ranked = rank(m, q, turn, now, viewer)
+    scale = max(.2, min(1.5, float(scale)))      # the context governor asks for less (or more) here instead of cutting lines from the finished block
+    items_cap, chars = max(2, round((d["items"] + (2 if q["reach"] else 0)) * scale)), int(d["chars"] * (1.3 if q["reach"] else 1) * scale)
     caps = {"episodic": max(2, round(items_cap * .5)), "semantic": max(2, round(items_cap * .55)), "emotional": max(1, round(items_cap * .3))}
     chosen, used, spent = [], {t: 0 for t in caps}, 0
 
@@ -170,8 +214,10 @@ def select(st, hist, *, user="", char="", cfg=None, turn=None, now=None, known_e
         if len(chosen) >= items_cap:
             break
         if r["rel"] >= MIN_REL:
+            if r["item"].get("status") in ("hypothetical", "outdated") and r["score"] < .3:
+                continue
             take(r, "+".join(r["why"]) or "relevant")
-        elif (not fresh and r["item"]["t"] != "semantic" and r["imp"] >= .7 and turn - r["item"].get("turn", 0) <= AMBIENT_TURNS
+        elif (not fresh and r["item"]["t"] != "semantic" and r["imp"] >= .7 and turn - r["item"].get("turn", 0) <= (60 if r["item"].get("open") else AMBIENT_TURNS)
               and ambient < (2 if cfg["depth"] == "deep" else 1)):
             ambient += take(r, "just happened")    # still colours the mood even if nobody mentioned it
     by_id = {r["item"]["id"]: r for r in ranked}
@@ -183,20 +229,65 @@ def select(st, hist, *, user="", char="", cfg=None, turn=None, now=None, known_e
     short = short_term(m, turn)
     if fresh:
         short = [x for x in short if x.startswith("Scene:")]     # 'just happened' belongs to the topic that was dropped
+    asked_back = bool(q["reach"] or PAST_Q.search(q.get("text", "")))
+    spec = [t_ for t_, w_ in q["terms"].items() if w_ >= 1.0 and t_ not in SCAFFOLD]
+
+    def solid(r, why):
+        """Is this a real answer to the question, or a loose hint? A word from the question in the memory only counts if it covers most of what was asked."""
+        if why == "always":
+            return False
+        w = set(r["why"])
+        if w & {"person", "strong meaning", "similar word", "embedding", "event"}:
+            return True
+        if "topic" in w and spec:
+            its = set(lx.terms(semantic.core(r["item"]["text"]) + " " + str(r["item"].get("ctx") or "")))
+            return len([t_ for t_ in spec if t_ in its]) / len(spec) > .55
+        return False
+
+    gap = bool(asked_back and not fresh and not any(solid(r, why) for r, why in chosen))
     if not chosen:
-        return {"block": "", "short": short, "ids": [], "trace": [], "q": _public_q(q)}
+        blk = gap_note(user, char) if gap else ""
+        return {"block": blk, "short": short, "ids": [], "trace": [], "q": _public_q(q), "gap": gap}
     groups = {"episodic": [], "semantic": [], "emotional": []}
     for r, _ in sorted(chosen, key=lambda c: c[0]["item"].get("turn", 0)):
         i = r["item"]
-        groups[i["t"]].append(f"- {i['text']}" + (_ago(i, now) if i["t"] == "episodic" else ""))
+        groups[i["t"]].append(f"- {i['text']}" + (_ago(i, now) if i["t"] == "episodic" else "") + label(i))
     parts = [f"[What {CH} remembers. These are real. When {US} asks about any of it, answer from it exactly; otherwise let it colour the reply without reciting it. "
-             f"If a memory disagrees with what {US} actually said, what {US} said wins]"]
+             f"If a memory disagrees with what {US} actually said, what {US} said wins. A memory marked unverified, disputed, outdated or imagined is not a fact: "
+             f"never state it as one. If something {US} asks about is not here, {CH} does not remember it: say so in character, never invent]"]
     for t, head in (("episodic", f"What happened between {CH} and {US}:"), ("semantic", f"What {CH} knows:"), ("emotional", f"How {CH} remembers feeling:")):
         if groups[t]:
             parts += [head] + groups[t]
+    if gap:
+        parts.append(gap_note(user, char, short=True))
     trace = [{"id": r["item"]["id"], "t": r["item"]["t"], "text": r["item"]["text"], "why": reason, "score": r["score"],
               "rel": r["rel"], "rec": r["rec"], "imp": r["imp"]} for r, reason in chosen]
-    return {"block": "\n".join(parts), "short": short, "ids": [t["id"] for t in trace], "trace": trace, "q": _public_q(q)}
+    return {"block": "\n".join(parts), "short": short, "ids": [t["id"] for t in trace], "trace": trace, "q": _public_q(q), "gap": gap}
+
+
+def label(i):
+    """Short honesty tags: the model must not state a rumour, a replaced fact or something imagined as if it were established."""
+    st, tags = i.get("status"), []
+    if st == "uncertain":
+        tags.append("unverified")
+    elif st == "disputed":
+        tags.append("disputed: accounts conflict")
+    elif st == "outdated":
+        tags.append("outdated: no longer true")
+    elif st == "hypothetical":
+        tags.append("only imagined, never happened")
+    if i.get("open"):
+        tags.append("still open")
+    elif i.get("outcome"):
+        tags.append(i["outcome"])
+    return f" [{'; '.join(tags)}]" if tags else ""
+
+
+def gap_note(user, char, short=False):
+    if short:
+        return f"[Nothing on record matches what {US} is asking about: {CH} does not remember it.]"
+    return (f"[Nothing {CH} remembers matches what {US} is asking about. {CH} does not remember it: say so in {CH}'s own way (or ask {US}); "
+            f"never make up details.]")
 
 
 def _public_q(q):

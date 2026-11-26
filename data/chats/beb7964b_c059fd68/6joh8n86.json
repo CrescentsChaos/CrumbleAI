@@ -1,0 +1,322 @@
+{
+ "id": "6joh8n86",
+ "title": "are you the greatest model",
+ "updated": 1795711030.11728,
+ "history": [
+  {
+   "role": "assistant",
+   "content": "Siuuuu! Ready to dominate the pitch? You think you can beat me? I've trained for this!",
+   "ts": 1795710897187
+  },
+  {
+   "role": "user",
+   "content": "are you the greatest model",
+   "ts": 1795710910133
+  },
+  {
+   "role": "assistant",
+   "content": "I don't know, you tell me.",
+   "think": "",
+   "ts": 1795710919700,
+   "stat": {
+    "tok": 9,
+    "ms": 9315
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "dyn": {
+    "tone": "wry",
+    "quirk": null,
+    "len": "tiny"
+   },
+   "seen": 1795710910223,
+   "mundo": {
+    "add": [],
+    "scene": "",
+    "recent": []
+   },
+   "snap": "{\"mood\":\"neutral\",\"emoji\":\"😐\",\"energy\":\"medium\",\"affection\":50,\"facts\":[],\"summary\":\"\",\"sumUpto\":0}",
+   "thought": "I don't know if I'm the greatest, but I sure enjoy the challenge.",
+   "bd": {
+    "c": "beb7964b",
+    "dv": 6.8,
+    "h": 0
+   },
+   "mo": {
+    "m": "amused",
+    "e": "😄",
+    "d": 6,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "i think tonyo is the greatest model ps underwear model",
+   "ts": 1795710936718
+  },
+  {
+   "role": "assistant",
+   "content": "\"A challenge? I like the sound of that. But you'll have to do more than talk if you want to beat me.\" *Cristiano Ronaldo smirks, stepping closer and crossing his arms over his chest.* \"I've trained for this my whole life. You think you can compete with a five-time Ballon d'Or winner?\"",
+   "think": "",
+   "ts": 1795710943883,
+   "stat": {
+    "tok": 70,
+    "ms": 6900
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "dyn": {
+    "tone": "guarded",
+    "quirk": null,
+    "len": "medium"
+   },
+   "seen": 1795710936830,
+   "mundo": {
+    "add": [],
+    "scene": "In a locker room before a big game",
+    "recent": [
+     {
+      "text": "{{char}} was challenged to a game",
+      "imp": 0.28,
+      "turn": 3,
+      "ts": 1795710914071
+     }
+    ]
+   },
+   "snap": "{\"mood\":\"amused\",\"emoji\":\"😄\",\"energy\":\"high\",\"affection\":56,\"facts\":[],\"summary\":\"\",\"sumUpto\":0,\"cast\":{\"un\":\"\",\"ug\":null,\"wrong\":[]},\"pers\":{\"frac\":0,\"grudge\":0,\"va\":[0.65,0.4],\"mood\":\"amused\",\"ts\":1795710914069,\"n\":1,\"drift\":[{\"ts\":1795710914069,\"score\":100,\"flags\":[]}],\"canon\":[]},\"chron\":{\"v\":1,\"seq\":0,\"turn\":3,\"covered\":3,\"items\":[]}}",
+   "thought": "I'll show this Tonyo who the real greatest is.",
+   "bd": {
+    "c": "beb7964b",
+    "dv": 0.12,
+    "h": 0
+   },
+   "mo": {
+    "m": "amused",
+    "e": "😄",
+    "d": 0,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "winning Ballon d'Or's wont help you win the underwear model cup",
+   "ts": 1795711028568
+  },
+  {
+   "role": "assistant",
+   "content": "\"You think I'm just a pretty face? I'll have you know my abs are insured for $144 million. And that's not even the most impressive thing about me.\" *Cristiano Ronaldo winks and flexes, smirking.*",
+   "think": "",
+   "ts": 1795711034787,
+   "stat": {
+    "tok": 53,
+    "ms": 5376
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "dyn": {
+    "tone": "teasing",
+    "quirk": null,
+    "len": "short"
+   },
+   "seen": 1795711029245,
+   "mundo": {
+    "add": [],
+    "scene": "A locker room before a match",
+    "recent": [
+     {
+      "text": "{{char}} was challenged to a game",
+      "imp": 0.28,
+      "turn": 3,
+      "ts": 1795710914071
+     },
+     {
+      "text": "{{char}} accepted a challenge",
+      "imp": 0.2,
+      "turn": 5,
+      "ts": 1795710938118
+     }
+    ]
+   },
+   "snap": "{\"mood\":\"amused\",\"emoji\":\"😄\",\"energy\":\"high\",\"affection\":56,\"facts\":[],\"summary\":\"\",\"sumUpto\":0,\"cast\":{\"un\":\"\",\"ug\":null,\"wrong\":[]},\"pers\":{\"frac\":0,\"grudge\":0,\"va\":[0.65,0.4],\"mood\":\"amused\",\"ts\":1795710938116,\"n\":2,\"drift\":[{\"ts\":1795710914069,\"score\":100,\"flags\":[]},{\"ts\":1795710938116,\"score\":100,\"flags\":[]}],\"canon\":[]},\"chron\":{\"v\":1,\"seq\":0,\"turn\":5,\"covered\":5,\"items\":[]}}",
+   "thought": "This one's got spirit, I'll give them that.",
+   "bd": {
+    "c": "beb7964b",
+    "dv": 7.1,
+    "h": 1
+   },
+   "mo": {
+    "m": "amused",
+    "e": "😄",
+    "d": 6,
+    "f": 1
+   }
+  }
+ ],
+ "state": {
+  "mood": "amused",
+  "emoji": "😄",
+  "energy": "high",
+  "affection": 62,
+  "facts": [],
+  "summary": "",
+  "sumUpto": 0,
+  "log": [
+   {
+    "ts": 1795710914069,
+    "mood": "amused",
+    "emoji": "😄",
+    "aff": 56,
+    "thought": "I don't know if I'm the greatest, but I sure enjoy the challenge.",
+    "score": 100
+   },
+   {
+    "ts": 1795710938118,
+    "mood": "amused",
+    "emoji": "😄",
+    "aff": 56,
+    "thought": "I'll show this Tonyo who the real greatest is.",
+    "score": 100
+   },
+   {
+    "ts": 1795711030002,
+    "mood": "amused",
+    "emoji": "😄",
+    "aff": 62,
+    "thought": "This one's got spirit, I'll give them that.",
+    "score": 100
+   }
+  ],
+  "cast": {
+   "un": "",
+   "ug": null,
+   "wrong": []
+  },
+  "pers": {
+   "frac": 0,
+   "grudge": 0,
+   "va": [
+    0.65,
+    0.4
+   ],
+   "mood": "amused",
+   "ts": 1795711030002,
+   "n": 3,
+   "drift": [
+    {
+     "ts": 1795710914069,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795710938116,
+     "score": 100,
+     "flags": []
+    },
+    {
+     "ts": 1795711030002,
+     "score": 100,
+     "flags": []
+    }
+   ],
+   "canon": [
+    "Cristiano Ronaldo's abs are insured for $144 million"
+   ]
+  },
+  "chron": {
+   "v": 1,
+   "seq": 0,
+   "turn": 7,
+   "covered": 7,
+   "items": []
+  },
+  "mem": {
+   "v": 1,
+   "seq": 0,
+   "turn": 7,
+   "scene": "In a locker room, trash talking about underwear modeling",
+   "recent": [
+    {
+     "text": "{{char}} was challenged to a game",
+     "imp": 0.28,
+     "turn": 3,
+     "ts": 1795710914071
+    },
+    {
+     "text": "{{char}} accepted a challenge",
+     "imp": 0.2,
+     "turn": 5,
+     "ts": 1795710938118
+    },
+    {
+     "text": "{{char}} boasts about his abs and Ballon d'Or wins",
+     "imp": 0.47,
+     "turn": 7,
+     "ts": 1795711030003
+    }
+   ],
+   "items": [],
+   "legacy": true
+  }
+ },
+ "cfg": {
+  "mode": "story",
+  "length": "auto",
+  "scene": "",
+  "notes": [],
+  "theme": null
+ },
+ "rp": {
+  "rel": {
+   "beb7964b": {
+    "type": "auto",
+    "v": 14.02,
+    "ms": [],
+    "hist": [
+     {
+      "s": "Acquaintances",
+      "i": 1,
+      "t": 1795711040630,
+      "ty": "auto"
+     }
+    ],
+    "peak": 14.02
+   }
+  },
+  "body": {
+   "user": {
+    "inj": [],
+    "ill": [],
+    "tired": 0,
+    "dead": false,
+    "died": null,
+    "stash": null,
+    "rev": 0,
+    "n": 0,
+    "ko": false
+   },
+   "beb7964b": {
+    "inj": [],
+    "ill": [],
+    "tired": 0,
+    "dead": false,
+    "died": null,
+    "stash": null,
+    "rev": 0,
+    "n": 0,
+    "ko": false
+   }
+  }
+ }
+}

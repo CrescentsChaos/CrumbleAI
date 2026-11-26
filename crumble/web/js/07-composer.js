@@ -22,7 +22,7 @@ $('#log').onclick=e=>{const b=e.target.closest('button');
 
 /* ---------- composer + toolbar ---------- */
 $('#inp').oninput=e=>{lastAct=Date.now();e.target.style.height='auto';e.target.style.height=Math.min(e.target.scrollHeight,170)+'px';mnuI=0;mnuUpdate()};
-$('#send').onclick=send;$('#stop').onclick=()=>{roundAbort=true;ctl&&ctl.abort()};$('#skip').onclick=skipTyping;
+$('#send').onclick=send;$('#stop').onclick=()=>{typeof autoStop=='function'&&autoStop();roundAbort=true;ctl&&ctl.abort()};$('#skip').onclick=skipTyping;
 $('#inp').onkeydown=e=>{if(!$('#mnu').hidden){if(e.key=='ArrowDown'||e.key=='ArrowUp'){e.preventDefault();mnuI=(mnuI+(e.key=='ArrowDown'?1:mnuL.length-1))%mnuL.length;mnuUpdate();return}
   if(e.key=='Enter'||e.key=='Tab'){e.preventDefault();mnuPick(mnuI);return}if(e.key=='Escape'){hideMnu();return}}
  if(e.key=='Enter'&&!e.shiftKey){e.preventDefault();send()}

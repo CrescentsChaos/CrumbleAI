@@ -1,3 +1,47 @@
+MEMORY OVERHAUL: the server reads every message and keeps its own durable copy of the memory
+Drop these over your project (same relative paths), delete the __pycache__ folders, restart. Nothing to configure; existing chats keep their memories.
+
+  WHY IT FORGOT (found by inspecting the code and running the old pipeline on scripted chats):
+    - only what the USER said was kept when the model's tracker gave no usable JSON: a gift the character handed over, a promise the character made, anything done in *narration* was never stored
+    - imagined things were stored as events ("What if I kissed you?" became a romance memory) and third-party claims lost who said them
+    - no meaning match: "the pendant" could never find "a silver locket"
+    - the page owned the memory: a cleared browser, another device or a failed save lost it; chat files were written non-atomically and a torn file silently became an empty chat
+    - extraction only ran when the mood tracker ran (every 2nd reply, last 6 messages), so busy group rounds slipped past it
+    - when the prompt was squeezed the memory block was cut from the END, which removed the facts about the user first
+
+  crumble/recall/extract.py     NEW   reads every message (user, character, narration): promises, plans, secrets, gifts, decisions, injuries, feelings, relationships, claims, and salient facts. Each memory records who, about whom, status
+                                      (confirmed / uncertain / hypothetical / disputed / outdated), source, who was there (whispers), and the exact words it came from. Questions and imagined lines are never stored as events.
+  crumble/recall/entities.py    NEW   entity registry (aliases, first names), relationship timeline (a bond that ends is kept with an end turn)
+  crumble/recall/semantic.py    NEW   meaning match (word groups, misspellings, optional embedder hook) - no model call
+  crumble/recall/ops.py         NEW   incremental ingest (an edited or rewound chat undoes what it taught), conflict resolution by source reliability and time (nothing silently discarded), corroboration, closing kept/broken promises, consolidation into digests
+  crumble/recall/store.py, retrieve.py, analyze.py, __init__.py   attribution fields, archive instead of delete, tombstones; hybrid ranking (keywords + meaning + people + who-is-asking + recency + importance); status labels in the prompt; "nothing on record" note; budget scale
+  crumble/vault.py              NEW   server-side memory under data/memory/: atomic writes, checksums, rolling backups, journal, corrupt files set aside, item-level merge so a blank page cannot wipe memory, deleted chats go to data/trash
+  crumble/llm.py, prompt.py, server.py, storage.py   ingest + restore before every reply, memory report in the reply (mem_report), vault saved after replies/tracking/chat saves, /api/vault, atomic chat files with .bak1/.bak2
+  web/js/06-generate.js, 16-recall.js   page adopts the server's memory copy; deletions are tombstoned; chat_id sent with tracking
+  tools/memory_bench.py, tools/memory_heldout.py, tests/test_memory_system.py   measurements and 56 tests (python -m tools.memory_bench)
+
+GROUP CHATS: characters who know each other, "Let them talk" fixed, Auto-talk
+Drop these over your project (same relative paths), delete the __pycache__ folders, restart.
+
+  FIX  "Let them talk" never appeared: the button starts hidden and was only revealed by a function that ran when you toggled Dice or OOC. The header now shows it as soon as a group is open.
+
+  crumble/rp/circle.py              NEW   the circle: a bond for every pair of characters (Friends, Allies, Rivals, Romantic, Family, Enemies, or undecided) with warmth, trust, tension and jealousy for each side.
+                                          Starts from each sheet's Relationships / Backstory text, moves with what they say to each other (no model call), and can be set by hand.
+                                          Romance never applies when either character is under 18. Also: different opinions about the user, where each character's loyalty leans, group trust.
+  crumble/rp/director.py                  who speaks next now follows those bonds: rivals and the jealous interrupt, people who differ disagree, allies back each other up, two characters can drift into a side
+                                          conversation (a few turns, the rest stay out), a bystander may start a separate topic; characters a message has nothing to do with stay out; quieter default pacing
+  crumble/prompt.py                       each speaker gets only THEIR side: how they feel about each person here, what they have noticed about how the others see the user, where their loyalty leans; new cues (interrupt, jealous, disagree, back, thread, branch); others' personality line in the group block
+  crumble/llm.py, server.py               circle passed to every group reply; /api/circle and /api/circle/observe; groups save "auto" and "auto_max"
+  crumble/web/js/27-circle.js       NEW   Memory tab > "Between the characters" (every pair: bond, warmth, trust, tension, jealousy; group trust; each person's stance on you); Auto-talk
+  crumble/web/js/03,05,06,07,12,13        header button fix; messages show "→ Name" and a small tag (cut in, jealous, disagrees, backs them up, side talk, new topic); undo reverses bond changes; group editor option
+  crumble/web/index.html, css/16-circle.css   Auto-talk switch and group option
+  tests/test_circle.py              NEW   13 tests; the full suite has the same 12 failing tests as before (wildlife data and two older tests) and no new ones
+
+Using it:
+  - Memory tab > "Between the characters": set who is a rival, friend, partner... or leave it undecided and let it grow.
+  - Group editor > "Let them talk among themselves": adds the Auto-talk switch to the chat. They keep going on their own, a pause between rounds, and stop after the number of rounds you set, when you press Stop, or switch chats. Your own message always comes first.
+  - "Let them talk" (one burst) is always there in group chats.
+
 History keeper and conversation dynamics.
 Drop these over your project (same relative paths), delete the __pycache__ folders, restart. New files are listed first.
 

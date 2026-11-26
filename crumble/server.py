@@ -1,6 +1,7 @@
 """The HTTP server: pages, JSON API, streaming replies and guest access control."""
 import hmac
 import json
+import os
 import re
 import secrets
 import shutil
@@ -15,6 +16,7 @@ from . import keeper, personality, places, presence, profile, recall
 from .feel import peek as feel_peek
 from .llm import generate_reply
 from .memory import keep_update, memorize, summarize, summary_details, track
+from .rp import circle
 from .rp.director import PACE, plan_next
 from .rp.narrator import NARRATOR, NARR_ID
 from .rp.ooc import OOC_CHAR, clean_notes
@@ -24,7 +26,7 @@ from .rp.resolve import rp_observe, rp_resolve
 from .sharing import FAILS, FWD, LOCAL, MAX_BODY, MAX_QUEUE, MYIPS, QL, QUEUE, SESS, SHARE, lan_urls, save_share
 from .storage import chat_list, cdir, get_char, get_group, group_members, load_chars, load_groups, pub, rj, wj
 from .textutil import loose_json
-from . import web
+from . import vault, web
 
 
 def state(a):
@@ -190,7 +192,11 @@ class H(BaseHTTPRequestHandler):
         if m:
             k = self.key(a, m[1])
             if k:
-                (CHATS/k/f"{m[2]}.json").unlink(missing_ok=True)
+                f_ = CHATS/k/f"{m[2]}.json"
+                if f_.exists():      # deleting a chat moves it (and its memory) to data/trash; nothing is destroyed
+                    vault.TRASH.mkdir(parents=True, exist_ok=True)
+                    os.replace(f_, vault.TRASH / f"{int(time.time())}-{k}-{m[2]}.json")
+                    vault.retire(a.get("uid") or "host", m[2])
         self.send({"ok": True})
 
     def acquire(self):
@@ -321,8 +327,10 @@ class H(BaseHTTPRequestHandler):
                 if first:
                     title = first.replace("\n", " ")[:40]
             cdir(cid)
+            raw_cid = re.sub(r"\W", "", str(b.get("cid", "")))
+            st_ = vault.protect_state(a.get("uid") or "host", chid, raw_cid, b.get("state"), len([m for m in b["history"] if not m.get("ooc")]))   # a stale or empty page cannot wipe the memory
             wj(CHATS/cid/f"{chid}.json", {"id": chid, "title": title[:80], "updated": time.time(), "history": b["history"],
-                                         "state": b.get("state"), "cfg": b.get("cfg"), "rp": b.get("rp")})
+                                         "state": st_, "cfg": b.get("cfg"), "rp": b.get("rp")})
             return self.send({"title": title[:80]})
         if self.path == "/api/groups":
             gid = re.sub(r"\W", "", str(b.get("id") or "")) or "grp_" + uuid.uuid4().hex[:8]
@@ -330,7 +338,8 @@ class H(BaseHTTPRequestHandler):
                 gid = "grp_" + uuid.uuid4().hex[:8]
             g = {"id": gid, "name": str(b.get("name") or "Group chat")[:60], "members": [str(i) for i in (b.get("members") or [])][:8],
                  "pace": b.get("pace") if b.get("pace") in PACE else "natural", "narrator": bool(b.get("narrator")),
-                 "scenario": str(b.get("scenario") or "")[:4000]}
+                 "scenario": str(b.get("scenario") or "")[:4000],
+                 "auto": bool(b.get("auto")), "auto_max": max(2, min(20, int(b.get("auto_max") or 6))) if str(b.get("auto_max") or "6").lstrip("-").isdigit() else 6}
             wj(GROUPS/f"{gid}.json", g)
             return self.send(g)
         if self.path in ("/api/group_next", "/api/rp/resolve", "/api/rp/observe"):
@@ -354,6 +363,28 @@ class H(BaseHTTPRequestHandler):
                 hist = [dict(m, content=str(m.get("content", ""))[:4000]) for m in (b.get("history") or [])[-30:]]
                 return self.send(plan_next(g, mem, hist, list(b.get("spoke") or []), int(b.get("cap") or 0), int(b.get("n") or 0),
                                            str(b.get("user") or "User"), b))
+            except Exception as e:
+                return self.send({"err": str(e)})
+        if self.path in ("/api/circle", "/api/circle/observe"):    # how the characters of a group feel about each other (no model call, nothing saved here)
+            g = get_group(str(b.get("group"))) if b.get("group") else None
+            mem = [m for m in (group_members(g) if g else []) if m]
+            if g and places.is_scene(g["id"]):
+                mem = places.only_present(mem, b.get("present") if isinstance(b.get("present"), list) else None)
+            if not mem:
+                return self.send({"err": "Unknown group."})
+            try:
+                user = str(b.get("user") or "User")[:60]
+                aff = {str(k): v for k, v in (b.get("aff") or {}).items()} if isinstance(b.get("aff"), dict) else {}
+                rom = {str(k): v for k, v in (b.get("rom") or {}).items()} if isinstance(b.get("rom"), dict) else {}
+                notes = []
+                cir = circle.seed(mem, b.get("circle"))
+                if self.path == "/api/circle/observe":
+                    text = str(b.get("text") or "")[:4000]
+                    if b.get("from") == "user":
+                        cir, notes = circle.observe_user(cir, mem, text, user, aff, rom)
+                    else:
+                        cir, notes = circle.observe(cir, mem, str(b.get("speaker") or ""), text, user, str(b.get("prev") or "") or None, aff, rom)
+                return self.send(dict(circle.view(mem, cir, user, aff), notes=notes))
             except Exception as e:
                 return self.send({"err": str(e)})
         if self.path == "/api/world":   # the story clock, weather and everyone's place in their day (no model call, nothing saved)
@@ -381,6 +412,12 @@ class H(BaseHTTPRequestHandler):
             if not c:
                 return self.send({"err": "Unknown character."})
             return self.send(personality.public(personality.profile_for(c)))
+        if self.path == "/api/vault":     # status / roll back this chat's memory: {chat_id, char_id, restore?: backup number}
+            vk = vault.key(a.get("uid") or "host", b.get("chat_id"), b.get("char_id"))
+            if b.get("restore"):
+                return self.send({"restored": vault.restore_backup(vk, int(b["restore"])), "backups": vault.backups(vk)})
+            v_ = vault.load(vk) or {}
+            return self.send({"items": len(((v_.get("mem") or {}).get("items") or [])), "rev": (v_.get("mem") or {}).get("rev"), "backups": vault.backups(vk)})
         if self.path == "/api/recall":   # preview: what would the memory search put in the prompt for this message? (no model call)
             st_ = b.get("state") if isinstance(b.get("state"), dict) else {}
             name, user_ = str(b.get("name") or "Character")[:60], str(b.get("user") or "User")[:60]
@@ -418,7 +455,16 @@ class H(BaseHTTPRequestHandler):
                 if self.path == "/api/summarize" and isinstance(b.get("place"), dict):     # the summary remembers which place the story stands in
                     card_ = places.get(b["place"].get("id"))
                     b["place_name"] = card_["name"] if card_ else ""
-                return self.send(track(b) if self.path == "/api/track" else memorize(b) if self.path == "/api/memorize" else {"summary": summarize(b), "chron_add": summary_details(b), "keep": keep_update(b)})
+                if self.path == "/api/track":
+                    res_ = track(b)
+                    cid_v, chat_v = str((b.get("char") or {}).get("id") or ""), str(b.get("chat_id") or "")
+                    if chat_v and cid_v and isinstance(res_.get("state"), dict):
+                        vk = vault.key(a.get("uid") or "host", chat_v, cid_v)
+                        vault.restore_into(vk, res_["state"], int(b.get("turn") or 0) or None)
+                        sv = res_["state"]
+                        vault.save(vk, mem=sv.get("mem"), chron=sv.get("chron"), keep=(b.get("state") or {}).get("keep"))
+                    return self.send(res_)
+                return self.send(memorize(b) if self.path == "/api/memorize" else {"summary": summarize(b), "chron_add": summary_details(b), "keep": keep_update(b)})
             except Exception as e:
                 return self.send({"err": str(e)})
         if self.path == "/api/chat":
@@ -460,6 +506,8 @@ class H(BaseHTTPRequestHandler):
                     if not c:
                         raise RuntimeError("That character is not in this group.")
                     b["char"], b["grp"] = c, dict(name=g["name"], scenario=g.get("scenario", ""), members=mem, narrator=bool(g.get("narrator")))
+                if b.get("chat_id") and (b.get("char") or {}).get("id"):
+                    b["_vault"] = vault.key(a.get("uid") or "host", b["chat_id"], b["char"]["id"])
                 self.acquire()
                 got = True
                 res = generate_reply(b, self.sse)

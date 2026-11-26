@@ -3,6 +3,7 @@ import re
 
 from . import ambience, context, identity, personality, recall, simtime
 from .config import CH, PERS_KEYS, SCHEMA, US, model_tier
+from .rp import circle
 from .rp.blocks import rp_blocks
 from .rp.narrator import NARR_ID, RP_KEYS
 from .rp.ooc import notes_block
@@ -130,7 +131,7 @@ def group_block(c, g):
     lines = []
     for m in g["members"]:
         if m["id"] != c.get("id"):
-            bits = [m.get("age"), m.get("gender"), m.get("occupation"), (m.get("description") or "")[:140]]
+            bits = [m.get("age"), m.get("gender"), m.get("occupation"), (m.get("description") or "")[:140], ("personality: " + (m.get("personality") or "")[:100]) if (m.get("personality") or "").strip() else ""]
             lines.append(f"- {m.get('name')}: " + "; ".join(x.strip() for x in bits if x and x.strip()))
     s = f"[Group chat: {g['name']}]\n"
     if (g.get("scenario") or "").strip():
@@ -152,7 +153,13 @@ def cue_text(b, c):
         return "(Narrate what happens next. Write only the Narrator's message.)"
     s = {"mention": f"{by} just addressed {CH} directly. Answer them.", "named": f"{by} just mentioned {CH}. React if {CH} has something to say.",
          "react": f"{CH} is directly affected by what {US} just did. Show {CH}'s reaction right now.",
-         "open": f"The scene is just starting or has gone quiet. Say or do something natural for {CH} here."}.get(
+         "open": f"The scene is just starting or has gone quiet. Say or do something natural for {CH} here.",
+         "interrupt": f"{by} is still talking, but {CH} cannot let that stand and cuts in. Open with the interruption itself: short, sharp, in {CH}'s own way, then make the point.",
+         "jealous": f"What {by} just said or did stings {CH}, who is jealous. Let it show the way {CH} would: a barb, a cold silence, forced cheer, a pointed question. Not a speech.",
+         "disagree": f"{CH} disagrees with what {by} just said and says so in {CH}'s own way (politely, bluntly or teasing). Not everyone has to agree.",
+         "back": f"{CH} backs {by} up: agrees, adds to it or stands beside them. Do not just repeat what {by} said.",
+         "thread": f"{CH} and {by} are in a conversation of their own. Answer {by} directly and keep that exchange going; the rest of the room is not part of it.",
+         "branch": f"While {by} and another talk, {CH} turns away and starts a separate conversation of their own (with {US} or someone else here), about something else. Do not answer the current exchange."}.get(
         cue.get("why"), f"React to what was just said, but only if {CH} has something real to add.")
     t = f"({s} Write only {CH}'s next message."
     return t + (f" If {CH} would stay silent right now, reply with exactly [pass].)" if cue.get("pass") else ")")
@@ -223,14 +230,7 @@ def build_messages(c, user, hist, o):
         rc = o.get("recall") or recall.select(st, hist, user=user, char=n, cfg=rcfg, turn=o.get("turn"),
                                                known_extra=[m.get("name") for m in (grp or {}).get("members", [])])
     tier = o["tier"] if o.get("tier") is not None else model_tier()   # 0 small, 1 mid, 2 large: how many generic rules the model carries
-    INTIMACY = INTIMACY.replace("{USER}", "{US}")
-    out = [
-        core_head(tier)
-        + "\n\n"
-        + _fill(INTIMACY)
-        + "\n\n"
-        + core_tail(tier, bool(grp))
-    ]
+    out = [core_head(tier) + "\n\n" + INTIMACY + "\n\n" + core_tail(tier, bool(grp))]
 
     if (c.get("system_prompt") or "").strip():
         out.append(
@@ -302,7 +302,7 @@ def build_messages(c, user, hist, o):
     if rc is not None:
         if rc["block"]:
             blk = rc["block"]
-            if sq.get("mem", 1) < 1:
+            if sq.get("mem", 1) < 1 and not rc.get("scaled"):
                 ls = blk.split("\n")
                 blk = "\n".join(ls[:1] + ls[1:][:max(2, int((len(ls) - 1) * sq["mem"]))])
             priv.append(blk)
@@ -366,6 +366,10 @@ def build_messages(c, user, hist, o):
     pblock, ptail = personality.prepare(c, st, hist, pcfg)
     if pblock:
         vol.append(pblock)
+    if grp and c.get("id") != NARR_ID and o.get("circle"):       # how the people here feel about each other and about the user
+        cblk = circle.block(c, [m for m in grp.get("members", []) if m.get("id") != NARR_ID], o["circle"], user, o.get("affs"), o.get("rom"))
+        if cblk:
+            vol.append(cblk)
 
     lo, hi = o["words"]
     nl = TEXT_LINES.get(o.get("length", "auto"), 4)

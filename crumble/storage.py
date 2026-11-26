@@ -1,6 +1,9 @@
 """Reading and writing characters, groups and chats on disk."""
 import json
+import os
 import re
+import shutil
+import time
 import uuid
 from pathlib import Path
 
@@ -8,14 +11,48 @@ from .config import CHARS, CHATS, GROUPS, KEYS
 
 
 def rj(p, default=None):
+    """Read JSON. A file that is damaged (a crash mid-write on an older version) is set aside and the last good backup is used,
+    instead of the chat silently turning into an empty one that the next save would overwrite."""
+    p = Path(p)
     try:
-        return json.loads(Path(p).read_text(encoding="utf-8"))
-    except Exception:
+        return json.loads(p.read_text(encoding="utf-8"))
+    except FileNotFoundError:
         return default
+    except Exception:
+        pass
+    for n in (1, 2):
+        try:
+            j = json.loads(p.with_name(p.name + f".bak{n}").read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        try:
+            os.replace(p, p.with_name(p.name + f".corrupt-{int(time.time())}"))
+        except OSError:
+            pass
+        return j
+    return default
 
 
 def wj(p, obj):
-    Path(p).write_text(json.dumps(obj, indent=1, ensure_ascii=False), encoding="utf-8")
+    """Write JSON atomically (temp file, fsync, rename) and keep the previous good version as .bak1/.bak2 (at most one rotation per 30 s)."""
+    p = Path(p)
+    text = json.dumps(obj, indent=1, ensure_ascii=False)
+    tmp = p.with_name(p.name + f".tmp{os.getpid()}")
+    with open(tmp, "w", encoding="utf-8") as f:
+        f.write(text)
+        f.flush()
+        os.fsync(f.fileno())
+    if p.exists() and p.suffix == ".json" and p.parent.parent.name == "chats":
+        b1 = p.with_name(p.name + ".bak1")
+        try:
+            json.loads(p.read_text(encoding="utf-8"))
+            if not b1.exists() or time.time() - b1.stat().st_mtime > 30:
+                if b1.exists():
+                    os.replace(b1, p.with_name(p.name + ".bak2"))
+                shutil.copy2(p, b1)
+        except Exception:
+            pass
+    os.replace(tmp, p)
 
 
 def slug(s):

@@ -1,0 +1,1223 @@
+{
+ "id": "i44pj935",
+ "title": "New chat",
+ "updated": 1795699891.0994248,
+ "history": [
+  {
+   "role": "assistant",
+   "content": "*The rain patters against the window, a steady drumbeat in the gathering dusk. Makima sits at the table, hands folded neatly before her as she listens to the conversation unfolding around her. Her gaze flickers from one face to another, observing the dynamics at play, filing away details for later consideration. She leans back slightly in her chair, posture relaxed yet alert.*\n\n\"It seems we have much to discuss,\" *Makima remarks, voice smooth and measured.* \"But perhaps a change of scenery would do us some good. The café across the street appears inviting.\" *She rises gracefully, gathering her things.* \"Shall we adjourn there for a more... comfortable discussion?\"",
+   "think": "",
+   "ts": 1795699662972,
+   "stat": {
+    "tok": 140,
+    "ms": 11645
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "dyn": {
+    "tone": "guarded",
+    "quirk": null,
+    "len": "long"
+   },
+   "seen": 1795699651165,
+   "cid": "246e3fcf",
+   "name": "Makima",
+   "obsnap": "{}",
+   "csnap": "{\"v\":1,\"pairs\":{}}",
+   "mundo": {
+    "add": [],
+    "scene": "",
+    "recent": []
+   },
+   "thought": "maintain control, gather information",
+   "bd": {
+    "c": "246e3fcf",
+    "dv": 0.12,
+    "h": 0
+   },
+   "mo": {
+    "m": "calm",
+    "e": "😌",
+    "d": 0,
+    "f": 0
+   }
+  },
+  {
+   "role": "assistant",
+   "content": "*Power grins, raising an eyebrow at Makima's suggestion.* \"Ooh, a café? Now you're talking!\" *She hops to her feet, rubbing her hands together eagerly.* \"Lead the way, boss! I could go for something sweet right about now.\"\n\n*Makima smiles serenely, gesturing towards the door.* \"After you, Power.\"",
+   "think": "",
+   "ts": 1795699673728,
+   "stat": {
+    "tok": 77,
+    "ms": 9258
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "dyn": {
+    "tone": "wry",
+    "quirk": "joke",
+    "len": "medium"
+   },
+   "seen": 1795699664234,
+   "cid": "f3292c76",
+   "name": "Power",
+   "to": "246e3fcf",
+   "csnap": "{\"v\":1,\"pairs\":{\"246e3fcf|77b68c2c\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"77b68c2c\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|9c36fd1f\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"9c36fd1f\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|f3292c76\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|9c36fd1f\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"9c36fd1f\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|f3292c76\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"9c36fd1f|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"9c36fd1f\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"9c36fd1f|f3292c76\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"9c36fd1f\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"a224ae86|f3292c76\":{\"k\":\"ally\",\"f\":56,\"t\":62,\"x\":8,\"j\":{\"a224ae86\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0}}}",
+   "mundo": {
+    "add": [],
+    "scene": "",
+    "recent": []
+   },
+   "thought": "can't wait to stuff my face with sweets!",
+   "bd": {
+    "c": "f3292c76",
+    "dv": 0.12,
+    "h": 0
+   },
+   "mo": {
+    "m": "excited",
+    "e": "🤩",
+    "d": 0,
+    "f": 0
+   }
+  },
+  {
+   "role": "assistant",
+   "content": "*Makima's smile never reaches her eyes as she watches Power bounce ahead.* \"Mind your manners, Power. We are in public.\"",
+   "think": "",
+   "ts": 1795699726614,
+   "stat": {
+    "tok": 29,
+    "ms": 8618
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "dyn": {
+    "tone": "irritated",
+    "quirk": null,
+    "len": "short"
+   },
+   "seen": 1795699717830,
+   "cid": "246e3fcf",
+   "name": "Makima",
+   "to": "f3292c76",
+   "csnap": "{\"v\":1,\"pairs\":{\"246e3fcf|77b68c2c\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"77b68c2c\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|9c36fd1f\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"9c36fd1f\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|f3292c76\":{\"k\":\"auto\",\"f\":46,\"t\":46,\"x\":9,\"j\":{\"246e3fcf\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|9c36fd1f\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"9c36fd1f\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|f3292c76\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"9c36fd1f|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"9c36fd1f\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"9c36fd1f|f3292c76\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"9c36fd1f\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"a224ae86|f3292c76\":{\"k\":\"ally\",\"f\":56,\"t\":62,\"x\":8,\"j\":{\"a224ae86\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0}}}",
+   "mundo": {
+    "add": [],
+    "scene": "{{char}} sitting at a table in a dimly lit room, rain pattering outside",
+    "recent": []
+   },
+   "thought": "Power's enthusiasm is a useful tool, but one that must be kept in check.",
+   "bd": {
+    "c": "246e3fcf",
+    "dv": 0.12,
+    "h": 0
+   },
+   "mo": {
+    "m": "calm",
+    "e": "😌",
+    "d": 0,
+    "f": 0
+   }
+  },
+  {
+   "role": "assistant",
+   "content": "*Power skips ahead, eyes lighting up as they take in the café's cozy atmosphere.* \"Oooh, this place looks perfect for some hot chocolate and gossip!\"",
+   "think": "",
+   "ts": 1795699739865,
+   "stat": {
+    "tok": 36,
+    "ms": 8208
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "dyn": {
+    "tone": "tender",
+    "quirk": null,
+    "len": "short"
+   },
+   "seen": 1795699729746,
+   "cid": "f3292c76",
+   "name": "Power",
+   "to": "246e3fcf",
+   "csnap": "{\"v\":1,\"pairs\":{\"246e3fcf|77b68c2c\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"77b68c2c\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|9c36fd1f\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"9c36fd1f\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|f3292c76\":{\"k\":\"auto\",\"f\":47,\"t\":47,\"x\":8,\"j\":{\"246e3fcf\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|9c36fd1f\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"9c36fd1f\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|f3292c76\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"9c36fd1f|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"9c36fd1f\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"9c36fd1f|f3292c76\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"9c36fd1f\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"a224ae86|f3292c76\":{\"k\":\"ally\",\"f\":56,\"t\":62,\"x\":8,\"j\":{\"a224ae86\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0}}}",
+   "mundo": {
+    "add": [],
+    "scene": "heading to a café with Makima",
+    "recent": [
+     {
+      "text": "decided to go to a café together",
+      "imp": 0.45,
+      "turn": 2,
+      "ts": 1795699681556
+     }
+    ]
+   },
+   "thought": "I can't wait to stuff my face with sweets!",
+   "bd": {
+    "c": "f3292c76",
+    "dv": 0.12,
+    "h": 0
+   },
+   "mo": {
+    "m": "excited",
+    "e": "🤩",
+    "d": 0,
+    "f": 0
+   }
+  },
+  {
+   "role": "assistant",
+   "content": "*Makima scans the chalkboard menu, one eyebrow slightly arched.* \"I recommend the chai. It's a personal favorite of mine.\"",
+   "think": "",
+   "ts": 1795699757074,
+   "stat": {
+    "tok": 30,
+    "ms": 7876
+   },
+   "pers": {
+    "score": 88,
+    "flags": [
+     "uses contractions"
+    ],
+    "retries": 0
+   },
+   "recalled": [],
+   "dyn": {
+    "tone": "mellow",
+    "quirk": null,
+    "len": "short"
+   },
+   "seen": 1795699749033,
+   "cid": "246e3fcf",
+   "name": "Makima",
+   "to": "f3292c76",
+   "csnap": "{\"v\":1,\"pairs\":{\"246e3fcf|77b68c2c\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"77b68c2c\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|9c36fd1f\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"9c36fd1f\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|f3292c76\":{\"k\":\"auto\",\"f\":47,\"t\":47,\"x\":8,\"j\":{\"246e3fcf\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|9c36fd1f\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"9c36fd1f\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|f3292c76\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"9c36fd1f|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"9c36fd1f\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"9c36fd1f|f3292c76\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"9c36fd1f\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"a224ae86|f3292c76\":{\"k\":\"ally\",\"f\":56,\"t\":62,\"x\":8,\"j\":{\"a224ae86\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0}}}",
+   "mundo": {
+    "add": [],
+    "scene": "{{char}} and {{user}} are walking to a café",
+    "recent": [
+     {
+      "text": "{{char}} reminded Power to mind her manners in public",
+      "imp": 0.07,
+      "turn": 3,
+      "ts": 1795699731581
+     }
+    ]
+   },
+   "thought": "Power's enthusiasm is... endearing. For now.",
+   "bd": {
+    "c": "246e3fcf",
+    "dv": 0.12,
+    "h": 0
+   },
+   "mo": {
+    "m": "calm",
+    "e": "😌",
+    "d": 0,
+    "f": 0
+   }
+  },
+  {
+   "role": "assistant",
+   "content": "*Power bounces over to a table, plopping down into an armchair with a sigh of relief. She stretches her arms above her head and grins at Makima.*\n\n\"I'm so glad we're doing this! I could use some time away from all the...you know.\" *She waves a hand vaguely.* \"Devil stuff.\"\n\n*A waiter approaches, pen and pad in hand. Power doesn't bother looking over the menu again; she already knows what she wants.* \"I'll have a hot chocolate with extra whipped cream please!\"",
+   "think": "",
+   "ts": 1795699768172,
+   "stat": {
+    "tok": 111,
+    "ms": 9863
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "dyn": {
+    "tone": "warm",
+    "quirk": null,
+    "len": "medium"
+   },
+   "seen": 1795699758137,
+   "cid": "f3292c76",
+   "name": "Power",
+   "to": "246e3fcf",
+   "csnap": "{\"v\":1,\"pairs\":{\"246e3fcf|77b68c2c\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"77b68c2c\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|9c36fd1f\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"9c36fd1f\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|f3292c76\":{\"k\":\"auto\",\"f\":47,\"t\":47,\"x\":8,\"j\":{\"246e3fcf\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|9c36fd1f\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"9c36fd1f\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|f3292c76\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"9c36fd1f|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"9c36fd1f\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"9c36fd1f|f3292c76\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"9c36fd1f\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"a224ae86|f3292c76\":{\"k\":\"ally\",\"f\":56,\"t\":62,\"x\":8,\"j\":{\"a224ae86\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0}}}",
+   "mundo": {
+    "add": [],
+    "scene": "{{char}} and Makima sit in a cozy café",
+    "recent": [
+     {
+      "text": "decided to go to a café together",
+      "imp": 0.45,
+      "turn": 2,
+      "ts": 1795699681556
+     },
+     {
+      "text": "{{char}} eagerly enters a café with Makima",
+      "imp": 0.13,
+      "turn": 4,
+      "ts": 1795699744586
+     }
+    ]
+   },
+   "snap": "{\"mood\":\"excited\",\"emoji\":\"🤩\",\"energy\":\"high\",\"affection\":50,\"facts\":[],\"summary\":\"\",\"sumUpto\":0,\"cast\":{\"un\":\"\",\"ug\":\"m\",\"wrong\":[]},\"pers\":{\"frac\":0,\"grudge\":0,\"va\":[0.8,0.85],\"mood\":\"excited\",\"ts\":1795699744586,\"n\":2,\"drift\":[{\"ts\":1795699681553,\"score\":100,\"flags\":[]},{\"ts\":1795699744586,\"score\":100,\"flags\":[]}],\"canon\":[]}}",
+   "snapc": "f3292c76",
+   "thought": "I hope Crescent likes cafes as much as I do.",
+   "bd": {
+    "c": "f3292c76",
+    "dv": 0.12,
+    "h": 0
+   },
+   "mo": {
+    "m": "excited",
+    "e": "🤩",
+    "d": 0,
+    "f": 0
+   }
+  },
+  {
+   "role": "assistant",
+   "content": "*The waiter nods and hurries off. Makima glances out the window at the steady rain.* \"A shame we cannot sit by the windows today. But I suppose it makes the café's warmth all the more inviting.\"",
+   "think": "",
+   "ts": 1795699782122,
+   "stat": {
+    "tok": 50,
+    "ms": 9053
+   },
+   "pers": {
+    "score": 74,
+    "flags": [
+     "too casual for this character",
+     "uses contractions"
+    ],
+    "retries": 0
+   },
+   "wild": {
+    "name": "Tuxedo Cat",
+    "sci": "Felis catus",
+    "class": "Mammal",
+    "mood": "fun",
+    "stage": 1,
+    "of": 2,
+    "tier": 2,
+    "rarity": "Common",
+    "habitat": "Indoors",
+    "sprite": "/animals/sprites/tuxedo_cat.png",
+    "size": 0.51,
+    "weight": 5.25,
+    "diet": "Carnivore"
+   },
+   "recalled": [],
+   "dyn": {
+    "tone": "warm",
+    "quirk": "topic",
+    "len": "short"
+   },
+   "seen": 1795699772566,
+   "cid": "246e3fcf",
+   "name": "Makima",
+   "to": "f3292c76",
+   "csnap": "{\"v\":1,\"pairs\":{\"246e3fcf|77b68c2c\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"77b68c2c\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|9c36fd1f\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"9c36fd1f\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|f3292c76\":{\"k\":\"auto\",\"f\":49,\"t\":48,\"x\":6,\"j\":{\"246e3fcf\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|9c36fd1f\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"9c36fd1f\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|f3292c76\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"9c36fd1f|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"9c36fd1f\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"9c36fd1f|f3292c76\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"9c36fd1f\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"a224ae86|f3292c76\":{\"k\":\"ally\",\"f\":56,\"t\":62,\"x\":8,\"j\":{\"a224ae86\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0}}}"
+  },
+  {
+   "role": "assistant",
+   "content": "*spins around in her seat, eyes bright.* \"Ooh, maybe we should get some pastries to go with our drinks? I saw a tray of croissants by the register.\"",
+   "think": "",
+   "ts": 1795699807161,
+   "stat": {
+    "tok": 41,
+    "ms": 8630
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "wild": {
+    "name": "Tabby Cat",
+    "sci": "Felis catus",
+    "class": "Mammal",
+    "mood": "fun",
+    "stage": 1,
+    "of": 2,
+    "tier": 1,
+    "rarity": "Common",
+    "habitat": "Indoors",
+    "sprite": "/animals/sprites/tabby_cat.png",
+    "size": 0.48,
+    "weight": 4.9,
+    "diet": "Carnivore"
+   },
+   "recalled": [],
+   "dyn": {
+    "tone": "teasing",
+    "quirk": null,
+    "len": "short"
+   },
+   "seen": 1795699798355,
+   "cid": "f3292c76",
+   "name": "Power",
+   "to": "246e3fcf",
+   "csnap": "{\"v\":1,\"pairs\":{\"246e3fcf|77b68c2c\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"77b68c2c\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|9c36fd1f\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"9c36fd1f\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|f3292c76\":{\"k\":\"auto\",\"f\":49,\"t\":48,\"x\":6,\"j\":{\"246e3fcf\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|9c36fd1f\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"9c36fd1f\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|f3292c76\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"9c36fd1f|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"9c36fd1f\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"9c36fd1f|f3292c76\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"9c36fd1f\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"a224ae86|f3292c76\":{\"k\":\"ally\",\"f\":56,\"t\":62,\"x\":8,\"j\":{\"a224ae86\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0}}}"
+  },
+  {
+   "role": "assistant",
+   "content": "*Asa Mitaka turns away from the conversation, noticing a small tabby cat peering in through the window. A faint smile touches her lips as she watches it paw at the glass.* \"What an adorable creature.\"",
+   "think": "",
+   "ts": 1795699817275,
+   "stat": {
+    "tok": 45,
+    "ms": 8701
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "wild": {
+    "name": "Tabby Cat",
+    "sci": "Felis catus",
+    "class": "Mammal",
+    "mood": "fun",
+    "stage": 1,
+    "of": 2,
+    "tier": 1,
+    "rarity": "Common",
+    "habitat": "Indoors",
+    "sprite": "/animals/sprites/tabby_cat.png",
+    "size": 0.48,
+    "weight": 4.9,
+    "diet": "Carnivore"
+   },
+   "recalled": [],
+   "dyn": {
+    "tone": "irritated",
+    "quirk": null,
+    "len": "short"
+   },
+   "seen": 1795699808395,
+   "cid": "9c36fd1f",
+   "name": "Asa Mitaka",
+   "why": "branch",
+   "csnap": "{\"v\":1,\"pairs\":{\"246e3fcf|77b68c2c\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"77b68c2c\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|9c36fd1f\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"9c36fd1f\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|f3292c76\":{\"k\":\"auto\",\"f\":49,\"t\":48,\"x\":6,\"j\":{\"246e3fcf\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|9c36fd1f\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"9c36fd1f\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|f3292c76\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"9c36fd1f|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"9c36fd1f\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"9c36fd1f|f3292c76\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"9c36fd1f\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"a224ae86|f3292c76\":{\"k\":\"ally\",\"f\":56,\"t\":62,\"x\":8,\"j\":{\"a224ae86\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0}}}"
+  },
+  {
+   "role": "assistant",
+   "content": "*Power spins around in her seat to face the cat, waving.* \"Hey there little guy! Come on in, it's chilly out!\" *She pats her lap invitingly. Then, turning back to Makima with a grin:* \"Aren't you gonna come pet him? He looks like he needs some love!\"",
+   "think": "",
+   "ts": 1795699828396,
+   "stat": {
+    "tok": 69,
+    "ms": 9166
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "wild": {
+    "name": "Tabby Cat",
+    "sci": "Felis catus",
+    "class": "Mammal",
+    "mood": "fun",
+    "stage": 1,
+    "of": 2,
+    "tier": 1,
+    "rarity": "Common",
+    "habitat": "Indoors",
+    "sprite": "/animals/sprites/tabby_cat.png",
+    "size": 0.48,
+    "weight": 4.9,
+    "diet": "Carnivore"
+   },
+   "recalled": [],
+   "dyn": {
+    "tone": "mellow",
+    "quirk": null,
+    "len": "medium"
+   },
+   "seen": 1795699819048,
+   "cid": "f3292c76",
+   "name": "Power",
+   "to": "9c36fd1f",
+   "why": "thread",
+   "csnap": "{\"v\":1,\"pairs\":{\"246e3fcf|77b68c2c\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"77b68c2c\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|9c36fd1f\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"9c36fd1f\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|f3292c76\":{\"k\":\"auto\",\"f\":49,\"t\":48,\"x\":6,\"j\":{\"246e3fcf\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|9c36fd1f\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"9c36fd1f\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|f3292c76\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"9c36fd1f|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"9c36fd1f\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"9c36fd1f|f3292c76\":{\"k\":\"auto\",\"f\":46,\"t\":45,\"x\":9,\"j\":{\"9c36fd1f\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"a224ae86|f3292c76\":{\"k\":\"ally\",\"f\":56,\"t\":62,\"x\":8,\"j\":{\"a224ae86\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0}}}",
+   "mundo": {
+    "add": [],
+    "scene": "{{char}} and Makima sit in a cozy café",
+    "recent": [
+     {
+      "text": "decided to go to a café together",
+      "imp": 0.45,
+      "turn": 2,
+      "ts": 1795699681556
+     },
+     {
+      "text": "{{char}} eagerly enters a café with Makima",
+      "imp": 0.13,
+      "turn": 4,
+      "ts": 1795699744586
+     },
+     {
+      "text": "{{char}} orders a hot chocolate with extra whipped cream",
+      "imp": 0.34,
+      "turn": 6,
+      "ts": 1795699786774
+     }
+    ]
+   },
+   "snap": "{\"mood\":\"excited\",\"emoji\":\"🤩\",\"energy\":\"high\",\"affection\":50,\"facts\":[],\"summary\":\"\",\"sumUpto\":0,\"cast\":{\"un\":\"\",\"ug\":\"m\",\"wrong\":[]},\"pers\":{\"frac\":0,\"grudge\":0,\"va\":[0.8,0.85],\"mood\":\"excited\",\"ts\":1795699786773,\"n\":3,\"drift\":[{\"ts\":1795699681553,\"score\":100,\"flags\":[]},{\"ts\":1795699744586,\"score\":100,\"flags\":[]},{\"ts\":1795699786773,\"score\":100,\"flags\":[]}],\"canon\":[]}}",
+   "snapc": "f3292c76",
+   "thought": "I hope Crescent likes cats too, they're so cute!",
+   "bd": {
+    "c": "f3292c76",
+    "dv": 0.12,
+    "h": 0
+   },
+   "mo": {
+    "m": "excited",
+    "e": "🤩",
+    "d": 0,
+    "f": 0
+   }
+  },
+  {
+   "role": "assistant",
+   "content": "*watches the cat dart between their legs. He seems more interested in exploring than cuddling.*",
+   "think": "",
+   "ts": 1795699840976,
+   "stat": {
+    "tok": 26,
+    "ms": 2346
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 1
+   },
+   "recalled": [],
+   "dyn": {
+    "tone": "tender",
+    "quirk": null,
+    "len": "short"
+   },
+   "seen": 1795699829362,
+   "cid": "9c36fd1f",
+   "name": "Asa Mitaka",
+   "to": "f3292c76",
+   "why": "thread",
+   "csnap": "{\"v\":1,\"pairs\":{\"246e3fcf|77b68c2c\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"77b68c2c\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|9c36fd1f\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"9c36fd1f\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|f3292c76\":{\"k\":\"auto\",\"f\":50,\"t\":49,\"x\":5,\"j\":{\"246e3fcf\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|9c36fd1f\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"9c36fd1f\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|f3292c76\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"9c36fd1f|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"9c36fd1f\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"9c36fd1f|f3292c76\":{\"k\":\"auto\",\"f\":46,\"t\":45,\"x\":9,\"j\":{\"9c36fd1f\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"a224ae86|f3292c76\":{\"k\":\"ally\",\"f\":56,\"t\":62,\"x\":8,\"j\":{\"a224ae86\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0}}}"
+  },
+  {
+   "role": "assistant",
+   "content": "*Power turns to Asa, grinning.* \"Wanna race him back to our table? Winner gets the last bite of whipped cream!\"",
+   "think": "",
+   "ts": 1795699863557,
+   "stat": {
+    "tok": 29,
+    "ms": 8567
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [
+    "c1"
+   ],
+   "dyn": {
+    "tone": "tender",
+    "quirk": null,
+    "len": "short"
+   },
+   "seen": 1795699854794,
+   "cid": "f3292c76",
+   "name": "Power",
+   "to": "9c36fd1f",
+   "csnap": "{\"v\":1,\"pairs\":{\"246e3fcf|77b68c2c\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"77b68c2c\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|9c36fd1f\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"9c36fd1f\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|f3292c76\":{\"k\":\"auto\",\"f\":50,\"t\":49,\"x\":5,\"j\":{\"246e3fcf\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|9c36fd1f\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"9c36fd1f\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|f3292c76\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"9c36fd1f|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"9c36fd1f\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"9c36fd1f|f3292c76\":{\"k\":\"auto\",\"f\":46,\"t\":45,\"x\":9,\"j\":{\"9c36fd1f\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"a224ae86|f3292c76\":{\"k\":\"ally\",\"f\":56,\"t\":62,\"x\":8,\"j\":{\"a224ae86\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0}}}",
+   "mundo": {
+    "add": [],
+    "scene": "{{char}} and Makima sit in a cozy café, enjoying the rain outside",
+    "recent": [
+     {
+      "text": "decided to go to a café together",
+      "imp": 0.45,
+      "turn": 2,
+      "ts": 1795699681556
+     },
+     {
+      "text": "{{char}} eagerly enters a café with Makima",
+      "imp": 0.13,
+      "turn": 4,
+      "ts": 1795699744586
+     },
+     {
+      "text": "{{char}} orders a hot chocolate with extra whipped cream",
+      "imp": 0.34,
+      "turn": 6,
+      "ts": 1795699786774
+     },
+     {
+      "text": "{{char}} invites a stray cat into the café",
+      "imp": 0.47,
+      "turn": 10,
+      "ts": 1795699845351
+     }
+    ]
+   },
+   "snap": "{\"mood\":\"excited\",\"emoji\":\"🤩\",\"energy\":\"high\",\"affection\":50,\"facts\":[],\"summary\":\"\",\"sumUpto\":0,\"cast\":{\"un\":\"\",\"ug\":\"m\",\"wrong\":[]},\"pers\":{\"frac\":0,\"grudge\":0,\"va\":[0.8,0.85],\"mood\":\"excited\",\"ts\":1795699845350,\"n\":4,\"drift\":[{\"ts\":1795699681553,\"score\":100,\"flags\":[]},{\"ts\":1795699744586,\"score\":100,\"flags\":[]},{\"ts\":1795699786773,\"score\":100,\"flags\":[]},{\"ts\":1795699845350,\"score\":100,\"flags\":[]}],\"canon\":[]}}",
+   "snapc": "f3292c76",
+   "thought": "I hope Crescent will join in the fun and play with the kitty too!",
+   "bd": {
+    "c": "f3292c76",
+    "dv": 0.12,
+    "h": 0
+   },
+   "mo": {
+    "m": "excited",
+    "e": "🤩",
+    "d": 0,
+    "f": 0
+   }
+  },
+  {
+   "role": "assistant",
+   "content": "*Asa Mitaka jumps up and claps hands.* \"Alright, I am in! Last one there is a rotten egg!\" *She takes off running, chasing the cat.*",
+   "think": "",
+   "ts": 1795699874033,
+   "stat": {
+    "tok": 39,
+    "ms": 8998
+   },
+   "pers": {
+    "score": 78,
+    "flags": [
+     "uses contractions",
+     "more excitable than this character"
+    ],
+    "retries": 0
+   },
+   "wild": {
+    "name": "Tabby Cat",
+    "sci": "Felis catus",
+    "class": "Mammal",
+    "mood": "fun",
+    "stage": 2,
+    "of": 2,
+    "tier": 1,
+    "rarity": "Common",
+    "habitat": "Indoors",
+    "sprite": "/animals/sprites/tabby_cat.png",
+    "size": 0.48,
+    "weight": 4.9,
+    "diet": "Carnivore"
+   },
+   "recalled": [
+    "c1"
+   ],
+   "dyn": {
+    "tone": "flustered",
+    "quirk": null,
+    "len": "short"
+   },
+   "seen": 1795699864850,
+   "cid": "9c36fd1f",
+   "name": "Asa Mitaka",
+   "to": "f3292c76",
+   "csnap": "{\"v\":1,\"pairs\":{\"246e3fcf|77b68c2c\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"77b68c2c\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|9c36fd1f\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"9c36fd1f\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"246e3fcf\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"246e3fcf|f3292c76\":{\"k\":\"auto\",\"f\":50,\"t\":49,\"x\":5,\"j\":{\"246e3fcf\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|9c36fd1f\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"9c36fd1f\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"77b68c2c|f3292c76\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"77b68c2c\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"9c36fd1f|a224ae86\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"9c36fd1f\":0,\"a224ae86\":0},\"fl\":0,\"ev\":[],\"m\":0},\"9c36fd1f|f3292c76\":{\"k\":\"auto\",\"f\":46,\"t\":45,\"x\":9,\"j\":{\"9c36fd1f\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0},\"a224ae86|f3292c76\":{\"k\":\"ally\",\"f\":56,\"t\":62,\"x\":8,\"j\":{\"a224ae86\":0,\"f3292c76\":0},\"fl\":0,\"ev\":[],\"m\":0}}}"
+  }
+ ],
+ "state": {
+  "mood": "neutral",
+  "emoji": "😐",
+  "energy": "medium",
+  "affection": 50,
+  "facts": [],
+  "summary": "SETTING & STATE\nLocation: A cozy café across the street from where they were previously discussing matters.\nCurrent State: Makima, Power, and Asa Mitaka have adjourned to the café for a more comfortable discussion. Power is excitedly ordering a hot chocolate with extra whipped cream. Asa Mitaka has noticed a tabby cat outside the window and is now engaged in a playful race with it back to their table.\n\nRELATIONSHIP DYNAMIC\nPrimary Dynamic: Power and Asa Mitaka seem to have a playful, friendly relationship, engaging in lighthearted competition. Makima maintains a more serious and composed demeanor, but still seems to enjoy the lighter moments with her companions.\nTone: The overall tone is lighthearted and jovial, with a sense of camaraderie among the group despite their serious business.\n\nPIVOTAL MOMENTS\n- Makima suggests moving the discussion to the café across the street for a more comfortable setting.\n- Power eagerly agrees and orders a hot chocolate with extra whipped cream.\n- Asa Mitaka notices a cat outside the window and becomes engaged in a playful race with it back to their table.\n- Power invites Makima to join in petting the cat, but Makima does not participate in the playful activity.",
+  "sumUpto": 13,
+  "log": [],
+  "members": {
+   "246e3fcf": {
+    "mood": "calm",
+    "emoji": "😌",
+    "energy": "low",
+    "affection": 50,
+    "facts": [],
+    "summary": "",
+    "sumUpto": 0,
+    "log": [
+     {
+      "ts": 1795699678155,
+      "mood": "calm",
+      "emoji": "😌",
+      "aff": 50,
+      "thought": "maintain control, gather information",
+      "score": 100
+     },
+     {
+      "ts": 1795699731581,
+      "mood": "calm",
+      "emoji": "😌",
+      "aff": 50,
+      "thought": "Power's enthusiasm is a useful tool, but one that must be kept in check.",
+      "score": 100
+     },
+     {
+      "ts": 1795699772987,
+      "mood": "calm",
+      "emoji": "😌",
+      "aff": 50,
+      "thought": "Power's enthusiasm is... endearing. For now.",
+      "score": 88
+     }
+    ],
+    "cast": {
+     "un": "",
+     "ug": "m",
+     "wrong": []
+    },
+    "pers": {
+     "frac": 0,
+     "grudge": 0,
+     "va": [
+      0.3,
+      -0.5
+     ],
+     "mood": "calm",
+     "ts": 1795699772987,
+     "n": 3,
+     "drift": [
+      {
+       "ts": 1795699678153,
+       "score": 100,
+       "flags": []
+      },
+      {
+       "ts": 1795699731581,
+       "score": 100,
+       "flags": []
+      },
+      {
+       "ts": 1795699772987,
+       "score": 88,
+       "flags": [
+        "uses contractions"
+       ]
+      }
+     ],
+     "canon": []
+    },
+    "mem": {
+     "v": 1,
+     "seq": 0,
+     "turn": 5,
+     "scene": "In a cozy café, discussing plans over drinks",
+     "recent": [
+      {
+       "text": "{{char}} reminded Power to mind her manners in public",
+       "imp": 0.07,
+       "turn": 3,
+       "ts": 1795699731581
+      },
+      {
+       "text": "{{char}} suggests a café and orders chai",
+       "imp": 0.07,
+       "turn": 5,
+       "ts": 1795699772987
+      }
+     ],
+     "items": [],
+     "legacy": true
+    }
+   },
+   "77b68c2c": {
+    "mood": "neutral",
+    "emoji": "😐",
+    "energy": "medium",
+    "affection": 50,
+    "facts": [],
+    "summary": "",
+    "sumUpto": 0,
+    "log": [],
+    "mem": {
+     "v": 1,
+     "seq": 0,
+     "turn": 0,
+     "scene": "",
+     "recent": [],
+     "items": [],
+     "legacy": false
+    },
+    "pers": {}
+   },
+   "9c36fd1f": {
+    "mood": "neutral",
+    "emoji": "😐",
+    "energy": "medium",
+    "affection": 50,
+    "facts": [],
+    "summary": "",
+    "sumUpto": 0,
+    "log": [],
+    "mem": {
+     "v": 1,
+     "seq": 0,
+     "turn": 0,
+     "scene": "",
+     "recent": [],
+     "items": [],
+     "legacy": false
+    },
+    "pers": {}
+   },
+   "a224ae86": {
+    "mood": "neutral",
+    "emoji": "😐",
+    "energy": "medium",
+    "affection": 50,
+    "facts": [],
+    "summary": "",
+    "sumUpto": 0,
+    "log": [],
+    "mem": {
+     "v": 1,
+     "seq": 0,
+     "turn": 0,
+     "scene": "",
+     "recent": [],
+     "items": [],
+     "legacy": false
+    },
+    "pers": {}
+   },
+   "f3292c76": {
+    "mood": "excited",
+    "emoji": "🤩",
+    "energy": "high",
+    "affection": 50,
+    "facts": [],
+    "summary": "",
+    "sumUpto": 0,
+    "log": [
+     {
+      "ts": 1795699681554,
+      "mood": "excited",
+      "emoji": "🤩",
+      "aff": 50,
+      "thought": "can't wait to stuff my face with sweets!",
+      "score": 100
+     },
+     {
+      "ts": 1795699744586,
+      "mood": "excited",
+      "emoji": "🤩",
+      "aff": 50,
+      "thought": "I can't wait to stuff my face with sweets!",
+      "score": 100
+     },
+     {
+      "ts": 1795699786774,
+      "mood": "excited",
+      "emoji": "🤩",
+      "aff": 50,
+      "thought": "I hope Crescent likes cafes as much as I do.",
+      "score": 100
+     },
+     {
+      "ts": 1795699845350,
+      "mood": "excited",
+      "emoji": "🤩",
+      "aff": 50,
+      "thought": "I hope Crescent likes cats too, they're so cute!",
+      "score": 100
+     },
+     {
+      "ts": 1795699878591,
+      "mood": "excited",
+      "emoji": "🤩",
+      "aff": 50,
+      "thought": "I hope Crescent will join in the fun and play with the kitty too!",
+      "score": 100
+     }
+    ],
+    "cast": {
+     "un": "",
+     "ug": "m",
+     "wrong": []
+    },
+    "pers": {
+     "frac": 0,
+     "grudge": 0,
+     "va": [
+      0.8,
+      0.85
+     ],
+     "mood": "excited",
+     "ts": 1795699878591,
+     "n": 5,
+     "drift": [
+      {
+       "ts": 1795699681553,
+       "score": 100,
+       "flags": []
+      },
+      {
+       "ts": 1795699744586,
+       "score": 100,
+       "flags": []
+      },
+      {
+       "ts": 1795699786773,
+       "score": 100,
+       "flags": []
+      },
+      {
+       "ts": 1795699845350,
+       "score": 100,
+       "flags": []
+      },
+      {
+       "ts": 1795699878591,
+       "score": 100,
+       "flags": []
+      }
+     ],
+     "canon": []
+    },
+    "mem": {
+     "v": 1,
+     "seq": 0,
+     "turn": 12,
+     "scene": "In a cozy café, enjoying drinks and pastries",
+     "recent": [
+      {
+       "text": "decided to go to a café together",
+       "imp": 0.45,
+       "turn": 2,
+       "ts": 1795699681556
+      },
+      {
+       "text": "{{char}} eagerly enters a café with Makima",
+       "imp": 0.13,
+       "turn": 4,
+       "ts": 1795699744586
+      },
+      {
+       "text": "{{char}} orders a hot chocolate with extra whipped cream",
+       "imp": 0.34,
+       "turn": 6,
+       "ts": 1795699786774
+      },
+      {
+       "text": "{{char}} invites a stray cat into the café",
+       "imp": 0.47,
+       "turn": 10,
+       "ts": 1795699845351
+      },
+      {
+       "text": "{{char}} invited {{user}} to pet a stray cat and race it back to the table",
+       "imp": 0.13,
+       "turn": 12,
+       "ts": 1795699878591
+      }
+     ],
+     "items": [],
+     "legacy": true
+    }
+   }
+  },
+  "chron": {
+   "v": 1,
+   "seq": 1,
+   "turn": 12,
+   "covered": 12,
+   "items": [
+    {
+     "id": "c1",
+     "t": "{{char}}: Then, turning back to Makima with a grin: \"Aren't you gonna come pet him?",
+     "k": "detail",
+     "w": 2,
+     "turn": 9,
+     "keys": [
+      "aren't",
+      "com",
+      "grin",
+      "makima",
+      "pet",
+      "turn"
+     ],
+     "pin": false,
+     "n": 1,
+     "last": 12
+    }
+   ]
+  },
+  "keep": {
+   "v": 1,
+   "seq": 0,
+   "chapters": [],
+   "long": "",
+   "events": [],
+   "bonds": {},
+   "main": {
+    "stage": "",
+    "log": []
+   },
+   "covered": 13
+  },
+  "chron_in": [
+   {
+    "t": "Power: Then, turning back to Makima with a grin: \"Aren't you gonna come pet him?",
+    "k": "detail",
+    "w": 2,
+    "turn": 9,
+    "pin": false
+   }
+  ]
+ },
+ "cfg": {
+  "mode": "story",
+  "length": "auto",
+  "scene": "",
+  "notes": [],
+  "theme": null,
+  "circle": {
+   "v": 1,
+   "pairs": {
+    "246e3fcf|77b68c2c": {
+     "k": "auto",
+     "f": 45,
+     "t": 45,
+     "x": 10,
+     "j": {
+      "246e3fcf": 0,
+      "77b68c2c": 0
+     },
+     "fl": 0,
+     "ev": [],
+     "m": 0
+    },
+    "246e3fcf|9c36fd1f": {
+     "k": "auto",
+     "f": 45,
+     "t": 45,
+     "x": 10,
+     "j": {
+      "246e3fcf": 0,
+      "9c36fd1f": 0
+     },
+     "fl": 0,
+     "ev": [],
+     "m": 0
+    },
+    "246e3fcf|a224ae86": {
+     "k": "auto",
+     "f": 45,
+     "t": 45,
+     "x": 10,
+     "j": {
+      "246e3fcf": 0,
+      "a224ae86": 0
+     },
+     "fl": 0,
+     "ev": [],
+     "m": 0
+    },
+    "246e3fcf|f3292c76": {
+     "k": "auto",
+     "f": 50,
+     "t": 49,
+     "x": 5,
+     "j": {
+      "246e3fcf": 0,
+      "f3292c76": 0
+     },
+     "fl": 0,
+     "ev": [],
+     "m": 0
+    },
+    "77b68c2c|9c36fd1f": {
+     "k": "auto",
+     "f": 45,
+     "t": 45,
+     "x": 10,
+     "j": {
+      "77b68c2c": 0,
+      "9c36fd1f": 0
+     },
+     "fl": 0,
+     "ev": [],
+     "m": 0
+    },
+    "77b68c2c|a224ae86": {
+     "k": "auto",
+     "f": 45,
+     "t": 45,
+     "x": 10,
+     "j": {
+      "77b68c2c": 0,
+      "a224ae86": 0
+     },
+     "fl": 0,
+     "ev": [],
+     "m": 0
+    },
+    "77b68c2c|f3292c76": {
+     "k": "auto",
+     "f": 45,
+     "t": 45,
+     "x": 10,
+     "j": {
+      "77b68c2c": 0,
+      "f3292c76": 0
+     },
+     "fl": 0,
+     "ev": [],
+     "m": 0
+    },
+    "9c36fd1f|a224ae86": {
+     "k": "auto",
+     "f": 45,
+     "t": 45,
+     "x": 10,
+     "j": {
+      "9c36fd1f": 0,
+      "a224ae86": 0
+     },
+     "fl": 0,
+     "ev": [],
+     "m": 0
+    },
+    "9c36fd1f|f3292c76": {
+     "k": "auto",
+     "f": 46,
+     "t": 45,
+     "x": 9,
+     "j": {
+      "9c36fd1f": 0,
+      "f3292c76": 0
+     },
+     "fl": 0,
+     "ev": [],
+     "m": 0
+    },
+    "a224ae86|f3292c76": {
+     "k": "ally",
+     "f": 56,
+     "t": 62,
+     "x": 8,
+     "j": {
+      "a224ae86": 0,
+      "f3292c76": 0
+     },
+     "fl": 0,
+     "ev": [],
+     "m": 0
+    }
+   }
+  }
+ },
+ "rp": {
+  "body": {
+   "user": {
+    "inj": [],
+    "ill": [],
+    "tired": 0,
+    "dead": false,
+    "died": null,
+    "stash": null,
+    "rev": 0,
+    "n": 0,
+    "ko": false
+   },
+   "246e3fcf": {
+    "inj": [],
+    "ill": [],
+    "tired": 0,
+    "dead": false,
+    "died": null,
+    "stash": null,
+    "rev": 0,
+    "n": 0,
+    "ko": false
+   },
+   "77b68c2c": {
+    "inj": [],
+    "ill": [],
+    "tired": 0,
+    "dead": false,
+    "died": null,
+    "stash": null,
+    "rev": 0,
+    "n": 0,
+    "ko": false
+   },
+   "9c36fd1f": {
+    "inj": [],
+    "ill": [],
+    "tired": 0,
+    "dead": false,
+    "died": null,
+    "stash": null,
+    "rev": 0,
+    "n": 0,
+    "ko": false
+   },
+   "a224ae86": {
+    "inj": [],
+    "ill": [],
+    "tired": 0,
+    "dead": false,
+    "died": null,
+    "stash": null,
+    "rev": 0,
+    "n": 0,
+    "ko": false
+   },
+   "f3292c76": {
+    "inj": [],
+    "ill": [],
+    "tired": 0,
+    "dead": false,
+    "died": null,
+    "stash": null,
+    "rev": 0,
+    "n": 0,
+    "ko": false
+   }
+  },
+  "rel": {
+   "246e3fcf": {
+    "type": "auto",
+    "v": 0.36,
+    "ms": [],
+    "hist": [],
+    "peak": 0.36
+   },
+   "f3292c76": {
+    "type": "auto",
+    "v": 0.6,
+    "ms": [],
+    "hist": [],
+    "peak": 0.6
+   }
+  }
+ }
+}

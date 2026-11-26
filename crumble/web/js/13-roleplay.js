@@ -26,7 +26,7 @@ function fxNo(i){const m=hist[i];if(!m)return;restore(m);delete m.card;delete m.
 const ACTS={social:[['persuade','💬','Persuade'],['intimidate','😠','Intimidate'],['deceive','🎭','Deceive'],['comfort','🫶','Comfort'],['investigate','🔍','Investigate'],['sneak','🤫','Sneak'],['steal','🖐','Sleight of hand'],['athletics','🧗','Athletics'],['craft','🔧','Craft'],['heal','🩹','Aid']],
  romance:[['flirt','😏','Flirt'],['touch','🤝','Touch'],['date','🌹','Ask out'],['kiss','💋','Kiss'],['confess','💞','Confess'],['intimate','🌙','Closer']]};
 function armUI(){$$('#rpbar .pill').forEach(b=>b.classList.toggle('arm',b.dataset.k==armed&&!b.dataset.d));$('#inp').placeholder=oocOn?(innerWidth<=760?'Out of character…':'Out of character: discuss the story, correct someone, change the setting or give directions…'):armed?innerWidth<=760?'Describe your move… (Enter to send)':`Describe how you try to ${(ACTS.social.concat(ACTS.romance).find(a=>a[0]==armed)||[0,0,armed])[2].toLowerCase()}… (Enter to send)`:(innerWidth<=760?'Message…':'Message… (Enter sends, Shift+Enter adds a line)')}
-function rpbarDraw(){const e=$('#rpbar');$('#tact2').hidden=U.rp=='off';$('#keep').hidden=!G;
+function rpbarDraw(){const e=$('#rpbar');$('#tact2').hidden=U.rp=='off';$('#keep').hidden=!G;typeof autoUI=='function'&&autoUI();
  e.hidden=oocOn||!(U.actbar&&U.rp!='off');if(e.hidden)return;
  const pl=(l,a)=>`<span class=lb>${l}</span>`+a.map(x=>`<button class=pill data-k=${x[0]} ${x[3]?`data-d="${at(x[3])}"`:''} title="${x[2]}">${x[1]} ${x[2]}</button>`).join('');
  e.innerHTML=pl('Do',ACTS.social)+(U.romance?pl('Romance',ACTS.romance):'');armUI()}
@@ -48,11 +48,11 @@ async function round(opts={}){
  const lu=hist.at(-1),acting=lu?.role=='user'?(lu.acting||[]):[],fx0=!!lu?.fx;
  try{for(let n=0;n<9&&!roundAbort;n++){
   const aff={};G.members.forEach(i=>aff[i]=mst(i).affection);
-  const r=await api('/api/group_next','POST',{group:G.id,present:sceneOn()?presentIds():undefined,user:uname(),history:apiHist(hist.slice(-30)),spoke,cap,n,keep:!!opts.keep,fx:n==0&&fx0,acting,aff,pers:U.pers,dead:Object.keys(chat.rp?.body||{}).filter(isDead)});
+  const r=await api('/api/group_next','POST',{group:G.id,present:sceneOn()?presentIds():undefined,user:uname(),history:apiHist(hist.slice(-30)),spoke,cap,n,keep:!!opts.keep,circle:circ(),fx:n==0&&fx0,acting,aff,pers:U.pers,dead:Object.keys(chat.rp?.body||{}).filter(isDead)});
   if(r.err){errBox(r.err,'round');break}
   cap=r.cap;if(!r.next)break;
   if(n>0){setStatus('typing…');await sleep(500+Math.random()*1300)}if(roundAbort)break;
-  const g=await gen('reply',r.next,{why:r.why,by:r.by,pass:r.pass});if(g===null)break;spoke.push(r.next)}}
+  const g=await gen('reply',r.next,{why:r.why,by:r.by,pass:r.pass,to:r.to});if(g===null)break;spoke.push(r.next)}}
  finally{rounding=false;busy(false);setStatus('online')}}
 $('#keep').onclick=()=>{if(!ctl&&!rounding&&chat)round({keep:true})};
 
@@ -72,4 +72,4 @@ function renderMemG(){const f=$('#memf'),st=chat.state;
  f.innerHTML=`<details open><summary>Characters in this group</summary>${gmem().map(c=>{const s=mst(c.id);return`<label>${esc(c.name)}: <b>${s.emoji||'😐'} ${esc(s.mood||'neutral')}</b> · feels about you: <b>${stg(s.affection)} (${s.affection})</b></label><input type=range min=0 max=100 value=${s.affection} data-m=gaff data-c=${c.id}>`}).join('')}</details>
  <details open><summary>Scene note</summary><label>Steer the situation. It stays in every prompt for this chat.</label><textarea data-m=scene rows=3>${esc(chat.cfg.scene||'')}</textarea></details>
  <details open><summary>Memory of earlier conversation</summary><label>Long chats are summarised automatically. You can edit it.</label><textarea data-m=summary rows=6>${esc(st.summary||'')}</textarea><div class=row><button data-m=sumnow>Summarize now</button><span class=small id=msum></span></div></details>${keepHtml(st,G?G.name:'the group')}`+(U.mem?gmem().filter(c=>c.id!='__narrator__').map(c=>memHtml(mst(c.id),c.name,c.id)).join(''):'')+rpMem()}
-function renderMem(){if(!chat?.state){$('#memf').innerHTML='<p class=small>Open a chat first.</p>';return}if(G)renderMemG();else{renderMemOne();$('#memf').insertAdjacentHTML('beforeend',rpMem())}$('#memf').insertAdjacentHTML('beforeend',bondMem()+notesMem());persMem()}
+function renderMem(){if(!chat?.state){$('#memf').innerHTML='<p class=small>Open a chat first.</p>';return}if(G)renderMemG();else{renderMemOne();$('#memf').insertAdjacentHTML('beforeend',rpMem())}$('#memf').insertAdjacentHTML('beforeend',(G?circleMem():'')+bondMem()+notesMem());persMem()}

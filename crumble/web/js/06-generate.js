@@ -46,7 +46,7 @@ async function gen(kind='reply',spk,cue,vis){
   place:placeSpec(),doing:doingMap(),present:sceneOn()?presentIds():undefined,params:{...P,quick:U.quick,fast:U.fast!==false,stream:!!U.stream,think:U.think,actions:U.actions,mode:chat.cfg.mode,length:chat.cfg.length,realism:U.realism,natural:U.natural,pers:persCfg(),mem:memCfg(),story:storyCfg(),dyn:dynCfg(),past:U.past!==false&&!chat.cfg.fresh}};
  body.ooc=ooc?{kind:lastO?.ooc||'discuss',notes:oocActive(all,'reply').filter(n=>n.oid!=lastO?.oid)}:{notes:oocActive(all,kind)};
  if(kind=='swipe'&&last)body.avoid=(last.sw?last.sw.map(x=>x.content):[last.content]).filter(Boolean);
- if(G){body.group=G.id;body.speaker=sp.id;body.cue=cue||{}}else if(vis){body.char=apiChar(sp);body.visit={main:cur.id,why:vis.why}}else body.char=apiChar();
+ if(G){body.group=G.id;body.speaker=sp.id;body.cue=cue||{};body.circle=circ();body.affs=affMap();body.rom=romMap()}else if(vis){body.char=apiChar(sp);body.visit={main:cur.id,why:vis.why}}else body.char=apiChar();
  let res=null,err='';
  try{const r=await fetch('/api/chat',{method:'POST',signal:ctl.signal,headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
   if(r.status==401){location.reload();return null}
@@ -67,15 +67,16 @@ async function gen(kind='reply',spk,cue,vis){
  else if(kind=='swipe'){restore(last);if(!last.sw)last.sw=[{content:last.content,think:last.think,ts:last.ts,stat:last.stat,thought:last.thought,pers:last.pers}];
   last.sw.push(v);last.si=last.sw.length-1;Object.assign(last,v,{thought:'',react:''});idx=li}
  else if(kind=='continue'){last.content=last.content.trimEnd()+(chat.cfg.mode=='text'?'\n':'\n\n')+res.text;if(last.sw)last.sw[last.si].content=last.content;idx=li}
- else{hist.push({role:'assistant',...v,seen:started,nudge:kind=='nudge'?1:undefined,...((G||vis)?{cid:sp.id,name:sp.name}:{}),...(vis?{vis:1,pl:vis.pl}:{})});idx=hist.length-1}
+ else{hist.push({role:'assistant',...v,seen:started,nudge:kind=='nudge'?1:undefined,...((G||vis)?{cid:sp.id,name:sp.name}:{}),...(G&&cue&&cue.to?{to:cue.to}:{}),...(G&&cue&&CWHY[cue.why]?{why:cue.why}:{}),...(vis?{vis:1,pl:vis.pl}:{})});idx=hist.length-1}
  $('#ctxm').textContent=(res.cut?'Reply hit the length cap and was trimmed to a full sentence. Use Continue for more. · ':'')+`prompt ${res.ctx_used.toLocaleString()} / ${res.ctx.toLocaleString()} tokens`+(res.recalled?.length?` · recalled ${res.recalled.length} ${res.recalled.length==1?'memory':'memories'}`:'')+(res.squeeze?` · compacted (details kept)`:'')+(res.dropped?` · ${res.dropped} oldest messages left out of the window (their details are kept)`:'');
   if(res.chron_add?.length&&!ooc){const cs=chat.state;cs.chron_in=[...(cs.chron_in||[]),...res.chron_add].slice(-80)}
+  if(res.mem&&!ooc&&U.mem){if(G&&sp&&sp.id!='__narrator__'&&!vis)mst(sp.id).mem=res.mem;else if(!G&&!vis)chat.state.mem=res.mem}   // the server read the chat and kept the memory: adopt its copy
  if(res.world&&!ooc&&!vis&&res.world.on!==false){W.info=res.world;worldHead()}
  saveChat();draw();beep();lastAct=Date.now();
  if(U.tts&&!ooc)speak(hist[idx].content);
  if(!U.stream)await typeMsg(idx);lastAct=Date.now();
- if(!ooc&&!vis){observeFx(hist[idx].content,hist[idx]);trackSoon(idx)}return true}
-async function post(t,forced,nofx){const m={role:'user',content:t,ts:Date.now()};hist.push(m);beep(520,.05);nudges=0;lastAct=Date.now();draw();feelPeek(t);worldRefresh();
+ if(!ooc&&!vis){observeFx(hist[idx].content,hist[idx]);trackSoon(idx);if(G&&sp.id!='__narrator__'&&kind!='continue'){const pv=hist[idx-1];circleSeen(hist[idx],sp.id,hist[idx].content,pv?(pv.role=='user'?'user':pv.cid):null)}}return true}
+async function post(t,forced,nofx){const m={role:'user',content:t,ts:Date.now()};hist.push(m);autoRuns=0;if(G)circleUser(m,t);beep(520,.05);nudges=0;lastAct=Date.now();draw();feelPeek(t);worldRefresh();
  if(U.rp!='off'&&!nofx){await resolveFx(m,forced);draw();if(!m.card&&!m.fx)observeFx(m.content,m)}
  saveChat();if(doingNow())doingLater=true;else await doingEnsure();if(!G&&U.rp!='off'&&isDead(cur.id)){bodyToast('☠',cur.name+' is dead','They cannot answer. Only a resurrection can change that.');return}
  if(G)await round();else if(await gen('reply')===true){await placeVisit(t);placeSuggest(t)}
@@ -93,7 +94,7 @@ async function trackState(i){
  if(!U.track||!S.loaded||!chat)return;const ch=chat,m=hist[i];if(!m||m.vis)return;
  const sp=G?memberById(m.cid):cur;if(!sp||sp.id=='__narrator__')return;if(U.rp!='off'&&isDead(sp.id))return;
  const stt=G?mst(sp.id):ch.state,{log,mem:memPrev,...rest}=stt,snap=JSON.stringify(rest);
- try{const r=await api('/api/track','POST',{char:apiChar(sp),user:uname(),persona:U.persona,history:apiHist(hist.slice(Math.max(0,i-5),i+1)),state:G?{...stt,chron:ch.state.chron,chron_in:ch.state.chron_in}:stt,group:G?G.id:undefined,pers:persCfg(),mem:memCfg(),turn:i+1,used:m.recalled||[]});
+ try{const r=await api('/api/track','POST',{char:apiChar(sp),user:uname(),persona:U.persona,history:apiHist(hist.slice(Math.max(0,i-5),i+1)),state:G?{...stt,chron:ch.state.chron,chron_in:ch.state.chron_in}:stt,group:G?G.id:undefined,chat_id:chat.id,pers:persCfg(),mem:memCfg(),turn:i+1,used:m.recalled||[]});
   if(r.err||!r.state||chat!==ch||hist[i]!==m)return;
   if(U.mem)m.mundo={add:r.mem_added||[],scene:memPrev?.scene||'',recent:memPrev?.recent||[]};
   m.snap=snap;if(G)m.snapc=sp.id;m.thought=r.thought||'';hist.forEach((x,k)=>{if(k<i-6){delete x.snap;delete x.snapc}});

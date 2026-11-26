@@ -2,7 +2,8 @@
 const memCfg=()=>({on:!!U.mem,depth:U.memDepth,learn:!!U.memLearn});
 const MLAY=[['episodic','📖','Episodic','what happened between you'],['semantic','📌','Semantic','lasting facts about you, them and your bond'],['emotional','💭','Emotional','how it felt']];
 const MIMP=[[.3,'Minor'],[.5,'Normal'],[.75,'Important'],[.9,'Core']];
-const blankMem=()=>({v:1,seq:0,turn:0,scene:'',recent:[],items:[],legacy:false});
+const blankMem=()=>({v:2,seq:0,turn:0,rev:0,scene:'',recent:[],items:[],legacy:false,ents:{},rels:[],archive:[],tomb:[],ing:{n:0,cp:{}}});
+const tombOf=(m,ids)=>{m.tomb=[...(m.tomb||[]),...ids].slice(-800);m.rev=(m.rev||0)+1};   // a deliberate deletion is remembered, so a stale copy cannot bring the memory back
 const memS=cid=>cid?mst(cid):chat.state;
 const memSt=cid=>{const s=memS(cid);return s.mem&&Array.isArray(s.mem.items)?s.mem:(s.mem=blankMem())};
 const cname=cid=>cid?(memberById(cid)?.name||'Character'):(cur?.name||'Character');
@@ -14,7 +15,7 @@ function mph(t,cid){let s=String(t||'').trim();
 const memFacts=m=>m.items.filter(i=>i.t=='semantic'&&(i.subj||'user')=='user').sort((a,b)=>(a.ts||0)-(b.ts||0)).slice(-40).map(i=>i.text);
 const memSync=cid=>{memS(cid).facts=memFacts(memSt(cid))};
 function undoMem(u,cid){const s=memS(cid),m=s.mem;if(!m||!Array.isArray(m.items))return;
- m.items=m.items.filter(i=>!(u.add||[]).includes(i.id));m.scene=u.scene||'';m.recent=u.recent||[];s.facts=memFacts(m)}
+ tombOf(m,u.add||[]);m.items=m.items.filter(i=>!(u.add||[]).includes(i.id));m.scene=u.scene||'';m.recent=u.recent||[];s.facts=memFacts(m)}
 const memUsed=cid=>(([...hist].reverse().find(m=>m.role=='assistant'&&m.recalled&&(!cid||m.cid==cid)))||{}).recalled||[];
 function memRow(i,cid,used){
  const near=MIMP.reduce((a,b)=>Math.abs(b[0]-(i.imp??.5))<Math.abs(a[0]-(i.imp??.5))?b:a)[0];
@@ -43,8 +44,8 @@ $('#memf').addEventListener('input',e=>{const t=e.target,k=t.dataset.mm;if(!k||!
 $('#memf').addEventListener('change',e=>{const t=e.target;if(t.dataset.mm!='imp')return;const o=memRowOf(t);if(o?.i){o.i.imp=+t.value;saveSoon()}});
 $('#memf').addEventListener('click',async e=>{const b=e.target.closest('button'),k=b?.dataset.mm;if(!k||!chat?.state)return;
  const o=memRowOf(b),cid=o?o.cid:(b.dataset.c||''),m=memSt(cid),stat=()=>$('#memf').querySelector(`[data-mstat="${cid}"]`);
- if(k=='del'&&o?.i){m.items=m.items.filter(x=>x!==o.i);m.items.forEach(x=>{if(x.link==o.i.id)delete x.link})}
- else if(k=='pin'&&o?.i)o.i.pin=!o.i.pin;
+ if(k=='del'&&o?.i){(m.archive=m.archive||[]).push({...o.i,why:'deleted',at:Date.now()});tombOf(m,[o.i.id]);m.items=m.items.filter(x=>x!==o.i);m.items.forEach(x=>{if(x.link==o.i.id)delete x.link})}
+ else if(k=='pin'&&o?.i){o.i.pin=!o.i.pin;o.i.ver=(o.i.ver||1)+1;o.i.upd=Date.now();m.rev=(m.rev||0)+1}
  else if(k=='add'){const t=b.dataset.t,v=$('#memf').querySelector(`[data-mmnew="${t}"][data-c="${cid}"]`)?.value.trim();if(!v)return;
   m.items.push({id:t[0]+'u'+rid().slice(0,5),t,text:mph(v,cid),imp:.6,ts:Date.now(),turn:hist.length,n:0,last:0,pin:false,src:'user',...(t=='semantic'?{subj:'user'}:{})})}
  else if(k=='test'){const q=$('#memf').querySelector(`[data-mmq][data-c="${cid}"]`)?.value.trim(),box=$('#memf').querySelector(`[data-mtest="${cid}"]`);if(!q||!box)return;
@@ -55,6 +56,6 @@ $('#memf').addEventListener('click',async e=>{const b=e.target.closest('button')
   for(const c of(G?gmem().filter(c=>c.id!='__narrator__'):[cur])){const s=memS(G?c.id:''),r=await api('/api/memorize','POST',{char:apiChar(c),user:uname(),persona:U.persona,history:apiHist(hist),state:s,mem:memCfg()});
    if(r.err){err=r.err;break}Object.assign(s,r.state);added+=r.added;calls+=r.calls}
   saveSoon();renderMem();const el=$('#memf').querySelector(`[data-mstat="${cid}"]`);if(el)el.textContent=err||`Done: ${added} new ${added==1?'memory':'memories'} (${calls} model calls).`;return}
- else if(k=='wipe'){if(!confirm('Forget every memory in this chat?'))return;memS(cid).mem=blankMem();memS(cid).facts=[]}
+ else if(k=='wipe'){if(!confirm('Forget every memory in this chat?'))return;const old=memS(cid).mem,nb=blankMem();if(old&&Array.isArray(old.items)){nb.archive=[...(old.archive||[]),...old.items.map(i=>({...i,why:'wiped',at:Date.now()}))].slice(-500);nb.tomb=[...(old.tomb||[]),...old.items.map(i=>i.id)].slice(-800);nb.seq=old.seq||0;nb.rev=(old.rev||0)+1}memS(cid).mem=nb;memS(cid).facts=[]}
  else return;
  memSync(cid);saveSoon();renderMem()});

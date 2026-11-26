@@ -17,12 +17,18 @@ from . import lexicon as lx
 TYPES = ("episodic", "semantic", "emotional")
 CAPS = {"episodic": 120, "semantic": 80, "emotional": 80}
 RECENT_MAX = 8
-SUBJECTS = ("user", "self", "bond")
+SUBJECTS = ("user", "self", "bond", "other")
+STATUSES = ("confirmed", "uncertain", "outdated", "hypothetical", "disputed")
+# who wins a conflict: a higher number is the more reliable source
+RELIABILITY = {"manual": 5.0, "user": 4.0, "scene": 3.5, "rule": 3.0, "char": 3.0, "model": 2.0, "legacy": 2.0, "auto": 2.0, "promoted": 2.0, "auto-lite": 1.5, "summary": 1.5, "report": 1.0}
+ARCHIVE_CAP = 500
+TOMB_CAP = 800
+KEEP_KINDS = ("promise", "secret", "body", "relationship", "decision", "plan")
 _POLARITY = (("pos", lx.LIKE_WORDS), ("neg", lx.DISLIKE_WORDS))
 
 
 def blank():
-    return {"v": 1, "seq": 0, "turn": 0, "scene": "", "recent": [], "items": [], "legacy": False}
+    return {"v": 2, "seq": 0, "turn": 0, "rev": 0, "scene": "", "recent": [], "items": [], "legacy": False, "ents": {}, "rels": [], "archive": [], "tomb": [], "ing": {"n": 0, "fps": []}}
 
 
 def now_ms():
@@ -47,6 +53,16 @@ def _sane(i):
     i["pin"] = bool(i.get("pin"))
     if not isinstance(i.get("people"), list):
         i["people"] = []
+    if "status" in i and i["status"] not in STATUSES:
+        i["status"] = "confirmed"
+    for k in ("about", "known_by", "hist"):
+        if k in i and not isinstance(i[k], list):
+            i[k] = []
+    if "msg" in i:
+        i["msg"] = _num(i.get("msg"), -1, int)
+    i["ver"] = _num(i.get("ver"), 1, int)
+    if "open" in i:
+        i["open"] = bool(i["open"])
     return i
 
 
@@ -57,6 +73,12 @@ def ensure(st, user="", char=""):
         m = st["mem"] = blank()
     for k, v in blank().items():
         m.setdefault(k, v)
+    m["v"] = 2
+    for k, kind in (("ents", dict), ("rels", list), ("archive", list), ("tomb", list), ("recent", list)):
+        if not isinstance(m.get(k), kind):
+            m[k] = kind()
+    if not isinstance(m.get("ing"), dict) or not isinstance(m["ing"].get("fps"), list):
+        m["ing"] = {"n": 0, "fps": []}
     m["items"] = [_sane(i) for i in m["items"] if isinstance(i, dict) and i.get("t") in TYPES and str(i.get("text", "")).strip()]
     if not m["legacy"]:
         m["legacy"] = True
@@ -104,9 +126,15 @@ def similar(a, b):
     return 1.0 if difflib.SequenceMatcher(None, clean(a), clean(b)).ratio() >= .9 else 0.0
 
 
-def _find_twin(m, t, text, subj):
+def _find_twin(m, t, text, subj, who="", kind=""):
     for i in m["items"]:
         if i["t"] != t or (t == "semantic" and i.get("subj") != subj):
+            continue
+        if who and i.get("who") and i["who"] != who:      # the same words said by someone else are a different memory
+            continue
+        if kind and i.get("kind") and i["kind"] != kind:
+            continue
+        if i.get("status") == "outdated":
             continue
         if similar(i["text"], text) >= (.66 if t == "episodic" else .7):
             return i, "same"
@@ -117,30 +145,90 @@ def _find_twin(m, t, text, subj):
     return None, ""
 
 
-def add(m, t, text, *, subj="user", imp=.5, emo="", val=0.0, people=(), link="", turn=None, ts=None, src="auto", pin=False):
-    """Add one memory, merging into a near-duplicate instead of piling up. Returns (item, created)."""
+def _bump(m, item):
+    item["ver"] = item.get("ver", 1) + 1
+    item["upd"] = now_ms()
+    m["rev"] = m.get("rev", 0) + 1
+
+
+def reliability(src):
+    return RELIABILITY.get(src or "", 2.0)
+
+
+def archive_items(m, items, why):
+    """Move memories out of play without destroying them: the record of what was forgotten, replaced or deleted stays recoverable."""
+    at = now_ms()
+    for i in items:
+        m["archive"].append(dict(i, why=why, at=at))
+    del m["archive"][:-ARCHIVE_CAP]
+
+
+def add(m, t, text, *, subj="user", imp=.5, emo="", val=0.0, people=(), link="", turn=None, ts=None, src="auto", pin=False,
+        kind="", who="", about=(), known_by=(), status="confirmed", rsrc="", open=False, when="", evid="", msg=None, slot="", obj="", ctx=""):
+    """Add one memory, merging into a near-duplicate instead of piling up. Returns (item, created).
+    kind/who/about/known_by/status/rsrc/open/when/evid/msg/slot/obj are the attribution fields (who did or said it, whom it concerns,
+    who was there, whether it is confirmed or only hearsay or imagined, where the words came from)."""
     text = str(text or "").strip().strip('"')
-    if t not in TYPES or len(text) < 4:
+    if t not in TYPES or len(text) < 4 or str(text) in ("{{user}}", "{{char}}"):
         return None, False
     text = text[:240]
     imp = max(0.0, min(1.0, float(imp)))
-    old, how = _find_twin(m, t, text, subj)
+    status = status if status in STATUSES else "confirmed"
+    rs = rsrc or src
+    old, how = _find_twin(m, t, text, subj, who, kind)
     if old:
         old["imp"] = round(min(1.0, max(old.get("imp", .5), imp) + (.04 if how == "same" else 0)), 3)
         if how == "flip" or (len(text) > len(old["text"]) and src != "legacy"):
+            if old["text"] != text:
+                old.setdefault("hist", []).append({"text": old["text"], "status": old.get("status", "confirmed"), "turn": old.get("turn", 0), "ts": old.get("ts", 0), "why": "reworded" if how == "same" else "reversed"})
+                del old["hist"][:-6]
             old["text"] = text
         old["pin"] = bool(old.get("pin") or pin)
         old["people"] = sorted(set(old.get("people") or []) | set(people or []))
+        if about:
+            old["about"] = sorted(set(old.get("about") or []) | {str(a) for a in about if a})[:6]
         if emo and not old.get("emo"):
             old["emo"], old["val"] = emo, round(float(val), 2)
+        if how == "same":      # the same thing seen again from a source at least as reliable firms it up
+            old["seen"] = old.get("seen", 1) + 1
+            if reliability(rs) >= reliability(old.get("rsrc") or old.get("src")) and status == "confirmed" and old.get("status") == "uncertain":
+                old["status"] = "confirmed"
+                old["rsrc"] = rs
+        _bump(m, old)
         return old, False
     m["seq"] += 1
     item = {"id": f"{t[0]}{m['seq']}", "t": t, "text": text, "imp": round(imp, 3), "ts": now_ms() if ts is None else ts,
-            "turn": m["turn"] if turn is None else turn, "n": 0, "last": 0, "pin": bool(pin), "src": src}
+            "turn": m["turn"] if turn is None else turn, "n": 0, "last": 0, "pin": bool(pin), "src": src, "ver": 1}
     if t == "semantic":
         item["subj"] = subj if subj in SUBJECTS else "user"
     if people:
         item["people"] = sorted({str(p).strip() for p in people if str(p).strip()})[:5]
+    if kind:
+        item["kind"] = kind
+    if who:
+        item["who"] = who
+    if about:
+        item["about"] = sorted({str(a) for a in about if a})[:6]
+    if known_by:
+        item["known_by"] = [str(k) for k in known_by if k][:8]
+    if status != "confirmed":
+        item["status"] = status
+    if rs and rs != src:
+        item["rsrc"] = rs
+    if open:
+        item["open"] = True
+    if when:
+        item["when"] = when
+    if evid:
+        item["evid"] = evid[:160]
+    if msg is not None:
+        item["msg"] = int(msg)
+    if slot:
+        item["slot"] = slot
+    if obj:
+        item["obj"] = obj
+    if ctx:
+        item["ctx"] = ctx[:100]
     if t == "emotional":
         item.update(emo=emo or "", val=round(float(val), 2))
         if link:
@@ -148,6 +236,7 @@ def add(m, t, text, *, subj="user", imp=.5, emo="", val=0.0, people=(), link="",
     elif emo:
         item.update(emo=emo, val=round(float(val), 2))
     m["items"].append(item)
+    m["rev"] = m.get("rev", 0) + 1
     return item, True
 
 
@@ -156,35 +245,48 @@ def keep_score(i, turn):
     return (9.0 if i.get("pin") else 0.0) + i.get("imp", .5) + .25 * (.5 ** (age / 150)) + .06 * min(i.get("n", 0), 5)
 
 
+def _protected(i, turn):
+    """Never forgotten by age: pinned, recently recalled, unresolved, or the kinds of memory a story is built on."""
+    used = i.get("n", 0) > 0 and turn - i.get("last", 0) < 200
+    return bool(i.get("pin") or used or i.get("open") or i.get("kind") in KEEP_KINDS and i.get("imp", .5) >= .5 or i.get("status") in ("outdated", "disputed"))
+
+
 def decay(m, turn):
-    """Forget what no longer matters: a small memory that was never recalled is deleted after a while (episodes and feelings ~140 messages,
-    plain facts ~220). Pinned memories and anything recalled lately stay; a feeling whose episode is gone goes with it."""
-    keep = []
+    """Forget what no longer matters: a small memory that was never recalled is retired after a while (episodes and feelings ~140 messages,
+    plain facts ~220). Pinned memories, unresolved promises and anything recalled lately stay; a feeling whose episode is gone goes with it.
+    Retired memories are archived (m["archive"]), not destroyed."""
+    keep, gone = [], []
     for i in m["items"]:
         age = turn - i.get("turn", 0)
-        used = i.get("n", 0) > 0 and turn - i.get("last", 0) < 200
         imp = i.get("imp", .5)
-        if i.get("pin") or used:
+        if _protected(i, turn):
             keep.append(i)
         elif i["t"] in ("episodic", "emotional") and imp < .4 and age > 140:
-            continue
+            gone.append(i)
         elif i["t"] == "semantic" and imp < .3 and age > 220:
-            continue
+            gone.append(i)
         else:
             keep.append(i)
     ids = {i["id"] for i in keep}
-    m["items"] = [i for i in keep if not (i["t"] == "emotional" and i.get("link") and i["link"] not in ids)]
+    orphan = [i for i in keep if i["t"] == "emotional" and i.get("link") and i["link"] not in ids]
+    m["items"] = [i for i in keep if i not in orphan]
+    if gone or orphan:
+        archive_items(m, gone + orphan, "aged out")
+        m["rev"] = m.get("rev", 0) + 1
     return m
 
 
 def compact(m, turn=None):
-    """Keep each layer under its cap by dropping the least important, oldest, never-recalled memories (pinned ones stay)."""
+    """Keep each layer under its cap by retiring the least important, oldest, never-recalled memories (pinned and unresolved ones stay). Archived, not destroyed."""
     turn = m.get("turn", 0) if turn is None else turn
     for t, cap in CAPS.items():
         mine = [i for i in m["items"] if i["t"] == t]
         if len(mine) > cap:
-            drop = {i["id"] for i in sorted(mine, key=lambda i: keep_score(i, turn))[:len(mine) - cap]}
+            order = sorted((i for i in mine if not (i.get("open") or i.get("pin"))), key=lambda i: keep_score(i, turn))
+            drop = {i["id"] for i in order[:len(mine) - cap]}
+            archive_items(m, [i for i in m["items"] if i["id"] in drop], "over capacity")
             m["items"] = [i for i in m["items"] if i["id"] not in drop]
+            m["rev"] = m.get("rev", 0) + 1
     return m
 
 
@@ -208,8 +310,15 @@ def touch(m, ids, turn):
             i["last"] = turn
 
 
-def remove(m, ids):
+def remove(m, ids, why="deleted"):
+    """Delete memories on purpose. They are tombstoned (so a stale copy of the chat cannot bring them back) and archived (so a mistake can be undone)."""
     ids = set(ids or [])
+    gone = [i for i in m["items"] if i["id"] in ids]
+    if gone:
+        archive_items(m, gone, why)
+        m.setdefault("tomb", []).extend(sorted(i["id"] for i in gone))
+        del m["tomb"][:-TOMB_CAP]
+        m["rev"] = m.get("rev", 0) + 1
     m["items"] = [i for i in m["items"] if i["id"] not in ids]
     for i in m["items"]:
         if i.get("link") in ids:

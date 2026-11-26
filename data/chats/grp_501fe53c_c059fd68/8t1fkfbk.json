@@ -1,0 +1,324 @@
+{
+ "id": "8t1fkfbk",
+ "title": "hlw",
+ "updated": 1795710421.3082235,
+ "history": [
+  {
+   "role": "user",
+   "content": "hlw",
+   "ts": 1795710362929,
+   "csnap": "null"
+  },
+  {
+   "role": "assistant",
+   "content": "\"Impressive, is it not?\" *Gary Oak quipped with a smirk.*",
+   "think": "",
+   "ts": 1795710372402,
+   "stat": {
+    "tok": 16,
+    "ms": 8999
+   },
+   "pers": {
+    "score": 100,
+    "flags": [],
+    "retries": 0
+   },
+   "recalled": [],
+   "dyn": {
+    "tone": "curious",
+    "quirk": "joke",
+    "len": "tiny"
+   },
+   "seen": 1795710363224,
+   "cid": "2abb601c",
+   "name": "Gary Oak",
+   "csnap": "{\"v\":1,\"pairs\":{\"2abb601c|c8cd1f0a\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"2abb601c\":0,\"c8cd1f0a\":0},\"fl\":0,\"ev\":[],\"m\":0}}}",
+   "mundo": {
+    "add": [],
+    "scene": "",
+    "recent": []
+   },
+   "snap": "{\"mood\":\"neutral\",\"emoji\":\"😐\",\"energy\":\"medium\",\"affection\":50,\"facts\":[],\"summary\":\"\",\"sumUpto\":0}",
+   "snapc": "2abb601c",
+   "thought": "This one seems rather... straightforward.",
+   "bd": {
+    "c": "2abb601c",
+    "dv": 2.4,
+    "h": 0
+   },
+   "mo": {
+    "m": "amused",
+    "e": "😄",
+    "d": 2,
+    "f": 0
+   }
+  },
+  {
+   "role": "user",
+   "content": "@Paul",
+   "ts": 1795710415321,
+   "csnap": "{\"v\":1,\"pairs\":{\"2abb601c|c8cd1f0a\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"2abb601c\":0,\"c8cd1f0a\":0},\"fl\":0,\"ev\":[],\"m\":0}}}"
+  },
+  {
+   "role": "assistant",
+   "content": "Hmph. *Paul raises an eyebrow at Gary's remark, unimpressed.*",
+   "think": "",
+   "ts": 1795710427287,
+   "stat": {
+    "tok": 39,
+    "ms": 10951
+   },
+   "pers": {
+    "score": 50,
+    "flags": [
+     "assistant-style phrasing"
+    ],
+    "retries": 0
+   },
+   "recalled": [],
+   "dyn": {
+    "tone": "irritated",
+    "quirk": "topic",
+    "len": "tiny"
+   },
+   "seen": 1795710416213,
+   "cid": "c8cd1f0a",
+   "name": "Paul",
+   "csnap": "{\"v\":1,\"pairs\":{\"2abb601c|c8cd1f0a\":{\"k\":\"auto\",\"f\":45,\"t\":45,\"x\":10,\"j\":{\"2abb601c\":0,\"c8cd1f0a\":0},\"fl\":0,\"ev\":[],\"m\":0}}}",
+   "mundo": {
+    "add": [],
+    "scene": "",
+    "recent": []
+   },
+   "snap": "{\"mood\":\"neutral\",\"emoji\":\"😐\",\"energy\":\"medium\",\"affection\":50,\"facts\":[],\"summary\":\"\",\"sumUpto\":0,\"pers\":{}}",
+   "snapc": "c8cd1f0a",
+   "thought": "Bonks' timing is always impeccable.",
+   "bd": {
+    "c": "c8cd1f0a",
+    "dv": 0.12,
+    "h": 0
+   },
+   "mo": {
+    "m": "neutral",
+    "e": "😐",
+    "d": 0,
+    "f": 1
+   }
+  }
+ ],
+ "state": {
+  "mood": "neutral",
+  "emoji": "😐",
+  "energy": "medium",
+  "affection": 50,
+  "facts": [],
+  "summary": "",
+  "sumUpto": 0,
+  "log": [],
+  "members": {
+   "2abb601c": {
+    "mood": "amused",
+    "emoji": "😄",
+    "energy": "high",
+    "affection": 52,
+    "facts": [],
+    "summary": "",
+    "sumUpto": 0,
+    "log": [
+     {
+      "ts": 1795710366296,
+      "mood": "amused",
+      "emoji": "😄",
+      "aff": 52,
+      "thought": "This one seems rather... straightforward.",
+      "score": 100
+     }
+    ],
+    "cast": {
+     "un": "",
+     "ug": null,
+     "wrong": []
+    },
+    "pers": {
+     "frac": 0.25,
+     "grudge": 0,
+     "va": [
+      0.65,
+      0.4
+     ],
+     "mood": "amused",
+     "ts": 1795710366295,
+     "n": 1,
+     "drift": [
+      {
+       "ts": 1795710366295,
+       "score": 100,
+       "flags": []
+      }
+     ],
+     "canon": []
+    },
+    "mem": {
+     "v": 1,
+     "seq": 0,
+     "turn": 2,
+     "scene": "{{char}}'s laboratory",
+     "recent": [
+      {
+       "text": "{{char}} responded to {{user}}'s greeting",
+       "imp": 0.13,
+       "turn": 2,
+       "ts": 1795710366296
+      }
+     ],
+     "items": [],
+     "legacy": true
+    }
+   },
+   "c8cd1f0a": {
+    "mood": "neutral",
+    "emoji": "😐",
+    "energy": "medium",
+    "affection": 50,
+    "facts": [],
+    "summary": "",
+    "sumUpto": 0,
+    "log": [
+     {
+      "ts": 1795710421232,
+      "mood": "neutral",
+      "emoji": "😐",
+      "aff": 50,
+      "thought": "Bonks' timing is always impeccable.",
+      "score": 100
+     }
+    ],
+    "mem": {
+     "v": 1,
+     "seq": 0,
+     "turn": 4,
+     "scene": "In the training room, sparring with Gary.",
+     "recent": [
+      {
+       "text": "{{user}} greeted {{char}}.",
+       "imp": 0.07,
+       "turn": 4,
+       "ts": 1795710421232
+      }
+     ],
+     "items": [],
+     "legacy": true
+    },
+    "pers": {
+     "frac": 0,
+     "grudge": 0,
+     "va": [
+      0,
+      0
+     ],
+     "mood": "neutral",
+     "ts": 1795710421230,
+     "n": 1,
+     "drift": [
+      {
+       "ts": 1795710421230,
+       "score": 100,
+       "flags": []
+      }
+     ],
+     "canon": []
+    },
+    "cast": {
+     "un": "",
+     "ug": null,
+     "wrong": []
+    }
+   }
+  },
+  "chron": {
+   "v": 1,
+   "seq": 0,
+   "turn": 4,
+   "covered": 4,
+   "items": []
+  }
+ },
+ "cfg": {
+  "mode": "story",
+  "length": "auto",
+  "scene": "",
+  "notes": [],
+  "theme": null,
+  "circle": {
+   "v": 1,
+   "pairs": {
+    "2abb601c|c8cd1f0a": {
+     "k": "auto",
+     "f": 45,
+     "t": 45,
+     "x": 10,
+     "j": {
+      "2abb601c": 0,
+      "c8cd1f0a": 0
+     },
+     "fl": 0,
+     "ev": [],
+     "m": 0
+    }
+   }
+  }
+ },
+ "rp": {
+  "body": {
+   "user": {
+    "inj": [],
+    "ill": [],
+    "tired": 0,
+    "dead": false,
+    "died": null,
+    "stash": null,
+    "rev": 0,
+    "n": 0,
+    "ko": false
+   },
+   "2abb601c": {
+    "inj": [],
+    "ill": [],
+    "tired": 0,
+    "dead": false,
+    "died": null,
+    "stash": null,
+    "rev": 0,
+    "n": 0,
+    "ko": false
+   },
+   "c8cd1f0a": {
+    "inj": [],
+    "ill": [],
+    "tired": 0,
+    "dead": false,
+    "died": null,
+    "stash": null,
+    "rev": 0,
+    "n": 0,
+    "ko": false
+   }
+  },
+  "rel": {
+   "2abb601c": {
+    "type": "auto",
+    "v": 2.4,
+    "ms": [],
+    "hist": [],
+    "peak": 2.4
+   },
+   "c8cd1f0a": {
+    "type": "auto",
+    "v": 0.12,
+    "ms": [],
+    "hist": [],
+    "peak": 0.12
+   }
+  }
+ }
+}

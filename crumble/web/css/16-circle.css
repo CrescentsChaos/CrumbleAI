@@ -1,0 +1,10 @@
+/* group relationships, side-conversation tags and the auto-talk switch */
+.nm .to{margin-left:6px;font-size:11px;color:var(--mu);font-weight:500}
+.nm .why{margin-left:6px;font-size:10.5px;padding:1px 7px;border-radius:99px;color:var(--mu);background:color-mix(in srgb,var(--tx) 8%,transparent);font-weight:500}
+.cc-co{display:flex;align-items:center;gap:10px;margin:6px 0}.cc-co .meter{flex:1;max-width:160px}
+.cc-pp{display:grid;gap:4px;margin:8px 0 10px}.cc-p small{margin-left:8px;color:var(--mu)}
+.cc-pair{margin:4px 0}.cc-pair>summary{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.cc-pair>summary small{color:var(--mu);margin-left:4px}.cc-pair>summary em{font-style:normal}
+.cc-pair select{width:100%}
+#auto.on{animation:ccpulse 2.4s ease-in-out infinite}
+@keyframes ccpulse{50%{box-shadow:0 0 0 4px color-mix(in srgb,var(--ac) 22%,transparent)}}
+@media (prefers-reduced-motion:reduce){#auto.on{animation:none}}
